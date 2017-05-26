@@ -1,25 +1,23 @@
 {
-    "name": "webpack-boilerplate",
-    "version": "1.0.0",
-    "description": "webpack boilerplate ",
-    "main": "index.js",
-    "scripts": {
-        "start": "webpack-dev-server --devtool eval --progress --colors"
-    },
-    "author": "Dmitry Pyatkov",
-    "license": "MIT",
-    "dependencies": {
-        "babel-core": "^6.16.0",
-        "babel-loader": "^6.2.10",
-        "bootstrap": "^3.3.5",
-        "css-loader": "^0.26.1",
-        "extract-text-webpack-plugin": "^2.0.0-rc.2",
-        "file-loader": "^0.10.0",
-        "less": "^2.7.2",
-        "less-loader": "^2.2.3",
-        "style-loader": "^0.13.1",
-        "url-loader": "^0.5.7",
-        "webpack": "^2.2.0",
-        "webpack-dev-server": "^2.2.0"
-    }
+  "name": "Intecmedia.Webpack",
+  "version": "0.0.1",
+  "description": "Intecmedia Webpack bootstrap",
+  "scripts": {},
+  "author": "Dmitry Pyatkov",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "bootstrap-loader": "^2.1.0",
+    "bootstrap-sass": "^3.3.7",
+    "css-loader": "^0.28.3",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.11.1",
+    "jquery": "^3.2.1",
+    "node-sass": "^4.5.3",
+    "resolve-url-loader": "^2.0.2",
+    "sass-loader": "^6.0.5",
+    "style-loader": "^0.18.1",
+    "url-loader": "^0.5.8",
+    "webpack": "^2.6.1"
+  }
 }
