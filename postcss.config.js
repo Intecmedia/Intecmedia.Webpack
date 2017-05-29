@@ -1,6 +1,8 @@
+const PROD = process.argv.indexOf("-p") !== -1;
+
 module.exports = {
     plugins: {
-       "autoprefixer": {
+       autoprefixer: {
             browsers: [
                 "Android 2.3",
                 "Android >= 4",
@@ -13,6 +15,8 @@ module.exports = {
             ],
             add: true,
         },
-       "cssnano": {},
+       cssnano: {
+           discardComments: { removeAll: PROD },
+       },
     },
 };

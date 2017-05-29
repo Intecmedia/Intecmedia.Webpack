@@ -1,5 +1,8 @@
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const PROD = process.argv.indexOf("-p") !== -1;
+
+console.log("Config enviroment: " + (PROD ? "production" : "development"));
 
 module.exports = {
 
@@ -19,6 +22,11 @@ module.exports = {
     },
 
     plugins: [
+        new webpack.DefinePlugin({
+            "process.env": {
+                "NODE_ENV": JSON.stringify(PROD ? "production" : "development"),
+            }
+        }),
         new ExtractTextPlugin({
             filename: "./css/app.min.css",
             allChunks: true,
@@ -39,3 +47,12 @@ module.exports = {
     },
 
 };
+
+
+if (PROD) {
+    module.exports.plugins.push(
+        new webpack.optimize.UglifyJsPlugin({
+            preserveComments: false
+        })
+    );
+}

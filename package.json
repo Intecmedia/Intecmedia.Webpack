@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "Intecmedia Webpack bootstrap",
   "scripts": {
-    "dev": "webpack --define process.env.NODE_ENV=development",
-    "prod": "webpack --optimize-minimize --define process.env.NODE_ENV=production"
+    "dev": "webpack",
+    "prod": "webpack -p"
   },
   "author": "Dmitry Pyatkov",
   "license": "MIT",
