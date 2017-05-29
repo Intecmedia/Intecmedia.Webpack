@@ -21,7 +21,14 @@ module.exports = {
         extensions: ["*", ".js"],
     },
 
-    plugins: [
+    plugins: (PROD ? [
+        // prod-only
+        new webpack.optimize.UglifyJsPlugin({
+            preserveComments: false,
+        }),
+    ] : [
+        // dev-only
+    ]).concat([
         new webpack.DefinePlugin({
             "process.env": {
                 "NODE_ENV": JSON.stringify(PROD ? "production" : "development"),
@@ -35,7 +42,7 @@ module.exports = {
             "$": "jquery",
             "jQuery": "jquery",
         }),
-    ],
+    ]),
 
     module: {
         rules: [
@@ -47,12 +54,3 @@ module.exports = {
     },
 
 };
-
-
-if (PROD) {
-    module.exports.plugins.push(
-        new webpack.optimize.UglifyJsPlugin({
-            preserveComments: false
-        })
-    );
-}

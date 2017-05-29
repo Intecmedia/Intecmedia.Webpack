@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "Intecmedia Webpack bootstrap",
   "scripts": {
-    "dev": "webpack",
+    "dev": "webpack -d",
+    "watch": "webpack -w",
     "prod": "webpack -p"
   },
   "author": "Dmitry Pyatkov",
