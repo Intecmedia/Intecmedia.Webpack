@@ -1,13 +1,9 @@
 const webpack = require("webpack");
-const autoprefixer = require("autoprefixer");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-
-const outup = "./public"
 
 module.exports = {
 
     entry: [
-        "bootstrap-loader/extractStyles",
         "./app/app.js",
     ],
 
@@ -16,7 +12,11 @@ module.exports = {
         filename: "./js/app.min.js",
     },
 
-    resolve: { extensions: ["*", ".js"] },
+    resolve: {
+        alias: {
+        },
+        extensions: ["*", ".js"],
+    },
 
     plugins: [
         new ExtractTextPlugin({
@@ -27,21 +27,14 @@ module.exports = {
             "$": "jquery",
             "jQuery": "jquery",
         }),
-        new webpack.LoaderOptionsPlugin({
-            postcss: [autoprefixer],
-        }),
     ],
 
     module: {
         rules: [
-            { test: /\.css$/, use: ExtractTextPlugin.extract({
-                fallback: "style-loader", use: "css-loader!postcss-loader",
-            }) },
-            { test: /\.scss$/, use: ExtractTextPlugin.extract({
-                fallback: "style-loader", use: "css-loader!postcss-loader!sass-loader",
-            }) },
+            { test: /\.js/, use: "imports-loader?jQuery=jquery" },
+            { test: /\.css/, loader: ExtractTextPlugin.extract("css-loader!postcss-loader") },
+            { test: /\.scss/, loader: ExtractTextPlugin.extract("css-loader!sass-loader!postcss-loader") },
             { test: /\.(eot|woff|woff2|ttf|svg)(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader?prefix=font/&name=fonts/[name].[ext]?v=[hash]" },
-            { test: /bootstrap-sass\/assets\/javascripts\//, use: "imports-loader?jQuery=jquery" },
         ],
     },
 

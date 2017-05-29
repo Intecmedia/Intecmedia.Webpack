@@ -1,0 +1,67 @@
+/*!
+ * Bootstrap v3.3.7 (http:/getbootstrap.com)
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https:/github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+
+@function twbs-font-path($path) {
+    @return "~bootstrap-sass/assets/fonts/#{$path}";
+};
+
+@function twbs-image-path($path) {
+    @return $path;
+};
+
+$bootstrap-sass-asset-helper: true;
+ 
+// Core variables and mixins
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss";
+
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_mixins.scss";
+
+// Reset and dependencies
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_normalize.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_print.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_glyphicons.scss";
+
+// Core CSS
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_scaffolding.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_type.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_code.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_grid.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_tables.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_forms.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_buttons.scss";
+
+// Components
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_component-animations.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_dropdowns.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_button-groups.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_input-groups.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_navs.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_navbar.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_breadcrumbs.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_pagination.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_pager.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_labels.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_badges.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_jumbotron.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_thumbnails.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_alerts.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_progress-bars.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_media.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_list-group.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_panels.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_responsive-embed.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_wells.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_close.scss";
+
+// Components w/ JavaScript
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_modals.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_tooltip.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_popovers.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_carousel.scss";
+
+// Utility classes
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_utilities.scss";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_responsive-utilities.scss";

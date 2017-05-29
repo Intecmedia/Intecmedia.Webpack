@@ -1,8 +1,5 @@
-jQuery(function($) {
-    window.$ = $;
-    window.jQuery = $;
+import "./app.scss";
 
 
+console.log(jQuery, $, window.$);
 
-
-});
