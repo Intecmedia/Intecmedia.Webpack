@@ -1,5 +1,9 @@
 import "./app.scss";
+import "./_bootstrap.js";
 
+window["$"] = jQuery;
+window["jQuery"] = jQuery;
 
-console.log(jQuery, $, window.$);
-
+jQuery(function($) {
+    
+});
