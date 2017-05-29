@@ -18,7 +18,8 @@ module.exports = {
     plugins: (PROD ? [
         // prod-only
         new webpack.optimize.UglifyJsPlugin({
-            preserveComments: false,
+            beautify: false,
+            comments: false,
         }),
     ] : [
         // dev-only
