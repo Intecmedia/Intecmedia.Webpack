@@ -4,6 +4,8 @@ const PROD = process.argv.indexOf("-p") !== -1;
 
 console.log("Config enviroment: " + (PROD ? "production" : "development"));
 
+const extractCSS = new ExtractTextPlugin("./css/app.min.css");
+
 module.exports = {
 
     entry: [
@@ -29,10 +31,7 @@ module.exports = {
                 "NODE_ENV": (PROD ? "production" : "development"),
             }
         }),
-        new ExtractTextPlugin({
-            filename: "./css/app.min.css",
-            allChunks: true,
-        }),
+        extractCSS,
         new webpack.ProvidePlugin({
             "$": "jquery",
             "jQuery": "jquery",
@@ -44,15 +43,15 @@ module.exports = {
     module: {
         rules: [
             { test: /\.js/, use: "imports-loader?jQuery=jquery" },
-            { test: /\.css/, loader: ExtractTextPlugin.extract({ use: ["css-loader", "postcss-loader"] }) },
-            { test: /\.scss/, loader: ExtractTextPlugin.extract({ use: [
+            { test: /\.css/, loader: extractCSS.extract(["css-loader", "postcss-loader"]) },
+            { test: /\.scss/, loader: extractCSS.extract([
                 "css-loader",
                 "sass-loader?" + JSON.stringify({
                      sourceMap: 1,
                      data: "$ENV: " + (PROD ? "production" : "development") + ";",
                  }),
                 "postcss-loader",
-            ] }) },
+            ]) },
             { test: /\.(eot|woff|woff2|ttf|svg)(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader?prefix=font/&name=fonts/[name].[ext]?v=[hash]" },
         ],
     },
