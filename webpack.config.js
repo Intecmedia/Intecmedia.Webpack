@@ -56,6 +56,7 @@ module.exports = {
             { test: /\.scss/, loader: extractCSS.extract([
                 "css-loader?sourceMap=" + (PROD ? 1 : 0),
                 "sass-loader?" + JSON.stringify({
+                    "indentWidth": 4,
                     "data": "$ENV: " + (PROD ? "production" : "development") + ";",
                 }),
                 "postcss-loader",
