@@ -38,17 +38,16 @@ module.exports = {
         }),
     ]),
 
-    devtool: (PROD ? "" : "inline-source-map"),
+    devtool: (PROD ? "" : "source-map"),
 
     module: {
         rules: [
             { test: /\.js/, use: "imports-loader?jQuery=jquery" },
             { test: /\.css/, loader: extractCSS.extract(["css-loader", "postcss-loader"]) },
             { test: /\.scss/, loader: extractCSS.extract([
-                "css-loader",
+                "css-loader?sourceMap=1&importLoaders=1",
                 "sass-loader?" + JSON.stringify({
-                     sourceMap: 1,
-                     data: "$ENV: " + (PROD ? "production" : "development") + ";",
+                     "data": "$ENV: " + (PROD ? "production" : "development") + ";",
                  }),
                 "postcss-loader",
             ]) },
