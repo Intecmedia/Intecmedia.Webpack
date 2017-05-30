@@ -45,7 +45,7 @@ module.exports = {
             { test: /\.js/, use: "imports-loader?jQuery=jquery" },
             { test: /\.css/, loader: extractCSS.extract(["css-loader", "postcss-loader"]) },
             { test: /\.scss/, loader: extractCSS.extract([
-                "css-loader?sourceMap=1&importLoaders=1",
+                "css-loader?sourceMap=" + (PROD ? 1 : 0),
                 "sass-loader?" + JSON.stringify({
                      "data": "$ENV: " + (PROD ? "production" : "development") + ";",
                  }),
