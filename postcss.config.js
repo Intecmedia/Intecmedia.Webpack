@@ -18,5 +18,7 @@ module.exports = {
        cssnano: {
            discardComments: { removeAll: PROD },
        },
-    },
+       stylelint: {
+       },
+    }
 };
