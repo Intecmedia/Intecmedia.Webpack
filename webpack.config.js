@@ -49,12 +49,17 @@ module.exports = {
     module: {
         rules: [
             { test: /\.js/, use: "imports-loader?jQuery=jquery" },
-            { test: /\.css/, loader: extractCSS.extract(["css-loader", "postcss-loader"]) },
+            { test: /\.css/, loader: extractCSS.extract([
+                "css-loader?importLoaders=1",
+                "csslint-loader",
+                "postcss-loader",
+            ]) },
             { test: /\.scss/, loader: extractCSS.extract([
                 "css-loader?sourceMap=" + (PROD ? 1 : 0),
                 "sass-loader?" + JSON.stringify({
-                     "data": "$ENV: " + (PROD ? "production" : "development") + ";",
-                 }),
+                    "data": "$ENV: " + (PROD ? "production" : "development") + ";",
+                }),
+                "csslint-loader",
                 "postcss-loader",
             ]) },
             { test: /\.(eot|woff|woff2|ttf|svg)(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader?prefix=font/&name=fonts/[name].[ext]?v=[hash]" },
