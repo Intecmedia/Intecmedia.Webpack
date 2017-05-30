@@ -40,6 +40,12 @@ module.exports = {
 
     devtool: (PROD ? "" : "source-map"),
 
+    resolve: {
+        alias: {
+            "bootstrap": "bootstrap-sass/assets/javascripts/bootstrap",
+        }
+    },
+
     module: {
         rules: [
             { test: /\.js/, use: "imports-loader?jQuery=jquery" },
