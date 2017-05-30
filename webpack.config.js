@@ -26,7 +26,7 @@ module.exports = {
     ]).concat([
         new webpack.DefinePlugin({
             "process.env": {
-                "NODE_ENV": JSON.stringify(PROD ? "production" : "development"),
+                "NODE_ENV": (PROD ? "production" : "development"),
             }
         }),
         new ExtractTextPlugin({
@@ -45,7 +45,14 @@ module.exports = {
         rules: [
             { test: /\.js/, use: "imports-loader?jQuery=jquery" },
             { test: /\.css/, loader: ExtractTextPlugin.extract({ use: ["css-loader", "postcss-loader"] }) },
-            { test: /\.scss/, loader: ExtractTextPlugin.extract({ use: ["css-loader", "sass-loader", "postcss-loader"] }) },
+            { test: /\.scss/, loader: ExtractTextPlugin.extract({ use: [
+                "css-loader",
+                "sass-loader?" + JSON.stringify({
+                     sourceMap: 1,
+                     data: "$ENV: " + (PROD ? "production" : "development") + ";",
+                 }),
+                "postcss-loader",
+            ] }) },
             { test: /\.(eot|woff|woff2|ttf|svg)(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader?prefix=font/&name=fonts/[name].[ext]?v=[hash]" },
         ],
     },

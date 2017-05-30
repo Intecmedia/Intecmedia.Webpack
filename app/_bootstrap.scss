@@ -65,3 +65,18 @@ $bootstrap-sass-asset-helper: true;
 // Utility classes
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/_utilities.scss";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/_responsive-utilities.scss";
+
+// Debug helper
+body:after {
+    @if $ENV != "production" {
+        background: $brand-danger;
+        color: $link-color;
+        content: "$ENV=#{$ENV}";
+        display: block;
+        opacity: .5;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: $zindex-modal;
+    }
+}
