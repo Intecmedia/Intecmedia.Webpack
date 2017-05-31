@@ -1,8 +1,8 @@
 const PROD = process.argv.indexOf("-p") !== -1;
 
 module.exports = {
-    plugins: {
-       autoprefixer: {
+    plugins: [
+        require("autoprefixer")({
             browsers: [
                 "Android 2.3",
                 "Android >= 4",
@@ -14,11 +14,14 @@ module.exports = {
                 "Safari >= 6",
             ],
             add: true,
-        },
-       cssnano: {
+        }),
+       require("cssnano")({
            discardComments: { removeAll: PROD },
-       },
-       stylelint: {
-       },
-    }
+       }),
+       require("stylelint")({
+       }),
+       require("css-mqpacker")({
+           sort: true,
+       }),
+    ]
 };

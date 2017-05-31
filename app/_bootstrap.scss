@@ -68,10 +68,10 @@ $bootstrap-sass-asset-helper: true;
 
 // Debug helper
 body:after {
-    @if $ENV != "production" {
+    @if $NODE_ENV != "production" {
         background: $brand-danger;
         color: $link-color;
-        content: "$ENV=#{$ENV}";
+        content: "$NODE_ENV=#{$NODE_ENV}";
         display: block;
         opacity: .5;
         position: absolute;

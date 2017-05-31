@@ -54,7 +54,7 @@ module.exports = {
             { test: /\.(css|scss)/, loader: extractCSS.extract([
                 { loader: "css-loader", options: { importLoaders: true, sourceMap: !PROD } },
                 { loader: "sass-loader", options: {
-                    data: "$ENV: " + (PROD ? "production" : "development") + ";",
+                    data: "$NODE_ENV: " + (PROD ? "production" : "development") + ";",
                     indentWidth: 4,
                     includePaths: [ path.resolve("./node_modules/bootstrap-sass/assets/stylesheets") ],
                     sourceMapEmbed: !PROD,
