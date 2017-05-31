@@ -38,7 +38,7 @@ module.exports = {
         }),
     ]),
 
-    devtool: (PROD ? "" : "source-map"),
+    devtool: (PROD ? "" : "inline-source-map"),
 
     resolve: {
         alias: {
@@ -49,17 +49,17 @@ module.exports = {
     module: {
         rules: [
             { test: /\.js/, use: "imports-loader?jQuery=jquery" },
-            { test: /\.css/, loader: extractCSS.extract([
-                "css-loader?importLoaders=1",
-                "postcss-loader",
-            ]) },
-            { test: /\.scss/, loader: extractCSS.extract([
-                "css-loader?sourceMap=" + (PROD ? 1 : 0),
-                "sass-loader?" + JSON.stringify({
-                    "indentWidth": 4,
-                    "data": "$ENV: " + (PROD ? "production" : "development") + ";",
-                }),
-                "postcss-loader",
+            { test: /\.(css|scss)/, loader: extractCSS.extract([
+                { loader: "css-loader", options: { importLoaders: true, sourceMap: !PROD } },
+                { loader: "sass-loader", options: {
+                    indentWidth: 4,
+                    sourceMapEmbed: !PROD,
+                    sourceMapContents: !PROD,
+                    data: "$ENV: " + (PROD ? "production" : "development") + ";",
+                } },
+                { loader: "postcss-loader", options: {
+                    sourceMap: (PROD ? false : "inline"),
+                } },
             ]) },
             { test: /\.(eot|woff|woff2|ttf|svg)(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader?prefix=font/&name=fonts/[name].[ext]?v=[hash]" },
         ],
