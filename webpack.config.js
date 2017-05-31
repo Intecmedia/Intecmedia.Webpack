@@ -52,7 +52,10 @@ module.exports = {
         rules: [
             { test: /\.js/, use: "imports-loader?jQuery=jquery" },
             { test: /\.(css|scss)/, loader: extractCSS.extract([
-                { loader: "css-loader", options: { importLoaders: true, sourceMap: !PROD } },
+                { loader: "css-loader", options: {
+                    importLoaders: true,
+                    sourceMap: !PROD,
+                } },
                 { loader: "sass-loader", options: {
                     data: "$NODE_ENV: " + (PROD ? "production" : "development") + ";",
                     indentWidth: 4,
@@ -60,9 +63,7 @@ module.exports = {
                     sourceMapEmbed: !PROD,
                     sourceMapContents: !PROD,
                 } },
-                { loader: "postcss-loader", options: {
-                    sourceMap: !PROD,
-                } },
+                { loader: "postcss-loader" },
             ]) },
             { test: /\.(eot|woff|woff2|ttf|svg)(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader?prefix=font/&name=fonts/[name].[ext]?v=[hash]" },
         ],
