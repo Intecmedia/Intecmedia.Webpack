@@ -1,3 +1,5 @@
+const path = require("path");
+
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const PROD = process.argv.indexOf("-p") !== -1;
@@ -52,13 +54,14 @@ module.exports = {
             { test: /\.(css|scss)/, loader: extractCSS.extract([
                 { loader: "css-loader", options: { importLoaders: true, sourceMap: !PROD } },
                 { loader: "sass-loader", options: {
+                    data: "$ENV: " + (PROD ? "production" : "development") + ";",
                     indentWidth: 4,
+                    includePaths: [ path.resolve("./node_modules/bootstrap-sass/assets/stylesheets") ],
                     sourceMapEmbed: !PROD,
                     sourceMapContents: !PROD,
-                    data: "$ENV: " + (PROD ? "production" : "development") + ";",
                 } },
                 { loader: "postcss-loader", options: {
-                    sourceMap: (PROD ? false : "inline"),
+                    sourceMap: !PROD,
                 } },
             ]) },
             { test: /\.(eot|woff|woff2|ttf|svg)(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader?prefix=font/&name=fonts/[name].[ext]?v=[hash]" },
