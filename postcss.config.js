@@ -4,8 +4,6 @@ const PROD = process.argv.indexOf("-p") !== -1;
 
 var browsers = fs.readFileSync("./.browserslistrc", "utf8").split(/\n/).filter((i) => i.trim() !== "");
 
-console.log("Browsers list:", JSON.stringify(browsers));
-
 module.exports = {
     sourceMap: !PROD,
     plugins: [

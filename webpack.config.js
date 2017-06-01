@@ -77,6 +77,10 @@ module.exports = {
                 } },
                 { loader: "postcss-loader", options: { /* use only 'postcss.config.js' */ } },
             ]) },
+            { test: /\.(jpe?g|png|gif|svg)$/i, loaders: [
+                "file-loader?name=assets/img/[name].[ext]?v=[hash]",
+                "image-webpack-loader",
+            ] },
             { test: /\.(eot|woff|woff2|ttf|svg)(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader?prefix=font/&name=assets/fonts/[name].[ext]?v=[hash]" },
         ],
     },
