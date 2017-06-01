@@ -4,16 +4,9 @@
  * Licensed under MIT (https:/github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
-@function twbs-font-path($path) {
-    @return "~bootstrap-sass/assets/fonts/#{$path}";
-};
+// Custom variables
+@import "_variables.scss";
 
-@function twbs-image-path($path) {
-    @return $path;
-};
-
-$bootstrap-sass-asset-helper: true;
- 
 // Core variables and mixins
 @import "bootstrap/_variables.scss";
 
@@ -69,12 +62,9 @@ $bootstrap-sass-asset-helper: true;
 // Debug helper
 body:after {
     @if $NODE_ENV != "production" {
-        background: $brand-danger;
-        color: $link-color;
+        @extend .btn, .btn-xs, .btn-danger;
         content: "$NODE_ENV=#{$NODE_ENV}";
-        display: block;
-        opacity: .5;
-        position: absolute;
+        position: fixed;
         right: 0;
         top: 0;
         z-index: $zindex-modal;
