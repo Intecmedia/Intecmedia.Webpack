@@ -34,6 +34,7 @@ module.exports = {
     ] : [
         // dev-only
     ]).concat([
+        // dev-and-prod
         new webpack.BannerPlugin({
             banner: banner,
         }),
