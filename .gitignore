@@ -1,1 +1,4 @@
+assets/app.min.js
+assets/app.min.css
 node_modules
+package-lock.json
