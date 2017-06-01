@@ -2,7 +2,9 @@ const fs = require('fs');
 
 const PROD = process.argv.indexOf("-p") !== -1;
 
-var browsers = fs.readFileSync("./.browserslistrc", "utf8").trim().split(/\n/);
+var browsers = fs.readFileSync("./.browserslistrc", "utf8").split(/\n/).filter((i) => i.trim() !== "");
+
+console.log("Browsers list: " + browsers);
 
 module.exports = {
     sourceMap: !PROD,
