@@ -20,6 +20,7 @@
     "node-sass": "^4.5.3",
     "pixrem": "^3.0.2",
     "postcss": "^6.0.1",
+    "postcss-focus": "^2.0.0",
     "postcss-loader": "^2.0.5",
     "sass-loader": "^6.0.5",
     "style-loader": "^0.18.1",

@@ -9,22 +9,23 @@ console.log("Browsers list:", JSON.stringify(browsers));
 module.exports = {
     sourceMap: !PROD,
     plugins: [
-        require("autoprefixer")({
-            browsers: browsers,
-            add: true,
+        require("stylelint")({
         }),
+        require("postcss-focus")(),
         require("pixrem")({
             rootValue: 16,
             browsers: browsers,
             unitPrecision: 3,
         }),
-        require("cssnano")({
-            discardComments: { removeAll: true },
-        }),
-        require("stylelint")({
-        }),
         require("css-mqpacker")({
             sort: true,
+        }),
+        require("autoprefixer")({
+            browsers: browsers,
+            add: true,
+        }),
+        require("cssnano")({
+            discardComments: { removeAll: true },
         }),
     ]
 };
