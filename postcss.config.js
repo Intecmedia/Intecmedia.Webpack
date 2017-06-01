@@ -1,23 +1,23 @@
+const fs = require('fs');
+
 const PROD = process.argv.indexOf("-p") !== -1;
+
+var browsers = fs.readFileSync("./.browserslistrc", "utf8").trim().split(/\n/);
 
 module.exports = {
     sourceMap: !PROD,
     plugins: [
         require("autoprefixer")({
-            browsers: [
-                "Android 2.3",
-                "Android >= 4",
-                "Chrome >= 20",
-                "Firefox >= 24",
-                "Explorer >= 8",
-                "iOS >= 6",
-                "Opera >= 12",
-                "Safari >= 6"
-            ],
+            browsers: browsers,
             add: true,
         }),
+        require("pixrem")({
+            rootValue: 16,
+            browsers: browsers,
+            unitPrecision: 3,
+        }),
         require("cssnano")({
-            discardComments: { removeAll: PROD },
+            discardComments: { removeAll: true },
         }),
         require("stylelint")({
         }),
