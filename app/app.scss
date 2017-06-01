@@ -1,1 +1,25 @@
 @import "./_bootstrap.scss";
+
+
+.foo {
+    width: 240px;
+    &.some {
+        font-size: 1px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .foo {
+        width: 576px;
+    }
+}
+
+.bar {
+    width: 160px;
+}
+
+@media screen and (min-width: 768px) {
+    .bar {
+        width: 384px;
+    }
+}

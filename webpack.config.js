@@ -7,7 +7,7 @@ const PROD = process.argv.indexOf("-p") !== -1;
 
 console.log("Config enviroment: " + (PROD ? "production" : "development"));
 
-const extractCSS = new ExtractTextPlugin("./css/app.min.css");
+const extractCSS = new ExtractTextPlugin("./assets/app.min.css");
 
 const banner = new String("");
 banner.toString = () => {
@@ -22,7 +22,7 @@ module.exports = {
 
     output: {
         path: __dirname,
-        filename: "./js/app.min.js",
+        filename: "./assets/app.min.js",
     },
 
     plugins: (PROD ? [
@@ -76,7 +76,7 @@ module.exports = {
                 } },
                 { loader: "postcss-loader", options: { /* use only 'postcss.config.js' */ } },
             ]) },
-            { test: /\.(eot|woff|woff2|ttf|svg)(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader?prefix=font/&name=fonts/[name].[ext]?v=[hash]" },
+            { test: /\.(eot|woff|woff2|ttf|svg)(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader?prefix=font/&name=assets/fonts/[name].[ext]?v=[hash]" },
         ],
     },
 
