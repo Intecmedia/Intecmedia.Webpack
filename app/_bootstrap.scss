@@ -64,13 +64,9 @@ body:after {
     @if $NODE_ENV != "production" {
         @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border);
         content: "$NODE_ENV=#{$NODE_ENV}";
-
         position: fixed;
         right: 0;
         bottom: 0;
         z-index: $zindex-modal;
-        &:hover {
-content: "1";
-        }
     }
 }
