@@ -62,8 +62,11 @@
 // Debug helper
 body:after {
     @if $NODE_ENV != "production" {
-        @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border);
+        background-color: $alert-danger-bg;
+        border-color: $alert-danger-border;
+        color: $alert-danger-text;
         content: "$NODE_ENV=#{$NODE_ENV}";
+        padding: $padding-xs-vertical $padding-xs-horizontal;
         position: fixed;
         right: 0;
         bottom: 0;
