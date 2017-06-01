@@ -78,6 +78,7 @@ module.exports = {
                 { loader: "postcss-loader", options: { /* use only 'postcss.config.js' */ } },
             ]) },
             { test: /\.(jpe?g|png|gif|svg)$/i, loaders: [
+                "url-loader?limit=10000",
                 "file-loader?name=assets/img/[name].[ext]?v=[hash]",
                 "image-webpack-loader",
             ] },
