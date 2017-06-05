@@ -66,6 +66,9 @@ module.exports = {
             { test: /\.js/, use: "imports-loader?jQuery=jquery" },
             // css loaders
             { test: /\.(css|scss)/, loader: extractCSS.extract([
+                { loader: "style-loader", options: {
+                    sourceMap: !PROD,
+                } },
                 { loader: "css-loader", options: {
                     importLoaders: true,
                     sourceMap: !PROD,
@@ -77,7 +80,9 @@ module.exports = {
                     sourceMapEmbed: !PROD,
                     sourceMapContents: !PROD,
                 } },
-                { loader: "postcss-loader", options: { /* use only 'postcss.config.js' */ } },
+                { loader: "postcss-loader", options: {
+                    /* use only 'postcss.config.js' */ 
+                } },
             ]) },
             // image loaders
             { test: /\.(jpe?g|png|gif|svg)$/i, loaders: [
