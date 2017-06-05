@@ -28,6 +28,7 @@ module.exports = {
     plugins: (PROD ? [
         // prod-only
         new webpack.optimize.UglifyJsPlugin({
+            banner: banner,
             beautify: false,
             comments: false,
         }),
