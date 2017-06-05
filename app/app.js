@@ -1,9 +1,13 @@
+import $ from "jquery";
 import "./app.scss";
 import "./_bootstrap.js";
 
-//window["$"] = jQuery;
-//window["jQuery"] = jQuery;
+
+window["$"] =  $;
+window["jQuery"] = $;
+
 
 jQuery(function($) {
-    
+
+
 });

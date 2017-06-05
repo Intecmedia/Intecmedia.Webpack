@@ -4,7 +4,7 @@
   "description": "Intecmedia Webpack bootstrap",
   "scripts": {
     "dev": "webpack -d --hide-modules",
-    "watch": "webpack -w --hide-modules",
+    "watch": "webpack -w -p --hide-modules",
     "prod": "webpack -p --hide-modules"
   },
   "author": "Dmitry Pyatkov",
