@@ -64,6 +64,16 @@ module.exports = {
         rules: [
             // javascript loaders
             { test: /\.js/, use: "imports-loader?jQuery=jquery" },
+            // image loaders
+            { test: /\.(jpe?g|png|gif|svg)$/i, exclude: /fonts/, loaders: [
+                "url-loader?limit=" + (32 * 1024), // IE8 cannot handle a data-uri larger than 32KB
+                "file-loader?name=assets/img/[name].[ext]?v=[hash]",
+                "image-webpack-loader",
+            ] },
+            // font loaders
+            { test: /\.(eot|woff|woff2|ttf|svg)(\?v=.+)?$/, loaders: [
+                "file-loader?prefix=font/&name=assets/fonts/[name].[ext]?v=[hash]",
+            ] },
             // css loaders
             { test: /\.(css|scss)/, loader: extractCSS.extract({
                 fallback: [
@@ -98,16 +108,6 @@ module.exports = {
                     } },
                 ],
             }) },
-            // image loaders
-            { test: /\.(jpe?g|png|gif|svg)$/i, loaders: [
-                "url-loader?limit=" + (32 * 1024), // IE8 cannot handle a data-uri larger than 32KB
-                "file-loader?name=assets/img/[name].[ext]?v=[hash]",
-                "image-webpack-loader",
-            ], exclude: /fonts/ },
-            // font loaders
-            { test: /\.(eot|woff|woff2|ttf|svg)(\?v=.+)?$/, loaders: [
-                "file-loader?prefix=font/&name=assets/fonts/[name].[ext]?v=[hash]",
-            ] },
         ],
     },
 
