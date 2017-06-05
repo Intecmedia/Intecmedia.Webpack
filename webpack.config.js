@@ -67,13 +67,21 @@ module.exports = {
             { test: /\.js/, use: "imports-loader?jQuery=jquery" },
             // image loaders
             { test: /\.(jpe?g|png|gif|svg)$/i, exclude: /fonts/, loaders: [
-                "url-loader?limit=" + (32 * 1024), // IE8 cannot handle a data-uri larger than 32KB
-                "file-loader?name=assets/img/[name].[ext]?v=[hash]",
-                "image-webpack-loader",
+                { loader: "url-loader", options: {
+                    limit: 32 * 1024, // IE8 cannot handle a data-uri larger than 32KB
+                } },
+                { loader: "file-loader", options: {
+                    name: "assets/img/[name].[ext]?v=[hash]",
+                } },
+                { loader: "image-webpack-loader", options: {
+                    bypassOnDebug: !PROD,
+                } },
             ] },
             // font loaders
             { test: /\.(eot|woff|woff2|ttf|svg)(\?v=.+)?$/, loaders: [
-                "file-loader?prefix=font/&name=assets/fonts/[name].[ext]?v=[hash]",
+                { loader: "file-loader", options: {
+                    name: "assets/fonts/[name].[ext]?v=[hash]",
+                } },
             ] },
             // css loaders
             { test: /\.(css|scss)/, loader: extractCSS.extract({
