@@ -81,8 +81,10 @@ module.exports = {
                 "url-loader?limit=" + (32 * 1024), // IE8 cannot handle a data-uri larger than 32KB
                 "file-loader?name=assets/img/[name].[ext]?v=[hash]",
                 "image-webpack-loader",
+            ], exclude: /fonts/ },
+            { test: /\.(eot|woff|woff2|ttf|svg)(\?v=.+)?$/, loaders: [
+                "file-loader?prefix=font/&name=assets/fonts/[name].[ext]?v=[hash]",
             ] },
-            { test: /\.(eot|woff|woff2|ttf|svg)(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader?prefix=font/&name=assets/fonts/[name].[ext]?v=[hash]" },
         ],
     },
 
