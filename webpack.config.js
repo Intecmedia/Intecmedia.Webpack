@@ -17,12 +17,12 @@ banner.toString = () => {
 module.exports = {
 
     entry: [
-        "./app/app.js",
+        "./app/app.js"
     ],
 
     output: {
         path: __dirname,
-        filename: "./assets/app.min.js",
+        filename: "./assets/app.min.js"
     },
 
     plugins: (PROD ? [
@@ -30,18 +30,18 @@ module.exports = {
         new webpack.optimize.UglifyJsPlugin({
             banner: banner,
             beautify: false,
-            comments: false,
-        }),
+            comments: false
+        })
     ] : [
         // dev-only
     ]).concat([
         // dev-and-prod
         new webpack.BannerPlugin({
-            banner: banner,
+            banner: banner
         }),
         new webpack.DefinePlugin({
             "process.env": {
-                "NODE_ENV": (PROD ? "production" : "development"),
+                "NODE_ENV": (PROD ? "production" : "development")
             }
         }),
         extractCSS,
@@ -49,76 +49,115 @@ module.exports = {
             "$": "jquery",
             "jQuery": "jquery",
             "window.$": "jquery",
-            "window.jQuery": "jquery",
-        }),
+            "window.jQuery": "jquery"
+        })
     ]),
 
     devtool: (PROD ? "" : "inline-source-map"),
 
     resolve: {
         alias: {
-            "bootstrap": "bootstrap-sass/assets/javascripts/bootstrap",
+            "bootstrap": "bootstrap-sass/assets/javascripts/bootstrap"
         }
     },
 
     module: {
         rules: [
             // javascript loaders
-            { test: /\.js/, use: "imports-loader?jQuery=jquery" },
+            {
+                test: /\.js/,
+                use: "imports-loader?jQuery=jquery"
+            },
             // image loaders
-            { test: /\.(jpe?g|png|gif|svg)$/i, exclude: /fonts/, loaders: [
-                { loader: "url-loader", options: {
-                    limit: 32 * 1024, // IE8 cannot handle a data-uri larger than 32KB
-                } },
-                { loader: "file-loader", options: {
-                    name: "assets/img/[name].[ext]?v=[hash]",
-                } },
-                { loader: "image-webpack-loader", options: {
-                    bypassOnDebug: !PROD,
-                } },
-            ] },
+            {
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                exclude: /fonts/,
+                loaders: [
+                    {
+                        loader: "url-loader",
+                        options: {
+                            limit: 32 * 1024 // IE8 cannot handle a data-uri larger than 32KB
+                        }
+                    },
+                    {
+                        loader: "file-loader",
+                        options: {
+                            name: "assets/img/[name].[ext]?v=[hash]"
+                        }
+                    },
+                    {
+                        loader: "image-webpack-loader",
+                        options: {
+                            bypassOnDebug: !PROD
+                        }
+                    }
+                ]
+            },
             // font loaders
-            { test: /\.(eot|woff|woff2|ttf|svg)(\?v=.+)?$/, loaders: [
-                { loader: "file-loader", options: {
-                    name: "assets/fonts/[name].[ext]?v=[hash]",
-                } },
-            ] },
+            {
+                test: /\.(eot|woff|woff2|ttf|svg)(\?v=.+)?$/,
+                loaders: [
+                    {
+                        loader: "file-loader",
+                        options: {
+                            name: "assets/fonts/[name].[ext]?v=[hash]"
+                        }
+                    }
+                ]
+            },
             // css loaders
-            { test: /\.(css|scss)/, loader: extractCSS.extract({
-                fallback: [
-                    { loader: "style-loader", options: {
-                        sourceMap: !PROD,
-                    }  },
-                ],
-                use: [
-                    { loader: "css-loader", options: {
-                        importLoaders: true,
-                        sourceMap: !PROD,
-                    } },
-                    { loader: "sass-loader", options: {
-                        data: "$NODE_ENV: " + (PROD ? "production" : "development") + ";",
-                        indentWidth: 4,
-                        includePaths: [ path.resolve("./node_modules/bootstrap-sass/assets/stylesheets") ],
-                        sourceMapEmbed: !PROD,
-                        sourceMapContents: !PROD,
-                    } },
-                    { loader: "postcss-loader", options: {
-                        sourceMap: !PROD,
-                        plugins: [
-                            require("postcss-cssnext")({
-                                warnForDuplicates: false,
-                            }),
-                            require("css-mqpacker")({
-                                sort: true,
-                            }),
-                            require("cssnano")({
-                                discardComments: {removeAll: true},
-                            }),
-                        ]
-                    } },
-                ],
-            }) },
-        ],
-    },
+            {
+                test: /\.(css|scss)/,
+                loader: extractCSS.extract({
+                    fallback: [
+                        {
+                            loader: "style-loader",
+                            options: {
+                                sourceMap: !PROD
+                            }
+                        }
+                    ],
+                    use: [
+                        {
+                            loader: "css-loader",
+                            options: {
+                                importLoaders: true,
+                                sourceMap: !PROD
+                            }
+                        },
+                        {
+                            loader: "sass-loader",
+                            options: {
+                                data: "$NODE_ENV: " + (PROD ? "production" : "development") + ";",
+                                indentWidth: 4,
+                                includePaths: [path.resolve("./node_modules/bootstrap-sass/assets/stylesheets")],
+                                sourceMapEmbed: !PROD,
+                                sourceMapContents: !PROD
+                            }
+                        },
+                        {
+                            loader: "postcss-loader",
+                            options: {
+                                sourceMap: !PROD,
+                                plugins: [
+                                    require("postcss-cssnext")({
+                                        warnForDuplicates: false
+                                    }),
+                                    require("css-mqpacker")({
+                                        sort: true
+                                    }),
+                                    require("cssnano")({
+                                        discardComments: {
+                                            removeAll: true
+                                        }
+                                    })
+                                ]
+                            }
+                        }
+                    ]
+                })
+            }
+        ]
+    }
 
 };
