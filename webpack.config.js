@@ -97,6 +97,7 @@ module.exports = {
                         sourceMap: !PROD,
                         plugins: [
                             require("postcss-cssnext")({
+                                warnForDuplicates: false,
                             }),
                             require("css-mqpacker")({
                                 sort: true,
