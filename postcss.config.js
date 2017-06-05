@@ -1,8 +1,8 @@
-const fs = require('fs');
-
+const browserslist = require("browserslist");
 const PROD = process.argv.indexOf("-p") !== -1;
 
-var browsers = fs.readFileSync("./.browserslistrc", "utf8").split(/\n/).filter((i) => i.trim() !== "");
+const browsers = browserslist.readConfig("./.browserslistrc").defaults;
+
 
 module.exports = {
     sourceMap: !PROD,
