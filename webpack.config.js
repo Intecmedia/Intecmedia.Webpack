@@ -84,7 +84,17 @@ module.exports = {
                         sourceMapContents: !PROD,
                     } },
                     { loader: "postcss-loader", options: {
-                        /* use only 'postcss.config.js' */ 
+                        sourceMap: !PROD,
+                        plugins: [
+                            require("postcss-cssnext")({
+                            }),
+                            require("css-mqpacker")({
+                                sort: true,
+                            }),
+                            require("cssnano")({
+                                discardComments: {removeAll: true},
+                            }),
+                        ]
                     } },
                 ],
             }) },
