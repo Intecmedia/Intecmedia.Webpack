@@ -65,25 +65,29 @@ module.exports = {
             // javascript loaders
             { test: /\.js/, use: "imports-loader?jQuery=jquery" },
             // css loaders
-            { test: /\.(css|scss)/, loader: extractCSS.extract([
-                { loader: "style-loader", options: {
-                    sourceMap: !PROD,
-                } },
-                { loader: "css-loader", options: {
-                    importLoaders: true,
-                    sourceMap: !PROD,
-                } },
-                { loader: "sass-loader", options: {
-                    data: "$NODE_ENV: " + (PROD ? "production" : "development") + ";",
-                    indentWidth: 4,
-                    includePaths: [ path.resolve("./node_modules/bootstrap-sass/assets/stylesheets") ],
-                    sourceMapEmbed: !PROD,
-                    sourceMapContents: !PROD,
-                } },
-                { loader: "postcss-loader", options: {
-                    /* use only 'postcss.config.js' */ 
-                } },
-            ]) },
+            { test: /\.(css|scss)/, loader: extractCSS.extract({
+                fallback: [
+                    { loader: "style-loader", options: {
+                        sourceMap: !PROD,
+                    }  },
+                ],
+                use: [
+                    { loader: "css-loader", options: {
+                        importLoaders: true,
+                        sourceMap: !PROD,
+                    } },
+                    { loader: "sass-loader", options: {
+                        data: "$NODE_ENV: " + (PROD ? "production" : "development") + ";",
+                        indentWidth: 4,
+                        includePaths: [ path.resolve("./node_modules/bootstrap-sass/assets/stylesheets") ],
+                        sourceMapEmbed: !PROD,
+                        sourceMapContents: !PROD,
+                    } },
+                    { loader: "postcss-loader", options: {
+                        /* use only 'postcss.config.js' */ 
+                    } },
+                ],
+            }) },
             // image loaders
             { test: /\.(jpe?g|png|gif|svg)$/i, loaders: [
                 "url-loader?limit=" + (32 * 1024), // IE8 cannot handle a data-uri larger than 32KB
