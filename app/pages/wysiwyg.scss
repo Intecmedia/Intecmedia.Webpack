@@ -42,7 +42,7 @@
                 width: $font-size-base;
                 margin-left: -$font-size-base;
                 font-size: $font-size-large;
-                line-height: $line-height-base;
+                line-height: $line-height-computed;
                 vertical-align: middle;
                 position: absolute;
                 text-align: center;
@@ -50,7 +50,6 @@
             > ul > li:before {
                 content: "\2022";
                 color: $text-color;
-                font-size: $font-size-base;
             }
         }
     }
