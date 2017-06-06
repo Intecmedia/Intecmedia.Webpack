@@ -4,7 +4,7 @@ const webpack = require("webpack");
 const IS_PROD = process.argv.indexOf("-p") !== -1;
 console.log("Config enviroment: " + (IS_PROD ? "production" : "development"));
 
-const extract = new (require("extract-text-webpack-plugin"))({
+const extractPlugin = new (require("extract-text-webpack-plugin"))({
     filename: "./assets/app.min.css"
 });
 
@@ -30,6 +30,15 @@ module.exports = {
 
     plugins: (IS_PROD ? [
         // prod-only
+        new webpack.EnvironmentPlugin({
+            NODE_ENV: "production",
+            DEBUG: false
+        }),
+        new webpack.DefinePlugin({
+            "process.env": {
+                "NODE_ENV": "production"
+            }
+        }),
         new webpack.optimize.UglifyJsPlugin({
             banner: banner,
             beautify: false,
@@ -37,17 +46,21 @@ module.exports = {
         })
     ] : [
         // dev-only
-    ]).concat([
-        // dev-and-prod
-        new webpack.BannerPlugin({
-            banner: banner
+        new webpack.EnvironmentPlugin({
+            NODE_ENV: "development",
+            DEBUG: true
         }),
         new webpack.DefinePlugin({
             "process.env": {
-                "NODE_ENV": (IS_PROD ? "production" : "development")
+                "NODE_ENV": "development"
             }
+        })
+    ]).concat([
+        // dev-and-prod
+        extractPlugin,
+        new webpack.BannerPlugin({
+            banner: banner
         }),
-        extract,
         new webpack.ProvidePlugin({
             "$": "jquery",
             "jQuery": "jquery",
@@ -122,7 +135,7 @@ module.exports = {
             // css loaders
             {
                 test: /\.s?css$/,
-                loader: extract.extract({
+                loader: extractPlugin.extract({
                     fallback: [
                         {
                             loader: "style-loader",
