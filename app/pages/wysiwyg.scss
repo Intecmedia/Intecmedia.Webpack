@@ -48,7 +48,8 @@
                 text-align: center;
             }
             > ul > li:before {
-                content: "\00ba" !important;
+                content: "\2022";
+                color: $text-color;
             }
         }
     }
