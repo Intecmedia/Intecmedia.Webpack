@@ -1,11 +1,8 @@
-import $ from "jquery";
-import "./app.scss";
-import "./_bootstrap.js";
+require("./app.scss");
+require("./_bootstrap.js");
 
-
-window["$"] =  $;
-window["jQuery"] = $;
-
+const jQuery = require("jquery");
+window["$"] = window["jQuery"] = jQuery;
 
 jQuery(function($) {
 
