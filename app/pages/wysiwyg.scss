@@ -39,14 +39,12 @@
                 font-family: inherit;
                 content: "\2022";
                 color: $brand-primary;
-                width: 1.2em;
-                margin-left: -1.2em;
-                font-size: 1.4em;
-                line-height: 1em;
+                width: $font-size-base;
+                margin-left: -$font-size-base;
+                font-size: $font-size-base;
+                line-height: $line-height-base;
                 vertical-align: middle;
                 position: absolute;
-                top: 0;
-                left: 0;
                 text-align: center;
             }
             > ul > li {
@@ -56,10 +54,10 @@
     }
     
     img[align="left"], img.pull-left {
-        margin-right: $padding-base-horizontal:;
+        margin-right: $padding-base-horizontal;
     }
 
     img[align="right"], img.pull-right {
-        margin-left: $padding-base-horizontal:;
+        margin-left: $padding-base-horizontal;
     }
 }
