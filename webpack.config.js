@@ -48,8 +48,6 @@ module.exports = {
         new webpack.ProvidePlugin({
             "$": "jquery",
             "jQuery": "jquery",
-            "window.$": "jquery",
-            "window.jQuery": "jquery"
         })
     ]),
 
@@ -65,8 +63,21 @@ module.exports = {
         rules: [
             // javascript loaders
             {
-                test: /\.js/,
-                use: "imports-loader?jQuery=jquery"
+                test: /\.js$/,
+                include: /node_modules/,
+                loader: "imports-loader",
+                options: {
+                    "$": "jquery",
+                    "jQuery": "jquery"
+                }
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: "babel-loader",
+                options: {
+                    presets: ["env"]
+                }
             },
             // image loaders
             {
@@ -107,7 +118,7 @@ module.exports = {
             },
             // css loaders
             {
-                test: /\.(css|scss)/,
+                test: /\.s?css$/,
                 loader: extractCSS.extract({
                     fallback: [
                         {
