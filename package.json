@@ -22,7 +22,7 @@
   ],
   "dependencies": {
     "autoprefixer": "latest",
-    "babel": "latest",
+    "babel-cli": "latest",
     "babel-core": "latest",
     "babel-loader": "latest",
     "babel-preset-airbnb": "latest",
