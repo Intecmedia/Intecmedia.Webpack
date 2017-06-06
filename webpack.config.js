@@ -35,6 +35,7 @@ module.exports = {
             DEBUG: false
         }),
         new webpack.DefinePlugin({
+            "NODE_ENV": JSON.stringify("production"),
             "process.env": {
                 "NODE_ENV": "production"
             }
@@ -51,6 +52,7 @@ module.exports = {
             DEBUG: true
         }),
         new webpack.DefinePlugin({
+            "NODE_ENV": JSON.stringify("development"),
             "process.env": {
                 "NODE_ENV": "development"
             }
