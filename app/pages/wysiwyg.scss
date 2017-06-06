@@ -56,10 +56,10 @@
     }
     
     img[align="left"], img.pull-left {
-        margin-right: 10px;
+        margin-right: $padding-base-horizontal:;
     }
 
     img[align="right"], img.pull-right {
-        margin-left: 10px;
+        margin-left: $padding-base-horizontal:;
     }
 }
