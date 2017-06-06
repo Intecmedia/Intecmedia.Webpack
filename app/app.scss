@@ -1,3 +1,16 @@
-@import "./_bootstrap.scss";
+/* Core */
+@import "_bootstrap";
+@import "mixins";
+
+/* Customization */
+@import "utils";
+@import "header";
+@import "layout";
+@import "footer";
+
+/* Pages */
+@import "pages/wysiwyg";
+@import "pages/index";
 
 
+/* Node modules */
