@@ -20,6 +20,7 @@
     "Safari >= 6"
   ],
   "dependencies": {
+    "autoprefixer": "latest",
     "babel": "latest",
     "babel-core": "latest",
     "babel-loader": "latest",
