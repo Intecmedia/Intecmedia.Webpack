@@ -62,8 +62,8 @@ module.exports = {
             banner: banner
         }),
         new webpack.ProvidePlugin({
-            "$": "jquery",
-            "jQuery": "jquery",
+            $: "jquery",
+            jQuery: "jquery"
         })
     ]),
 
