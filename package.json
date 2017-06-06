@@ -23,6 +23,7 @@
     "babel": "^6.23.0",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
+    "babel-preset-airbnb": "^2.2.3",
     "babel-preset-env": "^1.5.1",
     "bootstrap-sass": "^3.3.7",
     "browserslist": "^2.1.4",
