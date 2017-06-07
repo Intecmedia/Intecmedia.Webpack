@@ -4,5 +4,3 @@ assets/app.min.js
 assets/app.min.css
 assets/vendor.min.js
 node_modules
-package-lock.json
-
