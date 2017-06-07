@@ -168,18 +168,8 @@ module.exports = {
                         {
                             loader: "css-loader",
                             options: {
-                                importLoaders: 1, // index of 'sass-loader'
+                                importLoaders: 2, // index of 'sass-loader'
                                 sourceMap: !IS_PROD
-                            }
-                        },
-                        {
-                            loader: "sass-loader",
-                            options: {
-                                data: "$NODE_ENV: " + NODE_ENV + ";",
-                                indentWidth: 4,
-                                includePaths: sassIncludePaths,
-                                sourceMapEmbed: !IS_PROD,
-                                sourceMapContents: !IS_PROD
                             }
                         },
                         {
@@ -204,6 +194,16 @@ module.exports = {
                                 ] : [
                                     // dev-only
                                 ])
+                            }
+                        },
+                        {
+                            loader: "sass-loader",
+                            options: {
+                                data: "$NODE_ENV: " + NODE_ENV + ";",
+                                indentWidth: 4,
+                                includePaths: sassIncludePaths,
+                                sourceMapEmbed: !IS_PROD,
+                                sourceMapContents: !IS_PROD
                             }
                         }
                     ]
