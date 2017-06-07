@@ -40,7 +40,7 @@ module.exports = {
     },
 
     performance: {
-        hints: "error",
+        hints: IS_PROD ? "error" : false,
         maxAssetSize: 512 * 1024,
         maxEntrypointSize: 512 * 1024
     },
