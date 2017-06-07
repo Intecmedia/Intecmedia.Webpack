@@ -95,7 +95,9 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: "babel-loader",
                 options: {
-                    presets: ["env"]
+                    presets: ["env"],
+                    forceEnv: NODE_ENV,
+                    cacheDirectory: !IS_PROD
                 }
             },
             // image loaders
@@ -106,7 +108,7 @@ module.exports = {
                     {
                         loader: "url-loader",
                         options: {
-                            limit: 32 * 1024 // IE8 cannot handle a data-uri larger than 32KB
+                            limit: 32 * 1024
                         }
                     },
                     {
