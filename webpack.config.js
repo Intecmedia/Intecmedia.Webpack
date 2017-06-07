@@ -170,9 +170,12 @@ module.exports = {
                             options: {
                                 sourceMap: !IS_PROD,
                                 plugins: [
+                                    // dev-and-prod
                                     require("postcss-cssnext")({
                                         warnForDuplicates: false
-                                    }),
+                                    })
+                                ].concat(IS_PROD ? [
+                                    // prod-only
                                     require("css-mqpacker")({
                                         sort: true
                                     }),
@@ -181,7 +184,9 @@ module.exports = {
                                             removeAll: true
                                         }
                                     })
-                                ]
+                                ] : [
+                                    // dev-only
+                                ])
                             }
                         }
                     ]
