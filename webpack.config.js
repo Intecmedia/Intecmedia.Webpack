@@ -3,7 +3,10 @@ const webpack = require("webpack");
 
 const IS_PROD = process.argv.indexOf("-p") !== -1;
 const NODE_ENV = IS_PROD ? "production" : "development";
+const SOURCE_MAP = !IS_PROD;
+
 console.log("Config enviroment: " + NODE_ENV);
+console.log("Source maps: " + (SOURCE_MAP ? "enabled" : "disabled"));
 
 const extractPlugin = new (require("extract-text-webpack-plugin"))({
     filename: "./assets/app.min.css"
@@ -80,7 +83,7 @@ module.exports = {
         })
     ]),
 
-    devtool: (IS_PROD ? "" : "eval-source-map"),
+    devtool: (SOURCE_MAP ? "eval-source-map" : ""),
 
     module: {
         rules: [
@@ -149,7 +152,7 @@ module.exports = {
                         {
                             loader: "style-loader",
                             options: {
-                                sourceMap: !IS_PROD
+                                sourceMap: SOURCE_MAP
                             }
                         }
                     ],
@@ -158,13 +161,13 @@ module.exports = {
                             loader: "css-loader",
                             options: {
                                 importLoaders: 2, // index of 'sass-loader'
-                                sourceMap: !IS_PROD
+                                sourceMap: SOURCE_MAP
                             }
                         },
                         {
                             loader: "postcss-loader",
                             options: {
-                                sourceMap: IS_PROD ? false : "inline",
+                                sourceMap: SOURCE_MAP ? "inline" : false,
                                 plugins: [
                                     // dev-and-prod
                                     require("postcss-cssnext")({
@@ -192,10 +195,10 @@ module.exports = {
                             options: {
                                 data: "$NODE_ENV: " + NODE_ENV + ";",
                                 indentWidth: 4,
-                                sourceMap: IS_PROD ? false : "inline",
-                                sourceMapEmbed: !IS_PROD,
-                                sourceMapContents: !IS_PROD,
-                                sourceComments: !IS_PROD
+                                sourceMap: SOURCE_MAP ? "inline" : false,
+                                sourceMapEmbed: SOURCE_MAP,
+                                sourceMapContents: SOURCE_MAP,
+                                sourceComments: SOURCE_MAP
                             }
                         }
                     ]
