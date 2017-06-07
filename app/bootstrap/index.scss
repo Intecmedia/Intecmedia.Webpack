@@ -57,18 +57,3 @@
 // Utility classes
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/_utilities";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/_responsive-utilities";
-
-// Debug helper
-body:after {
-    @if $NODE_ENV != "production" {
-        background-color: $alert-danger-bg;
-        border-color: $alert-danger-border;
-        color: $alert-danger-text;
-        content: "$NODE_ENV=#{$NODE_ENV}";
-        padding: $padding-xs-vertical $padding-xs-horizontal;
-        position: fixed;
-        right: 0;
-        bottom: 0;
-        z-index: $zindex-modal;
-    }
-}
