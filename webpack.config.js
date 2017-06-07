@@ -3,7 +3,7 @@ const webpack = require("webpack");
 
 const IS_PROD = process.argv.indexOf("-p") !== -1;
 const NODE_ENV = IS_PROD ? "production" : "development";
-console.log("Config enviroment: " + (IS_PROD ? "production" : "development"));
+console.log("Config enviroment: " + NODE_ENV);
 
 const extractPlugin = new (require("extract-text-webpack-plugin"))({
     filename: "./assets/app.min.css"
