@@ -4,9 +4,13 @@
   "description": "Intecmedia Webpack bootstrap",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack -d --hide-modules",
+    "debug": "cross-env NODE_ENV=development DEBUG=1 webpack -d --hide-modules",
     "watch-dev": "cross-env NODE_ENV=development webpack -w -d --hide-modules",
+    "watch-dev-debug": "cross-env NODE_ENV=development DEBUG=1 webpack -w -d --hide-modules",
     "watch-prod": "cross-env NODE_ENV=production webpack -w -p --hide-modules",
-    "prod": "cross-env NODE_ENV=production webpack -p --hide-modules"
+    "watch-prod-debug": "cross-env NODE_ENV=production DEBUG=1 webpack -w -p --hide-modules",
+    "prod": "cross-env NODE_ENV=production DEBUG=1 webpack -p --hide-modules",
+    "prod-debug": "cross-env NODE_ENV=production webpack -p --hide-modules"
   },
   "author": "Dmitry Pyatkov",
   "license": "MIT",

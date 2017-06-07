@@ -1,12 +1,15 @@
 const util = require("util"), path = require("path");
 const webpack = require("webpack");
 
-const IS_PROD = process.argv.indexOf("-p") !== -1;
-const NODE_ENV = IS_PROD ? "production" : "development";
-const SOURCE_MAP = !IS_PROD;
+const DEBUG = ("DEBUG" in process.env && parseInt(process.env["DEBUG"]));
+const PROD = process.argv.indexOf("-p") !== -1;
+const NODE_ENV = PROD ? "production" : "development";
+const SOURCE_MAP = DEBUG;
 
 console.log("Config enviroment: " + NODE_ENV);
+console.log("Debug: " + (DEBUG ? "enabled" : "disabled"));
 console.log("Source maps: " + (SOURCE_MAP ? "enabled" : "disabled"));
+console.log("---");
 
 const extractPlugin = new (require("extract-text-webpack-plugin"))({
     filename: "./assets/app.min.css"
@@ -33,12 +36,12 @@ module.exports = {
     },
 
     performance: {
-        hints: IS_PROD ? "error" : false,
+        hints: PROD ? "error" : false,
         maxAssetSize: 512 * 1024,
         maxEntrypointSize: 256 * 1024
     },
 
-    plugins: (IS_PROD ? [
+    plugins: (PROD ? [
         // prod-only
         new webpack.EnvironmentPlugin({
             NODE_ENV: "production",
@@ -104,7 +107,7 @@ module.exports = {
                 options: {
                     presets: ["env"],
                     forceEnv: NODE_ENV,
-                    cacheDirectory: !IS_PROD
+                    cacheDirectory: !PROD
                 }
             },
             // image loaders
@@ -127,7 +130,7 @@ module.exports = {
                     {
                         loader: "image-webpack-loader",
                         options: {
-                            bypassOnDebug: !IS_PROD
+                            bypassOnDebug: !PROD
                         }
                     }
                 ]
@@ -174,7 +177,7 @@ module.exports = {
                                         features: {
                                         }
                                     }),
-                                ].concat(IS_PROD ? [
+                                ].concat(PROD ? [
                                     // prod-only
                                     require("css-mqpacker")({
                                         sort: true
