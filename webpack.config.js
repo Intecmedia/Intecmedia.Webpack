@@ -1,7 +1,7 @@
 const util = require("util"), path = require("path");
 const webpack = require("webpack");
 
-const DEBUG = ("DEBUG" in process.env && parseInt(process.env["DEBUG"]));
+const DEBUG = ("DEBUG" in process.env && parseInt(process.env["DEBUG"]) != 0);
 const PROD = process.argv.indexOf("-p") !== -1;
 const NODE_ENV = PROD ? "production" : "development";
 const SOURCE_MAP = DEBUG;
