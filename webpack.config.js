@@ -20,9 +20,19 @@ const sassIncludePaths = [
 
 module.exports = {
 
-    entry: [
-        "./app/app.js"
-    ],
+    resolve: {
+        alias: {
+            "bootstrap": "bootstrap-sass/assets/javascripts/bootstrap"
+        }
+    },
+
+    entry: {
+        vendor: [
+            "jquery",
+            "./app/_vendor.js"
+        ],
+        app: "./app/app.js"
+    },
 
     output: {
         path: __dirname,
@@ -60,6 +70,10 @@ module.exports = {
         })
     ]).concat([
         // dev-and-prod
+        new webpack.optimize.CommonsChunkPlugin({
+            name: "vendor",
+            filename: "./assets/vendor.min.js"
+        }),
         extractPlugin,
         new webpack.BannerPlugin({
             banner: banner
@@ -71,12 +85,6 @@ module.exports = {
     ]),
 
     devtool: (IS_PROD ? "" : "inline-source-map"),
-
-    resolve: {
-        alias: {
-            "bootstrap": "bootstrap-sass/assets/javascripts/bootstrap"
-        }
-    },
 
     module: {
         rules: [
