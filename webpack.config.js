@@ -6,7 +6,7 @@ const PROD = process.argv.indexOf("-p") !== -1;
 const NODE_ENV = PROD ? "production" : "development";
 const SOURCE_MAP = DEBUG;
 
-console.log("Config enviroment: " + NODE_ENV);
+console.log("Enviroment: " + NODE_ENV);
 console.log("Debug: " + (DEBUG ? "enabled" : "disabled"));
 console.log("Source maps: " + (SOURCE_MAP ? "enabled" : "disabled"));
 console.log("---");
@@ -124,7 +124,7 @@ module.exports = {
                     {
                         loader: "file-loader",
                         options: {
-                            name: "assets/img/[name].[ext]?v=[hash]"
+                            name: "assets/img/[name].[ext]" + (PROD ? "?v=[hash]" : "")
                         }
                     },
                     {
@@ -142,7 +142,7 @@ module.exports = {
                     {
                         loader: "file-loader",
                         options: {
-                            name: "assets/fonts/[name].[ext]?v=[hash]"
+                            name: "assets/fonts/[name].[ext]" + (PROD ? "?v=[hash]" : "")
                         }
                     }
                 ]
