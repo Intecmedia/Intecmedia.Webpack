@@ -4,15 +4,15 @@
  * Licensed under MIT (https:/github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
-//require("bootstrap/transition.js");
-//require("bootstrap/alert.js");
-//require("bootstrap/button.js");
-//require("bootstrap/carousel.js");
-//require("bootstrap/collapse.js");
-//require("bootstrap/dropdown.js");
-//require("bootstrap/modal.js");
-//require("bootstrap/tab.js");
-//require("bootstrap/affix.js");
-//require("bootstrap/scrollspy.js");
-//require("bootstrap/tooltip.js");
-//require("bootstrap/popover.js");
+require("bootstrap-sass/assets/javascripts/bootstrap/transition.js");
+//require("bootstrap-sass/assets/javascripts/bootstrap/alert.js");
+//require("bootstrap-sass/assets/javascripts/bootstrap/button.js");
+//require("bootstrap-sass/assets/javascripts/bootstrap/carousel.js");
+//require("bootstrap-sass/assets/javascripts/bootstrap/collapse.js");
+//require("bootstrap-sass/assets/javascripts/bootstrap/dropdown.js");
+//require("bootstrap-sass/assets/javascripts/bootstrap/modal.js");
+//require("bootstrap-sass/assets/javascripts/bootstrap/tab.js");
+//require("bootstrap-sass/assets/javascripts/bootstrap/affix.js");
+//require("bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js");
+//require("bootstrap-sass/assets/javascripts/bootstrap/tooltip.js");
+//require("bootstrap-sass/assets/javascripts/bootstrap/popover.js");

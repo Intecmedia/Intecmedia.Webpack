@@ -16,12 +16,6 @@ banner.toString = () => {
 
 module.exports = {
 
-    resolve: {
-        alias: {
-            "bootstrap": "bootstrap-sass/assets/javascripts/bootstrap"
-        }
-    },
-
     entry: {
         vendor: [
             "jquery",
