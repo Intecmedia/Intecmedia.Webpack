@@ -36,7 +36,7 @@ module.exports = {
     },
 
     performance: {
-        hints: PROD ? "error" : false,
+        hints: PROD && !DEBUG ? "error" : false,
         maxAssetSize: 512 * 1024,
         maxEntrypointSize: 256 * 1024
     },
