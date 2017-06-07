@@ -4,7 +4,7 @@
  * Licensed under MIT (https:/github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
-require("bootstrap-sass/assets/javascripts/bootstrap/transition.js");
+//require("bootstrap-sass/assets/javascripts/bootstrap/transition.js");
 //require("bootstrap-sass/assets/javascripts/bootstrap/alert.js");
 //require("bootstrap-sass/assets/javascripts/bootstrap/button.js");
 //require("bootstrap-sass/assets/javascripts/bootstrap/carousel.js");
