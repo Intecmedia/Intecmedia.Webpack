@@ -15,7 +15,8 @@ banner.toString = () => {
 };
 
 const sassIncludePaths = [
-    path.resolve("./node_modules/bootstrap-sass/assets/stylesheets")
+    path.resolve("./node_modules/bootstrap-sass/assets/stylesheets"),
+    path.resolve("./node_modules/font-awesome-sass/assets/stylesheets")
 ];
 
 module.exports = {
@@ -42,7 +43,7 @@ module.exports = {
     performance: {
         hints: IS_PROD ? "error" : false,
         maxAssetSize: 512 * 1024,
-        maxEntrypointSize: 512 * 1024
+        maxEntrypointSize: 256 * 1024
     },
 
     plugins: (IS_PROD ? [

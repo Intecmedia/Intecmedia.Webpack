@@ -33,6 +33,7 @@
     "css-mqpacker": "latest",
     "extract-text-webpack-plugin": "latest",
     "file-loader": "latest",
+    "font-awesome-sass": "latest",
     "image-webpack-loader": "latest",
     "imports-loader": "latest",
     "jquery": "latest",
