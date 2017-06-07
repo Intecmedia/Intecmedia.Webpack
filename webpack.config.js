@@ -179,14 +179,16 @@ module.exports = {
                                 plugins: [
                                     // dev-and-prod
                                     require("postcss-cssnext")({
-                                        warnForDuplicates: false
-                                    })
+                                        features: {
+                                        }
+                                    }),
                                 ].concat(IS_PROD ? [
                                     // prod-only
                                     require("css-mqpacker")({
                                         sort: true
                                     }),
                                     require("cssnano")({
+                                        autoprefixer: false,
                                         discardComments: {
                                             removeAll: true
                                         }
