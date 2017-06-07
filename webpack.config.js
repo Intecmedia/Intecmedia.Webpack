@@ -39,6 +39,12 @@ module.exports = {
         filename: "./assets/app.min.js"
     },
 
+    performance: {
+        hints: "error",
+        maxAssetSize: 512 * 1024,
+        maxEntrypointSize: 512 * 1024
+    },
+
     plugins: (IS_PROD ? [
         // prod-only
         new webpack.EnvironmentPlugin({
