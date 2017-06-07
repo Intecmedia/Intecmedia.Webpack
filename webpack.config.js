@@ -90,7 +90,7 @@ module.exports = {
         })
     ]),
 
-    devtool: (IS_PROD ? "" : "inline-source-map"),
+    devtool: (IS_PROD ? "" : "eval-source-map"),
 
     module: {
         rules: [
