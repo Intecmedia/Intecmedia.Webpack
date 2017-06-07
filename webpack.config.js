@@ -198,6 +198,7 @@ module.exports = {
                                 sourceMap: SOURCE_MAP ? "inline" : false,
                                 sourceMapEmbed: SOURCE_MAP,
                                 sourceMapContents: SOURCE_MAP,
+                                sourceMapRoot: ".",
                                 sourceComments: SOURCE_MAP
                             }
                         }
