@@ -164,7 +164,7 @@ module.exports = {
                         {
                             loader: "postcss-loader",
                             options: {
-                                sourceMap: !IS_PROD,
+                                sourceMap: IS_PROD ? false : "inline",
                                 plugins: [
                                     // dev-and-prod
                                     require("postcss-cssnext")({
@@ -192,8 +192,10 @@ module.exports = {
                             options: {
                                 data: "$NODE_ENV: " + NODE_ENV + ";",
                                 indentWidth: 4,
+                                sourceMap: IS_PROD ? false : "inline",
                                 sourceMapEmbed: !IS_PROD,
-                                sourceMapContents: !IS_PROD
+                                sourceMapContents: !IS_PROD,
+                                sourceComments: !IS_PROD
                             }
                         }
                     ]
