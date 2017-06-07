@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "description": "Intecmedia Webpack bootstrap",
   "scripts": {
-    "dev": "webpack -d --hide-modules",
-    "watch-dev": "webpack -w -d --hide-modules",
-    "watch-prod": "webpack -w -p --hide-modules",
-    "prod": "webpack -p --hide-modules"
+    "dev": "cross-env NODE_ENV=development webpack -d --hide-modules",
+    "watch-dev": "cross-env NODE_ENV=development webpack -w -d --hide-modules",
+    "watch-prod": "cross-env NODE_ENV=production webpack -w -p --hide-modules",
+    "prod": "cross-env NODE_ENV=production webpack -p --hide-modules"
   },
   "author": "Dmitry Pyatkov",
   "license": "MIT",
@@ -29,6 +29,7 @@
     "babel-preset-es2015": "latest",
     "bootstrap-sass": "latest",
     "browserslist": "latest",
+    "cross-env": "latest",
     "css-loader": "latest",
     "css-mqpacker": "latest",
     "extract-text-webpack-plugin": "latest",
