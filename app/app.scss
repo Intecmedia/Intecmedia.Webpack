@@ -1,5 +1,5 @@
 /* Core */
-@import "_bootstrap";
+@import "bootstrap/index";
 @import "mixins";
 
 /* Customization */
@@ -12,5 +12,6 @@
 @import "pages/wysiwyg";
 @import "pages/index";
 
-/* Node modules */
-@import "_font-awesome";
+/* Vendor */
+@import "font-awesome/index";
+
