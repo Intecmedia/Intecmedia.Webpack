@@ -1,11 +1,11 @@
 
 // Debug helper
-body:after {
-    @if $NODE_ENV != "production" {
+@if $NODE_ENV != "production" {
+    body:after {
         background-color: $alert-danger-bg;
         border-color: $alert-danger-border;
         color: $alert-danger-text;
-        content: "$NODE_ENV=#{$NODE_ENV}";
+        content: "Only visible $NODE_ENV=#{$NODE_ENV}";
         padding: $padding-xs-vertical $padding-xs-horizontal;
         position: fixed;
         right: 0;
@@ -13,3 +13,4 @@ body:after {
         z-index: $zindex-modal;
     }
 }
+
