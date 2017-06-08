@@ -1,9 +1,9 @@
 /* global NODE_ENV */
-/* eslint no-console: "off" */
 
 require('./app.scss')
 
 jQuery(() => {
+    /* eslint no-console: "off" */
     console.log(`Enviroment: ${NODE_ENV}`)
 
 })
