@@ -10,7 +10,8 @@
     "watch-prod": "cross-env NODE_ENV=production DEBUG=0 webpack -w -p --hide-modules --display-error-details --optimize-minimize",
     "watch-prod-debug": "cross-env NODE_ENV=production DEBUG=1 webpack -w -p --hide-modules --display-error-details --optimize-minimize",
     "prod": "cross-env NODE_ENV=production DEBUG=0 webpack -p --hide-modules --display-error-details --optimize-minimize",
-    "prod-debug": "cross-env NODE_ENV=production DEBUG=1 webpack -p --hide-modules--display-error-details --optimize-minimize"
+    "prod-debug": "cross-env NODE_ENV=production DEBUG=1 webpack -p --hide-modules--display-error-details --optimize-minimize",
+    "lint": "eslint --config .eslintrc.json --fix app/ --ext .js && eslint --config .eslintrc.json --fix webpack.config.js"
   },
   "author": "Dmitry Pyatkov",
   "license": "MIT",

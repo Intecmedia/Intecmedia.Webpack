@@ -11,8 +11,9 @@ const USE_LINTERS = DEBUG
 /* eslint no-console: "off" */
 console.log(`Enviroment: ${NODE_ENV}`)
 console.log(`Debug: ${DEBUG ? 'enabled' : 'disabled'}`)
+console.log(`Linters: ${USE_LINTERS ? 'enabled' : 'disabled'}`)
 console.log(`Source maps: ${USE_SOURCE_MAP ? 'enabled' : 'disabled'}`)
-console.log('---')
+console.log('---\nWebpack running...')
 
 const extractPlugin = new (require('extract-text-webpack-plugin'))({
     filename: './assets/app.min.css'
