@@ -12,7 +12,8 @@
     "prod": "cross-env NODE_ENV=production DEBUG=0 webpack -p --hide-modules --display-error-details --optimize-minimize",
     "prod-debug": "cross-env NODE_ENV=production DEBUG=1 webpack -p --hide-modules--display-error-details --optimize-minimize",
     "js-lint": "eslint --config .eslintrc.json --fix app/ --ext .js && eslint --config .eslintrc.json --fix webpack.config.js",
-    "build": "npm run js-lint && npm run prod"
+    "css-lint": "stylelint app/**/*.scss --fix --syntax scss --formater verbose --config .stylelintrc",
+    "build": "npm run js-lint && npm run css-lint && npm run prod"
   },
   "author": "Dmitry Pyatkov",
   "license": "MIT",
@@ -53,6 +54,7 @@
     "postcss-loader": "latest",
     "sass-loader": "latest",
     "style-loader": "latest",
+    "stylelint": "latest",
     "url-loader": "latest",
     "webpack": "latest"
   },
