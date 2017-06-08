@@ -1,15 +1,15 @@
 
 // Debug helper
-@if $NODE_ENV != "production" {
-    body:after {
+@if $NODE_ENV != 'production' {
+    body::after {
         background-color: $alert-danger-bg;
         border-color: $alert-danger-border;
+        bottom: 0;
         color: $alert-danger-text;
-        content: "Only visible $NODE_ENV=#{$NODE_ENV}";
+        content: 'Only visible $NODE_ENV=#{$NODE_ENV}';
         padding: $padding-xs-vertical $padding-xs-horizontal;
         position: fixed;
         right: 0;
-        bottom: 0;
         z-index: $zindex-modal;
     }
 }

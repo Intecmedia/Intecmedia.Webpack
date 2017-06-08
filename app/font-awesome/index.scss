@@ -3,14 +3,12 @@
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
  */
 
+/* stylelint-disable */
 $fa-sass-asset-helper: true;
 
 @function fa-font-path($path) {
-    @return "~font-awesome-sass/assets/fonts/#{$path}"
+    @return "~font-awesome-sass/assets/fonts/#{$path}";
 }
-
-/* stylelint-disable */
-
 @import "~font-awesome-sass/assets/stylesheets/font-awesome/variables";
 @import "~font-awesome-sass/assets/stylesheets/font-awesome/mixins";
 @import "~font-awesome-sass/assets/stylesheets/font-awesome/path";

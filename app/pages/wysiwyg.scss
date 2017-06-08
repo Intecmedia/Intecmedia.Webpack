@@ -1,63 +1,65 @@
+/* stylelint-disable selector-max-compound-selectors, max-nesting-depth, selector-no-qualifying-type, scss/at-extend-no-missing-placeholder */
 .wysiwyg {
     // image with caption
     figure {
         @extend .thumbnail;
+
         > figcaption {
-            padding: $thumbnail-caption-padding;
             color: $thumbnail-caption-color;
+            padding: $thumbnail-caption-padding;
         }
     }
     // default tables
     table:not([class]) {
-        width: 100%;
         @extend .table;
         @extend .table-bordered;
+        width: 100%;
     }
     // disabled table
-    table[border="0"] {
+    table[border='0'] {
+        background: transparent;
         border: 0;
         width: inherit;
-        background: transparent;
+
         > thead,
         > tbody,
         > tfoot {
             > tr {
                 > th,
                 > td {
-                    border: 0;
                     background: transparent;
+                    border: 0;
                 }
             }
         }
     }
     // colored bulls
-    ul:not([class]) {
-        > li {
-            position: relative;
-            list-style: none;
-            &:before {
-                font-family: inherit;
-                content: "\2022";
-                color: $text-color;
-                width: $font-size-base;
-                margin-left: -$font-size-base;
-                font-size: $font-size-large;
-                line-height: $line-height-computed;
-                vertical-align: middle;
-                position: absolute;
-                text-align: center;
-            }
-            > ul > li:before {
-                content: "\2022";
-                color: $text-color;
-            }
+    ul:not([class]) > li {
+        list-style: none;
+        position: relative;
+
+        &::before {
+            color: $text-color;
+            content: '\2022';
+            font-family: inherit;
+            font-size: $font-size-large;
+            line-height: $line-height-computed;
+            margin-left: -$font-size-base;
+            position: absolute;
+            text-align: center;
+            vertical-align: middle;
+            width: $font-size-base;
         }
     }
     // image aligment
-    img[align="left"], img.pull-left {
+    img[align='left'],
+    img.pull-left {
         margin-right: $padding-base-horizontal;
     }
-    img[align="right"], img.pull-right {
+
+    img[align='right'],
+    img.pull-right {
         margin-left: $padding-base-horizontal;
     }
 }
+/* stylelint-enable selector-max-compound-selectors, max-nesting-depth, selector-no-qualifying-type, scss/at-extend-no-missing-placeholder */

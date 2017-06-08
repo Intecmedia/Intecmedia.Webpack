@@ -15,7 +15,7 @@ console.log(`Linters: ${USE_LINTERS ? 'enabled' : 'disabled'}`)
 console.log(`Source maps: ${USE_SOURCE_MAP ? 'enabled' : 'disabled'}`)
 console.log('---\nWebpack running...')
 
-const stylelintPlugin = require('stylelint-webpack-plugin')
+const StyleLintPlugin = require('stylelint-webpack-plugin')
 const extractPlugin = new (require('extract-text-webpack-plugin'))({
     filename: './assets/app.min.css'
 })
@@ -91,7 +91,7 @@ module.exports = {
             jQuery: 'jquery'
         })
     ]).concat(USE_LINTERS ? [
-        new stylelintPlugin({
+        new StyleLintPlugin({
             fix: true,
             files: ['**/*.scss'],
             syntax: 'scss'
