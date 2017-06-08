@@ -1,16 +1,18 @@
 /* eslint global-require: "off" */
+const path = require('path')
 const webpack = require('webpack')
 
 /* eslint no-process-env: "off" */
 const DEBUG = 'DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0
 const PROD = process.argv.indexOf('-p') !== -1
 const NODE_ENV = PROD ? 'production' : 'development'
-const SOURCE_MAP = DEBUG
+const USE_SOURCE_MAP = DEBUG
+const USE_LINTERS = DEBUG
 
 /* eslint no-console: "off" */
 console.log(`Enviroment: ${NODE_ENV}`)
 console.log(`Debug: ${DEBUG ? 'enabled' : 'disabled'}`)
-console.log(`Source maps: ${SOURCE_MAP ? 'enabled' : 'disabled'}`)
+console.log(`Source maps: ${USE_SOURCE_MAP ? 'enabled' : 'disabled'}`)
 console.log('---')
 
 const extractPlugin = new (require('extract-text-webpack-plugin'))({
@@ -89,7 +91,7 @@ module.exports = {
         })
     ]),
 
-    devtool: SOURCE_MAP ? 'eval-source-map' : '',
+    devtool: USE_SOURCE_MAP ? 'eval-source-map' : '',
 
     module: {
         rules: [
@@ -114,14 +116,16 @@ module.exports = {
                             forceEnv: NODE_ENV,
                             cacheDirectory: !PROD
                         }
-                    },
+                    }
+                ].concat(USE_LINTERS ? [
                     {
                         loader: 'eslint-loader',
                         options: {
-                            fix: true
+                            fix: true,
+                            cache: PROD ? false : path.resolve(__dirname, '.cache')
                         }
                     }
-                ]
+                ] : [])
             },
             // image loaders
             {
@@ -168,7 +172,7 @@ module.exports = {
                         {
                             loader: 'style-loader',
                             options: {
-                                sourceMap: SOURCE_MAP
+                                sourceMap: USE_SOURCE_MAP
                             }
                         }
                     ],
@@ -177,13 +181,13 @@ module.exports = {
                             loader: 'css-loader',
                             options: {
                                 importLoaders: 2, // index of 'sass-loader'
-                                sourceMap: SOURCE_MAP
+                                sourceMap: USE_SOURCE_MAP
                             }
                         },
                         {
                             loader: 'postcss-loader',
                             options: {
-                                sourceMap: SOURCE_MAP ? 'inline' : false,
+                                sourceMap: USE_SOURCE_MAP ? 'inline' : false,
                                 plugins: [
                                     // dev-and-prod
                                     require('postcss-cssnext')({
@@ -210,11 +214,11 @@ module.exports = {
                             options: {
                                 data: `$NODE_ENV: ${NODE_ENV};`,
                                 indentWidth: 4,
-                                sourceMap: SOURCE_MAP ? 'inline' : false,
-                                sourceMapEmbed: SOURCE_MAP,
-                                sourceMapContents: SOURCE_MAP,
+                                sourceMap: USE_SOURCE_MAP ? 'inline' : false,
+                                sourceMapEmbed: USE_SOURCE_MAP,
+                                sourceMapContents: USE_SOURCE_MAP,
                                 sourceMapRoot: '.',
-                                sourceComments: SOURCE_MAP
+                                sourceComments: USE_SOURCE_MAP
                             }
                         }
                     ]
