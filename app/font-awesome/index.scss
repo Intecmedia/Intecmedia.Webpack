@@ -6,8 +6,8 @@
 $fa-sass-asset-helper: true;
 
 @function fa-font-path($path) {
-    @return "~font-awesome-sass/assets/fonts/#{$path}";
-};
+    @return "~font-awesome-sass/assets/fonts/#{$path}"
+}
 
 @import "~font-awesome-sass/assets/stylesheets/font-awesome/variables";
 @import "~font-awesome-sass/assets/stylesheets/font-awesome/mixins";
@@ -22,4 +22,3 @@ $fa-sass-asset-helper: true;
 @import "~font-awesome-sass/assets/stylesheets/font-awesome/stacked";
 @import "~font-awesome-sass/assets/stylesheets/font-awesome/icons";
 @import "~font-awesome-sass/assets/stylesheets/font-awesome/screen-reader";
-

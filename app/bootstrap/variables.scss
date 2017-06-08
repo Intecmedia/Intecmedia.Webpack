@@ -6,11 +6,11 @@ $bootstrap-sass-asset-helper: true;
 
 @function twbs-font-path($path) {
     @return "~bootstrap-sass/assets/fonts/#{$path}";
-};
+}
 
 @function twbs-image-path($path) {
     @return $path;
-};
+}
 
 //== Colors
 //
