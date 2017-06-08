@@ -1,5 +1,4 @@
-const jQuery = require("jquery");
-window["$"] = window["jQuery"] = jQuery;
+window.$ = jQuery
+window.jQuery = jQuery
 
-require("./bootstrap/index.js");
-
+require('./bootstrap/index.js')

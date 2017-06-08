@@ -103,12 +103,21 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: "babel-loader",
-                options: {
-                    presets: ["env"],
-                    forceEnv: NODE_ENV,
-                    cacheDirectory: !PROD
-                }
+                loaders: [
+                    {
+                        loader: "babel-loader",
+                        options: {
+                            presets: ["env"],
+                            forceEnv: NODE_ENV,
+                            cacheDirectory: !PROD
+                        }
+                    },
+                    {
+                        loader: "eslint-loader",
+                        options: {
+                        }
+                    },
+                ]
             },
             // image loaders
             {
