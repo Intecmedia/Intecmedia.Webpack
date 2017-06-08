@@ -1,5 +1,4 @@
 /* eslint global-require: "off" */
-const path = require('path')
 const webpack = require('webpack')
 
 /* eslint no-process-env: "off" */
@@ -122,7 +121,7 @@ module.exports = {
                         loader: 'eslint-loader',
                         options: {
                             fix: true,
-                            cache: PROD ? false : path.resolve(__dirname, 'node_modules', '.cache', 'eslint-loader')
+                            cache: !PROD
                         }
                     }
                 ] : [])
