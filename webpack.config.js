@@ -144,7 +144,7 @@ module.exports = {
                     {
                         loader: 'file-loader',
                         options: {
-                            name: `assets/img/[name].[ext]${PROD ? '?v=[hash]' : ''}`,
+                            name: `assets/images/[name].[ext]${PROD ? '?v=[hash]' : ''}`,
                         },
                     },
                     {
