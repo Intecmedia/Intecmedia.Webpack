@@ -16,9 +16,7 @@ console.log(`Source maps: ${USE_SOURCE_MAP ? 'enabled' : 'disabled'}`)
 console.log('---\nWebpack running...')
 
 const StyleLintPlugin = require('stylelint-webpack-plugin')
-const extractPlugin = new (require('extract-text-webpack-plugin'))({
-    filename: './assets/app.min.css'
-})
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 /* eslint no-new-wrappers: "off" */
 const banner = new String('')
@@ -82,7 +80,9 @@ module.exports = {
             name: 'vendor',
             filename: './assets/vendor.min.js'
         }),
-        extractPlugin,
+        new ExtractTextPlugin({
+            filename: './assets/app.min.css'
+        }),
         new webpack.BannerPlugin({
             banner
         }),
@@ -174,7 +174,7 @@ module.exports = {
             // css loaders
             {
                 test: /\.s?css$/,
-                loader: extractPlugin.extract({
+                loader: ExtractTextPlugin.extract({
                     fallback: [
                         {
                             loader: 'style-loader',
