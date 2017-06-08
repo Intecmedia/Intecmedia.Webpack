@@ -38,8 +38,8 @@ module.exports = {
 
     performance: {
         hints: PROD && !DEBUG ? 'error' : false,
-        maxAssetSize: 512000,
-        maxEntrypointSize: 256000,
+        maxAssetSize: 512 * 1024,
+        maxEntrypointSize: 256 * 1024,
     },
 
     plugins: (PROD ? [
@@ -139,7 +139,7 @@ module.exports = {
                     {
                         loader: 'url-loader',
                         options: {
-                            limit: 32000,
+                            limit: 32 * 1024,
                         },
                     },
                     {
