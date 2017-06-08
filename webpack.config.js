@@ -122,7 +122,7 @@ module.exports = {
                         loader: 'eslint-loader',
                         options: {
                             fix: true,
-                            cache: PROD ? false : path.resolve(__dirname, '.cache')
+                            cache: PROD ? false : path.resolve(__dirname, 'node_modules', '.cache', 'eslint-loader')
                         }
                     }
                 ] : [])
