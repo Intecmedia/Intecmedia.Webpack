@@ -221,7 +221,7 @@ module.exports = {
                                 sourceMap: USE_SOURCE_MAP ? 'inline' : false,
                                 sourceMapEmbed: USE_SOURCE_MAP,
                                 sourceMapContents: USE_SOURCE_MAP,
-                                sourceMapRoot: '.',
+                                sourceMapRoot: '..',
                                 sourceComments: USE_SOURCE_MAP,
                             },
                         },
