@@ -43,6 +43,7 @@
     "css-loader": "latest",
     "css-mqpacker": "latest",
     "eslint": "latest",
+    "eslint-config-google": "latest",
     "eslint-loader": "latest",
     "extract-text-webpack-plugin": "latest",
     "file-loader": "latest",
