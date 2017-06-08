@@ -92,6 +92,8 @@ module.exports = {
         })
     ]).concat(USE_LINTERS ? [
         new stylelintPlugin({
+            fix: true,
+            files: ['**/*.scss'],
             syntax: 'scss'
         })
     ] : []),
