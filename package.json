@@ -55,6 +55,7 @@
     "sass-loader": "latest",
     "style-loader": "latest",
     "stylelint": "latest",
+    "stylelint-webpack-plugin": "latest",
     "url-loader": "latest",
     "webpack": "latest"
   },
