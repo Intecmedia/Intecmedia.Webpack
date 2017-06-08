@@ -32,7 +32,6 @@ module.exports = {
     },
 
     output: {
-        path: __dirname,
         filename: './assets/app.min.js',
     },
 
