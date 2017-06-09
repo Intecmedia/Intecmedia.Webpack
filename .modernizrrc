@@ -3,6 +3,7 @@
     "options": [
         "setClasses"
     ],
+    "enableJSClass": true,
     "classPrefix": "mod-",
     "feature-detects": []
 }
