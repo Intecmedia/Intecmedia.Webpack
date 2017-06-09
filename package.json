@@ -15,8 +15,8 @@
     "css-lint": "stylelint app/**/*.scss --fix --syntax scss --formater verbose --config .stylelintrc",
     "css-format": "stylefmt --recursive app/**/*.scss --config .stylelintrc",
     "lint": "npm run js-lint && npm run css-format && npm run css-lint",
-    "imagemin": "imagemin assets/images/**/* --out-dir assets/images",
-    "build": "npm run lint && npm run imagemin && npm run prod"
+    "imagemin": "imagemin build/images/* --out-dir build/images",
+    "build": "npm run lint && npm run prod && npm run imagemin"
   },
   "author": "Dmitry Pyatkov",
   "license": "MIT",

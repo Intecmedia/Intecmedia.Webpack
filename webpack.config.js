@@ -1,4 +1,5 @@
 /* eslint global-require: "off" */
+const path = require('path');
 const webpack = require('webpack');
 
 const DEBUG = 'DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0;
@@ -26,13 +27,14 @@ module.exports = {
     entry: {
         vendor: [
             'jquery',
-            './app/vendor.js',
+            './source/vendor.js',
         ],
-        app: './app/app.js',
+        app: './source/app.js',
     },
 
     output: {
-        filename: './assets/app.min.js',
+        output: path.resolve(__dirname, 'output'),
+        filename: 'app.min.js',
     },
 
     performance: {
@@ -74,10 +76,10 @@ module.exports = {
         // dev-and-prod
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
-            filename: './assets/vendor.min.js',
+            filename: 'vendor.min.js',
         }),
         new ExtractTextPlugin({
-            filename: './assets/app.min.css',
+            filename: 'app.min.css',
         }),
         new webpack.BannerPlugin({
             banner,
@@ -144,7 +146,7 @@ module.exports = {
                     {
                         loader: 'file-loader',
                         options: {
-                            name: `assets/images/[name].[ext]${PROD ? '?v=[hash]' : ''}`,
+                            name: 'images/[name]-[hash].[ext]',
                         },
                     },
                     {
@@ -162,7 +164,7 @@ module.exports = {
                     {
                         loader: 'file-loader',
                         options: {
-                            name: `assets/fonts/[name].[ext]${PROD ? '?v=[hash]' : ''}`,
+                            name: 'fonts/[name]-[hash].[ext]',
                         },
                     },
                 ],

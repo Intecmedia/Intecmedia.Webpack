@@ -1,6 +1,6 @@
-assets/fonts
-assets/img
-assets/app.min.js
-assets/app.min.css
-assets/vendor.min.js
+build/fonts
+build/img
+build/app.min.js
+build/app.min.css
+build/vendor.min.js
 node_modules
