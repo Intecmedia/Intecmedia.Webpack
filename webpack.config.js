@@ -37,6 +37,7 @@ module.exports = {
     entry: {
         vendor: [
             'jquery',
+            'modernizr',
             './source/vendor.js',
         ],
         app: './source/app.js',
@@ -118,6 +119,12 @@ module.exports = {
 
     devtool: USE_SOURCE_MAP ? 'eval-source-map' : '',
 
+    resolve: {
+        alias: {
+            modernizr: path.resolve(__dirname, '.modernizrrc'),
+        },
+    },
+
     module: {
         rules: [
             // html loaders
@@ -133,6 +140,10 @@ module.exports = {
                 },
             },
             // javascript loaders
+            {
+                test: /\.modernizrrc$/,
+                loader: 'modernizr-loader!json-loader',
+            },
             {
                 test: /\.js$/,
                 include: /node_modules/,
