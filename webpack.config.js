@@ -44,6 +44,7 @@ module.exports = {
 
     output: {
         path: BUILD_DIR,
+        publicPath: '../',
         filename: 'js/app.min.js',
     },
 
@@ -172,7 +173,8 @@ module.exports = {
                         loader: 'url-loader',
                         options: {
                             limit: 32 * 1024,
-                            name: 'img/[name]-[hash].[ext]',
+                            name: '[name]-[hash].[ext]',
+                            outputPath: 'img/',
                         },
                     },
                     {
@@ -193,7 +195,8 @@ module.exports = {
                     {
                         loader: 'file-loader',
                         options: {
-                            name: 'fonts/[name]-[hash].[ext]',
+                            name: '[name]-[hash].[ext]',
+                            outputPath: 'fonts/',
                         },
                     },
                 ],
