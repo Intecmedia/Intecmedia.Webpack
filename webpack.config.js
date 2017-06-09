@@ -87,7 +87,7 @@ module.exports = {
         new CleanWebpackPlugin(['*.html', 'js/*.js', 'css/*.css', 'img/*', 'fonts/*'], {
             root: BUILD_DIR,
             verbose: true,
-            exclude: [".gitkeep"],
+            exclude: ['.gitkeep'],
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
