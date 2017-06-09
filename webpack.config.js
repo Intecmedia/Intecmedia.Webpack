@@ -166,11 +166,6 @@ module.exports = {
                         loader: 'url-loader',
                         options: {
                             limit: 32 * 1024,
-                        },
-                    },
-                    {
-                        loader: 'file-loader',
-                        options: {
                             name: 'img/[name]-[hash].[ext]',
                         },
                     },
