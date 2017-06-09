@@ -176,6 +176,9 @@ module.exports = {
                     {
                         loader: 'image-webpack-loader',
                         options: {
+                            mozjpeg: {
+                                quality: 100,
+                            },
                             bypassOnDebug: false,
                         },
                     },
