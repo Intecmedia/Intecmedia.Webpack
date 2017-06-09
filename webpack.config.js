@@ -113,6 +113,14 @@ module.exports = {
 
     module: {
         rules: [
+            // html loaders
+            {
+                test: /\.html$/,
+                loader: 'html-loader',
+                options: {
+                    attrs: ['img:src', 'img:srcset', 'source:srcset'],
+                },
+            },
             // javascript loaders
             {
                 test: /\.js$/,
