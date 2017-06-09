@@ -17,9 +17,10 @@ console.log(`Linters: ${USE_LINTERS ? 'enabled' : 'disabled'}`);
 console.log(`Source maps: ${USE_SOURCE_MAP ? 'enabled' : 'disabled'}`);
 console.log('---\nWebpack running...');
 
-const StyleLintPlugin = require('stylelint-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 const banner = new String(''); // eslint-disable-line no-new-wrappers
 banner.toString = () => {
@@ -83,6 +84,11 @@ module.exports = {
         }),
     ]).concat([
         // dev-and-prod
+        new CleanWebpackPlugin(['*.html', 'js/*.js', 'css/*.css', 'img/*', 'fonts/*'], {
+            root: BUILD_DIR,
+            verbose: true,
+            exclude: [".gitkeep"],
+        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             filename: 'js/vendor.min.js',
