@@ -16,7 +16,8 @@
     "css-format": "stylefmt --recursive source/**/*.scss --config .stylelintrc",
     "lint": "npm run js-lint && npm run css-format && npm run css-lint",
     "imagemin": "imagemin build/images/* --out-dir build/images",
-    "build": "npm run lint && npm run prod && npm run imagemin"
+    "nocache": "rm -rf ./node_modules/.cache",
+    "build": "npm run nocache && npm run lint && npm run prod && npm run imagemin"
   },
   "author": "Dmitry Pyatkov",
   "license": "MIT",
