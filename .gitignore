@@ -1,6 +1,6 @@
 build/fonts
 build/img
-build/app.min.js
-build/app.min.css
-build/vendor.min.js
+build/js
+build/css
+build/*.html
 node_modules

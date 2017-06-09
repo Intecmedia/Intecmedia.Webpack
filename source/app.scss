@@ -1,16 +1,16 @@
 /* Core */
 @import 'bootstrap/index';
-@import 'mixins';
+@import 'scss/mixins';
 
 /* Customization */
-@import 'utils';
-@import 'header';
-@import 'layout';
-@import 'footer';
+@import 'scss/utils';
+@import 'scss/header';
+@import 'scss/layout';
+@import 'scss/footer';
 
 /* Pages */
-@import 'pages/wysiwyg';
-@import 'pages/index';
+@import 'scss/wysiwyg';
+@import 'scss/index';
 
 /* Vendor */
 @import 'font-awesome/index';
