@@ -176,7 +176,7 @@ module.exports = {
                     {
                         loader: 'image-webpack-loader',
                         options: {
-                            bypassOnDebug: !PROD,
+                            bypassOnDebug: false,
                         },
                     },
                 ],
