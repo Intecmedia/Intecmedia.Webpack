@@ -118,6 +118,9 @@ module.exports = {
                 test: /\.html$/,
                 loader: 'html-loader',
                 options: {
+                    minimize: false,
+                    removeComments: false,
+                    collapseWhitespace: false,
                     attrs: ['img:src', 'img:srcset', 'source:srcset'],
                 },
             },
