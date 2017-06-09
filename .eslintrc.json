@@ -9,7 +9,7 @@
         "jquery": true
     },
     "rules": {
-        "max-len": [2, {
+        "max-len": [4, {
             "code": 120,
             "tabWidth": 4,
             "ignoreUrls": true
