@@ -8,6 +8,9 @@ const NODE_ENV = PROD ? 'production' : 'development';
 const USE_SOURCE_MAP = DEBUG;
 const USE_LINTERS = DEBUG;
 
+const BUILD_DIR = path.resolve(__dirname, 'build');
+
+console.log(`Build dir: ${BUILD_DIR}`);
 console.log(`Enviroment: ${NODE_ENV}`);
 console.log(`Debug: ${DEBUG ? 'enabled' : 'disabled'}`);
 console.log(`Linters: ${USE_LINTERS ? 'enabled' : 'disabled'}`);
@@ -33,7 +36,7 @@ module.exports = {
     },
 
     output: {
-        output: path.resolve(__dirname, 'output'),
+        path: BUILD_DIR,
         filename: 'app.min.js',
     },
 
