@@ -118,6 +118,7 @@ module.exports = {
                 test: /\.html$/,
                 loader: 'html-loader',
                 options: {
+                    interpolate: true,
                     minimize: false,
                     removeComments: false,
                     collapseWhitespace: false,
