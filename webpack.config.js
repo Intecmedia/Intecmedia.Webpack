@@ -72,6 +72,11 @@ module.exports = {
             beautify: false,
             comments: false,
         }),
+        new CleanWebpackPlugin(['*.html', 'js/*.js', 'css/*.css', 'img/*', 'fonts/*'], {
+            root: BUILD_DIR,
+            verbose: true,
+            exclude: ['.gitkeep'],
+        }),
     ] : [
         // dev-only
         new webpack.EnvironmentPlugin({
@@ -86,11 +91,6 @@ module.exports = {
         }),
     ]).concat([
         // dev-and-prod
-        new CleanWebpackPlugin(['*.html', 'js/*.js', 'css/*.css', 'img/*', 'fonts/*'], {
-            root: BUILD_DIR,
-            verbose: true,
-            exclude: ['.gitkeep'],
-        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             filename: 'js/vendor.min.js',
