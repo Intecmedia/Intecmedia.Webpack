@@ -12,7 +12,7 @@
 // Core CSS
 @import '~bootstrap-sass/assets/stylesheets/bootstrap/_scaffolding';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap/_type';
-//@import '~bootstrap-sass/assets/stylesheets/bootstrap/_code';
+@import '~bootstrap-sass/assets/stylesheets/bootstrap/_code';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap/_grid';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap/_tables';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap/_forms';
@@ -26,8 +26,8 @@
 //@import '~bootstrap-sass/assets/stylesheets/bootstrap/_navs';
 //@import '~bootstrap-sass/assets/stylesheets/bootstrap/_navbar';
 //@import '~bootstrap-sass/assets/stylesheets/bootstrap/_breadcrumbs';
-//@import '~bootstrap-sass/assets/stylesheets/bootstrap/_pagination';
-//@import '~bootstrap-sass/assets/stylesheets/bootstrap/_pager';
+@import '~bootstrap-sass/assets/stylesheets/bootstrap/_pagination';
+@import '~bootstrap-sass/assets/stylesheets/bootstrap/_pager';
 //@import '~bootstrap-sass/assets/stylesheets/bootstrap/_labels';
 //@import '~bootstrap-sass/assets/stylesheets/bootstrap/_badges';
 //@import '~bootstrap-sass/assets/stylesheets/bootstrap/_jumbotron';
