@@ -57,7 +57,7 @@
     "imagemin": "latest",
     "imagemin-cli": "latest",
     "imports-loader": "latest",
-    "jquery": "latest",
+    "jquery": "^1.12.4",
     "json-loader": "latest",
     "modernizr": "latest",
     "modernizr-loader": "latest",
