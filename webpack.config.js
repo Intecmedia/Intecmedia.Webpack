@@ -58,13 +58,9 @@ module.exports = {
         // prod-only
         new webpack.DefinePlugin({
             'NODE_ENV': JSON.stringify('production'),
-            'process.env': {
-                NODE_ENV: 'production',
-                DEBUG: false,
-            },
         }),
         new webpack.optimize.UglifyJsPlugin({
-            banner,
+            banner: banner,
             beautify: false,
             comments: false,
         }),
@@ -77,10 +73,6 @@ module.exports = {
         // dev-only
         new webpack.DefinePlugin({
             'NODE_ENV': JSON.stringify('development'),
-            'process.env': {
-                NODE_ENV: 'development',
-                DEBUG: true,
-            },
         }),
     ]).concat([
         // dev-and-prod
@@ -92,7 +84,7 @@ module.exports = {
             filename: 'css/app.min.css',
         }),
         new webpack.BannerPlugin({
-            banner,
+            banner: banner,
         }),
         new webpack.ProvidePlugin({
             $: 'jquery',
