@@ -36,8 +36,8 @@ module.exports = {
 
     entry: {
         vendor: [
-            'modernizr',
-            'picturefill',
+            //'modernizr',
+            //'picturefill',
             'jquery',
             './source/js/vendor.js',
         ],
