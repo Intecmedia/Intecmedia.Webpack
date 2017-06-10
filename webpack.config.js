@@ -61,6 +61,7 @@ module.exports = {
         }),
         new webpack.optimize.UglifyJsPlugin({
             banner: banner,
+            comments: false,
         }),
         new CleanWebpackPlugin(['*.html', 'js/*.js', 'css/*.css', 'img/*', 'fonts/*'], {
             root: BUILD_DIR,
