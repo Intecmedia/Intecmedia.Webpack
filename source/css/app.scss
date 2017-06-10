@@ -1,16 +1,17 @@
-/* Core */
+// Core
 @import 'bootstrap';
+@import 'variables';
 @import 'mixins';
 
-/* Customization */
+// Customization
 @import 'utils';
 @import 'header';
 @import 'layout';
 @import 'footer';
 
-/* Pages */
+// Pages
 @import 'wysiwyg';
 @import 'index';
 
-/* Vendor */
+// Vendor
 @import 'font-awesome';
