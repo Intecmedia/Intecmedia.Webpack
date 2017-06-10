@@ -56,14 +56,11 @@ module.exports = {
 
     plugins: (PROD ? [
         // prod-only
-        new webpack.EnvironmentPlugin({
-            NODE_ENV: 'production',
-            DEBUG: false,
-        }),
         new webpack.DefinePlugin({
             'NODE_ENV': JSON.stringify('production'),
             'process.env': {
                 NODE_ENV: 'production',
+                DEBUG: false,
             },
         }),
         new webpack.optimize.UglifyJsPlugin({
@@ -78,14 +75,11 @@ module.exports = {
         }),
     ] : [
         // dev-only
-        new webpack.EnvironmentPlugin({
-            NODE_ENV: 'development',
-            DEBUG: true,
-        }),
         new webpack.DefinePlugin({
             'NODE_ENV': JSON.stringify('development'),
             'process.env': {
                 NODE_ENV: 'development',
+                DEBUG: true,
             },
         }),
     ]).concat([
