@@ -182,7 +182,7 @@ module.exports = {
                     {
                         loader: 'url-loader',
                         options: {
-                            imit: 32 * 1024,
+                            limit: 32 * 1024,
                             useRelativePath: true,
                             name: '[name].[ext]?[hash]',
                             outputPath: 'img/',
