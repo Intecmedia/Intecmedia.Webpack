@@ -74,11 +74,11 @@ module.exports = {
             filename: 'index.html',
             template: './source/index.html',
         })),
+        new webpack.DefinePlugin({
+            'NODE_ENV': JSON.stringify(NODE_ENV),
+        }),
     ].concat(PROD ? [
         // prod-only
-        new webpack.DefinePlugin({
-            'NODE_ENV': JSON.stringify('production'),
-        }),
         new webpack.optimize.UglifyJsPlugin({
             banner: banner,
             comments: false,
@@ -89,9 +89,6 @@ module.exports = {
         }),
     ] : [
         // dev-only
-        new webpack.DefinePlugin({
-            'NODE_ENV': JSON.stringify('development'),
-        }),
     ]).concat(USE_LINTERS ? [
         new StyleLintPlugin({
             fix: true,
