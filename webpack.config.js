@@ -61,12 +61,9 @@ module.exports = {
         }),
         new webpack.optimize.UglifyJsPlugin({
             banner: banner,
-            beautify: false,
-            comments: false,
         }),
         new CleanWebpackPlugin(['*.html', 'js/*.js', 'css/*.css', 'img/*', 'fonts/*'], {
             root: BUILD_DIR,
-            verbose: true,
             exclude: ['.gitkeep'],
         }),
     ] : [
