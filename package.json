@@ -62,6 +62,7 @@
     "modernizr": "latest",
     "modernizr-loader": "latest",
     "node-sass": "latest",
+    "picturefill": "latest",
     "postcss": "latest",
     "postcss-cssnext": "latest",
     "postcss-loader": "latest",

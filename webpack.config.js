@@ -37,6 +37,7 @@ module.exports = {
     entry: {
         vendor: [
             'modernizr',
+            'picturefill',
             'jquery',
             './source/js/vendor.js',
         ],
@@ -70,13 +71,13 @@ module.exports = {
             $: 'jquery',
             jQuery: 'jquery',
         }),
+        new webpack.DefinePlugin({
+            'NODE_ENV': JSON.stringify(NODE_ENV),
+        }),
         new HtmlWebpackPlugin(Object.assign(htmlOptions, {
             filename: 'index.html',
             template: './source/index.html',
         })),
-        new webpack.DefinePlugin({
-            'NODE_ENV': JSON.stringify(NODE_ENV),
-        }),
     ].concat(PROD ? [
         // prod-only
         new webpack.optimize.UglifyJsPlugin({
