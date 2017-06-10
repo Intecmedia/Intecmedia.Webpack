@@ -1,6 +1,6 @@
 /* global NODE_ENV */
 
-require('./app.scss');
+require('../css/app.scss');
 window.Modernizr = require('modernizr');
 
 jQuery(() => {

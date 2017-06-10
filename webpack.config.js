@@ -38,14 +38,13 @@ module.exports = {
         vendor: [
             'jquery',
             'modernizr',
-            './source/vendor.js',
+            './source/js/vendor.js',
         ],
-        app: './source/app.js',
+        app: './source/js/app.js',
     },
 
     output: {
         path: BUILD_DIR,
-        publicPath: '../',
         filename: 'js/app.min.js',
     },
 
@@ -183,8 +182,9 @@ module.exports = {
                     {
                         loader: 'url-loader',
                         options: {
-                            limit: 32 * 1024,
-                            name: '[name]-[hash].[ext]',
+                            imit: 32 * 1024,
+                            useRelativePath: true,
+                            name: '[name].[ext]?[hash]',
                             outputPath: 'img/',
                         },
                     },
@@ -206,7 +206,7 @@ module.exports = {
                     {
                         loader: 'file-loader',
                         options: {
-                            name: '[name]-[hash].[ext]',
+                            name: '[name].[ext]?[hash]',
                             outputPath: 'fonts/',
                         },
                     },
