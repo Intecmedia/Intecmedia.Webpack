@@ -54,25 +54,7 @@ module.exports = {
         maxEntrypointSize: 256 * 1024,
     },
 
-    plugins: (PROD ? [
-        // prod-only
-        new webpack.DefinePlugin({
-            'NODE_ENV': JSON.stringify('production'),
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            banner: banner,
-            comments: false,
-        }),
-        new CleanWebpackPlugin(['*.html', 'js/*.js', 'css/*.css', 'img/*', 'fonts/*'], {
-            root: BUILD_DIR,
-            exclude: ['.gitkeep'],
-        }),
-    ] : [
-        // dev-only
-        new webpack.DefinePlugin({
-            'NODE_ENV': JSON.stringify('development'),
-        }),
-    ]).concat([
+    plugins: [
         // dev-and-prod
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
@@ -92,6 +74,24 @@ module.exports = {
             filename: 'index.html',
             template: './source/index.html',
         })),
+    ].concat(PROD ? [
+        // prod-only
+        new webpack.DefinePlugin({
+            'NODE_ENV': JSON.stringify('production'),
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            banner: banner,
+            comments: false,
+        }),
+        new CleanWebpackPlugin(['*.html', 'js/*.js', 'css/*.css', 'img/*', 'fonts/*'], {
+            root: BUILD_DIR,
+            exclude: ['.gitkeep'],
+        }),
+    ] : [
+        // dev-only
+        new webpack.DefinePlugin({
+            'NODE_ENV': JSON.stringify('development'),
+        }),
     ]).concat(USE_LINTERS ? [
         new StyleLintPlugin({
             fix: true,
@@ -186,15 +186,11 @@ module.exports = {
             // font loaders
             {
                 test: /\.(eot|woff|woff2|ttf|svg)(\?v=.+)?$/,
-                loaders: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: '[name].[ext]?[hash]',
-                            outputPath: 'fonts/',
-                        },
-                    },
-                ],
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]?[hash]',
+                    outputPath: 'fonts/',
+                },
             },
             // css loaders
             {
