@@ -4,3 +4,4 @@ build/js
 build/css
 build/*.html
 node_modules
+.DS_Store
