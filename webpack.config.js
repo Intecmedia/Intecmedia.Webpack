@@ -196,7 +196,7 @@ module.exports = {
             // css loaders
             {
                 test: /\.s?css$/,
-                loaders: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
+                loaders: (PROD ? [] : ['css-hot-loader']).concat(ExtractTextPlugin.extract({
                     fallback: [
                         {
                             loader: 'style-loader',
