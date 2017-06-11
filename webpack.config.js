@@ -34,6 +34,11 @@ const htmlOptions = {
 
 module.exports = {
 
+    devServer: {
+        overlay: true,
+        compress: false,
+    },
+
     entry: {
         vendor: [
             'jquery',
