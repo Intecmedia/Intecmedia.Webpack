@@ -10,7 +10,7 @@ const USE_LINTERS = DEBUG;
 
 const BUILD_DIR = path.resolve(__dirname, 'build');
 
-console.log(`Build dir: ${BUILD_DIR}`);
+console.log(`Output dir: ${BUILD_DIR}`);
 console.log(`Enviroment: ${NODE_ENV}`);
 console.log(`Debug: ${DEBUG ? 'enabled' : 'disabled'}`);
 console.log(`Linters: ${USE_LINTERS ? 'enabled' : 'disabled'}`);
@@ -245,8 +245,6 @@ module.exports = {
                                 indentWidth: 4,
                                 sourceMap: USE_SOURCE_MAP ? 'inline' : false,
                                 sourceMapEmbed: USE_SOURCE_MAP,
-                                sourceMapContents: USE_SOURCE_MAP,
-                                sourceMapRoot: '../..',
                                 sourceComments: USE_SOURCE_MAP,
                             },
                         },
