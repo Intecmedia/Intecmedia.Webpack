@@ -48,7 +48,6 @@ module.exports = {
 
     output: {
         path: BUILD_DIR,
-        publicPath: '/',
         filename: 'js/app.min.js',
     },
 
@@ -189,6 +188,7 @@ module.exports = {
             {
                 test: /\.s?css$/,
                 loaders: (PROD ? [] : ['css-hot-loader']).concat(ExtractTextPlugin.extract({
+                    publicPath: "../",
                     fallback: [
                         {
                             loader: 'style-loader',
