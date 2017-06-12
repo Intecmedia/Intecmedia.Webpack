@@ -17,7 +17,6 @@ console.log(`Linters: ${USE_LINTERS ? 'enabled' : 'disabled'}`);
 console.log(`Source maps: ${USE_SOURCE_MAP ? 'enabled' : 'disabled'}`);
 console.log('---\nWebpack running...');
 
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
@@ -87,10 +86,6 @@ module.exports = {
         new webpack.optimize.UglifyJsPlugin({
             banner: banner,
             comments: false,
-        }),
-        new CleanWebpackPlugin(['*.html', 'js/*.js', 'css/*.css', 'img/*', 'fonts/*'], {
-            root: BUILD_DIR,
-            exclude: ['.gitkeep'],
         }),
     ] : [
         // dev-only

@@ -44,7 +44,6 @@
     "babel-preset-es2015": "latest",
     "bootstrap-sass": "latest",
     "browserslist": "latest",
-    "clean-webpack-plugin": "latest",
     "cross-env": "latest",
     "css-hot-loader": "latest",
     "css-loader": "latest",
