@@ -70,6 +70,7 @@
     "postcss": "latest",
     "postcss-cssnext": "latest",
     "postcss-loader": "latest",
+    "postcss-url": "latest",
     "sass-loader": "latest",
     "style-loader": "latest",
     "stylefmt": "latest",

@@ -165,9 +165,8 @@ module.exports = {
                 exclude: /fonts/,
                 loaders: [
                     {
-                        loader: 'url-loader',
+                        loader: 'file-loader',
                         options: {
-                            limit: 32 * 1024,
                             useRelativePath: true,
                             name: '[name].[ext]?[hash]',
                             outputPath: 'img/',
@@ -222,6 +221,13 @@ module.exports = {
                                     require('postcss-cssnext')({
                                         features: {},
                                     }),
+                                    require('postcss-url')([
+                                        {
+                                            filter: "**/img/*",
+                                            maxSize: 32 * 1024,
+                                            url: "inline", 
+                                        },
+                                    ])
                                 ].concat(PROD ? [
                                     // prod-only
                                     require('css-mqpacker')({
