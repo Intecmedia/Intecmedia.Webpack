@@ -49,6 +49,7 @@ module.exports = {
 
     output: {
         path: BUILD_DIR,
+        publicPath: '/',
         filename: 'js/app.min.js',
     },
 
@@ -167,9 +168,7 @@ module.exports = {
                     {
                         loader: 'file-loader',
                         options: {
-                            useRelativePath: true,
-                            name: '[name].[ext]?[hash]',
-                            outputPath: 'img/',
+                            name: 'img/[name].[ext]?[hash]',
                         },
                     },
                     {
@@ -188,8 +187,7 @@ module.exports = {
                 test: /\.(eot|woff|woff2|ttf|svg)(\?v=.+)?$/,
                 loader: 'file-loader',
                 options: {
-                    name: '[name].[ext]?[hash]',
-                    outputPath: 'fonts/',
+                    name: 'fonts/[name].[ext]?[hash]',
                 },
             },
             // css loaders
@@ -221,13 +219,11 @@ module.exports = {
                                     require('postcss-cssnext')({
                                         features: {},
                                     }),
-                                    require('postcss-url')([
-                                        {
-                                            filter: "**/img/*",
-                                            maxSize: 32 * 1024,
-                                            url: "inline", 
-                                        },
-                                    ])
+                                    require('postcss-url')({
+                                        filter: '**/img/*',
+                                        maxSize: 32 * 1024,
+                                        url: 'inline',
+                                    }),
                                 ].concat(PROD ? [
                                     // prod-only
                                     require('css-mqpacker')({
