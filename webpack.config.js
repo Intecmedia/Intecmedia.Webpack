@@ -188,7 +188,7 @@ module.exports = {
             {
                 test: /\.s?css$/,
                 loaders: (PROD ? [] : ['css-hot-loader']).concat(ExtractTextPlugin.extract({
-                    publicPath: "../",
+                    publicPath: '../',
                     fallback: [
                         {
                             loader: 'style-loader',
@@ -211,9 +211,7 @@ module.exports = {
                                 sourceMap: USE_SOURCE_MAP ? 'inline' : false,
                                 plugins: [
                                     // dev-and-prod
-                                    require('postcss-cssnext')({
-                                        features: {},
-                                    }),
+                                    require('postcss-cssnext')(),
                                     require('postcss-url')({
                                         filter: '**/img/*',
                                         maxSize: 32 * 1024,
@@ -221,9 +219,7 @@ module.exports = {
                                     }),
                                 ].concat(PROD ? [
                                     // prod-only
-                                    require('css-mqpacker')({
-                                        sort: true,
-                                    }),
+                                    require('css-mqpacker')(),
                                     require('cssnano')({
                                         autoprefixer: false,
                                         discardComments: {
