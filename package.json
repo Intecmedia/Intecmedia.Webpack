@@ -11,7 +11,7 @@
         "watch-prod-debug": "cross-env NODE_ENV=production DEBUG=1 webpack -w -p --hide-modules --display-error-details --optimize-minimize",
         "prod": "cross-env NODE_ENV=production DEBUG=0 webpack -p --hide-modules --display-error-details --optimize-minimize",
         "prod-debug": "cross-env NODE_ENV=production DEBUG=1 webpack -p --hide-modules --display-error-details --optimize-minimize",
-        "js-lint": "eslint --config .eslintrc.json --fix source/ --ext .js && eslint --config .eslintrc.json --fix webpack.config.js imagemin.loader.js",
+        "js-lint": "eslint --config .eslintrc.json --fix source/js/ --ext .js && eslint --config .eslintrc.json --fix webpack.config.js imagemin.loader.js",
         "css-lint": "stylelint source/**/*.scss --fix --syntax scss --formater verbose --config .stylelintrc",
         "css-format": "stylefmt --recursive source/**/*.scss --config .stylelintrc",
         "html-lint": "htmllint --rc .htmllintrc build/**/*.html",
