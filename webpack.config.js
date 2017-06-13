@@ -5,7 +5,7 @@ const webpack = require('webpack');
 const DEBUG = 'DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0;
 const PROD = process.argv.indexOf('-p') !== -1;
 const NODE_ENV = PROD ? 'production' : 'development';
-const USE_SOURCE_MAP = DEBUG;
+const USE_SOURCE_MAP = DEBUG && PROD;
 const USE_LINTERS = DEBUG;
 
 const BUILD_DIR = path.resolve(__dirname, 'build');
