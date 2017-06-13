@@ -163,14 +163,7 @@ module.exports = {
                         },
                     },
                     {
-                        loader: 'image-webpack-loader',
-                        options: {
-                            mozjpeg: {
-                                enabled: false,
-                                quality: undefined,
-                            },
-                            bypassOnDebug: false,
-                        },
+                        loader: path.join(__dirname, 'imagemin.loader.js'),
                     },
                 ],
             },
