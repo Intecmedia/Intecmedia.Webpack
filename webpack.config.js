@@ -172,9 +172,10 @@ module.exports = {
                 exclude: /fonts/,
                 loaders: [
                     {
-                        loader: 'file-loader',
+                        loader: 'url-loader',
                         options: {
                             name: resourceUrl('img'),
+                            limit: 32 * 1024,
                         },
                     },
                     {
@@ -231,13 +232,6 @@ module.exports = {
                                 plugins: [
                                     // dev-and-prod
                                     require('postcss-cssnext')(),
-                                    require('postcss-url')({
-                                        filter: '**/img/*.{jpg,jpeg,png,gif,svg}',
-                                        fallback: null,
-                                        maxSize: 32 * 1024,
-                                        url: 'inline',
-                                        useHash: true,
-                                    }),
                                 ].concat(PROD ? [
                                     // prod-only
                                     require('css-mqpacker')(),
