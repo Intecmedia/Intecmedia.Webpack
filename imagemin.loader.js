@@ -9,11 +9,11 @@ module.exports = function imageminLoader(content) {
 
     const padSize = 60;
     const callback = this.async();
-    const cacheKey = this.resourcePath;
+    const cacheKey = this.resourcePath + '?' + content.length;
     const plugins = loaderUtils.getOptions(this).plugins;
     const resourcePath = path.relative(__dirname, this.resourcePath).replace(/\\/g, '/');
 
-    if (this.resourcePath in __cache__) {
+    if (cacheKey in __cache__) {
         console.log(util.format('Imagemin: %s\ [cache]', resourcePath.padStart(padSize)));
         callback(null, __cache__[cacheKey]);
         return;
