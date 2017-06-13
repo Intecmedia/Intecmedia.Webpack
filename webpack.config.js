@@ -113,7 +113,6 @@ module.exports = {
                 loader: 'underscore-template-loader',
                 options: {
                     attributes: ['img:src'],
-                    prependFilenameComment: (PROD ? false : __dirname),
                 },
             },
             // javascript loaders

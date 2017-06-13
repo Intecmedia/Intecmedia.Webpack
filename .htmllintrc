@@ -1,4 +1,5 @@
 {
+    "line-end-style": false,
     "attr-bans": ["align", "background", "bgcolor", "border", "frameborder", "longdesc", "marginwidth", "marginheight", "scrolling"],
     "attr-name-style": "dash",
     "attr-no-unsafe-char": false,
