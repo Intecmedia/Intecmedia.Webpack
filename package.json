@@ -47,6 +47,7 @@
     "css-hot-loader": "latest",
     "css-loader": "latest",
     "css-mqpacker": "latest",
+    "ejs-compiled-loader": "latest",
     "eslint": "latest",
     "eslint-config-google": "latest",
     "eslint-loader": "latest",
@@ -73,6 +74,7 @@
     "stylelint": "latest",
     "stylelint-config-sass-guidelines": "latest",
     "stylelint-webpack-plugin": "latest",
+    "underscore": "latest",
     "url-loader": "latest",
     "webpack": "latest",
     "webpack-dev-server": "latest"

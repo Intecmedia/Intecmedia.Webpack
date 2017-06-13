@@ -72,6 +72,7 @@ module.exports = {
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
+            _: 'underscore',
         }),
         new webpack.DefinePlugin({
             'NODE_ENV': JSON.stringify(NODE_ENV),
@@ -109,14 +110,25 @@ module.exports = {
             // html loaders
             {
                 test: /\.html$/,
-                loader: 'html-loader',
-                options: {
-                    interpolate: true,
-                    minimize: false,
-                    removeComments: false,
-                    collapseWhitespace: false,
-                    attrs: ['img:src', 'img:srcset', 'source:srcset'],
-                },
+                loaders: [
+                    {
+                        loader: 'ejs-compiled-loader',
+                        options: {
+                        },
+                    },
+/*
+                    {
+                        loader: 'html-loader',
+                        options: {
+                            interpolate: true,
+                            minimize: false,
+                            removeComments: false,
+                            collapseWhitespace: false,
+                            attrs: ['img:src', 'img:srcset', 'source:srcset'],
+                        },
+                    },
+*/
+                ],
             },
             // javascript loaders
             {
