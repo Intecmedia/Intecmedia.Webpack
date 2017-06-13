@@ -6,7 +6,7 @@ const loaderUtils = require('loader-utils');
 module.exports = function imageminLoader(content) {
     this.cacheable && this.cacheable();
 
-    const padSize = 80;
+    const padSize = 60;
     const callback = this.async();
     const plugins = loaderUtils.getOptions(this).plugins;
     const resourcePath = path.relative(__dirname, this.resourcePath).replace(/\\/g, '/');

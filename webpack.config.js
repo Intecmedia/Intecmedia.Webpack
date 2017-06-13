@@ -232,9 +232,11 @@ module.exports = {
                                     // dev-and-prod
                                     require('postcss-cssnext')(),
                                     require('postcss-url')({
-                                        filter: '**/img/*',
+                                        filter: '**/img/*.{jpg,jpeg,png,gif,svg}',
+                                        fallback: null,
                                         maxSize: 32 * 1024,
                                         url: 'inline',
+                                        useHash: true,
                                     }),
                                 ].concat(PROD ? [
                                     // prod-only
