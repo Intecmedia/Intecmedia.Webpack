@@ -1,20 +1,17 @@
 {
     "line-end-style": false,
-    "attr-bans": ["align", "background", "bgcolor", "border", "frameborder", "longdesc", "marginwidth", "marginheight", "scrolling"],
+    "attr-bans": [],
     "attr-name-style": "dash",
     "attr-no-unsafe-char": false,
     "class-style": "dash",
     "doctype-first": true,
     "doctype-html5": true,
-    "fig-req-figcaption": false,
     "html-valid-content-model": false,
     "id-class-ignore-regex": "(onclick|content|[a-z]+([A-Z][a-z])+)",
     "id-class-style": "dash",
-    "img-req-src": false,
-    "img-req-alt": false,
+    "img-req-src": true,
+    "img-req-alt": true,
     "indent-style": "spaces",
     "indent-width": 4,
-    "spec-char-escape": false,
-    "tag-bans": ["b", "i"],
-    "title-max-len": false
+    "spec-char-escape": false
 }
