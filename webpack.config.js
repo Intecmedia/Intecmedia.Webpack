@@ -182,6 +182,9 @@ module.exports = {
                         loader: path.join(__dirname, 'imagemin.loader.js'),
                         options: {
                             plugins: [
+                                require('imagemin-gifsicle')({
+                                    // https://github.com/imagemin/imagemin-gifsicle
+                                }),
                                 require('imagemin-jpegtran')({
                                     // https://github.com/imagemin/imagemin-jpegtran
                                 }),
