@@ -35,12 +35,14 @@ const htmlOptions = {
 const resourceUrl = (prefix) => {
     prefix = path.basename(prefix);
     return (resourcePath) => {
-        let url = path.relative(path.join(__dirname, 'source'), resourcePath);
+        let modulename = null;
+        let url = slash(path.relative(path.join(__dirname, 'source'), resourcePath));
         if (url.indexOf(prefix + '/') === 0) {
-            return slash(url) + '?[hash]';
-        } else {
-            return prefix + '/[folder]/[name].[ext]?[hash]';
+            return url + '?[hash]';
+        } else if (url.indexOf('../node_modules/') === 0) {
+            modulename = url.split('/', 3)[2];
         }
+        return path.join(prefix, modulename, '[name].[ext]?[hash]');  
     };
 };
 
