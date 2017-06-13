@@ -110,7 +110,9 @@ module.exports = {
             // html loaders
             {
                 test: /\.html$/,
-                loader: 'ejs-compiled-loader',
+                loader: 'underscore-template-loader',
+                options: {
+                },
             },
             // javascript loaders
             {
