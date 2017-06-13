@@ -110,25 +110,21 @@ module.exports = {
             // html loaders
             {
                 test: /\.html$/,
-                loaders: [
-                    {
-                        loader: 'ejs-compiled-loader',
-                        options: {
-                        },
-                    },
-/*
-                    {
-                        loader: 'html-loader',
-                        options: {
-                            interpolate: true,
-                            minimize: false,
-                            removeComments: false,
-                            collapseWhitespace: false,
-                            attrs: ['img:src', 'img:srcset', 'source:srcset'],
-                        },
-                    },
-*/
-                ],
+                loader: 'html-loader',
+                options: {
+                    interpolate: 'require',
+                    minimize: false,
+                    removeComments: false,
+                    collapseWhitespace: false,
+                    attrs: ['img:src', 'img:srcset', 'source:srcset'],
+                },
+            },
+            {
+                test: /\.ejs$/,
+                loader: 'ejs-compiled-loader',
+                options: {
+                    webpack: webpack,
+                },
             },
             // javascript loaders
             {
