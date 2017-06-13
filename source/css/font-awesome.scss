@@ -7,7 +7,7 @@
 $fa-sass-asset-helper: true;
 
 @function fa-font-path($path) {
-    @return "~font-awesome-sass/assets/fonts/#{$path}";
+    @return "../../node_modules/font-awesome-sass/assets/fonts/#{$path}";
 }
 @import "~font-awesome-sass/assets/stylesheets/font-awesome/variables";
 @import "~font-awesome-sass/assets/stylesheets/font-awesome/mixins";
