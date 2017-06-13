@@ -25,8 +25,14 @@ module.exports = function imageminLoader(content) {
     imagemin.buffer(content, {
         plugins,
     }).then((data) => {
-        console.log(`Imagemin processed: ${resourcePath} (${content.length} --> ${data.length})`);
-        callback(null, data);
+        let delta = data.length - content.length;
+        if (delta > 0) {
+            console.warn(`Imagemin NOT processed: ${resourcePath}\t`, (delta >= 0 ? '+' + delta : delta) + ' bytes');
+            callback(null, content);
+        } else {
+            console.log(`Imagemin processed: ${resourcePath}\t`, (delta >= 0 ? '+' + delta : delta) + ' bytes');
+            callback(null, data);
+        }
     }).catch((err) => {
         console.log(`Imagemin error: ${resourcePath}`);
         callback(err);
