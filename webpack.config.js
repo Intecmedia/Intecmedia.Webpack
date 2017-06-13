@@ -1,4 +1,5 @@
 /* eslint global-require: "off" */
+const slash = require('slash');
 const path = require('path');
 const webpack = require('webpack');
 
@@ -81,13 +82,6 @@ module.exports = {
             filename: 'index.html',
             template: './source/index.html',
         })),
-        new webpack.LoaderOptionsPlugin({
-            test: /\.(jpe?g|png|gif|svg)$/i,
-            exclude: /fonts/,
-            options: {
-                customInterpolateName: (url) => url.replace('img/img/', 'img/'),
-            },
-        }),
     ].concat(PROD ? [
         // prod-only
         new webpack.optimize.UglifyJsPlugin({
@@ -166,7 +160,11 @@ module.exports = {
                     {
                         loader: 'file-loader',
                         options: {
-                            name: 'img/[folder]/[name].[ext]?[hash]',
+                            //name: 'img/[folder]/[name].[ext]?[hash]',
+                            name: (resourcePath) => {
+                                let url = path.relative(path.join(__dirname, "source"), resourcePath);
+                                return slash(url) + '?[hash]';
+                            }
                         },
                     },
                     {
