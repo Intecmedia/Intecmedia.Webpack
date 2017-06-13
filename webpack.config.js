@@ -164,6 +164,19 @@ module.exports = {
                     },
                     {
                         loader: path.join(__dirname, 'imagemin.loader.js'),
+                        options: {
+                            plugins: [
+                                require('imagemin-jpegtran')({
+                                    // https://github.com/imagemin/imagemin-jpegtran
+                                }),
+                                require('imagemin-svgo')({
+                                    // https://github.com/imagemin/imagemin-svgo
+                                }),
+                                require('imagemin-pngquant')({
+                                    // https://github.com/imagemin/imagemin-pngquant
+                                }),
+                            ],
+                        },
                     },
                 ],
             },

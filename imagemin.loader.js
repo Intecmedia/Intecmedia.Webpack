@@ -1,25 +1,12 @@
 const path = require('path');
 const imagemin = require('imagemin');
-const imageminJpegtran = require('imagemin-jpegtran');
-const imageminPngquant = require('imagemin-pngquant');
-const imageminSvgo = require('imagemin-svgo');
+const loaderUtils = require('loader-utils');
 
 module.exports = function imageminLoader(content) {
     this.cacheable && this.cacheable();
 
-    let plugins = [];
-
-    plugins.push(imageminJpegtran({
-        // https://github.com/imagemin/imagemin-jpegtran
-    }));
-    plugins.push(imageminSvgo({
-        // https://github.com/imagemin/imagemin-svgo
-    }));
-    plugins.push(imageminPngquant({
-        // https://github.com/imagemin/imagemin-pngquant
-    }));
-
     const callback = this.async();
+    const plugins = loaderUtils.getOptions(this).plugins;
     const resourcePath = path.relative(__dirname, this.resourcePath);
 
     imagemin.buffer(content, {
@@ -27,10 +14,10 @@ module.exports = function imageminLoader(content) {
     }).then((data) => {
         let delta = data.length - content.length;
         if (delta > 0) {
-            console.warn(`Imagemin NOT processed: ${resourcePath}\t`, (delta >= 0 ? '+' + delta : delta) + ' bytes');
+            this.emitWarning(`Imagemin NOT processed: ${resourcePath} \t +${delta} bytes`);
             callback(null, content);
         } else {
-            console.log(`Imagemin processed: ${resourcePath}\t`, (delta >= 0 ? '+' + delta : delta) + ' bytes');
+            console.log(`Imagemin processed: ${resourcePath} \t ${delta} bytes`);
             callback(null, data);
         }
     }).catch((err) => {
