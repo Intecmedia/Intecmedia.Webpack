@@ -32,6 +32,18 @@ const htmlOptions = {
     minify: false,
 };
 
+const resourceUrl = (prefix) => {
+    prefix = path.basename(prefix);
+    return (resourcePath) => {
+        let url = path.relative(path.join(__dirname, 'source'), resourcePath);
+        if (url.indexOf(prefix + '/') === 0) {
+            return slash(url) + '?[hash]';
+        } else {
+            return prefix + '/[folder]/[name].[ext]?[hash]';
+        }
+    };
+};
+
 module.exports = {
 
     devServer: {
@@ -160,11 +172,7 @@ module.exports = {
                     {
                         loader: 'file-loader',
                         options: {
-                            //name: 'img/[folder]/[name].[ext]?[hash]',
-                            name: (resourcePath) => {
-                                let url = path.relative(path.join(__dirname, "source"), resourcePath);
-                                return slash(url) + '?[hash]';
-                            }
+                            name: resourceUrl('img'),
                         },
                     },
                     {
@@ -190,7 +198,7 @@ module.exports = {
                 test: /\.(eot|woff|woff2|ttf|svg)(\?v=.+)?$/,
                 loader: 'file-loader',
                 options: {
-                    name: 'fonts/[name].[ext]?[hash]',
+                    name: resourceUrl('fonts'),
                 },
             },
             // css loaders
