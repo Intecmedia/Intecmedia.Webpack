@@ -16,6 +16,9 @@ module.exports = function imageminLoader(content) {
         if (delta > 0) {
             this.emitWarning(`Imagemin NOT processed: ${resourcePath} \t +${delta} bytes`);
             callback(null, content);
+        } else if (delta === 0) {
+            console.log(`Imagemin NOT processed: ${resourcePath} already optimized`);
+            callback(null, content);
         } else {
             console.log(`Imagemin processed: ${resourcePath} \t ${delta} bytes`);
             callback(null, data);
