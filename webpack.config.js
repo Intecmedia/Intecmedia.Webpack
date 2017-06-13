@@ -172,10 +172,9 @@ module.exports = {
                 exclude: /fonts/,
                 loaders: [
                     {
-                        loader: 'url-loader',
+                        loader: 'file-loader',
                         options: {
                             name: resourceUrl('img'),
-                            limit: 32 * 1024,
                         },
                     },
                     {
