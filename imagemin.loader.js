@@ -7,7 +7,7 @@ module.exports = function imageminLoader(content) {
 
     const callback = this.async();
     const plugins = loaderUtils.getOptions(this).plugins;
-    const resourcePath = path.relative(__dirname, this.resourcePath);
+    const resourcePath = path.posix.normalize(path.relative(__dirname, this.resourcePath));
 
     imagemin.buffer(content, {
         plugins,

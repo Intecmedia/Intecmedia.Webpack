@@ -85,7 +85,7 @@ module.exports = {
             test: /\.(jpe?g|png|gif|svg)$/i,
             exclude: /fonts/,
             options: {
-                customInterpolateName: (url) => url.replace('img/img', 'img/'),
+                customInterpolateName: (url) => url.replace('img/img/', 'img/'),
             },
         }),
     ].concat(PROD ? [
