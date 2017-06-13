@@ -33,16 +33,16 @@ const htmlOptions = {
 };
 
 const resourceUrl = (prefix) => {
-    prefix = path.basename(prefix);
+    prefix = path.basename(prefix) + '/';
     return (resourcePath) => {
         let modulename = null;
         let url = slash(path.relative(path.join(__dirname, 'source'), resourcePath));
-        if (url.indexOf(prefix + '/') === 0) {
+        if (url.indexOf(prefix) === 0) {
             return url + '?[hash]';
         } else if (url.indexOf('../node_modules/') === 0) {
             modulename = url.split('/', 3)[2];
         }
-        return path.join(prefix, modulename, '[name].[ext]?[hash]');  
+        return path.join(prefix, modulename, '[name].[ext]?[hash]');
     };
 };
 
