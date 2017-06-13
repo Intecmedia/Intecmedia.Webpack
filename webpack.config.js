@@ -81,6 +81,13 @@ module.exports = {
             filename: 'index.html',
             template: './source/index.html',
         })),
+        new webpack.LoaderOptionsPlugin({
+            test: /\.(jpe?g|png|gif|svg)$/i,
+            exclude: /fonts/,
+            options: {
+                customInterpolateName: (url) => url.replace(/^img\/img\//, 'img/'),
+            },
+        }),
     ].concat(PROD ? [
         // prod-only
         new webpack.optimize.UglifyJsPlugin({
