@@ -42,7 +42,7 @@ const resourceUrl = (prefix) => {
         } else if (url.indexOf('../node_modules/') === 0) {
             modulename = url.split('/', 3)[2];
         }
-        return path.join(prefix, modulename, '[name].[ext]?[hash]');
+        return slash(path.join(prefix, modulename, '[name].[ext]?[hash]'));
     };
 };
 
