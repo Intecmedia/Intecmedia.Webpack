@@ -1,3 +1,5 @@
+const loaderUtils = require('loader-utils');
+
 module.exports = function cssurlLoader(content) {
     this.cacheable && this.cacheable();
 
@@ -11,7 +13,7 @@ module.exports = function cssurlLoader(content) {
             && (!options.exclude || !options.exclude.test(filename))
         ) {
             const name = options.name(filename);
-            return `${before}!my-imagemin-loader!url-loader?name=${name}&limit=${limit}!${filename}?${query}${after}`;
+            return `${before}!url-loader?name=${name}&limit=${limit}!my-imagemin-loader!${filename}?${query}${after}`;
         }
         return match;
     });

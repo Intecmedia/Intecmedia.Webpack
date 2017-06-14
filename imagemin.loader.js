@@ -1,7 +1,6 @@
 const path = require('path');
 const util = require('util');
 const imagemin = require('imagemin');
-const loaderUtils = require('loader-utils');
 const __cache__ = {};
 
 module.exports = function imageminLoader(content) {
