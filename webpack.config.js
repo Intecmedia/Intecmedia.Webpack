@@ -221,6 +221,14 @@ module.exports = {
                     ],
                     use: [
                         {
+                            loader: path.join(__dirname, 'cssurl.loader.js'),
+                            options: {
+                                test: /\.(jpe?g|png|gif|svg)$/i,
+                                exclude: /fonts/,
+                                limit: 32 * 1024,
+                            },
+                        },
+                        {
                             loader: 'css-loader',
                             options: {
                                 importLoaders: 2, // Number of loaders applied before CSS loader
