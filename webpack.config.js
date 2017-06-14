@@ -223,7 +223,7 @@ module.exports = {
                         {
                             loader: 'css-loader',
                             options: {
-                                importLoaders: 2, // index of 'sass-loader'
+                                importLoaders: 2, // Number of loaders applied before CSS loader
                                 sourceMap: USE_SOURCE_MAP,
                             },
                         },
