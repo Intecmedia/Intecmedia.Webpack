@@ -119,6 +119,12 @@ module.exports = {
             modernizr: path.resolve(__dirname, '.modernizrrc'),
         },
     },
+    resolveLoader: {
+        alias: {
+            'my-imagemin-loader': path.resolve(__dirname, 'imagemin.loader.js'),
+            'my-cssurl-loader': path.resolve(__dirname, 'cssurl.loader.js'),
+        },
+    },
 
     module: {
         rules: [
@@ -178,23 +184,7 @@ module.exports = {
                         },
                     },
                     {
-                        loader: path.join(__dirname, 'imagemin.loader.js'),
-                        options: {
-                            plugins: [
-                                require('imagemin-gifsicle')({
-                                    // https://github.com/imagemin/imagemin-gifsicle
-                                }),
-                                require('imagemin-jpegtran')({
-                                    // https://github.com/imagemin/imagemin-jpegtran
-                                }),
-                                require('imagemin-svgo')({
-                                    // https://github.com/imagemin/imagemin-svgo
-                                }),
-                                require('imagemin-pngquant')({
-                                    // https://github.com/imagemin/imagemin-pngquant
-                                }),
-                            ],
-                        },
+                        loader: 'my-imagemin-loader',
                     },
                 ],
             },
@@ -221,7 +211,7 @@ module.exports = {
                     ],
                     use: [
                         {
-                            loader: path.join(__dirname, 'cssurl.loader.js'),
+                            loader: 'my-cssurl-loader',
                             options: {
                                 test: /\.(jpe?g|png|gif|svg)$/i,
                                 exclude: /fonts/,

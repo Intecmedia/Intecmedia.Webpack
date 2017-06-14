@@ -10,7 +10,6 @@ module.exports = function imageminLoader(content) {
     const padSize = 60;
     const callback = this.async();
     const cacheKey = this.resourcePath + '?' + content.length;
-    const plugins = loaderUtils.getOptions(this).plugins;
     const resourcePath = path.relative(__dirname, this.resourcePath).replace(/\\/g, '/');
 
     if (cacheKey in __cache__) {
@@ -20,7 +19,20 @@ module.exports = function imageminLoader(content) {
     }
 
     imagemin.buffer(content, {
-        plugins,
+        plugins: [
+            require('imagemin-gifsicle')({
+                // https://github.com/imagemin/imagemin-gifsicle
+            }),
+            require('imagemin-jpegtran')({
+                // https://github.com/imagemin/imagemin-jpegtran
+            }),
+            require('imagemin-svgo')({
+                // https://github.com/imagemin/imagemin-svgo
+            }),
+            require('imagemin-pngquant')({
+                // https://github.com/imagemin/imagemin-pngquant
+            }),
+        ],
     }).then((data) => {
         let delta = data.length - content.length;
         if (delta > 0) {
