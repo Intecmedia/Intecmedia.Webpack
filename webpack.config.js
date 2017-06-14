@@ -225,6 +225,11 @@ module.exports = {
                             options: {
                                 importLoaders: 2, // Number of loaders applied before CSS loader
                                 sourceMap: USE_SOURCE_MAP,
+                                minimize: (PROD ? {
+                                    discardComments: {
+                                        removeAll: true,
+                                    },
+                                } : false),
                             },
                         },
                         {
@@ -232,20 +237,9 @@ module.exports = {
                             options: {
                                 sourceMap: USE_SOURCE_MAP ? 'inline' : false,
                                 plugins: [
-                                    // dev-and-prod
                                     require('postcss-cssnext')(),
-                                ].concat(PROD ? [
-                                    // prod-only
                                     require('css-mqpacker')(),
-                                    require('cssnano')({
-                                        autoprefixer: false,
-                                        discardComments: {
-                                            removeAll: true,
-                                        },
-                                    }),
-                                ] : [
-                                    // dev-only
-                                ]),
+                                ],
                             },
                         },
                         {
