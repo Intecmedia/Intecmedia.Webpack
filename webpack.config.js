@@ -35,7 +35,7 @@ const htmlOptions = {
 const resourceUrl = (prefix) => {
     prefix = path.basename(prefix) + '/';
     return (resourcePath) => {
-        let modulename = null;
+        let modulename = '';
         let url = slash(path.relative(path.join(__dirname, 'source'), resourcePath));
         if (url.indexOf(prefix) === 0) {
             return url + '?[hash]';
@@ -226,6 +226,7 @@ module.exports = {
                                 test: /\.(jpe?g|png|gif|svg)$/i,
                                 exclude: /fonts/,
                                 limit: 32 * 1024,
+                                name: resourceUrl('img'),
                             },
                         },
                         {

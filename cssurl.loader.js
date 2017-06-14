@@ -12,7 +12,8 @@ module.exports = function cssurl(content) {
             options.test && options.test.test(filename)
             && (!options.exclude || !options.exclude.test(filename))
         ) {
-            return `${before}!!url-loader?limit=${limit}!${filename}?${query}${after}`;
+            const name = options.name(filename);
+            return `${before}!!url-loader?name=${name}&limit=${limit}!${filename}?${query}${after}`;
         }
         return match;
     });
