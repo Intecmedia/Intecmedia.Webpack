@@ -56,6 +56,7 @@ module.exports = {
     entry: {
         vendor: [
             'jquery',
+            'babel-polyfill',
             './source/js/vendor.js',
         ],
         app: './source/js/app.js',
@@ -69,7 +70,7 @@ module.exports = {
     performance: {
         hints: PROD && !DEBUG ? 'error' : false,
         maxAssetSize: 512 * 1024,
-        maxEntrypointSize: 256 * 1024,
+        maxEntrypointSize: 512 * 1024,
     },
 
     plugins: [
