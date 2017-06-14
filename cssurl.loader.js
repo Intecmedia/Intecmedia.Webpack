@@ -13,7 +13,7 @@ module.exports = function cssurlLoader(content) {
             && (!options.exclude || !options.exclude.test(filename))
         ) {
             const name = options.name(filename);
-            return `${before}!url-loader?name=${name}&limit=${limit}!my-imagemin-loader!${filename}?${query}${after}`;
+            return `${before}!url-loader?name=${name}&limit=${limit}!intecmedia-imagemin-loader!${filename}?${query}${after}`;
         }
         return match;
     });
