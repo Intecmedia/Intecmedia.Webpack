@@ -97,15 +97,7 @@ module.exports = {
             filename: 'index.html',
             template: './source/index.html',
         })),
-    ].concat(PROD ? [
-        // prod-only
-        new webpack.optimize.UglifyJsPlugin({
-            banner: banner,
-            comments: false,
-        }),
-    ] : [
-        // dev-only
-    ]).concat(USE_LINTERS ? [
+    ].concat(USE_LINTERS ? [
         new StyleLintPlugin({
             fix: true,
             files: ['**/*.scss'],
