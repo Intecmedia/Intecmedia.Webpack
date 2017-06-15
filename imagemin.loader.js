@@ -15,10 +15,11 @@ module.exports = function imageminLoader(content) {
     const cacheKey = `${this.resourcePath}?mtime=${stat.mtime.getTime()}&size=${stat.size}`;
 
     const cached = imageCache.getKey(cacheKey);
-    if (cached !== undefined) {
-        let delta = cached.length - content.length;
+    if (cached !== undefined && cached.type == 'Buffer' && cached.data) {
+        let data = new Buffer(cached.data);
+        let delta = data.length - content.length;
         console.log(sprintf.sprintf('Imagemin:\t%60s %6d bytes [cache]', resourcePath, delta));
-        callback(null, cached);
+        callback(null, data);
         return;
     }
 
@@ -41,15 +42,15 @@ module.exports = function imageminLoader(content) {
         let delta = data.length - content.length;
         if (delta > 0) {
             console.log(sprintf.sprintf('Imagemin:\t%60s %6d bytes [skipped]', resourcePath, delta));
-            imageCache.setKey(cacheKey, content.toString());
+            imageCache.setKey(cacheKey, content);
             callback(null, content);
         } else if (delta === 0) {
             console.log(sprintf.sprintf('Imagemin:\t%60s %6d bytes [equal]', resourcePath, 0));
-            imageCache.setKey(cacheKey, content.toString());
+            imageCache.setKey(cacheKey, content);
             callback(null, content);
         } else {
             console.log(sprintf.sprintf('Imagemin:\t%60s %6d bytes [ok]', resourcePath, delta));
-            imageCache.setKey(cacheKey, data.toString());
+            imageCache.setKey(cacheKey, data);
             callback(null, data);
         }
         imageCache.save(true);
