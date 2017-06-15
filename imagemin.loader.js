@@ -1,3 +1,4 @@
+const fs = require('fs')
 const path = require('path');
 const util = require('util');
 const imagemin = require('imagemin');
@@ -8,8 +9,10 @@ module.exports = function imageminLoader(content) {
 
     const padSize = 60;
     const callback = this.async();
-    const cacheKey = this.resourcePath + '?' + content.length;
+
     const resourcePath = path.relative(__dirname, this.resourcePath).replace(/\\/g, '/');
+    const stat = fs.statSync(resourcePath);
+    const cacheKey = `${this.resourcePath}?mtime=${stat.mtime.getTime()}&size=${stat.size}`;
 
     if (cacheKey in __cache__) {
         let data = __cache__[cacheKey];
