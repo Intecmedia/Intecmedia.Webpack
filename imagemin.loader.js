@@ -1,4 +1,4 @@
-const fs = require('fs')
+const fs = require('fs');
 const path = require('path');
 const util = require('util');
 const imagemin = require('imagemin');
@@ -58,3 +58,4 @@ module.exports = function imageminLoader(content) {
 };
 
 module.exports.raw = true;
+module.exports.imageCache = imageCache;

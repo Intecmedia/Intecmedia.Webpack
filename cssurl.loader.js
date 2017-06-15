@@ -1,12 +1,17 @@
 const loaderUtils = require('loader-utils');
+const imageCache = {};
 
 module.exports = function cssurlLoader(content) {
     this.cacheable && this.cacheable();
 
     const options = loaderUtils.getOptions(this);
     const limit = parseInt(options.limit, 10);
+    const pattern = /(url\s*\("\s*\+\s*require\(")([^"]+)("\)\s*\+\s*"\))/g;
 
-    return content.toString().replace(/(url\(" \+ require\(")([^"]+)("\) \+ "\))/g, (match, before, url, after) => {
+    return content.toString().replace(pattern, (match, before, url, after) => {
+        if (match in imageCache) {
+            return imageCache[match];
+        }
         const [filename, query = ''] = url.split('?', 2);
         if (
             options.test && options.test.test(filename)
@@ -14,10 +19,11 @@ module.exports = function cssurlLoader(content) {
         ) {
             let name = options.name(filename);
             let img = `!url-loader?name=${name}&limit=${limit}!intecmedia-imagemin-loader!${filename}?${query}`;
-            return before + img + after;
+            return (imageCache[match] = before + img + after);
         }
-        return match;
+        return (imageCache[match] = match);
     });
 };
 
 module.exports.raw = true;
+module.exports.imageCache = imageCache;
