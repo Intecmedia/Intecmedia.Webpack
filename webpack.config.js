@@ -168,7 +168,7 @@ module.exports = {
             // image loaders
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
-                exclude: /fonts/,
+                exclude: /(fonts|font)/,
                 loaders: [
                     {
                         loader: 'file-loader',
@@ -184,6 +184,7 @@ module.exports = {
             // font loaders
             {
                 test: /\.(eot|woff|woff2|ttf|svg)(\?v=.+)?$/,
+                exclude: /(img|images)/,
                 loader: 'file-loader',
                 options: {
                     name: resourceUrl('fonts'),
