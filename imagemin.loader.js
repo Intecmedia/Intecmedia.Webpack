@@ -19,11 +19,11 @@ module.exports = function imageminLoader(content) {
         let data = new Buffer(cached.data);
         let delta = data.length - content.length;
         if (delta > 0) {
-            console.log(sprintf.sprintf('imagemin: cached %60s %6d bytes [skipped]', resourcePath, delta));
+            console.log(sprintf.sprintf('imagemin: cached %60s  %6d bytes minified [skipped]', resourcePath, delta));
         } else if (delta === 0) {
-            console.log(sprintf.sprintf('imagemin: cached %60s %6d bytes [equal]', resourcePath, 0));
+            console.log(sprintf.sprintf('imagemin: cached %60s  %6d bytes minified [equal]', resourcePath, 0));
         } else {
-            console.log(sprintf.sprintf('imagemin: cached %60s %6d bytes [ok]', resourcePath, delta));
+            console.log(sprintf.sprintf('imagemin: cached %60s  %6d bytes minified [ok]', resourcePath, delta));
         }
         callback(null, data);
         return;
@@ -47,21 +47,21 @@ module.exports = function imageminLoader(content) {
     }).then((data) => {
         let delta = data.length - content.length;
         if (delta > 0) {
-            console.log(sprintf.sprintf('imagemin: minified %60s %6d bytes [skipped]', resourcePath, delta));
+            console.log(sprintf.sprintf('imagemin: minified %60s  %6d bytes minified [skipped]', resourcePath, delta));
             imageCache.setKey(cacheKey, content);
             callback(null, content);
         } else if (delta === 0) {
-            console.log(sprintf.sprintf('imagemin: minified %60s %6d bytes [equal]', resourcePath, 0));
+            console.log(sprintf.sprintf('imagemin: minified %60s  %6d bytes minified [equal]', resourcePath, 0));
             imageCache.setKey(cacheKey, content);
             callback(null, content);
         } else {
-            console.log(sprintf.sprintf('imagemin: minified %60s %6d bytes [ok]', resourcePath, delta));
+            console.log(sprintf.sprintf('imagemin: minified %60s  %6d bytes minified [ok]', resourcePath, delta));
             imageCache.setKey(cacheKey, data);
             callback(null, data);
         }
         imageCache.save(true);
     }).catch((err) => {
-        console.log(sprintf.sprintf('Imagemin: minified %60s %6d bytes [error]', resourcePath, 0));
+        console.log(sprintf.sprintf('Imagemin: minified %60s  %6d bytes minified [error]', resourcePath, 0));
         callback(err);
     });
 };
