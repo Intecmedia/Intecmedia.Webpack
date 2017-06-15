@@ -2,7 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const imagemin = require('imagemin');
 const sprintf = require('sprintf-js');
-const imageCache = {};
+
+const flatCache = require('flat-cache');
+const imageCache = flatCache.load('imagemin', path.resolve(__dirname, 'node_modules', '.cache', 'imagemin'));
 
 module.exports = function imageminLoader(content) {
     this.cacheable && this.cacheable();
@@ -12,9 +14,10 @@ module.exports = function imageminLoader(content) {
     const resourcePath = path.relative(__dirname, this.resourcePath).replace(/\\/g, '/');
     const cacheKey = `${this.resourcePath}?mtime=${stat.mtime.getTime()}&size=${stat.size}`;
 
-    if (cacheKey in imageCache) {
+    const cached = imageCache.getKey(cacheKey);
+    if (cached !== undefined) {
         console.log(sprintf.sprintf('Imagemin:\t%60s %6d bytes [cache]', resourcePath, 0));
-        callback(null, imageCache[cacheKey]);
+        callback(null, cached);
         return;
     }
 
@@ -37,17 +40,18 @@ module.exports = function imageminLoader(content) {
         let delta = data.length - content.length;
         if (delta > 0) {
             console.log(sprintf.sprintf('Imagemin:\t%60s %6d bytes [skipped]', resourcePath, delta));
-            imageCache[cacheKey] = content;
+            imageCache.setKey(cacheKey, content.toString());
             callback(null, content);
         } else if (delta === 0) {
             console.log(sprintf.sprintf('Imagemin:\t%60s %6d bytes [equal]', resourcePath, 0));
-            imageCache[cacheKey] = content;
+            imageCache.setKey(cacheKey, content.toString());
             callback(null, content);
         } else {
             console.log(sprintf.sprintf('Imagemin:\t%60s %6d bytes [ok]', resourcePath, delta));
-            imageCache[cacheKey] = data;
+            imageCache.setKey(cacheKey, data.toString());
             callback(null, data);
         }
+        imageCache.save(true);
     }).catch((err) => {
         console.log(sprintf.sprintf('Imagemin:\t%60s %6d bytes [error]', resourcePath, 0));
         callback(err);
