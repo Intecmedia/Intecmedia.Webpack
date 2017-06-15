@@ -16,7 +16,7 @@ module.exports = function imageminLoader(content) {
 
     if (cacheKey in imageCache) {
         let data = imageCache[cacheKey];
-        console.log(util.format('Imagemin:\t%s    %d [cache]', resourcePath.padStart(padSize), data.length));
+        console.log(util.format('Imagemin:\t%s    %d bytes [cache]', resourcePath.padStart(padSize), data.length));
         callback(null, data);
         return;
     }
@@ -39,20 +39,20 @@ module.exports = function imageminLoader(content) {
     }).then((data) => {
         let delta = data.length - content.length;
         if (delta > 0) {
-            this.emitWarning(util.format('Imagemin:\t%s    +%d bytes', resourcePath.padStart(padSize), delta));
+            console.log(util.format('Imagemin:\t%s    +%d bytes [skipped]', resourcePath.padStart(padSize), delta));
             imageCache[cacheKey] = content;
             callback(null, content);
         } else if (delta === 0) {
-            console.log(util.format('Imagemin:\t%s    %d bytes', resourcePath.padStart(padSize), 0));
+            console.log(util.format('Imagemin:\t%s    +%d bytes [equal]', resourcePath.padStart(padSize), 0));
             imageCache[cacheKey] = content;
             callback(null, content);
         } else {
-            console.log(util.format('Imagemin:\t%s    %d bytes', resourcePath.padStart(padSize), delta));
+            console.log(util.format('Imagemin:\t%s    %d bytes [ok]', resourcePath.padStart(padSize), delta));
             imageCache[cacheKey] = data;
             callback(null, data);
         }
     }).catch((err) => {
-        console.log(util.format('Imagemin:\t%s    error', resourcePath.padStart(padSize)));
+        console.log(util.format('Imagemin:\t%s    +0 bytes [error]', resourcePath.padStart(padSize)));
         callback(err);
     });
 };
