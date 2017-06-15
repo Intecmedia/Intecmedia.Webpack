@@ -43,6 +43,10 @@ const resourceUrl = (prefix) => {
 
 module.exports = {
 
+    watchOptions: {
+        ignored: /node_modules/,
+    },
+
     devServer: {
         overlay: true,
         compress: false,
