@@ -61,7 +61,6 @@ module.exports = function imageminLoader(content) {
         }
         imageCache.save(true);
     }).catch((err) => {
-        console.log(sprintf.sprintf('Imagemin: minified %60s  %6d bytes minified [error]', resourcePath, 0));
         callback(err);
     });
 };
