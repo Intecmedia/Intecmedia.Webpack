@@ -12,8 +12,9 @@ module.exports = function cssurlLoader(content) {
             options.test && options.test.test(filename)
             && (!options.exclude || !options.exclude.test(filename))
         ) {
-            const name = options.name(filename);
-            return `${before}!url-loader?name=${name}&limit=${limit}!intecmedia-imagemin-loader!${filename}?${query}${after}`;
+            let name = options.name(filename);
+            let img = `!url-loader?name=${name}&limit=${limit}!intecmedia-imagemin-loader!${filename}?${query}`;
+            return before + img + after;
         }
         return match;
     });

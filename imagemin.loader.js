@@ -12,8 +12,9 @@ module.exports = function imageminLoader(content) {
     const resourcePath = path.relative(__dirname, this.resourcePath).replace(/\\/g, '/');
 
     if (cacheKey in __cache__) {
-        console.log(util.format('Imagemin:\t%s    %d [cache]', resourcePath.padStart(padSize), __cache__[cacheKey].length));
-        callback(null, __cache__[cacheKey]);
+        let data = __cache__[cacheKey];
+        console.log(util.format('Imagemin:\t%s    %d [cache]', resourcePath.padStart(padSize), data.length));
+        callback(null, data);
         return;
     }
 
