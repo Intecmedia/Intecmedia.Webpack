@@ -10,8 +10,8 @@ module.exports = function imageminLoader(content) {
     const padSize = 60;
     const callback = this.async();
 
+    const stat = fs.statSync(this.resourcePath);
     const resourcePath = path.relative(__dirname, this.resourcePath).replace(/\\/g, '/');
-    const stat = fs.statSync(resourcePath);
     const cacheKey = `${this.resourcePath}?mtime=${stat.mtime.getTime()}&size=${stat.size}`;
 
     if (cacheKey in __cache__) {
