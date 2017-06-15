@@ -8,14 +8,12 @@ const DEBUG = 'DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0;
 const PROD = process.argv.indexOf('-p') !== -1;
 const NODE_ENV = PROD ? 'production' : 'development';
 const USE_SOURCE_MAP = DEBUG && !PROD;
-const USE_LINTERS = DEBUG;
 
 const BUILD_DIR = path.resolve(__dirname, 'build');
 
 console.log(`Output dir: ${BUILD_DIR}`);
 console.log(`Enviroment: ${NODE_ENV}`);
 console.log(`Debug: ${DEBUG ? 'enabled' : 'disabled'}`);
-console.log(`Linters: ${USE_LINTERS ? 'enabled' : 'disabled'}`);
 console.log(`Source maps: ${USE_SOURCE_MAP ? 'enabled' : 'disabled'}`);
 console.log('---\nWebpack running...');
 
@@ -90,6 +88,11 @@ module.exports = {
         new webpack.DefinePlugin({
             'NODE_ENV': JSON.stringify(NODE_ENV),
         }),
+        new StyleLintPlugin({
+            fix: true,
+            files: ['**/*.scss'],
+            syntax: 'scss',
+        }),
     ].concat(glob.sync('./source/*.html').map((template) => {
         return new HtmlWebpackPlugin({
             filename: path.basename(template),
@@ -97,13 +100,7 @@ module.exports = {
             inject: false,
             minify: false,
         });
-    })).concat(USE_LINTERS ? [
-        new StyleLintPlugin({
-            fix: true,
-            files: ['**/*.scss'],
-            syntax: 'scss',
-        }),
-    ] : []),
+    })),
 
     devtool: USE_SOURCE_MAP ? 'eval-source-map' : '',
 
@@ -155,7 +152,6 @@ module.exports = {
                             cacheDirectory: !PROD,
                         },
                     },
-                ].concat(USE_LINTERS ? [
                     {
                         loader: 'eslint-loader',
                         options: {
@@ -163,7 +159,7 @@ module.exports = {
                             cache: !PROD,
                         },
                     },
-                ] : []),
+                ],
             },
             // image loaders
             {
