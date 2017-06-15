@@ -1,13 +1,11 @@
 const fs = require('fs');
 const path = require('path');
-const util = require('util');
 const imagemin = require('imagemin');
+const sprintf = require('sprintf-js');
 const imageCache = {};
 
 module.exports = function imageminLoader(content) {
     this.cacheable && this.cacheable();
-
-    const padSize = 60;
     const callback = this.async();
 
     const stat = fs.statSync(this.resourcePath);
@@ -16,7 +14,7 @@ module.exports = function imageminLoader(content) {
 
     if (cacheKey in imageCache) {
         let data = imageCache[cacheKey];
-        console.log(util.format('Imagemin:\t%s    %d bytes [cache]', resourcePath.padStart(padSize), data.length));
+        console.log(sprintf.sprintf('Imagemin:\t%60s %6d bytes [cache]', resourcePath, data.length));
         callback(null, data);
         return;
     }
@@ -39,20 +37,20 @@ module.exports = function imageminLoader(content) {
     }).then((data) => {
         let delta = data.length - content.length;
         if (delta > 0) {
-            console.log(util.format('Imagemin:\t%s    +%d bytes [skipped]', resourcePath.padStart(padSize), delta));
+            console.log(sprintf.sprintf('Imagemin:\t%60s %6d bytes [skipped]', resourcePath, delta));
             imageCache[cacheKey] = content;
             callback(null, content);
         } else if (delta === 0) {
-            console.log(util.format('Imagemin:\t%s    +%d bytes [equal]', resourcePath.padStart(padSize), 0));
+            console.log(sprintf.sprintf('Imagemin:\t%60s %6d bytes [equal]', resourcePath, 0));
             imageCache[cacheKey] = content;
             callback(null, content);
         } else {
-            console.log(util.format('Imagemin:\t%s    %d bytes [ok]', resourcePath.padStart(padSize), delta));
+            console.log(sprintf.sprintf('Imagemin:\t%60s %6d bytes [ok]', resourcePath, delta));
             imageCache[cacheKey] = data;
             callback(null, data);
         }
     }).catch((err) => {
-        console.log(util.format('Imagemin:\t%s    +0 bytes [error]', resourcePath.padStart(padSize)));
+        console.log(sprintf.sprintf('Imagemin:\t%60s %6d bytes [error]', resourcePath, 0));
         callback(err);
     });
 };
