@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path');
 const util = require('util');
 const imagemin = require('imagemin');
-const __cache__ = {};
+const imageCache = {};
 
 module.exports = function imageminLoader(content) {
     this.cacheable && this.cacheable();
@@ -14,8 +14,8 @@ module.exports = function imageminLoader(content) {
     const resourcePath = path.relative(__dirname, this.resourcePath).replace(/\\/g, '/');
     const cacheKey = `${this.resourcePath}?mtime=${stat.mtime.getTime()}&size=${stat.size}`;
 
-    if (cacheKey in __cache__) {
-        let data = __cache__[cacheKey];
+    if (cacheKey in imageCache) {
+        let data = imageCache[cacheKey];
         console.log(util.format('Imagemin:\t%s    %d [cache]', resourcePath.padStart(padSize), data.length));
         callback(null, data);
         return;
@@ -40,15 +40,15 @@ module.exports = function imageminLoader(content) {
         let delta = data.length - content.length;
         if (delta > 0) {
             this.emitWarning(util.format('Imagemin:\t%s    +%d bytes', resourcePath.padStart(padSize), delta));
-            __cache__[cacheKey] = content;
+            imageCache[cacheKey] = content;
             callback(null, content);
         } else if (delta === 0) {
             console.log(util.format('Imagemin:\t%s    %d bytes', resourcePath.padStart(padSize), 0));
-            __cache__[cacheKey] = content;
+            imageCache[cacheKey] = content;
             callback(null, content);
         } else {
             console.log(util.format('Imagemin:\t%s    %d bytes', resourcePath.padStart(padSize), delta));
-            __cache__[cacheKey] = data;
+            imageCache[cacheKey] = data;
             callback(null, data);
         }
     }).catch((err) => {
