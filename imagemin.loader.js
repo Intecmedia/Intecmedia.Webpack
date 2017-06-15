@@ -13,9 +13,8 @@ module.exports = function imageminLoader(content) {
     const cacheKey = `${this.resourcePath}?mtime=${stat.mtime.getTime()}&size=${stat.size}`;
 
     if (cacheKey in imageCache) {
-        let data = imageCache[cacheKey];
-        console.log(sprintf.sprintf('Imagemin:\t%60s %6d bytes [cache]', resourcePath, data.length));
-        callback(null, data);
+        console.log(sprintf.sprintf('Imagemin:\t%60s %6d bytes [cache]', resourcePath, 0));
+        callback(null, imageCache[cacheKey]);
         return;
     }
 
