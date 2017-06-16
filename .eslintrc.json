@@ -9,6 +9,7 @@
         "jquery": true
     },
     "rules": {
+        "unicode-bom": ["error", "never"],
         "max-len": [2, {
             "code": 120,
             "tabWidth": 4,
