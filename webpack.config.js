@@ -77,6 +77,7 @@ module.exports = {
         }),
         new ExtractTextPlugin({
             filename: 'css/app.min.css',
+            allChunks: true,
         }),
         new webpack.BannerPlugin({
             banner: banner,
@@ -214,7 +215,6 @@ module.exports = {
                         {
                             loader: 'css-loader',
                             options: {
-                                importLoaders: 2, // Number of loaders applied before CSS loader
                                 sourceMap: USE_SOURCE_MAP,
                                 minimize: (PROD ? {
                                     discardComments: {
