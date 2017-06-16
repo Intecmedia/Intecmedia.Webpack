@@ -55,6 +55,7 @@
         "extract-text-webpack-plugin": "latest",
         "file-loader": "latest",
         "font-awesome-sass": "latest",
+        "flat-cache": "latest",
         "html-loader": "latest",
         "html-webpack-plugin": "latest",
         "htmllint-cli": "latest",
