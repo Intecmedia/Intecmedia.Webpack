@@ -205,7 +205,7 @@ module.exports = {
                             loader: 'intecmedia-cssurl-loader',
                             options: {
                                 test: /\.(jpe?g|png|gif|svg)$/i,
-                                exclude: /fonts/,
+                                exclude: /(fonts|font)/,
                                 limit: 32 * 1024,
                                 name: resourceUrl('img'),
                             },
