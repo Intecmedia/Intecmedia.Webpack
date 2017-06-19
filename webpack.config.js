@@ -93,7 +93,7 @@ module.exports = {
             'NODE_ENV': JSON.stringify(NODE_ENV),
         }),
         new StyleLintPlugin({
-            fix: true,
+            configFile: '.stylelintrc',
             files: ['**/*.scss'],
             syntax: 'scss',
         }),
@@ -248,6 +248,12 @@ module.exports = {
                                 sourceMap: USE_SOURCE_MAP ? 'inline' : false,
                                 sourceMapEmbed: USE_SOURCE_MAP,
                                 sourceComments: USE_SOURCE_MAP,
+                            },
+                        },
+                        {
+                            loader: 'stylefmt-loader',
+                            options: {
+                                config: '.stylelintrc',
                             },
                         },
                     ],

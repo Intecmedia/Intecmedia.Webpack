@@ -80,6 +80,7 @@
         "sass-loader": "latest",
         "style-loader": "latest",
         "stylefmt": "latest",
+        "stylefmt-loader": "latest",
         "stylelint": "latest",
         "stylelint-config-sass-guidelines": "latest",
         "stylelint-selector-bem-pattern": "latest",
