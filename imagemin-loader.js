@@ -5,6 +5,24 @@ const sprintf = require('sprintf-js');
 
 const flatCache = require('flat-cache');
 const imageCache = flatCache.load('imagemin', path.resolve(__dirname, 'node_modules', '.cache', 'imagemin'));
+const plugins = [
+    require('imagemin-gifsicle')({
+        // https://github.com/imagemin/imagemin-gifsicle
+    }),
+    require('imagemin-jpegtran')({
+        // https://github.com/imagemin/imagemin-jpegtran
+    }),
+    require('imagemin-svgo')({
+        // https://github.com/imagemin/imagemin-svgo
+    }),
+    require('imagemin-optipng')({
+        // https://github.com/imagemin/imagemin-optipng
+    }),
+    require('imagemin-pngquant')({
+        // https://github.com/imagemin/imagemin-pngquant
+    }),
+];
+
 
 module.exports = function imageminLoader(content) {
     this.cacheable && this.cacheable();
@@ -30,20 +48,7 @@ module.exports = function imageminLoader(content) {
     }
 
     imagemin.buffer(content, {
-        plugins: [
-            require('imagemin-gifsicle')({
-                // https://github.com/imagemin/imagemin-gifsicle
-            }),
-            require('imagemin-jpegtran')({
-                // https://github.com/imagemin/imagemin-jpegtran
-            }),
-            require('imagemin-svgo')({
-                // https://github.com/imagemin/imagemin-svgo
-            }),
-            require('imagemin-pngquant')({
-                // https://github.com/imagemin/imagemin-pngquant
-            }),
-        ],
+        plugins: plugins,
     }).then((data) => {
         let delta = data.length - content.length;
         if (delta > 0) {
@@ -67,3 +72,5 @@ module.exports = function imageminLoader(content) {
 
 module.exports.raw = true;
 module.exports.imageCache = imageCache;
+module.exports.plugins = plugins;
+

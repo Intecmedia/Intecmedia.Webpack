@@ -64,6 +64,7 @@
         "imagemin": "latest",
         "imagemin-gifsicle": "latest",
         "imagemin-jpegtran": "latest",
+        "imagemin-optipng": "latest",
         "imagemin-pngquant": "latest",
         "imagemin-svgo": "latest",
         "imports-loader": "latest",
