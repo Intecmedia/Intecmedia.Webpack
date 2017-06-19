@@ -18,7 +18,7 @@ module.exports = function cssurlLoader(content) {
             && (!options.exclude || !options.exclude.test(filename))
         ) {
             let name = options.name(filename);
-            let img = `!url-loader?name=${name}&limit=${limit}!intecmedia-imagemin-loader!${filename}?${query}`;
+            let img = `!url-loader?name=${name}&limit=${limit}!imagemin-loader!${filename}?${query}`;
             return (imageCache[match] = before + img + after);
         }
         return (imageCache[match] = match);

@@ -119,8 +119,8 @@ module.exports = {
     },
     resolveLoader: {
         alias: {
-            'intecmedia-imagemin-loader': path.resolve(__dirname, 'imagemin.loader.js'),
-            'intecmedia-cssurl-loader': path.resolve(__dirname, 'cssurl.loader.js'),
+            'imagemin-loader': path.resolve(__dirname, 'imagemin-loader.js'),
+            'cssurl-loader': path.resolve(__dirname, 'cssurl-loader.js'),
         },
     },
 
@@ -181,7 +181,7 @@ module.exports = {
                         },
                     },
                     {
-                        loader: 'intecmedia-imagemin-loader',
+                        loader: 'imagemin-loader',
                     },
                 ],
             },
@@ -209,7 +209,7 @@ module.exports = {
                     ],
                     use: [
                         {
-                            loader: 'intecmedia-cssurl-loader',
+                            loader: 'cssurl-loader',
                             options: {
                                 test: /\.(jpe?g|png|gif|svg)$/i,
                                 exclude: /(fonts|font)/,
