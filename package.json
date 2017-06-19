@@ -17,8 +17,9 @@
         "html-lint": "htmllint --rc .htmllintrc build/**/*.html",
         "lint": "npm run js-lint && npm run css-format && npm run css-lint && npm run html-lint",
         "nocache": "rm -rf ./node_modules/.cache",
-        "server": "cross-env NODE_ENV=development DEBUG=0 webpack-dev-server --hot --open",
-        "server-debug": "cross-env NODE_ENV=development DEBUG=1 webpack-dev-server --hot --open",
+        "server": "cross-env NODE_ENV=development DEBUG=0 webpack-dev-server -d --hot --open",
+        "server-debug": "cross-env NODE_ENV=development DEBUG=1 webpack-dev-server -d --hot --open",
+        "server-prod": "cross-env NODE_ENV=production DEBUG=0 webpack-dev-server -p --hot --open",
         "build": "npm run nocache && npm run js-lint && npm run css-format && npm run css-lint && npm run prod && npm run html-lint",
         "start": "npm run build"
     },
