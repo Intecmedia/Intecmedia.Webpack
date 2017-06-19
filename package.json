@@ -85,7 +85,8 @@
         "underscore-template-loader": "latest",
         "url-loader": "latest",
         "webpack": "latest",
-        "webpack-dev-server": "latest"
+        "webpack-dev-server": "latest",
+        "webpack-notifier": "latest"
     },
     "devDependencies": {}
 }
