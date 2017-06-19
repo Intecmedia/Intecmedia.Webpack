@@ -1,5 +1,5 @@
 const loaderUtils = require('loader-utils');
-const imageCache = {};
+const cssurlCache = {};
 
 module.exports = function cssurlLoader(content) {
     this.cacheable && this.cacheable();
@@ -9,8 +9,8 @@ module.exports = function cssurlLoader(content) {
     const pattern = /(url\s*\("\s*\+\s*require\(")([^"]+)("\)\s*\+\s*"\))/g;
 
     return content.toString().replace(pattern, (match, before, url, after) => {
-        if (match in imageCache) {
-            return imageCache[match];
+        if (match in cssurlCache) {
+            return cssurlCache[match];
         }
         const [filename, query = ''] = url.split('?', 2);
         if (
@@ -19,11 +19,11 @@ module.exports = function cssurlLoader(content) {
         ) {
             let name = options.name(filename);
             let img = `!url-loader?name=${name}&limit=${limit}!imagemin-loader!${filename}?${query}`;
-            return (imageCache[match] = before + img + after);
+            return (cssurlCache[match] = before + img + after);
         }
-        return (imageCache[match] = match);
+        return (cssurlCache[match] = match);
     });
 };
 
 module.exports.raw = true;
-module.exports.imageCache = imageCache;
+module.exports.cssurlCache = cssurlCache;

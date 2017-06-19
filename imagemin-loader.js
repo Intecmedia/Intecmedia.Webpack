@@ -1,11 +1,10 @@
 const fs = require('fs');
 const path = require('path');
-const imagemin = require('imagemin');
 const sprintf = require('sprintf-js');
 
-const flatCache = require('flat-cache');
-const imageCache = flatCache.load('imagemin', path.resolve(__dirname, 'node_modules', '.cache', 'imagemin'));
-const plugins = [
+const imagemin = require('imagemin');
+const imageminCache = require('flat-cache').load('imagemin', path.resolve('./node_modules/.cache/imagemin-loader'));
+const imageminPlugins = [
     require('imagemin-gifsicle')({
         // https://github.com/imagemin/imagemin-gifsicle
     }),
@@ -23,7 +22,6 @@ const plugins = [
     }),
 ];
 
-
 module.exports = function imageminLoader(content) {
     this.cacheable && this.cacheable();
     const callback = this.async();
@@ -32,45 +30,44 @@ module.exports = function imageminLoader(content) {
     const resourcePath = path.relative(__dirname, this.resourcePath).replace(/\\/g, '/');
     const cacheKey = `${this.resourcePath}?mtime=${stat.mtime.getTime()}&size=${stat.size}`;
 
-    const cached = imageCache.getKey(cacheKey);
+    const cached = imageminCache.getKey(cacheKey);
     if (cached !== undefined && cached.type == 'Buffer' && cached.data) {
         let data = new Buffer(cached.data);
         let delta = data.length - content.length;
         if (delta > 0) {
-            console.log(sprintf.sprintf('imagemin: cached %60s  %6d bytes minified [skipped]', resourcePath, delta));
+            console.log(sprintf.sprintf('imagemin-loader: cached %60s  %6d bytes minified [skipped]', resourcePath, delta));
         } else if (delta === 0) {
-            console.log(sprintf.sprintf('imagemin: cached %60s  %6d bytes minified [equal]', resourcePath, 0));
+            console.log(sprintf.sprintf('imagemin-loader: cached %60s  %6d bytes minified [equal]', resourcePath, 0));
         } else {
-            console.log(sprintf.sprintf('imagemin: cached %60s  %6d bytes minified [ok]', resourcePath, delta));
+            console.log(sprintf.sprintf('imagemin-loader: cached %60s  %6d bytes minified [ok]', resourcePath, delta));
         }
         callback(null, data);
         return;
     }
 
     imagemin.buffer(content, {
-        plugins: plugins,
+        plugins: imageminPlugins,
     }).then((data) => {
         let delta = data.length - content.length;
         if (delta > 0) {
-            console.log(sprintf.sprintf('imagemin: minified %60s  %6d bytes minified [skipped]', resourcePath, delta));
-            imageCache.setKey(cacheKey, content);
+            console.log(sprintf.sprintf('imagemin-loader: minified %60s  %6d bytes minified [skipped]', resourcePath, delta));
+            imageminCache.setKey(cacheKey, content);
             callback(null, content);
         } else if (delta === 0) {
-            console.log(sprintf.sprintf('imagemin: minified %60s  %6d bytes minified [equal]', resourcePath, 0));
-            imageCache.setKey(cacheKey, content);
+            console.log(sprintf.sprintf('imagemin-loader: minified %60s  %6d bytes minified [equal]', resourcePath, 0));
+            imageminCache.setKey(cacheKey, content);
             callback(null, content);
         } else {
-            console.log(sprintf.sprintf('imagemin: minified %60s  %6d bytes minified [ok]', resourcePath, delta));
-            imageCache.setKey(cacheKey, data);
+            console.log(sprintf.sprintf('imagemin-loader: minified %60s  %6d bytes minified [ok]', resourcePath, delta));
+            imageminCache.setKey(cacheKey, data);
             callback(null, data);
         }
-        imageCache.save(true);
+        imageminCache.save(true);
     }).catch((err) => {
         callback(err);
     });
 };
 
 module.exports.raw = true;
-module.exports.imageCache = imageCache;
-module.exports.plugins = plugins;
-
+module.exports.imageminCache = imageminCache;
+module.exports.imageminPlugins = imageminPlugins;
