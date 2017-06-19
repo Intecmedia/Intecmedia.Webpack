@@ -8,7 +8,7 @@ module.exports = function cssurlLoader(content) {
     const limit = parseInt(options.limit, 10);
     const pattern = /(url\s*\("\s*\+\s*require\(")([^"]+)("\)\s*\+\s*"\))/g;
 
-    return content.toString().replace(pattern, (match, before, url, after) => {
+    return new Buffer(content.toString().replace(pattern, (match, before, url, after) => {
         if (match in cssurlCache) {
             return cssurlCache[match];
         }
@@ -22,7 +22,7 @@ module.exports = function cssurlLoader(content) {
             return (cssurlCache[match] = before + img + after);
         }
         return (cssurlCache[match] = match);
-    });
+    }));
 };
 
 module.exports.raw = true;
