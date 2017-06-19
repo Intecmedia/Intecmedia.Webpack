@@ -1,12 +1,16 @@
 {
     "extends": "stylelint-config-sass-guidelines",
     "plugins": [
+        "stylelint-no-unsupported-browser-features",
         "stylelint-selector-bem-pattern"
     ],
     "rules": {
         "indentation": 4,
         "plugin/selector-bem-pattern": {
             "preset": "bem"
-        }
+        },
+        "plugin/no-unsupported-browser-features": [true, {
+            severity: "warning"
+        }]
     }
 }
