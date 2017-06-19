@@ -27,7 +27,7 @@ module.exports = function imageminLoader(content) {
     const callback = this.async();
 
     const stat = fs.statSync(this.resourcePath);
-    const resourcePath = path.relative(__dirname, this.resourcePath).replace(/\\/g, '/');
+    const url = path.relative(__dirname, this.resourcePath).replace(/\\/g, '/');
     const cacheKey = `${this.resourcePath}?mtime=${stat.mtime.getTime()}&size=${stat.size}`;
 
     const cached = imageminCache.getKey(cacheKey);
@@ -35,11 +35,11 @@ module.exports = function imageminLoader(content) {
         let data = new Buffer(cached.data);
         let delta = data.length - content.length;
         if (delta > 0) {
-            console.log(sprintf.sprintf('imagemin-loader: cached %60s  %6d bytes minified [skipped]', resourcePath, delta));
+            console.log(sprintf.sprintf('imagemin-loader: cached %60s  %6d bytes minified [skipped]', url, delta));
         } else if (delta === 0) {
-            console.log(sprintf.sprintf('imagemin-loader: cached %60s  %6d bytes minified [equal]', resourcePath, 0));
+            console.log(sprintf.sprintf('imagemin-loader: cached %60s  %6d bytes minified [equal]', url, 0));
         } else {
-            console.log(sprintf.sprintf('imagemin-loader: cached %60s  %6d bytes minified [ok]', resourcePath, delta));
+            console.log(sprintf.sprintf('imagemin-loader: cached %60s  %6d bytes minified [ok]', url, delta));
         }
         callback(null, data);
         return;
@@ -50,15 +50,15 @@ module.exports = function imageminLoader(content) {
     }).then((data) => {
         let delta = data.length - content.length;
         if (delta > 0) {
-            console.log(sprintf.sprintf('imagemin-loader: minified %60s  %6d bytes minified [skipped]', resourcePath, delta));
+            console.log(sprintf.sprintf('imagemin-loader: minified %60s  %6d bytes minified [skipped]', url, delta));
             imageminCache.setKey(cacheKey, content);
             callback(null, content);
         } else if (delta === 0) {
-            console.log(sprintf.sprintf('imagemin-loader: minified %60s  %6d bytes minified [equal]', resourcePath, 0));
+            console.log(sprintf.sprintf('imagemin-loader: minified %60s  %6d bytes minified [equal]', url, 0));
             imageminCache.setKey(cacheKey, content);
             callback(null, content);
         } else {
-            console.log(sprintf.sprintf('imagemin-loader: minified %60s  %6d bytes minified [ok]', resourcePath, delta));
+            console.log(sprintf.sprintf('imagemin-loader: minified %60s  %6d bytes minified [ok]', url, delta));
             imageminCache.setKey(cacheKey, data);
             callback(null, data);
         }

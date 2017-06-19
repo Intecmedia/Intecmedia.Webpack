@@ -99,6 +99,8 @@ module.exports = {
         }),
         new WebpackNotifierPlugin({
             alwaysNotify: true,
+            contentImage: path.resolve('./source/img/ico/favicon.png'),
+            title: 'Webpack',
         }),
         ...(glob.sync('./source/*.html').map((template) => {
             return new HtmlWebpackPlugin({
@@ -114,7 +116,7 @@ module.exports = {
 
     resolve: {
         alias: {
-            modernizr: path.resolve(__dirname, '.modernizrrc'),
+            modernizr$: path.resolve(__dirname, '.modernizrrc'),
         },
     },
     resolveLoader: {
