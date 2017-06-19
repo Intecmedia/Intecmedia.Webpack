@@ -128,9 +128,9 @@ module.exports = {
             // html loaders
             {
                 test: /\.html$/,
-                loader: 'underscore-template-loader',
+                loader: 'handlebars-loader',
                 options: {
-                    attributes: ['img:src'],
+                    inlineRequires: '/img/',
                 },
             },
             // javascript loaders
