@@ -4,8 +4,9 @@ const path = require('path');
 const slash = require('slash');
 const webpack = require('webpack');
 
-const DEBUG = 'DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0;
-const PROD = process.argv.indexOf('-p') !== -1;
+const DEBUG = ('DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0) || process.argv.indexOf('-d') !== -1;
+const PROD = ('NODE_ENV' in process.env && process.env.NODE_ENV === 'production') || process.argv.indexOf('-p') !== -1;
+
 const NODE_ENV = PROD ? 'production' : 'development';
 const USE_SOURCE_MAP = DEBUG && !PROD;
 const USE_LINTERS = PROD || DEBUG;
