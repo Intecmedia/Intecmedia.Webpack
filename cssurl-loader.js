@@ -8,7 +8,7 @@ module.exports = function cssurlLoader(content) {
     const limit = parseInt(options.limit, 10);
     const pattern = /(url\s*\("\s*\+\s*require\(")([^"]+)("\)\s*\+\s*"\))/g;
 
-    return new Buffer(content.toString().replace(pattern, (match, before, url, after) => {
+    return Buffer.from(content.toString().replace(pattern, (match, before, url, after) => {
         if (match in cssurlCache) {
             return cssurlCache[match];
         }

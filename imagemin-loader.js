@@ -51,15 +51,15 @@ module.exports = function imageminLoader(content) {
         let delta = data.length - content.length;
         if (delta > 0) {
             console.log(sprintf.sprintf('imagemin-loader: minified %60s  %6d bytes minified [skipped]', url, delta));
-            imageminCache.setKey(cacheKey, content);
+            imageminCache.setKey(cacheKey, content.toJSON());
             callback(null, content);
         } else if (delta === 0) {
             console.log(sprintf.sprintf('imagemin-loader: minified %60s  %6d bytes minified [equal]', url, 0));
-            imageminCache.setKey(cacheKey, content);
+            imageminCache.setKey(cacheKey, content.toJSON());
             callback(null, content);
         } else {
             console.log(sprintf.sprintf('imagemin-loader: minified %60s  %6d bytes minified [ok]', url, delta));
-            imageminCache.setKey(cacheKey, data);
+            imageminCache.setKey(cacheKey, data.toJSON());
             callback(null, data);
         }
         imageminCache.save(true);
