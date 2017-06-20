@@ -20,6 +20,10 @@ console.log(`Debug: ${DEBUG ? 'enabled' : 'disabled'}`);
 console.log(`Linters: ${USE_LINTERS ? 'enabled' : 'disabled'}`);
 console.log(`Source maps: ${USE_SOURCE_MAP ? 'enabled' : 'disabled'}`);
 
+if (PROD && DEBUG ) {
+    throw new Error('Dont use NODE_ENV=${NODE_ENV} and DEBUG=${DEBUG} together');
+}
+
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StyleLintPlugin = (USE_LINTERS ? require('stylelint-webpack-plugin') : () => {});
