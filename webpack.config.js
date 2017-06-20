@@ -18,7 +18,7 @@ console.log(`Source maps: ${USE_SOURCE_MAP ? 'enabled' : 'disabled'}`);
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const StyleLintPlugin = require('stylelint-webpack-plugin');
+const StyleLintPlugin = (PROD || DEBUG ? require('stylelint-webpack-plugin') : () => {});
 const WebpackNotifierPlugin = require('webpack-notifier');
 
 const banner = new String(''); // eslint-disable-line no-new-wrappers
@@ -90,12 +90,12 @@ module.exports = {
         new webpack.DefinePlugin({
             'NODE_ENV': JSON.stringify(NODE_ENV),
         }),
-        new StyleLintPlugin({
+        ...(PROD || DEBUG ? [new StyleLintPlugin({
             configFile: '.stylelintrc',
             files: ['**/*.scss'],
             fix: true,
             syntax: 'scss',
-        }),
+        })] : []),
         new WebpackNotifierPlugin({
             alwaysNotify: true,
             contentImage: path.resolve('./source/img/ico/favicon.png'),
@@ -161,13 +161,13 @@ module.exports = {
                             cacheDirectory: !PROD,
                         },
                     },
-                    {
+                    ...(PROD || DEBUG ? [{
                         loader: 'eslint-loader',
                         options: {
                             fix: true,
                             cache: !PROD,
                         },
-                    },
+                    }] : []),
                 ],
             },
             // image loaders
@@ -198,7 +198,7 @@ module.exports = {
             // css loaders
             {
                 test: /\.s?css$/,
-                loaders: (PROD ? [] : ['css-hot-loader']).concat(ExtractTextPlugin.extract({
+                loaders: (DEBUG ? ['css-hot-loader'] : []).concat(ExtractTextPlugin.extract({
                     publicPath: '../',
                     fallback: [
                         {
@@ -234,8 +234,8 @@ module.exports = {
                             options: {
                                 sourceMap: USE_SOURCE_MAP ? 'inline' : false,
                                 plugins: [
-                                    require('postcss-cssnext')(),
-                                    require('css-mqpacker')(),
+                                    ...(PROD || DEBUG ? [require('postcss-cssnext')()] : []),
+                                    ...(PROD || DEBUG ? [require('css-mqpacker')()] : []),
                                 ],
                             },
                         },
@@ -249,12 +249,12 @@ module.exports = {
                                 sourceComments: USE_SOURCE_MAP,
                             },
                         },
-                        {
+                        ...(PROD || DEBUG ? [{
                             loader: 'stylefmt-loader',
                             options: {
                                 config: '.stylelintrc',
                             },
-                        },
+                        }] : []),
                     ],
                 })),
             },
