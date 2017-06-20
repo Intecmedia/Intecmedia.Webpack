@@ -86,7 +86,6 @@ module.exports = {
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
-            _: 'underscore',
         }),
         new webpack.DefinePlugin({
             'NODE_ENV': JSON.stringify(NODE_ENV),
@@ -94,6 +93,7 @@ module.exports = {
         new StyleLintPlugin({
             configFile: '.stylelintrc',
             files: ['**/*.scss'],
+            fix: true,
             syntax: 'scss',
         }),
         new WebpackNotifierPlugin({
