@@ -25,7 +25,7 @@ const StyleLintPlugin = (USE_LINTERS ? require('stylelint-webpack-plugin') : () 
 const WebpackNotifierPlugin = require('webpack-notifier');
 
 const banner = new String(''); // eslint-disable-line no-new-wrappers
-banner.toString = () => `${new Date().toISOString()} | NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | [chunkhash]`;
+banner.toString = () => `${new Date().toISOString()} | NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chunkhash]`;
 
 const resourceName = (prefix, hash = false) => {
     prefix = path.basename(prefix);
