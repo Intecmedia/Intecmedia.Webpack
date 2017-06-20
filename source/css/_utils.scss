@@ -1,16 +1,16 @@
-/* stylelint-disable */
 // Debug helper
-@if $NODE_ENV != 'production' {
+@if $NODE_ENV != 'production' or $DEBUG {
+    /* stylelint-disable */
     body::after {
         background-color: $alert-danger-bg;
         border-color: $alert-danger-border;
         bottom: 0;
         color: $alert-danger-text;
-        content: 'Only visible $NODE_ENV=#{$NODE_ENV}';
+        content: 'Only visible $NODE_ENV=#{$NODE_ENV} or DEBUG=#{$DEBUG}';
         padding: $padding-xs-vertical $padding-xs-horizontal;
         position: fixed;
         right: 0;
         z-index: $zindex-modal;
     }
+    /* stylelint-enable */
 }
-/* stylelint-enable */

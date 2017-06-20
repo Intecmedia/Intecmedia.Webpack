@@ -247,7 +247,7 @@ module.exports = {
                         {
                             loader: 'sass-loader',
                             options: {
-                                data: `$NODE_ENV: ${NODE_ENV};`,
+                                data: `$NODE_ENV: '${NODE_ENV}';\n$DEBUG: ${DEBUG ? 'true' : false};\n`,
                                 indentWidth: 4,
                                 sourceMap: USE_SOURCE_MAP ? 'inline' : false,
                                 sourceMapEmbed: USE_SOURCE_MAP,
