@@ -8,17 +8,20 @@ const DEBUG = 'DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0;
 const PROD = process.argv.indexOf('-p') !== -1;
 const NODE_ENV = PROD ? 'production' : 'development';
 const USE_SOURCE_MAP = DEBUG && !PROD;
+const USE_LINTERS = PROD || DEBUG;
 
 const BUILD_DIR = path.resolve(__dirname, 'build');
 
 console.log(`Output dir: ${BUILD_DIR}`);
 console.log(`Enviroment: ${NODE_ENV}`);
 console.log(`Debug: ${DEBUG ? 'enabled' : 'disabled'}`);
+console.log(`Lnters: ${USE_LINTERS ? 'enabled' : 'disabled'}`);
 console.log(`Source maps: ${USE_SOURCE_MAP ? 'enabled' : 'disabled'}`);
+console.log('\n');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const StyleLintPlugin = (PROD || DEBUG ? require('stylelint-webpack-plugin') : () => {});
+const StyleLintPlugin = (USE_LINTERS ? require('stylelint-webpack-plugin') : () => {});
 const WebpackNotifierPlugin = require('webpack-notifier');
 
 const banner = new String(''); // eslint-disable-line no-new-wrappers
@@ -90,7 +93,7 @@ module.exports = {
         new webpack.DefinePlugin({
             'NODE_ENV': JSON.stringify(NODE_ENV),
         }),
-        ...(PROD || DEBUG ? [new StyleLintPlugin({
+        ...(USE_LINTERS ? [new StyleLintPlugin({
             configFile: '.stylelintrc',
             files: ['**/*.scss'],
             fix: true,
@@ -161,7 +164,7 @@ module.exports = {
                             cacheDirectory: !PROD,
                         },
                     },
-                    ...(PROD || DEBUG ? [{
+                    ...(USE_LINTERS ? [{
                         loader: 'eslint-loader',
                         options: {
                             fix: true,
@@ -234,8 +237,10 @@ module.exports = {
                             options: {
                                 sourceMap: USE_SOURCE_MAP ? 'inline' : false,
                                 plugins: [
-                                    ...(PROD || DEBUG ? [require('postcss-cssnext')()] : []),
-                                    ...(PROD || DEBUG ? [require('css-mqpacker')()] : []),
+                                    ...(PROD || DEBUG ? [
+                                        require('postcss-cssnext')(),
+                                        require('css-mqpacker')(),
+                                    ] : []),
                                 ],
                             },
                         },
@@ -249,7 +254,7 @@ module.exports = {
                                 sourceComments: USE_SOURCE_MAP,
                             },
                         },
-                        ...(PROD || DEBUG ? [{
+                        ...(USE_LINTERS ? [{
                             loader: 'stylefmt-loader',
                             options: {
                                 config: '.stylelintrc',
