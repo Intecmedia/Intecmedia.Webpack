@@ -102,7 +102,7 @@ module.exports = {
         ...(USE_LINTERS ? [new StyleLintPlugin({
             configFile: '.stylelintrc',
             files: ['**/*.scss'],
-            fix: true,
+            fix: false,
             syntax: 'scss',
         })] : []),
         ...(glob.sync('./source/*.html').map((template) => {
