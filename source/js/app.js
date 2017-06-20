@@ -3,5 +3,5 @@
 require('../css/app.scss');
 
 jQuery(() => {
-    console.log(`Enviroment: ${NODE_ENV}`);
+    console.log(`NODE_ENV=${NODE_ENV}; DEBUG=${DEBUG};`);
 });
