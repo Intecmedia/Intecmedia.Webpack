@@ -28,7 +28,7 @@ module.exports = function imageminLoader(content) {
 
     const stat = fs.statSync(this.resourcePath);
     const url = path.relative(__dirname, this.resourcePath).replace(/\\/g, '/');
-    const cacheKey = `${this.resourcePath}?mtime=${stat.mtime.getTime()}&size=${stat.size}`;
+    const cacheKey = `${this.resourcePath}?${JSON.stringify(stat)}`;
 
     const cached = imageminCache.getKey(cacheKey);
     if (cached !== undefined && cached.type == 'Buffer' && cached.data) {
