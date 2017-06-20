@@ -93,17 +93,17 @@ module.exports = {
         new webpack.DefinePlugin({
             'NODE_ENV': JSON.stringify(NODE_ENV),
         }),
+        new WebpackNotifierPlugin({
+            alwaysNotify: true,
+            contentImage: path.resolve('./source/img/ico/favicon.png'),
+            title: 'Webpack',
+        }),
         ...(USE_LINTERS ? [new StyleLintPlugin({
             configFile: '.stylelintrc',
             files: ['**/*.scss'],
             fix: true,
             syntax: 'scss',
         })] : []),
-        new WebpackNotifierPlugin({
-            alwaysNotify: true,
-            contentImage: path.resolve('./source/img/ico/favicon.png'),
-            title: 'Webpack',
-        }),
         ...(glob.sync('./source/*.html').map((template) => {
             return new HtmlWebpackPlugin({
                 filename: path.basename(template),
