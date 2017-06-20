@@ -91,8 +91,8 @@ module.exports = {
             jQuery: 'jquery',
         }),
         new webpack.DefinePlugin({
-            'DEBUG': JSON.stringify(DEBUG),
-            'NODE_ENV': JSON.stringify(NODE_ENV),
+            DEBUG: JSON.stringify(DEBUG),
+            NODE_ENV: JSON.stringify(NODE_ENV),
         }),
         new WebpackNotifierPlugin({
             alwaysNotify: true,
@@ -111,6 +111,9 @@ module.exports = {
                 template: template,
                 inject: false,
                 minify: false,
+                title: 'Intecmedia.Webpack',
+                DEBUG: JSON.stringify(DEBUG),
+                NODE_ENV: JSON.stringify(NODE_ENV),
             });
         })),
     ],
@@ -202,7 +205,7 @@ module.exports = {
             // css loaders
             {
                 test: /\.s?css$/,
-                loaders: (DEBUG ? ['css-hot-loader'] : []).concat(ExtractTextPlugin.extract({
+                loaders: (DEBUG && false? ['css-hot-loader'] : []).concat(ExtractTextPlugin.extract({
                     publicPath: '../',
                     fallback: [
                         {
