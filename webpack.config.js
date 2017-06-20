@@ -9,6 +9,7 @@ const PROD = process.argv.indexOf('-p') !== -1;
 const NODE_ENV = PROD ? 'production' : 'development';
 const USE_SOURCE_MAP = DEBUG && !PROD;
 const USE_LINTERS = PROD || DEBUG;
+const DEV_SERVER = path.basename(require.main.filename) === 'webpack-dev-server.js';
 
 const BUILD_DIR = path.resolve(__dirname, 'build');
 
@@ -102,7 +103,7 @@ module.exports = {
         ...(USE_LINTERS ? [new StyleLintPlugin({
             configFile: '.stylelintrc',
             files: ['**/*.scss'],
-            fix: false,
+            fix: !DEV_SERVER,
             syntax: 'scss',
         })] : []),
         ...(glob.sync('./source/*.html').map((template) => {
