@@ -167,7 +167,7 @@ module.exports = {
                         loader: 'babel-loader',
                         options: {
                             presets: ['env'],
-                            forceEnv: (DEBUG ? 'development' : 'production'),
+                            forceEnv: NODE_ENV,
                             cacheDirectory: !PROD,
                         },
                     },
