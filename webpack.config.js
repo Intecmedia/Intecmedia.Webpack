@@ -193,9 +193,9 @@ module.exports = {
                             name: resourceName('img', false),
                         },
                     },
-                    {
+                    ...(PROD || DEBUG ? [{
                         loader: 'imagemin-loader',
-                    },
+                    }] : []),
                 ],
             },
             // font loaders
@@ -221,7 +221,7 @@ module.exports = {
                         },
                     ],
                     use: [
-                        {
+                        ...(PROD || DEBUG ? [{
                             loader: 'cssurl-loader',
                             options: {
                                 test: /\.(jpe?g|png|gif|svg)$/i,
@@ -229,7 +229,7 @@ module.exports = {
                                 limit: 32 * 1024,
                                 name: resourceName('img', false),
                             },
-                        },
+                        }] : []),
                         {
                             loader: 'css-loader',
                             options: {
