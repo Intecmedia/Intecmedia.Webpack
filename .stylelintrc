@@ -2,10 +2,16 @@
     "extends": "stylelint-config-sass-guidelines",
     "plugins": [
         "stylelint-no-unsupported-browser-features",
-        "stylelint-selector-bem-pattern"
+        "stylelint-selector-bem-pattern",
+        "stylelint-scss"
     ],
     "rules": {
         "indentation": 4,
+        "scss/at-else-closing-brace-newline-after": "always-last-in-chain",
+        "scss/at-else-closing-brace-space-after": "always-intermediate",
+        "scss/at-else-empty-line-before": "never",
+        "scss/at-if-closing-brace-newline-after": "always-last-in-chain",
+        "scss/at-if-closing-brace-space-after": "always-intermediate",
         "plugin/selector-bem-pattern": {
             "preset": "bem"
         },
