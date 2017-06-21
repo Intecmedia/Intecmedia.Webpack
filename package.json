@@ -2,6 +2,10 @@
     "name": "Intecmedia.Webpack",
     "version": "0.0.1",
     "description": "Intecmedia Webpack bootstrap",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Intecmedia/Intecmedia.Webpack.git"
+    },
     "scripts": {
         "dev": "cross-env NODE_ENV=development DEBUG=0 webpack -d",
         "debug": "cross-env NODE_ENV=development DEBUG=1 webpack -d",
