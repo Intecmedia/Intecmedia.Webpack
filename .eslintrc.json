@@ -7,9 +7,9 @@
         "jquery": true
     },
     "rules": {
-        "no-console": 0,
+        "no-console": "off",
         "unicode-bom": ["error", "never"],
-        "max-len": [2, {
+        "max-len": ["error", {
             "code": 120,
             "tabWidth": 4,
             "ignoreUrls": true
