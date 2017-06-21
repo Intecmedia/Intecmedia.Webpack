@@ -191,7 +191,7 @@ module.exports = {
             },
             // image loaders
             {
-                test: /\.(jpe?g|png|gif|svg)$/i,
+                test: /\.(jpe?g|png|gif|svg|ico)$/i,
                 exclude: /(fonts|font)/,
                 loaders: [
                     {
