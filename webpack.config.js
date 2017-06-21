@@ -168,7 +168,7 @@ module.exports = {
                     {
                         loader: 'babel-loader',
                         options: {
-                            presets: [['env', {
+                            presets: [['airbnb', {
                                 debug: DEBUG || PROD,
                                 targets: {
                                     browsers: browserslist,
