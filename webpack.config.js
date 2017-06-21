@@ -1,4 +1,5 @@
 /* eslint global-require: "off" */
+const fs = require('fs');
 const glob = require('glob');
 const path = require('path');
 const slash = require('slash');
@@ -31,6 +32,7 @@ const WebpackNotifierPlugin = require('webpack-notifier');
 
 const banner = new String(''); // eslint-disable-line no-new-wrappers
 banner.toString = () => `${new Date().toISOString()} | NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chunkhash]`;
+const browserslist = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'package.json'))).browserslist;
 
 const resourceName = (prefix, hash = false) => {
     const basename = path.basename(prefix);
@@ -166,7 +168,12 @@ module.exports = {
                     {
                         loader: 'babel-loader',
                         options: {
-                            presets: ['env'],
+                            presets: [['env', {
+                                debug: DEBUG || PROD,
+                                targets: {
+                                    browsers: browserslist,
+                                },
+                            }]],
                             forceEnv: NODE_ENV,
                             cacheDirectory: !PROD,
                         },
