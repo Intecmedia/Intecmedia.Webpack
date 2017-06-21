@@ -2,7 +2,7 @@
 
 Это внутренний стандарт/шаблон для верстки сайтов компании [Intecmedia](http://intecmedia.ru)
 
-## Цель шаблона: минимальные натройки -- максимальная автоматизация процесса сборки.
+## Цель шаблона: минимальные натройки -- максимальная автоматизация процесса сборки и защита от ошибок.
 
 Предложения и замечания приветствуются в разделе [Issues](https://github.com/Intecmedia/Intecmedia.Webpack/issues/new) или [Pull requests](https://github.com/intecmedia/Intecmedia.Webpack/pulls).
 
@@ -22,29 +22,29 @@
 * Автоматический base64-url ресурсов
 * Handlebars Для сборки HTML
 
-## Обзор некоторых комманд:
-* npm run dev
-* npm run debug
-* npm run prod
-* npm run watch
-* npm run watch-dev
-* npm run watch-debug
-* npm run watch-prod
-* npm run js-lint
-* npm run css-lint
-* npm run css-format
-* npm run html-lint
-* npm run lint
-* npm run nocache
-* npm run server
-* npm run server-dev
-* npm run server-debug
-* npm run server-prod
-* npm run build
+## Обзор комманд:
+* **npm run dev** -- сборка в development-режиме и debug=off, самые быстрый способ
+* **npm run debug** -- сборка в development-режиме и debug=on, медленный способ
+* **npm run prod** -- сборка в production-режиме и debug=off, самые медленный способ
+* **npm run watch** -- watch в production-режимеи debug=off, самые медленный способ
+* **npm run watch-dev** -- watch в development-режиме и debug=off, самые быстрый способ
+* **npm run watch-debug** -- watch в development-режиме и debug=on, медленный способ
+* **npm run watch-prod** -- watch в production-режиме и debug=off, самые медленный способ
+* **npm run js-lint** -- линтер js, часть проблем autofix
+* **npm run css-lint** -- линтер css, часть проблем autofix
+* **npm run css-format** -- форматер css, используется в паре с **npm run css-lint**
+* **npm run html-lint** -- линтер html
+* **npm run lint** -- запуск всех линтеров
+* **npm run nocache** -- очистка кеша ./node_modules/.cache/, иногда нужно для imagemin.
+* **npm run server** -- сервер в production-режиме и debug=off, самые медленный способ
+* **npm run server-dev** -- сервер в development-режиме и debug=off, самые быстрый способ
+* **npm run server-debug** -- сервер в development-режиме и debug=on, медленный способ
+* **npm run server-prod** -- сервер в production-режиме и debug=off, самые медленный способ
+* **npm run build** -- релизный билд, запускается в production-режиме и debug=off, вклчая все линтеры, очень медленный способ
 
 ## Стилистика кода
 * Мы использум БЭМ, исключая сторонние пакеты.
-* Подробно писать про стиля кода нет смысла. Сборка покрыта линтерами.
+* Подробно писать про оформление кода нет смысла -- сборка покрыта линтерами.
 
 ### Schema.org для следующего:
 * [Адреса и Организации](http://help.yandex.ru/webmaster/supported-schemas/address-organization.xml)
