@@ -21,3 +21,25 @@
 * Imagemin для сжатия гарфики: svg, png, jpeg, gif
 * Автоматический base64-url ресурсов
 * Handlebars Для сборки HTML
+
+## Обзор некоторых комманд:
+* npm run dev
+* npm run debug
+* npm run prod
+* npm run watch
+* npm run watch-dev
+* npm run watch-debug
+* npm run watch-prod
+* npm run js-lint
+* npm run css-lint
+* npm run css-format
+* npm run html-lint
+* npm run lint
+* npm run nocache
+* npm run server
+* npm run server-dev
+* npm run server-debug
+* npm run server-prod
+* npm run build
+
+
