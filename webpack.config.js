@@ -4,17 +4,17 @@ const path = require('path');
 const slash = require('slash');
 const webpack = require('webpack');
 
-const DEBUG = ('DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0) || process.argv.indexOf('-d') !== -1;
+const DEBUG = ('DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0);
+const DEV_SERVER = path.basename(require.main.filename, '.js') === 'webpack-dev-server';
 const PROD = ('NODE_ENV' in process.env && process.env.NODE_ENV === 'production') || process.argv.indexOf('-p') !== -1;
-
 const NODE_ENV = PROD ? 'production' : 'development';
+
 const USE_SOURCE_MAP = DEBUG && !PROD;
 const USE_LINTERS = PROD || DEBUG;
-const DEV_SERVER = path.basename(require.main.filename) === 'webpack-dev-server.js';
 
-const BUILD_DIR = path.resolve(__dirname, 'build');
+const OUTPUT_PATH = path.resolve(__dirname, 'build');
 
-console.log(`Output dir: ${BUILD_DIR}`);
+console.log(`Output: ${OUTPUT_PATH}`);
 console.log(`Enviroment: ${NODE_ENV}`);
 console.log(`Debug: ${DEBUG ? 'enabled' : 'disabled'}`);
 console.log(`Linters: ${USE_LINTERS ? 'enabled' : 'disabled'}`);
@@ -69,7 +69,7 @@ module.exports = {
     },
 
     output: {
-        path: BUILD_DIR,
+        path: OUTPUT_PATH,
         filename: 'js/app.min.js',
     },
 
