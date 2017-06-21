@@ -9,13 +9,7 @@
     "rules": {
         "no-console": "off",
         "unicode-bom": ["error", "never"],
-        "max-len": ["error", {
-            "code": 120,
-            "tabWidth": 4,
-            "ignoreUrls": true
-        }],
-        "indent": ["error", 4, {
-            "SwitchCase": 1
-        }]
+        "max-len": ["error", 120, 4],
+        "indent": ["error", 4]
     }
 }
