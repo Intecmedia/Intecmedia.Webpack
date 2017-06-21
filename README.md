@@ -42,4 +42,16 @@
 * npm run server-prod
 * npm run build
 
+## Стилистика кода
+* Мы использум БЭМ, исключая сторонние пакеты.
+* Подробно писать про стиля кода нет смысла. Сборка покрыта линтерами.
+
+### Schema.org для следующего:
+* [Адреса и Организации](http://help.yandex.ru/webmaster/supported-schemas/address-organization.xml)
+* [Видео](http://help.yandex.ru/webmaster/supported-schemas/video.xml)
+* [Вопросы и Ответы](http://help.yandex.ru/webmaster/supported-schemas/questions.xml)
+* [Товары и Цены](http://help.yandex.ru/webmaster/supported-schemas/goods-prices.xml)
+* [Картинки](http://help.yandex.ru/webmaster/supported-schemas/image.xml)
+
+
 
