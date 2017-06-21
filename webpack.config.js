@@ -20,8 +20,8 @@ console.log(`Debug: ${DEBUG ? 'enabled' : 'disabled'}`);
 console.log(`Linters: ${USE_LINTERS ? 'enabled' : 'disabled'}`);
 console.log(`Source maps: ${USE_SOURCE_MAP ? 'enabled' : 'disabled'}`);
 
-if (PROD && DEBUG ) {
-    throw new Error('Dont use NODE_ENV=${NODE_ENV} and DEBUG=${DEBUG} together');
+if (PROD && DEBUG) {
+    throw new Error(`Dont use NODE_ENV=${NODE_ENV} and DEBUG=${DEBUG} together`);
 }
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -33,18 +33,18 @@ const banner = new String(''); // eslint-disable-line no-new-wrappers
 banner.toString = () => `${new Date().toISOString()} | NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chunkhash]`;
 
 const resourceName = (prefix, hash = false) => {
-    prefix = path.basename(prefix);
-    hash = (hash ? '?[hash]' : '');
+    const basename = path.basename(prefix);
+    const suffix = (hash ? '?[hash]' : '');
     return (resourcePath) => {
-        let url = slash(path.relative(path.join(__dirname, 'source'), resourcePath));
-        if (url.startsWith(prefix + '/')) {
-            return url + hash;
+        const url = slash(path.relative(path.join(__dirname, 'source'), resourcePath));
+        if (url.startsWith(`${basename}/`)) {
+            return url + suffix;
         }
         if (url.startsWith('../node_modules/')) {
-            let [, , modulename] = url.split('/', 3);
-            return slash(path.join(prefix, modulename, '[name].[ext]' + hash));
+            const [, , modulename] = url.split('/', 3);
+            return slash(path.join(basename, modulename, `[name].[ext]${suffix}`));
         }
-        return slash(path.join(prefix, '[name].[ext]' + hash));
+        return slash(path.join(basename, `[name].[ext]${suffix}`));
     };
 };
 
@@ -89,7 +89,7 @@ module.exports = {
             allChunks: true,
         }),
         new webpack.BannerPlugin({
-            banner: banner,
+            banner,
         }),
         new webpack.ProvidePlugin({
             $: 'jquery',
@@ -110,17 +110,15 @@ module.exports = {
             fix: !DEV_SERVER,
             syntax: 'scss',
         })] : []),
-        ...(glob.sync('./source/*.html').map((template) => {
-            return new HtmlWebpackPlugin({
-                filename: path.basename(template),
-                template: template,
-                inject: false,
-                minify: false,
-                title: 'Intecmedia.Webpack',
-                DEBUG: JSON.stringify(DEBUG),
-                NODE_ENV: JSON.stringify(NODE_ENV),
-            });
-        })),
+        ...(glob.sync('./source/*.html').map(template => new HtmlWebpackPlugin({
+            filename: path.basename(template),
+            template,
+            inject: false,
+            minify: false,
+            title: 'Intecmedia.Webpack',
+            DEBUG: JSON.stringify(DEBUG),
+            NODE_ENV: JSON.stringify(NODE_ENV),
+        }))),
     ],
 
     devtool: USE_SOURCE_MAP ? 'eval-source-map' : '',
@@ -169,7 +167,7 @@ module.exports = {
                         loader: 'babel-loader',
                         options: {
                             presets: ['env'],
-                            forceEnv: NODE_ENV,
+                            forceEnv: (DEBUG ? 'development' : 'production'),
                             cacheDirectory: !PROD,
                         },
                     },
@@ -210,7 +208,7 @@ module.exports = {
             // css loaders
             {
                 test: /\.s?css$/,
-                loaders: (DEBUG && false? ['css-hot-loader'] : []).concat(ExtractTextPlugin.extract({
+                loaders: (DEBUG || DEV_SERVER ? ['css-hot-loader'] : []).concat(ExtractTextPlugin.extract({
                     publicPath: '../',
                     fallback: [
                         {

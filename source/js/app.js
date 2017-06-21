@@ -1,4 +1,4 @@
-/* global NODE_ENV */
+/* global NODE_ENV DEBUG */
 
 require('../css/app.scss');
 

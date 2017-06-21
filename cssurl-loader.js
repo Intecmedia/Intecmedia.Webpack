@@ -1,8 +1,12 @@
+/* eslint global-require: "off" */
 const loaderUtils = require('loader-utils');
+
 const cssurlCache = {};
 
 module.exports = function cssurlLoader(content) {
-    this.cacheable && this.cacheable();
+    if (this.cacheable) {
+        this.cacheable();
+    }
 
     const options = loaderUtils.getOptions(this);
     const limit = parseInt(options.limit, 10);
@@ -17,8 +21,8 @@ module.exports = function cssurlLoader(content) {
             options.test && options.test.test(filename)
             && (!options.exclude || !options.exclude.test(filename))
         ) {
-            let name = options.name(filename);
-            let img = `!url-loader?name=${name}&limit=${limit}!imagemin-loader!${filename}?${query}`;
+            const name = options.name(filename);
+            const img = `!url-loader?name=${name}&limit=${limit}!imagemin-loader!${filename}?${query}`;
             return (cssurlCache[match] = before + img + after);
         }
         return (cssurlCache[match] = match);

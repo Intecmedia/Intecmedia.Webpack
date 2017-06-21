@@ -1,29 +1,32 @@
+/* eslint global-require: "off" */
 const fs = require('fs');
 const path = require('path');
 const sprintf = require('sprintf-js');
-
 const imagemin = require('imagemin');
 const imageminCache = require('flat-cache').load('imagemin', path.resolve('./node_modules/.cache/imagemin-loader'));
+
 const imageminPlugins = [
     require('imagemin-gifsicle')({
-        // https://github.com/imagemin/imagemin-gifsicle
+    // https://github.com/imagemin/imagemin-gifsicle
     }),
     require('imagemin-jpegtran')({
-        // https://github.com/imagemin/imagemin-jpegtran
+    // https://github.com/imagemin/imagemin-jpegtran
     }),
     require('imagemin-svgo')({
-        // https://github.com/imagemin/imagemin-svgo
+    // https://github.com/imagemin/imagemin-svgo
     }),
     require('imagemin-optipng')({
-        // https://github.com/imagemin/imagemin-optipng
+    // https://github.com/imagemin/imagemin-optipng
     }),
     require('imagemin-pngquant')({
-        // https://github.com/imagemin/imagemin-pngquant
+    // https://github.com/imagemin/imagemin-pngquant
     }),
 ];
 
 module.exports = function imageminLoader(content) {
-    this.cacheable && this.cacheable();
+    if (this.cacheable) {
+        this.cacheable();
+    }
     const callback = this.async();
 
     const stat = fs.statSync(this.resourcePath);
@@ -31,9 +34,9 @@ module.exports = function imageminLoader(content) {
     const cacheKey = `${this.resourcePath}?${JSON.stringify(stat)}`;
 
     const cached = imageminCache.getKey(cacheKey);
-    if (cached !== undefined && cached.type == 'Buffer' && cached.data) {
-        let data = new Buffer(cached.data);
-        let delta = data.length - content.length;
+    if (cached !== undefined && cached.type === 'Buffer' && cached.data) {
+        const data = new Buffer(cached.data);
+        const delta = data.length - content.length;
         if (delta > 0) {
             console.log(sprintf.sprintf('imagemin-loader: cached %60s  %6d bytes minified [skipped]', url, delta));
         } else if (delta === 0) {
@@ -48,7 +51,7 @@ module.exports = function imageminLoader(content) {
     imagemin.buffer(content, {
         plugins: imageminPlugins,
     }).then((data) => {
-        let delta = data.length - content.length;
+        const delta = data.length - content.length;
         if (delta > 0) {
             console.log(sprintf.sprintf('imagemin-loader: minified %60s  %6d bytes minified [skipped]', url, delta));
             imageminCache.setKey(cacheKey, content.toJSON());
