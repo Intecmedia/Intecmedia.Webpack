@@ -25,14 +25,13 @@ module.exports = function cssurlLoader(content) {
                 newNode.args[0].value = cssurlCache[url];
                 return newNode;
             }
-            const [filename, query = ''] = url.split('?', 2);
+            const [name] = url.split('?', 2);
             if (
-                options.test && options.test.test(filename)
-                && (!options.exclude || !options.exclude.test(filename))
+                options.test && options.test.test(name)
+                && (!options.exclude || !options.exclude.test(name))
             ) {
                 const newNode = node.clone();
-                const name = options.name(filename);
-                cssurlCache[url] = `!url-loader?name=${name}&limit=${limit}!imagemin-loader!${filename}?${query}`;
+                cssurlCache[url] = `!url-loader?name=${options.name(name)}&limit=${limit}!imagemin-loader!${url}`;
                 newNode.args[0].value = cssurlCache[url];
                 return newNode;
             }
