@@ -31,7 +31,8 @@ module.exports = function cssurlLoader(content) {
                 && (!options.exclude || !options.exclude.test(name))
             ) {
                 const newNode = node.clone();
-                cssurlCache[url] = `!url-loader?name=${options.name(name)}&limit=${limit}!imagemin-loader!${url}`;
+                const loader = /\.svg$/i.test(name) ? 'svg-url-loader' : 'url-loader';
+                cssurlCache[url] = `!${loader}?name=${options.name(name)}&limit=${limit}!imagemin-loader!${url}`;
                 newNode.args[0].value = cssurlCache[url];
                 return newNode;
             }

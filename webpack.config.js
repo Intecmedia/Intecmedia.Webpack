@@ -143,7 +143,7 @@ module.exports = {
         rules: [
             // html loaders
             {
-                test: /\.html$/,
+                test: /\.html$/i,
                 loader: 'handlebars-loader',
                 options: {
                     inlineRequires: '/img/',
@@ -155,7 +155,7 @@ module.exports = {
                 loader: 'modernizr-loader!json-loader',
             },
             {
-                test: /\.js$/,
+                test: /\.js$/i,
                 include: /node_modules/,
                 loader: 'imports-loader',
                 options: {
@@ -164,7 +164,7 @@ module.exports = {
                 },
             },
             {
-                test: /\.js$/,
+                test: /\.js$/i,
                 exclude: /node_modules/,
                 loaders: [
                     {
@@ -192,7 +192,7 @@ module.exports = {
             // image loaders
             {
                 test: /\.(jpe?g|png|gif|svg|ico)$/i,
-                exclude: /(fonts|font)/,
+                exclude: /(fonts|font)/i,
                 loaders: [
                     {
                         loader: 'file-loader',
@@ -207,8 +207,8 @@ module.exports = {
             },
             // font loaders
             {
-                test: /\.(eot|woff|woff2|ttf|svg)(\?v=.+)?$/,
-                exclude: /(img|images)/,
+                test: /\.(eot|woff|woff2|ttf|svg)(\?v=.+)?$/i,
+                exclude: /(img|images)/i,
                 loader: 'file-loader',
                 options: {
                     name: resourceName('fonts', true),
@@ -216,7 +216,7 @@ module.exports = {
             },
             // css loaders
             {
-                test: /\.s?css$/,
+                test: /\.s?css$/i,
                 loaders: (DEBUG || DEV_SERVER ? ['css-hot-loader'] : []).concat(ExtractTextPlugin.extract({
                     publicPath: '../',
                     fallback: [
@@ -232,7 +232,7 @@ module.exports = {
                             loader: 'cssurl-loader',
                             options: {
                                 test: /\.(jpe?g|png|gif|svg)$/i,
-                                exclude: /(fonts|font)/,
+                                exclude: /(fonts|font)/i,
                                 limit: 32 * 1024,
                                 name: resourceName('img', false),
                             },
