@@ -98,6 +98,7 @@
         "stylelint-selector-bem-pattern": "latest",
         "stylelint-webpack-plugin": "latest",
         "url-loader": "latest",
+        "uglify-js": "latest",
         "webpack": "latest",
         "webpack-dev-server": "latest",
         "webpack-notifier": "latest"

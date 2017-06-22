@@ -1,4 +1,5 @@
 /* eslint global-require: "off" */
+const UglifyJS = require('uglify-js');
 const loaderUtils = require('loader-utils');
 
 const cssurlCache = {};
@@ -10,22 +11,39 @@ module.exports = function cssurlLoader(content) {
 
     const options = loaderUtils.getOptions(this);
     const limit = parseInt(options.limit, 10);
-    const pattern = /(url \(" \+ require\(")([^"]+)("\) \+ "\))/g;
 
-    return Buffer.from(content.toString().replace(pattern, (match, before, url, after) => {
-        if (match in cssurlCache) {
-            return cssurlCache[match];
-        }
-        const [filename, query = ''] = url.split('?', 2);
+    const transformer = new UglifyJS.TreeTransformer(null, (node) => {
         if (
-            options.test && options.test.test(filename)
-            && (!options.exclude || !options.exclude.test(filename))
+            node instanceof UglifyJS.AST_Call
+            && node.expression instanceof UglifyJS.AST_SymbolRef
+            && node.expression.name === 'require'
+            && node.args.length === 1
         ) {
-            const name = options.name(filename);
-            const img = `!url-loader?name=${name}&limit=${limit}!imagemin-loader!${filename}?${query}`;
-            return (cssurlCache[match] = before + img + after);
+            const newNode = node.clone();
+            const url = node.args[0].value;
+            if (url in cssurlCache) {
+                newNode.args[0].value = cssurlCache[url];
+                return newNode;
+            }
+            const [filename, query = ''] = url.split('?', 2);
+            if (
+                options.test && options.test.test(filename)
+                && (!options.exclude || !options.exclude.test(filename))
+            ) {
+                const name = options.name(filename);
+                cssurlCache[url] = `!url-loader?name=${name}&limit=${limit}!imagemin-loader!${filename}?${query}`;
+                newNode.args[0].value = cssurlCache[url];
+                return newNode;
+            }
         }
-        return (cssurlCache[match] = match);
+        return node;
+    });
+
+    const AST = UglifyJS.parse(content.toString());
+
+    return Buffer.from(AST.transform(transformer).print_to_string({
+        beautify: true,
+        comments: true,
     }));
 };
 
