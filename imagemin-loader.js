@@ -79,5 +79,3 @@ module.exports = function imageminLoader(content) {
 };
 
 module.exports.raw = true;
-module.exports.imageminCache = imageminCache;
-module.exports.imageminPlugins = imageminPlugins;

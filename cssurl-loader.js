@@ -30,4 +30,3 @@ module.exports = function cssurlLoader(content) {
 };
 
 module.exports.raw = true;
-module.exports.cssurlCache = cssurlCache;
