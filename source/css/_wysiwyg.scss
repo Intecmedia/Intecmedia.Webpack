@@ -61,5 +61,12 @@
     img.pull-right {
         margin-left: $padding-base-horizontal;
     }
+
+    .text-center img,
+    img.text-center,
+     {
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 /* stylelint-enable selector-max-compound-selectors, max-nesting-depth, selector-no-qualifying-type, scss/at-extend-no-missing-placeholder */
