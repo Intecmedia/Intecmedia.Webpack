@@ -18,7 +18,7 @@ module.exports = function cssurlLoader(content) {
     const options = Object.assign({}, defaultOptions, loaderUtils.getOptions(this));
     const limit = parseInt(options.limit, 10);
 
-    const requireTransformer = new UglifyJS.TreeTransformer(null, (node) => {
+    const transformer = new UglifyJS.TreeTransformer(null, (node) => {
         if (
             node instanceof UglifyJS.AST_Call
             && node.expression instanceof UglifyJS.AST_SymbolRef
@@ -48,10 +48,10 @@ module.exports = function cssurlLoader(content) {
         return node;
     });
 
-    const requireTree = UglifyJS.parse(content.toString());
-    const tranformedTree = requireTree.transform(requireTransformer);
+    const tree = UglifyJS.parse(content.toString());
+    const newTree = tree.transform(transformer);
 
-    return Buffer.from(tranformedTree.print_to_string({
+    return Buffer.from(newTree.print_to_string({
         beautify: true,
         comments: true,
         preserve_line: true,
