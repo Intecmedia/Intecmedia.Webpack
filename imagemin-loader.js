@@ -23,6 +23,8 @@ const imageminPlugins = [
     }),
 ];
 
+let firstCall = true;
+
 module.exports = function imageminLoader(content) {
     if (this.cacheable) {
         this.cacheable();
@@ -33,16 +35,21 @@ module.exports = function imageminLoader(content) {
     const url = path.relative(__dirname, this.resourcePath).replace(/\\/g, '/');
     const cacheKey = `${this.resourcePath}?${JSON.stringify(stat)}`;
 
+    if (firstCall) {
+        firstCall = false;
+        console.log('\nImagemin loader:');
+    }
+
     const cached = imageminCache.getKey(cacheKey);
     if (cached !== undefined && cached.type === 'Buffer' && cached.data) {
         const data = new Buffer(cached.data);
         const delta = data.length - content.length;
         if (delta > 0) {
-            console.log(sprintf.sprintf('imagemin-loader: cached %60s  %6d bytes minified [skipped]', url, delta));
+            console.log(sprintf.sprintf('  [cached]   %60s  %6d bytes saved [skipped]', url, delta));
         } else if (delta === 0) {
-            console.log(sprintf.sprintf('imagemin-loader: cached %60s  %6d bytes minified [equal]', url, 0));
+            console.log(sprintf.sprintf('  [cached]   %60s  %6d bytes saved [equal]', url, 0));
         } else {
-            console.log(sprintf.sprintf('imagemin-loader: cached %60s  %6d bytes minified [ok]', url, delta));
+            console.log(sprintf.sprintf('  [cached]   %60s  %6d bytes saved [ok]', url, delta));
         }
         callback(null, data);
         return;
@@ -53,15 +60,15 @@ module.exports = function imageminLoader(content) {
     }).then((data) => {
         const delta = data.length - content.length;
         if (delta > 0) {
-            console.log(sprintf.sprintf('imagemin-loader: minified %60s  %6d bytes minified [skipped]', url, delta));
+            console.log(sprintf.sprintf('  [minified] %60s  %6d bytes saved [skipped]', url, delta));
             imageminCache.setKey(cacheKey, content.toJSON());
             callback(null, content);
         } else if (delta === 0) {
-            console.log(sprintf.sprintf('imagemin-loader: minified %60s  %6d bytes minified [equal]', url, 0));
+            console.log(sprintf.sprintf('  [minified] %60s  %6d bytes saved [equal]', url, 0));
             imageminCache.setKey(cacheKey, content.toJSON());
             callback(null, content);
         } else {
-            console.log(sprintf.sprintf('imagemin-loader: minified %60s  %6d bytes minified [ok]', url, delta));
+            console.log(sprintf.sprintf('  [minified] %60s  %6d bytes saved [ok]', url, delta));
             imageminCache.setKey(cacheKey, data.toJSON());
             callback(null, data);
         }
