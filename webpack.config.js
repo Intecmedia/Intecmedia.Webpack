@@ -105,7 +105,7 @@ module.exports = {
         }),
         new WebpackNotifierPlugin({
             alwaysNotify: true,
-            contentImage: path.resolve('./source/img/ico/favicon.png'),
+            contentImage: path.resolve('./source/img/ico/apple-touch-icon.png'),
             title: 'Webpack',
         }),
         ...(USE_LINTERS ? [new StyleLintPlugin({
