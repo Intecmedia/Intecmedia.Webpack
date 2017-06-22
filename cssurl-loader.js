@@ -9,7 +9,13 @@ module.exports = function cssurlLoader(content) {
         this.cacheable();
     }
 
-    const options = loaderUtils.getOptions(this);
+    const defaultOptions = {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        exclude: null,
+        limit: 0,
+        name: () => '[path]/[name].[ext]',
+    };
+    const options = Object.assign({}, defaultOptions, loaderUtils.getOptions(this));
     const limit = parseInt(options.limit, 10);
 
     const requireTransformer = new UglifyJS.TreeTransformer(null, (node) => {
@@ -25,14 +31,16 @@ module.exports = function cssurlLoader(content) {
                 newNode.args[0].value = cssurlCache[url];
                 return newNode;
             }
-            const [name] = url.split('?', 2);
+            const [filename] = url.split('?', 2);
             if (
-                options.test && options.test.test(name)
-                && (!options.exclude || !options.exclude.test(name))
+                options.test && options.test.test(filename)
+                && (!options.exclude || !options.exclude.test(filename))
             ) {
+                const name = options.name(filename);
+                const loader = /\.svg$/i.test(filename) ? 'svg-url-loader' : 'url-loader';
+                cssurlCache[url] = `!${loader}?name=${name}&limit=${limit}!imagemin-loader!${url}`;
+
                 const newNode = node.clone();
-                const loader = /\.svg$/i.test(name) ? 'svg-url-loader' : 'url-loader';
-                cssurlCache[url] = `!${loader}?name=${options.name(name)}&limit=${limit}!imagemin-loader!${url}`;
                 newNode.args[0].value = cssurlCache[url];
                 return newNode;
             }
@@ -41,8 +49,9 @@ module.exports = function cssurlLoader(content) {
     });
 
     const requireTree = UglifyJS.parse(content.toString());
+    const tranformedTree = requireTree.transform(requireTransformer);
 
-    return Buffer.from(requireTree.transform(requireTransformer).print_to_string({
+    return Buffer.from(tranformedTree.print_to_string({
         beautify: true,
         comments: true,
         preserve_line: true,
