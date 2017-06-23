@@ -98,7 +98,7 @@
         "stylelint-selector-bem-pattern": "latest",
         "stylelint-webpack-plugin": "latest",
         "svg-url-loader": "latest",
-        "uglify-js": "latest",
+        "uglify-js": "~2",
         "url-loader": "latest",
         "webpack": "latest",
         "webpack-dev-server": "latest",
