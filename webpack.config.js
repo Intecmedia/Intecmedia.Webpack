@@ -251,9 +251,16 @@ module.exports = {
                             options: {
                                 sourceMap: USE_SOURCE_MAP ? 'inline' : false,
                                 plugins: [
+                                    require('postcss-input-style')(),
+                                    require('postcss-quantity-queries')(),
+                                    require('postcss-responsive-type')(),
                                     ...(PROD || DEBUG ? [
-                                        require('postcss-cssnext')(),
+                                        require('pixrem')(),
+                                        require('pleeease-filters')(),
+                                        require('postcss-image-set-polyfill')(),
+                                        require('postcss-color-rgba-fallback')(),
                                         require('css-mqpacker')(),
+                                        require('autoprefixer')(),
                                     ] : []),
                                 ],
                             },
