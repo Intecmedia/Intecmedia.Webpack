@@ -260,8 +260,9 @@ module.exports = {
                                         require('postcss-image-set-polyfill')(),
                                         require('postcss-color-rgba-fallback')(),
                                         require('css-mqpacker')(),
-                                        require('autoprefixer')(),
+                                        require('autoprefixer')(), // this always last
                                     ] : []),
+                                    require('postcss-reporter')(), // this always last
                                 ],
                             },
                         },

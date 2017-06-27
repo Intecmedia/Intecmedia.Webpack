@@ -90,6 +90,7 @@
         "postcss-input-style": "latest",
         "postcss-loader": "latest",
         "postcss-quantity-queries": "latest",
+        "postcss-reporter": "latest",
         "postcss-responsive-type": "latest",
         "postcss-sorting": "latest",
         "sass-loader": "latest",
