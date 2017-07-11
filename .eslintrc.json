@@ -6,6 +6,9 @@
         "browser": true,
         "jquery": true
     },
+    "plugins": [
+        "import"
+    ],
     "rules": {
         "no-console": "off",
         "unicode-bom": ["error", "never"],
