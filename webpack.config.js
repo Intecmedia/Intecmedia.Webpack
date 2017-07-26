@@ -32,7 +32,7 @@ const WebpackNotifierPlugin = require('webpack-notifier');
 const banner = new String(''); // eslint-disable-line no-new-wrappers
 banner.toString = () => `${new Date().toISOString()} | NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chunkhash]`;
 
-const browserslist = require('./package.json').browserslist;
+const { browserslist } = require('./package.json');
 
 const resourceName = (prefix, hash = false) => {
     const basename = path.basename(prefix);
