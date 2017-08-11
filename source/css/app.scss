@@ -1,17 +1,20 @@
-// Core
-@import 'bootstrap';
-@import 'variables';
-@import 'mixins';
+// Base
+@import 'base/variables';
+@import 'base/bootstrap';
+@import 'base/fonts';
 
-// Customization
-@import 'utils';
-@import 'header';
-@import 'layout';
-@import 'footer';
+// Utils
+@import 'utils/mixins';
+@import 'utils/utils';
+
+// Layout
+@import 'layout/header';
+@import 'layout/layout';
+@import 'layout/footer';
 
 // Pages
-@import 'wysiwyg';
-@import 'index';
+@import 'pages/wysiwyg';
+@import 'pages/index';
 
 // Vendor
-@import 'font-awesome';
+@import 'vendor/font-awesome';
