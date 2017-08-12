@@ -123,7 +123,7 @@ module.exports = {
         }))),
     ],
 
-    devtool: USE_SOURCE_MAP ? 'eval-source-map' : '',
+    devtool: USE_SOURCE_MAP ? 'eval-source-map' : 'hidden-source-map',
 
     resolve: {
         alias: {
