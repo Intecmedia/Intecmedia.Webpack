@@ -1,4 +1,5 @@
 /* eslint global-require: "off" */
+const fs = require('fs');
 const glob = require('glob');
 const path = require('path');
 const slash = require('slash');
@@ -61,6 +62,13 @@ module.exports = {
         open: true,
         overlay: true,
         compress: false,
+        setup(app) {
+            app.get('/service-worker.js', (req, res) => {
+                const content = fs.readFileSync(path.join(OUTPUT_PATH, '/service-worker.js'));
+                res.set({ 'Content-Type': 'application/javascript; charset=utf-8' });
+                res.send(content);
+            });
+        },
     },
 
     entry: {
