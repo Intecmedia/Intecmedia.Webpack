@@ -92,6 +92,7 @@ module.exports = {
             allChunks: true,
         }),
         ...(PROD ? [
+            new webpack.NoErrorsPlugin(),
             new webpack.optimize.UglifyJsPlugin({
                 parallel: true,
                 sourceMap: true,
