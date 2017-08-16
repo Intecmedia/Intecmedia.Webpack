@@ -127,10 +127,10 @@ module.exports = {
             handleFetch: true,
             filename: 'service-worker.js',
             staticFileGlobs: [
-                `${slash(OUTPUT_PATH)}/js/*.min.js`,
-                `${slash(OUTPUT_PATH)}/css/*.min.css`,
-                `${slash(OUTPUT_PATH)}/img/ico/*.{png,svg,ico,gif,xml,jpeg,jpg}`,
-                `${slash(OUTPUT_PATH)}/fonts/*.woff2`,
+                slash(path.join(OUTPUT_PATH, '/js/*.min.js')),
+                slash(path.join(OUTPUT_PATH, '/css/*.min.css')),
+                slash(path.join(OUTPUT_PATH, '/img/ico/*.{png,svg,ico,gif,xml,jpeg,jpg}')),
+                slash(path.join(OUTPUT_PATH, '/fonts/*.woff2')),
             ],
             runtimeCaching: [{
                 urlPattern: /(.*)/,
