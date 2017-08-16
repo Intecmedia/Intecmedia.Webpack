@@ -21,9 +21,9 @@
         "lint": "npm run js-lint && npm run css-format && npm run css-lint && npm run html-lint",
         "nocache": "rm -rf ./node_modules/.cache",
         "server": "npm run server-prod",
-        "server-dev": "cross-env NODE_ENV=development DEBUG=0 webpack-dev-server -d --inline --hot --open",
-        "server-debug": "cross-env NODE_ENV=development DEBUG=1 webpack-dev-server -d --inline --hot --open",
-        "server-prod": "cross-env NODE_ENV=production DEBUG=0 webpack-dev-server -p --inline --hot --open --optimize-minimize",
+        "server-dev": "cross-env NODE_ENV=development DEBUG=0 webpack-dev-server -d",
+        "server-debug": "cross-env NODE_ENV=development DEBUG=1 webpack-dev-server -d",
+        "server-prod": "cross-env NODE_ENV=production DEBUG=0 webpack-dev-server -p --optimize-minimize",
         "build": "npm-run-all nocache js-lint css-format css-lint prod html-lint",
         "start": "npm run build"
     },

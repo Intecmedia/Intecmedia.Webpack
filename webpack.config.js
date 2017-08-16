@@ -58,6 +58,9 @@ module.exports = {
     },
 
     devServer: {
+        hot: true,
+        inline: true,
+        open: true,
         overlay: true,
         compress: false,
     },
