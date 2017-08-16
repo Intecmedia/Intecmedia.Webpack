@@ -28,6 +28,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StyleLintPlugin = (USE_LINTERS ? require('stylelint-webpack-plugin') : () => {});
 const WebpackNotifierPlugin = require('webpack-notifier');
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 const banner = new String(''); // eslint-disable-line no-new-wrappers
 banner.toString = () => `${new Date().toISOString()} | NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chunkhash]`;
@@ -121,6 +122,28 @@ module.exports = {
             DEBUG: JSON.stringify(DEBUG),
             NODE_ENV: JSON.stringify(NODE_ENV),
         }))),
+        new SWPrecacheWebpackPlugin({
+            minify: PROD,
+            handleFetch: true,
+            filename: 'service-worker.js',
+            staticFileGlobs: [
+                `${slash(OUTPUT_PATH)}/js/*.min.js`,
+                `${slash(OUTPUT_PATH)}/css/*.min.css`,
+                `${slash(OUTPUT_PATH)}/img/ico/*.{png,svg,ico,gif,xml,jpeg,jpg}`,
+                `${slash(OUTPUT_PATH)}/fonts/*.woff2`,
+            ],
+            runtimeCaching: [{
+                urlPattern: /(.*)/,
+                handler: 'networkFirst',
+                options: { debug: !PROD },
+            }, {
+                urlPattern: /\/(js|css|fonts|img)\/(.*)/,
+                handler: 'cacheFirst',
+                options: { debug: !PROD },
+            }],
+            staticFileGlobsIgnorePatterns: [/\.map$/, /\.LICENSE$/],
+            ignoreUrlParametersMatching: [/^utm_/],
+        }),
     ],
 
     devtool: USE_SOURCE_MAP ? 'eval-source-map' : '',

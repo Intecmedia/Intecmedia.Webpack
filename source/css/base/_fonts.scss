@@ -1,12 +1,12 @@
 /*
 @font-face {
-    font-family: '#{$font-family}';
-    src: url('../../fonts/#{$font-filename}.eot'));
-    src: url('../../fonts/#{$font-filename}.eot#iefix')) format('embedded-opentype'),
-        url('../../fonts/#{$font-filename}.woff2')) format('woff2'),
-        url('../../fonts/#{$font-filename}.woff')) format('woff'),
-        url('../../fonts/#{$font-filename}.ttf')) format('truetype'),
-        url('../../fonts/#{$font-filename}.svg#fontawesomeregular')) format('svg');
+    font-family: '#{font-family}';
+    src: url('../../fonts/#{font-filename}.eot'));
+    src: url('../../fonts/#{font-filename}.eot#iefix')) format('embedded-opentype'),
+        url('../../fonts/#{font-filename}.woff2')) format('woff2'),
+        url('../../fonts/#{font-filename}.woff')) format('woff'),
+        url('../../fonts/#{font-filename}.ttf')) format('truetype'),
+        url('../../fonts/#{font-filename}.svg#fontawesomeregular')) format('svg');
     font-weight: normal;
     font-display: swap;
     font-style: normal;
