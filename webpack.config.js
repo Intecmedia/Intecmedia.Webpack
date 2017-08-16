@@ -91,6 +91,18 @@ module.exports = {
             filename: 'css/app.min.css',
             allChunks: true,
         }),
+        ...(PROD ? [
+            new webpack.optimize.UglifyJsPlugin({
+                parallel: true,
+                sourceMap: true,
+                extractComments: true,
+                uglifyOptions: {
+                    output: {
+                        comments: false,
+                    },
+                },
+            }),
+        ] : []),
         new webpack.BannerPlugin({
             banner,
         }),
