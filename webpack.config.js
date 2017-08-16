@@ -154,7 +154,7 @@ module.exports = {
                 options: { debug: !PROD },
             }],
             staticFileGlobsIgnorePatterns: [/\.map$/, /\.LICENSE$/],
-            ignoreUrlParametersMatching: [/^utm_/],
+            ignoreUrlParametersMatching: [/^utm_/, /^[a-fA-F0-9]{32}$/],
         }),
     ],
 
