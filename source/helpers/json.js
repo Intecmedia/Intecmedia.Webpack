@@ -1,3 +1,3 @@
-module.exports = function(object) {
+module.exports = function helperJson(object) {
     return JSON.stringify(object);
 };
