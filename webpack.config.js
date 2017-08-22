@@ -189,7 +189,9 @@ module.exports = {
                 test: /\.html$/i,
                 loader: 'handlebars-loader',
                 options: {
+                    debug: DEBUG,
                     inlineRequires: '/img/',
+                    helperDirs: path.join(__dirname, 'source', 'helpers'),
                 },
             },
             // javascript loaders
