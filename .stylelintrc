@@ -7,6 +7,9 @@
     ],
     "rules": {
         "indentation": 4,
+        "selector-class-pattern": [
+            "^[a-z0-9\\-_]+$"
+        ],
         "scss/at-else-closing-brace-newline-after": "always-last-in-chain",
         "scss/at-else-closing-brace-space-after": "always-intermediate",
         "scss/at-else-empty-line-before": "never",
