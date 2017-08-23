@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const sprintf = require('sprintf-js');
 const imagemin = require('imagemin');
-const imageminCache = require('flat-cache').load('imagemin', path.resolve('./node_modules/.cache/imagemin-loader'));
+const flatCache = require('flat-cache');
 
 const imageminPlugins = [
     require('imagemin-gifsicle')({
@@ -23,7 +23,7 @@ const imageminPlugins = [
     }),
 ];
 
-let firstCall = true;
+let imageminCache = null;
 
 module.exports = function imageminLoader(content) {
     if (this.cacheable) {
@@ -35,9 +35,9 @@ module.exports = function imageminLoader(content) {
     const url = path.relative(__dirname, this.resourcePath).replace(/\\/g, '/');
     const cacheKey = `${this.resourcePath}?${JSON.stringify(stat)}`;
 
-    if (firstCall) {
-        firstCall = false;
+    if (imageminCache === null) {
         console.log('\nImagemin loader:');
+        imageminCache = flatCache.load('imagemin', path.resolve('./node_modules/.cache/imagemin-loader'));
     }
 
     const cached = imageminCache.getKey(cacheKey);
