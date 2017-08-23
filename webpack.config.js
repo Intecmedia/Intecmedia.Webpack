@@ -89,6 +89,7 @@ module.exports = {
         hints: PROD && !DEBUG ? 'error' : false,
         maxAssetSize: 512 * 1024,
         maxEntrypointSize: 512 * 1024,
+        assetFilter: assetFilename => !(/(\.map|\.LICENSE|service-worker\.js)$/.test(assetFilename)),
     },
 
     plugins: [
