@@ -30,6 +30,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StyleLintPlugin = (USE_LINTERS ? require('stylelint-webpack-plugin') : () => {});
 const WebpackNotifierPlugin = require('webpack-notifier');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const banner = new String(''); // eslint-disable-line no-new-wrappers
 banner.toString = () => `${new Date().toISOString()} | NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chunkhash]`;
@@ -167,6 +169,15 @@ module.exports = {
             staticFileGlobsIgnorePatterns: [/\.map$/, /\.LICENSE$/],
             ignoreUrlParametersMatching: [/^utm_/, /^[a-fA-F0-9]{32}$/],
         }),
+        /*
+        new CopyWebpackPlugin([{
+            from: 'images/',
+        }]),
+*/
+        new ImageminPlugin({
+            test: /\.(jpe?g|png|gif|svg)$/i,
+            disable: !(PROD || DEBUG),
+        }),
     ],
 
     devtool: USE_SOURCE_MAP ? 'eval-source-map' : 'hidden-source-map',
@@ -174,12 +185,6 @@ module.exports = {
     resolve: {
         alias: {
             modernizr$: path.resolve(__dirname, '.modernizrrc'),
-        },
-    },
-    resolveLoader: {
-        alias: {
-            'imagemin-loader': path.resolve(__dirname, 'imagemin-loader.js'),
-            'cssurl-loader': path.resolve(__dirname, 'cssurl-loader.js'),
         },
     },
 
@@ -246,9 +251,6 @@ module.exports = {
                             name: resourceName('img', false),
                         },
                     },
-                    ...(PROD || DEBUG ? [{
-                        loader: 'imagemin-loader',
-                    }] : []),
                 ],
             },
             // font loaders
@@ -274,15 +276,6 @@ module.exports = {
                         },
                     ],
                     use: [
-                        ...(PROD || DEBUG ? [{
-                            loader: 'cssurl-loader',
-                            options: {
-                                test: /\.(jpe?g|png|gif|svg)$/i,
-                                exclude: /(fonts|font)/i,
-                                limit: 32 * 1024,
-                                name: resourceName('img', false),
-                            },
-                        }] : []),
                         {
                             loader: 'css-loader',
                             options: {
