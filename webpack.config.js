@@ -31,6 +31,7 @@ const StyleLintPlugin = (USE_LINTERS ? require('stylelint-webpack-plugin') : () 
 const WebpackNotifierPlugin = require('webpack-notifier');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const banner = new String(''); // eslint-disable-line no-new-wrappers
 banner.toString = () => `${new Date().toISOString()} | NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chunkhash]`;
@@ -168,6 +169,11 @@ module.exports = {
             staticFileGlobsIgnorePatterns: [/\.map$/, /\.LICENSE$/],
             ignoreUrlParametersMatching: [/^utm_/, /^[a-fA-F0-9]{32}$/],
         }),
+        new CopyWebpackPlugin([{
+            context: path.join(__dirname, 'source'),
+            from: '**/*.{png,svg,ico,gif,xml,jpeg,jpg}',
+            to: OUTPUT_PATH,
+        }]),
         new ImageminPlugin({
             test: /\.(jpe?g|png|gif|svg)$/i,
             disable: !(PROD || DEBUG),
@@ -190,7 +196,6 @@ module.exports = {
                 loader: 'handlebars-loader',
                 options: {
                     debug: DEBUG,
-                    inlineRequires: '/img/',
                     helperDirs: path.join(__dirname, 'source', 'helpers'),
                 },
             },
@@ -240,8 +245,9 @@ module.exports = {
                 exclude: /(fonts|font)/i,
                 loaders: [
                     {
-                        loader: 'file-loader',
+                        loader: 'url-loader',
                         options: {
+                            limit: 32 * 1024,
                             name: resourceName('img', false),
                         },
                     },
@@ -294,14 +300,10 @@ module.exports = {
                                         require('pleeease-filters')(),
                                         require('postcss-image-set-polyfill')(),
                                         require('postcss-color-rgba-fallback')(),
+                                        require('postcss-flexbugs-fixes')(),
                                         require('css-mqpacker')(),
                                         require('autoprefixer')({ browsers: browserslist }), // this always last
                                     ] : []),
-                                    require('postcss-url')({
-                                        filter: '**/*.{jpeg,jpg,gif,png,svg}',
-                                        url: 'inline',
-                                        maxSize: 32,
-                                    }),
                                     require('postcss-reporter')(), // this always last
                                 ],
                             },
