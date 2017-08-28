@@ -31,7 +31,6 @@ const StyleLintPlugin = (USE_LINTERS ? require('stylelint-webpack-plugin') : () 
 const WebpackNotifierPlugin = require('webpack-notifier');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
-// const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const banner = new String(''); // eslint-disable-line no-new-wrappers
 banner.toString = () => `${new Date().toISOString()} | NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chunkhash]`;
@@ -169,11 +168,6 @@ module.exports = {
             staticFileGlobsIgnorePatterns: [/\.map$/, /\.LICENSE$/],
             ignoreUrlParametersMatching: [/^utm_/, /^[a-fA-F0-9]{32}$/],
         }),
-        /*
-        new CopyWebpackPlugin([{
-            from: 'images/',
-        }]),
-*/
         new ImageminPlugin({
             test: /\.(jpe?g|png|gif|svg)$/i,
             disable: !(PROD || DEBUG),
@@ -264,7 +258,7 @@ module.exports = {
             },
             // css loaders
             {
-                test: /\.s?css$/i,
+                test: /\.(css|scss)$/i,
                 loaders: (DEBUG || DEV_SERVER ? ['css-hot-loader'] : []).concat(ExtractTextPlugin.extract({
                     publicPath: '../',
                     fallback: [
@@ -303,6 +297,11 @@ module.exports = {
                                         require('css-mqpacker')(),
                                         require('autoprefixer')({ browsers: browserslist }), // this always last
                                     ] : []),
+                                    require('postcss-url')({
+                                        filter: '**/*.{jpeg,jpg,gif,png,svg}',
+                                        url: 'inline',
+                                        maxSize: 32,
+                                    }),
                                     require('postcss-reporter')(), // this always last
                                 ],
                             },
