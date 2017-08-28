@@ -171,7 +171,7 @@ module.exports = {
         }),
         new CopyWebpackPlugin([{
             context: path.join(__dirname, 'source'),
-            from: '**/*.{png,svg,ico,gif,xml,jpeg,jpg}',
+            from: 'img/**/*.{png,svg,ico,gif,xml,jpeg,jpg,json}',
             to: OUTPUT_PATH,
         }]),
         new ImageminPlugin({
