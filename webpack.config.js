@@ -171,10 +171,12 @@ module.exports = {
             ignoreUrlParametersMatching: [/^utm_/, /^[a-fA-F0-9]{32}$/],
         }),
         new CopyWebpackPlugin([{
-            context: path.join(__dirname, 'source'),
+            context: './source',
             from: 'img/**/*.{png,svg,ico,gif,xml,jpeg,jpg,json}',
             to: OUTPUT_PATH,
-        }]),
+        }], {
+            debug: (DEBUG ? 'debug' : 'info'),
+        }),
         new ImageminPlugin({
             test: /\.(jpe?g|png|gif|svg)$/i,
             disable: !(PROD || DEBUG),
