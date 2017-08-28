@@ -137,6 +137,7 @@ module.exports = {
             files: ['**/*.scss'],
             fix: !DEV_SERVER,
             syntax: 'scss',
+            quiet: PROD,
         })] : []),
         ...(glob.sync('./source/*.html').map(template => new HtmlWebpackPlugin({
             filename: path.basename(template),
