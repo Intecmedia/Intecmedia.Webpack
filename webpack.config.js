@@ -182,7 +182,7 @@ module.exports = {
         }),
         new FaviconsWebpackPlugin({
             logo: './source/img/favicons-source.png',
-            prefix: 'img/ico/',
+            prefix: 'img/favicon/',
             icons: {
                 android: true,
                 appleIcon: true,
