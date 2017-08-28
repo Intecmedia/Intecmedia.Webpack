@@ -47,7 +47,6 @@
         "babel-polyfill": "latest",
         "babel-preset-airbnb": "latest",
         "babel-preset-env": "latest",
-
         "bootstrap-sass": "latest",
         "browserslist": "latest",
         "copy-webpack-plugin": "latest",
@@ -69,7 +68,6 @@
         "html-loader": "latest",
         "html-webpack-plugin": "latest",
         "htmllint-cli": "latest",
-
         "imagemin": "latest",
         "imagemin-gifsicle": "latest",
         "imagemin-jpegtran": "latest",

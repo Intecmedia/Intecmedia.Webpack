@@ -151,6 +151,7 @@ module.exports = {
             NODE_ENV: JSON.stringify(NODE_ENV),
         }))),
         new HtmlPrettyPlugin({
+            unformatted: ['code', 'pre'],
             indent_size: 4,
         }),
         new SWPrecacheWebpackPlugin({
