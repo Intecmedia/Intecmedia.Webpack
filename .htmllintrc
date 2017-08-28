@@ -13,5 +13,6 @@
     "img-req-alt": true,
     "indent-style": "spaces",
     "indent-width": 4,
-    "spec-char-escape": false
+    "spec-char-escape": false,
+    "tag-bans": ["style"]
 }
