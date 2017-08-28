@@ -236,6 +236,7 @@ module.exports = {
                         options: {
                             fix: true,
                             cache: !PROD,
+                            quiet: PROD,
                         },
                     }] : []),
                 ],
