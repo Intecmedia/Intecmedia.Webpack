@@ -24,7 +24,7 @@
         },
         "plugin/no-unsupported-browser-features": [true, {
             "severity": "warning",
-            "ignore": ["rem"]
+            "ignore": ["rem", "outline", "pointer-events", "background-img-opts", "font-unicode-range", "will-change", "object-fit", "viewport-units"]
         }]
     }
 }
