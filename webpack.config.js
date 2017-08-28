@@ -131,7 +131,7 @@ module.exports = {
         }),
         new WebpackNotifierPlugin({
             alwaysNotify: true,
-            contentImage: './source/img/favicons-source.png',
+            contentImage: path.resolve('./source/img/favicons-source.png'),
             title: 'Webpack',
         }),
         ...(USE_LINTERS ? [new StyleLintPlugin({
@@ -151,7 +151,9 @@ module.exports = {
             NODE_ENV: JSON.stringify(NODE_ENV),
         }))),
         new HtmlPrettyPlugin({
+            ocd: true,
             unformatted: ['code', 'pre'],
+            indent_inner_html: false,
             indent_size: 4,
         }),
         new SWPrecacheWebpackPlugin({
