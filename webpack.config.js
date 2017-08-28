@@ -76,11 +76,6 @@ module.exports = {
     },
 
     entry: {
-        vendor: [
-            'jquery',
-            'babel-polyfill',
-            './source/js/vendor.js',
-        ],
         app: './source/js/app.js',
     },
 
@@ -97,10 +92,6 @@ module.exports = {
     },
 
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            filename: 'js/vendor.min.js',
-        }),
         new ExtractTextPlugin({
             filename: 'css/app.min.css',
             allChunks: true,
