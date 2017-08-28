@@ -30,7 +30,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StyleLintPlugin = (USE_LINTERS ? require('stylelint-webpack-plugin') : () => {});
 const WebpackNotifierPlugin = require('webpack-notifier');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
-const ImageminPlugin = require('imagemin-webpack-plugin').default;
+const { default: ImageminPlugin } = require('imagemin-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const banner = new String(''); // eslint-disable-line no-new-wrappers
