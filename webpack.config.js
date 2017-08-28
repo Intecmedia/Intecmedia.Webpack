@@ -32,6 +32,8 @@ const WebpackNotifierPlugin = require('webpack-notifier');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const { default: ImageminPlugin } = require('imagemin-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const HtmlPrettyPlugin = require('./html-pretty.js');
 
 const banner = new String(''); // eslint-disable-line no-new-wrappers
 banner.toString = () => `${new Date().toISOString()} | NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chunkhash]`;
@@ -129,7 +131,7 @@ module.exports = {
         }),
         new WebpackNotifierPlugin({
             alwaysNotify: true,
-            contentImage: path.resolve('./source/img/ico/apple-touch-icon.png'),
+            contentImage: './source/img/favicons-source.png',
             title: 'Webpack',
         }),
         ...(USE_LINTERS ? [new StyleLintPlugin({
@@ -142,12 +144,15 @@ module.exports = {
         ...(glob.sync('./source/*.html').map(template => new HtmlWebpackPlugin({
             filename: path.basename(template),
             template,
-            inject: false,
+            inject: true,
             minify: false,
             title: 'Intecmedia.Webpack',
             DEBUG: JSON.stringify(DEBUG),
             NODE_ENV: JSON.stringify(NODE_ENV),
         }))),
+        new HtmlPrettyPlugin({
+            indent_size: 4,
+        }),
         new SWPrecacheWebpackPlugin({
             minify: PROD,
             handleFetch: true,
@@ -180,6 +185,22 @@ module.exports = {
         new ImageminPlugin({
             test: /\.(jpe?g|png|gif|svg)$/i,
             disable: !(PROD || DEBUG),
+        }),
+        new FaviconsWebpackPlugin({
+            logo: './source/img/favicons-source.png',
+            prefix: 'img/ico/',
+            icons: {
+                android: true,
+                appleIcon: true,
+                appleStartup: false,
+                coast: false,
+                favicons: true,
+                firefox: false,
+                opengraph: true,
+                twitter: true,
+                yandex: false,
+                windows: true,
+            },
         }),
     ],
 
