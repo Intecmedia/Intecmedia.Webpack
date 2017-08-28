@@ -132,6 +132,22 @@ module.exports = {
             syntax: 'scss',
             quiet: PROD,
         })] : []),
+        new FaviconsWebpackPlugin({
+            logo: './source/img/favicons-source.png',
+            prefix: 'img/favicon/',
+            icons: {
+                android: true,
+                appleIcon: true,
+                appleStartup: false,
+                coast: false,
+                favicons: true,
+                firefox: false,
+                opengraph: true,
+                twitter: true,
+                yandex: false,
+                windows: true,
+            },
+        }),
         ...(glob.sync('./source/*.html').map(template => new HtmlWebpackPlugin({
             filename: path.basename(template),
             template,
@@ -179,22 +195,6 @@ module.exports = {
         new ImageminPlugin({
             test: /\.(jpe?g|png|gif|svg)$/i,
             disable: !(PROD || DEBUG),
-        }),
-        new FaviconsWebpackPlugin({
-            logo: './source/img/favicons-source.png',
-            prefix: 'img/favicon/',
-            icons: {
-                android: true,
-                appleIcon: true,
-                appleStartup: false,
-                coast: false,
-                favicons: true,
-                firefox: false,
-                opengraph: true,
-                twitter: true,
-                yandex: false,
-                windows: true,
-            },
         }),
     ],
 
