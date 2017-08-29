@@ -45,6 +45,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const HtmlPrettyPlugin = require('./html-pretty.js');
 const ManifestPlugin = require('./manifest.js');
+const WriteFilePlugin = (DEV_SERVER ? require('write-file-webpack-plugin') : () => {});
 
 const banner = new String(''); // eslint-disable-line no-new-wrappers
 banner.toString = () => `${new Date().toISOString()} | NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chunkhash]`;
@@ -79,7 +80,8 @@ module.exports = {
         compress: false,
         setup(app) {
             app.get('/service-worker.js', (req, res) => {
-                const content = fs.readFileSync(path.join(OUTPUT_PATH, '/service-worker.js'));
+                const filename = path.join(OUTPUT_PATH, '/service-worker.js');
+                const content = fs.existsSync(filename) ? fs.readFileSync(filename) : '';
                 res.set({ 'Content-Type': 'application/javascript; charset=utf-8' });
                 res.send(content);
             });
@@ -220,6 +222,7 @@ module.exports = {
             test: /\.(jpe?g|png|gif|svg)$/i,
             disable: !(PROD || DEBUG),
         }),
+        new WriteFilePlugin(),
     ],
 
     devtool: USE_SOURCE_MAP ? 'eval-source-map' : 'hidden-source-map',
