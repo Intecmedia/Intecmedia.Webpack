@@ -1,6 +1,5 @@
 const pretty = require('pretty');
 
-
 const DEFAULT_OPTIONS = {
     ocd: false,
     unformatted: ['code', 'pre', 'em', 'strong', 'span'],

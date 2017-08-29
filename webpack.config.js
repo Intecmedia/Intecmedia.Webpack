@@ -13,8 +13,18 @@ const NODE_ENV = PROD ? 'production' : 'development';
 const USE_SOURCE_MAP = DEBUG && !PROD;
 const USE_LINTERS = PROD || DEBUG;
 
+const PACKAGE_NAME = (() => {
+    const ignored = ['www', 'html'];
+    let name = path.basename(path.resolve('.'));
+    if (name.toLowerCase() in ignored) {
+        name = path.basename(path.resolve('..'));
+    }
+    return name;
+})();
+
 const OUTPUT_PATH = path.resolve(__dirname, 'build');
 
+console.log(`Name: ${PACKAGE_NAME}`);
 console.log(`Output: ${OUTPUT_PATH}`);
 console.log(`Enviroment: ${NODE_ENV}`);
 console.log(`Debug: ${DEBUG ? 'enabled' : 'disabled'}`);
@@ -123,7 +133,7 @@ module.exports = {
         new WebpackNotifierPlugin({
             alwaysNotify: true,
             contentImage: path.resolve('./source/img/favicons-source.png'),
-            title: 'Webpack',
+            title: PACKAGE_NAME,
         }),
         ...(USE_LINTERS ? [new StyleLintPlugin({
             configFile: '.stylelintrc',
@@ -135,6 +145,16 @@ module.exports = {
         new FaviconsWebpackPlugin({
             logo: './source/img/favicons-source.png',
             prefix: 'img/favicon/',
+
+            appName: PACKAGE_NAME,
+            appDescription: PACKAGE_NAME,
+
+            background: '#fff',
+            theme_color: '#fff',
+
+            lang: 'ru-RU',
+            start_url: '/',
+
             icons: {
                 android: true,
                 appleIcon: true,
@@ -153,7 +173,7 @@ module.exports = {
             template,
             inject: true,
             minify: false,
-            title: 'Intecmedia.Webpack',
+            title: PACKAGE_NAME,
             DEBUG: JSON.stringify(DEBUG),
             NODE_ENV: JSON.stringify(NODE_ENV),
         }))),
