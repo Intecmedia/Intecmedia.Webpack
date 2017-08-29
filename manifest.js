@@ -14,9 +14,9 @@ ManifestPlugin.prototype.apply = function ManifestPluginApply(compiler) {
     compiler.plugin('done', () => {
         /* eslint import/no-dynamic-require: "off" */
         if (fs.existsSync(this.options.path)) {
-            let manifest = require(filename);
+            let manifest = require(this.options.path);
             manifest = Object.assign({}, manifest, this.options.replace);
-            fs.writeFileSync(this.options.path, JSON.stringify(manifest, null, 4));
+            fs.writeFileAsync(this.options.path, JSON.stringify(manifest, null, 4));
         }
     });
 };
