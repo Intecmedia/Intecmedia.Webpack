@@ -148,6 +148,7 @@ module.exports = {
             prefix: 'img/favicon/',
             background: '#fff',
             theme_color: '#fff',
+            persistentCache: !(PROD || DEBUG),
             icons: {
                 android: true,
                 appleIcon: true,
