@@ -145,8 +145,7 @@ module.exports = {
         new FaviconsWebpackPlugin({
             logo: './source/img/favicons-source.png',
             prefix: 'img/favicon/',
-            appName: PACKAGE_NAME,
-            appDescription: PACKAGE_NAME,
+            title: PACKAGE_NAME,
             background: '#fff',
             theme_color: '#fff',
             icons: {
