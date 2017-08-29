@@ -11,11 +11,11 @@ function ManifestPlugin(options) {
 }
 
 ManifestPlugin.prototype.apply = function ManifestPluginApply(compiler) {
-    compiler.plugin('after-emit', () => {
+    compiler.plugin('done', () => {
         /* eslint import/no-dynamic-require: "off" */
         let manifest = require(this.options.path);
         manifest = Object.assign({}, manifest, this.options.replace);
-        fs.writeFile(this.options.path, JSON.stringify(manifest, null, 4));
+        fs.writeFileSync(this.options.path, JSON.stringify(manifest, null, 4));
     });
 };
 
