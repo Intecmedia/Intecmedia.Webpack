@@ -45,7 +45,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const HtmlPrettyPlugin = require('./html-pretty.js');
 const ManifestPlugin = require('./manifest.js');
-const WriteFilePlugin = (DEV_SERVER ? require('write-file-webpack-plugin') : () => {});
 
 const banner = new String(''); // eslint-disable-line no-new-wrappers
 banner.toString = () => `${new Date().toISOString()} | NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chunkhash]`;
@@ -161,7 +160,7 @@ module.exports = {
                 opengraph: true,
                 twitter: true,
                 yandex: false,
-                windows: true,
+                windows: false,
             },
         }),
         new ManifestPlugin({

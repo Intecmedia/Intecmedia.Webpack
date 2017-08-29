@@ -114,8 +114,7 @@
         "url-loader": "latest",
         "webpack": "latest",
         "webpack-dev-server": "latest",
-        "webpack-notifier": "latest",
-        "write-file-webpack-plugin": "latest"
+        "webpack-notifier": "latest"
     },
     "devDependencies": {}
 }
