@@ -44,6 +44,7 @@ const { default: ImageminPlugin } = require('imagemin-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const HtmlPrettyPlugin = require('./html-pretty.js');
+const ManifestPlugin = require('./manifest.js');
 
 const banner = new String(''); // eslint-disable-line no-new-wrappers
 banner.toString = () => `${new Date().toISOString()} | NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chunkhash]`;
@@ -145,7 +146,6 @@ module.exports = {
         new FaviconsWebpackPlugin({
             logo: './source/img/favicons-source.png',
             prefix: 'img/favicon/',
-            title: PACKAGE_NAME,
             background: '#fff',
             theme_color: '#fff',
             icons: {
@@ -159,6 +159,16 @@ module.exports = {
                 twitter: true,
                 yandex: false,
                 windows: true,
+            },
+        }),
+        new ManifestPlugin({
+            path: path.join(OUTPUT_PATH, '/img/favicon/manifest.json'),
+            replace: {
+                name: PACKAGE_NAME,
+                short_name: PACKAGE_NAME,
+                description: null,
+                lang: 'ru-RU',
+                start_url: '/',
             },
         }),
         ...(glob.sync('./source/*.html').map(template => new HtmlWebpackPlugin({
