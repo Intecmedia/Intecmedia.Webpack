@@ -11,12 +11,13 @@ function ManifestPlugin(options) {
 }
 
 ManifestPlugin.prototype.apply = function ManifestPluginApply(compiler) {
+    const options = this.options;
     compiler.plugin('done', () => {
         /* eslint import/no-dynamic-require: "off" */
-        if (fs.existsSync(this.options.path)) {
-            let manifest = require(this.options.path);
-            manifest = Object.assign({}, manifest, this.options.replace);
-            fs.writeFileAsync(this.options.path, JSON.stringify(manifest, null, 4));
+        if (fs.existsSync(options.path)) {
+            const manifestOriginal = require(options.path);
+            const manifestReplaced = Object.assign({}, manifestOriginal, options.replace);
+            fs.writeFileAsync(options.path, JSON.stringify(manifestReplaced, null, 4));
         }
     });
 };
