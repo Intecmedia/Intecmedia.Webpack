@@ -145,16 +145,10 @@ module.exports = {
         new FaviconsWebpackPlugin({
             logo: './source/img/favicons-source.png',
             prefix: 'img/favicon/',
-
             appName: PACKAGE_NAME,
             appDescription: PACKAGE_NAME,
-
             background: '#fff',
             theme_color: '#fff',
-
-            lang: 'ru-RU',
-            start_url: '/',
-
             icons: {
                 android: true,
                 appleIcon: true,
