@@ -222,7 +222,7 @@ module.exports = {
             test: /\.(jpe?g|png|gif|svg)$/i,
             disable: !(PROD || DEBUG),
         }),
-        new WriteFilePlugin(),
+        ...(DEV_SERVER ? [new WriteFilePlugin()] : []),
     ],
 
     devtool: USE_SOURCE_MAP ? 'eval-source-map' : 'hidden-source-map',
