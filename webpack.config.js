@@ -24,9 +24,11 @@ const PACKAGE_NAME = (() => {
 })();
 
 const OUTPUT_PATH = path.resolve(__dirname, 'build');
+const PUBLIC_PATH = '/';
 
 console.log(`Name: ${PACKAGE_NAME}`);
 console.log(`Output: ${OUTPUT_PATH}`);
+console.log(`Public: ${PUBLIC_PATH}`);
 console.log(`Enviroment: ${NODE_ENV}`);
 console.log(`Debug: ${DEBUG ? 'enabled' : 'disabled'}`);
 console.log(`Linters: ${USE_LINTERS ? 'enabled' : 'disabled'}`);
@@ -94,6 +96,7 @@ module.exports = {
 
     output: {
         path: OUTPUT_PATH,
+        publicPath: PUBLIC_PATH,
         filename: 'js/app.min.js',
     },
 
@@ -126,8 +129,8 @@ module.exports = {
             banner,
         }),
         new webpack.ProvidePlugin({
-            '$': 'jquery',
-            'jQuery': 'jquery',
+            $: 'jquery',
+            jQuery: 'jquery',
             'window.jQuery': 'jquery',
         }),
         new webpack.DefinePlugin({
@@ -210,7 +213,7 @@ module.exports = {
                 handler: 'networkFirst',
                 options: { debug: !PROD },
             }, {
-                urlPattern: /(.*)\/(js|css|fonts|img)\/(.*)/,
+                urlPattern: new RegExp(`${PUBLIC_PATH.replace(/\/+$/, '')}/(js|css|fonts|img)/(.*)`),
                 handler: 'cacheFirst',
                 options: { debug: !PROD },
             }],
@@ -317,7 +320,6 @@ module.exports = {
             {
                 test: /\.(css|scss)$/i,
                 loaders: (DEBUG || DEV_SERVER ? ['css-hot-loader'] : []).concat(ExtractTextPlugin.extract({
-                    publicPath: '../',
                     fallback: [
                         {
                             loader: 'style-loader',
