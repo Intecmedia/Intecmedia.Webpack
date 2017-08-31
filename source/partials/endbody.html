@@ -1,5 +1,24 @@
     <script type="text/javascript">
-        if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.register("/service-worker.js", , { scope: "/" });
-        }
+    ("serviceWorker" in navigator) && (function (baseURL, hash) {
+        navigator.serviceWorker.getRegistrations().then(function (registrations) {
+            var i, registration = null;
+            var scriptURL = baseURL + "?" + hash;
+            for (i in registrations) {
+                if (registrations[i].active && registrations[i].active.scriptURL 
+                    && (registrations[i].active.scriptURL.indexOf(baseURL) === 0)
+                    && (scriptURL != registrations[i].active.scriptURL)) {
+                    registration = registrations[i];
+                    if (localStorage.getItem("serviceWorkerHash") != hash) {
+                        localStorage.setItem("serviceWorkerHash", hash);
+                        registration.update();
+                    }
+                    break;
+                }
+            }
+            if (!registration) {
+                navigator.serviceWorker.register(scriptURL, { scope: "/" });
+                localStorage.setItem("serviceWorkerHash", hash);
+            }
+        });
+    })(document.location.protocol + "//" + document.location.hostname + "/service-worker.js", "{{ htmlWebpackPlugin.options.serviceWorkerHash }}");
     </script>

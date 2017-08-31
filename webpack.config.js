@@ -4,6 +4,7 @@ const glob = require('glob');
 const path = require('path');
 const slash = require('slash');
 const webpack = require('webpack');
+const MD5 = require('md5.js');
 
 const DEBUG = ('DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0);
 const DEV_SERVER = path.basename(require.main.filename, '.js') === 'webpack-dev-server';
@@ -125,8 +126,8 @@ module.exports = {
             banner,
         }),
         new webpack.ProvidePlugin({
-            $: 'jquery',
-            jQuery: 'jquery',
+            '$': 'jquery',
+            'jQuery': 'jquery',
             'window.jQuery': 'jquery',
         }),
         new webpack.DefinePlugin({
@@ -180,6 +181,11 @@ module.exports = {
             inject: true,
             minify: false,
             title: PACKAGE_NAME,
+            serviceWorkerHash: () => {
+                const hash = new MD5();
+                hash.update(fs.readFileAsync(path.join(OUTPUT_PATH, '/service-worker.js')).toString());
+                return hash.digest('hex');
+            },
             DEBUG: JSON.stringify(DEBUG),
             NODE_ENV: JSON.stringify(NODE_ENV),
         }))),
