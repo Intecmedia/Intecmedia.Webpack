@@ -1,24 +1,17 @@
     <script type="text/javascript">
     ("serviceWorker" in navigator) && (function (baseURL, hash) {
         navigator.serviceWorker.getRegistrations().then(function (registrations) {
-            var i, registration = null;
             var scriptURL = baseURL + "?" + hash;
-            for (i in registrations) {
-                if (registrations[i].active && registrations[i].active.scriptURL 
-                    && (registrations[i].active.scriptURL.indexOf(baseURL) === 0)
-                    && (scriptURL != registrations[i].active.scriptURL)) {
-                    registration = registrations[i];
-                    if (localStorage.getItem("serviceWorkerHash") != hash) {
-                        localStorage.setItem("serviceWorkerHash", hash);
-                        registration.update();
-                    }
-                    break;
-                }
-            }
-            if (!registration) {
+            var registration = registrations.filter(function (i) {
+                return i.active.scriptURL.indexOf(baseURL) === 0 && scriptURL != i.active.scriptURL;
+            });
+            if (registration && registration[0] && localStorage.getItem("serviceWorkerHash") != hash) {
+                localStorage.setItem("serviceWorkerHash", hash);
+                registration[0].update();
+            } else {
                 navigator.serviceWorker.register(scriptURL, { scope: "/" });
                 localStorage.setItem("serviceWorkerHash", hash);
             }
         });
-    })(document.location.protocol + "//" + document.location.hostname + "/service-worker.js", "{{ htmlWebpackPlugin.options.serviceWorkerHash }}");
+    })(document.location.protocol + "//" + document.location.host + "/service-worker.js", "{{ htmlWebpackPlugin.options.serviceWorkerHash }}");
     </script>
