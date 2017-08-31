@@ -1,19 +1,20 @@
     <script type="text/javascript">
-        ("serviceWorker" in navigator) && (function(baseURL, hash) {
+        ('serviceWorker' in navigator) && (function(baseURL, hash) {
             navigator.serviceWorker.getRegistrations().then(function(registrations) {
-                var scriptURL = baseURL + "?" + hash;
-                var registration = registrations.filter(function(i) {
-                    return i.active.scriptURL.indexOf(baseURL) === 0 && scriptURL != i.active.scriptURL;
+                var scriptURL = baseURL + '?' + hash;
+                var registration = registrations.find(function(r) {
+                    return r.active && r.active.scriptURL.indexOf(baseURL) === 0 && scriptURL != r.active.scriptURL;
                 });
-                if (registration && registration[0] && localStorage.getItem("serviceWorkerHash") != hash) {
-                    localStorage.setItem("serviceWorkerHash", hash);
-                    registration[0].update();
+                if (registration && localStorage.getItem('serviceWorkerHash') != hash) {
+                    console.log('Service Worker was updated because hash changed.');
+                    localStorage.setItem('serviceWorkerHash', hash);
+                    registration.update();
                 } else {
                     navigator.serviceWorker.register(scriptURL, {
-                        scope: "/"
+                        scope: '/'
                     });
-                    localStorage.setItem("serviceWorkerHash", hash);
+                    localStorage.setItem('serviceWorkerHash', hash);
                 }
             });
-        })(document.location.protocol + "//" + document.location.host + "/service-worker.js", "{{ htmlWebpackPlugin.options.serviceWorkerHash }}");
+        })(document.location.protocol + '//' + document.location.host + '/service-worker.js', '{{ htmlWebpackPlugin.options.serviceWorkerHash }}');
     </script>
