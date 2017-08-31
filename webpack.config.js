@@ -210,7 +210,7 @@ module.exports = {
                 handler: 'networkFirst',
                 options: { debug: !PROD },
             }, {
-                urlPattern: /\/(js|css|fonts|img)\/(.*)/,
+                urlPattern: /(.*)\/(js|css|fonts|img)\/(.*)/,
                 handler: 'cacheFirst',
                 options: { debug: !PROD },
             }],
