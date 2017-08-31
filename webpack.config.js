@@ -186,7 +186,10 @@ module.exports = {
             title: PACKAGE_NAME,
             serviceWorkerHash: () => {
                 const hash = new MD5();
-                hash.update(fs.readFileAsync(path.join(OUTPUT_PATH, '/service-worker.js')).toString());
+                const filename = path.join(OUTPUT_PATH, '/service-worker.js');
+                if (fs.existsSync(filename)) {
+                    hash.update(fs.readFileSync(filename));
+                }
                 return hash.digest('hex');
             },
             DEBUG: JSON.stringify(DEBUG),
