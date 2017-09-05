@@ -104,7 +104,11 @@ module.exports = {
         hints: PROD && !DEBUG ? 'error' : false,
         maxAssetSize: 512 * 1024,
         maxEntrypointSize: 512 * 1024,
-        assetFilter: assetFilename => !(/(\.map|\.LICENSE|service-worker\.js)$/.test(assetFilename)),
+        assetFilter: (uri) => {
+            const [filename] = uri.split('?', 2);
+            const ignore = /(\.map|\.LICENSE|\.eot|\.ttf|manifest\.json|service-worker\.js)$/;
+            return !(ignore.test(filename));
+        },
     },
 
     plugins: [
