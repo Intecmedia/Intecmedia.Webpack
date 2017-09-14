@@ -9,18 +9,20 @@ const DEFAULT_OPTIONS = {
     sep: '\n',
 };
 
-function HtmlPrettyPlugin(options) {
-    this.options = Object.assign({}, DEFAULT_OPTIONS, options);
-}
+class HtmlPrettyPlugin {
+    constructor(options) {
+        this.options = Object.assign({}, DEFAULT_OPTIONS, options);
+    }
 
-HtmlPrettyPlugin.prototype.apply = function HtmlPrettyPluginApply(compiler) {
-    compiler.plugin('compilation', (compilation) => {
-        compilation.plugin('html-webpack-plugin-after-html-processing', (htmlPluginData, callback) => {
-            /* eslint no-param-reassign: "off" */
-            htmlPluginData.html = pretty(htmlPluginData.html, this.options);
-            callback(null, htmlPluginData);
+    apply(compiler) {
+        compiler.plugin('compilation', (compilation) => {
+            compilation.plugin('html-webpack-plugin-after-html-processing', (htmlPluginData, callback) => {
+                /* eslint no-param-reassign: "off" */
+                htmlPluginData.html = pretty(htmlPluginData.html, this.options);
+                callback(null, htmlPluginData);
+            });
         });
-    });
+    }
 };
 
 module.exports = HtmlPrettyPlugin;
