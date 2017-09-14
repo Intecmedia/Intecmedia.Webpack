@@ -9,7 +9,7 @@ const DEFAULT_OPTIONS = {
     sep: '\n',
 };
 
-class HtmlPrettyPlugin {
+module.exports = class HtmlPrettyPlugin {
     constructor(options) {
         this.options = Object.assign({}, DEFAULT_OPTIONS, options);
     }
@@ -24,5 +24,3 @@ class HtmlPrettyPlugin {
         });
     }
 };
-
-module.exports = HtmlPrettyPlugin;

@@ -6,7 +6,7 @@ const DEFAULT_OPTIONS = {
     replace: {},
 };
 
-class ManifestPlugin {
+module.exports = class ManifestPlugin {
     constructor(options) {
         this.options = Object.assign({}, DEFAULT_OPTIONS, options);
     }
@@ -22,6 +22,4 @@ class ManifestPlugin {
             }
         });
     }
-}
-
-module.exports = ManifestPlugin;
+};
