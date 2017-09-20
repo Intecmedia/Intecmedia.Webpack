@@ -142,7 +142,7 @@ module.exports = {
         }),
         new WebpackNotifierPlugin({
             alwaysNotify: true,
-            contentImage: path.resolve('./source/img/favicons-source.png'),
+            contentImage: path.resolve('./.favicons-source-512x512.png'),
             title: PACKAGE_NAME,
         }),
         ...(USE_LINTERS ? [new StyleLintPlugin({
@@ -152,8 +152,9 @@ module.exports = {
             syntax: 'scss',
             quiet: PROD,
         })] : []),
+        // app image generator
         new FaviconsWebpackPlugin({
-            logo: './source/img/favicons-source.png',
+            logo: './.favicons-source-512x512.png',
             prefix: 'img/favicon/',
             background: '#fff',
             theme_color: '#fff',
@@ -167,6 +168,24 @@ module.exports = {
                 firefox: false,
                 opengraph: true,
                 twitter: true,
+                yandex: false,
+                windows: false,
+            },
+        }),
+        // favicon generator
+        new FaviconsWebpackPlugin({
+            logo: './.favicons-source-32x32.png',
+            prefix: 'img/favicon/',
+            persistentCache: !(PROD || DEBUG),
+            icons: {
+                android: false,
+                appleIcon: false,
+                appleStartup: false,
+                coast: false,
+                favicons: true,
+                firefox: false,
+                opengraph: false,
+                twitter: false,
                 yandex: false,
                 windows: false,
             },
