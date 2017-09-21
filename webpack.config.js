@@ -195,6 +195,7 @@ module.exports = {
             DEBUG,
             NODE_ENV,
             SERVICE_WORKER,
+            PUBLIC_PATH,
         }))),
         new HtmlPrettyPlugin({
             ocd: true,
