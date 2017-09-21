@@ -45,7 +45,8 @@ const WebpackNotifierPlugin = require('webpack-notifier');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const { default: ImageminPlugin } = require('imagemin-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+
+const Favicons = require('./favicons.js');
 const HtmlPrettyPlugin = require('./html-pretty.js');
 const ManifestPlugin = require('./manifest.js');
 
@@ -152,43 +153,17 @@ module.exports = {
             syntax: 'scss',
             quiet: PROD,
         })] : []),
-        // app image generator
-        new FaviconsWebpackPlugin({
+        new Favicons.AppIcon({
             logo: './.favicons-source-512x512.png',
             prefix: 'img/favicon/',
             background: '#fff',
             theme_color: '#fff',
             persistentCache: !(PROD || DEBUG),
-            icons: {
-                android: true,
-                appleIcon: true,
-                appleStartup: false,
-                coast: false,
-                favicons: true,
-                firefox: false,
-                opengraph: true,
-                twitter: true,
-                yandex: false,
-                windows: false,
-            },
         }),
-        // favicon generator
-        new FaviconsWebpackPlugin({
+        new Favicons.FavIcon({
             logo: './.favicons-source-32x32.png',
             prefix: 'img/favicon/',
             persistentCache: !(PROD || DEBUG),
-            icons: {
-                android: false,
-                appleIcon: false,
-                appleStartup: false,
-                coast: false,
-                favicons: true,
-                firefox: false,
-                opengraph: false,
-                twitter: false,
-                yandex: false,
-                windows: false,
-            },
         }),
         new ManifestPlugin({
             path: path.join(OUTPUT_PATH, '/img/favicon/manifest.json'),
