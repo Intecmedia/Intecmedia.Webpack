@@ -205,7 +205,7 @@ module.exports = {
             staticFileGlobs: [
                 slash(path.join(OUTPUT_PATH, '/js/*.min.js')),
                 slash(path.join(OUTPUT_PATH, '/css/*.min.css')),
-                slash(path.join(OUTPUT_PATH, '/img/ico/*.{png,svg,ico,gif,xml,jpeg,jpg}')),
+                slash(path.join(OUTPUT_PATH, '/img/favicon/*.{png,svg,ico,gif,xml,jpeg,jpg}')),
                 slash(path.join(OUTPUT_PATH, '/fonts/*.woff2')),
             ],
             runtimeCaching: [{
