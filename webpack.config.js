@@ -46,7 +46,7 @@ const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const { default: ImageminPlugin } = require('imagemin-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const Favicons = require('./favicons.js');
+const FaviconsPlugin = require('./favicons.js');
 const HtmlPrettyPlugin = require('./html-pretty.js');
 const ManifestPlugin = require('./manifest.js');
 
@@ -153,14 +153,14 @@ module.exports = {
             syntax: 'scss',
             quiet: PROD,
         })] : []),
-        new Favicons.AppIcon({
+        new FaviconsPlugin.AppIcon({
             logo: './.favicons-source-512x512.png',
             prefix: 'img/favicon/',
             background: '#fff',
             theme_color: '#fff',
             persistentCache: !(PROD || DEBUG),
         }),
-        new Favicons.FavIcon({
+        new FaviconsPlugin.FavIcon({
             logo: './.favicons-source-32x32.png',
             prefix: 'img/favicon/',
             persistentCache: !(PROD || DEBUG),
