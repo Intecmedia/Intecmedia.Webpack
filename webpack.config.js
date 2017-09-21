@@ -202,7 +202,7 @@ module.exports = {
             indent_inner_html: false,
             indent_size: 4,
         }),
-        new SWPrecacheWebpackPlugin({
+        ...(SERVICE_WORKER ? [new SWPrecacheWebpackPlugin({
             minify: PROD,
             handleFetch: true,
             filename: 'service-worker.js',
@@ -223,7 +223,7 @@ module.exports = {
             }],
             staticFileGlobsIgnorePatterns: [/\.map$/, /\.LICENSE$/],
             ignoreUrlParametersMatching: [/^utm_/, /^[a-fA-F0-9]{32}$/],
-        }),
+        })] : []),
         new CopyWebpackPlugin([{
             context: './source',
             from: 'img/**/*.{png,svg,ico,gif,xml,jpeg,jpg,json}',
