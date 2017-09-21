@@ -12,7 +12,7 @@ module.exports = class ManifestPlugin {
     }
 
     apply(compiler) {
-        const options = this.options;
+        const { options } = this;
         compiler.plugin('done', () => {
             /* eslint import/no-dynamic-require: "off" */
             if (fs.existsSync(options.path)) {
