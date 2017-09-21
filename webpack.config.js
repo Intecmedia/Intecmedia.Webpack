@@ -58,6 +58,13 @@ banner.toString = () => `${new Date().toISOString()} | NODE_ENV=${NODE_ENV} | DE
 
 const { browserslist } = require('./package.json');
 
+const HTML_OPTIONS = {
+    DEBUG,
+    NODE_ENV,
+    SERVICE_WORKER,
+    PUBLIC_PATH,
+};
+
 const resourceName = (prefix, hash = false) => {
     const basename = path.basename(prefix);
     const suffix = (hash ? '?[hash]' : '');
@@ -192,10 +199,7 @@ module.exports = {
                 }
                 return hash.digest('hex');
             },
-            DEBUG,
-            NODE_ENV,
-            SERVICE_WORKER,
-            PUBLIC_PATH,
+            ...HTML_OPTIONS,
         }))),
         new HtmlPrettyPlugin({
             ocd: true,
