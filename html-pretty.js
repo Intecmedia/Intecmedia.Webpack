@@ -1,4 +1,5 @@
 const pretty = require('pretty');
+const deepAssign = require('deep-assign');
 
 const DEFAULT_OPTIONS = {
     ocd: false,
@@ -11,7 +12,7 @@ const DEFAULT_OPTIONS = {
 
 module.exports = class HtmlPrettyPlugin {
     constructor(options) {
-        this.options = Object.assign({}, DEFAULT_OPTIONS, options);
+        this.options = deepAssign({}, DEFAULT_OPTIONS, options);
     }
 
     apply(compiler) {

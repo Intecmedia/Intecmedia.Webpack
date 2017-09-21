@@ -54,6 +54,7 @@
         "css-hot-loader": "latest",
         "css-loader": "latest",
         "css-mqpacker": "latest",
+        "deep-assign": "latest",
         "eslint": "latest",
         "eslint-config-airbnb-base": "latest",
         "eslint-loader": "latest",
