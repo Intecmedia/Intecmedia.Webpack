@@ -192,9 +192,9 @@ module.exports = {
                 }
                 return hash.digest('hex');
             },
-            DEBUG: JSON.stringify(DEBUG),
-            NODE_ENV: JSON.stringify(NODE_ENV),
-            SERVICE_WORKER: JSON.stringify(SERVICE_WORKER),
+            DEBUG,
+            NODE_ENV,
+            SERVICE_WORKER,
         }))),
         new HtmlPrettyPlugin({
             ocd: true,
