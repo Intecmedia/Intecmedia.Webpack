@@ -26,6 +26,8 @@ const PACKAGE_NAME = (() => {
 const OUTPUT_PATH = path.resolve(__dirname, 'build');
 const PUBLIC_PATH = '/';
 
+const SERVICE_WORKER = false;
+
 console.log(`Name: ${PACKAGE_NAME}`);
 console.log(`Output: ${OUTPUT_PATH}`);
 console.log(`Public: ${PUBLIC_PATH}`);
@@ -33,6 +35,7 @@ console.log(`Enviroment: ${NODE_ENV}`);
 console.log(`Debug: ${DEBUG ? 'enabled' : 'disabled'}`);
 console.log(`Linters: ${USE_LINTERS ? 'enabled' : 'disabled'}`);
 console.log(`Source maps: ${USE_SOURCE_MAP ? 'enabled' : 'disabled'}`);
+console.log(`Service Worker: ${SERVICE_WORKER ? 'enabled' : 'disabled'}`);
 
 if (PROD && DEBUG) {
     throw new Error(`Dont use NODE_ENV=${NODE_ENV} and DEBUG=${DEBUG} together`);
@@ -191,6 +194,7 @@ module.exports = {
             },
             DEBUG: JSON.stringify(DEBUG),
             NODE_ENV: JSON.stringify(NODE_ENV),
+            SERVICE_WORKER: JSON.stringify(SERVICE_WORKER),
         }))),
         new HtmlPrettyPlugin({
             ocd: true,

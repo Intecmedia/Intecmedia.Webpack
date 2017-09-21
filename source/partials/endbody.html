@@ -1,3 +1,4 @@
+{{#if htmlWebpackPlugin.options.SERVICE_WORKER}}
     <script type="text/javascript">
         ('serviceWorker' in navigator) && (function(baseURL, hash) {
             navigator.serviceWorker.getRegistrations().then(function(registrations) {
@@ -18,3 +19,4 @@
             });
         })(document.location.protocol + '//' + document.location.host + '/service-worker.js', '{{ htmlWebpackPlugin.options.serviceWorkerHash }}');
     </script>
+{{/if}}
