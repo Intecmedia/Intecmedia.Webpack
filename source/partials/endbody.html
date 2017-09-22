@@ -6,15 +6,15 @@
                 var registration = registrations.find(function(r) {
                     return r.active && r.active.scriptURL.indexOf(baseURL) === 0 && scriptURL != r.active.scriptURL;
                 });
-                if (registration && localStorage.getItem('serviceWorkerHash') != hash) {
+                if (registration && localStorage.getItem('SERVICE_WORKER_HASH') != hash) {
                     console.log('Service Worker was updated because hash changed.');
-                    localStorage.setItem('serviceWorkerHash', hash);
+                    localStorage.setItem('SERVICE_WORKER_HASH', hash);
                     registration.update();
                 } else {
                     navigator.serviceWorker.register(scriptURL);
-                    localStorage.setItem('serviceWorkerHash', hash);
+                    localStorage.setItem('SERVICE_WORKER_HASH', hash);
                 }
             });
-        })(document.location.protocol + '//' + document.location.host + '/service-worker.js', '{{ htmlWebpackPlugin.options.serviceWorkerHash }}');
+        })(document.location.protocol + '//' + document.location.host + '/service-worker.js', '{{ htmlWebpackPlugin.options.SERVICE_WORKER_HASH }}');
     </script>
 {{/if}}

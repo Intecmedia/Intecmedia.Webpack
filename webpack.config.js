@@ -64,6 +64,14 @@ const HTML_OPTIONS = {
     NODE_ENV,
     PUBLIC_PATH,
     USE_SERVICE_WORKER,
+    SERVICE_WORKER_HASH: (USE_SERVICE_WORKER ? () => {
+        const hash = new MD5();
+        const filename = path.join(OUTPUT_PATH, SERVICE_WORKER_BASE, 'service-worker.js');
+        if (fs.existsSync(filename)) {
+            hash.update(fs.readFileSync(filename));
+        }
+        return hash.digest('hex');
+    } : false),
 };
 
 const resourceName = (prefix, hash = false) => {
@@ -192,14 +200,6 @@ module.exports = {
             inject: true,
             minify: false,
             title: PACKAGE_NAME,
-            serviceWorkerHash: (USE_SERVICE_WORKER ? () => {
-                const hash = new MD5();
-                const filename = path.join(OUTPUT_PATH, SERVICE_WORKER_BASE, 'service-worker.js');
-                if (fs.existsSync(filename)) {
-                    hash.update(fs.readFileSync(filename));
-                }
-                return hash.digest('hex');
-            } : false),
             ...HTML_OPTIONS,
         }))),
         new HtmlPrettyPlugin({
