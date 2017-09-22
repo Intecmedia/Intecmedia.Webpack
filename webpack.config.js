@@ -27,7 +27,7 @@ const OUTPUT_PATH = path.resolve(__dirname, 'build');
 const PUBLIC_PATH = '/';
 
 const USE_SERVICE_WORKER = false;
-const SERVICE_WORKER_PATH = slash(path.relative(PUBLIC_PATH, '/'));
+const SERVICE_WORKER_BASE = slash(path.relative(PUBLIC_PATH, '/'));
 
 console.log(`Name: ${PACKAGE_NAME}`);
 console.log(`Output: ${OUTPUT_PATH}`);
@@ -62,9 +62,8 @@ const { browserslist } = require('./package.json');
 const HTML_OPTIONS = {
     DEBUG,
     NODE_ENV,
-    USE_SERVICE_WORKER,
-    SERVICE_WORKER_PATH,
     PUBLIC_PATH,
+    USE_SERVICE_WORKER,
 };
 
 const resourceName = (prefix, hash = false) => {
@@ -95,7 +94,7 @@ module.exports = {
         compress: false,
         setup(app) {
             app.get('/service-worker.js', (req, res) => {
-                const filename = path.join(OUTPUT_PATH, SERVICE_WORKER_PATH, '/service-worker.js');
+                const filename = path.join(OUTPUT_PATH, SERVICE_WORKER_BASE, '/service-worker.js');
                 const content = fs.existsSync(filename) ? fs.readFileSync(filename) : '';
                 res.set({ 'Content-Type': 'application/javascript; charset=utf-8' });
                 res.send(content);
@@ -195,7 +194,7 @@ module.exports = {
             title: PACKAGE_NAME,
             serviceWorkerHash: (USE_SERVICE_WORKER ? () => {
                 const hash = new MD5();
-                const filename = path.join(OUTPUT_PATH, SERVICE_WORKER_PATH, 'service-worker.js');
+                const filename = path.join(OUTPUT_PATH, SERVICE_WORKER_BASE, 'service-worker.js');
                 if (fs.existsSync(filename)) {
                     hash.update(fs.readFileSync(filename));
                 }
@@ -212,7 +211,7 @@ module.exports = {
         ...(USE_SERVICE_WORKER ? [new SWPrecacheWebpackPlugin({
             minify: PROD,
             handleFetch: true,
-            filename: SERVICE_WORKER_PATH + '/service-worker.js',
+            filename: SERVICE_WORKER_BASE + '/service-worker.js',
             staticFileGlobs: [
                 slash(path.join(OUTPUT_PATH, '/js/*.min.js')),
                 slash(path.join(OUTPUT_PATH, '/css/*.min.css')),
