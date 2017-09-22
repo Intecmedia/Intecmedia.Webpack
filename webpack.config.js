@@ -192,6 +192,7 @@ module.exports = {
                 description: null,
                 lang: 'ru-RU',
                 start_url: '/',
+                theme_color: '#fff',
             },
         }),
         ...(glob.sync('./source/*.html').map(template => new HtmlWebpackPlugin({
