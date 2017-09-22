@@ -26,7 +26,8 @@ const PACKAGE_NAME = (() => {
 const OUTPUT_PATH = path.resolve(__dirname, 'build');
 const PUBLIC_PATH = '/';
 
-const SERVICE_WORKER = false;
+const USE_SERVICE_WORKER = false;
+const SERVICE_WORKER_PATH = slash(path.relative(PUBLIC_PATH, '/'));
 
 console.log(`Name: ${PACKAGE_NAME}`);
 console.log(`Output: ${OUTPUT_PATH}`);
@@ -35,7 +36,7 @@ console.log(`Enviroment: ${NODE_ENV}`);
 console.log(`Debug: ${DEBUG ? 'enabled' : 'disabled'}`);
 console.log(`Linters: ${USE_LINTERS ? 'enabled' : 'disabled'}`);
 console.log(`Source maps: ${USE_SOURCE_MAP ? 'enabled' : 'disabled'}`);
-console.log(`Service Worker: ${SERVICE_WORKER ? 'enabled' : 'disabled'}`);
+console.log(`Service Worker: ${USE_SERVICE_WORKER ? 'enabled' : 'disabled'}`);
 
 if (PROD && DEBUG) {
     throw new Error(`Dont use NODE_ENV=${NODE_ENV} and DEBUG=${DEBUG} together`);
@@ -61,7 +62,8 @@ const { browserslist } = require('./package.json');
 const HTML_OPTIONS = {
     DEBUG,
     NODE_ENV,
-    SERVICE_WORKER,
+    USE_SERVICE_WORKER,
+    SERVICE_WORKER_PATH,
     PUBLIC_PATH,
 };
 
@@ -93,7 +95,7 @@ module.exports = {
         compress: false,
         setup(app) {
             app.get('/service-worker.js', (req, res) => {
-                const filename = path.join(OUTPUT_PATH, '/service-worker.js');
+                const filename = path.join(OUTPUT_PATH, SERVICE_WORKER_PATH, '/service-worker.js');
                 const content = fs.existsSync(filename) ? fs.readFileSync(filename) : '';
                 res.set({ 'Content-Type': 'application/javascript; charset=utf-8' });
                 res.send(content);
@@ -191,14 +193,14 @@ module.exports = {
             inject: true,
             minify: false,
             title: PACKAGE_NAME,
-            serviceWorkerHash: () => {
+            serviceWorkerHash: (USE_SERVICE_WORKER ? () => {
                 const hash = new MD5();
-                const filename = path.join(OUTPUT_PATH, '/service-worker.js');
+                const filename = path.join(OUTPUT_PATH, SERVICE_WORKER_PATH, 'service-worker.js');
                 if (fs.existsSync(filename)) {
                     hash.update(fs.readFileSync(filename));
                 }
                 return hash.digest('hex');
-            },
+            } : false),
             ...HTML_OPTIONS,
         }))),
         new HtmlPrettyPlugin({
@@ -207,10 +209,10 @@ module.exports = {
             indent_inner_html: false,
             indent_size: 4,
         }),
-        ...(SERVICE_WORKER ? [new SWPrecacheWebpackPlugin({
+        ...(USE_SERVICE_WORKER ? [new SWPrecacheWebpackPlugin({
             minify: PROD,
             handleFetch: true,
-            filename: 'service-worker.js',
+            filename: SERVICE_WORKER_PATH + '/service-worker.js',
             staticFileGlobs: [
                 slash(path.join(OUTPUT_PATH, '/js/*.min.js')),
                 slash(path.join(OUTPUT_PATH, '/css/*.min.css')),

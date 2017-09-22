@@ -1,4 +1,4 @@
-{{#if htmlWebpackPlugin.options.SERVICE_WORKER}}
+{{#if htmlWebpackPlugin.options.USE_SERVICE_WORKER}}
     <script type="text/javascript">
         ('serviceWorker' in navigator) && (function(baseURL, hash) {
             navigator.serviceWorker.getRegistrations().then(function(registrations) {
@@ -11,9 +11,7 @@
                     localStorage.setItem('serviceWorkerHash', hash);
                     registration.update();
                 } else {
-                    navigator.serviceWorker.register(scriptURL, {
-                        scope: '/'
-                    });
+                    navigator.serviceWorker.register(scriptURL);
                     localStorage.setItem('serviceWorkerHash', hash);
                 }
             });
