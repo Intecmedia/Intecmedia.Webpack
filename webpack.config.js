@@ -221,7 +221,7 @@ module.exports = {
             ],
             runtimeCaching: [{
                 urlPattern: /^chrome-extension:\/\//,
-                handler: 'uncache',
+                handler: 'networkOnly',
                 options: { debug: !PROD },
             }, {
                 urlPattern: /(.*)/,
