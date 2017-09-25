@@ -220,6 +220,10 @@ module.exports = {
                 slash(path.join(OUTPUT_PATH, '/fonts/*.woff2')),
             ],
             runtimeCaching: [{
+                urlPattern: /^chrome-extension:\/\//,
+                handler: 'uncache',
+                options: { debug: !PROD },
+            }, {
                 urlPattern: /(.*)/,
                 handler: 'networkFirst',
                 options: { debug: !PROD },
