@@ -228,7 +228,7 @@ module.exports = {
                 handler: 'networkFirst',
                 options: { debug: !PROD },
             }, {
-                urlPattern: new RegExp(`${PUBLIC_PATH.replace(/\/+$/, '')}/(js|css|fonts|img)/(.*)`),
+                urlPattern: new RegExp(`${PUBLIC_PATH}(js|css|fonts|img)/(.*)`),
                 handler: 'cacheFirst',
                 options: { debug: !PROD },
             }],
