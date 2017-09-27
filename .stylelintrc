@@ -10,7 +10,7 @@
         "selector-class-pattern": [
             "^[a-z0-9\\-_]+$"
         ],
-        "max-nesting-depth": 3,
+        "max-nesting-depth": 4,
         "scss/at-else-closing-brace-newline-after": "always-last-in-chain",
         "scss/at-else-closing-brace-space-after": "always-intermediate",
         "scss/at-else-empty-line-before": "never",
@@ -24,7 +24,7 @@
         },
         "plugin/no-unsupported-browser-features": [true, {
             "severity": "warning",
-            "ignore": ["rem", "outline", "pointer-events", "background-img-opts", "font-unicode-range", "will-change", "object-fit", "viewport-units", "user-select"]
+            "ignore": ["rem", "outline", "pointer-events", "background-img-opts", "font-unicode-range", "will-change", "object-fit", "viewport-units", "user-select", "flexbox"]
         }]
     }
 }
