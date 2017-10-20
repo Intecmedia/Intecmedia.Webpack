@@ -49,6 +49,7 @@
         "babel-preset-env": "latest",
         "bootstrap-sass": "latest",
         "browserslist": "latest",
+        "case-sensitive-paths-webpack-plugin": "latest",
         "copy-webpack-plugin": "latest",
         "cross-env": "latest",
         "css-hot-loader": "latest",

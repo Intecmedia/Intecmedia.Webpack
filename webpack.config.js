@@ -48,6 +48,7 @@ const StyleLintPlugin = (USE_LINTERS ? require('stylelint-webpack-plugin') : () 
 const WebpackNotifierPlugin = require('webpack-notifier');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const { default: ImageminPlugin } = require('imagemin-webpack-plugin');
+const CaseSensitivePathsPlugin = (PROD ? require('case-sensitive-paths-webpack-plugin') : () => {});
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const FaviconsPlugin = require('./favicons.js');
@@ -137,6 +138,7 @@ module.exports = {
             allChunks: true,
         }),
         ...(PROD ? [
+            new CaseSensitivePathsPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),
             new webpack.optimize.UglifyJsPlugin({
                 parallel: true,
