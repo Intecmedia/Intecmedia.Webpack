@@ -11,6 +11,7 @@
     ],
     "rules": {
         "no-console": "off",
+        "no-param-reassign": [2, { "props": false }],
         "unicode-bom": ["error", "never"],
         "max-len": ["error", 120, 4],
         "indent": ["error", 4]
