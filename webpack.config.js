@@ -245,6 +245,11 @@ module.exports = {
         }),
         new ImageminPlugin({
             test: /\.(jpe?g|png|gif|svg)$/i,
+            svgo: {
+                plugins: [
+                    { removeViewBox: false },
+                ],
+            },
             disable: !(PROD || DEBUG),
         }),
     ],
