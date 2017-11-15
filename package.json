@@ -14,7 +14,7 @@
         "watch-dev": "cross-env NODE_ENV=development DEBUG=0 webpack -w -d",
         "watch-debug": "cross-env NODE_ENV=development DEBUG=1 webpack -w -d",
         "watch-prod": "cross-env NODE_ENV=production DEBUG=0 webpack -w -p --optimize-minimize",
-        "js-lint": "cross-env NODE_ENV=development eslint --config .eslintrc.json --fix source/js/ --ext .js && eslint --config .eslintrc.json --fix source/helpers/*.js && eslint --config .eslintrc.json --fix *.js",
+        "js-lint": "cross-env NODE_ENV=development eslint --config .eslintrc.json --ignore-path .eslintignore --fix source/js/ --ext .js && eslint --config .eslintrc.json --fix source/helpers/*.js && eslint --config .eslintrc.json --fix *.js",
         "css-lint": "cross-env NODE_ENV=development stylelint source/**/*.scss --fix --syntax scss --formater verbose --config .stylelintrc",
         "css-format": "cross-env NODE_ENV=development stylefmt --recursive source/css/**/*.scss --config .stylelintrc",
         "html-lint": "cross-env NODE_ENV=development htmllint --rc .htmllintrc build/**/*.html",

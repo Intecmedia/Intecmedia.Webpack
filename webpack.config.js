@@ -289,7 +289,7 @@ module.exports = {
             },
             {
                 test: /\.js$/i,
-                exclude: /node_modules/,
+                exclude: /(node_modules|external)/,
                 loaders: [
                     {
                         loader: 'babel-loader',
