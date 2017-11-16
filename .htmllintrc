@@ -15,5 +15,6 @@
     "indent-style": "spaces",
     "indent-width": 4,
     "spec-char-escape": false,
+    "tag-self-close": "never",
     "tag-bans": ["style"]
 }
