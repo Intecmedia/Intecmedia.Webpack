@@ -1,9 +1,8 @@
 {
     "line-end-style": false,
     "attr-bans": [],
-    "attr-name-style": "dash",
+    "attr-name-style": false,
     "attr-no-unsafe-char": false,
-    "attr-name-ignore-regex": "(viewBox)",
     "class-style": false,
     "doctype-first": true,
     "doctype-html5": true,
