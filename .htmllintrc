@@ -8,7 +8,6 @@
     "doctype-html5": true,
     "html-req-lang": true,
     "html-valid-content-model": false,
-    "id-class-ignore-regex": "(onclick|content|[a-z]+([A-Z][a-z])+)",
     "id-class-style": false,
     "id-class-no-ad": true,
     "id-no-dup": true,
