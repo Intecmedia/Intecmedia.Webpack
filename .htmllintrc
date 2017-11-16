@@ -6,9 +6,11 @@
     "class-style": false,
     "doctype-first": true,
     "doctype-html5": true,
+    "html-req-lang": true,
     "html-valid-content-model": false,
     "id-class-ignore-regex": "(onclick|content|[a-z]+([A-Z][a-z])+)",
     "id-class-style": false,
+    "id-class-no-ad": true,
     "id-no-dup": true,
     "img-req-src": true,
     "img-req-alt": true,
@@ -16,5 +18,7 @@
     "indent-width": 4,
     "spec-char-escape": false,
     "tag-self-close": "never",
-    "tag-bans": ["style"]
+    "tag-bans": ["style"],
+    "label-req-for": true,
+    "input-req-label": true
 }
