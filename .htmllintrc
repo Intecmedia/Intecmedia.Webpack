@@ -2,6 +2,7 @@
     "line-end-style": false,
     "attr-bans": [],
     "attr-name-style": "dash",
+    "attr-name-ignore-regex": "(viewBox)",
     "attr-no-unsafe-char": false,
     "class-style": false,
     "doctype-first": true,
