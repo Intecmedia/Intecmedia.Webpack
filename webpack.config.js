@@ -239,6 +239,7 @@ module.exports = {
         new CopyWebpackPlugin([{
             context: './source',
             from: 'img/**/*.{png,svg,ico,gif,xml,jpeg,jpg,json}',
+            copyUnmodified: !(PROD || DEBUG),
             to: OUTPUT_PATH,
         }], {
             debug: (DEBUG ? 'debug' : 'info'),
