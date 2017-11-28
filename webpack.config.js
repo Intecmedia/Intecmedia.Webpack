@@ -56,7 +56,7 @@ const HtmlPrettyPlugin = require('./html-pretty.js');
 const ManifestPlugin = require('./manifest.js');
 
 const banner = new String(''); // eslint-disable-line no-new-wrappers
-banner.toString = () => `${new Date().toISOString()} | NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chunkhash]`;
+banner.toString = () => `NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chunkhash]`;
 
 const { browserslist } = require('./package.json');
 
