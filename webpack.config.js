@@ -202,6 +202,7 @@ module.exports = {
             template,
             inject: true,
             minify: false,
+            hash: true,
             title: PACKAGE_NAME,
             ...HTML_OPTIONS,
         }))),
