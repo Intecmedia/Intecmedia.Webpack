@@ -203,6 +203,7 @@ module.exports = {
             inject: true,
             minify: false,
             hash: true,
+            cache: !(PROD || DEBUG),
             title: PACKAGE_NAME,
             ...HTML_OPTIONS,
         }))),
