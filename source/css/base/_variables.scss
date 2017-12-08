@@ -6,7 +6,7 @@
 $bootstrap-sass-asset-helper: true;
 
 @function twbs-font-path($path) {
-    @return "../../node_modules/bootstrap-sass/assets/fonts/#{$path}";
+    @return '../../node_modules/bootstrap-sass/assets/fonts/#{$path}';
 }
 
 @function twbs-image-path($path) {
@@ -49,10 +49,10 @@ $link-hover-decoration: underline !default;
 //== Typography
 //
 //## Font, line-height, and color for body text, headings, and more.
-$font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
-$font-family-serif: Georgia, "Times New Roman", Times, serif !default;
+$font-family-sans-serif: 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
+$font-family-serif: Georgia, 'Times New Roman', Times, serif !default;
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
-$font-family-monospace: Menlo, Monaco, Consolas, "Courier New", monospace !default;
+$font-family-monospace: Menlo, Monaco, Consolas, 'Courier New', monospace !default;
 $font-family-base: $font-family-sans-serif !default;
 $font-size-base: 14px !default;
 $font-size-large: ceil(($font-size-base * 1.25)) !default; // ~18px
@@ -84,12 +84,12 @@ $headings-color: inherit !default;
 
 // [converter] If $bootstrap-sass-asset-helper if used, provide path relative to the assets load path.
 // [converter] This is because some asset helpers, such as Sprockets, do not work with file-relative paths.
-$icon-font-path: if($bootstrap-sass-asset-helper, "bootstrap/", "../fonts/bootstrap/") !default;
+$icon-font-path: if($bootstrap-sass-asset-helper, 'bootstrap/', '../fonts/bootstrap/') !default;
 
 //** File name for all font files.
-$icon-font-name: "glyphicons-halflings-regular" !default;
+$icon-font-name: 'glyphicons-halflings-regular' !default;
 //** Element ID within SVG icon file.
-$icon-font-svg-id: "glyphicons_halflingsregular" !default;
+$icon-font-svg-id: 'glyphicons_halflingsregular' !default;
 
 
 //== Components
@@ -753,7 +753,7 @@ $breadcrumb-color: #ccc !default;
 //** Text color of current page in the breadcrumb
 $breadcrumb-active-color: $gray-light !default;
 //** Textual separator for between breadcrumb elements
-$breadcrumb-separator: "/" !default;
+$breadcrumb-separator: '/' !default;
 
 
 //== Carousel
