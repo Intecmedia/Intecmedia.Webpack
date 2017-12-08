@@ -14,3 +14,20 @@
     }
     /* stylelint-enable */
 }
+
+// Debug helper
+@if $PACKAGE_NAME == 'Intecmedia.Webpack' {
+    /* stylelint-disable */
+    body::after {
+        background-color: $alert-danger-bg;
+        border-color: $alert-danger-border;
+        bottom: 0;
+        color: $alert-danger-text;
+        content: 'Please rename the `name` in `package.json` file';
+        padding: $padding-xs-vertical $padding-xs-horizontal;
+        position: fixed;
+        right: 0;
+        z-index: $zindex-modal;
+    }
+    /* stylelint-enable */
+}
