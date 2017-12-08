@@ -14,14 +14,7 @@ const NODE_ENV = PROD ? 'production' : 'development';
 const USE_SOURCE_MAP = DEBUG && !PROD;
 const USE_LINTERS = PROD || DEBUG;
 
-const PACKAGE_NAME = (() => {
-    const ignored = ['www', 'html'];
-    let name = path.basename(path.resolve('.'));
-    if (name.toLowerCase() in ignored) {
-        name = path.basename(path.resolve('..'));
-    }
-    return name;
-})();
+const { name: PACKAGE_NAME, browserslist: BROWSERS } = require('./package.json');
 
 const OUTPUT_PATH = path.resolve(__dirname, 'build');
 const PUBLIC_PATH = '/';
@@ -57,8 +50,6 @@ const ManifestPlugin = require('./manifest.js');
 
 const banner = new String(''); // eslint-disable-line no-new-wrappers
 banner.toString = () => `NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chunkhash]`;
-
-const { browserslist } = require('./package.json');
 
 const HTML_OPTIONS = {
     DEBUG,
@@ -189,12 +180,10 @@ module.exports = {
         new ManifestPlugin({
             path: path.join(OUTPUT_PATH, '/img/favicon/manifest.json'),
             replace: {
-                name: PACKAGE_NAME,
-                short_name: PACKAGE_NAME,
-                description: null,
                 lang: 'ru-RU',
-                start_url: '/',
+                start_url: '/?utm_source=app_manifest',
                 theme_color: '#fff',
+                background_color: '#fff',
             },
         }),
         ...(glob.sync('./source/*.html').map(template => new HtmlWebpackPlugin({
@@ -300,7 +289,7 @@ module.exports = {
                             presets: [['airbnb', {
                                 debug: DEBUG || PROD,
                                 targets: {
-                                    browsers: browserslist,
+                                    browsers: BROWSERS,
                                 },
                             }]],
                             forceEnv: NODE_ENV,
@@ -379,7 +368,7 @@ module.exports = {
                                         require('postcss-color-rgba-fallback')(),
                                         require('postcss-flexbugs-fixes')(),
                                         require('css-mqpacker')(),
-                                        require('autoprefixer')({ browsers: browserslist }), // this always last
+                                        require('autoprefixer')({ browsers: BROWSERS }), // this always last
                                     ] : []),
                                     require('postcss-reporter')(), // this always last
                                 ],
