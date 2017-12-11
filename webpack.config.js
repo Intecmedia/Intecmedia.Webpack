@@ -377,7 +377,11 @@ module.exports = {
                         {
                             loader: 'sass-loader',
                             options: {
-                                data: `$NODE_ENV: '${NODE_ENV}';\n$DEBUG: ${DEBUG ? 'true' : 'false'};\n$PACKAGE_NAME: '${PACKAGE_NAME}';\n`,
+                                data: [
+                                    `$DEBUG: ${DEBUG ? 'true' : 'false'};\n`,
+                                    `$NODE_ENV: '${NODE_ENV}';\n`,
+                                    `$PACKAGE_NAME: '${PACKAGE_NAME}';\n`,
+                                ].join(''),
                                 indentWidth: 4,
                                 sourceMap: USE_SOURCE_MAP ? 'inline' : false,
                                 sourceMapEmbed: USE_SOURCE_MAP,
