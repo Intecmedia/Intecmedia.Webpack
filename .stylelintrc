@@ -31,7 +31,10 @@
             ],
         }],
         "selector-pseudo-element-no-unknown": [true, {
-            ignorePseudoElements: ["at-least", "at-most", "between", "exactly", "track", "thumb"]
+            ignorePseudoElements: [
+                "at-least", "at-most", "between", "exactly",
+                "track", "thumb"
+            ]
         }],
         "plugin/no-unsupported-browser-features": [true, {
             "severity": "warning",
