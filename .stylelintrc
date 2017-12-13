@@ -30,6 +30,9 @@
                 "letter-spacing-range", "min-letter-spacing", "max-letter-spacing", "letter-spacing-range", "letter-spacing-range"
             ],
         }],
+        "selector-pseudo-element-no-unknown": [true, {
+            ignorePseudoElements: ["track", "thumb"]
+        }],
         "plugin/no-unsupported-browser-features": [true, {
             "severity": "warning",
             "ignore": ["rem", "flexbox", "viewport-units"]
