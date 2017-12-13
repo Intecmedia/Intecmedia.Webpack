@@ -30,13 +30,15 @@
     "author": "Dmitry Pyatkov",
     "license": "MIT",
     "browserslist": [
-        "Android >= 4.4",
-        "Chrome >= 35",
-        "Firefox >= 38",
-        "Explorer >= 10",
-        "Edge >= 12",
-        "iOS >= 8",
-        "Safari >= 8"
+        "last 2 Edge versions",
+        "last 2 Explorer versions",
+        "last 2 Chrome versions",
+        "last 2 ChromeAndroid versions",
+        "last 2 Firefox versions",
+        "last 2 FirefoxAndroid versions",
+        "last 2 Opera versions",
+        "last 2 iOS versions",
+        "last 2 Safari versions"
     ],
     "dependencies": {
         "autoprefixer": "latest",
