@@ -21,6 +21,7 @@ const OUTPUT_PATH = path.resolve(__dirname, 'build');
 const PUBLIC_PATH = '/';
 const USE_FAVICONS = true;
 const USE_SERVICE_WORKER = false;
+const LANGUAGE = 'ru';
 
 const SERVICE_WORKER_BASE = slash(path.relative(PUBLIC_PATH, '/'));
 
@@ -33,6 +34,7 @@ console.log(`Linters: ${USE_LINTERS ? 'enabled' : 'disabled'}`);
 console.log(`Source maps: ${USE_SOURCE_MAP ? 'enabled' : 'disabled'}`);
 console.log(`Service Worker: ${USE_SERVICE_WORKER ? 'enabled' : 'disabled'}`);
 console.log(`Favicons: ${USE_FAVICONS ? 'enabled' : 'disabled'}`);
+console.log(`Language: ${LANGUAGE}`);
 
 if (PROD && DEBUG) {
     throw new Error(`Dont use NODE_ENV=${NODE_ENV} and DEBUG=${DEBUG} together`);
@@ -58,6 +60,7 @@ const HTML_OPTIONS = {
     DEBUG,
     NODE_ENV,
     PUBLIC_PATH,
+    LANGUAGE,
     USE_FAVICONS,
     USE_SERVICE_WORKER,
     SERVICE_WORKER_HASH: (USE_SERVICE_WORKER ? () => {
@@ -185,7 +188,7 @@ module.exports = {
             new ManifestPlugin({
                 path: path.join(OUTPUT_PATH, '/img/favicon/manifest.json'),
                 replace: {
-                    lang: 'ru-RU',
+                    lang: LANGUAGE,
                     start_url: '/?utm_source=app_manifest',
                     theme_color: '#fff',
                     background_color: '#fff',
