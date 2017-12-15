@@ -39,7 +39,7 @@
         }],
         "plugin/no-low-performance-animation": [true, {
             "severity": "warning",
-            ignore: ["color", "background", "background-position", "background-color"]
+            ignore: ["opacity", "transform", "color", "background", "background-position", "background-color"]
         }],
         "plugin/no-unsupported-browser-features": [true, {
             "severity": "warning",
