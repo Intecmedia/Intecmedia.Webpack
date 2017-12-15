@@ -17,9 +17,11 @@ const USE_LINTERS = PROD || DEBUG;
 const { name: PACKAGE_NAME, browserslist: BROWSERS } = require('./package.json');
 
 const OUTPUT_PATH = path.resolve(__dirname, 'build');
-const PUBLIC_PATH = '/';
 
+const PUBLIC_PATH = '/';
+const USE_FAVICONS = true;
 const USE_SERVICE_WORKER = false;
+
 const SERVICE_WORKER_BASE = slash(path.relative(PUBLIC_PATH, '/'));
 
 console.log(`Name: ${PACKAGE_NAME}`);
@@ -30,6 +32,7 @@ console.log(`Debug: ${DEBUG ? 'enabled' : 'disabled'}`);
 console.log(`Linters: ${USE_LINTERS ? 'enabled' : 'disabled'}`);
 console.log(`Source maps: ${USE_SOURCE_MAP ? 'enabled' : 'disabled'}`);
 console.log(`Service Worker: ${USE_SERVICE_WORKER ? 'enabled' : 'disabled'}`);
+console.log(`Favicons: ${USE_FAVICONS ? 'enabled' : 'disabled'}`);
 
 if (PROD && DEBUG) {
     throw new Error(`Dont use NODE_ENV=${NODE_ENV} and DEBUG=${DEBUG} together`);
@@ -37,11 +40,11 @@ if (PROD && DEBUG) {
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const StyleLintPlugin = (USE_LINTERS ? require('stylelint-webpack-plugin') : () => {});
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const { default: ImageminPlugin } = require('imagemin-webpack-plugin');
-const CaseSensitivePathsPlugin = (PROD ? require('case-sensitive-paths-webpack-plugin') : () => {});
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const FaviconsPlugin = require('./favicons.js');
@@ -55,6 +58,7 @@ const HTML_OPTIONS = {
     DEBUG,
     NODE_ENV,
     PUBLIC_PATH,
+    USE_FAVICONS,
     USE_SERVICE_WORKER,
     SERVICE_WORKER_HASH: (USE_SERVICE_WORKER ? () => {
         const hash = new MD5();
@@ -165,27 +169,29 @@ module.exports = {
             syntax: 'scss',
             quiet: PROD,
         })] : []),
-        new FaviconsPlugin.AppIcon({
-            logo: './.favicons-source-512x512.png',
-            prefix: 'img/favicon/',
-            background: '#fff',
-            theme_color: '#fff',
-            persistentCache: !(PROD || DEBUG),
-        }),
-        new FaviconsPlugin.FavIcon({
-            logo: './.favicons-source-32x32.png',
-            prefix: 'img/favicon/',
-            persistentCache: !(PROD || DEBUG),
-        }),
-        new ManifestPlugin({
-            path: path.join(OUTPUT_PATH, '/img/favicon/manifest.json'),
-            replace: {
-                lang: 'ru-RU',
-                start_url: '/?utm_source=app_manifest',
+        ...(USE_FAVICONS ? [
+            new FaviconsPlugin.AppIcon({
+                logo: './.favicons-source-512x512.png',
+                prefix: 'img/favicon/',
+                background: '#fff',
                 theme_color: '#fff',
-                background_color: '#fff',
-            },
-        }),
+                persistentCache: !(PROD || DEBUG),
+            }),
+            new FaviconsPlugin.FavIcon({
+                logo: './.favicons-source-32x32.png',
+                prefix: 'img/favicon/',
+                persistentCache: !(PROD || DEBUG),
+            }),
+            new ManifestPlugin({
+                path: path.join(OUTPUT_PATH, '/img/favicon/manifest.json'),
+                replace: {
+                    lang: 'ru-RU',
+                    start_url: '/?utm_source=app_manifest',
+                    theme_color: '#fff',
+                    background_color: '#fff',
+                },
+            }),
+        ] : []),
         ...(glob.sync('./source/*.html').map(template => new HtmlWebpackPlugin({
             filename: path.basename(template),
             template,
