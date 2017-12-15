@@ -264,9 +264,18 @@ module.exports = {
 
     module: {
         rules: [
+            // svg loaders
+            {
+                test: /\.svg\.html$/i,
+                loader: [
+                    { loader: 'handlebars-loader', options: { debug: DEBUG } },
+                    { loader: 'svgo-loader', options: { plugins: [{ removeViewBox: false }] } },
+                ],
+            },
             // html loaders
             {
                 test: /\.html$/i,
+                exclude: /\.svg\.html$/i,
                 loader: 'handlebars-loader',
                 options: {
                     debug: DEBUG,

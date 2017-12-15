@@ -115,6 +115,8 @@
         "stylelint-scss": "latest",
         "stylelint-selector-bem-pattern": "latest",
         "stylelint-webpack-plugin": "latest",
+        "svgo": "latest",
+        "svgo-loader": "latest",
         "sw-precache": "latest",
         "sw-precache-webpack-plugin": "latest",
         "sw-toolbox": "latest",
