@@ -18,10 +18,9 @@ const { name: PACKAGE_NAME, browserslist: BROWSERS } = require('./package.json')
 
 const OUTPUT_PATH = path.resolve(__dirname, 'build');
 
-const PUBLIC_PATH = '/';
-const USE_FAVICONS = true;
-const USE_SERVICE_WORKER = false;
-const LANGUAGE = 'ru';
+const {
+    PUBLIC_PATH, USE_FAVICONS, USE_SERVICE_WORKER, LANGUAGE,
+} = require('./app.config.js');
 
 const SERVICE_WORKER_BASE = slash(path.relative(PUBLIC_PATH, '/'));
 
