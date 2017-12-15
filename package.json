@@ -111,6 +111,7 @@
         "stylelint": "latest",
         "stylelint-config-sass-guidelines": "latest",
         "stylelint-no-unsupported-browser-features": "latest",
+        "stylelint-performance-animation": "latest",
         "stylelint-scss": "latest",
         "stylelint-selector-bem-pattern": "latest",
         "stylelint-webpack-plugin": "latest",

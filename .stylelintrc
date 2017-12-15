@@ -1,6 +1,7 @@
 {
     "extends": "stylelint-config-sass-guidelines",
     "plugins": [
+        "stylelint-performance-animation",
         "stylelint-no-unsupported-browser-features",
         "stylelint-selector-bem-pattern",
         "stylelint-scss"
@@ -35,6 +36,10 @@
                 "at-least", "at-most", "between", "exactly",
                 "track", "thumb"
             ]
+        }],
+        "plugin/no-low-performance-animation": [true, {
+            "severity": "warning",
+            ignore: ["color", "background", "background-position", "background-color"]
         }],
         "plugin/no-unsupported-browser-features": [true, {
             "severity": "warning",
