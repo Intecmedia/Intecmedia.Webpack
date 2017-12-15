@@ -248,6 +248,7 @@ module.exports = {
             svgo: {
                 plugins: [
                     { removeViewBox: false },
+                    { removeAttrs: { attrs: 'data\\-.*' } },
                 ],
             },
             disable: !(PROD || DEBUG),
@@ -269,7 +270,15 @@ module.exports = {
                 test: /\.svg\.html$/i,
                 loader: [
                     { loader: 'handlebars-loader', options: { debug: DEBUG } },
-                    { loader: 'svgo-loader', options: { plugins: [{ removeViewBox: false }] } },
+                    {
+                        loader: 'svgo-loader',
+                        options: {
+                            plugins: [
+                                { removeViewBox: false },
+                                { removeAttrs: { attrs: 'data\\-.*' } },
+                            ],
+                        },
+                    },
                 ],
             },
             // html loaders
