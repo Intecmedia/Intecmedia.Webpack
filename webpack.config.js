@@ -267,7 +267,8 @@ module.exports = {
         rules: [
             // svg loaders
             {
-                test: /\.svg\.html$/i,
+                test: /(\.svg|\.svg\.html)$/i,
+                exclude: /(fonts|font|img|images)/i,
                 loader: [
                     { loader: 'handlebars-loader', options: { debug: DEBUG } },
                     {
@@ -335,7 +336,7 @@ module.exports = {
             // image loaders
             {
                 test: /\.(jpe?g|png|gif|svg|ico)$/i,
-                exclude: /(fonts|font)/i,
+                exclude: /(fonts|font|partials)/i,
                 loaders: [
                     {
                         loader: 'url-loader',
@@ -349,7 +350,7 @@ module.exports = {
             // font loaders
             {
                 test: /\.(eot|woff|woff2|ttf|svg)(\?v=.+)?$/i,
-                exclude: /(img|images)/i,
+                exclude: /(img|images|partials)/i,
                 loader: 'file-loader',
                 options: {
                     name: resourceName('fonts', true),
