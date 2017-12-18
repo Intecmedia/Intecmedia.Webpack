@@ -17,23 +17,18 @@ const USE_LINTERS = PROD || DEBUG;
 const { name: PACKAGE_NAME, browserslist: BROWSERS } = require('./package.json');
 
 const OUTPUT_PATH = path.resolve(__dirname, 'build');
+const APP_CONFIG = require('./app.config.js');
 
-const {
-    PUBLIC_PATH, USE_FAVICONS, USE_SERVICE_WORKER, LANGUAGE,
-} = require('./app.config.js');
-
-const SERVICE_WORKER_BASE = slash(path.relative(PUBLIC_PATH, '/'));
+const SERVICE_WORKER_BASE = slash(path.relative(APP_CONFIG.PUBLIC_PATH, '/'));
 
 console.log(`Name: ${PACKAGE_NAME}`);
 console.log(`Output: ${OUTPUT_PATH}`);
-console.log(`Public: ${PUBLIC_PATH}`);
+console.log(`Public: ${APP_CONFIG.PUBLIC_PATH}`);
 console.log(`Enviroment: ${NODE_ENV}`);
 console.log(`Debug: ${DEBUG ? 'enabled' : 'disabled'}`);
 console.log(`Linters: ${USE_LINTERS ? 'enabled' : 'disabled'}`);
 console.log(`Source maps: ${USE_SOURCE_MAP ? 'enabled' : 'disabled'}`);
-console.log(`Service Worker: ${USE_SERVICE_WORKER ? 'enabled' : 'disabled'}`);
-console.log(`Favicons: ${USE_FAVICONS ? 'enabled' : 'disabled'}`);
-console.log(`Language: ${LANGUAGE}`);
+console.log(`App config: ${JSON.stringify(APP_CONFIG, null, '    ')}`);
 
 if (PROD && DEBUG) {
     throw new Error(`Dont use NODE_ENV=${NODE_ENV} and DEBUG=${DEBUG} together`);
@@ -58,11 +53,8 @@ banner.toString = () => `NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chun
 const HTML_OPTIONS = {
     DEBUG,
     NODE_ENV,
-    PUBLIC_PATH,
-    LANGUAGE,
-    USE_FAVICONS,
-    USE_SERVICE_WORKER,
-    SERVICE_WORKER_HASH: (USE_SERVICE_WORKER ? () => {
+    ...APP_CONFIG,
+    SERVICE_WORKER_HASH: (APP_CONFIG.USE_SERVICE_WORKER ? () => {
         const hash = new MD5();
         const filename = path.join(OUTPUT_PATH, SERVICE_WORKER_BASE, 'service-worker.js');
         if (fs.existsSync(filename)) {
@@ -114,7 +106,7 @@ module.exports = {
 
     output: {
         path: OUTPUT_PATH,
-        publicPath: PUBLIC_PATH,
+        publicPath: APP_CONFIG.PUBLIC_PATH,
         filename: 'js/app.min.js',
     },
 
@@ -171,7 +163,7 @@ module.exports = {
             syntax: 'scss',
             quiet: PROD,
         })] : []),
-        ...(USE_FAVICONS ? [
+        ...(APP_CONFIG.USE_FAVICONS ? [
             new FaviconsPlugin.AppIcon({
                 logo: './.favicons-source-512x512.png',
                 prefix: 'img/favicon/',
@@ -187,10 +179,10 @@ module.exports = {
             new ManifestPlugin({
                 path: path.join(OUTPUT_PATH, '/img/favicon/manifest.json'),
                 replace: {
-                    lang: LANGUAGE,
-                    start_url: '/?utm_source=app_manifest',
-                    theme_color: '#fff',
-                    background_color: '#fff',
+                    lang: APP_CONFIG.LANGUAGE,
+                    start_url: APP_CONFIG.START_URL,
+                    theme_color: APP_CONFIG.THEME_COLOR,
+                    background_color: APP_CONFIG.BACKGROUND_COLOR,
                 },
             }),
         ] : []),
@@ -210,7 +202,7 @@ module.exports = {
             indent_inner_html: false,
             indent_size: 4,
         }),
-        ...(USE_SERVICE_WORKER ? [new SWPrecacheWebpackPlugin({
+        ...(APP_CONFIG.USE_SERVICE_WORKER ? [new SWPrecacheWebpackPlugin({
             minify: PROD,
             handleFetch: true,
             filename: `${SERVICE_WORKER_BASE}/service-worker.js`,
@@ -228,7 +220,7 @@ module.exports = {
                 handler: 'networkFirst',
                 options: { debug: !PROD },
             }, {
-                urlPattern: new RegExp(`${PUBLIC_PATH}(js|css|fonts|img)/(.*)`),
+                urlPattern: new RegExp(`${APP_CONFIG.PUBLIC_PATH}(js|css|fonts|img)/(.*)`),
                 handler: 'cacheFirst',
                 options: { debug: !PROD },
             }],
