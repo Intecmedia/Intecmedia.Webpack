@@ -306,32 +306,25 @@ module.exports = {
                     jQuery: 'jquery',
                 },
             },
-            {
+            ...(USE_LINTERS ? [{
+                enforce: 'pre',
                 test: /\.js$/i,
                 exclude: /(node_modules|external)/,
-                loaders: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: [['airbnb', {
-                                debug: DEBUG || PROD,
-                                targets: {
-                                    browsers: BROWSERS,
-                                },
-                            }]],
-                            forceEnv: NODE_ENV,
-                            cacheDirectory: !PROD,
-                        },
-                    },
-                    ...(USE_LINTERS ? [{
-                        loader: 'eslint-loader',
-                        options: {
-                            fix: true,
-                            cache: !PROD,
-                            quiet: PROD,
-                        },
-                    }] : []),
-                ],
+                loader: 'eslint-loader',
+                options: { fix: true, cache: !PROD, quiet: PROD },
+            }] : []),
+            {
+                test: /\.js$/i,
+                exclude: /(node_modules)/,
+                loader: 'babel-loader',
+                options: {
+                    presets: [['airbnb', {
+                        debug: DEBUG || PROD,
+                        targets: { browsers: BROWSERS },
+                    }]],
+                    forceEnv: NODE_ENV,
+                    cacheDirectory: !PROD,
+                },
             },
             // image loaders
             {
@@ -363,9 +356,7 @@ module.exports = {
                     fallback: [
                         {
                             loader: 'style-loader',
-                            options: {
-                                sourceMap: USE_SOURCE_MAP,
-                            },
+                            options: { sourceMap: USE_SOURCE_MAP },
                         },
                     ],
                     use: [
@@ -374,9 +365,7 @@ module.exports = {
                             options: {
                                 sourceMap: USE_SOURCE_MAP,
                                 minimize: (PROD ? {
-                                    discardComments: {
-                                        removeAll: true,
-                                    },
+                                    discardComments: { removeAll: true },
                                 } : false),
                             },
                         },
