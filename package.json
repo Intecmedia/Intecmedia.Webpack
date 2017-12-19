@@ -25,20 +25,19 @@
         "server-debug": "cross-env NODE_ENV=development DEBUG=1 webpack-dev-server --hot --inline -d -w",
         "server-prod": "cross-env NODE_ENV=production DEBUG=0 webpack-dev-server --hot --inline -p --optimize-minimize -w",
         "build": "npm-run-all nocache js-lint css-format css-lint prod html-lint",
+        "browserslist": "npx browserslist",
         "start": "npm run build"
     },
     "author": "Dmitry Pyatkov",
     "license": "MIT",
     "browserslist": [
-        "last 2 Edge versions",
-        "last 2 Explorer versions",
-        "last 2 Chrome versions",
-        "last 2 ChromeAndroid versions",
-        "last 2 Firefox versions",
-        "last 2 FirefoxAndroid versions",
-        "last 2 Opera versions",
-        "last 2 iOS versions",
-        "last 2 Safari versions"
+        "last 2 Edge major versions",
+        "last 2 Explorer major versions",
+        "last 3 Chrome major versions",
+        "last 3 Firefox major versions",
+        "last 3 Opera major versions",
+        "last 3 iOS major versions",
+        "last 3 Safari major versions"
     ],
     "dependencies": {
         "autoprefixer": "latest",
