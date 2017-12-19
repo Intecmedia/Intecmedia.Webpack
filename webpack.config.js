@@ -270,6 +270,7 @@ module.exports = {
                         options: {
                             plugins: [
                                 { cleanupIDs: false },
+                                { convertShapeToPath: false },
                                 { removeViewBox: false },
                                 { removeAttrs: { attrs: 'data\\-.*' } },
                             ],
