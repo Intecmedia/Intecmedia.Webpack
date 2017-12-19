@@ -167,13 +167,15 @@ module.exports = {
             new FaviconsPlugin.AppIcon({
                 logo: './.favicons-source-512x512.png',
                 prefix: 'img/favicon/',
-                background: '#fff',
-                theme_color: '#fff',
+                background: APP_CONFIG.BACKGROUND_COLOR,
+                theme_color: APP_CONFIG.THEME_COLOR,
                 persistentCache: !(PROD || DEBUG),
             }),
             new FaviconsPlugin.FavIcon({
                 logo: './.favicons-source-32x32.png',
                 prefix: 'img/favicon/',
+                background: APP_CONFIG.BACKGROUND_COLOR,
+                theme_color: APP_CONFIG.THEME_COLOR,
                 persistentCache: !(PROD || DEBUG),
             }),
             new ManifestPlugin({
