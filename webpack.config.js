@@ -269,6 +269,7 @@ module.exports = {
                         loader: 'svgo-loader',
                         options: {
                             plugins: [
+                                { cleanupIDs: false },
                                 { removeViewBox: false },
                                 { removeAttrs: { attrs: 'data\\-.*' } },
                             ],
