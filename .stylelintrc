@@ -43,7 +43,7 @@
         }],
         "plugin/no-unsupported-browser-features": [true, {
             "severity": "warning",
-            "ignore": ["rem", "flexbox", "viewport-units"]
+            "ignore": ["rem", "flexbox", "viewport-units", "font-unicode-range"]
         }]
     }
 }
