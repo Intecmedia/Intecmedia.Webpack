@@ -17,7 +17,7 @@
     "indent-width": 4,
     "spec-char-escape": false,
     "tag-self-close": [
-        "rect", "circle", "ellipse", "line", "polyline", "polygon", "path", "use",
+        "rect", "circle", "ellipse", "line", "polyline", "polygon", "path", "use", "image",
         "text", "tspan",
         "feBlend", "feColorMatrix", "feComponentTransfer", "feComposite",
         "feConvolveMatrix", "feDiffuseLighting", "feDisplacementMap", "feFlood",
