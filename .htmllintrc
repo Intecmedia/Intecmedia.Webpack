@@ -16,7 +16,15 @@
     "indent-style": "spaces",
     "indent-width": 4,
     "spec-char-escape": false,
-    "tag-self-close": ["rect", "circle", "ellipse", "line", "polyline", "polygon", "path"],
+    "tag-self-close": [
+        "rect", "circle", "ellipse", "line", "polyline", "polygon", "path",
+        "text", "tspan",
+        "feBlend", "feColorMatrix", "feComponentTransfer", "feComposite",
+        "feConvolveMatrix", "feDiffuseLighting", "feDisplacementMap", "feFlood",
+        "feGaussianBlur", "feImage", "feMerge", "feMorphology", "feOffset", "feSpecularLighting",
+        "feTile", "feTurbulence", "feDistantLight", "fePointLight", "feSpotLight",
+        "linearGradient", "radialGradient", "stop"
+    ],
     "tag-bans": ["style"],
     "label-req-for": true,
     "input-req-label": true
