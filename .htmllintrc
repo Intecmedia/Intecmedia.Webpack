@@ -16,7 +16,7 @@
     "indent-style": "spaces",
     "indent-width": 4,
     "spec-char-escape": false,
-    "tag-self-close": "never",
+    "tag-self-close": ["rect", "circle", "ellipse", "line", "polyline", "polygon", "path"],
     "tag-bans": ["style"],
     "label-req-for": true,
     "input-req-label": true
