@@ -2,11 +2,11 @@
 .wysiwyg {
     // image with caption
     figure {
-        @extend .thumbnail;
+        @extend .img-thumbnail;
 
         > figcaption {
-            color: $thumbnail-caption-color;
-            padding: $thumbnail-caption-padding;
+            color: $figure-caption-color;
+            font-size: $figure-caption-font-size;
         }
     }
     // default tables
@@ -39,11 +39,11 @@
         position: relative;
 
         &::before {
-            color: $text-color;
+            color: $body-color;
             content: '\2022';
             font-family: inherit;
-            font-size: $font-size-large;
-            line-height: $line-height-computed;
+            font-size: $font-size-base;
+            line-height: $line-height-base;
             margin-left: -$font-size-base;
             position: absolute;
             text-align: center;
@@ -55,13 +55,13 @@
     img[align='left'],
     img.pull-left {
         float: left;
-        margin-right: $padding-base-horizontal;
+        margin-right: $font-size-base;
     }
 
     img[align='right'],
     img.pull-right {
         float: right;
-        margin-left: $padding-base-horizontal;
+        margin-left: $font-size-base;
     }
 
     .text-center img,
