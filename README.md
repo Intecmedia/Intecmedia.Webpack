@@ -23,6 +23,7 @@
 * Handlebars для сборки HTML
 
 ## Обзор комманд:
+* **npm run browserslist** -- список поддерживаемых браузеров
 * **npm run dev** -- сборка в development-режиме и debug=off, самый быстрый способ
 * **npm run debug** -- сборка в development-режиме и debug=on, медленный способ
 * **npm run prod** -- сборка в production-режиме и debug=off, самый медленный способ
