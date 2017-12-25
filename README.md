@@ -19,7 +19,7 @@
 * Модульный Modernizr через [.modernizrrc](https://github.com/Intecmedia/Intecmedia.Webpack/blob/master/.modernizrrc)
 * Imagemin для сжатия гарфики: svg, png, jpeg, gif
 * Автоматический base64-url ресурсов
-* Handlebars для сборки HTML
+* [Nunjucks](https://mozilla.github.io/nunjucks/) для сборки HTML
 
 ## Обзор комманд:
 * **npm run browserslist** -- список поддерживаемых браузеров
