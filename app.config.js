@@ -1,4 +1,5 @@
 module.exports = {
+    TITLE: 'Intecmedia.Webpack',
     PUBLIC_PATH: '/',
     USE_FAVICONS: true,
     USE_SERVICE_WORKER: false,

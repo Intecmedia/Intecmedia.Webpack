@@ -50,7 +50,7 @@ const ManifestPlugin = require('./manifest.js');
 const banner = new String(''); // eslint-disable-line no-new-wrappers
 banner.toString = () => `NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chunkhash]`;
 
-const HTML_OPTIONS = {
+const HTML_CONTEXT = {
     DEBUG,
     NODE_ENV,
     ...APP_CONFIG,
@@ -197,7 +197,6 @@ module.exports = {
             hash: true,
             cache: !(PROD || DEBUG),
             title: PACKAGE_NAME,
-            ...HTML_OPTIONS,
         }))),
         new HtmlPrettyPlugin({
             ocd: true,
@@ -261,6 +260,7 @@ module.exports = {
     module: {
         rules: [
             // svg loaders
+            /*
             {
                 test: /(\.svg|\.svg\.html)$/i,
                 exclude: /(fonts|font|img|images)/i,
@@ -279,15 +279,13 @@ module.exports = {
                     },
                 ],
             },
+*/
             // html loaders
             {
                 test: /\.html$/i,
                 exclude: /\.svg\.html$/i,
-                loader: 'handlebars-loader',
-                options: {
-                    debug: DEBUG,
-                    helperDirs: path.join(__dirname, 'source', 'helpers'),
-                },
+                loader: path.resolve(__dirname, 'html-template.js'),
+                options: { searchPaths: [path.resolve(__dirname, 'source')], context: HTML_CONTEXT },
             },
             // javascript loaders
             {

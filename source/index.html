@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html class="no-js" lang="{{ htmlWebpackPlugin.options.LANGUAGE }}">
+<html class="no-js" lang="{{ LANGUAGE }}">
 <head>
-{{> partials/head.html title='Example Title' }}
+    {% include 'partials/head.html' %}
 </head>
 <body>
 
@@ -24,7 +24,7 @@
 
                     <div class="wysiwyg">
                         <p>Content from WYSIWYG-editor</p>
-                        <img src="{{ htmlWebpackPlugin.options.PUBLIC_PATH }}img/upload/intecmedia-banner.jpg" alt="IntecMedia">
+                        <img src="{{ PUBLIC_PATH }}img/upload/intecmedia-banner.jpg" alt="IntecMedia">
                     </div>
 
                 </div>
@@ -40,6 +40,6 @@
         </div>
     </footer>
 
-{{> partials/endbody.html }}
+    {% include 'partials/endbody.html' %}
 </body>
 </html>
