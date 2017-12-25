@@ -259,33 +259,12 @@ module.exports = {
 
     module: {
         rules: [
-            // svg loaders
-            /*
-            {
-                test: /(\.svg|\.svg\.html)$/i,
-                exclude: /(fonts|font|img|images)/i,
-                loader: [
-                    { loader: 'handlebars-loader', options: { debug: DEBUG } },
-                    {
-                        loader: 'svgo-loader',
-                        options: {
-                            plugins: [
-                                { cleanupIDs: false },
-                                { convertShapeToPath: false },
-                                { removeViewBox: false },
-                                { removeAttrs: { attrs: 'data\\-.*' } },
-                            ],
-                        },
-                    },
-                ],
-            },
-*/
             // html loaders
             {
                 test: /\.html$/i,
                 exclude: /\.svg\.html$/i,
                 loader: path.resolve(__dirname, 'html-template.js'),
-                options: { searchPaths: [path.resolve(__dirname, 'source')], context: HTML_CONTEXT },
+                options: { context: HTML_CONTEXT, searchPaths: [path.resolve(__dirname, 'source')] },
             },
             // javascript loaders
             {
