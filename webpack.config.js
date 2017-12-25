@@ -50,10 +50,13 @@ const ManifestPlugin = require('./manifest.js');
 const banner = new String(''); // eslint-disable-line no-new-wrappers
 banner.toString = () => `NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chunkhash]`;
 
+const SITEMAP = glob.sync('./source/**/*.html').filter(filename => !/partials/.test(filename));
+
 const HTML_CONTEXT = {
+    ...APP,
     DEBUG,
     NODE_ENV,
-    ...APP,
+    SITEMAP: SITEMAP.map(filename => slash(path.sep + path.relative('./source', filename))),
     SERVICE_WORKER_HASH: (APP.USE_SERVICE_WORKER ? () => {
         const hash = new MD5();
         const filename = path.join(OUTPUT_PATH, SERVICE_WORKER_BASE, 'service-worker.js');
@@ -189,9 +192,9 @@ module.exports = {
                 },
             }),
         ] : []),
-        ...(glob.sync('./source/*.html').map(template => new HtmlWebpackPlugin({
-            filename: path.basename(template),
-            template,
+        ...(SITEMAP.map(filename => new HtmlWebpackPlugin({
+            filename: path.basename(filename),
+            template: filename,
             inject: true,
             minify: APP.HTML_PRETTY ? false : {
                 html5: true,
@@ -204,7 +207,6 @@ module.exports = {
             },
             hash: true,
             cache: !(PROD || DEBUG),
-            title: PACKAGE_NAME,
         }))),
         ...(APP.HTML_PRETTY ? [new HtmlPrettyPlugin({
             ocd: true,

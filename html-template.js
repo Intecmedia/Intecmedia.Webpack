@@ -1,5 +1,6 @@
 const path = require('path');
 const SVGO = require('svgo');
+const slash = require('slash');
 const loaderUtils = require('loader-utils');
 const nunjucks = require('nunjucks');
 const frontMatter = require('front-matter');
@@ -50,8 +51,16 @@ module.exports = function HtmlTemplateLoader(template) {
 
     const templateData = frontMatter(template);
 
+    const pageContext = {
+        PAGE: templateData.attributes,
+    };
+    const relativePath = path.relative('./source', loaderThis.resourcePath);
+    pageContext.PAGE.RESOURCE_PATH = slash(path.sep + relativePath);
+
+    console.log(`[html-template] processing ${loaderThis.resourcePath}`);
+
     const nunjucksTemplate = nunjucks.compile(templateData.body, nunjucksEnvironment);
-    const nunjucksHtml = nunjucksTemplate.render(deepAssign({}, nunjucksContext, { PAGE: templateData.attributes }));
+    const nunjucksHtml = nunjucksTemplate.render(deepAssign({}, nunjucksContext, pageContext));
 
     return `export default ${JSON.stringify(nunjucksHtml)}`;
 };
