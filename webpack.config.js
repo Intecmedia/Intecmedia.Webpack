@@ -264,7 +264,7 @@ module.exports = {
                 test: /\.html$/i,
                 exclude: /\.svg\.html$/i,
                 loader: path.resolve(__dirname, 'html-template.js'),
-                options: { context: HTML_CONTEXT, searchPaths: [path.resolve(__dirname, 'source')] },
+                options: { context: { APP: HTML_CONTEXT }, searchPaths: [path.resolve(__dirname, 'source')] },
             },
             // javascript loaders
             {

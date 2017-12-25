@@ -1,4 +1,4 @@
-{% if USE_SERVICE_WORKER %}
+{% if APP.USE_SERVICE_WORKER %}
     <script type="text/javascript">
         ('serviceWorker' in navigator) && (function(baseURL, hash) {
             navigator.serviceWorker.getRegistrations().then(function(registrations) {
@@ -15,6 +15,6 @@
                     localStorage.setItem('SERVICE_WORKER_HASH', hash);
                 }
             });
-        })(document.location.protocol + '//' + document.location.host + '/service-worker.js', '{{ SERVICE_WORKER_HASH }}');
+        })(document.location.protocol + '//' + document.location.host + '/service-worker.js', '{{ APP.SERVICE_WORKER_HASH }}');
     </script>
 {% endif %}

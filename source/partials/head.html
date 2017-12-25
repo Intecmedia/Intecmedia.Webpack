@@ -1,7 +1,7 @@
 <meta charset="utf-8">
-<title>{{ PAGE.title }} :: {{ TITLE }}</title>
-<meta name="description" content="{{ path.description }}">
+<title>{{ PAGE.title }} :: {{ APP.TITLE }}</title>
+<meta name="description" content="{{ PAGE.description }}">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-{% if USE_FAVICONS %}
-<link rel="manifest" href="{{ PUBLIC_PATH }}img/favicon/manifest.json">
+{% if APP.USE_FAVICONS %}
+<link rel="manifest" href="{{ APP.PUBLIC_PATH }}img/favicon/manifest.json">
 {% endif %}
