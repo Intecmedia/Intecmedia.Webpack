@@ -200,7 +200,7 @@ module.exports = {
         }))),
         new HtmlPrettyPlugin({
             ocd: true,
-            unformatted: ['code', 'pre'],
+            unformatted: ['code', 'pre', 'textarea', 'svg'],
             indent_inner_html: false,
             indent_size: 4,
         }),

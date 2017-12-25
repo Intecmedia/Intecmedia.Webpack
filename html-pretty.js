@@ -3,7 +3,7 @@ const deepAssign = require('deep-assign');
 
 const DEFAULT_OPTIONS = {
     ocd: false,
-    unformatted: ['code', 'pre', 'em', 'strong', 'span'],
+    unformatted: [],
     indent_inner_html: true,
     indent_char: ' ',
     indent_size: 4,

@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<html class="no-js" lang="{{ LANGUAGE }}">
-<head>
-    {% include 'partials/head.html' %}
-</head>
-<body>
+---
+title: Index
+description: 
+---
+{% extends "partials/layout.html" %}
+
+{% block body %}
 
     <header class="header">
         <div class="container">
@@ -40,6 +41,4 @@
         </div>
     </footer>
 
-    {% include 'partials/endbody.html' %}
-</body>
-</html>
+{% endblock %}

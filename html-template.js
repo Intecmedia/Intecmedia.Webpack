@@ -2,6 +2,8 @@ const path = require('path');
 const SVGO = require('svgo');
 const loaderUtils = require('loader-utils');
 const nunjucks = require('nunjucks');
+const frontMatter = require('front-matter');
+const deepAssign = require('deep-assign');
 const { FileSystemLoader } = require('nunjucks/src/loaders');
 
 const svgo = new SVGO({
@@ -25,7 +27,7 @@ module.exports = function HtmlTemplateLoader(template) {
     const originalGetSource = nunjucksLoader.getSource;
     nunjucksLoader.getSource = function getSource(...args) {
         const source = originalGetSource.apply(this, args);
-        loaderThis.addDependency(source.path);
+        if (!source.path) return source;
 
         const extension = path.extname(source.path);
         if (extension === '.svg') {
@@ -38,14 +40,18 @@ module.exports = function HtmlTemplateLoader(template) {
             while (!optimizeDone) { process._tickCallback(); }
         }
 
+        loaderThis.addDependency(source.path);
+
         return source;
     };
 
     const nunjucksEnvironment = new nunjucks.Environment(nunjucksLoader);
     nunjucks.configure(null, { watch: false });
 
-    const nunjucksTemplate = nunjucks.compile(template, nunjucksEnvironment);
-    const nunjucksHtml = nunjucksTemplate.render(nunjucksContext);
+    const templateData = frontMatter(template);
+
+    const nunjucksTemplate = nunjucks.compile(templateData.body, nunjucksEnvironment);
+    const nunjucksHtml = nunjucksTemplate.render(deepAssign({}, nunjucksContext, { PAGE: templateData.attributes }));
 
     return `export default ${JSON.stringify(nunjucksHtml)}`;
 };
