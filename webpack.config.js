@@ -158,7 +158,7 @@ module.exports = {
         new WebpackNotifierPlugin({
             alwaysNotify: true,
             contentImage: path.resolve('./.favicons-source-512x512.png'),
-            title: PACKAGE_NAME,
+            title: APP.TITLE,
         }),
         ...(USE_LINTERS ? [new StyleLintPlugin({
             configFile: '.stylelintrc',
@@ -207,6 +207,7 @@ module.exports = {
             },
             hash: true,
             cache: !(PROD || DEBUG),
+            title: APP.TITLE,
         }))),
         ...(APP.HTML_PRETTY ? [new HtmlPrettyPlugin({
             ocd: true,
