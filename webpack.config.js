@@ -17,18 +17,18 @@ const USE_LINTERS = PROD || DEBUG;
 const { name: PACKAGE_NAME, browserslist: BROWSERS } = require('./package.json');
 
 const OUTPUT_PATH = path.resolve(__dirname, 'build');
-const APP_CONFIG = require('./app.config.js');
+const APP = require('./app.config.js');
 
-const SERVICE_WORKER_BASE = slash(path.relative(APP_CONFIG.PUBLIC_PATH, '/'));
+const SERVICE_WORKER_BASE = slash(path.relative(APP.PUBLIC_PATH, '/'));
 
 console.log(`Name: ${PACKAGE_NAME}`);
 console.log(`Output: ${OUTPUT_PATH}`);
-console.log(`Public: ${APP_CONFIG.PUBLIC_PATH}`);
+console.log(`Public: ${APP.PUBLIC_PATH}`);
 console.log(`Enviroment: ${NODE_ENV}`);
 console.log(`Debug: ${DEBUG ? 'enabled' : 'disabled'}`);
 console.log(`Linters: ${USE_LINTERS ? 'enabled' : 'disabled'}`);
 console.log(`Source maps: ${USE_SOURCE_MAP ? 'enabled' : 'disabled'}`);
-console.log(`App config: ${JSON.stringify(APP_CONFIG, null, '    ')}`);
+console.log(`App config: ${JSON.stringify(APP, null, '    ')}`);
 
 if (PROD && DEBUG) {
     throw new Error(`Dont use NODE_ENV=${NODE_ENV} and DEBUG=${DEBUG} together`);
@@ -53,8 +53,8 @@ banner.toString = () => `NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chun
 const HTML_CONTEXT = {
     DEBUG,
     NODE_ENV,
-    ...APP_CONFIG,
-    SERVICE_WORKER_HASH: (APP_CONFIG.USE_SERVICE_WORKER ? () => {
+    ...APP,
+    SERVICE_WORKER_HASH: (APP.USE_SERVICE_WORKER ? () => {
         const hash = new MD5();
         const filename = path.join(OUTPUT_PATH, SERVICE_WORKER_BASE, 'service-worker.js');
         if (fs.existsSync(filename)) {
@@ -106,7 +106,7 @@ module.exports = {
 
     output: {
         path: OUTPUT_PATH,
-        publicPath: APP_CONFIG.PUBLIC_PATH,
+        publicPath: APP.PUBLIC_PATH,
         filename: 'js/app.min.js',
     },
 
@@ -164,28 +164,28 @@ module.exports = {
             syntax: 'scss',
             quiet: PROD,
         })] : []),
-        ...(APP_CONFIG.USE_FAVICONS ? [
+        ...(APP.USE_FAVICONS ? [
             new FaviconsPlugin.AppIcon({
                 logo: './.favicons-source-512x512.png',
                 prefix: 'img/favicon/',
-                background: APP_CONFIG.BACKGROUND_COLOR,
-                theme_color: APP_CONFIG.THEME_COLOR,
+                background: APP.BACKGROUND_COLOR,
+                theme_color: APP.THEME_COLOR,
                 persistentCache: !(PROD || DEBUG),
             }),
             new FaviconsPlugin.FavIcon({
                 logo: './.favicons-source-32x32.png',
                 prefix: 'img/favicon/',
-                background: APP_CONFIG.BACKGROUND_COLOR,
-                theme_color: APP_CONFIG.THEME_COLOR,
+                background: APP.BACKGROUND_COLOR,
+                theme_color: APP.THEME_COLOR,
                 persistentCache: !(PROD || DEBUG),
             }),
             new ManifestPlugin({
                 path: path.join(OUTPUT_PATH, '/img/favicon/manifest.json'),
                 replace: {
-                    lang: APP_CONFIG.LANGUAGE,
-                    start_url: APP_CONFIG.START_URL,
-                    theme_color: APP_CONFIG.THEME_COLOR,
-                    background_color: APP_CONFIG.BACKGROUND_COLOR,
+                    lang: APP.LANGUAGE,
+                    start_url: APP.START_URL,
+                    theme_color: APP.THEME_COLOR,
+                    background_color: APP.BACKGROUND_COLOR,
                 },
             }),
         ] : []),
@@ -193,18 +193,26 @@ module.exports = {
             filename: path.basename(template),
             template,
             inject: true,
-            minify: false,
+            minify: APP.HTML_PRETTY ? false : {
+                html5: true,
+                collapseWhitespace: true,
+                conservativeCollapse: false,
+                removeComments: true,
+                decodeEntities: true,
+                minifyCSS: false,
+                minifyJS: false,
+            },
             hash: true,
             cache: !(PROD || DEBUG),
             title: PACKAGE_NAME,
         }))),
-        new HtmlPrettyPlugin({
+        ...(APP.HTML_PRETTY ? [new HtmlPrettyPlugin({
             ocd: true,
             unformatted: ['code', 'pre', 'textarea', 'svg'],
             indent_inner_html: false,
             indent_size: 4,
-        }),
-        ...(APP_CONFIG.USE_SERVICE_WORKER ? [new SWPrecacheWebpackPlugin({
+        })] : []),
+        ...(APP.USE_SERVICE_WORKER ? [new SWPrecacheWebpackPlugin({
             minify: PROD,
             handleFetch: true,
             filename: `${SERVICE_WORKER_BASE}/service-worker.js`,
@@ -222,7 +230,7 @@ module.exports = {
                 handler: 'networkFirst',
                 options: { debug: !PROD },
             }, {
-                urlPattern: new RegExp(`${APP_CONFIG.PUBLIC_PATH}(js|css|fonts|img)/(.*)`),
+                urlPattern: new RegExp(`${APP.PUBLIC_PATH}(js|css|fonts|img)/(.*)`),
                 handler: 'cacheFirst',
                 options: { debug: !PROD },
             }],

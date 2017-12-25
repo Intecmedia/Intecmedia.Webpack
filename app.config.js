@@ -7,4 +7,5 @@ module.exports = {
     START_URL: '/?utm_source=app_manifest',
     THEME_COLOR: '#fff',
     BACKGROUND_COLOR: '#fff',
+    HTML_PRETTY: true,
 };
