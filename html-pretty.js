@@ -18,7 +18,7 @@ module.exports = class HtmlPrettyPlugin {
     apply(compiler) {
         compiler.plugin('compilation', (compilation) => {
             compilation.plugin('html-webpack-plugin-after-html-processing', (htmlPluginData, callback) => {
-                /* eslint no-param-reassign: "off" */
+                // eslint-disable-next-line no-param-reassign
                 htmlPluginData.html = pretty(htmlPluginData.html, this.options);
                 callback(null, htmlPluginData);
             });

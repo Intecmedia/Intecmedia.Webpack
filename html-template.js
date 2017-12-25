@@ -34,7 +34,7 @@ module.exports = function HtmlTemplateLoader(template) {
                 optimizeDone = true;
                 source.src = result.data;
             });
-            /* eslint no-underscore-dangle: "off" */
+            // eslint-disable-next-line no-underscore-dangle
             while (!optimizeDone) { process._tickCallback(); }
         }
 

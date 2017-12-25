@@ -1,4 +1,3 @@
-/* eslint global-require: "off" */
 const fs = require('fs');
 const deepAssign = require('deep-assign');
 
@@ -15,8 +14,8 @@ module.exports = class ManifestPlugin {
     apply(compiler) {
         const { options } = this;
         compiler.plugin('done', () => {
-            /* eslint import/no-dynamic-require: "off" */
             if (fs.existsSync(options.path)) {
+                // eslint-disable-next-line import/no-dynamic-require,global-require
                 const manifestOriginal = require(options.path);
                 const manifestReplaced = deepAssign({}, manifestOriginal, options.replace);
                 fs.writeFileAsync(options.path, JSON.stringify(manifestReplaced, null, 4));
