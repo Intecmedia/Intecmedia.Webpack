@@ -169,6 +169,7 @@ module.exports = {
         })] : []),
         ...(APP.USE_FAVICONS ? [
             new FaviconsPlugin.AppIcon({
+                title: APP.TITLE,
                 logo: './.favicons-source-512x512.png',
                 prefix: 'img/favicon/',
                 background: APP.BACKGROUND_COLOR,
@@ -176,6 +177,7 @@ module.exports = {
                 persistentCache: !(PROD || DEBUG),
             }),
             new FaviconsPlugin.FavIcon({
+                title: APP.TITLE,
                 logo: './.favicons-source-32x32.png',
                 prefix: 'img/favicon/',
                 background: APP.BACKGROUND_COLOR,
