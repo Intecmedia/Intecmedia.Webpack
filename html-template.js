@@ -16,6 +16,18 @@ const svgo = new SVGO({
     ],
 });
 
+const optimizeSvg = (svgstr, svgpath) => {
+    let optimized;
+    let done = false;
+    svgo.optimize(svgstr, { path: svgpath }).then((result) => {
+        done = true;
+        optimized = result.data;
+    });
+    // eslint-disable-next-line no-underscore-dangle
+    while (!done) { process._tickCallback(); }
+    return optimized;
+};
+
 module.exports = function HtmlTemplateLoader(template) {
     const loaderThis = this;
     const options = loaderUtils.getOptions(loaderThis);
@@ -32,13 +44,7 @@ module.exports = function HtmlTemplateLoader(template) {
 
         const extension = path.extname(source.path);
         if (extension === '.svg') {
-            let optimizeDone = false;
-            svgo.optimize(source.src, { path: source.path }).then((result) => {
-                optimizeDone = true;
-                source.src = result.data;
-            });
-            // eslint-disable-next-line no-underscore-dangle
-            while (!optimizeDone) { process._tickCallback(); }
+            source.src = optimizeSvg(source.src, source.path);
         }
 
         loaderThis.addDependency(source.path);
