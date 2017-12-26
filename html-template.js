@@ -57,7 +57,7 @@ module.exports = function HtmlTemplateLoader(template) {
     const relativePath = path.relative('./source', loaderThis.resourcePath);
     pageContext.PAGE.RESOURCE_PATH = slash(path.sep + relativePath);
 
-    console.log(`[html-template] processing ${loaderThis.resourcePath}`);
+    console.log(`[html-template] processing '${loaderThis.resourcePath}'`);
 
     const nunjucksTemplate = nunjucks.compile(templateData.body, nunjucksEnvironment);
     const nunjucksHtml = nunjucksTemplate.render(deepAssign({}, nunjucksContext, pageContext));

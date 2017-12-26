@@ -19,6 +19,7 @@ module.exports = class ManifestPlugin {
                 const manifestOriginal = require(options.path);
                 const manifestReplaced = deepAssign({}, manifestOriginal, options.replace);
                 fs.writeFileAsync(options.path, JSON.stringify(manifestReplaced, null, 4));
+                console.log(`[manifest.json] processing '${options.path}'`);
             }
         });
     }
