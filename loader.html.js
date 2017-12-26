@@ -28,14 +28,27 @@ const optimizeSvg = (svgstr, svgpath) => {
     return optimized;
 };
 
+const DEFAULT_OPTIONS = {
+    context: {},
+    noCache: true,
+    searchPaths: ['.'],
+    configure: {
+        autoescape: true,
+        trimBlocks: true,
+        lstripBlocks: false,
+        watch: false,
+        noCache: true,
+    },
+};
+
 module.exports = function HtmlLoader(template) {
     const loaderThis = this;
-    const options = loaderUtils.getOptions(loaderThis);
+    const options = deepAssign({}, DEFAULT_OPTIONS, loaderUtils.getOptions(loaderThis));
 
     const nunjucksSearchPaths = options.searchPaths;
     const nunjucksContext = options.context;
 
-    const nunjucksLoader = new FileSystemLoader(nunjucksSearchPaths);
+    const nunjucksLoader = new FileSystemLoader(nunjucksSearchPaths, { noCache: options.noCache });
 
     const originalGetSource = nunjucksLoader.getSource;
     nunjucksLoader.getSource = function getSource(...args) {
@@ -53,7 +66,7 @@ module.exports = function HtmlLoader(template) {
     };
 
     const nunjucksEnvironment = new nunjucks.Environment(nunjucksLoader);
-    nunjucks.configure(null, { watch: false });
+    nunjucks.configure(null, options.configure);
 
     const templateData = frontMatter(template);
 

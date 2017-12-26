@@ -276,7 +276,11 @@ module.exports = {
             {
                 test: /\.html$/i,
                 loader: './loader.html.js',
-                options: { context: { APP: HTML_CONTEXT }, searchPaths: [path.resolve(__dirname, 'source')] },
+                options: {
+                    noCache: PROD,
+                    context: { APP: HTML_CONTEXT },
+                    searchPaths: [path.resolve(__dirname, 'source')],
+                },
             },
             // javascript loaders
             {
