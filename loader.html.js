@@ -28,7 +28,7 @@ const optimizeSvg = (svgstr, svgpath) => {
     return optimized;
 };
 
-module.exports = function HtmlTemplateLoader(template) {
+module.exports = function HtmlLoader(template) {
     const loaderThis = this;
     const options = loaderUtils.getOptions(loaderThis);
 
@@ -63,7 +63,7 @@ module.exports = function HtmlTemplateLoader(template) {
     const relativePath = path.relative('./source', loaderThis.resourcePath);
     pageContext.PAGE.RESOURCE_PATH = slash(path.sep + relativePath);
 
-    console.log(`[html-template] processing '${loaderThis.resourcePath}'`);
+    console.log(`[loader-html] processing '${loaderThis.resourcePath}'`);
 
     const nunjucksTemplate = nunjucks.compile(templateData.body, nunjucksEnvironment);
     const nunjucksHtml = nunjucksTemplate.render(deepAssign({}, nunjucksContext, pageContext));

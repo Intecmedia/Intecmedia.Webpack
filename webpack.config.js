@@ -43,9 +43,9 @@ const { default: ImageminPlugin } = require('imagemin-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const FaviconsPlugin = require('./favicons.js');
-const HtmlPrettyPlugin = require('./html-pretty.js');
-const ManifestPlugin = require('./manifest.js');
+const FaviconsPlugin = require('./plugin.favicons.js');
+const PrettyPlugin = require('./plugin.pretty.js');
+const ManifestPlugin = require('./plugin.manifest.js');
 
 const banner = new String(''); // eslint-disable-line no-new-wrappers
 banner.toString = () => `NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chunkhash]`;
@@ -211,7 +211,7 @@ module.exports = {
             cache: !(PROD || DEBUG),
             title: APP.TITLE,
         }))),
-        ...(APP.HTML_PRETTY ? [new HtmlPrettyPlugin({
+        ...(APP.HTML_PRETTY ? [new PrettyPlugin({
             ocd: true,
             unformatted: ['code', 'pre', 'textarea', 'svg'],
             indent_inner_html: false,
@@ -275,7 +275,7 @@ module.exports = {
             // html loaders
             {
                 test: /\.html$/i,
-                loader: './html-template.js',
+                loader: './loader.html.js',
                 options: { context: { APP: HTML_CONTEXT }, searchPaths: [path.resolve(__dirname, 'source')] },
             },
             // javascript loaders
