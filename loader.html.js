@@ -59,9 +59,7 @@ module.exports = function HtmlLoader(source) {
 
         return result;
     };
-
-    const environment = new nunjucks.Environment(loader);
-    nunjucks.configure(options.searchPath, options.configure);
+    const environment = new nunjucks.Environment(loader, options.configure);
 
     const content = frontMatter(source);
     const context = deepAssign({}, options.context, {
@@ -72,9 +70,13 @@ module.exports = function HtmlLoader(source) {
     });
 
     console.log(`[loader-html] processing '${self.resourcePath}'`);
-    const template = nunjucks.compile(content.body, environment);
-    template.render(context, (error, result) => {
-        if (error) throw error;
+    environment.renderString(content.body, context, (error, result) => {
+        if (error) {
+            if (error.message) {
+                error.message = error.message.replace(/^\(unknown path\)/, `(${self.resourcePath})`);
+            }
+            throw error;
+        }
         callback(null, `export default ${JSON.stringify(result)};`);
     });
 };
