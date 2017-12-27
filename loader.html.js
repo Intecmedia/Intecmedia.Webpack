@@ -41,45 +41,38 @@ const DEFAULT_OPTIONS = {
     },
 };
 
-module.exports = function HtmlLoader(template) {
+module.exports = function HtmlLoader(source) {
     const loaderThis = this;
     const options = deepAssign({}, DEFAULT_OPTIONS, loaderUtils.getOptions(loaderThis));
 
-    const nunjucksSearchPaths = options.searchPaths;
-    const nunjucksContext = options.context;
+    const loader = new FileSystemLoader(options.searchPaths, { noCache: options.noCache });
+    const originalGetSource = loader.getSource;
+    loader.getSource = function getSource(...args) {
+        const result = originalGetSource.apply(this, args);
+        if (!result.path) return source;
 
-    const nunjucksLoader = new FileSystemLoader(nunjucksSearchPaths, { noCache: options.noCache });
-
-    const originalGetSource = nunjucksLoader.getSource;
-    nunjucksLoader.getSource = function getSource(...args) {
-        const source = originalGetSource.apply(this, args);
-        if (!source.path) return source;
-
-        const extension = path.extname(source.path);
+        const extension = path.extname(result.path);
         if (extension === '.svg') {
-            source.src = optimizeSvg(source.src, source.path);
+            result.src = optimizeSvg(result.src, result.path);
         }
 
-        loaderThis.addDependency(source.path);
+        loaderThis.addDependency(result.path);
 
-        return source;
+        return result;
     };
 
-    const nunjucksEnvironment = new nunjucks.Environment(nunjucksLoader);
+    const environment = new nunjucks.Environment(loader);
     nunjucks.configure(null, options.configure);
 
-    const templateData = frontMatter(template);
+    const content = frontMatter(source);
 
-    const pageContext = {
-        PAGE: templateData.attributes,
-    };
+    const context = deepAssign({}, options.context, { PAGE: content.attributes });
     const relativePath = path.relative('./source', loaderThis.resourcePath);
-    pageContext.PAGE.RESOURCE_PATH = slash(path.sep + relativePath);
+    context.PAGE.RESOURCE_PATH = slash(path.sep + relativePath);
 
     console.log(`[loader-html] processing '${loaderThis.resourcePath}'`);
 
-    const nunjucksTemplate = nunjucks.compile(templateData.body, nunjucksEnvironment);
-    const nunjucksHtml = nunjucksTemplate.render(deepAssign({}, nunjucksContext, pageContext));
+    const template = nunjucks.compile(content.body, environment);
 
-    return `export default ${JSON.stringify(nunjucksHtml)}`;
+    return `export default ${JSON.stringify(template.render(context))}`;
 };
