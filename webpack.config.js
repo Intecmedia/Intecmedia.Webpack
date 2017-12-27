@@ -279,7 +279,7 @@ module.exports = {
                 options: {
                     noCache: PROD,
                     context: { APP: HTML_CONTEXT },
-                    searchPaths: [path.resolve(__dirname, 'source')],
+                    searchPath: './source',
                 },
             },
             // javascript loaders

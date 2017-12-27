@@ -31,22 +31,22 @@ const optimizeSvg = (svgstr, svgpath) => {
 const DEFAULT_OPTIONS = {
     context: {},
     noCache: true,
-    searchPaths: ['.'],
+    searchPath: './source',
     configure: {
         autoescape: true,
         trimBlocks: true,
         lstripBlocks: false,
         watch: false,
-        noCache: true,
     },
 };
 
 module.exports = function HtmlLoader(source) {
-    const loaderThis = this;
-    const callback = loaderThis.async();
-    const options = deepAssign({}, DEFAULT_OPTIONS, loaderUtils.getOptions(loaderThis));
+    const self = this;
+    const callback = self.async();
+    const options = deepAssign({}, DEFAULT_OPTIONS, loaderUtils.getOptions(self));
+    const searchPath = path.join(__dirname, options.searchPath);
 
-    const loader = new FileSystemLoader(options.searchPaths, { noCache: options.noCache });
+    const loader = new FileSystemLoader(searchPath, { noCache: options.noCache });
     const originalGetSource = loader.getSource;
     loader.getSource = function getSource(...args) {
         const result = originalGetSource.apply(this, args);
@@ -57,24 +57,23 @@ module.exports = function HtmlLoader(source) {
             result.src = optimizeSvg(result.src, result.path);
         }
 
-        loaderThis.addDependency(result.path);
+        self.addDependency(result.path);
 
         return result;
     };
 
     const environment = new nunjucks.Environment(loader);
-    nunjucks.configure(null, options.configure);
+    nunjucks.configure(searchPath, options.configure);
 
     const content = frontMatter(source);
-
     const context = deepAssign({}, options.context, {
         PAGE: {
             ...content.attributes,
-            RESOURCE_PATH: slash(path.sep + path.relative('./source', loaderThis.resourcePath)),
+            RESOURCE_PATH: slash(path.sep + path.relative(options.searchPath, self.resourcePath)),
         },
     });
 
-    console.log(`[loader-html] processing '${loaderThis.resourcePath}'`);
+    console.log(`[loader-html] processing '${self.resourcePath}'`);
     const template = nunjucks.compile(content.body, environment);
     template.render(context, (error, result) => {
         if (error) throw error;
