@@ -31,7 +31,7 @@ const DEFAULT_OPTIONS = {
     context: {},
     noCache: true,
     searchPath: './source',
-    configure: {
+    environment: {
         autoescape: true,
         trimBlocks: true,
         lstripBlocks: false,
@@ -59,7 +59,7 @@ module.exports = function HtmlLoader(source) {
 
         return result;
     };
-    const environment = new nunjucks.Environment(loader, options.configure);
+    const environment = new nunjucks.Environment(loader, options.environment);
 
     const content = frontMatter(source);
     const context = deepAssign({}, options.context, {
@@ -75,8 +75,9 @@ module.exports = function HtmlLoader(source) {
             if (error.message) {
                 error.message = error.message.replace(/^\(unknown path\)/, `(${self.resourcePath})`);
             }
-            throw error;
+            callback(error);
+        } else {
+            callback(null, `export default ${JSON.stringify(result)};`);
         }
-        callback(null, `export default ${JSON.stringify(result)};`);
     });
 };
