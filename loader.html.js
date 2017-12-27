@@ -67,12 +67,15 @@ module.exports = function HtmlLoader(source) {
 
     const content = frontMatter(source);
 
-    const context = deepAssign({}, options.context, { PAGE: content.attributes });
-    const relativePath = path.relative('./source', loaderThis.resourcePath);
-    context.PAGE.RESOURCE_PATH = slash(path.sep + relativePath);
+    const context = deepAssign({}, options.context, {
+        PAGE: {
+            ...content.attributes,
+            RESOURCE_PATH: slash(path.sep + path.relative('./source', loaderThis.resourcePath)),
+        },
+    });
 
-    const template = nunjucks.compile(content.body, environment);
     console.log(`[loader-html] processing '${loaderThis.resourcePath}'`);
+    const template = nunjucks.compile(content.body, environment);
     template.render(context, (error, result) => {
         if (error) throw error;
         callback(null, `export default ${JSON.stringify(result)};`);
