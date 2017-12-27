@@ -5,7 +5,6 @@ const loaderUtils = require('loader-utils');
 const nunjucks = require('nunjucks');
 const frontMatter = require('front-matter');
 const deepAssign = require('deep-assign');
-const { FileSystemLoader } = require('nunjucks/src/loaders');
 
 const svgo = new SVGO({
     plugins: [
@@ -45,7 +44,7 @@ module.exports = function HtmlLoader(source) {
     const callback = self.async();
     const options = deepAssign({}, DEFAULT_OPTIONS, loaderUtils.getOptions(self));
 
-    const loader = new FileSystemLoader(options.searchPath, { noCache: options.noCache });
+    const loader = new nunjucks.FileSystemLoader(options.searchPath, { noCache: options.noCache });
     const originalGetSource = loader.getSource;
     loader.getSource = function getSource(...args) {
         const result = originalGetSource.apply(this, args);
