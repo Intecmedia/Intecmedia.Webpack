@@ -44,9 +44,8 @@ module.exports = function HtmlLoader(source) {
     const self = this;
     const callback = self.async();
     const options = deepAssign({}, DEFAULT_OPTIONS, loaderUtils.getOptions(self));
-    const searchPath = path.join(__dirname, options.searchPath);
 
-    const loader = new FileSystemLoader(searchPath, { noCache: options.noCache });
+    const loader = new FileSystemLoader(options.searchPath, { noCache: options.noCache });
     const originalGetSource = loader.getSource;
     loader.getSource = function getSource(...args) {
         const result = originalGetSource.apply(this, args);
@@ -63,7 +62,7 @@ module.exports = function HtmlLoader(source) {
     };
 
     const environment = new nunjucks.Environment(loader);
-    nunjucks.configure(searchPath, options.configure);
+    nunjucks.configure(options.searchPath, options.configure);
 
     const content = frontMatter(source);
     const context = deepAssign({}, options.context, {
