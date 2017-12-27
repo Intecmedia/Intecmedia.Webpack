@@ -43,6 +43,7 @@ const DEFAULT_OPTIONS = {
 
 module.exports = function HtmlLoader(source) {
     const loaderThis = this;
+    const callback = loaderThis.async();
     const options = deepAssign({}, DEFAULT_OPTIONS, loaderUtils.getOptions(loaderThis));
 
     const loader = new FileSystemLoader(options.searchPaths, { noCache: options.noCache });
@@ -70,9 +71,10 @@ module.exports = function HtmlLoader(source) {
     const relativePath = path.relative('./source', loaderThis.resourcePath);
     context.PAGE.RESOURCE_PATH = slash(path.sep + relativePath);
 
-    console.log(`[loader-html] processing '${loaderThis.resourcePath}'`);
-
     const template = nunjucks.compile(content.body, environment);
-
-    return `export default ${JSON.stringify(template.render(context))}`;
+    console.log(`[loader-html] processing '${loaderThis.resourcePath}'`);
+    template.render(context, (error, result) => {
+        if (error) throw error;
+        callback(null, `export default ${JSON.stringify(result)};`);
+    });
 };
