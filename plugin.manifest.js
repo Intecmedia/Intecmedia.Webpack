@@ -12,14 +12,13 @@ module.exports = class ManifestPlugin {
     }
 
     apply(compiler) {
-        const { options } = this;
         compiler.plugin('done', () => {
-            if (fs.existsSync(options.path)) {
+            if (fs.existsSync(this.options.path)) {
                 // eslint-disable-next-line import/no-dynamic-require,global-require
-                const manifestOriginal = require(options.path);
-                const manifestReplaced = deepAssign({}, manifestOriginal, options.replace);
-                fs.writeFileAsync(options.path, JSON.stringify(manifestReplaced, null, 4));
-                console.log(`[manifest.json] processing '${options.path}'`);
+                const manifestOriginal = require(this.options.path);
+                const manifestReplaced = deepAssign({}, manifestOriginal, this.options.replace);
+                fs.writeFileAsync(this.options.path, JSON.stringify(manifestReplaced, null, 4));
+                console.log(`[manifest.json] processing '${this.options.path}'`);
             }
         });
     }
