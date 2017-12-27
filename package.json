@@ -79,7 +79,7 @@
         "jquery": "latest",
         "json-loader": "latest",
         "loader-utils": "latest",
-        "md5.js": "latest",
+        "md5-file": "latest",
         "modernizr": "latest",
         "modernizr-loader": "latest",
         "node-sass": "latest",

@@ -4,7 +4,7 @@ const glob = require('glob');
 const path = require('path');
 const slash = require('slash');
 const webpack = require('webpack');
-const MD5 = require('md5.js');
+const md5File = require('md5-file');
 
 const DEBUG = ('DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0);
 const DEV_SERVER = path.basename(require.main.filename, '.js') === 'webpack-dev-server';
@@ -20,6 +20,7 @@ const OUTPUT_PATH = path.resolve(__dirname, 'build');
 const APP = require('./app.config.js');
 
 const SERVICE_WORKER_BASE = slash(path.relative(APP.PUBLIC_PATH, '/'));
+const SERVICE_WORKER_PATH = path.join(OUTPUT_PATH, SERVICE_WORKER_BASE, '/service-worker.js');
 
 console.log(`Name: ${PACKAGE_NAME}`);
 console.log(`Output: ${OUTPUT_PATH}`);
@@ -52,21 +53,6 @@ banner.toString = () => `NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chun
 
 const SITEMAP = glob.sync('./source/**/*.html').filter(filename => !/partials/.test(filename));
 
-const HTML_CONTEXT = {
-    ...APP,
-    DEBUG,
-    NODE_ENV,
-    SITEMAP: SITEMAP.map(filename => slash(path.sep + path.relative('./source', filename))),
-    SERVICE_WORKER_HASH: (APP.USE_SERVICE_WORKER ? () => {
-        const hash = new MD5();
-        const filename = path.join(OUTPUT_PATH, SERVICE_WORKER_BASE, 'service-worker.js');
-        if (fs.existsSync(filename)) {
-            hash.update(fs.readFileSync(filename));
-        }
-        return hash.digest('hex');
-    } : false),
-};
-
 const resourceName = (prefix, hash = false) => {
     const basename = path.basename(prefix);
     const suffix = (hash ? '?[hash]' : '');
@@ -95,8 +81,7 @@ module.exports = {
         compress: false,
         setup(app) {
             app.get('/service-worker.js', (req, res) => {
-                const filename = path.join(OUTPUT_PATH, SERVICE_WORKER_BASE, '/service-worker.js');
-                const content = fs.existsSync(filename) ? fs.readFileSync(filename) : '';
+                const content = fs.existsSync(SERVICE_WORKER_PATH) ? fs.readFileSync(SERVICE_WORKER_PATH) : '';
                 res.set({ 'Content-Type': 'application/javascript; charset=utf-8' });
                 res.send(content);
             });
@@ -220,7 +205,7 @@ module.exports = {
         ...(APP.USE_SERVICE_WORKER ? [new SWPrecacheWebpackPlugin({
             minify: PROD,
             handleFetch: true,
-            filename: `${SERVICE_WORKER_BASE}/service-worker.js`,
+            filename: (SERVICE_WORKER_BASE ? `${SERVICE_WORKER_BASE}/service-worker.js` : 'service-worker.js'),
             staticFileGlobs: [
                 slash(path.join(OUTPUT_PATH, '/js/*.min.js')),
                 slash(path.join(OUTPUT_PATH, '/css/*.min.css')),
@@ -278,7 +263,20 @@ module.exports = {
                 loader: './loader.html.js',
                 options: {
                     noCache: PROD,
-                    context: { APP: HTML_CONTEXT },
+                    context: {
+                        DEBUG,
+                        NODE_ENV,
+                        APP: {
+                            ...APP,
+                            SITEMAP: SITEMAP.map(filename => slash(path.sep + path.relative('./source', filename))),
+                            SERVICE_WORKER_HASH: (APP.USE_SERVICE_WORKER ? () => {
+                                if (fs.existsSync(SERVICE_WORKER_PATH)) {
+                                    return md5File.sync(SERVICE_WORKER_PATH);
+                                }
+                                return null;
+                            } : false),
+                        },
+                    },
                     searchPath: path.join(__dirname, 'source'),
                 },
             },

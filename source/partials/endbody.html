@@ -15,6 +15,6 @@
                     localStorage.setItem('SERVICE_WORKER_HASH', hash);
                 }
             });
-        })(document.location.protocol + '//' + document.location.host + '/service-worker.js', '{{ APP.SERVICE_WORKER_HASH }}');
+        })(document.location.protocol + '//' + document.location.host + '/service-worker.js', '{{ APP.SERVICE_WORKER_HASH() }}');
     </script>
 {% endif %}
