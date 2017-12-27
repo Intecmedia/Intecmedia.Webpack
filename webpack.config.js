@@ -19,9 +19,6 @@ const { name: PACKAGE_NAME, browserslist: BROWSERS } = require('./package.json')
 const OUTPUT_PATH = path.resolve(__dirname, 'build');
 const APP = require('./app.config.js');
 
-const SERVICE_WORKER_BASE = slash(path.relative(APP.PUBLIC_PATH, '/'));
-const SERVICE_WORKER_PATH = path.join(OUTPUT_PATH, SERVICE_WORKER_BASE, '/service-worker.js');
-
 console.log(`Name: ${PACKAGE_NAME}`);
 console.log(`Output: ${OUTPUT_PATH}`);
 console.log(`Public: ${APP.PUBLIC_PATH}`);
@@ -48,8 +45,17 @@ const FaviconsPlugin = require('./plugin.favicons.js');
 const PrettyPlugin = require('./plugin.pretty.js');
 const ManifestPlugin = require('./plugin.manifest.js');
 
-const banner = new String(''); // eslint-disable-line no-new-wrappers
-banner.toString = () => `NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chunkhash]`;
+const SERVICE_WORKER_BASE = slash(path.relative(APP.PUBLIC_PATH, '/'));
+const SERVICE_WORKER_PATH = path.join(OUTPUT_PATH, SERVICE_WORKER_BASE, '/service-worker.js');
+const SERVICE_WORKER_HASH = () => {
+    if (APP.USE_SERVICE_WORKER && fs.existsSync(SERVICE_WORKER_PATH)) {
+        return md5File.sync(SERVICE_WORKER_PATH);
+    }
+    return null;
+};
+
+const CHUNKS_BANNER = new String(''); // eslint-disable-line no-new-wrappers
+CHUNKS_BANNER.toString = () => `NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chunkhash]`;
 
 const SITEMAP = glob.sync('./source/**/*.html').filter(filename => !/partials/.test(filename));
 
@@ -129,7 +135,7 @@ module.exports = {
             }),
         ] : []),
         new webpack.BannerPlugin({
-            banner,
+            banner: CHUNKS_BANNER,
         }),
         new webpack.ProvidePlugin({
             $: 'jquery',
@@ -264,18 +270,7 @@ module.exports = {
                 options: {
                     noCache: PROD,
                     context: {
-                        DEBUG,
-                        NODE_ENV,
-                        APP: {
-                            ...APP,
-                            SITEMAP: SITEMAP.map(filename => slash(path.sep + path.relative('./source', filename))),
-                            SERVICE_WORKER_HASH: (APP.USE_SERVICE_WORKER ? () => {
-                                if (fs.existsSync(SERVICE_WORKER_PATH)) {
-                                    return md5File.sync(SERVICE_WORKER_PATH);
-                                }
-                                return null;
-                            } : false),
-                        },
+                        ...APP.HTML_CONTEXT, APP: { ...APP, SERVICE_WORKER_HASH }, DEBUG, NODE_ENV,
                     },
                     searchPath: path.join(__dirname, 'source'),
                 },

@@ -8,4 +8,6 @@ module.exports = {
     THEME_COLOR: '#fff',
     BACKGROUND_COLOR: '#fff',
     HTML_PRETTY: true,
+    HTML_CONTEXT: {
+    },
 };
