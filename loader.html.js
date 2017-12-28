@@ -13,6 +13,7 @@ const svgo = new SVGO({
         { removeViewBox: false },
         { removeAttrs: { attrs: 'data\\-.*' } },
     ],
+    js2svg: { useShortTags: false },
 });
 
 const DEFAULT_OPTIONS = {
