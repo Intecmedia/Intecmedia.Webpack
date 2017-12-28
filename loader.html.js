@@ -15,18 +15,6 @@ const svgo = new SVGO({
     ],
 });
 
-const optimizeSvg = (svgstr, svgpath) => {
-    let optimized;
-    let done = false;
-    svgo.optimize(svgstr, { path: svgpath }).then((result) => {
-        done = true;
-        optimized = result.data;
-    });
-    // eslint-disable-next-line no-underscore-dangle
-    while (!done) { process._tickCallback(); }
-    return optimized;
-};
-
 const DEFAULT_OPTIONS = {
     context: {},
     noCache: true,
@@ -49,17 +37,28 @@ module.exports = function HtmlLoader(source) {
     loader.getSource = function getSource(...args) {
         const result = originalGetSource.apply(this, args);
         if (!result.path) return source;
+        self.addDependency(result.path);
 
         const extension = path.extname(result.path);
         if (extension === '.svg') {
-            result.src = optimizeSvg(result.src, result.path);
+            result.src = `{% filter svgo %}${result.src}{% endfilter %}\n\n`;
         }
-
-        self.addDependency(result.path);
 
         return result;
     };
+
     const environment = new nunjucks.Environment(loader, options.environment);
+    environment.addFilter('svgo', (svgstr) => {
+        let optimized;
+        let done = false;
+        svgo.optimize(svgstr).then((result) => {
+            done = true;
+            optimized = result.data;
+        });
+        // eslint-disable-next-line no-underscore-dangle
+        while (!done) { process._tickCallback(); }
+        return nunjucks.runtime.markSafe(optimized);
+    });
 
     const publicPath = ((options.context.APP || {}).PUBLIC_PATH || path.sep);
     const resourcePath = path.sep + path.relative(options.searchPath, self.resourcePath);
