@@ -202,12 +202,7 @@ module.exports = {
             cache: !(PROD || DEBUG),
             title: APP.TITLE,
         }))),
-        ...(APP.HTML_PRETTY ? [new PrettyPlugin({
-            ocd: true,
-            unformatted: ['code', 'pre', 'textarea', 'svg'],
-            indent_inner_html: false,
-            indent_size: 4,
-        })] : []),
+        ...(APP.HTML_PRETTY ? [new PrettyPlugin()] : []),
         ...(APP.USE_SERVICE_WORKER ? [new SWPrecacheWebpackPlugin({
             minify: PROD,
             handleFetch: true,
