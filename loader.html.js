@@ -61,16 +61,20 @@ module.exports = function HtmlLoader(source) {
     };
     const environment = new nunjucks.Environment(loader, options.environment);
 
-    const content = frontMatter(source);
+    const publicPath = ((options.context.APP || {}).PUBLIC_PATH || path.sep);
+    const resourcePath = path.sep + path.relative(options.searchPath, self.resourcePath);
+
+    const template = frontMatter(source);
     const context = deepAssign({}, options.context, {
         PAGE: {
-            ...content.attributes,
-            RESOURCE_PATH: slash(path.sep + path.relative(options.searchPath, self.resourcePath)),
+            ...template.attributes,
+            PUBLIC_PATH: slash(path.normalize(publicPath + resourcePath)),
+            RESOURCE_PATH: slash(path.normalize(resourcePath)),
         },
     });
 
     console.log(`[loader-html] processing '${self.resourcePath}'`);
-    environment.renderString(content.body, context, (error, result) => {
+    environment.renderString(template.body, context, (error, result) => {
         if (error) {
             if (error.message) {
                 error.message = error.message.replace(/^\(unknown path\)/, `(${self.resourcePath})`);
