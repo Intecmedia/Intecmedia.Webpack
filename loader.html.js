@@ -41,24 +41,20 @@ module.exports = function HtmlLoader(source) {
 
         const extension = path.extname(result.path);
         if (extension === '.svg') {
-            result.src = `{% filter svgo %}${result.src}{% endfilter %}\n\n`;
+            result.src = `{% filter svgo %}${result.src}{% endfilter %}`;
         }
 
         return result;
     };
 
     const environment = new nunjucks.Environment(loader, options.environment);
-    environment.addFilter('svgo', (svgstr) => {
-        let optimized;
-        let done = false;
-        svgo.optimize(svgstr).then((result) => {
-            done = true;
-            optimized = result.data;
+    environment.addFilter('svgo', (input, filter) => {
+        svgo.optimize(input).then((optimized) => {
+            filter(null, new nunjucks.runtime.SafeString(optimized.data));
+        }).catch((error) => {
+            filter(error);
         });
-        // eslint-disable-next-line no-underscore-dangle
-        while (!done) { process._tickCallback(); }
-        return nunjucks.runtime.markSafe(optimized);
-    });
+    }, true);
 
     const publicPath = ((options.context.APP || {}).PUBLIC_PATH || path.sep);
     const resourcePath = path.sep + path.relative(options.searchPath, self.resourcePath);
