@@ -3,7 +3,7 @@ const deepAssign = require('deep-assign');
 
 const DEFAULT_OPTIONS = {
     ocd: false,
-    indent_inner_html: true,
+    indent_inner_html: false,
     indent_char: ' ',
     indent_size: 4,
     sep: '\n',
