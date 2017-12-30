@@ -8,7 +8,7 @@
 
 ## Особености:
 * Webpack 3
-* Progressive Web Apps: manifest.json и offline кеширование статики через [Service Worker-ы](https://github.com/GoogleChromeLabs/sw-precache)
+* Progressive Web Apps: offline кеширование статики через [Service Worker-ы](https://github.com/GoogleChromeLabs/sw-precache)
 * Bootstrap 4.0.0-beta.3
 * Babel и [babel-preset-airbnb](https://www.npmjs.com/package/babel-preset-airbnb)
 * Линтер с автофиксом [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) ([перевод](https://github.com/leonidlebedev/javascript-airbnb))
@@ -19,6 +19,7 @@
 * Множество линтеров: eslint, htmllint, stylelint с возможностью autofix кода
 * Модульный Modernizr через [.modernizrrc](https://github.com/Intecmedia/Intecmedia.Webpack/blob/master/.modernizrrc)
 * Imagemin для сжатия гарфики: svg, png, jpeg, gif
+* Генерация множества app-иконок и manifest.json
 * Автоматический base64-url ресурсов
 
 ## Обзор комманд:
