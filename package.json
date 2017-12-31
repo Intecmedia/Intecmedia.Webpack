@@ -121,8 +121,9 @@
         "sw-toolbox": "latest",
         "url-loader": "latest",
         "webpack": "latest",
-        "webpack-bundle-analyzer": "latest",
+        "webpack-bundle-analyzer": "^2.9.1",
         "webpack-dev-server": "latest",
+        "webpack-log": "^1.1.0",
         "webpack-notifier": "latest"
     },
     "devDependencies": {}

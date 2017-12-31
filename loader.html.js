@@ -5,6 +5,9 @@ const loaderUtils = require('loader-utils');
 const nunjucks = require('nunjucks');
 const frontMatter = require('front-matter');
 const deepAssign = require('deep-assign');
+const weblog = require('webpack-log');
+
+const logger = weblog({ name: 'loader-html' });
 
 const svgo = new SVGO({
     plugins: [
@@ -69,7 +72,7 @@ module.exports = function HtmlLoader(source) {
         },
     });
 
-    console.log(`[loader-html] processing '${self.resourcePath}'`);
+    logger.info(`[loader-html] processing '${self.resourcePath}'`);
     environment.renderString(template.body, context, (error, result) => {
         if (error) {
             if (error.message) {

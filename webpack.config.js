@@ -5,6 +5,9 @@ const path = require('path');
 const slash = require('slash');
 const webpack = require('webpack');
 const md5File = require('md5-file');
+const weblog = require('webpack-log');
+
+const logger = weblog({ name: 'webpack-config' });
 
 const DEBUG = ('DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0);
 const DEV_SERVER = path.basename(require.main.filename, '.js') === 'webpack-dev-server';
@@ -19,14 +22,14 @@ const { name: PACKAGE_NAME, browserslist: BROWSERS } = require('./package.json')
 const OUTPUT_PATH = path.resolve(__dirname, 'build');
 const APP = require('./app.config.js');
 
-console.log(`Name: ${PACKAGE_NAME}`);
-console.log(`Output: ${OUTPUT_PATH}`);
-console.log(`Public: ${APP.PUBLIC_PATH}`);
-console.log(`Enviroment: ${NODE_ENV}`);
-console.log(`Debug: ${DEBUG ? 'enabled' : 'disabled'}`);
-console.log(`Linters: ${USE_LINTERS ? 'enabled' : 'disabled'}`);
-console.log(`Source maps: ${USE_SOURCE_MAP ? 'enabled' : 'disabled'}`);
-console.log(`App config: ${JSON.stringify(APP, null, '    ')}`);
+logger.info(`Name: ${PACKAGE_NAME}`);
+logger.info(`Output: ${OUTPUT_PATH}`);
+logger.info(`Public: ${APP.PUBLIC_PATH}`);
+logger.info(`Enviroment: ${NODE_ENV}`);
+logger.info(`Debug: ${DEBUG ? 'enabled' : 'disabled'}`);
+logger.info(`Linters: ${USE_LINTERS ? 'enabled' : 'disabled'}`);
+logger.info(`Source maps: ${USE_SOURCE_MAP ? 'enabled' : 'disabled'}`);
+logger.info(`App config: ${JSON.stringify(APP, null, '    ')}`);
 
 if (PROD && DEBUG) {
     throw new Error(`Dont use NODE_ENV=${NODE_ENV} and DEBUG=${DEBUG} together`);

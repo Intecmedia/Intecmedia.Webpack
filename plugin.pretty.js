@@ -1,5 +1,8 @@
 const pretty = require('pretty');
 const deepAssign = require('deep-assign');
+const weblog = require('webpack-log');
+
+const logger = weblog({ name: 'plugin-pretty' });
 
 const DEFAULT_OPTIONS = {
     ocd: false,
@@ -17,7 +20,7 @@ module.exports = class PrettyPlugin {
     apply(compiler) {
         compiler.plugin('compilation', (compilation) => {
             compilation.plugin('html-webpack-plugin-after-html-processing', (htmlPluginData, callback) => {
-                console.log(`[plugin-pretty] processing '${htmlPluginData.plugin.options.filename}'`);
+                logger.info(`processing '${htmlPluginData.plugin.options.filename}'`);
                 // eslint-disable-next-line no-param-reassign
                 htmlPluginData.html = pretty(htmlPluginData.html, this.options);
                 callback(null, htmlPluginData);
