@@ -1,4 +1,4 @@
-/* eslint global-require: "off" */
+/* eslint global-require: "off", max-lines: "off" */
 const fs = require('fs');
 const glob = require('glob');
 const path = require('path');
