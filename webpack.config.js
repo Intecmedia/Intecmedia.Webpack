@@ -140,6 +140,8 @@ module.exports = {
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
+            'window.$': 'jquery',
+            'window.jQuery': 'jquery',
             Popper: ['popper.js', 'default'],
         }),
         new webpack.DefinePlugin({
@@ -271,6 +273,16 @@ module.exports = {
                 },
             },
             // javascript loaders
+            {
+                test: require.resolve('jquery'),
+                use: [{
+                    loader: 'expose-loader',
+                    options: 'jQuery',
+                }, {
+                    loader: 'expose-loader',
+                    options: '$',
+                }],
+            },
             {
                 test: /\.modernizrrc$/,
                 loader: 'modernizr-loader!json-loader',
