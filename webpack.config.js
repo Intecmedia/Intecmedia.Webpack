@@ -44,6 +44,7 @@ const { default: ImageminPlugin } = require('imagemin-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const BabelMinifyPlugin = require('babel-minify-webpack-plugin');
 
 const FaviconsPlugin = require('./plugin.favicons.js');
 const PrettyPlugin = require('./plugin.pretty.js');
@@ -127,16 +128,7 @@ module.exports = {
         ...(PROD ? [
             new CaseSensitivePathsPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),
-            new webpack.optimize.UglifyJsPlugin({
-                parallel: true,
-                sourceMap: true,
-                extractComments: true,
-                uglifyOptions: {
-                    output: {
-                        comments: false,
-                    },
-                },
-            }),
+            new BabelMinifyPlugin(),
         ] : []),
         new webpack.BannerPlugin({
             banner: CHUNKS_BANNER,

@@ -44,6 +44,7 @@
         "babel-core": "latest",
         "babel-eslint": "latest",
         "babel-loader": "latest",
+        "babel-minify-webpack-plugin": "^0.2.0",
         "babel-polyfill": "latest",
         "babel-preset-airbnb": "latest",
         "babel-preset-env": "latest",
@@ -124,7 +125,8 @@
         "webpack-bundle-analyzer": "latest",
         "webpack-dev-server": "latest",
         "webpack-log": "latest",
-        "webpack-notifier": "latest"
+        "webpack-notifier": "latest",
+        "webpack-sources": "^1.0.1"
     },
     "devDependencies": {}
 }
