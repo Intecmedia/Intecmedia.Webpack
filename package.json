@@ -44,7 +44,7 @@
         "babel-core": "latest",
         "babel-eslint": "latest",
         "babel-loader": "latest",
-        "babel-minify-webpack-plugin": "^0.2.0",
+        "babel-minify-webpack-plugin": "latest",
         "babel-polyfill": "latest",
         "babel-preset-airbnb": "latest",
         "babel-preset-env": "latest",
