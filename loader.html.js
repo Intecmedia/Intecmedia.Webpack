@@ -72,7 +72,7 @@ module.exports = function HtmlLoader(source) {
         },
     });
 
-    logger.info(`[loader-html] processing '${self.resourcePath}'`);
+    logger.info(`processing '${self.resourcePath}'`);
     environment.renderString(template.body, context, (error, result) => {
         if (error) {
             if (error.message) {
