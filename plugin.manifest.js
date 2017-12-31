@@ -23,6 +23,7 @@ module.exports = class ManifestPlugin {
                     manifestOriginal = require(this.options.path);
                 } catch (exception) {
                     logger.error(exception.message);
+                    throw exception;
                 } finally {
                     const manifestReplaced = deepAssign({}, manifestOriginal, this.options.replace);
                     fs.writeFileAsync(this.options.path, JSON.stringify(manifestReplaced, null, 4));

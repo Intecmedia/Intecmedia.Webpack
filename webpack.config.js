@@ -128,7 +128,7 @@ module.exports = {
         ...(PROD ? [
             new CaseSensitivePathsPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),
-            new BabelMinifyPlugin(),
+            new BabelMinifyPlugin({}, { comments: false }),
         ] : []),
         new webpack.BannerPlugin({
             banner: CHUNKS_BANNER,
