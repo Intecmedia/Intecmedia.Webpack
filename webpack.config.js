@@ -40,6 +40,7 @@ const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const { default: ImageminPlugin } = require('imagemin-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const FaviconsPlugin = require('./plugin.favicons.js');
 const PrettyPlugin = require('./plugin.pretty.js');
@@ -248,6 +249,10 @@ module.exports = {
             },
             disable: !(PROD || DEBUG),
         }),
+        ...(DEV_SERVER || !PROD ? [new BundleAnalyzerPlugin({
+            analyzerMode: (DEV_SERVER ? 'server' : 'static'),
+            reportFilename: '.webpack-bundle-analyzer.html',
+        })] : []),
     ],
 
     devtool: USE_SOURCE_MAP ? 'eval-source-map' : 'nosources-source-map',
