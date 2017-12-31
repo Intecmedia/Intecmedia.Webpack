@@ -14,6 +14,7 @@ module.exports = class ManifestPlugin {
     apply(compiler) {
         compiler.plugin('done', () => {
             if (fs.existsSync(this.options.path)) {
+                if (!fs.existsSync(this.options.path)) return;
                 // eslint-disable-next-line import/no-dynamic-require,global-require
                 const manifestOriginal = require(this.options.path);
                 const manifestReplaced = deepAssign({}, manifestOriginal, this.options.replace);
