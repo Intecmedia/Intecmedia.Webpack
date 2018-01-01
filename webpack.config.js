@@ -59,9 +59,6 @@ const SERVICE_WORKER_HASH = () => {
     return null;
 };
 
-const CHUNKS_BANNER = new String(''); // eslint-disable-line no-new-wrappers
-CHUNKS_BANNER.toString = () => `NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chunkhash]`;
-
 const SITEMAP = glob.sync('./source/**/*.html').filter(filename => !/partials/.test(filename));
 
 const resourceName = (prefix, hash = false) => {
@@ -128,10 +125,13 @@ module.exports = {
         ...(PROD ? [
             new CaseSensitivePathsPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),
-            new BabelMinifyPlugin({}, { comments: false }),
+            new BabelMinifyPlugin(
+                { mangle: { topLevel: true } },
+                { comments: false },
+            ),
         ] : []),
         new webpack.BannerPlugin({
-            banner: CHUNKS_BANNER,
+            banner: `NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chunkhash]`,
         }),
         new webpack.ProvidePlugin({
             $: 'jquery',
