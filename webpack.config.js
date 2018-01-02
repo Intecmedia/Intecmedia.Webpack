@@ -243,10 +243,10 @@ module.exports = {
             },
             disable: !(PROD || DEBUG),
         }),
-        ...(DEV_SERVER || !PROD ? [new BundleAnalyzerPlugin({
+        new BundleAnalyzerPlugin({
             analyzerMode: (DEV_SERVER ? 'server' : 'static'),
             reportFilename: path.join(__dirname, 'node_modules/.cache/bundle-analyzer-report.html'),
-        })] : []),
+        }),
     ],
 
     devtool: USE_SOURCE_MAP ? 'eval-source-map' : 'nosources-source-map',
