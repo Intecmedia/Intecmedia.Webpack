@@ -4,5 +4,5 @@
         "setClasses"
     ],
     "enableJSClass": true,
-    "feature-detects": ["css/flexbox", "css/flexwrap", "img/webp"]
+    "feature-detects": ["img/webp"]
 }
