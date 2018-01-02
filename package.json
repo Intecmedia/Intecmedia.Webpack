@@ -111,6 +111,7 @@
         "stylelint": "latest",
         "stylelint-config-sass-guidelines": "latest",
         "stylelint-no-unsupported-browser-features": "latest",
+        "stylelint-order": "^0.8.0",
         "stylelint-performance-animation": "latest",
         "stylelint-scss": "latest",
         "stylelint-selector-bem-pattern": "latest",
@@ -126,7 +127,7 @@
         "webpack-dev-server": "latest",
         "webpack-log": "latest",
         "webpack-notifier": "latest",
-        "webpack-sources": "^1.0.1"
+        "webpack-sources": "1.0.1"
     },
     "devDependencies": {}
 }
