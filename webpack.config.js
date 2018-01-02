@@ -246,7 +246,7 @@ module.exports = {
         }),
         ...(DEV_SERVER || !PROD ? [new BundleAnalyzerPlugin({
             analyzerMode: (DEV_SERVER ? 'server' : 'static'),
-            reportFilename: '.webpack-bundle-analyzer.html',
+            reportFilename: path.join(__dirname, 'node_modules/.cache/bundle-analyzer-report.html'),
         })] : []),
     ],
 
