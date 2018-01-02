@@ -24,7 +24,6 @@ const APP = require('./app.config.js');
 
 logger.info(`Name: ${PACKAGE_NAME}`);
 logger.info(`Output: ${OUTPUT_PATH}`);
-logger.info(`Public: ${APP.PUBLIC_PATH}`);
 logger.info(`Enviroment: ${NODE_ENV}`);
 logger.info(`Debug: ${DEBUG ? 'enabled' : 'disabled'}`);
 logger.info(`Linters: ${USE_LINTERS ? 'enabled' : 'disabled'}`);
