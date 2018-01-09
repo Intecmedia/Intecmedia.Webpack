@@ -1,4 +1,3 @@
-const fs = require('fs');
 const deepAssign = require('deep-assign');
 const weblog = require('webpack-log');
 
@@ -16,17 +15,17 @@ module.exports = class ManifestPlugin {
 
     apply(compiler) {
         compiler.plugin('done', () => {
-            if (fs.existsSync(this.options.path)) {
+            const fs = compiler.outputFileSystem;
+            if (fs && fs.existsSync(this.options.path)) {
                 let manifestOriginal;
                 try {
-                    // eslint-disable-next-line import/no-dynamic-require,global-require
-                    manifestOriginal = require(this.options.path);
+                    manifestOriginal = JSON.parse(fs.readFileSync(this.options.path));
                 } catch (exception) {
                     logger.error(exception.message);
                     throw exception;
                 } finally {
                     const manifestReplaced = deepAssign({}, manifestOriginal, this.options.replace);
-                    fs.writeFileAsync(this.options.path, JSON.stringify(manifestReplaced, null, 4));
+                    fs.writeFileSync(this.options.path, JSON.stringify(manifestReplaced, null, 4));
                     logger.info(`processing '${this.options.path}'`);
                 }
             }
