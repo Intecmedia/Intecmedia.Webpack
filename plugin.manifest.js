@@ -16,19 +16,30 @@ module.exports = class ManifestPlugin {
 
     apply(compiler) {
         compiler.plugin('done', () => {
-            const existsSync = compiler.outputFileSystem.existsSync || fs.existsSync;
-            if (existsSync(this.options.path)) {
+            if (fs.existsSync(this.options.path)) {
                 let manifestOriginal;
                 try {
-                    const readFileSync = compiler.outputFileSystem.readFileSync || fs.readFileSync;
-                    manifestOriginal = JSON.parse(readFileSync(this.options.path));
+                    manifestOriginal = JSON.parse(fs.readFileSync(this.options.path));
                 } catch (exception) {
                     logger.error(exception.message);
                     throw exception;
                 } finally {
                     const manifestReplaced = deepAssign({}, manifestOriginal, this.options.replace);
-                    const writeFileSync = compiler.outputFileSystem.writeFileSync || fs.writeFileSync;
-                    writeFileSync(this.options.path, JSON.stringify(manifestReplaced, null, 4));
+                    fs.writeFileSync(this.options.path, JSON.stringify(manifestReplaced, null, 4));
+                    logger.info(`processing '${this.options.path}'`);
+                }
+            }
+            const memoryfs = compiler.outputFileSystem;
+            if (memoryfs.existsSync && memoryfs.existsSync(this.options.path)) {
+                let manifestOriginal;
+                try {
+                    manifestOriginal = JSON.parse(memoryfs.readFileSync(this.options.path));
+                } catch (exception) {
+                    logger.error(exception.message);
+                    throw exception;
+                } finally {
+                    const manifestReplaced = deepAssign({}, manifestOriginal, this.options.replace);
+                    memoryfs.writeFileSync(this.options.path, JSON.stringify(manifestReplaced, null, 4));
                     logger.info(`processing '${this.options.path}'`);
                 }
             }
