@@ -16,33 +16,21 @@ module.exports = class ManifestPlugin {
 
     apply(compiler) {
         compiler.plugin('done', () => {
-            if (fs.existsSync(this.options.path)) {
-                let manifestOriginal;
-                try {
-                    manifestOriginal = JSON.parse(fs.readFileSync(this.options.path));
-                } catch (exception) {
-                    logger.error(exception.message);
-                    throw exception;
-                } finally {
-                    const manifestReplaced = deepAssign({}, manifestOriginal, this.options.replace);
-                    fs.writeFileSync(this.options.path, JSON.stringify(manifestReplaced, null, 4));
-                    logger.info(`processing '${this.options.path}'`);
-                }
-            }
-            const memoryfs = compiler.outputFileSystem;
-            if (memoryfs.existsSync && memoryfs.existsSync(this.options.path)) {
-                let manifestOriginal;
-                try {
-                    manifestOriginal = JSON.parse(memoryfs.readFileSync(this.options.path));
-                } catch (exception) {
-                    logger.error(exception.message);
-                    throw exception;
-                } finally {
-                    const manifestReplaced = deepAssign({}, manifestOriginal, this.options.replace);
-                    memoryfs.writeFileSync(this.options.path, JSON.stringify(manifestReplaced, null, 4));
-                    logger.info(`processing '${this.options.path}'`);
-                }
-            }
+            [fs, compiler.outputFileSystem]
+                .filter(filesystem => filesystem.existsSync && filesystem.existsSync(this.options.path))
+                .forEach((filesystem) => {
+                    let manifestOriginal;
+                    try {
+                        manifestOriginal = JSON.parse(filesystem.readFileSync(this.options.path));
+                    } catch (exception) {
+                        logger.error(exception.message);
+                        throw exception;
+                    } finally {
+                        const manifestReplaced = deepAssign({}, manifestOriginal, this.options.replace);
+                        filesystem.writeFileSync(this.options.path, JSON.stringify(manifestReplaced, null, 4));
+                        logger.info(`processing '${this.options.path}'`);
+                    }
+                });
         });
     }
 };
