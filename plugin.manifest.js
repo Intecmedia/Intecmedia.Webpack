@@ -7,6 +7,7 @@ const logger = weblog({ name: 'manifest.json' });
 const DEFAULT_OPTIONS = {
     path: './build/img/favicon/manifest.json',
     replace: {},
+    indent: 4,
 };
 
 module.exports = class ManifestPlugin {
@@ -16,21 +17,21 @@ module.exports = class ManifestPlugin {
 
     apply(compiler) {
         compiler.plugin('done', () => {
-            [fs, compiler.outputFileSystem]
-                .filter(filesystem => filesystem.existsSync && filesystem.existsSync(this.options.path))
-                .forEach((filesystem) => {
-                    let manifestOriginal;
+            [fs, compiler.outputFileSystem].forEach((filesystem) => {
+                if (filesystem.existsSync && filesystem.existsSync(this.options.path)) {
+                    let src;
                     try {
-                        manifestOriginal = JSON.parse(filesystem.readFileSync(this.options.path));
+                        src = JSON.parse(filesystem.readFileSync(this.options.path));
                     } catch (exception) {
                         logger.error(exception.message);
                         throw exception;
                     } finally {
-                        const manifestReplaced = deepAssign({}, manifestOriginal, this.options.replace);
-                        filesystem.writeFileSync(this.options.path, JSON.stringify(manifestReplaced, null, 4));
+                        const dist = deepAssign({}, src, this.options.replace);
+                        filesystem.writeFileSync(this.options.path, JSON.stringify(dist, null, this.options.indent));
                         logger.info(`processing '${this.options.path}'`);
                     }
-                });
+                }
+            });
         });
     }
 };
