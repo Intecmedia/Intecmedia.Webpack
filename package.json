@@ -93,6 +93,7 @@
         "pleeease-filters": "latest",
         "popper.js": "latest",
         "postcss": "latest",
+        "postcss-browser-reporter": "latest",
         "postcss-color-rgba-fallback": "latest",
         "postcss-devtools": "latest",
         "postcss-flexbugs-fixes": "latest",
