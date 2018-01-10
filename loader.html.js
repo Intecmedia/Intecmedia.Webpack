@@ -40,14 +40,13 @@ module.exports = function HtmlLoader(source) {
     const originalGetSource = loader.getSource;
     loader.getSource = function getSource(...args) {
         const result = originalGetSource.apply(this, args);
-        if (!result.path) return source;
-        self.addDependency(result.path);
-
-        const extension = path.extname(result.path);
-        if (extension === '.svg') {
-            result.src = `{% filter svgo %}${result.src}{% endfilter %}`;
+        if (result && result.path) {
+            self.addDependency(result.path);
+            const extension = path.extname(result.path);
+            if (extension === '.svg') {
+                result.src = `{% filter svgo %}${result.src}{% endfilter %}`;
+            }
         }
-
         return result;
     };
 
