@@ -94,6 +94,7 @@
         "popper.js": "latest",
         "postcss": "latest",
         "postcss-color-rgba-fallback": "latest",
+        "postcss-devtools": "^1.1.1",
         "postcss-flexbugs-fixes": "latest",
         "postcss-image-set-polyfill": "latest",
         "postcss-input-style": "latest",

@@ -363,6 +363,7 @@ module.exports = {
                             options: {
                                 sourceMap: USE_SOURCE_MAP ? 'inline' : false,
                                 plugins: [
+                                    require('postcss-devtools')({ precise: true }),
                                     require('postcss-input-style')(),
                                     require('postcss-quantity-queries')(),
                                     require('postcss-responsive-type')(),
@@ -375,6 +376,7 @@ module.exports = {
                                         require('css-mqpacker')(),
                                         require('autoprefixer')({ browsers: BROWSERS }), // this always last
                                     ] : []),
+                                    require('postcss-browser-reporter')(),
                                     require('postcss-reporter')(), // this always last
                                 ],
                             },
