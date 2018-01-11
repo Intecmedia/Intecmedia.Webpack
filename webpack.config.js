@@ -64,7 +64,7 @@ const resourceName = (prefix, hash = false) => {
     const basename = path.basename(prefix);
     const suffix = (hash ? '?[hash]' : '');
     return (resourcePath) => {
-        const url = slash(path.relative(path.join(__dirname, 'source'), resourcePath));
+        const url = slash(path.relative(SOURCE_PATH, resourcePath));
         if (url.startsWith(`${basename}/`)) {
             return url + suffix;
         }
@@ -182,23 +182,36 @@ module.exports = {
                 },
             }),
         ] : []),
-        ...(SITEMAP.map(filename => new HtmlWebpackPlugin({
-            filename: path.basename(filename),
-            template: filename,
-            inject: true,
-            minify: APP.HTML_PRETTY ? false : {
-                html5: true,
-                collapseWhitespace: true,
-                conservativeCollapse: false,
-                removeComments: true,
-                decodeEntities: true,
-                minifyCSS: false,
-                minifyJS: false,
-            },
-            hash: true,
-            cache: !(PROD || DEBUG),
-            title: APP.TITLE,
-        }))),
+        ...(SITEMAP.map((template) => {
+            const basename = path.basename(template);
+            const filename = (basename === 'index.html' ? path.join(
+                OUTPUT_PATH,
+                path.relative(SOURCE_PATH, template),
+            ) : path.join(
+                OUTPUT_PATH,
+                path.relative(SOURCE_PATH, path.dirname(template)),
+                path.basename(template, '.html'),
+                'index.html',
+            ));
+            logger.info(`${template} --> ${filename}`);
+            return new HtmlWebpackPlugin({
+                filename,
+                template,
+                inject: true,
+                minify: APP.HTML_PRETTY ? false : {
+                    html5: true,
+                    collapseWhitespace: true,
+                    conservativeCollapse: false,
+                    removeComments: true,
+                    decodeEntities: true,
+                    minifyCSS: false,
+                    minifyJS: false,
+                },
+                hash: true,
+                cache: !(PROD || DEBUG),
+                title: APP.TITLE,
+            });
+        })),
         ...(APP.HTML_PRETTY ? [new PrettyPlugin()] : []),
         ...(APP.USE_SERVICE_WORKER ? [new SWPrecacheWebpackPlugin({
             minify: PROD,
