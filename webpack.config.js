@@ -19,11 +19,11 @@ const USE_LINTERS = PROD || DEBUG;
 
 const { name: PACKAGE_NAME, browserslist: BROWSERS } = require('./package.json');
 
+const SOURCE_PATH = path.resolve(__dirname, 'source');
 const OUTPUT_PATH = path.resolve(__dirname, 'build');
 const APP = require('./app.config.js');
 
 logger.info(`Name: ${PACKAGE_NAME}`);
-logger.info(`Output: ${OUTPUT_PATH}`);
 logger.info(`Enviroment: ${NODE_ENV}`);
 logger.info(`Debug: ${DEBUG ? 'enabled' : 'disabled'}`);
 logger.info(`Linters: ${USE_LINTERS ? 'enabled' : 'disabled'}`);
@@ -58,7 +58,7 @@ const SERVICE_WORKER_HASH = () => {
     return null;
 };
 
-const SITEMAP = glob.sync('./source/**/*.html').filter(filename => !/partials/.test(filename));
+const SITEMAP = glob.sync(`${SOURCE_PATH}/**/*.html`).filter(filename => !/partials/.test(filename));
 
 const resourceName = (prefix, hash = false) => {
     const basename = path.basename(prefix);
@@ -96,7 +96,7 @@ module.exports = {
     },
 
     entry: {
-        app: './source/js/app.js',
+        app: `${SOURCE_PATH}/js/app.js`,
     },
 
     output: {
@@ -226,7 +226,7 @@ module.exports = {
             ignoreUrlParametersMatching: [/^utm_/, /^[a-fA-F0-9]{32}$/],
         })] : []),
         new CopyWebpackPlugin([{
-            context: './source',
+            context: SOURCE_PATH,
             from: 'img/**/*.{png,svg,ico,gif,xml,jpeg,jpg,json}',
             copyUnmodified: !(PROD || DEBUG),
             to: OUTPUT_PATH,
