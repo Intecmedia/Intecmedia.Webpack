@@ -3,7 +3,7 @@ const ImageSize = require('image-size');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 const DEFAULT_FAVICON = {
-    logo: './.favicons-source-32x32.png',
+    logo: './.favicons-source-64x64.png',
     prefix: 'img/favicon/',
     icons: {
         android: false,
@@ -24,8 +24,8 @@ module.exports.FavIcon = function FavIcon(options) {
     const logoSize = ImageSize(mergedOptions.logo);
     if (!(logoSize && logoSize.type === 'png')) {
         throw new Error(`FavIcon '${mergedOptions.logo}': the file is not a valid image`);
-    } else if (!(logoSize.width === 32 && logoSize.height === 32)) {
-        throw new Error(`FavIcon '${mergedOptions.logo}': image size is not than (32 x 32)`);
+    } else if (!(logoSize.width === 64 && logoSize.height === 64)) {
+        throw new Error(`FavIcon '${mergedOptions.logo}': image size is not than (64 x 64)`);
     }
     return new FaviconsWebpackPlugin(mergedOptions);
 };

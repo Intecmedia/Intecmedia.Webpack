@@ -166,7 +166,7 @@ module.exports = {
             }),
             new FaviconsPlugin.FavIcon({
                 title: APP.TITLE,
-                logo: './.favicons-source-32x32.png',
+                logo: './.favicons-source-64x64.png',
                 prefix: 'img/favicon/',
                 background: APP.BACKGROUND_COLOR,
                 theme_color: APP.THEME_COLOR,
