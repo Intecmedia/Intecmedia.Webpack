@@ -281,7 +281,7 @@ module.exports = {
                     context: {
                         ...APP.HTML_CONTEXT, APP: { ...APP, SERVICE_WORKER_HASH }, DEBUG, NODE_ENV,
                     },
-                    searchPath: path.join(__dirname, 'source'),
+                    searchPath: SOURCE_PATH,
                 },
             },
             // javascript loaders
@@ -301,32 +301,38 @@ module.exports = {
             },
             {
                 test: /\.js$/i,
-                exclude: [path.join(__dirname, 'node_modules'), path.join(__dirname, SOURCE_PATH, 'js', 'external')],
-                loader: 'imports-loader',
-                options: {
-                    $: 'jquery',
-                    jQuery: 'jquery',
-                },
-            },
-            ...(USE_LINTERS ? [{
-                enforce: 'pre',
-                test: /\.js$/i,
-                exclude: [path.join(__dirname, 'node_modules'), path.join(__dirname, SOURCE_PATH, 'js', 'external')],
-                loader: 'eslint-loader',
-                options: { fix: true, cache: !PROD, quiet: PROD },
-            }] : []),
-            {
-                test: /\.js$/i,
-                exclude: [path.join(__dirname, 'node_modules'), path.join(__dirname, SOURCE_PATH, 'js', 'external')],
-                loader: 'babel-loader',
-                options: {
-                    presets: [['airbnb', {
-                        debug: DEBUG || PROD,
-                        targets: { browsers: BROWSERS },
-                    }]],
-                    forceEnv: NODE_ENV,
-                    cacheDirectory: !PROD,
-                },
+                exclude: [
+                    path.join(__dirname, 'node_modules'),
+                    path.join(SOURCE_PATH, 'js', 'external'),
+                ],
+                loaders: [
+                    {
+                        loader: 'imports-loader',
+                        options: {
+                            $: 'jquery',
+                            jQuery: 'jquery',
+                        },
+                    },
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [['airbnb', {
+                                debug: DEBUG || PROD,
+                                targets: { browsers: BROWSERS },
+                            }]],
+                            forceEnv: NODE_ENV,
+                            cacheDirectory: !PROD,
+                        },
+                    },
+                    ...(USE_LINTERS ? [{
+                        loader: 'eslint-loader',
+                        options: {
+                            fix: true,
+                            cache: !PROD,
+                            quiet: PROD,
+                        },
+                    }] : []),
+                ],
             },
             // image loaders
             {
