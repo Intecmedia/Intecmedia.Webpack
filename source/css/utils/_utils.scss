@@ -2,11 +2,10 @@
 @if $NODE_ENV != 'production' or $DEBUG {
     /* stylelint-disable */
     body::after {
-        background-color: invert(theme-color('danger'));
-        border-color: $border-color;
+        @extend .bg-danger;
+        @extend .text-warning;
         bottom: 0;
         content: 'Only visible $NODE_ENV=#{$NODE_ENV} or DEBUG=#{$DEBUG}';
-        padding: $input-btn-padding-y $input-btn-padding-x;
         position: fixed;
         right: 0;
         z-index: $zindex-modal;
@@ -18,11 +17,10 @@
 @if $PACKAGE_NAME == 'Intecmedia.Webpack' {
     /* stylelint-disable */
     body::after {
-        background-color: theme-color('danger');
-        border-color: $border-color;
+        @extend .bg-danger;
+        @extend .text-warning;
         bottom: 0;
         content: 'Please rename the `name` in `package.json` file';
-        padding: $input-btn-padding-y $input-btn-padding-x;
         position: fixed;
         right: 0;
         z-index: $zindex-modal;
