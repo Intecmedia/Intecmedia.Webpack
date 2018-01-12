@@ -2,11 +2,14 @@
 .wysiwyg {
     // image with caption
     figure {
-        @extend .img-thumbnail;
+        @extend .figure;
 
-        > figcaption {
-            color: $figure-caption-color;
-            font-size: $figure-caption-font-size;
+        img {
+            @extend .figure-img;
+        }
+
+        figcaption {
+            @extend .figure-caption;
         }
     }
     // default tables
@@ -50,6 +53,19 @@
             vertical-align: middle;
             width: $font-size-base;
         }
+    }
+    // responsive images
+    .img-responsive {
+        @extend .img-fluid;
+    }
+
+    .img-rounded {
+        @extend .rounded;
+    }
+
+    .img-circle {
+        @extend .rounded;
+        border-radius: 50%;
     }
     // image aligment
     img[align='left'],
