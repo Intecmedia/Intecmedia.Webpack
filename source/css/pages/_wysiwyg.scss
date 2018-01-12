@@ -65,7 +65,7 @@
 
     .img-circle {
         @extend .rounded;
-        border-radius: 50%;
+        @extend .rounded-circle;
     }
     // image aligment
     img[align='left'],
