@@ -258,7 +258,7 @@ module.exports = {
         }),
         new BundleAnalyzerPlugin({
             analyzerMode: (DEV_SERVER ? 'server' : 'static'),
-            reportFilename: path.join(__dirname, `node_modules/.cache/bundle-analyzer-${NODE_ENV}.html`),
+            reportFilename: path.join(__dirname, 'node_modules', '.cache', `bundle-analyzer-${NODE_ENV}.html`),
         }),
     ],
 
@@ -301,7 +301,7 @@ module.exports = {
             },
             {
                 test: /\.js$/i,
-                include: /node_modules/,
+                exclude: [path.join(__dirname, 'node_modules'), path.join(__dirname, SOURCE_PATH, 'js', 'external')],
                 loader: 'imports-loader',
                 options: {
                     $: 'jquery',
@@ -311,13 +311,13 @@ module.exports = {
             ...(USE_LINTERS ? [{
                 enforce: 'pre',
                 test: /\.js$/i,
-                exclude: /(node_modules|external)/,
+                exclude: [path.join(__dirname, 'node_modules'), path.join(__dirname, SOURCE_PATH, 'js', 'external')],
                 loader: 'eslint-loader',
                 options: { fix: true, cache: !PROD, quiet: PROD },
             }] : []),
             {
                 test: /\.js$/i,
-                exclude: /(node_modules)/,
+                exclude: [path.join(__dirname, 'node_modules'), path.join(__dirname, SOURCE_PATH, 'js', 'external')],
                 loader: 'babel-loader',
                 options: {
                     presets: [['airbnb', {
