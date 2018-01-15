@@ -19,7 +19,7 @@ const DEFAULT_OPTIONS = {
         lstripBlocks: false,
         watch: false,
     },
-    require: {
+    requireTags: {
         img: ['src', 'data-src', 'lowsrc', 'srcset', 'data-srcset'],
         source: ['srcset', 'data-srcset'],
     },
@@ -31,31 +31,31 @@ function requireHtml(html, options, callback) {
     const parser = posthtml();
     parser.use((tree) => {
         tree.walk((node) => {
-            if (node.tag in options.require) {
-                options.require[node.tag].forEach((attr) => {
-                    if (!(attr in node.attrs) || ('data-require-ignore' && node.attrs)) return;
-                    if (attr === 'srcset' || attr === 'data-srcset') {
-                        const srcset = node.attrs[attr].split(/\s*,\s*/).map((src) => {
-                            if (options.requireIgnore.test(src)) return src;
-                            const [url, size] = src.split(/\s+/, 2);
-                            let ident;
-                            do {
-                                ident = `xxxHTMLLINKxxx${Math.random()}${Math.random()}xxx`;
-                            } while (urls[ident]);
-                            urls[ident] = url;
-                            return `${ident} ${size}`;
-                        });
-                        node.attrs[attr] = srcset.join(', ');
-                    } else if (!options.requireIgnore.test(node.attrs[attr])) {
+            const tag = node.tag ? node.tag.toLowerCase() : null;
+            if (!(tag in options.requireTags)) return node;
+            options.requireTags[tag].forEach((attr) => {
+                if (!(attr in node.attrs) || ('data-require-ignore' && node.attrs)) return;
+                if (attr === 'srcset' || attr === 'data-srcset') {
+                    const srcset = node.attrs[attr].split(/\s*,\s*/).map((src) => {
+                        if (options.requireIgnore.test(src)) return src;
+                        const [url, size] = src.split(/\s+/, 2);
                         let ident;
                         do {
                             ident = `xxxHTMLLINKxxx${Math.random()}${Math.random()}xxx`;
                         } while (urls[ident]);
-                        urls[ident] = node.attrs[attr];
-                        node.attrs[attr] = ident;
-                    }
-                });
-            }
+                        urls[ident] = url;
+                        return `${ident} ${size}`;
+                    });
+                    node.attrs[attr] = srcset.join(', ');
+                } else if (!options.requireIgnore.test(node.attrs[attr])) {
+                    let ident;
+                    do {
+                        ident = `xxxHTMLLINKxxx${Math.random()}${Math.random()}xxx`;
+                    } while (urls[ident]);
+                    urls[ident] = node.attrs[attr];
+                    node.attrs[attr] = ident;
+                }
+            });
             return node;
         });
         return tree;
@@ -63,6 +63,7 @@ function requireHtml(html, options, callback) {
     parser.process(html).then((result) => {
         let exportString = `export default ${JSON.stringify(result.html)};`;
         exportString = exportString.replace(/xxxHTMLLINKxxx[0-9\\.]+xxx/g, (match) => {
+return match;
             if (!urls[match]) return match;
             const url = loaderUtils.urlToRequest(urls[match], options.searchPath);
             return `"+require(${JSON.stringify(url)})+"`;
