@@ -279,9 +279,16 @@ module.exports = {
                 loader: './loader.html.js',
                 options: {
                     noCache: PROD,
-                    context: {
-                        ...APP.HTML_CONTEXT, APP: { ...APP, SERVICE_WORKER_HASH }, DEBUG, NODE_ENV,
-                    },
+                    context: Object.assign(
+                        {},
+                        APP.HTML_CONTEXT,
+                        APP,
+                        {
+                            DEBUG,
+                            NODE_ENV,
+                            SERVICE_WORKER_HASH,
+                        },
+                    ),
                     searchPath: SOURCE_PATH,
                 },
             },
@@ -390,10 +397,10 @@ module.exports = {
                                         require('pixrem')(),
                                         require('pleeease-filters')(),
                                         require('postcss-image-set-polyfill')(),
+                                        require('postcss-url')({ url: 'inline', maxSize: 32 }),
                                         require('postcss-color-rgba-fallback')(),
                                         require('postcss-flexbugs-fixes')(),
                                         require('css-mqpacker')(),
-                                        require('postcss-url')({ url: 'inline', maxSize: 32 }),
                                         require('autoprefixer')({ browsers: BROWSERS }), // this always last
                                     ] : []),
                                     require('postcss-browser-reporter')(),
