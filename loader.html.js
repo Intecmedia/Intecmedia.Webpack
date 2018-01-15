@@ -23,7 +23,7 @@ const DEFAULT_OPTIONS = {
         img: ['src', 'data-src', 'lowsrc', 'srcset', 'data-srcset'],
         source: ['srcset', 'data-srcset'],
     },
-    requireIgnore: /^(https?:\/\/|ftp:\/\/|mailto:|\/\/)/,
+    requireIgnore: /^(https?:\/\/|ftp:\/\/|mailto:|\/\/)/i,
 };
 
 function requireHtml(html, options, callback) {
@@ -34,7 +34,7 @@ function requireHtml(html, options, callback) {
             const tag = node.tag ? node.tag.toLowerCase() : null;
             if (!(tag in options.requireTags)) return node;
             options.requireTags[tag].forEach((attr) => {
-                if (!(attr in node.attrs) || ('data-require-ignore' && node.attrs)) return;
+                if (!(attr in node.attrs) || ('data-require-ignore' in node.attrs)) return;
                 if (attr === 'srcset' || attr === 'data-srcset') {
                     const srcset = node.attrs[attr].split(/\s*,\s*/).map((src) => {
                         if (options.requireIgnore.test(src)) return src;
@@ -63,7 +63,6 @@ function requireHtml(html, options, callback) {
     parser.process(html).then((result) => {
         let exportString = `export default ${JSON.stringify(result.html)};`;
         exportString = exportString.replace(/xxxHTMLLINKxxx[0-9\\.]+xxx/g, (match) => {
-return match;
             if (!urls[match]) return match;
             const url = loaderUtils.urlToRequest(urls[match], options.searchPath);
             return `"+require(${JSON.stringify(url)})+"`;
