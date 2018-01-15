@@ -247,7 +247,7 @@ module.exports = {
             debug: (DEBUG ? 'debug' : 'info'),
         }),
         new ImageminPlugin({
-            test: /\.(jpe?g|png|gif|svg)$/i,
+            test: /\.(jpeg|jpg|png|gif|svg)$/i,
             svgo: {
                 plugins: [
                     { removeViewBox: false },
@@ -337,13 +337,12 @@ module.exports = {
             },
             // image loaders
             {
-                test: /\.(jpe?g|png|gif|svg|ico)$/i,
+                test: /\.(jpeg|jpg|png|gif|svg|ico)$/i,
                 exclude: /(fonts|font|partials)/i,
                 loaders: [
                     {
-                        loader: 'url-loader',
+                        loader: 'file-loader',
                         options: {
-                            limit: 32 * 1024,
                             name: resourceName('img', false),
                         },
                     },
