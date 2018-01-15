@@ -31,8 +31,7 @@ function requireHtml(html, options, callback) {
     const parser = posthtml();
     parser.use((tree) => {
         tree.match(Object.keys(options.requireTags).map(tag => ({ tag })), (node) => {
-            const tag = node.tag ? node.tag.toLowerCase() : null;
-            options.requireTags[tag].forEach((attr) => {
+            options.requireTags[node.tag].forEach((attr) => {
                 if (!(attr in node.attrs) || ('data-require-ignore' in node.attrs)) return;
                 if (attr === 'srcset' || attr === 'data-srcset') {
                     const srcset = node.attrs[attr].split(/\s*,\s*/).map((src) => {
