@@ -33,26 +33,26 @@ function requireHtml(html, options, callback) {
         tree.walk((node) => {
             if (node.tag in options.require) {
                 options.require[node.tag].forEach((attr) => {
-                    let ident;
-                    if (attr in node.attrs && !('data-require-ignore' && node.attrs)) {
-                        if (attr === 'srcset' || attr === 'data-srcset') {
-                            const srcset = node.attrs[attr].split(/\s*,\s*/).map((src) => {
-                                if (options.requireIgnore.test(src)) return src;
-                                const [url, size] = src.split(/\s+/, 2);
-                                do {
-                                    ident = `xxxHTMLLINKxxx${Math.random()}${Math.random()}xxx`;
-                                } while (urls[ident]);
-                                urls[ident] = url;
-                                return `${ident} ${size}`;
-                            });
-                            node.attrs[attr] = srcset.join(', ');
-                        } else if (!options.requireIgnore.test(node.attrs[attr])) {
+                    if (!(attr in node.attrs) || ('data-require-ignore' && node.attrs)) return;
+                    if (attr === 'srcset' || attr === 'data-srcset') {
+                        const srcset = node.attrs[attr].split(/\s*,\s*/).map((src) => {
+                            if (options.requireIgnore.test(src)) return src;
+                            const [url, size] = src.split(/\s+/, 2);
+                            let ident;
                             do {
                                 ident = `xxxHTMLLINKxxx${Math.random()}${Math.random()}xxx`;
                             } while (urls[ident]);
-                            urls[ident] = node.attrs[attr];
-                            node.attrs[attr] = ident;
-                        }
+                            urls[ident] = url;
+                            return `${ident} ${size}`;
+                        });
+                        node.attrs[attr] = srcset.join(', ');
+                    } else if (!options.requireIgnore.test(node.attrs[attr])) {
+                        let ident;
+                        do {
+                            ident = `xxxHTMLLINKxxx${Math.random()}${Math.random()}xxx`;
+                        } while (urls[ident]);
+                        urls[ident] = node.attrs[attr];
+                        node.attrs[attr] = ident;
                     }
                 });
             }
