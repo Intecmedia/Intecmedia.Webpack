@@ -394,6 +394,7 @@ module.exports = {
                                         require('postcss-color-rgba-fallback')(),
                                         require('postcss-flexbugs-fixes')(),
                                         require('css-mqpacker')(),
+                                        require('postcss-url')({ url: 'inline', maxSize: 32 }),
                                         require('autoprefixer')({ browsers: BROWSERS }), // this always last
                                     ] : []),
                                     require('postcss-browser-reporter')(),

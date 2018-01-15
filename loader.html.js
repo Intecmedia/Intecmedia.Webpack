@@ -1,23 +1,13 @@
 const path = require('path');
-const SVGO = require('svgo');
 const slash = require('slash');
 const loaderUtils = require('loader-utils');
 const nunjucks = require('nunjucks');
 const frontMatter = require('front-matter');
 const deepAssign = require('deep-assign');
 const weblog = require('webpack-log');
+const posthtml = require('posthtml');
 
 const logger = weblog({ name: 'loader-html' });
-
-const svgo = new SVGO({
-    plugins: [
-        { cleanupIDs: false },
-        { convertShapeToPath: false },
-        { removeViewBox: false },
-        { removeAttrs: { attrs: 'data\\-.*' } },
-    ],
-    js2svg: { useShortTags: false },
-});
 
 const DEFAULT_OPTIONS = {
     context: {},
@@ -29,41 +19,58 @@ const DEFAULT_OPTIONS = {
         lstripBlocks: false,
         watch: false,
     },
+    interpolate: {
+        img: ['src'],
+        source: ['srcset'],
+    },
+    interpolateLoader: 'file-loader',
 };
 
+function interpolateHtml(html, options, callback) {
+    const urls = {};
+    const parser = posthtml();
+    parser.use((tree) => {
+        tree.walk((node) => {
+            if (node.tag in options) {
+                options[node.tag].forEach((attr) => {
+                    if (attr in node.attrs) {
+                        let ident;
+                        do {
+                            ident = `xxxREQUIRE-INTERPOLATExxx${Math.random()}${Math.random()}xxx`;
+                        } while (urls[ident]);
+                        urls[ident] = node.attrs[attr];
+                        node.attrs[attr] = ident;
+                    }
+                });
+            }
+            return node;
+        });
+        return tree;
+    });
+    parser.process(html).then((result) => {
+        let exportString = `export default ${JSON.stringify(result.html)};`;
+        exportString = exportString.replace(/xxxREQUIRE-INTERPOLATExxx[0-9\\.]+xxx/g, (match) => {
+            if (!urls[match]) return match;
+            const url = loaderUtils.urlToRequest(urls[match], options.searchPath);
+            return `"+require(${JSON.stringify(url)})+"`;
+        });
+        callback(null, exportString);
+    }).catch(callback);
+}
+
 module.exports = function HtmlLoader(source) {
-    const self = this;
-    const callback = self.async();
-    const options = deepAssign({}, DEFAULT_OPTIONS, loaderUtils.getOptions(self));
+    const loaderContext = this;
+    const callback = loaderContext.async();
+    const options = deepAssign({}, DEFAULT_OPTIONS, loaderUtils.getOptions(loaderContext));
 
     const loader = new nunjucks.FileSystemLoader(options.searchPath, { noCache: options.noCache });
-    const originalGetSource = loader.getSource;
-    loader.getSource = function getSource(...args) {
-        const result = originalGetSource.apply(this, args);
-        if (result && result.path) {
-            self.addDependency(result.path);
-            const extension = path.extname(result.path);
-            if (extension === '.svg') {
-                result.src = `{% filter svgo %}${result.src}{% endfilter %}`;
-            }
-        }
-        return result;
-    };
-
     const environment = new nunjucks.Environment(loader, options.environment);
-    environment.addFilter('svgo', (input, filter) => {
-        svgo.optimize(input).then((optimized) => {
-            filter(null, new nunjucks.runtime.SafeString(optimized.data));
-        }).catch((error) => {
-            filter(error);
-        });
-    }, true);
 
     const publicPath = ((options.context.APP || {}).PUBLIC_PATH || path.sep);
-    const resourcePath = path.sep + path.relative(options.searchPath, self.resourcePath);
+    const resourcePath = path.sep + path.relative(options.searchPath, loaderContext.resourcePath);
 
     const template = frontMatter(source);
-    const context = deepAssign({}, options.context, {
+    const templateContext = deepAssign({}, options.context, {
         PAGE: {
             ...template.attributes,
             PUBLIC_PATH: slash(path.normalize(publicPath + resourcePath)),
@@ -71,15 +78,15 @@ module.exports = function HtmlLoader(source) {
         },
     });
 
-    logger.info(`processing '${self.resourcePath}'`);
-    environment.renderString(template.body, context, (error, result) => {
+    logger.info(`processing '${loaderContext.resourcePath}'`);
+    environment.renderString(template.body, templateContext, (error, result) => {
         if (error) {
             if (error.message) {
-                error.message = error.message.replace(/^\(unknown path\)/, `(${self.resourcePath})`);
+                error.message = error.message.replace(/^\(unknown path\)/, `(${loaderContext.resourcePath})`);
             }
             callback(error);
         } else {
-            callback(null, `export default ${JSON.stringify(result)};`);
+            interpolateHtml.call(loaderContext, result, options.interpolate, callback);
         }
     });
 };
