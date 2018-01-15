@@ -19,36 +19,36 @@ const DEFAULT_OPTIONS = {
         lstripBlocks: false,
         watch: false,
     },
-    interpolate: {
+    require: {
         img: ['src', 'data-src', 'lowsrc', 'srcset', 'data-srcset'],
         source: ['srcset', 'data-srcset'],
     },
-    interpolateIgnore: /^(https?:\/\/|ftp:\/\/|mailto:|\/\/)/,
+    requireIgnore: /^(https?:\/\/|ftp:\/\/|mailto:|\/\/)/,
 };
 
-function interpolateHtml(html, options, callback) {
+function requireHtml(html, options, callback) {
     const urls = {};
     const parser = posthtml();
     parser.use((tree) => {
         tree.walk((node) => {
-            if (node.tag in options.interpolate) {
-                options.interpolate[node.tag].forEach((attr) => {
+            if (node.tag in options.require) {
+                options.require[node.tag].forEach((attr) => {
                     let ident;
-                    if (attr in node.attrs) {
+                    if (attr in node.attrs && !('data-require-ignore' && node.attrs)) {
                         if (attr === 'srcset' || attr === 'data-srcset') {
                             const srcset = node.attrs[attr].split(/\s*,\s*/).map((src) => {
-                                if (options.interpolateIgnore.test(src)) return src;
+                                if (options.requireIgnore.test(src)) return src;
                                 const [url, size] = src.split(/\s+/, 2);
                                 do {
-                                    ident = `xxxREQUIRE-INTERPOLATExxx${Math.random()}${Math.random()}xxx`;
+                                    ident = `xxxHTMLLINKxxx${Math.random()}${Math.random()}xxx`;
                                 } while (urls[ident]);
                                 urls[ident] = url;
                                 return `${ident} ${size}`;
                             });
                             node.attrs[attr] = srcset.join(', ');
-                        } else if (!options.interpolateIgnore.test(node.attrs[attr])) {
+                        } else if (!options.requireIgnore.test(node.attrs[attr])) {
                             do {
-                                ident = `xxxREQUIRE-INTERPOLATExxx${Math.random()}${Math.random()}xxx`;
+                                ident = `xxxHTMLLINKxxx${Math.random()}${Math.random()}xxx`;
                             } while (urls[ident]);
                             urls[ident] = node.attrs[attr];
                             node.attrs[attr] = ident;
@@ -62,7 +62,7 @@ function interpolateHtml(html, options, callback) {
     });
     parser.process(html).then((result) => {
         let exportString = `export default ${JSON.stringify(result.html)};`;
-        exportString = exportString.replace(/xxxREQUIRE-INTERPOLATExxx[0-9\\.]+xxx/g, (match) => {
+        exportString = exportString.replace(/xxxHTMLLINKxxx[0-9\\.]+xxx/g, (match) => {
             if (!urls[match]) return match;
             const url = loaderUtils.urlToRequest(urls[match], options.searchPath);
             return `"+require(${JSON.stringify(url)})+"`;
@@ -99,7 +99,7 @@ module.exports = function HtmlLoader(source) {
             }
             callback(error);
         } else {
-            interpolateHtml.call(loaderContext, result, options, callback);
+            requireHtml.call(loaderContext, result, options, callback);
         }
     });
 };
