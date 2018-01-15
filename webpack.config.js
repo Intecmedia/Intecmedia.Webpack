@@ -258,6 +258,7 @@ module.exports = {
         }),
         new BundleAnalyzerPlugin({
             analyzerMode: (DEV_SERVER ? 'server' : 'static'),
+            openAnalyzer: DEV_SERVER,
             reportFilename: path.join(__dirname, 'node_modules', '.cache', `bundle-analyzer-${NODE_ENV}.html`),
         }),
     ],
