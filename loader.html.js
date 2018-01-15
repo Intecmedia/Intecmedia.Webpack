@@ -83,13 +83,14 @@ module.exports = function HtmlLoader(source) {
     const resourcePath = path.sep + path.relative(options.searchPath, loaderContext.resourcePath);
 
     const template = frontMatter(source);
-    const templateContext = deepAssign({}, options.context, {
+    const templateContext = {
+        APP: options.context,
         PAGE: {
             ...template.attributes,
             PUBLIC_PATH: slash(path.normalize(publicPath + resourcePath)),
             RESOURCE_PATH: slash(path.normalize(resourcePath)),
         },
-    });
+    };
 
     logger.info(`processing '${loaderContext.resourcePath}'`);
     environment.renderString(template.body, templateContext, (error, result) => {
