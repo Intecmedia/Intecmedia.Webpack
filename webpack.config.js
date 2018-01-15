@@ -385,6 +385,13 @@ module.exports = {
                             },
                         },
                         {
+                            loader: 'resolve-url-loader',
+                            options: {
+                                sourceMap: USE_SOURCE_MAP,
+                                debug: !PROD,
+                            },
+                        },
+                        {
                             loader: 'postcss-loader',
                             options: {
                                 sourceMap: USE_SOURCE_MAP ? 'inline' : false,
