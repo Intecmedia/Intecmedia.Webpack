@@ -23,6 +23,7 @@ const DEFAULT_OPTIONS = {
         img: ['src', 'data-src', 'lowsrc', 'srcset', 'data-srcset'],
         source: ['srcset', 'data-srcset'],
     },
+    interpolateIgnore: /^(https?:\/\/|ftp:\/\/|mailto:|\/\/)/,
 };
 
 function interpolateHtml(html, options, callback) {
@@ -30,13 +31,14 @@ function interpolateHtml(html, options, callback) {
     const parser = posthtml();
     parser.use((tree) => {
         tree.walk((node) => {
-            if (node.tag in options) {
-                options[node.tag].forEach((attr) => {
+            if (node.tag in options.interpolate) {
+                options.interpolate[node.tag].forEach((attr) => {
+                    let ident;
                     if (attr in node.attrs) {
-                        let ident;
                         if (attr === 'srcset' || attr === 'data-srcset') {
                             const srcset = node.attrs[attr].split(/\s*,\s*/).map((src) => {
-                                const [ url, size ] = src.split(/\s+/, 2);
+                                if (options.interpolateIgnore.test(src)) return src;
+                                const [url, size] = src.split(/\s+/, 2);
                                 do {
                                     ident = `xxxREQUIRE-INTERPOLATExxx${Math.random()}${Math.random()}xxx`;
                                 } while (urls[ident]);
@@ -44,7 +46,7 @@ function interpolateHtml(html, options, callback) {
                                 return `${ident} ${size}`;
                             });
                             node.attrs[attr] = srcset.join(', ');
-                        } else {
+                        } else if (!options.interpolateIgnore.test(node.attrs[attr])) {
                             do {
                                 ident = `xxxREQUIRE-INTERPOLATExxx${Math.random()}${Math.random()}xxx`;
                             } while (urls[ident]);
@@ -97,7 +99,7 @@ module.exports = function HtmlLoader(source) {
             }
             callback(error);
         } else {
-            interpolateHtml.call(loaderContext, result, options.interpolate, callback);
+            interpolateHtml.call(loaderContext, result, options, callback);
         }
     });
 };
