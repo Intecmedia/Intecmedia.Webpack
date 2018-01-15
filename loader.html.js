@@ -41,7 +41,7 @@ function interpolateHtml(html, options, callback) {
                                     ident = `xxxREQUIRE-INTERPOLATExxx${Math.random()}${Math.random()}xxx`;
                                 } while (urls[ident]);
                                 urls[ident] = url;
-                                return `${url} ${size}`;
+                                return `${urls[ident]} ${size}`;
                             });
                             node.attrs[attr] = srcset.join(', ');
                         } else {
