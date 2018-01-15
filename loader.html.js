@@ -20,10 +20,9 @@ const DEFAULT_OPTIONS = {
         watch: false,
     },
     interpolate: {
-        img: ['src'],
-        source: ['srcset'],
+        img: ['src', 'data-src', 'lowsrc', 'srcset', 'data-srcset'],
+        source: ['srcset', 'data-srcset'],
     },
-    interpolateLoader: 'file-loader',
 };
 
 function interpolateHtml(html, options, callback) {
@@ -35,11 +34,23 @@ function interpolateHtml(html, options, callback) {
                 options[node.tag].forEach((attr) => {
                     if (attr in node.attrs) {
                         let ident;
-                        do {
-                            ident = `xxxREQUIRE-INTERPOLATExxx${Math.random()}${Math.random()}xxx`;
-                        } while (urls[ident]);
-                        urls[ident] = node.attrs[attr];
-                        node.attrs[attr] = ident;
+                        if (attr === 'srcset' || attr === 'data-srcset') {
+                            const srcset = node.attrs[attr].split(/\s*,\s*/).map((src) => {
+                                const [ url, size ] = src.split(/\s+/, 2);
+                                do {
+                                    ident = `xxxREQUIRE-INTERPOLATExxx${Math.random()}${Math.random()}xxx`;
+                                } while (urls[ident]);
+                                urls[ident] = url;
+                                return `${url} ${size}`;
+                            });
+                            node.attrs[attr] = srcset.join(', ');
+                        } else {
+                            do {
+                                ident = `xxxREQUIRE-INTERPOLATExxx${Math.random()}${Math.random()}xxx`;
+                            } while (urls[ident]);
+                            urls[ident] = node.attrs[attr];
+                            node.attrs[attr] = ident;
+                        }
                     }
                 });
             }
