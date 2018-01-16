@@ -360,12 +360,6 @@ module.exports = {
             {
                 test: /\.(css|scss)$/i,
                 loaders: (DEBUG || DEV_SERVER ? ['css-hot-loader'] : []).concat(ExtractTextPlugin.extract({
-                    fallback: [
-                        {
-                            loader: 'style-loader',
-                            options: { sourceMap: USE_SOURCE_MAP },
-                        },
-                    ],
                     use: [
                         {
                             loader: 'css-loader',
