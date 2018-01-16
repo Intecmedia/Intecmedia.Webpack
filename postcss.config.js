@@ -1,11 +1,9 @@
 /* eslint global-require: "off" */
 const DEBUG = ('DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0);
 const PROD = ('NODE_ENV' in process.env && process.env.NODE_ENV === 'production') || process.argv.indexOf('-p') !== -1;
-
 const { browserslist: BROWSERS } = require('./package.json');
 
 module.exports = {
-
     plugins: [
         require('postcss-devtools')({ precise: true }),
         require('postcss-input-style')(),

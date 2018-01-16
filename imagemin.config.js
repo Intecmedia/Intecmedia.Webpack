@@ -1,8 +1,5 @@
-module.expors = {
-    svgo: {
-        plugins: [
-            { removeViewBox: false },
-            { removeAttrs: { attrs: 'data\\-.*' } },
-        ],
-    },
+const svgoConfig = require('./svgo.config.js');
+
+module.exports = {
+    svgo: svgoConfig,
 };
