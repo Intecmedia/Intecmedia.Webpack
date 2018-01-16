@@ -58,7 +58,9 @@ const SERVICE_WORKER_HASH = () => {
     return null;
 };
 
-const SITEMAP = glob.sync(`${SOURCE_PATH}/**/*.html`).filter(filename => !/partials/.test(filename));
+const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.html`, {
+    ignore: `${slash(SOURCE_PATH)}/partials/**/*.html`,
+});
 
 const resourceName = (prefix, hash = false) => {
     const basename = path.basename(prefix);
@@ -397,10 +399,10 @@ module.exports = {
                             loader: 'sass-loader',
                             options: {
                                 data: [
-                                    `$DEBUG: ${DEBUG ? 'true' : 'false'};\n`,
-                                    `$NODE_ENV: '${NODE_ENV}';\n`,
-                                    `$PACKAGE_NAME: '${PACKAGE_NAME}';\n`,
-                                ].join(''),
+                                    ['$DEBUG', DEBUG],
+                                    ['$NODE_ENV', NODE_ENV],
+                                    ['$PACKAGE_NAME', PACKAGE_NAME],
+                                ].map(i => `${i[0]}: ${JSON.stringify(i[1])};`).join('\n'),
                                 indentWidth: 4,
                                 sourceMap: USE_SOURCE_MAP ? 'inline' : false,
                                 sourceMapEmbed: USE_SOURCE_MAP,
