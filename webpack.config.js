@@ -51,12 +51,7 @@ const ManifestPlugin = require('./plugin.manifest.js');
 
 const SERVICE_WORKER_BASE = slash(path.relative(APP.PUBLIC_PATH, '/'));
 const SERVICE_WORKER_PATH = path.join(OUTPUT_PATH, SERVICE_WORKER_BASE, '/service-worker.js');
-const SERVICE_WORKER_HASH = () => {
-    if (APP.USE_SERVICE_WORKER && fs.existsSync(SERVICE_WORKER_PATH)) {
-        return md5File.sync(SERVICE_WORKER_PATH);
-    }
-    return null;
-};
+const SERVICE_WORKER_HASH = () => fs.existsSync(SERVICE_WORKER_PATH) && md5File.sync(SERVICE_WORKER_PATH);
 
 const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.html`, {
     ignore: `${slash(SOURCE_PATH)}/partials/**/*.html`,
@@ -342,7 +337,7 @@ module.exports = {
             // image loaders
             {
                 test: /\.(jpeg|jpg|png|gif|svg|ico)$/i,
-                exclude: /(fonts|font|partials)/i,
+                exclude: /(fonts|font)/i,
                 loaders: [
                     {
                         loader: 'file-loader',
@@ -355,7 +350,7 @@ module.exports = {
             // font loaders
             {
                 test: /\.(eot|woff|woff2|ttf|svg)(\?v=.+)?$/i,
-                exclude: /(img|images|partials)/i,
+                exclude: /(img|images)/i,
                 loader: 'file-loader',
                 options: {
                     name: resourceName('fonts', true),
