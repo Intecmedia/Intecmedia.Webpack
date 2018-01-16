@@ -248,12 +248,7 @@ module.exports = {
         }),
         new ImageminPlugin({
             test: /\.(jpeg|jpg|png|gif|svg)$/i,
-            svgo: {
-                plugins: [
-                    { removeViewBox: false },
-                    { removeAttrs: { attrs: 'data\\-.*' } },
-                ],
-            },
+            ...require('./imagemin.config.js'),
             disable: !(PROD || DEBUG),
         }),
         new BundleAnalyzerPlugin({
@@ -395,24 +390,7 @@ module.exports = {
                             loader: 'postcss-loader',
                             options: {
                                 sourceMap: USE_SOURCE_MAP ? 'inline' : false,
-                                plugins: [
-                                    require('postcss-devtools')({ precise: true }),
-                                    require('postcss-input-style')(),
-                                    require('postcss-quantity-queries')(),
-                                    require('postcss-responsive-type')(),
-                                    ...(PROD || DEBUG ? [
-                                        require('pixrem')(),
-                                        require('pleeease-filters')(),
-                                        require('postcss-image-set-polyfill')(),
-                                        require('postcss-url')({ url: 'inline', maxSize: 32 }),
-                                        require('postcss-color-rgba-fallback')(),
-                                        require('postcss-flexbugs-fixes')(),
-                                        require('css-mqpacker')(),
-                                        require('autoprefixer')({ browsers: BROWSERS }), // this always last
-                                    ] : []),
-                                    require('postcss-browser-reporter')(),
-                                    require('postcss-reporter')(), // this always last
-                                ],
+                                config: { path: './postcss.config.js' },
                             },
                         },
                         {
@@ -429,12 +407,6 @@ module.exports = {
                                 sourceComments: USE_SOURCE_MAP,
                             },
                         },
-                        ...(USE_LINTERS ? [{
-                            loader: 'stylefmt-loader',
-                            options: {
-                                config: '.stylelintrc',
-                            },
-                        }] : []),
                     ],
                 })),
             },
