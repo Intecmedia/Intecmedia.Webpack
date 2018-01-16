@@ -338,14 +338,10 @@ module.exports = {
             {
                 test: /\.(jpeg|jpg|png|gif|svg|ico)$/i,
                 exclude: /(fonts|font)/i,
-                loaders: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: resourceName('img', false),
-                        },
-                    },
-                ],
+                loader: 'file-loader',
+                options: {
+                    name: resourceName('img', false),
+                },
             },
             // font loaders
             {
@@ -359,7 +355,7 @@ module.exports = {
             // css loaders
             {
                 test: /\.(css|scss)$/i,
-                loaders: (DEBUG || DEV_SERVER ? ['css-hot-loader'] : []).concat(ExtractTextPlugin.extract({
+                loaders: (DEV_SERVER ? ['css-hot-loader'] : []).concat(ExtractTextPlugin.extract({
                     use: [
                         {
                             loader: 'css-loader',
