@@ -6,8 +6,10 @@
         @extend .text-warning;
         bottom: 0;
         content: 'Only visible $NODE_ENV=#{$NODE_ENV} or DEBUG=#{$DEBUG}';
+        opacity: 0.8;
         position: fixed;
         right: 0;
+        white-space: nowrap;
         z-index: $zindex-modal;
     }
     /* stylelint-enable */
@@ -21,8 +23,10 @@
         @extend .text-warning;
         bottom: 0;
         content: 'Please rename the `name` in `package.json` file';
+        opacity: 0.8;
         position: fixed;
         right: 0;
+        white-space: nowrap;
         z-index: $zindex-modal;
     }
     /* stylelint-enable */
