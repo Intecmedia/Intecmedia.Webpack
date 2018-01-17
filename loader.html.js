@@ -27,6 +27,7 @@ const DEFAULT_OPTIONS = {
         source: ['srcset', 'data-srcset'],
     },
     requireIgnore: /^(\w+[:]|\/\/)/i,
+    requireInterpolate: true,
     searchPath: './source',
     svgo: svgoConfig,
     svgoEnabled: true,
@@ -37,7 +38,7 @@ const SRCSET_SEPARATOR = /\s*,\s*/;
 const IDENT_PATTERN = /xxxHTMLLINKxxx[0-9\\.]+xxx/g;
 const randomIdent = () => `xxxHTMLLINKxxx${Math.random()}${Math.random()}xxx`;
 
-const REQUIRE_PATTERN = /\$\{require\(([^)]+)\)\}/g;
+const REQUIRE_PATTERN = /\$\{require\([^)]*\)\}/g;
 
 function processHtml(html, options, loaderCallback) {
     const requireReplace = {};
@@ -104,18 +105,20 @@ function processHtml(html, options, loaderCallback) {
     }
     parser.process(html).then((result) => {
         let exportString = `export default ${JSON.stringify(result.html)};`;
-        exportString = exportString.replace(REQUIRE_PATTERN, (match) => {
-            const url = match[1];
-            if (options.requireIgnore.test(url)) return match;
+        if (options.requireInterpolate) {
+            exportString = exportString.replace(REQUIRE_PATTERN, (match) => {
+                const url = match[1];
+                if (!url || options.requireIgnore.test(url)) return match;
 
-            let ident;
-            do {
-                ident = randomIdent();
-            } while (requireReplace[ident]);
-            requireReplace[ident] = url;
+                let ident;
+                do {
+                    ident = randomIdent();
+                } while (requireReplace[ident]);
+                requireReplace[ident] = url;
 
-            return ident;
-        });
+                return ident;
+            });
+        }
         if (requireReplace && Object.keys(requireReplace).length) {
             exportString = exportString.replace(IDENT_PATTERN, (match) => {
                 if (!requireReplace[match]) return match;
