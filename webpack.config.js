@@ -14,7 +14,7 @@ const DEV_SERVER = path.basename(require.main.filename, '.js') === 'webpack-dev-
 const PROD = ('NODE_ENV' in process.env && process.env.NODE_ENV === 'production') || process.argv.indexOf('-p') !== -1;
 const NODE_ENV = PROD ? 'production' : 'development';
 
-const USE_SOURCE_MAP = DEBUG && !PROD;
+const USE_SOURCE_MAP = (DEBUG && !PROD) || DEV_SERVER;
 const USE_LINTERS = PROD || DEBUG;
 
 const { name: PACKAGE_NAME, browserslist: BROWSERS } = require('./package.json');
@@ -365,13 +365,6 @@ module.exports = {
                                 minimize: (PROD ? {
                                     discardComments: { removeAll: true },
                                 } : false),
-                            },
-                        },
-                        {
-                            loader: 'resolve-url-loader',
-                            options: {
-                                sourceMap: USE_SOURCE_MAP,
-                                debug: !PROD,
                             },
                         },
                         {

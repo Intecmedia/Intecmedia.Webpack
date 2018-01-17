@@ -108,7 +108,6 @@
         "posthtml": "latest",
         "posthtml-render": "latest",
         "pretty": "latest",
-        "resolve-url-loader": "latest",
         "sass-loader": "latest",
         "slash": "latest",
         "style-loader": "latest",
