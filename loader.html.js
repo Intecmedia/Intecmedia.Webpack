@@ -6,65 +6,98 @@ const frontMatter = require('front-matter');
 const deepAssign = require('deep-assign');
 const weblog = require('webpack-log');
 const posthtml = require('posthtml');
+const posthtmlRender = require('posthtml-render');
+const SVGO = require('svgo');
+const svgoConfig = require('./svgo.config.js');
+const deasync = require('deasync');
 
 const logger = weblog({ name: 'loader-html' });
 
 const DEFAULT_OPTIONS = {
     context: {},
-    noCache: true,
-    searchPath: './source',
     environment: {
         autoescape: true,
         trimBlocks: true,
         lstripBlocks: false,
         watch: false,
     },
-    requireTags: {
+    noCache: true,
+    linkTags: {
         img: ['src', 'data-src', 'lowsrc', 'srcset', 'data-srcset'],
         source: ['srcset', 'data-srcset'],
     },
-    requireIgnore: /^(https?:\/\/|ftp:\/\/|mailto:|\/\/)/i,
+    linkIgnore: /^(https?:\/\/|ftp:\/\/|mailto:|\/\/)/i,
+    searchPath: './source',
+    svgo: svgoConfig,
 };
 
-function requireHtml(html, options, callback) {
-    const urls = {};
+const SRCSET_SEP = /\s*,\s*/;
+const SRC_SEP = /\s+/;
+
+const IDENT_PATTERN = /xxxHTMLLINKxxx[0-9\\.]+xxx/g;
+const getIdent = () => `xxxHTMLLINKxxx${Math.random()}${Math.random()}xxx`;
+
+function processHtml(html, options, callback) {
+    const linksReplace = {};
     const parser = posthtml();
-    parser.use((tree) => {
-        tree.match(Object.keys(options.requireTags).map(tag => ({ tag })), (node) => {
-            options.requireTags[node.tag].forEach((attr) => {
-                if (!(attr in node.attrs) || ('data-require-ignore' in node.attrs)) return;
-                if (attr === 'srcset' || attr === 'data-srcset') {
-                    const srcset = node.attrs[attr].split(/\s*,\s*/).map((src) => {
-                        if (options.requireIgnore.test(src)) return src;
-                        const [url, size] = src.split(/\s+/, 2);
+    if (options.linkTags && Object.keys(options.linkTags).length) {
+        parser.use((tree) => {
+            tree.match(Object.keys(options.linkTags).map(tag => ({ tag })), (node) => {
+                options.linkTags[node.tag].forEach((attr) => {
+                    if (!(attr in node.attrs) || ('data-require-ignore' in node.attrs)) return;
+                    if (attr === 'srcset' || attr === 'data-srcset') {
+                        const srcset = node.attrs[attr].split(SRCSET_SEP).map((src) => {
+                            if (options.linkIgnore.test(src)) return src;
+                            const [url, size] = src.split(SRC_SEP, 2);
+                            let ident;
+                            do {
+                                ident = getIdent();
+                            } while (linksReplace[ident]);
+                            linksReplace[ident] = url;
+                            return `${ident} ${size}`;
+                        });
+                        node.attrs[attr] = srcset.join(', ');
+                    } else if (!options.linkIgnore.test(node.attrs[attr])) {
                         let ident;
                         do {
-                            ident = `xxxHTMLLINKxxx${Math.random()}${Math.random()}xxx`;
-                        } while (urls[ident]);
-                        urls[ident] = url;
-                        return `${ident} ${size}`;
-                    });
-                    node.attrs[attr] = srcset.join(', ');
-                } else if (!options.requireIgnore.test(node.attrs[attr])) {
-                    let ident;
-                    do {
-                        ident = `xxxHTMLLINKxxx${Math.random()}${Math.random()}xxx`;
-                    } while (urls[ident]);
-                    urls[ident] = node.attrs[attr];
-                    node.attrs[attr] = ident;
-                }
+                            ident = getIdent();
+                        } while (linksReplace[ident]);
+                        linksReplace[ident] = node.attrs[attr];
+                        node.attrs[attr] = ident;
+                    }
+                });
+                return node;
             });
-            return node;
+            return tree;
         });
-        return tree;
-    });
+    }
+    if (options.svgo && Object.keys(options.svgo).length) {
+        const svgoInstance = new SVGO(options.svgo);
+        parser.use((tree) => {
+            tree.match({ tag: 'svg' }, (node) => {
+                let minifiedSvg;
+                const originalSvg = posthtmlRender(node);
+                svgoInstance.optimize(originalSvg).then((result) => {
+                    minifiedSvg = result;
+                });
+                deasync.loopWhile(() => minifiedSvg === undefined);
+                node.attrs = {};
+                node.content = minifiedSvg.data;
+                node.tag = false;
+                return node;
+            });
+            return tree;
+        });
+    }
     parser.process(html).then((result) => {
         let exportString = `export default ${JSON.stringify(result.html)};`;
-        exportString = exportString.replace(/xxxHTMLLINKxxx[0-9\\.]+xxx/g, (match) => {
-            if (!urls[match]) return match;
-            const url = loaderUtils.urlToRequest(urls[match], options.searchPath);
-            return `"+require(${JSON.stringify(url)})+"`;
-        });
+        if (linksReplace && Object.keys(linksReplace).length) {
+            exportString = exportString.replace(IDENT_PATTERN, (match) => {
+                if (!linksReplace[match]) return match;
+                const url = loaderUtils.urlToRequest(linksReplace[match], options.searchPath);
+                return `"+require(${JSON.stringify(url)})+"`;
+            });
+        }
         callback(null, exportString);
     }).catch(callback);
 }
@@ -98,7 +131,7 @@ module.exports = function HtmlLoader(source) {
             }
             callback(error);
         } else {
-            requireHtml.call(loaderContext, result, options, callback);
+            processHtml.call(loaderContext, result, options, callback);
         }
     });
 };
