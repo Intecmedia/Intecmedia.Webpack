@@ -5,7 +5,7 @@ const DEBUG = ('DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0);
 const PROD = ('NODE_ENV' in process.env && process.env.NODE_ENV === 'production') || process.argv.indexOf('-p') !== -1;
 const { browserslist: BROWSERS } = require('./package.json');
 
-const SOURCE_PATH = path.resolve(__dirname, 'source', 'css');
+const SOURCE_PATH = path.resolve(__dirname, 'source');
 const { output: { path: BUILD_PATH } } = require('./webpack.config.js');
 
 module.exports = {
@@ -21,7 +21,7 @@ module.exports = {
             require('postcss-url')({
                 url: 'inline',
                 maxSize: 32,
-                basePath: [BUILD_PATH, SOURCE_PATH],
+                basePath: [path.join(BUILD_PATH, 'css'), path.join(SOURCE_PATH, 'css')],
             }),
             require('postcss-color-rgba-fallback')(),
             require('postcss-flexbugs-fixes')(),
