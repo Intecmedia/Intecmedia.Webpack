@@ -29,6 +29,7 @@ const DEFAULT_OPTIONS = {
     linkIgnore: /^(https?:\/\/|ftp:\/\/|mailto:|\/\/)/i,
     searchPath: './source',
     svgo: svgoConfig,
+    svgoEnabled: true,
 };
 
 const SRC_SEPARATOR = /\s+/;
@@ -74,7 +75,7 @@ function processHtml(html, options, loaderCallback) {
             return tree;
         });
     }
-    if (options.svgo && Object.keys(options.svgo).length) {
+    if (options.svgoEnabled) {
         const svgoInstance = new SVGO(options.svgo);
         parser.use((tree) => {
             tree.match({ tag: 'svg' }, (node) => {
@@ -117,8 +118,8 @@ module.exports = function HtmlLoader(source) {
     const loaderCallback = loaderContext.async();
     const options = deepAssign({}, DEFAULT_OPTIONS, loaderUtils.getOptions(loaderContext));
 
-    const loader = new nunjucks.FileSystemLoader(options.searchPath, { noCache: options.noCache });
-    const environment = new nunjucks.Environment(loader, options.environment);
+    const nunjucksLoader = new nunjucks.FileSystemLoader(options.searchPath, { noCache: options.noCache });
+    const nunjucksEnvironment = new nunjucks.Environment(nunjucksLoader, options.environment);
 
     const publicPath = ((options.context.APP || {}).PUBLIC_PATH || path.sep);
     const resourcePath = path.sep + path.relative(options.searchPath, loaderContext.resourcePath);
@@ -134,7 +135,7 @@ module.exports = function HtmlLoader(source) {
     };
 
     logger.info(`processing '${loaderContext.resourcePath}'`);
-    environment.renderString(template.body, templateContext, (error, result) => {
+    nunjucksEnvironment.renderString(template.body, templateContext, (error, result) => {
         if (error) {
             if (error.message) {
                 error.message = error.message.replace(/^\(unknown path\)/, `(${loaderContext.resourcePath})`);

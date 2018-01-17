@@ -270,7 +270,6 @@ module.exports = {
                 test: /\.html$/i,
                 loader: './loader.html.js',
                 options: {
-                    noCache: PROD,
                     context: Object.assign(
                         {},
                         APP.HTML_CONTEXT,
@@ -281,7 +280,9 @@ module.exports = {
                             SERVICE_WORKER_HASH,
                         },
                     ),
+                    noCache: DEBUG || PROD,
                     searchPath: SOURCE_PATH,
+                    svgoEnabled: DEBUG || PROD,
                 },
             },
             // javascript loaders
