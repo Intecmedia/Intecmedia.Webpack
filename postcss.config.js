@@ -1,7 +1,12 @@
 /* eslint global-require: "off" */
+const path = require('path');
+
 const DEBUG = ('DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0);
 const PROD = ('NODE_ENV' in process.env && process.env.NODE_ENV === 'production') || process.argv.indexOf('-p') !== -1;
 const { browserslist: BROWSERS } = require('./package.json');
+
+const SOURCE_PATH = path.resolve(__dirname, 'source', 'css');
+const { output: { path: BUILD_PATH } } = require('./webpack.config.js');
 
 module.exports = {
     plugins: [
@@ -13,7 +18,11 @@ module.exports = {
             require('pixrem')(),
             require('pleeease-filters')(),
             require('postcss-image-set-polyfill')(),
-            require('postcss-url')({ url: 'inline', maxSize: 32 }),
+            require('postcss-url')({
+                url: 'inline',
+                maxSize: 32,
+                basePath: [BUILD_PATH, SOURCE_PATH],
+            }),
             require('postcss-color-rgba-fallback')(),
             require('postcss-flexbugs-fixes')(),
             require('css-mqpacker')(),
