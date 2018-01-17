@@ -106,7 +106,8 @@ function processHtml(html, options, loaderCallback) {
     parser.process(html).then((result) => {
         let exportString = `export default ${JSON.stringify(result.html)};`;
         if (options.requireInterpolate) {
-            exportString = exportString.replace(REQUIRE_PATTERN, (match, url) => {
+            exportString = exportString.replace(REQUIRE_PATTERN, (match, quoted) => {
+                const url = quoted.replace(/(^["'])|(["']$)/g, '');
                 if (!url || options.requireIgnore.test(url)) return match;
 
                 let ident;
