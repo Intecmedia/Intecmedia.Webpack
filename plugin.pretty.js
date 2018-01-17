@@ -21,9 +21,8 @@ module.exports = class PrettyPlugin {
         compiler.plugin('compilation', (compilation) => {
             compilation.plugin('html-webpack-plugin-after-html-processing', (htmlPluginData, callback) => {
                 logger.info(`processing '${htmlPluginData.plugin.options.filename}'`);
-                // eslint-disable-next-line no-param-reassign
-                htmlPluginData.html = pretty(htmlPluginData.html, this.options);
-                callback(null, htmlPluginData);
+                const html = pretty(htmlPluginData.html, this.options);
+                callback(null, Object.assign(htmlPluginData, {html}));
             });
         });
     }
