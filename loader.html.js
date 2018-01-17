@@ -36,7 +36,7 @@ const SRCSET_SEPARATOR = /\s*,\s*/;
 const IDENT_PATTERN = /xxxHTMLLINKxxx[0-9\\.]+xxx/g;
 const randomIdent = () => `xxxHTMLLINKxxx${Math.random()}${Math.random()}xxx`;
 
-function processHtml(html, options, callback) {
+function processHtml(html, options, loaderCallback) {
     const linksReplace = {};
     const parser = posthtml();
     if (options.linkTags && Object.keys(options.linkTags).length) {
@@ -86,7 +86,7 @@ function processHtml(html, options, callback) {
                     minifiedSvg = result;
                 }).catch((error) => {
                     minifiedSvg = { data: originalSvg };
-                    return callback(error);
+                    return loaderCallback(error);
                 });
                 deasync.loopWhile(() => minifiedSvg === undefined);
 
@@ -104,19 +104,17 @@ function processHtml(html, options, callback) {
         if (linksReplace && Object.keys(linksReplace).length) {
             exportString = exportString.replace(IDENT_PATTERN, (match) => {
                 if (!linksReplace[match]) return match;
-
                 const url = loaderUtils.urlToRequest(linksReplace[match], options.searchPath);
-
                 return `"+require(${JSON.stringify(url)})+"`;
             });
         }
-        callback(null, exportString);
-    }).catch(callback);
+        loaderCallback(null, exportString);
+    }).catch(loaderCallback);
 }
 
 module.exports = function HtmlLoader(source) {
     const loaderContext = this;
-    const callback = loaderContext.async();
+    const loaderCallback = loaderContext.async();
     const options = deepAssign({}, DEFAULT_OPTIONS, loaderUtils.getOptions(loaderContext));
 
     const loader = new nunjucks.FileSystemLoader(options.searchPath, { noCache: options.noCache });
@@ -141,9 +139,9 @@ module.exports = function HtmlLoader(source) {
             if (error.message) {
                 error.message = error.message.replace(/^\(unknown path\)/, `(${loaderContext.resourcePath})`);
             }
-            callback(error);
+            loaderCallback(error);
         } else {
-            processHtml.call(loaderContext, result, options, callback);
+            processHtml.call(loaderContext, result, options, loaderCallback);
         }
     });
 };
