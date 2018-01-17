@@ -26,7 +26,7 @@ const DEFAULT_OPTIONS = {
         img: ['src', 'data-src', 'lowsrc', 'srcset', 'data-srcset'],
         source: ['srcset', 'data-srcset'],
     },
-    linkIgnore: /^(https?:\/\/|ftp:\/\/|mailto:|\/\/)/i,
+    linkIgnore: /^(\w+:|\/\/)/i,
     searchPath: './source',
     svgo: svgoConfig,
     svgoEnabled: true,
