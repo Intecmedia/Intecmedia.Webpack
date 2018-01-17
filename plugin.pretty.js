@@ -6,6 +6,7 @@ const logger = weblog({ name: 'plugin-pretty' });
 
 const DEFAULT_OPTIONS = {
     ocd: false,
+    unformatted: ['code', 'pre', 'em', 'strong', 'span', 'svg'],
     indent_inner_html: false,
     indent_char: ' ',
     indent_size: 4,
@@ -22,7 +23,7 @@ module.exports = class PrettyPlugin {
             compilation.plugin('html-webpack-plugin-after-html-processing', (htmlPluginData, callback) => {
                 logger.info(`processing '${htmlPluginData.plugin.options.filename}'`);
                 const html = pretty(htmlPluginData.html, this.options);
-                callback(null, Object.assign(htmlPluginData, {html}));
+                callback(null, Object.assign(htmlPluginData, { html }));
             });
         });
     }
