@@ -38,7 +38,7 @@ const SRCSET_SEPARATOR = /\s*,\s*/;
 const IDENT_PATTERN = /xxxHTMLLINKxxx[0-9\\.]+xxx/g;
 const randomIdent = () => `xxxHTMLLINKxxx${Math.random()}${Math.random()}xxx`;
 
-const REQUIRE_PATTERN = /\$\{require\([^)]*\)\}/g;
+const REQUIRE_PATTERN = /\$\{require\(([^)]*)\)\}/g;
 
 function processHtml(html, options, loaderCallback) {
     const requireReplace = {};
@@ -106,8 +106,7 @@ function processHtml(html, options, loaderCallback) {
     parser.process(html).then((result) => {
         let exportString = `export default ${JSON.stringify(result.html)};`;
         if (options.requireInterpolate) {
-            exportString = exportString.replace(REQUIRE_PATTERN, (match) => {
-                const url = match[1];
+            exportString = exportString.replace(REQUIRE_PATTERN, (match, url) => {
                 if (!url || options.requireIgnore.test(url)) return match;
 
                 let ident;
