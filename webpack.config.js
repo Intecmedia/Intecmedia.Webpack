@@ -54,7 +54,11 @@ const SERVICE_WORKER_PATH = path.join(OUTPUT_PATH, SERVICE_WORKER_BASE, '/servic
 const SERVICE_WORKER_HASH = () => fs.existsSync(SERVICE_WORKER_PATH) && md5File.sync(SERVICE_WORKER_PATH);
 
 const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.html`, {
-    ignore: `${slash(SOURCE_PATH)}/partials/**/*.html`,
+    ignore: [
+        `${slash(SOURCE_PATH)}/partials/**/*.html`,
+        `${slash(SOURCE_PATH)}/google*.html`,
+        `${slash(SOURCE_PATH)}/yandex_*.html`,
+    ],
 });
 
 const resourceName = (prefix, hash = false) => {
@@ -235,12 +239,18 @@ module.exports = {
             staticFileGlobsIgnorePatterns: [/\.map$/, /\.LICENSE$/],
             ignoreUrlParametersMatching: [/^utm_/, /^[a-fA-F0-9]{32}$/],
         })] : []),
-        new CopyWebpackPlugin([{
-            context: SOURCE_PATH,
-            from: 'img/**/*.{png,svg,ico,gif,xml,jpeg,jpg,json}',
+        new CopyWebpackPlugin([
+            ...[
+                'img/**/*.{png,svg,ico,gif,xml,jpeg,jpg,json}',
+                'google*.html',
+                'yandex_*.html',
+            ].map(from => ({
+                from,
+                to: OUTPUT_PATH,
+                context: SOURCE_PATH,
+            })),
+        ], {
             copyUnmodified: !(PROD || DEBUG),
-            to: OUTPUT_PATH,
-        }], {
             debug: (DEBUG ? 'debug' : 'info'),
         }),
         new ImageminPlugin({
