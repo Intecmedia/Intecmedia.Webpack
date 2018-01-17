@@ -242,12 +242,13 @@ module.exports = {
         new CopyWebpackPlugin([
             ...[
                 'img/**/*.{png,svg,ico,gif,xml,jpeg,jpg,json}',
-                'google*.html',
-                'yandex_*.html',
+                '*.txt',
+                '*.html',
             ].map(from => ({
                 from,
                 to: OUTPUT_PATH,
                 context: SOURCE_PATH,
+                ignore: SITEMAP,
             })),
         ], {
             copyUnmodified: !(PROD || DEBUG),
