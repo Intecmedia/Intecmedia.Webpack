@@ -22,11 +22,11 @@ const DEFAULT_OPTIONS = {
         watch: false,
     },
     noCache: true,
-    linkTags: {
+    requireTags: {
         img: ['src', 'data-src', 'lowsrc', 'srcset', 'data-srcset'],
         source: ['srcset', 'data-srcset'],
     },
-    linkIgnore: /^(\w+:|\/\/)/i,
+    requireIgnore: /^(\w+[:]|\/\/)/i,
     searchPath: './source',
     svgo: svgoConfig,
     svgoEnabled: true,
@@ -37,36 +37,38 @@ const SRCSET_SEPARATOR = /\s*,\s*/;
 const IDENT_PATTERN = /xxxHTMLLINKxxx[0-9\\.]+xxx/g;
 const randomIdent = () => `xxxHTMLLINKxxx${Math.random()}${Math.random()}xxx`;
 
+const REQUIRE_PATTERN = /\$\{require\(([^)]+)\)\}/g;
+
 function processHtml(html, options, loaderCallback) {
-    const linksReplace = {};
+    const requireReplace = {};
     const parser = posthtml();
-    if (options.linkTags && Object.keys(options.linkTags).length) {
+    if (options.requireTags && Object.keys(options.requireTags).length) {
         parser.use((tree) => {
-            tree.match(Object.keys(options.linkTags).map(tag => ({ tag })), (node) => {
-                options.linkTags[node.tag].forEach((attr) => {
+            tree.match(Object.keys(options.requireTags).map(tag => ({ tag })), (node) => {
+                options.requireTags[node.tag].forEach((attr) => {
                     if (!(attr in node.attrs) || ('data-link-ignore' in node.attrs)) return;
 
                     if (attr === 'srcset' || attr === 'data-srcset') {
                         const srcset = node.attrs[attr].split(SRCSET_SEPARATOR).map((src) => {
-                            if (options.linkIgnore.test(src)) return src;
+                            if (options.requireIgnore.test(src)) return src;
 
                             const [url, size] = src.split(SRC_SEPARATOR, 2);
                             let ident;
                             do {
                                 ident = randomIdent();
-                            } while (linksReplace[ident]);
+                            } while (requireReplace[ident]);
 
-                            linksReplace[ident] = url;
+                            requireReplace[ident] = url;
                             return `${ident} ${size}`;
                         });
                         node.attrs[attr] = srcset.join(', ');
-                    } else if (!options.linkIgnore.test(node.attrs[attr])) {
+                    } else if (!options.requireIgnore.test(node.attrs[attr])) {
                         let ident;
                         do {
                             ident = randomIdent();
-                        } while (linksReplace[ident]);
+                        } while (requireReplace[ident]);
 
-                        linksReplace[ident] = node.attrs[attr];
+                        requireReplace[ident] = node.attrs[attr];
                         node.attrs[attr] = ident;
                     }
                 });
@@ -102,10 +104,22 @@ function processHtml(html, options, loaderCallback) {
     }
     parser.process(html).then((result) => {
         let exportString = `export default ${JSON.stringify(result.html)};`;
-        if (linksReplace && Object.keys(linksReplace).length) {
+        exportString = exportString.replace(REQUIRE_PATTERN, (match) => {
+            const url = match[1];
+            if (options.requireIgnore.test(url)) return match;
+
+            let ident;
+            do {
+                ident = randomIdent();
+            } while (requireReplace[ident]);
+            requireReplace[ident] = url;
+
+            return ident;
+        });
+        if (requireReplace && Object.keys(requireReplace).length) {
             exportString = exportString.replace(IDENT_PATTERN, (match) => {
-                if (!linksReplace[match]) return match;
-                const url = loaderUtils.urlToRequest(linksReplace[match], options.searchPath);
+                if (!requireReplace[match]) return match;
+                const url = loaderUtils.urlToRequest(requireReplace[match], options.searchPath);
                 return `"+require(${JSON.stringify(url)})+"`;
             });
         }
@@ -120,6 +134,10 @@ module.exports = function HtmlLoader(source) {
 
     const nunjucksLoader = new nunjucks.FileSystemLoader(options.searchPath, { noCache: options.noCache });
     const nunjucksEnvironment = new nunjucks.Environment(nunjucksLoader, options.environment);
+
+    nunjucksEnvironment.addFilter('require', (url, filterCallback) => {
+        filterCallback(`\${require(${JSON.stringify(url)})}`);
+    }, true);
 
     const publicPath = ((options.context.APP || {}).PUBLIC_PATH || path.sep);
     const resourcePath = path.sep + path.relative(options.searchPath, loaderContext.resourcePath);
