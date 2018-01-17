@@ -31,11 +31,10 @@ const DEFAULT_OPTIONS = {
     svgo: svgoConfig,
 };
 
-const SRCSET_SEP = /\s*,\s*/;
-const SRC_SEP = /\s+/;
-
+const SRC_SEPARATOR = /\s+/;
+const SRCSET_SEPARATOR = /\s*,\s*/;
 const IDENT_PATTERN = /xxxHTMLLINKxxx[0-9\\.]+xxx/g;
-const getIdent = () => `xxxHTMLLINKxxx${Math.random()}${Math.random()}xxx`;
+const randomIdent = () => `xxxHTMLLINKxxx${Math.random()}${Math.random()}xxx`;
 
 function processHtml(html, options, callback) {
     const linksReplace = {};
@@ -44,15 +43,18 @@ function processHtml(html, options, callback) {
         parser.use((tree) => {
             tree.match(Object.keys(options.linkTags).map(tag => ({ tag })), (node) => {
                 options.linkTags[node.tag].forEach((attr) => {
-                    if (!(attr in node.attrs) || ('data-require-ignore' in node.attrs)) return;
+                    if (!(attr in node.attrs) || ('data-link-ignore' in node.attrs)) return;
+
                     if (attr === 'srcset' || attr === 'data-srcset') {
-                        const srcset = node.attrs[attr].split(SRCSET_SEP).map((src) => {
+                        const srcset = node.attrs[attr].split(SRCSET_SEPARATOR).map((src) => {
                             if (options.linkIgnore.test(src)) return src;
-                            const [url, size] = src.split(SRC_SEP, 2);
+
+                            const [url, size] = src.split(SRC_SEPARATOR, 2);
                             let ident;
                             do {
-                                ident = getIdent();
+                                ident = randomIdent();
                             } while (linksReplace[ident]);
+
                             linksReplace[ident] = url;
                             return `${ident} ${size}`;
                         });
@@ -60,8 +62,9 @@ function processHtml(html, options, callback) {
                     } else if (!options.linkIgnore.test(node.attrs[attr])) {
                         let ident;
                         do {
-                            ident = getIdent();
+                            ident = randomIdent();
                         } while (linksReplace[ident]);
+
                         linksReplace[ident] = node.attrs[attr];
                         node.attrs[attr] = ident;
                     }
@@ -75,15 +78,22 @@ function processHtml(html, options, callback) {
         const svgoInstance = new SVGO(options.svgo);
         parser.use((tree) => {
             tree.match({ tag: 'svg' }, (node) => {
+                if ('data-svgo-ignore' in node.attrs) return node;
+
                 let minifiedSvg;
                 const originalSvg = posthtmlRender(node);
                 svgoInstance.optimize(originalSvg).then((result) => {
                     minifiedSvg = result;
+                }).catch((error) => {
+                    minifiedSvg = { data: originalSvg };
+                    return callback(error);
                 });
                 deasync.loopWhile(() => minifiedSvg === undefined);
+
                 node.attrs = {};
                 node.content = minifiedSvg.data;
                 node.tag = false;
+
                 return node;
             });
             return tree;
@@ -94,7 +104,9 @@ function processHtml(html, options, callback) {
         if (linksReplace && Object.keys(linksReplace).length) {
             exportString = exportString.replace(IDENT_PATTERN, (match) => {
                 if (!linksReplace[match]) return match;
+
                 const url = loaderUtils.urlToRequest(linksReplace[match], options.searchPath);
+
                 return `"+require(${JSON.stringify(url)})+"`;
             });
         }
