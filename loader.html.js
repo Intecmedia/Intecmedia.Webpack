@@ -27,6 +27,7 @@ const DEFAULT_OPTIONS = {
         source: ['srcset', 'data-srcset'],
     },
     requireIgnore: /^(\w+[:]|\/\/)/i,
+    requireReplace: {},
     searchPath: './source',
     svgo: svgoConfig,
     svgoEnabled: true,
@@ -36,8 +37,6 @@ const SRC_SEPARATOR = /\s+/;
 const SRCSET_SEPARATOR = /\s*,\s*/;
 const IDENT_PATTERN = /xxxHTMLLINKxxx[0-9\\.]+xxx/g;
 const randomIdent = () => `xxxHTMLLINKxxx${Math.random()}${Math.random()}xxx`;
-
-let requireReplace = {};
 
 function processHtml(html, options, loaderCallback) {
     const parser = posthtml();
@@ -55,9 +54,9 @@ function processHtml(html, options, loaderCallback) {
                             let ident;
                             do {
                                 ident = randomIdent();
-                            } while (requireReplace[ident]);
+                            } while (options.requireReplace[ident]);
 
-                            requireReplace[ident] = url;
+                            options.requireReplace[ident] = url;
                             return `${ident} ${size}`;
                         });
                         node.attrs[attr] = srcset.join(', ');
@@ -65,9 +64,9 @@ function processHtml(html, options, loaderCallback) {
                         let ident;
                         do {
                             ident = randomIdent();
-                        } while (requireReplace[ident]);
+                        } while (options.requireReplace[ident]);
 
-                        requireReplace[ident] = node.attrs[attr];
+                        options.requireReplace[ident] = node.attrs[attr];
                         node.attrs[attr] = ident;
                     }
                 });
@@ -103,10 +102,10 @@ function processHtml(html, options, loaderCallback) {
     }
     parser.process(html).then((result) => {
         let exportString = `export default ${JSON.stringify(result.html)};`;
-        if (requireReplace && Object.keys(requireReplace).length) {
+        if (options.requireReplace && Object.keys(options.requireReplace).length) {
             exportString = exportString.replace(IDENT_PATTERN, (match) => {
-                if (!requireReplace[match]) return match;
-                const url = loaderUtils.urlToRequest(requireReplace[match], options.searchPath);
+                if (!options.requireReplace[match]) return match;
+                const url = loaderUtils.urlToRequest(options.requireReplace[match], options.searchPath);
                 return `"+require(${JSON.stringify(url)})+"`;
             });
         }
@@ -122,13 +121,12 @@ module.exports = function HtmlLoader(source) {
     const nunjucksLoader = new nunjucks.FileSystemLoader(options.searchPath, { noCache: options.noCache });
     const nunjucksEnvironment = new nunjucks.Environment(nunjucksLoader, options.environment);
 
-    requireReplace = {};
     nunjucksEnvironment.addFilter('require', (url) => {
         let ident;
         do {
             ident = randomIdent();
-        } while (requireReplace[ident]);
-        requireReplace[ident] = url;
+        } while (options.requireReplace[ident]);
+        options.requireReplace[ident] = url;
         return ident;
     });
 
@@ -153,7 +151,7 @@ module.exports = function HtmlLoader(source) {
             }
             loaderCallback(error);
         } else {
-            processHtml.call(loaderContext, result, options, loaderCallback);
+            processHtml(result, options, loaderCallback);
         }
     });
 };
