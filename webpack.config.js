@@ -23,12 +23,14 @@ const SOURCE_PATH = path.resolve(__dirname, 'source');
 const OUTPUT_PATH = path.resolve(__dirname, 'build');
 const APP = require('./app.config.js');
 
-logger.info(`Name: ${PACKAGE_NAME}`);
-logger.info(`Enviroment: ${NODE_ENV}`);
-logger.info(`Debug: ${DEBUG ? 'enabled' : 'disabled'}`);
-logger.info(`Linters: ${USE_LINTERS ? 'enabled' : 'disabled'}`);
-logger.info(`Source maps: ${USE_SOURCE_MAP ? 'enabled' : 'disabled'}`);
-logger.info(`App config: ${JSON.stringify(APP, null, '    ')}`);
+if (path.basename(require.main.filename, '.js') in ['webpack', 'webpack-dev-server']) {
+    logger.info(`Name: ${PACKAGE_NAME}`);
+    logger.info(`Enviroment: ${NODE_ENV}`);
+    logger.info(`Debug: ${DEBUG ? 'enabled' : 'disabled'}`);
+    logger.info(`Linters: ${USE_LINTERS ? 'enabled' : 'disabled'}`);
+    logger.info(`Source maps: ${USE_SOURCE_MAP ? 'enabled' : 'disabled'}`);
+    logger.info(`App config: ${JSON.stringify(APP, null, '    ')}`);
+}
 
 if (PROD && DEBUG) {
     throw new Error(`Dont use NODE_ENV=${NODE_ENV} and DEBUG=${DEBUG} together`);
