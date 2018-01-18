@@ -27,7 +27,6 @@ const DEFAULT_OPTIONS = {
         source: ['srcset', 'data-srcset'],
     },
     requireIgnore: /^(\w+[:]|\/\/)/i,
-    requireInterpolate: true,
     searchPath: './source',
     svgo: svgoConfig,
     svgoEnabled: true,
@@ -38,10 +37,9 @@ const SRCSET_SEPARATOR = /\s*,\s*/;
 const IDENT_PATTERN = /xxxHTMLLINKxxx[0-9\\.]+xxx/g;
 const randomIdent = () => `xxxHTMLLINKxxx${Math.random()}${Math.random()}xxx`;
 
-const REQUIRE_PATTERN = /\$\{require\(([^)]*)\)\}/g;
+let requireReplace = {};
 
 function processHtml(html, options, loaderCallback) {
-    const requireReplace = {};
     const parser = posthtml();
     if (options.requireTags && Object.keys(options.requireTags).length) {
         parser.use((tree) => {
@@ -105,20 +103,6 @@ function processHtml(html, options, loaderCallback) {
     }
     parser.process(html).then((result) => {
         let exportString = `export default ${JSON.stringify(result.html)};`;
-        if (options.requireInterpolate) {
-            exportString = exportString.replace(REQUIRE_PATTERN, (match, quoted) => {
-                const url = quoted.replace(/(^["'])|(["']$)/g, '');
-                if (!url || options.requireIgnore.test(url)) return match;
-
-                let ident;
-                do {
-                    ident = randomIdent();
-                } while (requireReplace[ident]);
-                requireReplace[ident] = url;
-
-                return ident;
-            });
-        }
         if (requireReplace && Object.keys(requireReplace).length) {
             exportString = exportString.replace(IDENT_PATTERN, (match) => {
                 if (!requireReplace[match]) return match;
@@ -138,9 +122,15 @@ module.exports = function HtmlLoader(source) {
     const nunjucksLoader = new nunjucks.FileSystemLoader(options.searchPath, { noCache: options.noCache });
     const nunjucksEnvironment = new nunjucks.Environment(nunjucksLoader, options.environment);
 
-    nunjucksEnvironment.addFilter('require', (url, filterCallback) => {
-        filterCallback(`\${require(${JSON.stringify(url)})}`);
-    }, true);
+    requireReplace = {};
+    nunjucksEnvironment.addFilter('require', (url) => {
+        let ident;
+        do {
+            ident = randomIdent();
+        } while (requireReplace[ident]);
+        requireReplace[ident] = url;
+        return ident;
+    });
 
     const publicPath = ((options.context.APP || {}).PUBLIC_PATH || path.sep);
     const resourcePath = path.sep + path.relative(options.searchPath, loaderContext.resourcePath);
