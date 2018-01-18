@@ -78,10 +78,10 @@ function processHtml(html, options, loaderCallback) {
                             if (options.requireIgnore.test(src)) return src;
 
                             const [url, size] = src.split(SRC_SEPARATOR, 2);
-                            return `${options.requireCallback(url)} ${size}`;
+                            return `${options.requireIdent(url)} ${size}`;
                         }).join(', ');
                     } else if (!options.requireIgnore.test(node.attrs[attr])) {
-                        node.attrs[attr] = options.requireCallback(node.attrs[attr]);
+                        node.attrs[attr] = options.requireIdent(node.attrs[attr]);
                     }
                 });
                 return node;
@@ -116,13 +116,7 @@ function processHtml(html, options, loaderCallback) {
     }
     parser.process(html).then((result) => {
         let exportString = `export default ${JSON.stringify(result.html)};`;
-        if (options.requireReplace && Object.keys(options.requireReplace).length) {
-            exportString = exportString.replace(IDENT_PATTERN, (match) => {
-                if (!options.requireReplace[match]) return match;
-                const url = loaderUtils.urlToRequest(options.requireReplace[match], options.searchPath);
-                return `"+require(${JSON.stringify(url)})+"`;
-            });
-        }
+        exportString = options.requireExport(exportString);
         loaderCallback(null, exportString);
     }).catch(loaderCallback);
 }
@@ -137,7 +131,7 @@ module.exports = function HtmlLoader(source) {
     const nunjucksLoader = new nunjucks.FileSystemLoader(options.searchPath, { noCache: options.noCache });
     const nunjucksEnvironment = new nunjucks.Environment(nunjucksLoader, options.environment);
 
-    options.requireCallback = (url) => {
+    options.requireIdent = (url) => {
         let ident;
         do {
             ident = randomIdent();
@@ -145,8 +139,14 @@ module.exports = function HtmlLoader(source) {
         options.requireReplace[ident] = url;
         return ident;
     };
-    nunjucksEnvironment.addFilter('require', options.requireCallback);
-    nunjucksEnvironment.addGlobal('require', options.requireCallback);
+    options.requireExport = exportString => exportString.replace(IDENT_PATTERN, (match) => {
+        if (!options.requireReplace[match]) return match;
+        const url = loaderUtils.urlToRequest(options.requireReplace[match], options.searchPath);
+        return `"+require(${JSON.stringify(url)})+"`;
+    });
+
+    nunjucksEnvironment.addFilter('require', options.requireIdent);
+    nunjucksEnvironment.addGlobal('require', options.requireIdent);
 
     const publicPath = ((options.context.APP || {}).PUBLIC_PATH || path.sep);
     const resourcePath = path.sep + path.relative(options.searchPath, loaderContext.resourcePath);
