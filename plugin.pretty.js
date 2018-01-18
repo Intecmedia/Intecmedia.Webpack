@@ -1,5 +1,6 @@
 const pretty = require('pretty');
 const deepAssign = require('deep-assign');
+const validateOptions = require('schema-utils');
 const weblog = require('webpack-log');
 
 const logger = weblog({ name: 'plugin-pretty' });
@@ -13,9 +14,24 @@ const DEFAULT_OPTIONS = {
     sep: '\n',
 };
 
+const OPTIONS_SCHEMA = {
+    type: 'object',
+    additionalProperties: false,
+    properties: {
+        ocd: { type: 'boolean' },
+        unformatted: { type: 'array' },
+        indent_inner_html: { type: 'boolean' },
+        indent_char: { type: 'string' },
+        indent_size: { type: 'integer' },
+        sep: { type: 'string' },
+    },
+};
+
+
 module.exports = class PrettyPlugin {
     constructor(options) {
         this.options = deepAssign({}, DEFAULT_OPTIONS, options);
+        validateOptions(OPTIONS_SCHEMA, this.options, 'manifest.json');
     }
 
     apply(compiler) {

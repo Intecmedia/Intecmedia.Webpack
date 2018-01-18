@@ -109,6 +109,7 @@
         "posthtml-render": "latest",
         "pretty": "latest",
         "sass-loader": "latest",
+        "schema-utils": "latest",
         "slash": "latest",
         "style-loader": "latest",
         "stylefmt": "latest",

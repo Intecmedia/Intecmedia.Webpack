@@ -1,6 +1,7 @@
 const path = require('path');
 const slash = require('slash');
 const loaderUtils = require('loader-utils');
+const validateOptions = require('schema-utils');
 const nunjucks = require('nunjucks');
 const frontMatter = require('front-matter');
 const deepAssign = require('deep-assign');
@@ -31,6 +32,32 @@ const DEFAULT_OPTIONS = {
     searchPath: './source',
     svgo: svgoConfig,
     svgoEnabled: true,
+};
+
+const OPTIONS_SCHEMA = {
+    type: 'object',
+    additionalProperties: false,
+    properties: {
+        context: { type: 'object' },
+        environment: { type: 'object' },
+        noCache: { type: 'boolean' },
+        requireTags: {
+            type: 'object',
+            properties: {
+                prop: {
+                    type: 'object',
+                    properties: {
+                        prop: { type: 'string' },
+                    },
+                },
+            },
+        },
+        requireIgnore: { instanceof: 'RegExp' },
+        requireReplace: { type: 'object' },
+        searchPath: { type: 'string' },
+        svgo: { type: 'object' },
+        svgoEnabled: { type: 'boolean' },
+    },
 };
 
 const SRC_SEPARATOR = /\s+/;
@@ -116,7 +143,9 @@ function processHtml(html, options, loaderCallback) {
 module.exports = function HtmlLoader(source) {
     const loaderContext = this;
     const loaderCallback = loaderContext.async();
+
     const options = deepAssign({}, DEFAULT_OPTIONS, loaderUtils.getOptions(loaderContext));
+    validateOptions(OPTIONS_SCHEMA, options, 'loader-html');
 
     const nunjucksLoader = new nunjucks.FileSystemLoader(options.searchPath, { noCache: options.noCache });
     const nunjucksEnvironment = new nunjucks.Environment(nunjucksLoader, options.environment);
