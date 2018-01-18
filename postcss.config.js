@@ -14,6 +14,7 @@ module.exports = {
         require('postcss-input-style')(),
         require('postcss-quantity-queries')(),
         require('postcss-responsive-type')(),
+        require('postcss-font-magician')({ display: 'swap' }),
         ...(PROD || DEBUG ? [
             require('pixrem')(),
             require('pleeease-filters')(),
