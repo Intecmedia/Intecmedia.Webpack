@@ -74,13 +74,12 @@ function processHtml(html, options, loaderCallback) {
                     if (!(attr in node.attrs) || ('data-link-ignore' in node.attrs)) return;
 
                     if (attr === 'srcset' || attr === 'data-srcset') {
-                        const srcset = node.attrs[attr].split(SRCSET_SEPARATOR).map((src) => {
+                        node.attrs[attr] = node.attrs[attr].split(SRCSET_SEPARATOR).map((src) => {
                             if (options.requireIgnore.test(src)) return src;
 
                             const [url, size] = src.split(SRC_SEPARATOR, 2);
                             return `${options.requireIdent(url)} ${size}`;
-                        });
-                        node.attrs[attr] = srcset.join(', ');
+                        }).join(', ');
                     } else if (!options.requireIgnore.test(node.attrs[attr])) {
                         node.attrs[attr] = options.requireIdent(node.attrs[attr]);
                     }
