@@ -75,7 +75,7 @@ function processHtml(html, options, loaderCallback) {
                     if (!(attr in node.attrs) || ('data-require-ignore' in node.attrs)) return;
 
                     const val = node.attrs[attr];
-                    if (attr === 'srcset' || attr === 'data-srcset') {
+                    if (attr in ['srcset', 'data-srcset']) {
                         node.attrs[attr] = val.split(SRCSET_SEPARATOR).map((src) => {
                             if (IGNORE_PATTERN.test(src) || options.requireIgnore.test(src)) return src;
                             const [url, size] = src.split(SRC_SEPARATOR, 2);
