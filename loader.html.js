@@ -150,14 +150,16 @@ module.exports = function HtmlLoader(source) {
     const nunjucksLoader = new nunjucks.FileSystemLoader(options.searchPath, { noCache: options.noCache });
     const nunjucksEnvironment = new nunjucks.Environment(nunjucksLoader, options.environment);
 
-    nunjucksEnvironment.addFilter('require', (url) => {
+    const requireFunction = (url) => {
         let ident;
         do {
             ident = randomIdent();
         } while (options.requireReplace[ident]);
         options.requireReplace[ident] = url;
         return ident;
-    });
+    };
+    nunjucksEnvironment.addFilter('require', requireFunction);
+    nunjucksEnvironment.addGlobal('require', requireFunction);
 
     const publicPath = ((options.context.APP || {}).PUBLIC_PATH || path.sep);
     const resourcePath = path.sep + path.relative(options.searchPath, loaderContext.resourcePath);
