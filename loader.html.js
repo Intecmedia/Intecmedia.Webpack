@@ -133,9 +133,8 @@ module.exports = function HtmlLoader(source) {
 
     options.requireIdent = (url) => {
         let ident;
-        do {
-            ident = randomIdent();
-        } while (options.requireReplace[ident]);
+        do ident = randomIdent();
+        while (options.requireReplace[ident]);
         options.requireReplace[ident] = url;
         return ident;
     };
