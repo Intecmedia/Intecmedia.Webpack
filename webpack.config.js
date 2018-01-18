@@ -11,8 +11,12 @@ const logger = weblog({ name: 'webpack-config' });
 
 const DEBUG = ('DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0);
 const DEV_SERVER = path.basename(require.main.filename, '.js') === 'webpack-dev-server';
-const PROD = ('NODE_ENV' in process.env && process.env.NODE_ENV === 'production') || process.argv.indexOf('-p') !== -1;
+const PROD = (process.env.NODE_ENV === 'production');
 const NODE_ENV = PROD ? 'production' : 'development';
+
+if (!['production', 'development'].includes(process.env.NODE_ENV)) {
+    throw new Error('Unknow NODE_ENV=' + JSON.stringify(process.env.NODE_ENV));
+}
 
 const USE_SOURCE_MAP = (DEBUG && !PROD) || DEV_SERVER;
 const USE_LINTERS = PROD || DEBUG;
@@ -23,7 +27,7 @@ const SOURCE_PATH = path.resolve(__dirname, 'source');
 const OUTPUT_PATH = path.resolve(__dirname, 'build');
 const APP = require('./app.config.js');
 
-if (path.basename(require.main.filename, '.js') in ['webpack', 'webpack-dev-server']) {
+if (['webpack', 'webpack-dev-server'].includes(path.basename(require.main.filename, '.js'))) {
     logger.info(`Name: ${PACKAGE_NAME}`);
     logger.info(`Enviroment: ${NODE_ENV}`);
     logger.info(`Debug: ${DEBUG ? 'enabled' : 'disabled'}`);
@@ -147,13 +151,14 @@ module.exports = {
             contentImage: path.resolve('./.favicons-source-512x512.png'),
             title: APP.TITLE,
         }),
-        ...(USE_LINTERS ? [new StyleLintPlugin({
+        new StyleLintPlugin({
             configFile: '.stylelintrc',
             files: ['**/*.scss'],
             fix: !DEV_SERVER,
+            emitErrors: USE_LINTERS,
             syntax: 'scss',
             quiet: PROD,
-        })] : []),
+        }),
         ...(APP.USE_FAVICONS ? [
             new FaviconsPlugin.AppIcon({
                 title: APP.TITLE,
@@ -330,14 +335,15 @@ module.exports = {
                             cacheDirectory: !PROD,
                         },
                     },
-                    ...(USE_LINTERS ? [{
+                    {
                         loader: 'eslint-loader',
                         options: {
                             fix: true,
                             cache: !PROD,
                             quiet: PROD,
+                            emitWarning: USE_LINTERS,
                         },
-                    }] : []),
+                    },
                 ],
             },
             // image loaders
