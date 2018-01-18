@@ -27,12 +27,17 @@ const DEFAULT_OPTIONS = {
         img: ['src', 'data-src', 'lowsrc', 'srcset', 'data-srcset'],
         source: ['srcset', 'data-srcset'],
     },
-    requireIgnore: /^(\w+[:]|\/\/)/i,
+    requireIgnore: /(^(\w+[:]|\/\/))|(^\{\{.*\}\}$)/i,
     requireReplace: {},
     searchPath: './source',
     svgo: svgoConfig,
     svgoEnabled: true,
 };
+
+const SRC_SEPARATOR = /\s+/;
+const SRCSET_SEPARATOR = /\s*,\s*/;
+const REQUIRE_PATTERN = /\{\{ require\([0-9\\.]+\) \}\}/g;
+const RANDOM_REQUIRE = () => `{{ require(${Math.random()}${Math.random()}) }}`;
 
 const OPTIONS_SCHEMA = {
     type: 'object',
@@ -59,11 +64,6 @@ const OPTIONS_SCHEMA = {
         svgoEnabled: { type: 'boolean' },
     },
 };
-
-const SRC_SEPARATOR = /\s+/;
-const SRCSET_SEPARATOR = /\s*,\s*/;
-const REQUIRE_PATTERN = /xXxREQUIRE\([0-9\\.]+\)xXx/g;
-const RANDOM_REQUIRE = () => `xXxREQUIRE(${Math.random()}${Math.random()})xXx`;
 
 function processHtml(html, options, loaderCallback) {
     const parser = posthtml();
