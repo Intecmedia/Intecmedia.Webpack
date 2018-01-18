@@ -62,8 +62,8 @@ const OPTIONS_SCHEMA = {
 
 const SRC_SEPARATOR = /\s+/;
 const SRCSET_SEPARATOR = /\s*,\s*/;
-const IDENT_PATTERN = /xxxHTMLLINKxxx[0-9\\.]+xxx/g;
-const randomIdent = () => `xxxHTMLLINKxxx${Math.random()}${Math.random()}xxx`;
+const REQUIRE_PATTERN = /xXxREQUIRE\([0-9\\.]+\)xXx/g;
+const RANDOM_REQUIRE = () => `xXxREQUIRE(${Math.random()}${Math.random()})xXx`;
 
 function processHtml(html, options, loaderCallback) {
     const parser = posthtml();
@@ -133,12 +133,12 @@ module.exports = function HtmlLoader(source) {
 
     options.requireIdent = (url) => {
         let ident;
-        do ident = randomIdent();
+        do ident = RANDOM_REQUIRE();
         while (options.requireReplace[ident]);
         options.requireReplace[ident] = url;
         return ident;
     };
-    options.requireExport = exportString => exportString.replace(IDENT_PATTERN, (match) => {
+    options.requireExport = exportString => exportString.replace(REQUIRE_PATTERN, (match) => {
         if (!options.requireReplace[match]) return match;
         const request = loaderUtils.urlToRequest(options.requireReplace[match], options.searchPath);
         return `"+require(${JSON.stringify(request)})+"`;
