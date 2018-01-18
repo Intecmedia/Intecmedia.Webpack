@@ -10,7 +10,7 @@ const { 'tag-self-close': tagSelfClose } = JSON.parse(fs.readFileSync('./.htmlli
 
 const DEFAULT_OPTIONS = {
     ocd: false,
-    unformatted: ['code', 'pre', 'em', 'strong', 'span'].concat(tagSelfClose),
+    unformatted: ['code', 'pre', 'em', 'strong', 'span', ...tagSelfClose],
     indent_inner_html: false,
     indent_char: ' ',
     indent_size: 4,
