@@ -78,10 +78,10 @@ function processHtml(html, options, loaderCallback) {
                             if (options.requireIgnore.test(src)) return src;
 
                             const [url, size] = src.split(SRC_SEPARATOR, 2);
-                            return `${options.requireIdent(url)} ${size}`;
+                            return `${options.requireCallback(url)} ${size}`;
                         }).join(', ');
                     } else if (!options.requireIgnore.test(node.attrs[attr])) {
-                        node.attrs[attr] = options.requireIdent(node.attrs[attr]);
+                        node.attrs[attr] = options.requireCallback(node.attrs[attr]);
                     }
                 });
                 return node;
@@ -137,7 +137,7 @@ module.exports = function HtmlLoader(source) {
     const nunjucksLoader = new nunjucks.FileSystemLoader(options.searchPath, { noCache: options.noCache });
     const nunjucksEnvironment = new nunjucks.Environment(nunjucksLoader, options.environment);
 
-    options.requireIdent = (url) => {
+    options.requireCallback = (url) => {
         let ident;
         do {
             ident = randomIdent();
@@ -145,8 +145,8 @@ module.exports = function HtmlLoader(source) {
         options.requireReplace[ident] = url;
         return ident;
     };
-    nunjucksEnvironment.addFilter('require', options.requireIdent);
-    nunjucksEnvironment.addGlobal('require', options.requireIdent);
+    nunjucksEnvironment.addFilter('require', options.requireCallback);
+    nunjucksEnvironment.addGlobal('require', options.requireCallback);
 
     const publicPath = ((options.context.APP || {}).PUBLIC_PATH || path.sep);
     const resourcePath = path.sep + path.relative(options.searchPath, loaderContext.resourcePath);
