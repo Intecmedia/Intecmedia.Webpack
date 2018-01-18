@@ -27,7 +27,7 @@ const DEFAULT_OPTIONS = {
         img: ['src', 'data-src', 'lowsrc', 'srcset', 'data-srcset'],
         source: ['srcset', 'data-srcset'],
     },
-    requireIgnore: /(^(\w+[:]|\/\/))|(^\{\{.*\}\}$)/i,
+    requireIgnore: /^(\w+[:]|\/\/)/i,
     requireReplace: {},
     searchPath: './source',
     svgo: svgoConfig,
@@ -36,6 +36,7 @@ const DEFAULT_OPTIONS = {
 
 const SRC_SEPARATOR = /\s+/;
 const SRCSET_SEPARATOR = /\s*,\s*/;
+const IGNORE_PATTERN = /^\{\{.*\}\}$/;
 const REQUIRE_PATTERN = /\{\{ require\([0-9\\.]+\) \}\}/g;
 const RANDOM_REQUIRE = () => `{{ require(${Math.random()}${Math.random()}) }}`;
 
@@ -73,15 +74,15 @@ function processHtml(html, options, loaderCallback) {
                 options.requireTags[node.tag].forEach((attr) => {
                     if (!(attr in node.attrs) || ('data-link-ignore' in node.attrs)) return;
 
+                    const val = node.attrs[attr];
                     if (attr === 'srcset' || attr === 'data-srcset') {
-                        node.attrs[attr] = node.attrs[attr].split(SRCSET_SEPARATOR).map((src) => {
-                            if (options.requireIgnore.test(src)) return src;
-
+                        node.attrs[attr] = val.split(SRCSET_SEPARATOR).map((src) => {
+                            if (IGNORE_PATTERN.test(src) || options.requireIgnore.test(src)) return src;
                             const [url, size] = src.split(SRC_SEPARATOR, 2);
                             return `${options.requireIdent(url)} ${size}`;
                         }).join(', ');
-                    } else if (!options.requireIgnore.test(node.attrs[attr])) {
-                        node.attrs[attr] = options.requireIdent(node.attrs[attr]);
+                    } else if (!IGNORE_PATTERN.test(val) && !options.requireIgnore.test(val)) {
+                        node.attrs[attr] = options.requireIdent(val);
                     }
                 });
                 return node;
