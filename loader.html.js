@@ -141,8 +141,8 @@ module.exports = function HtmlLoader(source) {
     };
     options.requireExport = exportString => exportString.replace(IDENT_PATTERN, (match) => {
         if (!options.requireReplace[match]) return match;
-        const url = loaderUtils.urlToRequest(options.requireReplace[match], options.searchPath);
-        return `"+require(${JSON.stringify(url)})+"`;
+        const request = loaderUtils.urlToRequest(options.requireReplace[match], options.searchPath);
+        return `"+require(${JSON.stringify(request)})+"`;
     });
 
     nunjucksEnvironment.addFilter('require', options.requireIdent);
