@@ -72,7 +72,7 @@ function processHtml(html, options, loaderCallback) {
         parser.use((tree) => {
             tree.match(Object.keys(options.requireTags).map(tag => ({ tag })), (node) => {
                 options.requireTags[node.tag].forEach((attr) => {
-                    if (!(attr in node.attrs) || ('data-link-ignore' in node.attrs)) return;
+                    if (!(attr in node.attrs) || ('data-require-ignore' in node.attrs)) return;
 
                     const val = node.attrs[attr];
                     if (attr === 'srcset' || attr === 'data-srcset') {
