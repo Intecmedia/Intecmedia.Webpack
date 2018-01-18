@@ -78,23 +78,11 @@ function processHtml(html, options, loaderCallback) {
                             if (options.requireIgnore.test(src)) return src;
 
                             const [url, size] = src.split(SRC_SEPARATOR, 2);
-                            let ident;
-                            do {
-                                ident = randomIdent();
-                            } while (options.requireReplace[ident]);
-
-                            options.requireReplace[ident] = url;
-                            return `${ident} ${size}`;
+                            return `${options.requireIdent(url)} ${size}`;
                         });
                         node.attrs[attr] = srcset.join(', ');
                     } else if (!options.requireIgnore.test(node.attrs[attr])) {
-                        let ident;
-                        do {
-                            ident = randomIdent();
-                        } while (options.requireReplace[ident]);
-
-                        options.requireReplace[ident] = node.attrs[attr];
-                        node.attrs[attr] = ident;
+                        node.attrs[attr] = options.requireIdent(node.attrs[attr]);
                     }
                 });
                 return node;
@@ -150,7 +138,7 @@ module.exports = function HtmlLoader(source) {
     const nunjucksLoader = new nunjucks.FileSystemLoader(options.searchPath, { noCache: options.noCache });
     const nunjucksEnvironment = new nunjucks.Environment(nunjucksLoader, options.environment);
 
-    const requireFunction = (url) => {
+    options.requireIdent = (url) => {
         let ident;
         do {
             ident = randomIdent();
@@ -158,8 +146,8 @@ module.exports = function HtmlLoader(source) {
         options.requireReplace[ident] = url;
         return ident;
     };
-    nunjucksEnvironment.addFilter('require', requireFunction);
-    nunjucksEnvironment.addGlobal('require', requireFunction);
+    nunjucksEnvironment.addFilter('require', options.requireIdent);
+    nunjucksEnvironment.addGlobal('require', options.requireIdent);
 
     const publicPath = ((options.context.APP || {}).PUBLIC_PATH || path.sep);
     const resourcePath = path.sep + path.relative(options.searchPath, loaderContext.resourcePath);
