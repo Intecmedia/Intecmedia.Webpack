@@ -77,8 +77,8 @@ function processHtml(html, options, loaderCallback) {
                     const val = node.attrs[attr];
                     if (attr in ['srcset', 'data-srcset']) {
                         node.attrs[attr] = val.split(SRCSET_SEPARATOR).map((src) => {
-                            if (IGNORE_PATTERN.test(src) || options.requireIgnore.test(src)) return src;
                             const [url, size] = src.split(SRC_SEPARATOR, 2);
+                            if (IGNORE_PATTERN.test(url) || options.requireIgnore.test(url)) return src;
                             return `${options.requireIdent(url)} ${size}`;
                         }).join(', ');
                     } else if (!IGNORE_PATTERN.test(val) && !options.requireIgnore.test(val)) {
