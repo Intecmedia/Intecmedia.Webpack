@@ -84,16 +84,12 @@ module.exports = {
     },
 
     devServer: {
+        before(app) {
+            app.get('/service-worker.js', (request, response) => response.sendFile(SERVICE_WORKER_PATH));
+        },
+        compress: false,
         open: true,
         overlay: true,
-        compress: false,
-        setup(app) {
-            app.get('/service-worker.js', (req, res) => {
-                const content = fs.existsSync(SERVICE_WORKER_PATH) ? fs.readFileSync(SERVICE_WORKER_PATH) : '';
-                res.set({ 'Content-Type': 'application/javascript; charset=utf-8' });
-                res.send(content);
-            });
-        },
     },
 
     entry: {
@@ -101,20 +97,20 @@ module.exports = {
     },
 
     output: {
+        filename: 'js/app.min.js',
         path: OUTPUT_PATH,
         publicPath: APP.PUBLIC_PATH,
-        filename: 'js/app.min.js',
     },
 
     performance: {
-        hints: PROD && !DEBUG ? 'error' : false,
-        maxAssetSize: 512 * 1024,
-        maxEntrypointSize: 512 * 1024,
         assetFilter: (uri) => {
             const [filename] = uri.split('?', 2);
             const ignore = /(\.map|\.LICENSE|\.eot|\.ttf|manifest\.json|service-worker\.js)$/;
             return !(ignore.test(filename));
         },
+        hints: PROD && !DEBUG ? 'error' : false,
+        maxAssetSize: 512 * 1024,
+        maxEntrypointSize: 512 * 1024,
     },
 
     plugins: [
