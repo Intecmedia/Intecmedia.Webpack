@@ -1,5 +1,5 @@
 const fs = require('fs');
-const path = require('path');
+
 const glob = require('glob');
 const htmllint = require('htmllint');
 const weblog = require('webpack-log');
