@@ -74,11 +74,14 @@ function processHtml(html, options, loaderCallback) {
     const parser = posthtml();
     if (options.requireTags && Object.keys(options.requireTags).length) {
         parser.use((tree) => {
-            const query = Object.keys(options.requireTags).map(tag => ({
+            const expression = Object.keys(options.requireTags).map(tag => ({
                 tag,
-                attrs: options.requireTags[tag].reduce((attrs, attr) => Object.assign(attrs, { [attr]: true }), {}),
+                attrs: options.requireTags[tag].reduce((attrs, attr) => ({
+                    ...attrs,
+                    [attr]: true,
+                }), {}),
             }));
-            tree.match(query, (node) => {
+            tree.match(expression, (node) => {
                 options.requireTags[node.tag].forEach((attr) => {
                     if (!(attr in node.attrs) || ('data-require-ignore' in node.attrs)) return;
 
