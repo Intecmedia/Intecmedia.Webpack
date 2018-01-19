@@ -8,8 +8,6 @@ const weblog = require('webpack-log');
 const logger = weblog({ name: 'loader-resize' });
 
 const DEFAULT_OPTIONS = {
-    format: null,
-    resize: null,
     imageMagick: true,
 };
 
@@ -17,13 +15,13 @@ module.exports = function ResizeLoader(content) {
     const loaderContext = this;
     if (loaderContext.cacheable) loaderContext.cacheable();
 
+    const queryOptions = loaderContext.resourceQuery ? loaderUtils.parseQuery(loaderContext.resourceQuery) : {};
     const options = deepAssign(
         {},
         DEFAULT_OPTIONS,
         loaderUtils.getOptions(loaderContext),
-        loaderContext.resourceQuery ? loaderUtils.parseQuery(loaderContext.resourceQuery) : {},
     );
-    if (!options.resize) return fileLoader.call(loaderContext, content);
+    if (!queryOptions.resize) return fileLoader.call(loaderContext, content);
 
     const loaderCallback = this.async();
     const resourceInfo = path.parse(loaderContext.resourcePath);
@@ -33,28 +31,28 @@ module.exports = function ResizeLoader(content) {
     anyOfMagick(content).size(function sizeCallback(error, size) {
         if (error) { loaderCallback(error); return; }
 
-        let [width, height] = options.resize.split('x', 2);
+        let [width, height] = queryOptions.resize.split('x', 2);
         width = parseInt(width || size.width, 10);
         height = parseInt(height || size.height, 10);
 
         this.resize(width, height);
-        const quality = options.quality ? parseInt(options.quality, 10) : 0;
+        const quality = queryOptions.quality ? parseInt(queryOptions.quality, 10) : 0;
         if (quality > 0) {
             this.quality(quality);
         }
 
-        const format = (options.format || resourceInfo.ext.substr(1));
+        const format = (queryOptions.format || resourceInfo.ext.substr(1));
         this.toBuffer(format.toUpperCase(), (exception, buffer) => {
             if (exception) { loaderCallback(exception); return; }
 
             const resourcePath = path.join(resourceInfo.dir, [
-                resourceInfo.name,
-                (
+                ...(queryOptions.name ? [queryOptions.name] : [(
                     width !== size.width || height !== size.height
                         ? `@${width === size.width ? '' : width}x${height === size.height ? '' : height}`
                         : ''
                 ),
-                (options.suffix ? options.suffix : ''),
+                ]),
+                (queryOptions.suffix ? queryOptions.suffix : ''),
                 '.',
                 format.toLowerCase(),
             ].join(''));
