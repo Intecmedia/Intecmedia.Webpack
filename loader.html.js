@@ -31,7 +31,7 @@ const DEFAULT_OPTIONS = {
     requireTags: {
         img: ['src', 'data-src', 'lowsrc', 'srcset', 'data-srcset'],
         source: ['srcset', 'data-srcset'],
-        image: ['href', 'xlink:href'], // exclude base64
+        image: ['href', 'xlink:href'],
     },
     requireIgnore: /^(\w+[:]|\/\/)/i,
     requireReplace: {},
