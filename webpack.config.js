@@ -351,12 +351,23 @@ module.exports = {
             },
             // image loaders
             {
-                test: /\.(jpeg|jpg|png|gif|svg|ico)$/i,
+                test: /\.(jpeg|jpg|png|gif|svg)$/i,
                 exclude: /(fonts|font)/i,
-                loader: 'file-loader',
-                options: {
-                    name: resourceName('img', false),
-                },
+                oneOf: [
+                    {
+                        resourceQuery: /[?&](resize)(=|&|\[|$)/,
+                        loader: './loader.resize.js',
+                        options: {
+                            name: resourceName('img', false),
+                        },
+                    },
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: resourceName('img', false),
+                        },
+                    },
+                ],
             },
             // font loaders
             {

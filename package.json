@@ -66,6 +66,7 @@
         "file-loader": "latest",
         "front-matter": "latest",
         "glob": "latest",
+        "gm": "^1.23.1",
         "html-loader": "latest",
         "html-webpack-plugin": "latest",
         "htmllint": "latest",
