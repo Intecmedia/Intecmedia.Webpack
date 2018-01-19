@@ -3,6 +3,9 @@ const path = require('path');
 const loaderUtils = require('loader-utils');
 const fileLoader = require('file-loader');
 const deepAssign = require('deep-assign');
+const weblog = require('webpack-log');
+
+const logger = weblog({ name: 'loader-resize' });
 
 const DEFAULT_OPTIONS = {
     resize: null,
@@ -25,6 +28,7 @@ module.exports = function ResizeLoader(content) {
     const resourceInfo = path.parse(loaderContext.resourcePath);
     const anyOfMagick = gm.subClass({ imageMagick: options.imageMagick });
 
+    logger.info(`processing '${loaderContext.resourcePath}'`);
     anyOfMagick(content).size(function sizeCallback(error, size) {
         if (error) { loaderCallback(error); return; }
 
@@ -46,6 +50,8 @@ module.exports = function ResizeLoader(content) {
                 ),
                 format.toLowerCase(),
             ].join(''));
+            logger.info(`save '${loaderContext.resourcePath}'`);
+
             loaderCallback(null, fileLoader.call(loaderContext, buffer));
         });
     });
