@@ -8,6 +8,7 @@ const weblog = require('webpack-log');
 const logger = weblog({ name: 'loader-resize' });
 
 const DEFAULT_OPTIONS = {
+    format: null,
     resize: null,
     imageMagick: true,
 };
@@ -32,16 +33,21 @@ module.exports = function ResizeLoader(content) {
     anyOfMagick(content).size(function sizeCallback(error, size) {
         if (error) { loaderCallback(error); return; }
 
-        let [width, height, format] = options.resize.split('x', 3);
+        let [width, height] = options.resize.split('x', 2);
         width = parseInt(width || size.width, 10);
         height = parseInt(height || size.height, 10);
-        format = (format || options.format || resourceInfo.ext.substr(1));
 
         this.resize(width, height);
+        const quality = options.quality ? parseInt(options.quality, 10) : 0;
+        if (quality > 0) {
+            this.quality(quality);
+        }
+
+        const format = (options.format || resourceInfo.ext.substr(1));
         this.toBuffer(format.toUpperCase(), (exception, buffer) => {
             if (exception) { loaderCallback(exception); return; }
 
-            loaderContext.resourcePath = path.join(resourceInfo.dir, [
+            const resourcePath = path.join(resourceInfo.dir, [
                 resourceInfo.name,
                 (
                     width !== size.width || height !== size.height
@@ -50,7 +56,8 @@ module.exports = function ResizeLoader(content) {
                 ),
                 format.toLowerCase(),
             ].join(''));
-            logger.info(`save '${loaderContext.resourcePath}'`);
+            logger.info(`save '${resourcePath}'`);
+            loaderContext.resourcePath = resourcePath;
 
             loaderCallback(null, fileLoader.call(loaderContext, buffer));
         });
