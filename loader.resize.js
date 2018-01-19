@@ -21,7 +21,7 @@ module.exports = function ResizeLoader(content) {
         DEFAULT_OPTIONS,
         loaderUtils.getOptions(loaderContext),
     );
-    if (!queryOptions.resize) return fileLoader.call(loaderContext, content);
+    if (!('resize' in queryOptions)) return fileLoader.call(loaderContext, content);
 
     const loaderCallback = this.async();
     const resourceInfo = path.parse(loaderContext.resourcePath);
