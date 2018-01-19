@@ -46,7 +46,7 @@ module.exports = function ResizeLoader(content) {
             if (exception) { loaderCallback(exception); return; }
 
             const resourcePath = path.join(resourceInfo.dir, [
-                ...(queryOptions.name ? [queryOptions.name] : [(
+                ...(queryOptions.name ? [queryOptions.name] : [resourceInfo.name, (
                     width !== size.width || height !== size.height
                         ? `@${width === size.width ? '' : width}x${height === size.height ? '' : height}`
                         : ''
