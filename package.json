@@ -114,6 +114,7 @@
         "slash": "latest",
         "style-loader": "latest",
         "stylefmt": "latest",
+        "stylefmt-loader": "^1.2.3",
         "stylelint": "latest",
         "stylelint-config-sass-guidelines": "latest",
         "stylelint-no-unsupported-browser-features": "latest",
