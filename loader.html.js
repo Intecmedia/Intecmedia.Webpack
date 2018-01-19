@@ -31,6 +31,7 @@ const DEFAULT_OPTIONS = {
     requireTags: {
         img: ['src', 'data-src', 'lowsrc', 'srcset', 'data-srcset'],
         source: ['srcset', 'data-srcset'],
+        image: ['href', 'xlink:href'], // exclude base64
     },
     requireIgnore: /^(\w+[:]|\/\/)/i,
     requireReplace: {},
@@ -154,7 +155,9 @@ module.exports = function HtmlLoader(source) {
     };
     options.requireExport = exportString => exportString.replace(REQUIRE_PATTERN, (match) => {
         if (!options.requireReplace[match]) return match;
-        const request = loaderUtils.urlToRequest(options.requireReplace[match], options.searchPath);
+        const url = options.requireReplace[match];
+        logger.info(`require('${url}')`);
+        const request = loaderUtils.urlToRequest(url, options.searchPath);
         return `"+require(${JSON.stringify(request)})+"`;
     });
 
