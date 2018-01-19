@@ -15,7 +15,7 @@ const PROD = (process.env.NODE_ENV === 'production');
 const NODE_ENV = PROD ? 'production' : 'development';
 
 if (!['production', 'development'].includes(process.env.NODE_ENV)) {
-    throw new Error('Unknow NODE_ENV=' + JSON.stringify(process.env.NODE_ENV));
+    throw new Error(`Unknow NODE_ENV=${JSON.stringify(process.env.NODE_ENV)}`);
 }
 
 const USE_SOURCE_MAP = (DEBUG && !PROD) || DEV_SERVER;
@@ -152,10 +152,12 @@ module.exports = {
             title: APP.TITLE,
         }),
         new StyleLintPlugin({
-            configFile: '.stylelintrc',
+            configFile: path.join(__dirname, '.stylelintrc'),
+            context: SOURCE_PATH,
             files: ['**/*.scss'],
+            failOnError: PROD,
             fix: !DEV_SERVER,
-            emitErrors: USE_LINTERS,
+            emitErrors: false,
             syntax: 'scss',
             quiet: PROD,
         }),
