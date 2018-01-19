@@ -21,7 +21,12 @@ glob(`${BUILD_PATH}/**/*.html`, {
     if (error) throw error;
 
     files.forEach((filename) => {
-        htmllint(filename, htmllintrc).then((issues) => {
+        const html = fs.readFileSync(filename, 'utf8').toString();
+        htmllint(html, htmllintrc).then((issues) => {
+            if (issues === false) {
+                logger.info(`skipped ${filename}`);
+                return;
+            }
             issues.forEach((issue) => {
                 logger.info(`${filename}: line ${issue.line} col ${issue.column}`);
                 logger.warn(`${htmllint.messages.renderIssue(issue)}\n`);
