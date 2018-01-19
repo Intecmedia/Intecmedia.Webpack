@@ -1,13 +1,17 @@
 const path = require('path');
 const slash = require('slash');
+
 const loaderUtils = require('loader-utils');
 const validateOptions = require('schema-utils');
+const weblog = require('webpack-log');
+
 const nunjucks = require('nunjucks');
 const frontMatter = require('front-matter');
 const deepAssign = require('deep-assign');
-const weblog = require('webpack-log');
+
 const posthtml = require('posthtml');
 const posthtmlRender = require('posthtml-render');
+
 const SVGO = require('svgo');
 const svgoConfig = require('./svgo.config.js');
 const deasync = require('deasync');
@@ -70,7 +74,11 @@ function processHtml(html, options, loaderCallback) {
     const parser = posthtml();
     if (options.requireTags && Object.keys(options.requireTags).length) {
         parser.use((tree) => {
-            tree.match(Object.keys(options.requireTags).map(tag => ({ tag })), (node) => {
+            const query = Object.keys(options.requireTags).map(tag => ({
+                tag,
+                attrs: options.requireTags[tag].reduce((attrs, attr) => Object.assign(attrs, { [attr]: true }), {}),
+            }));
+            tree.match(query, (node) => {
                 options.requireTags[node.tag].forEach((attr) => {
                     if (!(attr in node.attrs) || ('data-require-ignore' in node.attrs)) return;
 
