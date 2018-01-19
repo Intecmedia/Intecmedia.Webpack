@@ -9,7 +9,9 @@ description:
     <header class="header">
         <div class="container">
             <div class="row">
-                <div class="col-12">example header</div>
+                <div class="col-12">
+                    {% include 'partials/svg/indecmedia-logo.svg' %}
+                </div>
             </div>
         </div>
     </header>
@@ -19,15 +21,11 @@ description:
             <div class="row">
                 <div class="col-12">
 
-                    <div class="page-header">
-                        <h1>Example Title</h1>
-                    </div>
+                    <h1>Example Title</h1>
 
                     <div class="wysiwyg">
                         <p>Content from WYSIWYG-editor</p>
-                        <a href="{{ require('img/upload/intecmedia-banner.jpg') }}">
-                            {% include 'partials/svg/indecmedia-logo.svg' %}
-                        </a>
+                        <img src="{{ require('img/upload/intecmedia-banner.jpg') }}">
                     </div>
 
                 </div>
