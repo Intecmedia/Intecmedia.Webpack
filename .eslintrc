@@ -14,10 +14,10 @@
         "no-param-reassign": [2, {
             "props": false 
         }],
-        "unicode-bom": ["error", "never"],
-        "max-len": ["error", 120, 4],
-        "indent": ["error", 4],
-        "max-lines": ["error", {
+        "unicode-bom": ["warn", "never"],
+        "max-len": ["warn", 120, 4],
+        "indent": ["warn", 4],
+        "max-lines": ["warn", {
             "max": 300, 
             "skipBlankLines": true
         }]
