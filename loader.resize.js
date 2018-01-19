@@ -29,7 +29,7 @@ module.exports = function ResizeLoader(content) {
     const resourceInfo = path.parse(loaderContext.resourcePath);
     const anyOfMagick = gm.subClass({ imageMagick: options.imageMagick });
 
-    logger.info(`processing '${loaderContext.resourcePath}'`);
+    logger.info(`processing '${loaderContext.resourcePath}${loaderContext.resourceQuery}'`);
     anyOfMagick(content).size(function sizeCallback(error, size) {
         if (error) { loaderCallback(error); return; }
 
