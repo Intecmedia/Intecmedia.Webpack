@@ -96,7 +96,7 @@ module.exports = {
         },
         compress: false,
         open: true,
-        overlay: true,
+        overlay: { warnings: false, errors: true },
     },
 
     entry: {
