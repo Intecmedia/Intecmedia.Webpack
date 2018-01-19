@@ -11,6 +11,7 @@ const logger = weblog({ name: 'webpack-config' });
 
 const DEBUG = ('DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0);
 const DEV_SERVER = path.basename(require.main.filename, '.js') === 'webpack-dev-server';
+const STANDALONE = ['webpack', 'webpack-dev-server'].includes(path.basename(require.main.filename, '.js'));
 const PROD = (process.env.NODE_ENV === 'production');
 const NODE_ENV = PROD ? 'production' : 'development';
 
@@ -27,7 +28,7 @@ const SOURCE_PATH = path.resolve(__dirname, 'source');
 const OUTPUT_PATH = path.resolve(__dirname, 'build');
 const APP = require('./app.config.js');
 
-if (['webpack', 'webpack-dev-server'].includes(path.basename(require.main.filename, '.js'))) {
+if (STANDALONE) {
     logger.info(`Name: ${PACKAGE_NAME}`);
     logger.info(`Enviroment: ${NODE_ENV}`);
     logger.info(`Debug: ${DEBUG ? 'enabled' : 'disabled'}`);
@@ -198,7 +199,7 @@ module.exports = {
                 path.basename(template, '.html'),
                 'index.html',
             ));
-            logger.info(`${template} --> ${filename}`);
+            if (STANDALONE) logger.info(`${template} --> ${filename}`);
             return new HtmlWebpackPlugin({
                 filename,
                 template,
