@@ -6,11 +6,10 @@ const weblog = require('webpack-log');
 
 const logger = weblog({ name: 'plugin-pretty' });
 
-const { 'tag-self-close': tagSelfClose } = JSON.parse(fs.readFileSync('./.htmllintrc', 'utf8'));
 
 const DEFAULT_OPTIONS = {
     ocd: false,
-    unformatted: ['code', 'pre', 'em', 'strong', 'span', ...tagSelfClose],
+    unformatted: ['code', 'pre', 'em', 'strong', 'span'],
     indent_inner_html: false,
     indent_char: ' ',
     indent_size: 4,
