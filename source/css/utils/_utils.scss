@@ -2,8 +2,7 @@
 @if $NODE_ENV != 'production' or $DEBUG {
     /* stylelint-disable */
     body::after {
-        @extend .bg-danger;
-        @extend .text-warning;
+        @extend .btn-danger;
         bottom: 0;
         content: 'Only visible $NODE_ENV=#{$NODE_ENV} or DEBUG=#{$DEBUG}';
         opacity: 0.8;
@@ -19,8 +18,7 @@
 @if $PACKAGE_NAME == 'Intecmedia.Webpack' {
     /* stylelint-disable */
     body::after {
-        @extend .bg-danger;
-        @extend .text-warning;
+        @extend .btn-danger;
         bottom: 0;
         content: 'Please rename the `name` in `package.json` file';
         opacity: 0.8;

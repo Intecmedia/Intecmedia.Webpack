@@ -60,12 +60,12 @@
     }
 
     .img-rounded {
-        @extend .rounded;
+        border-radius: $border-radius !important;
     }
 
     .img-circle {
-        @extend .rounded;
-        @extend .rounded-circle;
+        border-radius: $border-radius !important;
+        border-radius: 50%;
     }
     // image aligment
     img[align='left'],

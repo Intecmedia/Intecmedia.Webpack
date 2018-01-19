@@ -46,7 +46,7 @@
         "babel-polyfill": "latest",
         "babel-preset-airbnb": "latest",
         "babel-preset-env": "latest",
-        "bootstrap": "^4.0.0-beta.3",
+        "bootstrap": "^4.0.0",
         "browserslist": "latest",
         "case-sensitive-paths-webpack-plugin": "latest",
         "copy-webpack-plugin": "latest",
