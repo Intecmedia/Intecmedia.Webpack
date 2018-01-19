@@ -355,7 +355,7 @@ module.exports = {
                 exclude: /(fonts|font)/i,
                 oneOf: [
                     {
-                        resourceQuery: /[?&](resize)(=|&|\[|$)/,
+                        resourceQuery: /resize/,
                         loader: './loader.resize.js',
                         options: {
                             name: resourceName('img', false),
