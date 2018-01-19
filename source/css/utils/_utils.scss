@@ -5,6 +5,7 @@
         @extend .btn-danger;
         bottom: 0;
         content: 'Only visible $NODE_ENV=#{$NODE_ENV} or DEBUG=#{$DEBUG}';
+        font-size: $font-size-sm;
         opacity: 0.8;
         position: fixed;
         right: 0;
@@ -21,6 +22,7 @@
         @extend .btn-danger;
         bottom: 0;
         content: 'Please rename the `name` in `package.json` file';
+        font-size: $font-size-sm;
         opacity: 0.8;
         position: fixed;
         right: 0;
