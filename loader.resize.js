@@ -22,23 +22,32 @@ module.exports = function ResizeLoader(content) {
     if (!options.resize) return fileLoader.call(loaderContext, content);
 
     const loaderCallback = this.async();
+    const resource = path.parse(loaderContext.resourcePath);
+    const anyOfMagick = gm.subClass({ imageMagick: options.imageMagick });
 
-    const magick = gm.subClass({ imageMagick: options.imageMagick });
-    magick(content).size(function sizeCallback(error, size) {
+    anyOfMagick(content).size(function sizeCallback(error, size) {
         if (error) { loaderCallback(error); return; }
 
-        let [width, height] = options.resize.split('x', 2);
+        let [width, height, format] = options.resize.split('x', 3);
         width = parseInt(width || size.width, 10);
         height = parseInt(height || size.height, 10);
+        format = (format || options.format || resource.ext.substr(1));
 
         this.resize(width, height);
-        this.toBuffer((exception, buffer) => {
+        this.toBuffer(format.toUpperCase(), (exception, buffer) => {
             if (exception) { loaderCallback(exception); return; }
 
-            const resource = path.parse(loaderContext.resourcePath);
-            const resourcePath = path.join(resource.dir, `${resource.name}@${width}x${height}${resource.ext}`);
-            loaderContext.resourcePath = resourcePath;
-            loaderContext.addDependency(resourcePath);
+            const target = path.join(resource.dir, [
+                resource.name,
+                (
+                    width !== size.width || height !== size.height
+                        ? `@${width === size.width ? '' : width}x${height === size.height ? '' : height}.`
+                        : '.'
+                ),
+                format.toLowerCase(),
+            ].join(''));
+            loaderContext.resourcePath = target;
+            loaderContext.addDependency(target);
 
             loaderCallback(null, fileLoader.call(loaderContext, buffer));
         });
