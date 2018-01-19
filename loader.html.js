@@ -11,6 +11,7 @@ const deepAssign = require('deep-assign');
 
 const posthtml = require('posthtml');
 const posthtmlRender = require('posthtml-render');
+const posthtmlCommentAfter = require('posthtml-comment-after');
 
 const SVGO = require('svgo');
 const svgoConfig = require('./svgo.config.js');
@@ -126,6 +127,7 @@ function processHtml(html, options, loaderCallback) {
             return tree;
         });
     }
+    parser.use(posthtmlCommentAfter());
     parser.process(html).then((result) => {
         let exportString = `export default ${JSON.stringify(result.html)};`;
         exportString = options.requireExport(exportString);

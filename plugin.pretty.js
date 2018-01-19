@@ -1,11 +1,9 @@
-const fs = require('fs');
 const pretty = require('pretty');
 const deepAssign = require('deep-assign');
 const validateOptions = require('schema-utils');
 const weblog = require('webpack-log');
 
 const logger = weblog({ name: 'plugin-pretty' });
-
 
 const DEFAULT_OPTIONS = {
     ocd: false,

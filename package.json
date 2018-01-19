@@ -107,6 +107,7 @@
         "postcss-sorting": "latest",
         "postcss-url": "latest",
         "posthtml": "latest",
+        "posthtml-comment-after": "^0.5.4",
         "posthtml-render": "latest",
         "pretty": "latest",
         "sass-loader": "latest",
