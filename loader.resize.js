@@ -51,9 +51,11 @@ module.exports = function ResizeLoader(content) {
                 resourceInfo.name,
                 (
                     width !== size.width || height !== size.height
-                        ? `@${width === size.width ? '' : width}x${height === size.height ? '' : height}.`
-                        : '.'
+                        ? `@${width === size.width ? '' : width}x${height === size.height ? '' : height}`
+                        : ''
                 ),
+                (options.suffix ? options.suffix : ''),
+                '.',
                 format.toLowerCase(),
             ].join(''));
             logger.info(`save '${resourcePath}'`);
