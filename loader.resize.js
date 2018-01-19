@@ -22,7 +22,7 @@ module.exports = function ResizeLoader(content) {
     if (!options.resize) return fileLoader.call(loaderContext, content);
 
     const loaderCallback = this.async();
-    const resource = path.parse(loaderContext.resourcePath);
+    const resourceInfo = path.parse(loaderContext.resourcePath);
     const anyOfMagick = gm.subClass({ imageMagick: options.imageMagick });
 
     anyOfMagick(content).size(function sizeCallback(error, size) {
@@ -31,14 +31,14 @@ module.exports = function ResizeLoader(content) {
         let [width, height, format] = options.resize.split('x', 3);
         width = parseInt(width || size.width, 10);
         height = parseInt(height || size.height, 10);
-        format = (format || options.format || resource.ext.substr(1));
+        format = (format || options.format || resourceInfo.ext.substr(1));
 
         this.resize(width, height);
         this.toBuffer(format.toUpperCase(), (exception, buffer) => {
             if (exception) { loaderCallback(exception); return; }
 
-            const target = path.join(resource.dir, [
-                resource.name,
+            loaderContext.resourcePath = path.join(resourceInfo.dir, [
+                resourceInfo.name,
                 (
                     width !== size.width || height !== size.height
                         ? `@${width === size.width ? '' : width}x${height === size.height ? '' : height}.`
@@ -46,9 +46,6 @@ module.exports = function ResizeLoader(content) {
                 ),
                 format.toLowerCase(),
             ].join(''));
-            loaderContext.resourcePath = target;
-            loaderContext.addDependency(target);
-
             loaderCallback(null, fileLoader.call(loaderContext, buffer));
         });
     });
