@@ -28,8 +28,8 @@ module.exports = function ResizeLoader(content) {
     const anyOfMagick = gm.subClass({ imageMagick: options.imageMagick });
 
     logger.info(`processing '${loaderContext.resourcePath}${loaderContext.resourceQuery}'`);
-    anyOfMagick(content).size(function sizeCallback(error, size) {
-        if (error) { loaderCallback(error); return; }
+    anyOfMagick(content).size(function sizeCallback(sizeError, size) {
+        if (sizeError) { loaderCallback(sizeError); return; }
 
         let [width, height, resize] = query.resize.split('x', 3);
         width = parseInt(width || size.width, 10);
@@ -47,8 +47,8 @@ module.exports = function ResizeLoader(content) {
             `${pathinfo.name}@${width === size.width ? '' : width}x${height === size.height ? '' : height}`
         )) + (query.suffix ? `-${query.suffix}` : '');
 
-        this.toBuffer(format.toUpperCase(), (exception, buffer) => {
-            if (exception) { loaderCallback(exception); return; }
+        this.toBuffer(format.toUpperCase(), (bufferError, buffer) => {
+            if (bufferError) { loaderCallback(bufferError); return; }
 
             loaderContext.resourcePath = path.join(pathinfo.dir, `${name}.${format}`);
             logger.info(`save '${loaderContext.resourcePath}'`);
