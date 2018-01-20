@@ -1,5 +1,8 @@
 /* stylelint-disable selector-max-compound-selectors, max-nesting-depth, selector-no-qualifying-type, scss/at-extend-no-missing-placeholder */
 .wysiwyg {
+    img:not([class]) {
+        @extend .img-responsive;
+    }
     // image with caption
     figure {
         @extend .figure;
