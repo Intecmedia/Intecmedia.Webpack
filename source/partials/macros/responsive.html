@@ -1,24 +1,24 @@
-{% macro xs(url, resize='576x', format='') %}{{ require(url + '?resize=' + resize + '&format=' + format + '&suffix=xs') }}{% endmacro %}
-{% macro sm(url, resize='768x', format='') %}{{ require(url + '?resize=' + resize + '&format=' + format + '&suffix=sm') }}{% endmacro %}
-{% macro md(url, resize='992x', format='') %}{{ require(url + '?resize=' + resize + '&format=' + format + '&suffix=md') }}{% endmacro %}
-{% macro lg(url, resize='1200x', format='') %}{{ require(url + '?resize=' + resize + '&format=' + format + '&suffix=lg') }}{% endmacro %}
-{% macro xl(url, resize='1900x', format='') %}{{ require(url + '?resize=' + resize + '&format=' + format + '&suffix=xl') }}{% endmacro %}
+{% macro resize_xs(url, resize='576x', format='') %}{{ require(url + '?resize=' + resize + '&format=' + format + '&suffix=xs') }}{% endmacro %}
+{% macro resize_sm(url, resize='768x', format='') %}{{ require(url + '?resize=' + resize + '&format=' + format + '&suffix=sm') }}{% endmacro %}
+{% macro resize_md(url, resize='992x', format='') %}{{ require(url + '?resize=' + resize + '&format=' + format + '&suffix=md') }}{% endmacro %}
+{% macro resize_lg(url, resize='1200x', format='') %}{{ require(url + '?resize=' + resize + '&format=' + format + '&suffix=lg') }}{% endmacro %}
+{% macro resize_xl(url, resize='1900x', format='') %}{{ require(url + '?resize=' + resize + '&format=' + format + '&suffix=xl') }}{% endmacro %}
 
 
 {% macro picture (url, alt, attrs={}) %}
     <picture{% for k, v in attrs %} {{ k }}="{{ v }}"{% endfor %}>
 
-        <source media="(max-width: 575px)" srcset="{{ xs(url, '576x', 'webp') }}" type="image/webp">
-        <source media="(min-width: 576px) and (max-width: 767px)" srcset="{{ sm(url, '576x', 'webp') }}" type="image/webp">
-        <source media="(min-width: 768px) and (max-width: 991px)" srcset="{{ md(url, '992x', 'webp') }}" type="image/webp">
-        <source media="(min-width: 992px) and (max-width: 1199px)" srcset="{{ xl(url, '1200x', 'webp') }}" type="image/webp">
-        <source media="(min-width: 1200px)" srcset="{{ lg(url, '1900x', 'webp') }}" type="image/webp">
+        <source media="(max-width: 575px)" srcset="{{ resize_xs(url, '576x', 'webp') }}" type="image/webp">
+        <source media="(min-width: 576px) and (max-width: 767px)" srcset="{{ resize_sm(url, '576x', 'webp') }}" type="image/webp">
+        <source media="(min-width: 768px) and (max-width: 991px)" srcset="{{ resize_md(url, '992x', 'webp') }}" type="image/webp">
+        <source media="(min-width: 992px) and (max-width: 1199px)" srcset="{{ resize_lg(url, '1200x', 'webp') }}" type="image/webp">
+        <source media="(min-width: 1200px)" srcset="{{ resize_xl(url, '1900x', 'webp') }}" type="image/webp">
 
-        <source media="(max-width: 575px)" srcset="{{ xs(url, '576x', 'jpg') }}" type="image/jpeg">
-        <source media="(min-width: 576px) and (max-width: 767px)" srcset="{{ sm(url, '576x', 'jpg') }}" type="image/jpeg">
-        <source media="(min-width: 768px) and (max-width: 991px)" srcset="{{ md(url, '992x', 'jpg') }}" type="image/jpeg">
-        <source media="(min-width: 992px) and (max-width: 1199px)" srcset="{{ xl(url, '1200x', 'jpg') }}" type="image/jpeg">
-        <source media="(min-width: 1200px)" srcset="{{ lg(url, '1900x', 'jpg') }}" type="image/jpeg">
+        <source media="(max-width: 575px)" srcset="{{ resize_xs(url, '576x', 'jpg') }}" type="image/jpeg">
+        <source media="(min-width: 576px) and (max-width: 767px)" srcset="{{ resize_sm(url, '576x', 'jpg') }}" type="image/jpeg">
+        <source media="(min-width: 768px) and (max-width: 991px)" srcset="{{ resize_md(url, '992x', 'jpg') }}" type="image/jpeg">
+        <source media="(min-width: 992px) and (max-width: 1199px)" srcset="{{ resize_lg(url, '1200x', 'jpg') }}" type="image/jpeg">
+        <source media="(min-width: 1200px)" srcset="{{ resize_xl(url, '1900x', 'jpg') }}" type="image/jpeg">
 
         <img src="{{ require(url) }}" alt="{{ alt }}">
     </picture>
