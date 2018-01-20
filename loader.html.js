@@ -111,6 +111,8 @@ function processHtml(html, options, loaderCallback) {
 
                 let minifiedSvg;
                 const originalSvg = posthtmlRender(node);
+                logger.info(`svgo(${JSON.stringify(originalSvg.substr(0, 120))}…)`);
+
                 svgoInstance.optimize(originalSvg).then((result) => {
                     minifiedSvg = result;
                 }).catch((error) => {
