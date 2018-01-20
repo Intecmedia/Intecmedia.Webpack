@@ -15,53 +15,43 @@ module.exports = function ResizeLoader(content) {
     const loaderContext = this;
     if (loaderContext.cacheable) loaderContext.cacheable();
 
-    const queryOptions = loaderContext.resourceQuery ? loaderUtils.parseQuery(loaderContext.resourceQuery) : {};
+    const query = loaderContext.resourceQuery ? loaderUtils.parseQuery(loaderContext.resourceQuery) : {};
     const options = deepAssign(
         {},
         DEFAULT_OPTIONS,
         loaderUtils.getOptions(loaderContext),
     );
-    if (!('resize' in queryOptions)) return fileLoader.call(loaderContext, content);
+    if (!('resize' in query)) return fileLoader.call(loaderContext, content);
 
     const loaderCallback = this.async();
-    const resourceInfo = path.parse(loaderContext.resourcePath);
+    const pathinfo = path.parse(loaderContext.resourcePath);
     const anyOfMagick = gm.subClass({ imageMagick: options.imageMagick });
 
     logger.info(`processing '${loaderContext.resourcePath}${loaderContext.resourceQuery}'`);
     anyOfMagick(content).size(function sizeCallback(error, size) {
         if (error) { loaderCallback(error); return; }
 
-        let [width, height] = queryOptions.resize.split('x', 2);
+        let [width, height, resize] = query.resize.split('x', 3);
         width = parseInt(width || size.width, 10);
         height = parseInt(height || size.height, 10);
+        resize = String(resize).trim();
 
-        this.resize(width, height);
-        const quality = queryOptions.quality ? parseInt(queryOptions.quality, 10) : 0;
+        this.resize(width, height, resize);
+        const quality = query.quality ? parseInt(query.quality, 10) : 0;
         if (quality > 0) {
             this.quality(quality);
         }
 
-        const format = (queryOptions.format || resourceInfo.ext.substr(1));
+        const format = (query.format || pathinfo.ext.substr(1)).toLowerCase();
+        const name = (query.name || (
+            `@${width === size.width ? '' : width}x${height === size.height ? '' : height}`
+        )) + (query.suffix || '');
+
         this.toBuffer(format.toUpperCase(), (exception, buffer) => {
             if (exception) { loaderCallback(exception); return; }
 
-            const resourcePath = path.join(resourceInfo.dir, [
-                ...(queryOptions.name ? [
-                    queryOptions.name,
-                ] : [
-                    resourceInfo.name,
-                    (
-                        width !== size.width || height !== size.height
-                            ? `@${width === size.width ? '' : width}x${height === size.height ? '' : height}`
-                            : ''
-                    ),
-                ]),
-                (queryOptions.suffix || ''),
-                '.',
-                format.toLowerCase(),
-            ].join(''));
-            logger.info(`save '${resourcePath}'`);
-            loaderContext.resourcePath = resourcePath;
+            loaderContext.resourcePath = path.join(pathinfo.dir, `${name}.${format}`);
+            logger.info(`save '${loaderContext.resourcePath}'`);
 
             loaderCallback(null, fileLoader.call(loaderContext, buffer));
         });
