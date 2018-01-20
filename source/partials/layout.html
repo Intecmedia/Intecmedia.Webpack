@@ -5,13 +5,12 @@
     <title>{{ PAGE.title }} :: {{ APP.TITLE }}</title>
     <meta name="description" content="{{ PAGE.description }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     {% if APP.USE_FAVICONS %}
     <link rel="manifest" href="{{ APP.PUBLIC_PATH }}img/favicon/manifest.json">
     {% endif %}
-
+    <!-- block-head -->
     {% block head %}{% endblock %}
-
+    <!-- /block-head -->
     {% include 'partials/counters-head.html' %}
 </head>
 <body {% block body_class %}{% endblock %}>
