@@ -31,10 +31,10 @@ module.exports = function ResizeLoader(content) {
     anyOfMagick(content).size(function sizeCallback(error, size) {
         if (error) { loaderCallback(error); return; }
 
-        let [width, height, resize: ""] = query.resize.split('x', 3);
+        let [width, height, resize] = query.resize.split('x', 3);
         width = parseInt(width || size.width, 10);
         height = parseInt(height || size.height, 10);
-        resize = resize.trim();
+        resize = (resize || '').trim();
 
         this.resize(width, height, resize);
         const quality = query.quality ? parseInt(query.quality, 10) : 0;
