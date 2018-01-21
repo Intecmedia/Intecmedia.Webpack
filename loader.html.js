@@ -138,7 +138,7 @@ function processHtml(html, options, loaderCallback) {
     }).catch(loaderCallback);
 }
 
-module.exports = function HtmlLoader(source) {
+module.exports = function HtmlLoader() {
     const loaderContext = this;
     const loaderCallback = loaderContext.async();
 
@@ -147,6 +147,7 @@ module.exports = function HtmlLoader(source) {
 
     const nunjucksLoader = new nunjucks.FileSystemLoader(options.searchPath, { noCache: options.noCache });
     const nunjucksEnvironment = new nunjucks.Environment(nunjucksLoader, options.environment);
+
 
     options.requireIdent = (url) => {
         let ident;
@@ -169,18 +170,24 @@ module.exports = function HtmlLoader(source) {
     const publicPath = ((options.context.APP || {}).PUBLIC_PATH || path.sep);
     const resourcePath = path.sep + path.relative(options.searchPath, loaderContext.resourcePath);
 
-    const template = frontMatter(source);
-    const templateContext = {
-        APP: options.context,
-        PAGE: {
-            ...template.attributes,
-            PUBLIC_PATH: slash(path.normalize(publicPath + resourcePath)),
-            RESOURCE_PATH: slash(path.normalize(resourcePath)),
-        },
+    nunjucksEnvironment.addGlobal('APP', options.context);
+    nunjucksEnvironment.addGlobal('PAGE', {
+        PUBLIC_PATH: slash(path.normalize(publicPath + resourcePath)),
+        RESOURCE_PATH: slash(path.normalize(resourcePath)),
+    });
+
+    const nunjucksGetSource = nunjucksLoader.getSource;
+    nunjucksLoader.getSource = function getSource(filename) {
+        const templateSource = nunjucksGetSource.call(this, filename);
+        const templateData = frontMatter(templateSource.src);
+        const PAGE = nunjucksEnvironment.getGlobal('PAGE') || {};
+        nunjucksEnvironment.addGlobal('PAGE', deepAssign({}, PAGE, templateData.attributes));
+        templateSource.src = templateData.body;
+        return templateSource;
     };
 
     logger.info(`processing '${loaderContext.resourcePath}'`);
-    nunjucksEnvironment.renderString(template.body, templateContext, (error, result) => {
+    nunjucksEnvironment.render(loaderContext.resourcePath, {}, (error, result) => {
         if (error) {
             if (error.message) {
                 error.message = error.message.replace(/^\(unknown path\)/, `(${loaderContext.resourcePath})`);
