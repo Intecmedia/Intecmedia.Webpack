@@ -27,7 +27,6 @@ const DEFAULT_OPTIONS = {
         lstripBlocks: false,
         watch: false,
     },
-    noCache: true,
     requireTags: {
         img: ['src', 'data-src', 'lowsrc', 'srcset', 'data-srcset'],
         source: ['srcset', 'data-srcset'],
@@ -52,7 +51,6 @@ const OPTIONS_SCHEMA = {
     properties: {
         context: { type: 'object' },
         environment: { type: 'object' },
-        noCache: { type: 'boolean' },
         requireTags: {
             type: 'object',
             properties: {
@@ -145,9 +143,8 @@ module.exports = function HtmlLoader() {
     const options = deepAssign({}, DEFAULT_OPTIONS, loaderUtils.getOptions(loaderContext));
     validateOptions(OPTIONS_SCHEMA, options, 'loader-html');
 
-    const nunjucksLoader = new nunjucks.FileSystemLoader(options.searchPath, { noCache: options.noCache });
+    const nunjucksLoader = new nunjucks.FileSystemLoader(options.searchPath, { noCache: true });
     const nunjucksEnvironment = new nunjucks.Environment(nunjucksLoader, options.environment);
-
 
     options.requireIdent = (url) => {
         let ident;
@@ -171,17 +168,21 @@ module.exports = function HtmlLoader() {
     const resourcePath = path.sep + path.relative(options.searchPath, loaderContext.resourcePath);
 
     nunjucksEnvironment.addGlobal('APP', options.context);
-    nunjucksEnvironment.addGlobal('PAGE', {
+    const PAGE = {
         PUBLIC_PATH: slash(path.normalize(publicPath + resourcePath)),
         RESOURCE_PATH: slash(path.normalize(resourcePath)),
-    });
+    };
+    nunjucksEnvironment.addGlobal('PAGE', PAGE);
 
     const nunjucksGetSource = nunjucksLoader.getSource;
     nunjucksLoader.getSource = function getSource(filename) {
         const templateSource = nunjucksGetSource.call(this, filename);
         const templateData = frontMatter(templateSource.src);
-        const PAGE = nunjucksEnvironment.getGlobal('PAGE') || {};
-        nunjucksEnvironment.addGlobal('PAGE', deepAssign({}, PAGE, templateData.attributes));
+        nunjucksEnvironment.addGlobal('PAGE', deepAssign(
+            {},
+            templateData.attributes,
+            PAGE,
+        ));
         templateSource.src = templateData.body;
         return templateSource;
     };

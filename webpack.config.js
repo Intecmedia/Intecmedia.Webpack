@@ -292,7 +292,6 @@ module.exports = {
                             SERVICE_WORKER_HASH,
                         },
                     ),
-                    noCache: DEBUG || PROD,
                     searchPath: SOURCE_PATH,
                     svgoEnabled: DEBUG || PROD,
                 },
