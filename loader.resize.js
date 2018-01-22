@@ -60,9 +60,7 @@ module.exports = function ResizeLoader(content) {
 
 module.exports.raw = true;
 
-const DEFAULT_SIZES = {
-    xs: 576, sm: 768, md: 992, lg: 1200, xl: 1900,
-};
+const DEFAULT_SIZES = {xs: 576, sm: 768, md: 992, lg: 1200, xl: 1900};
 const DEFAULT_BREAKPOINTS = ['xs', 'sm', 'md', 'lg', 'xl'];
 
 module.exports.breakpointsMedia = (breakpoints, sizes) => {
@@ -72,7 +70,9 @@ module.exports.breakpointsMedia = (breakpoints, sizes) => {
     const result = new Map;
     sorted.forEach((breakpoint, index) => {
         result[breakpoint] = [
+            // not first
             ...(sorted[index - 1] ? [`(min-width: ${merged[sorted[index - 1]]}px)`] : []),
+            // not last
             ...(index !== sorted.length - 1 ? [`(max-width: ${merged[breakpoint] - 1}px)`] : []),
         ].join(' and ');
     });
