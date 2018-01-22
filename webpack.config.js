@@ -1,4 +1,4 @@
-/* eslint global-require: "off", max-lines: "off" */
+/* eslint global-require: "off", max-lines: "off", import/no-dynamic-require: "off" */
 const fs = require('fs');
 const glob = require('glob');
 const path = require('path');
@@ -273,6 +273,7 @@ module.exports = {
     resolve: {
         alias: {
             modernizr$: path.resolve(__dirname, '.modernizrrc'),
+            ...(require(path.join(SOURCE_PATH, 'js', 'resolve.alias.js'))),
         },
     },
 

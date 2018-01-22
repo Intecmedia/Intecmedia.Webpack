@@ -60,14 +60,15 @@ module.exports = function ResizeLoader(content) {
 
 module.exports.raw = true;
 
-const DEFAULT_SIZES = {xs: 576, sm: 768, md: 992, lg: 1200, xl: 1900};
+const DEFAULT_SIZES = {
+    xs: 576, sm: 768, md: 992, lg: 1200, xl: 1900,
+};
 const DEFAULT_BREAKPOINTS = ['xs', 'sm', 'md', 'lg', 'xl'];
-
-module.exports.breakpointsMedia = (breakpoints, sizes) => {
+const breakpointsMedia = (breakpoints, sizes) => {
     const sorted = DEFAULT_BREAKPOINTS.filter(i => breakpoints.includes(i));
     const merged = Object.assign({}, sizes, DEFAULT_SIZES);
 
-    const result = new Map;
+    const result = new Map();
     sorted.forEach((breakpoint, index) => {
         result[breakpoint] = [
             // not first
@@ -78,3 +79,7 @@ module.exports.breakpointsMedia = (breakpoints, sizes) => {
     });
     return result;
 };
+
+module.exports.breakpointsMedia = breakpointsMedia;
+module.exports.breakpointsMedia.DEFAULT_SIZES = DEFAULT_SIZES;
+module.exports.breakpointsMedia.DEFAULT_BREAKPOINTS = DEFAULT_BREAKPOINTS;
