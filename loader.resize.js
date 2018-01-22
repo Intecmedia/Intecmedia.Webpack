@@ -25,18 +25,21 @@ module.exports = function ResizeLoader(content) {
 
     const loaderCallback = this.async();
     const pathinfo = path.parse(loaderContext.resourcePath);
-    const anyOfMagick = gm.subClass({ imageMagick: options.imageMagick });
+    const magick = gm.subClass({ imageMagick: options.imageMagick });
 
     logger.info(`processing '${loaderContext.resourcePath}${loaderContext.resourceQuery}'`);
-    anyOfMagick(content).size(function sizeCallback(sizeError, size) {
+    magick(content).size(function sizeCallback(sizeError, size) {
         if (sizeError) { loaderCallback(sizeError); return; }
 
-        let [width, height, resize] = query.resize.split('x', 3);
+        let [, width,, height, flag] = query.resize.match(/^(\d*)(x(\d*))?([!><^])?/);
         width = parseInt(width || size.width, 10);
         height = parseInt(height || size.height, 10);
-        resize = (resize || '').trim();
+        flag = (flag || '').trim();
+        const flagNames = {
+            '': '', '!': '-ignore-aspect', '>': '-shrink-larger', '<': '-enlarge-smaller', '^': '-fill-area',
+        };
 
-        this.resize(width, height, resize);
+        this.resize(width, height, flag);
         const quality = query.quality ? parseInt(query.quality, 10) : 0;
         if (quality > 0) {
             this.quality(quality);
@@ -44,7 +47,10 @@ module.exports = function ResizeLoader(content) {
 
         const format = (query.format || pathinfo.ext.substr(1)).toLowerCase();
         const name = (query.name || (
-            `${pathinfo.name}@${width === size.width ? '' : width}x${height === size.height ? '' : height}`
+            `${pathinfo.name}@${[
+                (width === size.width ? '' : width),
+                (height === size.height ? '' : height),
+            ].join('x')}${flagNames[flag]}`
         )) + (query.suffix ? `-${query.suffix}` : '');
 
         this.toBuffer(format.toUpperCase(), (bufferError, buffer) => {
