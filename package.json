@@ -98,6 +98,7 @@
         "postcss-color-rgba-fallback": "latest",
         "postcss-devtools": "latest",
         "postcss-flexbugs-fixes": "latest",
+        "postcss-focus": "latest",
         "postcss-font-magician": "latest",
         "postcss-image-set-polyfill": "latest",
         "postcss-input-style": "latest",
