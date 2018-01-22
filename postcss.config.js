@@ -26,6 +26,7 @@ module.exports = {
             }),
             require('postcss-color-rgba-fallback')(),
             require('postcss-flexbugs-fixes')(),
+            require('postcss-will-change')(),
             require('css-mqpacker')(),
             require('autoprefixer')({ browsers: BROWSERS }), // this always last
         ] : []),

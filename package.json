@@ -107,6 +107,7 @@
         "postcss-responsive-type": "latest",
         "postcss-sorting": "latest",
         "postcss-url": "latest",
+        "postcss-will-change": "latest",
         "posthtml": "latest",
         "posthtml-comment-after": "latest",
         "posthtml-render": "latest",
