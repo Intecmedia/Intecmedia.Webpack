@@ -242,7 +242,7 @@ module.exports = {
         })] : []),
         new CopyWebpackPlugin([
             ...[
-                'img/**/*.{png,svg,ico,gif,xml,jpeg,jpg,json}',
+                'img/**/*.{png,svg,ico,gif,xml,jpeg,jpg,json,webp}',
                 'google*.html',
                 'yandex_*.html',
                 '*.txt',
