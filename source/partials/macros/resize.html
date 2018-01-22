@@ -4,21 +4,16 @@
 {% macro lg(url, resize='1200x', format='') %}{{ require(url + '?resize=' + resize + '&format=' + format + '&suffix=lg') }}{% endmacro %}
 {% macro xl(url, resize='1900x', format='') %}{{ require(url + '?resize=' + resize + '&format=' + format + '&suffix=xl') }}{% endmacro %}
 
-
-{% macro picture (url, alt, attrs={}) %}
+{% macro picture (url, alt, attrs={}, breakpoints = ['xs', 'sm', 'md', 'lg', 'xl'], sizes = {xs: 576, sm: 768, md: 992, lg: 1200, xl: 1900}) %}
     <picture{% for k, v in attrs %} {{ k }}="{{ v }}"{% endfor %}>
 
-        <source media="(max-width: 575px)" srcset="{{ xs(url, '576x', 'webp') }}" type="image/webp">
-        <source media="(min-width: 576px) and (max-width: 767px)" srcset="{{ sm(url, '576x', 'webp') }}" type="image/webp">
-        <source media="(min-width: 768px) and (max-width: 991px)" srcset="{{ md(url, '992x', 'webp') }}" type="image/webp">
-        <source media="(min-width: 992px) and (max-width: 1199px)" srcset="{{ lg(url, '1200x', 'webp') }}" type="image/webp">
-        <source media="(min-width: 1200px)" srcset="{{ xl(url, '1900x', 'webp') }}" type="image/webp">
+        {% for breakpoint, media in breakpointsMedia(breakpoints, sizes) %}
+        <source media="{{ media }}" srcset="{{ require(url + '?resize=' + sizes[breakpoint] + 'x&format=webp&suffix=' + breakpoint) }}" type="image/webp">
+        {% endfor %}
 
-        <source media="(max-width: 575px)" srcset="{{ xs(url, '576x', 'jpg') }}" type="image/jpeg">
-        <source media="(min-width: 576px) and (max-width: 767px)" srcset="{{ sm(url, '576x', 'jpg') }}" type="image/jpeg">
-        <source media="(min-width: 768px) and (max-width: 991px)" srcset="{{ md(url, '992x', 'jpg') }}" type="image/jpeg">
-        <source media="(min-width: 992px) and (max-width: 1199px)" srcset="{{ lg(url, '1200x', 'jpg') }}" type="image/jpeg">
-        <source media="(min-width: 1200px)" srcset="{{ xl(url, '1900x', 'jpg') }}" type="image/jpeg">
+        {% for breakpoint, media in breakpointsMedia(breakpoints, sizes) %}
+        <source media="{{ media }}" srcset="{{ require(url + '?resize=' + sizes[breakpoint] + 'x&format=jpg&suffix=' + breakpoint) }}" type="image/jpeg">
+        {% endfor %}
 
         <img src="{{ require(url) }}" alt="{{ alt }}">
     </picture>
