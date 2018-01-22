@@ -38,6 +38,7 @@ module.exports = function ResizeLoader(content) {
         const flagNames = {
             '': '', '!': '-ignore-aspect', '>': '-shrink-larger', '<': '-enlarge-smaller', '^': '-fill-area',
         };
+        if (!(flag in flagNames)) { loaderCallback(`Unknow resize flag: '${query.resize}'`); return; }
 
         this.resize(width, height, flag);
         const quality = query.quality ? parseInt(query.quality, 10) : 0;
