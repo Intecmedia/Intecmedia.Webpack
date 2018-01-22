@@ -65,11 +65,11 @@ const DEFAULT_SIZES = {
 };
 const DEFAULT_BREAKPOINTS = ['xs', 'sm', 'md', 'lg', 'xl'];
 
-module.exports.breakpointsSizes = (breakpoints, sizes) => {
+module.exports.breakpointsMedia = (breakpoints, sizes) => {
     const sorted = DEFAULT_BREAKPOINTS.filter(i => breakpoints.includes(i));
     const merged = Object.assign({}, sizes, DEFAULT_SIZES);
 
-    const result = {};
+    const result = new Map;
     sorted.forEach((breakpoint, index) => {
         result[breakpoint] = [
             ...(sorted[index - 1] ? [`(min-width: ${merged[sorted[index - 1]]}px)`] : []),
