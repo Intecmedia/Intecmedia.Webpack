@@ -179,14 +179,14 @@ module.exports = function HtmlLoader() {
     const nunjucksGetSource = nunjucksLoader.getSource;
     nunjucksLoader.getSource = function getSource(filename) {
         const templateSource = nunjucksGetSource.call(this, filename);
+        if (!frontMatter.test(templateSource.src)) return templateSource;
         const templateData = frontMatter(templateSource.src);
         nunjucksEnvironment.addGlobal('PAGE', deepAssign(
             {},
             templateData.attributes,
             PAGE,
         ));
-        templateSource.src = templateData.body;
-        return templateSource;
+        return Object.assign({}, templateSource, { src: templateData.body });
     };
 
     logger.info(`processing '${loaderContext.resourcePath}'`);
