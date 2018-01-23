@@ -31,39 +31,39 @@ module.exports = function ResizeLoader(content) {
         return loaderCallback(null, fileLoader.call(loaderContext, fileLoader.call(loaderContext, content)));
     }
 
-    const pathinfo = path.parse(loaderContext.resourcePath);
-    const relative = path.relative(__dirname, loaderContext.resourcePath);
-    const magick = gm.subClass({ imageMagick: options.imageMagick });
+    const resourceInfo = path.parse(loaderContext.resourcePath);
+    const relativePath = path.relative(__dirname, loaderContext.resourcePath);
+    const imageMagick = gm.subClass({ imageMagick: options.imageMagick });
 
     const resourceStat = fs.statSync(this.resourcePath);
     const cacheKey = `${this.resourcePath}?${JSON.stringify(query)}&${JSON.stringify(resourceStat)}`;
 
-    let [, width,, height, flag] = query.resize.trim().match(/^(\d*)(x(\d*))?([!><^])?$/);
-    width = parseInt(width, 10);
-    height = parseInt(height, 10);
-    flag = (flag || '').trim();
-    const resizeFlags = {
+    let [, resizeWidth,, resizeHeight, resizeFlag] = query.resize.trim().match(/^(\d*)(x(\d*))?([!><^])?$/);
+    resizeWidth = parseInt(resizeWidth, 10);
+    resizeHeight = parseInt(resizeHeight, 10);
+    resizeFlag = (resizeFlag || '').trim();
+    const resizeFlagNames = {
         '': '', '!': '-ignore-aspect', '>': '-shrink-larger', '<': '-enlarge-smaller', '^': '-fill-area',
     };
-    if (!(flag in resizeFlags)) {
+    if (!(resizeFlag in resizeFlagNames)) {
         return loaderCallback(`Unknow resize flag: '${query.resize}'`);
     }
 
-    const format = (query.format || pathinfo.ext.substr(1)).toLowerCase();
+    const format = (query.format || resourceInfo.ext.substr(1)).toLowerCase();
     const name = (query.name || (
-        `${pathinfo.name}@resize-${width || ''}x${height || ''}${resizeFlags[flag]}`
+        `${resourceInfo.name}@resize-${resizeWidth || ''}x${resizeHeight || ''}${resizeFlagNames[resizeFlag]}`
     )) + (query.suffix ? `-${query.suffix}` : '');
 
     const cacheData = resizeCache.getKey(cacheKey);
     if (cacheData !== undefined && cacheData.type === 'Buffer' && cacheData.data) {
-        logger.info(`load cache '${relative}${loaderContext.resourceQuery}'`);
-        loaderContext.resourcePath = path.join(pathinfo.dir, `${name}.${format}`);
+        logger.info(`load cache '${relativePath}${loaderContext.resourceQuery}'`);
+        loaderContext.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
         loaderCallback(null, fileLoader.call(loaderContext, Buffer.from(cacheData.data)));
     } else {
-        magick(content).size(function sizeCallback(sizeError, size) {
+        imageMagick(content).size(function sizeCallback(sizeError, size) {
             if (sizeError) { loaderCallback(sizeError); return; }
 
-            this.resize(width || size.width, height || size.height, flag);
+            this.resize(resizeWidth || size.width, resizeHeight || size.height, resizeFlag);
             const quality = query.quality ? parseInt(query.quality, 10) : 0;
             if (quality > 0) {
                 this.quality(quality);
@@ -71,9 +71,9 @@ module.exports = function ResizeLoader(content) {
 
             this.toBuffer(format.toUpperCase(), (bufferError, buffer) => {
                 if (bufferError) { loaderCallback(bufferError); return; }
-                logger.info(`save cache '${relative}${loaderContext.resourceQuery}'`);
+                logger.info(`save cache '${relativePath}${loaderContext.resourceQuery}'`);
                 resizeCache.setKey(cacheKey, buffer.toJSON());
-                loaderContext.resourcePath = path.join(pathinfo.dir, `${name}.${format}`);
+                loaderContext.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
                 loaderCallback(null, fileLoader.call(loaderContext, buffer));
                 resizeCache.save(true);
             });
