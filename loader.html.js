@@ -181,7 +181,7 @@ module.exports = function HtmlLoader() {
         if (!frontMatter.test(templateSource.src)) return templateSource;
         const templateData = frontMatter(templateSource.src);
         nunjucksEnvironment.addGlobal('PAGE', deepAssign(
-            {},
+            nunjucksEnvironment.getGlobal('PAGE') || {},
             templateData.attributes,
             PAGE,
         ));
