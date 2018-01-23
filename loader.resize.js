@@ -27,7 +27,7 @@ module.exports = function ResizeLoader(content) {
     const pathinfo = path.parse(loaderContext.resourcePath);
     const magick = gm.subClass({ imageMagick: options.imageMagick });
 
-    logger.info(`processing '${loaderContext.resourcePath}${loaderContext.resourceQuery}'`);
+    logger.info(`processing '${path.relative(__dirname, loaderContext.resourcePath)}${loaderContext.resourceQuery}'`);
     magick(content).size(function sizeCallback(sizeError, size) {
         if (sizeError) { loaderCallback(sizeError); return; }
 
@@ -53,10 +53,7 @@ module.exports = function ResizeLoader(content) {
 
         this.toBuffer(format.toUpperCase(), (bufferError, buffer) => {
             if (bufferError) { loaderCallback(bufferError); return; }
-
             loaderContext.resourcePath = path.join(pathinfo.dir, `${name}.${format}`);
-            logger.info(`save '${loaderContext.resourcePath}'`);
-
             loaderCallback(null, fileLoader.call(loaderContext, buffer));
         });
     });
