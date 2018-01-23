@@ -76,7 +76,7 @@ const breakpointsMedia = (breakpoints, sizes) => {
     sorted.forEach((breakpoint, index) => {
         result[breakpoint] = [
             // not first
-            ...(sorted[index - 1] ? [`(min-width: ${merged[sorted[index - 1]]}px)`] : []),
+            ...(index >= 1 && sorted[index - 1] ? [`(min-width: ${merged[sorted[index - 1]]}px)`] : []),
             // not last
             ...(index !== sorted.length - 1 ? [`(max-width: ${merged[breakpoint] - 1}px)`] : []),
         ].join(' and ');

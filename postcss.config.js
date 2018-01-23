@@ -14,9 +14,9 @@ module.exports = {
         require('postcss-input-style')(),
         require('postcss-quantity-queries')(),
         require('postcss-responsive-type')(),
-        require('postcss-font-magician')({ display: 'swap', foundries: '' }),
         ...(PROD || DEBUG ? [
             require('pixrem')(),
+            require('postcss-focus')(),
             require('pleeease-filters')(),
             require('postcss-image-set-polyfill')(),
             require('postcss-url')({
@@ -24,8 +24,10 @@ module.exports = {
                 maxSize: 32,
                 basePath: [path.join(BUILD_PATH, 'css'), path.join(SOURCE_PATH, 'css')],
             }),
+            require('postcss-font-magician')({ display: 'swap', foundries: '' }),
             require('postcss-color-rgba-fallback')(),
             require('postcss-flexbugs-fixes')(),
+            require('postcss-will-change')(),
             require('css-mqpacker')(),
             require('autoprefixer')({ browsers: BROWSERS }), // this always last
         ] : []),
