@@ -188,7 +188,7 @@ module.exports = function HtmlLoader() {
         return Object.assign({}, templateSource, { src: templateData.body });
     };
 
-    logger.info(`processing '${loaderContext.resourcePath}'`);
+    logger.info(`processing '${path.relative(__dirname, loaderContext.resourcePath)}'`);
     nunjucksEnvironment.render(loaderContext.resourcePath, {}, (error, result) => {
         if (error) {
             if (error.message) {
