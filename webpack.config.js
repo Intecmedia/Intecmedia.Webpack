@@ -206,7 +206,15 @@ module.exports = {
                 filename,
                 template,
                 inject: true,
-                minify: APP.HTML_PRETTY ? false : {
+                minify: (APP.HTML_PRETTY ? {
+                    html5: true,
+                    collapseWhitespace: false,
+                    conservativeCollapse: false,
+                    removeComments: false,
+                    decodeEntities: false,
+                    minifyCSS: false,
+                    minifyJS: false,
+                } : {
                     html5: true,
                     collapseWhitespace: true,
                     conservativeCollapse: false,
@@ -214,7 +222,7 @@ module.exports = {
                     decodeEntities: true,
                     minifyCSS: true,
                     minifyJS: true,
-                },
+                }),
                 hash: true,
                 cache: !(PROD || DEBUG),
                 title: APP.TITLE,
