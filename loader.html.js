@@ -185,7 +185,9 @@ module.exports = function HtmlLoader() {
             templateData.attributes,
             PAGE,
         ));
-        return Object.assign({}, templateSource, { src: templateData.body });
+        return Object.assign({}, templateSource, {
+            src: `{#---\n${templateData.frontmatter}\n---#}\n${templateData.body}`,
+        });
     };
 
     logger.info(`processing '${path.relative(__dirname, loaderContext.resourcePath)}'`);
