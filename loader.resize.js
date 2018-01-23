@@ -1,5 +1,7 @@
+const fs = require('fs');
 const gm = require('gm');
 const path = require('path');
+const flatCache = require('flat-cache');
 const loaderUtils = require('loader-utils');
 const fileLoader = require('file-loader');
 const deepAssign = require('deep-assign');
@@ -10,6 +12,9 @@ const logger = weblog({ name: 'loader-resize' });
 const DEFAULT_OPTIONS = {
     imageMagick: true,
 };
+
+const resizeCache = flatCache.load('resize', path.resolve('./node_modules/.cache/loader-resize'));
+module.exports.resizeCache = resizeCache;
 
 module.exports = function ResizeLoader(content) {
     const loaderContext = this;
@@ -26,6 +31,9 @@ module.exports = function ResizeLoader(content) {
     const loaderCallback = this.async();
     const pathinfo = path.parse(loaderContext.resourcePath);
     const magick = gm.subClass({ imageMagick: options.imageMagick });
+
+    const resourceStat = fs.statSync(this.resourcePath);
+    const cacheKey = `${this.resourcePath}?${loaderContext.resourceQuery}&${JSON.stringify(resourceStat)}`;
 
     logger.info(`processing '${path.relative(__dirname, loaderContext.resourcePath)}${loaderContext.resourceQuery}'`);
     magick(content).size(function sizeCallback(sizeError, size) {
@@ -51,11 +59,19 @@ module.exports = function ResizeLoader(content) {
             `${pathinfo.name}@resize-${width || ''}x${height || ''}${resizeFlags[flag]}`
         )) + (query.suffix ? `-${query.suffix}` : '');
 
-        this.toBuffer(format.toUpperCase(), (bufferError, buffer) => {
-            if (bufferError) { loaderCallback(bufferError); return; }
+        const cacheData = resizeCache.getKey(cacheKey);
+        if (cacheData !== undefined && cacheData.type === 'Buffer' && cacheData.data) {
             loaderContext.resourcePath = path.join(pathinfo.dir, `${name}.${format}`);
-            loaderCallback(null, fileLoader.call(loaderContext, buffer));
-        });
+            loaderCallback(null, fileLoader.call(loaderContext, Buffer.from(cacheData.data)));
+        } else {
+            this.toBuffer(format.toUpperCase(), (bufferError, buffer) => {
+                if (bufferError) { loaderCallback(bufferError); return; }
+                loaderContext.resourcePath = path.join(pathinfo.dir, `${name}.${format}`);
+                resizeCache.setKey(cacheKey, buffer.toJSON());
+                loaderCallback(null, fileLoader.call(loaderContext, buffer));
+                resizeCache.save(true);
+            });
+        }
     });
 };
 
