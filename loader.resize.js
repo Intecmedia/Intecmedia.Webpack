@@ -32,12 +32,11 @@ module.exports = function ResizeLoader(content) {
     }
 
     const pathinfo = path.parse(loaderContext.resourcePath);
+    const relative = path.relative(__dirname, loaderContext.resourcePath);
     const magick = gm.subClass({ imageMagick: options.imageMagick });
 
     const resourceStat = fs.statSync(this.resourcePath);
     const cacheKey = `${this.resourcePath}?${loaderContext.resourceQuery}&${JSON.stringify(resourceStat)}`;
-
-    logger.info(`processing '${path.relative(__dirname, loaderContext.resourcePath)}${loaderContext.resourceQuery}'`);
 
     let [, width,, height, flag] = query.resize.trim().match(/^(\d*)(x(\d*))?([!><^])?$/);
     width = parseInt(width, 10);
@@ -57,6 +56,7 @@ module.exports = function ResizeLoader(content) {
 
     const cacheData = resizeCache.getKey(cacheKey);
     if (cacheData !== undefined && cacheData.type === 'Buffer' && cacheData.data) {
+        logger.info(`load cache '${relative}${loaderContext.resourceQuery}'`);
         loaderContext.resourcePath = path.join(pathinfo.dir, `${name}.${format}`);
         loaderCallback(null, fileLoader.call(loaderContext, Buffer.from(cacheData.data)));
     } else {
@@ -71,8 +71,9 @@ module.exports = function ResizeLoader(content) {
 
             this.toBuffer(format.toUpperCase(), (bufferError, buffer) => {
                 if (bufferError) { loaderCallback(bufferError); return; }
-                loaderContext.resourcePath = path.join(pathinfo.dir, `${name}.${format}`);
+                logger.info(`save cache '${relative}${loaderContext.resourceQuery}'`);
                 resizeCache.setKey(cacheKey, buffer.toJSON());
+                loaderContext.resourcePath = path.join(pathinfo.dir, `${name}.${format}`);
                 loaderCallback(null, fileLoader.call(loaderContext, buffer));
                 resizeCache.save(true);
             });
