@@ -1,3 +1,4 @@
+const path = require('path');
 const pretty = require('pretty');
 const deepAssign = require('deep-assign');
 const validateOptions = require('schema-utils');
@@ -42,7 +43,7 @@ module.exports = class PrettyPlugin {
     apply(compiler) {
         compiler.plugin('compilation', (compilation) => {
             compilation.plugin('html-webpack-plugin-after-html-processing', (htmlPluginData, callback) => {
-                logger.info(`processing '${htmlPluginData.plugin.options.filename}'`);
+                logger.info(`processing '${path.relative(__dirname, htmlPluginData.plugin.options.filename)}'`);
                 const html = pretty(htmlPluginData.html, this.options);
                 callback(null, Object.assign(htmlPluginData, { html }));
             });

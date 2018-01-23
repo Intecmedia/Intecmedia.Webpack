@@ -199,7 +199,7 @@ module.exports = {
                 path.basename(template, '.html'),
                 'index.html',
             ));
-            if (STANDALONE) logger.info(`${template} --> ${filename}`);
+            if (STANDALONE) logger.info(`${path.relative(__dirname, template)} --> ${path.relative(__dirname, filename)}`);
             return new HtmlWebpackPlugin({
                 filename,
                 template,

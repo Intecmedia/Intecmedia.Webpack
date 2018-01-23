@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const deepAssign = require('deep-assign');
 const validateOptions = require('schema-utils');
 const weblog = require('webpack-log');
@@ -40,7 +41,7 @@ module.exports = class ManifestPlugin {
                     } finally {
                         const dist = deepAssign({}, src, this.options.replace);
                         filesystem.writeFileSync(this.options.path, JSON.stringify(dist, null, this.options.indent));
-                        logger.info(`processing '${this.options.path}'`);
+                        logger.info(`processing '${path.relative(__dirname, this.options.path)}'`);
                     }
                 }
             });

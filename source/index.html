@@ -1,6 +1,9 @@
 ---
 title: title
 description: description
+foo:
+ - 1
+ - 2
 ---
 
 {% extends "partials/layouts/index.html" %}
@@ -11,6 +14,7 @@ description: description
     <h1>Example Title</h1>
     <div class="wysiwyg">
         <p>Content from WYSIWYG-editor</p>
+~{{ PAGE.foo }};
         {{ resize.picture('img/upload/intecmedia-banner.jpg', 'IntecMedia') }}
     </div>
 {% endblock %}
