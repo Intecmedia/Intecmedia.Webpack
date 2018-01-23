@@ -1,0 +1,12 @@
+<!-- webp-test -->
+<script type="text/javascript">
+    (document.documentElement && document.documentElement.className && (function (html) {
+        html.className = html.className.replace('no-js', 'js');
+        var webp = new Image();
+        webp.onload = webp.onerror = function () {
+            html.className += (webp.width == 1 &&  webp.height == 1 ? ' webp' : ' no-webp');
+        };
+        webp.src = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuUAAA=';
+    })(document.documentElement));
+</script>
+<!-- /webp-test -->

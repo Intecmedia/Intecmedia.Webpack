@@ -8,6 +8,7 @@
     {% if APP.USE_FAVICONS %}
     <link rel="manifest" href="{{ APP.PUBLIC_PATH }}img/favicon/manifest.json">
     {% endif %}
+    {% include 'partials/webp-test.html' %}
     <!-- block-head -->
     {% block head %}{% endblock %}
     <!-- /block-head -->
