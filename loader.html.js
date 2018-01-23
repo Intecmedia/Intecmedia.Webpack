@@ -185,8 +185,9 @@ module.exports = function HtmlLoader() {
             templateData.attributes,
             PAGE,
         ));
+        const header = templateData.frontmatter.replace('#}', escape('#}')).replace('{#', escape('{#'));
         return Object.assign({}, templateSource, {
-            src: `{#---\n${templateData.frontmatter}\n---#}\n${templateData.body}`,
+            src: `{#---\n${header}\n---#};\n${templateData.body}`,
         });
     };
 
