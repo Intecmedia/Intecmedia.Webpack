@@ -272,7 +272,6 @@ module.exports = {
 
     resolve: {
         alias: {
-            modernizr$: path.resolve(__dirname, '.modernizrrc'),
             ...(require(path.join(SOURCE_PATH, 'js', 'resolve.alias.js'))),
         },
     },
