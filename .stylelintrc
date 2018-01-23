@@ -32,14 +32,17 @@
             ],
         }],
         "selector-pseudo-element-no-unknown": [true, {
-            ignorePseudoElements: [
+            "ignorePseudoElements": [
                 "at-least", "at-most", "between", "exactly",
                 "track", "thumb"
             ]
         }],
+        "selector-no-qualifying-type": [true, {
+            "ignore": ["attribute", "class", "id"]
+        }],
         "plugin/no-low-performance-animation": [true, {
             "severity": "warning",
-            ignore: ["opacity", "transform", "color", "background", "background-position", "background-color"]
+            "ignore": ["opacity", "transform", "color", "background", "background-position", "background-color"]
         }],
         "plugin/no-unsupported-browser-features": [true, {
             "severity": "warning",
