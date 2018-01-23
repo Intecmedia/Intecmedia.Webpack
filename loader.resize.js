@@ -19,6 +19,7 @@ module.exports.resizeCache = resizeCache;
 module.exports = function ResizeLoader(content) {
     const loaderContext = this;
     if (loaderContext.cacheable) loaderContext.cacheable();
+    const loaderCallback = this.async();
 
     const query = loaderContext.resourceQuery ? loaderUtils.parseQuery(loaderContext.resourceQuery) : {};
     const options = deepAssign(
@@ -26,9 +27,10 @@ module.exports = function ResizeLoader(content) {
         DEFAULT_OPTIONS,
         loaderUtils.getOptions(loaderContext),
     );
-    if (!('resize' in query)) return fileLoader.call(loaderContext, content);
+    if (!('resize' in query)) {
+        return loaderCallback(null, fileLoader.call(loaderContext, fileLoader.call(loaderContext, content)));
+    }
 
-    const loaderCallback = this.async();
     const pathinfo = path.parse(loaderContext.resourcePath);
     const magick = gm.subClass({ imageMagick: options.imageMagick });
 
@@ -36,34 +38,37 @@ module.exports = function ResizeLoader(content) {
     const cacheKey = `${this.resourcePath}?${loaderContext.resourceQuery}&${JSON.stringify(resourceStat)}`;
 
     logger.info(`processing '${path.relative(__dirname, loaderContext.resourcePath)}${loaderContext.resourceQuery}'`);
-    magick(content).size(function sizeCallback(sizeError, size) {
-        if (sizeError) { loaderCallback(sizeError); return; }
 
-        let [, width,, height, flag] = query.resize.trim().match(/^(\d*)(x(\d*))?([!><^])?$/);
-        width = parseInt(width, 10);
-        height = parseInt(height, 10);
-        flag = (flag || '').trim();
-        const resizeFlags = {
-            '': '', '!': '-ignore-aspect', '>': '-shrink-larger', '<': '-enlarge-smaller', '^': '-fill-area',
-        };
-        if (!(flag in resizeFlags)) { loaderCallback(`Unknow resize flag: '${query.resize}'`); return; }
+    let [, width,, height, flag] = query.resize.trim().match(/^(\d*)(x(\d*))?([!><^])?$/);
+    width = parseInt(width, 10);
+    height = parseInt(height, 10);
+    flag = (flag || '').trim();
+    const resizeFlags = {
+        '': '', '!': '-ignore-aspect', '>': '-shrink-larger', '<': '-enlarge-smaller', '^': '-fill-area',
+    };
+    if (!(flag in resizeFlags)) {
+        return loaderCallback(`Unknow resize flag: '${query.resize}'`);
+    }
 
-        this.resize(width || size.width, height || size.height, flag);
-        const quality = query.quality ? parseInt(query.quality, 10) : 0;
-        if (quality > 0) {
-            this.quality(quality);
-        }
+    const format = (query.format || pathinfo.ext.substr(1)).toLowerCase();
+    const name = (query.name || (
+        `${pathinfo.name}@resize-${width || ''}x${height || ''}${resizeFlags[flag]}`
+    )) + (query.suffix ? `-${query.suffix}` : '');
 
-        const format = (query.format || pathinfo.ext.substr(1)).toLowerCase();
-        const name = (query.name || (
-            `${pathinfo.name}@resize-${width || ''}x${height || ''}${resizeFlags[flag]}`
-        )) + (query.suffix ? `-${query.suffix}` : '');
+    const cacheData = resizeCache.getKey(cacheKey);
+    if (cacheData !== undefined && cacheData.type === 'Buffer' && cacheData.data) {
+        loaderContext.resourcePath = path.join(pathinfo.dir, `${name}.${format}`);
+        loaderCallback(null, fileLoader.call(loaderContext, Buffer.from(cacheData.data)));
+    } else {
+        magick(content).size(function sizeCallback(sizeError, size) {
+            if (sizeError) { loaderCallback(sizeError); return; }
 
-        const cacheData = resizeCache.getKey(cacheKey);
-        if (cacheData !== undefined && cacheData.type === 'Buffer' && cacheData.data) {
-            loaderContext.resourcePath = path.join(pathinfo.dir, `${name}.${format}`);
-            loaderCallback(null, fileLoader.call(loaderContext, Buffer.from(cacheData.data)));
-        } else {
+            this.resize(width || size.width, height || size.height, flag);
+            const quality = query.quality ? parseInt(query.quality, 10) : 0;
+            if (quality > 0) {
+                this.quality(quality);
+            }
+
             this.toBuffer(format.toUpperCase(), (bufferError, buffer) => {
                 if (bufferError) { loaderCallback(bufferError); return; }
                 loaderContext.resourcePath = path.join(pathinfo.dir, `${name}.${format}`);
@@ -71,8 +76,8 @@ module.exports = function ResizeLoader(content) {
                 loaderCallback(null, fileLoader.call(loaderContext, buffer));
                 resizeCache.save(true);
             });
-        }
-    });
+        });
+    }
 };
 
 module.exports.raw = true;
