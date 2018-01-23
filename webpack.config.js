@@ -112,7 +112,7 @@ module.exports = {
     performance: {
         assetFilter: (uri) => {
             const [filename] = uri.split('?', 2);
-            const ignore = /(\.map|\.LICENSE|\.eot|\.ttf|manifest\.json|service-worker\.js|@resize\-)$/;
+            const ignore = /(\.map|\.LICENSE|\.eot|\.ttf|manifest\.json|service-worker\.js|@resize-)$/;
             return !(ignore.test(filename));
         },
         hints: PROD && !DEBUG ? 'error' : false,
@@ -199,7 +199,9 @@ module.exports = {
                 path.basename(template, '.html'),
                 'index.html',
             ));
-            if (STANDALONE) logger.info(`${path.relative(__dirname, template)} --> ${path.relative(__dirname, filename)}`);
+            if (STANDALONE) {
+                logger.info(`${path.relative(__dirname, template)} --> ${path.relative(__dirname, filename)}`);
+            }
             return new HtmlWebpackPlugin({
                 filename,
                 template,
