@@ -48,7 +48,7 @@ module.exports = function ResizeLoader(content) {
 
         const format = (query.format || pathinfo.ext.substr(1)).toLowerCase();
         const name = (query.name || (
-            `${pathinfo.name}@${width || ''}x${height || ''}${resizeFlags[flag]}`
+            `${pathinfo.name}@resize-${width || ''}x${height || ''}${resizeFlags[flag]}`
         )) + (query.suffix ? `-${query.suffix}` : '');
 
         this.toBuffer(format.toUpperCase(), (bufferError, buffer) => {

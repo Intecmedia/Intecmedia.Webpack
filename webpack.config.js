@@ -112,11 +112,11 @@ module.exports = {
     performance: {
         assetFilter: (uri) => {
             const [filename] = uri.split('?', 2);
-            const ignore = /(\.map|\.LICENSE|\.eot|\.ttf|manifest\.json|service-worker\.js)$/;
+            const ignore = /(\.map|\.LICENSE|\.eot|\.ttf|manifest\.json|service-worker\.js|@resize\-)$/;
             return !(ignore.test(filename));
         },
         hints: PROD && !DEBUG ? 'error' : false,
-        maxAssetSize: 512 * 1024,
+        maxAssetSize: 1024 * 1024,
         maxEntrypointSize: 512 * 1024,
     },
 

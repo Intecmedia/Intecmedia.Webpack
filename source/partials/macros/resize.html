@@ -1,18 +1,18 @@
-{% macro xs(url, resize='576x', format='') %}{{ require(url + '?resize=' + resize + '&format=' + format + '&suffix=xs') }}{% endmacro %}
-{% macro sm(url, resize='768x', format='') %}{{ require(url + '?resize=' + resize + '&format=' + format + '&suffix=sm') }}{% endmacro %}
-{% macro md(url, resize='992x', format='') %}{{ require(url + '?resize=' + resize + '&format=' + format + '&suffix=md') }}{% endmacro %}
-{% macro lg(url, resize='1200x', format='') %}{{ require(url + '?resize=' + resize + '&format=' + format + '&suffix=lg') }}{% endmacro %}
-{% macro xl(url, resize='1900x', format='') %}{{ require(url + '?resize=' + resize + '&format=' + format + '&suffix=xl') }}{% endmacro %}
+{% macro xs(url, resize='576x', format='', quality=80) %}{{ require(url + '?resize=' + resize + '&quality=' + quality + '&format=' + format + '&suffix=xs') }}{% endmacro %}
+{% macro sm(url, resize='768x', format='', quality=80) %}{{ require(url + '?resize=' + resize + '&quality=' + quality + '&format=' + format + '&suffix=sm') }}{% endmacro %}
+{% macro md(url, resize='992x', format='', quality=80) %}{{ require(url + '?resize=' + resize + '&quality=' + quality + '&format=' + format + '&suffix=md') }}{% endmacro %}
+{% macro lg(url, resize='1200x', format='', quality=80) %}{{ require(url + '?resize=' + resize + '&quality=' + quality + '&format=' + format + '&suffix=lg') }}{% endmacro %}
+{% macro xl(url, resize='1900x', format='', quality=80) %}{{ require(url + '?resize=' + resize + '&quality=' + quality + '&format=' + format + '&suffix=xl') }}{% endmacro %}
 
-{% macro picture (url, alt, attrs={}, breakpoints = ['xs', 'sm', 'md', 'lg', 'xl'], sizes = {xs: 576, sm: 768, md: 992, lg: 1200, xl: 1900}) %}
+{% macro picture (url, alt, attrs={}, breakpoints=['xs', 'sm', 'md', 'lg', 'xl'], sizes={xs: 576, sm: 768, md: 992, lg: 1200, xl: 1900}, quality=80) %}
     <picture{% for k, v in attrs %} {{ k }}="{{ v }}"{% endfor %}>
 
         {% for breakpoint, media in breakpointsMedia(breakpoints, sizes) %}
-        <source media="{{ media }}" srcset="{{ require(url + '?resize=' + sizes[breakpoint] + 'x&format=webp&suffix=' + breakpoint) }}" type="image/webp">
+        <source media="{{ media }}" srcset="{{ require(url + '?resize=' + sizes[breakpoint] + 'x&quality=' + quality + '&format=webp&suffix=' + breakpoint) }}" type="image/webp">
         {% endfor %}
 
         {% for breakpoint, media in breakpointsMedia(breakpoints, sizes) %}
-        <source media="{{ media }}" srcset="{{ require(url + '?resize=' + sizes[breakpoint] + 'x&format=jpg&suffix=' + breakpoint) }}" type="image/jpeg">
+        <source media="{{ media }}" srcset="{{ require(url + '?resize=' + sizes[breakpoint] + 'x&quality=' + quality + '&format=jpg&suffix=' + breakpoint) }}" type="image/jpeg">
         {% endfor %}
 
         <img src="{{ require(url) }}" alt="{{ alt }}">
