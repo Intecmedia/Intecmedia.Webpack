@@ -35,10 +35,10 @@ module.exports = function ResizeLoader(content) {
         width = parseInt(width, 10);
         height = parseInt(height, 10);
         flag = (flag || '').trim();
-        const flagNames = {
+        const resizeFlags = {
             '': '', '!': '-ignore-aspect', '>': '-shrink-larger', '<': '-enlarge-smaller', '^': '-fill-area',
         };
-        if (!(flag in flagNames)) { loaderCallback(`Unknow resize flag: '${query.resize}'`); return; }
+        if (!(flag in resizeFlags)) { loaderCallback(`Unknow resize flag: '${query.resize}'`); return; }
 
         this.resize(width || size.width, height || size.height, flag);
         const quality = query.quality ? parseInt(query.quality, 10) : 0;
@@ -48,7 +48,7 @@ module.exports = function ResizeLoader(content) {
 
         const format = (query.format || pathinfo.ext.substr(1)).toLowerCase();
         const name = (query.name || (
-            `${pathinfo.name}@${[width || '', height || ''].join('x')}${flagNames[flag]}`
+            `${pathinfo.name}@${width || ''}x${height || ''}${resizeFlags[flag]}`
         )) + (query.suffix ? `-${query.suffix}` : '');
 
         this.toBuffer(format.toUpperCase(), (bufferError, buffer) => {
