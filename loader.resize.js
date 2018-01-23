@@ -36,7 +36,7 @@ module.exports = function ResizeLoader(content) {
     const magick = gm.subClass({ imageMagick: options.imageMagick });
 
     const resourceStat = fs.statSync(this.resourcePath);
-    const cacheKey = `${this.resourcePath}?${loaderContext.resourceQuery}&${JSON.stringify(resourceStat)}`;
+    const cacheKey = `${this.resourcePath}?${JSON.stringify(query)}&${JSON.stringify(resourceStat)}`;
 
     let [, width,, height, flag] = query.resize.trim().match(/^(\d*)(x(\d*))?([!><^])?$/);
     width = parseInt(width, 10);
