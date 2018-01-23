@@ -31,16 +31,16 @@ module.exports = function ResizeLoader(content) {
     magick(content).size(function sizeCallback(sizeError, size) {
         if (sizeError) { loaderCallback(sizeError); return; }
 
-        let [, width,, height, flag] = query.resize.match(/^(\d*)(x(\d*))?([!><^])?/);
-        width = parseInt(width || size.width, 10);
-        height = parseInt(height || size.height, 10);
+        let [, width,, height, flag] = query.resize.trim().match(/^(\d*)(x(\d*))?([!><^])?$/);
+        width = parseInt(width, 10);
+        height = parseInt(height, 10);
         flag = (flag || '').trim();
         const flagNames = {
             '': '', '!': '-ignore-aspect', '>': '-shrink-larger', '<': '-enlarge-smaller', '^': '-fill-area',
         };
         if (!(flag in flagNames)) { loaderCallback(`Unknow resize flag: '${query.resize}'`); return; }
 
-        this.resize(width, height, flag);
+        this.resize(width || size.width, height || size.height, flag);
         const quality = query.quality ? parseInt(query.quality, 10) : 0;
         if (quality > 0) {
             this.quality(quality);
@@ -48,10 +48,7 @@ module.exports = function ResizeLoader(content) {
 
         const format = (query.format || pathinfo.ext.substr(1)).toLowerCase();
         const name = (query.name || (
-            `${pathinfo.name}@${[
-                (width === size.width ? '' : width),
-                (height === size.height ? '' : height),
-            ].join('x')}${flagNames[flag]}`
+            `${pathinfo.name}@${[width || '', height || ''].join('x')}${flagNames[flag]}`
         )) + (query.suffix ? `-${query.suffix}` : '');
 
         this.toBuffer(format.toUpperCase(), (bufferError, buffer) => {
