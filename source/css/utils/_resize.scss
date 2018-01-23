@@ -1,5 +1,5 @@
 @mixin resize-background-image($url, $quality: 80) {
-    .webp & {
+     html.webp & {
         @include media-breakpoint-only(xs) {
             background-image: url('#{$url}?resize=576x&quality=#{$quality}&format=webp&suffix=xs');
         }
@@ -21,7 +21,8 @@
         }
     }
 
-    .no-webp & {
+    html.no-webp &,
+    html.no-js & {
         @include media-breakpoint-only(xs) {
             background-image: url('#{$url}?resize=576x&quality=#{$quality}&format=jpg&suffix=xs');
         }
