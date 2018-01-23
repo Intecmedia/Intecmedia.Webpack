@@ -178,7 +178,9 @@ module.exports = function HtmlLoader() {
     const nunjucksGetSource = nunjucksLoader.getSource;
     nunjucksLoader.getSource = function getSource(filename) {
         const templateSource = nunjucksGetSource.call(this, filename);
-        if (!frontMatter.test(templateSource.src)) return templateSource;
+        if (!frontMatter.test(templateSource.src)) {
+            return templateSource;
+        }
         const templateData = frontMatter(templateSource.src);
         nunjucksEnvironment.addGlobal('PAGE', deepAssign(
             nunjucksEnvironment.getGlobal('PAGE') || {},
@@ -188,7 +190,9 @@ module.exports = function HtmlLoader() {
         return Object.assign({}, templateSource, {
             src: [
                 '{#---',
-                templateData.frontmatter.replace('#}', escape('#}')).replace('{#', escape('{#')),
+                templateData.frontmatter
+                    .replace('#}', escape('#}'))
+                    .replace('{#', escape('{#')),
                 '---#}',
                 templateData.body,
             ].join('\n'),
@@ -198,9 +202,6 @@ module.exports = function HtmlLoader() {
     logger.info(`processing '${path.relative(__dirname, loaderContext.resourcePath)}'`);
     nunjucksEnvironment.render(loaderContext.resourcePath, {}, (error, result) => {
         if (error) {
-            if (error.message) {
-                error.message = error.message.replace(/^\(unknown path\)/, `(${loaderContext.resourcePath})`);
-            }
             loaderCallback(error);
         } else {
             processHtml(result, options, loaderCallback);
