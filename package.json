@@ -114,6 +114,7 @@
         "posthtml-comment-after": "latest",
         "posthtml-render": "latest",
         "pretty": "latest",
+        "resolve-url-loader": "latest",        
         "sass-loader": "latest",
         "schema-utils": "latest",
         "slash": "latest",
