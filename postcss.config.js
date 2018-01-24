@@ -20,6 +20,11 @@ module.exports = {
             require('pleeease-filters')(),
             require('postcss-image-set-polyfill')(),
             require('postcss-url')({
+                filter: (url) => {
+                    if (/(resize|inline)/.test(url.search)) return false;
+                    const ext = path.extname(url.pathname).toLowerCase();
+                    return ['png', 'jpeg', 'jpg', 'gif', 'svg'].includes(ext);
+                },
                 url: 'inline',
                 maxSize: 32,
                 basePath: [path.join(BUILD_PATH, 'css'), path.join(SOURCE_PATH, 'css')],
