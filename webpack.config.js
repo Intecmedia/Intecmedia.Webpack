@@ -365,12 +365,12 @@ module.exports = {
                 exclude: /(fonts|font)/i,
                 oneOf: [
                     {
-                        resourceQuery: /resize/,
+                        resourceQuery: /[&?]resize=/,
                         loader: './loader.resize.js',
                         options: { name: resourceName('img', false) },
                     },
                     {
-                        resourceQuery: /inline/,
+                        resourceQuery: /[&?]inline=/,
                         loader: 'url-loader',
                         options: { name: resourceName('img', false), limit: 32 * 1024 },
                     },

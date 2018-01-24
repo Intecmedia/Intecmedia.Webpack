@@ -19,7 +19,7 @@ module.exports = {
             require('postcss-image-set-polyfill')(),
             require('postcss-url')({
                 filter: (asset) => {
-                    if (/(inline|resize)/.test(asset.search)) return false;
+                    if (/[&?](inline|resize)=/.test(asset.search)) return false;
                     const ext = path.extname(asset.pathname).toLowerCase();
                     return ['.png', '.jpeg', '.jpg', '.gif', '.svg'].includes(ext);
                 },
