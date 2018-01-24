@@ -3,6 +3,7 @@ const gm = require('gm');
 const path = require('path');
 const flatCache = require('flat-cache');
 const loaderUtils = require('loader-utils');
+const urlLoader = require('url-loader');
 const fileLoader = require('file-loader');
 const deepAssign = require('deep-assign');
 const weblog = require('webpack-log');
@@ -27,8 +28,9 @@ module.exports = function ResizeLoader(content) {
         DEFAULT_OPTIONS,
         loaderUtils.getOptions(loaderContext),
     );
+    const nextLoader = ('inline' in query ? urlLoader : fileLoader);
     if (!('resize' in query)) {
-        return loaderCallback(null, fileLoader.call(loaderContext, content));
+        return loaderCallback(null, nextLoader.call(loaderContext, content));
     }
 
     const resourceInfo = path.parse(loaderContext.resourcePath);
@@ -58,7 +60,7 @@ module.exports = function ResizeLoader(content) {
     if (cacheData !== undefined && cacheData.type === 'Buffer' && cacheData.data) {
         logger.info(`load cache '${relativePath}${loaderContext.resourceQuery}'`);
         loaderContext.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
-        loaderCallback(null, fileLoader.call(loaderContext, Buffer.from(cacheData.data)));
+        loaderCallback(null, nextLoader.call(loaderContext, Buffer.from(cacheData.data)));
     } else {
         imageMagick(content).size(function sizeCallback(sizeError, size) {
             if (sizeError) { loaderCallback(sizeError); return; }
@@ -74,7 +76,7 @@ module.exports = function ResizeLoader(content) {
                 logger.info(`save cache '${relativePath}${loaderContext.resourceQuery}'`);
                 resizeCache.setKey(cacheKey, buffer.toJSON());
                 loaderContext.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
-                loaderCallback(null, fileLoader.call(loaderContext, buffer));
+                loaderCallback(null, nextLoader.call(loaderContext, buffer));
                 resizeCache.save(true);
             });
         });
