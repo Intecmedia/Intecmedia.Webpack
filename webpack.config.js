@@ -367,16 +367,16 @@ module.exports = {
                     {
                         resourceQuery: /[&?]resize=/,
                         loader: './loader.resize.js',
-                        options: { name: resourceName('img', false) },
+                        options: { name: resourceName('img', true), limit: 32 * 1024 },
                     },
                     {
                         resourceQuery: /[&?]inline=/,
                         loader: 'url-loader',
-                        options: { name: resourceName('img', false), limit: 32 * 1024 },
+                        options: { name: resourceName('img', true), limit: 32 * 1024 },
                     },
                     {
                         loader: 'file-loader',
-                        options: { name: resourceName('img', false) },
+                        options: { name: resourceName('img', true) },
                     },
                 ],
             },
