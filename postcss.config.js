@@ -20,12 +20,12 @@ module.exports = {
             require('pleeease-filters')(),
             require('postcss-image-set-polyfill')(),
             require('postcss-url')({
-                filter: (asset) => {
-                    if (/[&?](inline)=/.test(asset.search)) return false;
+                filter(asset) {
+                    if (/[&?]inline=/.test(asset.search)) return false;
                     const format = path.extname(asset.pathname).substr(1);
                     return INLINE_FILES.includes(format.toLowerCase());
                 },
-                url: (asset) => {
+                url(asset) {
                     const params = new URLSearchParams(asset.search);
                     const format = params.get('format') || path.extname(asset.pathname).substr(1);
                     if (INLINE_FILES.includes(format.toLowerCase())) params.set('inline', 'inline');
