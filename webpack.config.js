@@ -372,7 +372,7 @@ module.exports = {
                     {
                         resourceQuery: /inline/,
                         loader: 'url-loader',
-                        options: { name: resourceName('img', false) },
+                        options: { name: resourceName('img', false), limit: 32 * 1024 },
                     },
                     {
                         loader: 'file-loader',
