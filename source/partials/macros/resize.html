@@ -1,10 +1,10 @@
-{% macro xs(url, resize='576x', quality=80, format='') %}{{ require(url + '?resize=' + resize + '&quality=' + quality + '&format=' + format + '&suffix=xs') }}{% endmacro %}
-{% macro sm(url, resize='768x', quality=80, format='') %}{{ require(url + '?resize=' + resize + '&quality=' + quality + '&format=' + format + '&suffix=sm') }}{% endmacro %}
-{% macro md(url, resize='992x', quality=80, format='') %}{{ require(url + '?resize=' + resize + '&quality=' + quality + '&format=' + format + '&suffix=md') }}{% endmacro %}
-{% macro lg(url, resize='1200x', quality=80, format='') %}{{ require(url + '?resize=' + resize + '&quality=' + quality + '&format=' + format + '&suffix=lg') }}{% endmacro %}
-{% macro xl(url, resize='1900x', quality=80, format='') %}{{ require(url + '?resize=' + resize + '&quality=' + quality + '&format=' + format + '&suffix=xl') }}{% endmacro %}
+{% macro xs(url, resize='576x', quality=60, format='') %}{{ require(url + '?resize=' + resize + '&quality=' + quality + '&format=' + format + '&suffix=xs') }}{% endmacro %}
+{% macro sm(url, resize='768x', quality=60, format='') %}{{ require(url + '?resize=' + resize + '&quality=' + quality + '&format=' + format + '&suffix=sm') }}{% endmacro %}
+{% macro md(url, resize='992x', quality=60, format='') %}{{ require(url + '?resize=' + resize + '&quality=' + quality + '&format=' + format + '&suffix=md') }}{% endmacro %}
+{% macro lg(url, resize='1200x', quality=60, format='') %}{{ require(url + '?resize=' + resize + '&quality=' + quality + '&format=' + format + '&suffix=lg') }}{% endmacro %}
+{% macro xl(url, resize='1900x', quality=60, format='') %}{{ require(url + '?resize=' + resize + '&quality=' + quality + '&format=' + format + '&suffix=xl') }}{% endmacro %}
 
-{% macro picture (url, alt, attrs={}, breakpoints=['xs', 'sm', 'md', 'lg', 'xl'], sizes={xs: 576, sm: 768, md: 992, lg: 1200, xl: 1900}, quality=80) %}
+{% macro picture (url, alt, attrs={}, breakpoints=['xs', 'sm', 'md', 'lg', 'xl'], sizes={xs: 576, sm: 768, md: 992, lg: 1200, xl: 1900}, quality=60) %}
     <picture{% for k, v in attrs %} {{ k }}="{{ v }}"{% endfor %}>
 
         {% for breakpoint, media in breakpointsMedia(breakpoints, sizes) %}
