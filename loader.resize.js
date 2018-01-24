@@ -28,9 +28,12 @@ module.exports = function ResizeLoader(content) {
         DEFAULT_OPTIONS,
         loaderUtils.getOptions(loaderContext),
     );
-    const nextLoader = ('inline' in query && query.inline === 'inline' ? urlLoader : fileLoader);
+    const nextLoader = (query.inline === 'inline' ? urlLoader : fileLoader);
     if (!('resize' in query)) {
         return loaderCallback(null, nextLoader.call(loaderContext, content));
+    }
+    if ('inline' in query) {
+        delete query.inline;
     }
 
     const resourceInfo = path.parse(loaderContext.resourcePath);
