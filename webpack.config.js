@@ -413,7 +413,7 @@ module.exports = {
                         {
                             loader: 'resolve-url-loader',
                             options: {
-                                sourceMap: USE_SOURCE_MAP,
+                                sourceMap: USE_SOURCE_MAP ? 'inline' : false,
                             },
                         },
                         {
