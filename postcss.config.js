@@ -1,4 +1,5 @@
 /* eslint global-require: "off" */
+const fs = require('fs');
 const path = require('path');
 const { URLSearchParams } = require('url');
 
@@ -7,6 +8,7 @@ const PROD = ('NODE_ENV' in process.env && process.env.NODE_ENV === 'production'
 const { browserslist: BROWSERS } = require('./package.json');
 
 const INLINE_FILES = ['png', 'jpeg', 'jpg', 'gif', 'svg'];
+const INLINE_LIMIT = 32 * 1024;
 
 module.exports = {
     plugins: [
@@ -26,9 +28,12 @@ module.exports = {
                     return INLINE_FILES.includes(format.toLowerCase());
                 },
                 url(asset) {
+                    const stat = fs.statSync(asset.absolutePath);
                     const params = new URLSearchParams(asset.search);
                     const format = params.get('format') || path.extname(asset.pathname).substr(1);
-                    if (INLINE_FILES.includes(format.toLowerCase())) params.set('inline', 'inline');
+                    if (INLINE_FILES.includes(format.toLowerCase()) && stat.size < INLINE_LIMIT) {
+                        params.set('inline', 'inline');
+                    }
                     return `${asset.pathname}?${params.toString()}`;
                 },
             }),
