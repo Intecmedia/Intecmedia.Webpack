@@ -1,6 +1,6 @@
-const fs = require('fs');
 const gm = require('gm');
 const path = require('path');
+const md5File = require('md5-file');
 const flatCache = require('flat-cache');
 const loaderUtils = require('loader-utils');
 const urlLoader = require('url-loader');
@@ -37,8 +37,8 @@ module.exports = function ResizeLoader(content) {
     const relativePath = path.relative(__dirname, loaderContext.resourcePath);
     const imageMagick = gm.subClass({ imageMagick: options.imageMagick });
 
-    const resourceStat = fs.statSync(this.resourcePath);
-    const cacheKey = `${this.resourcePath}?${JSON.stringify(query)}&${JSON.stringify(resourceStat)}`;
+    const resourceHash = md5File.sync(loaderContext.resourcePath);
+    const cacheKey = `${loaderContext.resourcePath}?${JSON.stringify(query)}&${resourceHash}`;
 
     let [, resizeWidth,, resizeHeight, resizeFlag] = query.resize.trim().match(/^(\d*)(x(\d*))?([!><^])?$/);
     resizeWidth = parseInt(resizeWidth, 10);
