@@ -1,4 +1,4 @@
-@mixin resize-background-image($url, $quality: 80) {
+@mixin resize-background-image($url, $quality: 60, $breakpoints: $grid-breakpoints) {
     html.webp & {
         @include media-breakpoint-only(xs) {
             background-image: url('#{$url}?resize=576x&quality=#{$quality}&format=webp&suffix=xs');
