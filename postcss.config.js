@@ -23,7 +23,7 @@ module.exports = {
                 filter: (url) => {
                     if (/(resize|inline)/.test(url.search)) return false;
                     const ext = path.extname(url.pathname).toLowerCase();
-                    return ['png', 'jpeg', 'jpg', 'gif', 'svg'].includes(ext);
+                    return ['.png', '.jpeg', '.jpg', '.gif', '.svg'].includes(ext);
                 },
                 url: 'inline',
                 maxSize: 32,
