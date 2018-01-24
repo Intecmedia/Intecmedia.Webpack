@@ -6,6 +6,8 @@ const DEBUG = ('DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0);
 const PROD = ('NODE_ENV' in process.env && process.env.NODE_ENV === 'production') || process.argv.indexOf('-p') !== -1;
 const { browserslist: BROWSERS } = require('./package.json');
 
+const INLINE_FILES = ['png', 'jpeg', 'jpg', 'gif', 'svg'];
+
 module.exports = {
     plugins: [
         require('postcss-devtools')({ precise: true }),
@@ -19,13 +21,14 @@ module.exports = {
             require('postcss-image-set-polyfill')(),
             require('postcss-url')({
                 filter: (asset) => {
-                    if (/[&?](inline|resize)=/.test(asset.search)) return false;
-                    const ext = path.extname(asset.pathname).toLowerCase();
-                    return ['.png', '.jpeg', '.jpg', '.gif', '.svg'].includes(ext);
+                    if (/[&?](inline)=/.test(asset.search)) return false;
+                    const format = path.extname(asset.pathname).substr(1);
+                    return INLINE_FILES.includes(format.toLowerCase());
                 },
                 url: (asset) => {
                     const params = new URLSearchParams(asset.search);
-                    params.set('inline', 'inline');
+                    const format = params.get('format') || path.extname(asset.pathname).substr(1);
+                    if (INLINE_FILES.includes(format.toLowerCase())) params.set('inline', 'inline');
                     return `${asset.pathname}?${params.toString()}`;
                 },
             }),
