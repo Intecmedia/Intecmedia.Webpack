@@ -411,6 +411,12 @@ module.exports = {
                             },
                         },
                         {
+                            loader: 'resolve-url-loader',
+                            options: {
+                                sourceMap: USE_SOURCE_MAP,
+                            },
+                        },
+                        {
                             loader: 'sass-loader',
                             options: {
                                 data: [
