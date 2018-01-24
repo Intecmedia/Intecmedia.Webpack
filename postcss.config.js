@@ -23,8 +23,8 @@ module.exports = {
                     const ext = path.extname(asset.pathname).toLowerCase();
                     return ['.png', '.jpeg', '.jpg', '.gif', '.svg'].includes(ext);
                 },
-                assetsPath: (asset) => {
-                    const url = new URL(asset);
+                url: (asset) => {
+                    const url = new URL(asset.url);
                     url.searchParams.set('inline', 'inline');
                     return url.toString();
                 },
