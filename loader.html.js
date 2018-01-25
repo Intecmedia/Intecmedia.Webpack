@@ -12,10 +12,10 @@ const deepAssign = require('deep-assign');
 const posthtml = require('posthtml');
 const posthtmlRender = require('posthtml-render');
 const posthtmlCommentAfter = require('posthtml-comment-after');
-const { breakpointsMedia } = require('./loader.resize.js');
 
 const SVGO = require('svgo');
 const svgoConfig = require('./svgo.config.js');
+const helpers = require('./source/helpers/index.js');
 const deasync = require('deasync');
 
 const logger = weblog({ name: 'loader-html' });
@@ -163,7 +163,10 @@ module.exports = function HtmlLoader() {
 
     nunjucksEnvironment.addFilter('require', options.requireIdent);
     nunjucksEnvironment.addGlobal('require', options.requireIdent);
-    nunjucksEnvironment.addGlobal('breakpointsMedia', breakpointsMedia);
+
+    helpers.forEach((helper, name) => {
+        nunjucksEnvironment.addGlobal(name, helper);
+    });
 
     const publicPath = ((options.context.APP || {}).PUBLIC_PATH || path.sep);
     const resourcePath = path.sep + path.relative(options.searchPath, loaderContext.resourcePath);

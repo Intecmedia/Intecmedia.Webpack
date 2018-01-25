@@ -7,11 +7,11 @@
 {% macro picture (url, alt, attrs={}, breakpoints=['xs', 'sm', 'md', 'lg', 'xl'], sizes={xs: 576, sm: 768, md: 992, lg: 1200, xl: 1900}, quality=60) %}
     <picture{% for k, v in attrs %} {{ k }}="{{ v }}"{% endfor %}>
 
-        {% for breakpoint, media in breakpointsMedia(breakpoints, sizes) %}
+        {% for breakpoint, media in breakpoints_media(breakpoints, sizes) %}
         <source media="{{ media }}" srcset="{{ require(url + '?resize=' + sizes[breakpoint] + 'x&quality=' + quality + '&format=webp&suffix=' + breakpoint) }}" type="image/webp">
         {% endfor %}
 
-        {% for breakpoint, media in breakpointsMedia(breakpoints, sizes) %}
+        {% for breakpoint, media in breakpoints_media(breakpoints, sizes) %}
         <source media="{{ media }}" srcset="{{ require(url + '?resize=' + sizes[breakpoint] + 'x&quality=' + quality + '&format=jpg&suffix=' + breakpoint) }}" type="image/jpeg">
         {% endfor %}
 
