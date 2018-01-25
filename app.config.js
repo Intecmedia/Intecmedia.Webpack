@@ -1,5 +1,7 @@
+/* eslint max-len: "off" */
 module.exports = {
     TITLE: 'Intecmedia.Webpack',
+    DESCRIPTION: '',
     PUBLIC_PATH: '/',
     USE_FAVICONS: true,
     USE_SERVICE_WORKER: false,
