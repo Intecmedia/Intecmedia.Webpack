@@ -116,7 +116,7 @@ module.exports = {
             return !(ignore.test(filename));
         },
         hints: PROD && !DEBUG ? 'error' : false,
-        maxAssetSize: 1024 * 1024,
+        maxAssetSize: 3 * 1024 * 1024,
         maxEntrypointSize: 512 * 1024,
     },
 
