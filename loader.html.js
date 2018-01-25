@@ -52,17 +52,7 @@ const OPTIONS_SCHEMA = {
     properties: {
         context: { type: 'object' },
         environment: { type: 'object' },
-        requireTags: {
-            type: 'object',
-            properties: {
-                prop: {
-                    type: 'array',
-                    properties: {
-                        prop: { type: 'string' },
-                    },
-                },
-            },
-        },
+        requireTags: { type: 'object' },
         requireIgnore: { instanceof: 'RegExp' },
         requireReplace: { type: 'object' },
         searchPath: { type: 'string' },
