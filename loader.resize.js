@@ -41,7 +41,7 @@ module.exports = function ResizeLoader(content) {
     const imageMagick = gm.subClass({ imageMagick: options.imageMagick });
 
     const resourceHash = md5File.sync(loaderContext.resourcePath);
-    const cacheKey = `${loaderContext.resourcePath}?${JSON.stringify(query)}&${resourceHash}`;
+    const cacheKey = `${relativePath}?${JSON.stringify(query)}&${resourceHash}`;
 
     let [, resizeWidth,, resizeHeight, resizeFlag] = query.resize.trim().match(/^(\d*)(x(\d*))?([!><^])?$/);
     resizeWidth = parseInt(resizeWidth, 10);
