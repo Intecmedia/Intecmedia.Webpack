@@ -6,11 +6,18 @@
         bottom: 0;
         content: 'Only visible $NODE_ENV=#{$NODE_ENV} or DEBUG=#{$DEBUG}';
         font-size: $font-size-sm;
+        line-height: 1rem;
+        margin-bottom: -1rem;
         opacity: 0.8;
         position: fixed;
         right: 0;
+        transition: .6s;
         white-space: nowrap;
         z-index: $zindex-modal;
+
+        html:hover & {
+            margin-bottom: 0;
+        }
     }
     /* stylelint-enable */
 }
@@ -23,11 +30,18 @@
         bottom: 0;
         content: 'Please rename the `name` in `package.json` file';
         font-size: $font-size-sm;
+        line-height: 1rem;
+        margin-bottom: -1rem;
         opacity: 0.8;
         position: fixed;
         right: 0;
+        transition: .6s;
         white-space: nowrap;
         z-index: $zindex-modal;
+
+        html:hover & {
+            margin-bottom: 0;
+        }
     }
     /* stylelint-enable */
 }
