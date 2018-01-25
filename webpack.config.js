@@ -109,16 +109,16 @@ module.exports = {
         publicPath: APP.PUBLIC_PATH,
     },
 
-    performance: {
+    performance: (PROD && !DEBUG ? {
         assetFilter: (uri) => {
             const [filename] = uri.split('?', 2);
             const ignore = /(\.map|\.LICENSE|\.eot|\.ttf|manifest\.json|service-worker\.js|@resize-)$/;
             return !(ignore.test(filename));
         },
-        hints: PROD && !DEBUG ? 'error' : false,
+        hints: 'error',
         maxAssetSize: 3 * 1024 * 1024,
         maxEntrypointSize: 512 * 1024,
-    },
+    } : false),
 
     plugins: [
         new ExtractTextPlugin({
