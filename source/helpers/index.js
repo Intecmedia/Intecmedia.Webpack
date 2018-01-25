@@ -1,5 +1,4 @@
 /* eslint global-require: "off", import/no-dynamic-require: "off" */
-
 const path = require('path');
 const glob = require('glob');
 
