@@ -14,7 +14,7 @@ const DEFAULT_OPTIONS = {
     imageMagick: true,
 };
 
-const resizeCache = flatCache.load('resize', path.resolve('./node_modules/.cache/loader-resize'));
+const resizeCache = flatCache.load('loader-resize.json', path.resolve('./node_modules/.cache/'));
 module.exports.resizeCache = resizeCache;
 
 module.exports = function ResizeLoader(content) {
