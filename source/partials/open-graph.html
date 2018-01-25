@@ -3,7 +3,6 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="{{ APP.TITLE }} :: {{ PAGE.title }}">
 <meta property="og:description" content="{{ PAGE.description or APP.DESCRIPTION }}">
-<meta property="og:site_name" content="{{ APP.TITLE }}">
 <meta property="og:image" content="{% if PAGE.og_image %}{{ APP.PUBLIC_PATH }}{{ PAGE.og_image }}{% else %}{{ APP.PUBLIC_PATH }}img/og-image.jpg{% endif %}">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="{% if PAGE.og_image %}{{ APP.PUBLIC_PATH }}{{ PAGE.og_image }}{% else %}{{ APP.PUBLIC_PATH }}img/og-image.jpg{% endif %}">
