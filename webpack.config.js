@@ -112,7 +112,7 @@ module.exports = {
     performance: (PROD && !DEBUG ? {
         assetFilter: (uri) => {
             const [filename] = uri.split('?', 2);
-            const ignore = /(\.map|\.LICENSE|\.eot|\.ttf|manifest\.json|service-worker\.js|@resize-)$/;
+            const ignore = /(\.(css|js)\.map|\.LICENSE|\.eot|\.ttf|manifest\.json|service-worker\.js|@resize-.+)$/;
             return !(ignore.test(filename));
         },
         hints: 'error',
