@@ -56,7 +56,7 @@ const OPTIONS_SCHEMA = {
             type: 'object',
             properties: {
                 prop: {
-                    type: 'object',
+                    type: 'array',
                     properties: {
                         prop: { type: 'string' },
                     },
