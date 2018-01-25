@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>{{ PAGE.title }} :: {{ APP.TITLE }}</title>
-    <meta name="description" content="{{ PAGE.description }}">
+    <meta name="description" content="{{ PAGE.description or APP.DESCRIPTION }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {% if APP.USE_FAVICONS %}
