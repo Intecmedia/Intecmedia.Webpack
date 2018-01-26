@@ -29,15 +29,15 @@
     "author": "Dmitry Pyatkov",
     "license": "MIT",
     "browserslist": [
+        "Android >= 5",
         "IE >= 10",
+        "iOS >= 9",
         "Safari >= 9",
         "last 2 Edge versions",
         "last 2 Chrome versions",
+        "last 2 ChromeAndroid version",
         "last 2 Firefox versions",
-        "last 2 Opera versions",
-        "last 2 iOS versions",
-        "last 1 Android version",
-        "last 2 ChromeAndroid version"
+        "last 2 Opera versions"
     ],
     "dependencies": {
         "autoprefixer": "latest",
