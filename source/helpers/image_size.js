@@ -6,7 +6,8 @@ const imageMagick = gm.subClass({ imageMagick: true });
 
 module.exports = (filename) => {
     let result;
-    imageMagick(path.join(process.cwd(), 'source', filename)).size((error, size) => {
+    const fullpath = path.join(process.cwd(), 'source', filename);
+    imageMagick(fullpath).size((error, size) => {
         if (error) { throw error; }
         result = size;
     });
