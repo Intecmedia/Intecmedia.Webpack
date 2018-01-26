@@ -5,6 +5,13 @@
     }
 }
 
+@mixin autofill($color, $background-color) {
+    &:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 9999px $background-color inset;
+        -webkit-text-fill-color: $color !important;
+    }
+}
+
 @mixin bg-autofill($background-color) {
     &:-webkit-autofill {
         -webkit-box-shadow: 0 0 0 9999px $background-color inset;
@@ -13,6 +20,14 @@
 
 @mixin color-autofill($color) {
     &:-webkit-autofill {
+        -webkit-text-fill-color: $color !important;
+    }
+}
+
+@mixin hover-autofill($color, $background-color) {
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+        -webkit-box-shadow: 0 0 0 9999px $background-color inset !important;
         -webkit-text-fill-color: $color !important;
     }
 }
