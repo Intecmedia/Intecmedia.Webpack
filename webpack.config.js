@@ -12,6 +12,7 @@ const logger = weblog({ name: 'webpack-config' });
 const DEBUG = ('DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0);
 const DEV_SERVER = path.basename(require.main.filename, '.js') === 'webpack-dev-server';
 const STANDALONE = ['webpack', 'webpack-dev-server'].includes(path.basename(require.main.filename, '.js'));
+const WATCH = (process.argv.indexOf('--watch') !== -1) || (process.argv.indexOf('-w') !== -1);
 const PROD = (process.env.NODE_ENV === 'production');
 const NODE_ENV = PROD ? 'production' : 'development';
 
@@ -51,6 +52,7 @@ const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const BabelMinifyPlugin = require('babel-minify-webpack-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const FaviconsPlugin = require('./plugin.favicons.js');
 const PrettyPlugin = require('./plugin.pretty.js');
@@ -121,6 +123,7 @@ module.exports = {
     } : false),
 
     plugins: [
+        ...(WATCH ? [new BrowserSyncPlugin()] : []),
         new ExtractTextPlugin({
             filename: 'css/app.min.css',
             allChunks: true,

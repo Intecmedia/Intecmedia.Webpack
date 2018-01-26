@@ -47,6 +47,8 @@
         "babel-preset-airbnb": "latest",
         "babel-preset-env": "latest",
         "bootstrap": "latest",
+        "browser-sync": "^2.23.6",
+        "browser-sync-webpack-plugin": "^1.2.0",
         "browserslist": "latest",
         "case-sensitive-paths-webpack-plugin": "latest",
         "copy-webpack-plugin": "latest",
