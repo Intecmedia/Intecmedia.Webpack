@@ -46,17 +46,17 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const SWPrecacheWebpackPlugin = (APP.USE_SERVICE_WORKER ? require('sw-precache-webpack-plugin') : () => {});
 const { default: ImageminPlugin } = require('imagemin-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const BabelMinifyPlugin = require('babel-minify-webpack-plugin');
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const BabelMinifyPlugin = (PROD ? require('babel-minify-webpack-plugin') : () => {});
+const BrowserSyncPlugin = (WATCH ? require('browser-sync-webpack-plugin') : () => {});
 
-const FaviconsPlugin = require('./plugin.favicons.js');
-const PrettyPlugin = require('./plugin.pretty.js');
-const ManifestPlugin = require('./plugin.manifest.js');
+const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
+const PrettyPlugin = (APP.HTML_PRETTY ? require('./plugin.pretty.js') : () => {});
+const ManifestPlugin = (APP.USE_FAVICONS ? require('./plugin.manifest.js') : () => {});
 
 const SERVICE_WORKER_BASE = slash(path.relative(APP.PUBLIC_PATH, '/'));
 const SERVICE_WORKER_PATH = path.join(OUTPUT_PATH, SERVICE_WORKER_BASE, '/service-worker.js');
