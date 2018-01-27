@@ -20,8 +20,8 @@
         "html-lint": "cross-env NODE_ENV=development node ./script.html-lint.js",
         "lint": "npm run js-lint && npm run css-format && npm run css-lint && npm run html-lint",
         "server": "npm run server-dev",
-        "server-dev": "cross-env NODE_ENV=development DEBUG=0 webpack-dev-server --hot --inline --debug --watch",
-        "server-debug": "cross-env NODE_ENV=development DEBUG=1 webpack-dev-server --hot --inline --debug --watch",
+        "server-dev": "cross-env NODE_ENV=development DEBUG=0 webpack-dev-server --hot --inline --debug",
+        "server-debug": "cross-env NODE_ENV=development DEBUG=1 webpack-dev-server --hot --inline --debug",
         "build": "npm-run-all js-lint css-format css-lint prod html-lint",
         "browserslist": "npx browserslist",
         "start": "npm run build"
