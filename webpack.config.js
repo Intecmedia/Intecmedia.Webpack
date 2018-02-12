@@ -241,13 +241,15 @@ module.exports = {
                 slash(path.join(OUTPUT_PATH, '/css/*.min.css')),
                 slash(path.join(OUTPUT_PATH, '/fonts/*.woff2')),
             ],
+            mergeStaticsConfig: true,
+            verbose: true,
             runtimeCaching: [{
-                urlPattern: /(.*)/,
-                handler: 'networkFirst',
-                options: { debug: !PROD },
-            }, {
                 urlPattern: new RegExp(`${APP.PUBLIC_PATH}(js|css|fonts|img)/(.*)`),
                 handler: 'cacheFirst',
+                options: { debug: !PROD },
+            }, {
+                urlPattern: /(.*)/,
+                handler: 'networkFirst',
                 options: { debug: !PROD },
             }],
             staticFileGlobsIgnorePatterns: [/\.map$/, /\.LICENSE$/],
