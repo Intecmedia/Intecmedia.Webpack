@@ -248,9 +248,7 @@ module.exports = {
                 handler: 'cacheFirst',
                 options: { debug: !PROD },
             }, {
-                urlPattern: /(.*)/,
-                handler: 'networkFirst',
-                options: { debug: !PROD },
+                default: 'networkFirst',
             }],
             staticFileGlobsIgnorePatterns: [/\.map$/, /\.LICENSE$/],
             ignoreUrlParametersMatching: [/^utm_/, /^[a-fA-F0-9]{32}$/],
