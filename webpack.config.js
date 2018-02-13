@@ -102,7 +102,7 @@ module.exports = {
     },
 
     entry: {
-        app: `${SOURCE_PATH}/js/app.js`,
+        app: (PROD && !DEBUG ? ['babel-polyfill'] : []).concat(`${SOURCE_PATH}/js/app.js`),
     },
 
     output: {
