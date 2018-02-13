@@ -346,7 +346,9 @@ module.exports = {
                     {
                         loader: 'babel-loader',
                         options: {
-                            plugins: [],
+                            plugins: [['transform-runtime', {
+                                polyfill: false,
+                            }]],
                             presets: [['airbnb', {
                                 debug: DEBUG || PROD,
                                 targets: { browsers: BROWSERS },
