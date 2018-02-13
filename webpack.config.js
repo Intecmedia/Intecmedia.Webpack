@@ -244,11 +244,19 @@ module.exports = {
             mergeStaticsConfig: true,
             verbose: true,
             runtimeCaching: [{
-                urlPattern: new RegExp(`${APP.PUBLIC_PATH}(js|css|fonts|img)/(.*)`),
+                urlPattern: `${APP.PUBLIC_PATH}(js|css|fonts|img)/(.*)`, // only local urls
                 handler: 'cacheFirst',
                 options: { debug: !PROD },
             }, {
-                default: 'networkFirst',
+                urlPattern: '/(.*)', // other local urls
+                handler: 'networkFirst',
+                options: { debug: !PROD },
+            }, {
+                urlPattern: /(.+)/, // external urls
+                handler: 'networkOnly',
+                options: { debug: !PROD },
+            }, {
+                default: 'networkOnly',
             }],
             staticFileGlobsIgnorePatterns: [/\.map$/, /\.LICENSE$/],
             ignoreUrlParametersMatching: [/^utm_/, /^[a-fA-F0-9]{32}$/],
