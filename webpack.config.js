@@ -233,7 +233,8 @@ module.exports = {
         })),
         ...(APP.HTML_PRETTY ? [new PrettyPlugin()] : []),
         ...(APP.USE_SERVICE_WORKER ? [new SWPrecacheWebpackPlugin({
-            minify: PROD,
+            minify: !DEBUG,
+            verbose: true,
             handleFetch: true,
             filename: (SERVICE_WORKER_BASE ? `${SERVICE_WORKER_BASE}/service-worker.js` : 'service-worker.js'),
             staticFileGlobs: [
@@ -242,21 +243,16 @@ module.exports = {
                 slash(path.join(OUTPUT_PATH, '/fonts/*.woff2')),
             ],
             mergeStaticsConfig: true,
-            verbose: true,
             runtimeCaching: [{
                 urlPattern: `${APP.PUBLIC_PATH}(js|css|fonts|img)/(.*)`, // only local urls
                 handler: 'cacheFirst',
-                options: { debug: !PROD },
+                options: { debug: DEBUG },
             }, {
                 urlPattern: '/(.*)', // other local urls
                 handler: 'networkFirst',
-                options: { debug: !PROD },
+                options: { debug: DEBUG },
             }, {
-                urlPattern: /(.+)/, // external urls
-                handler: 'networkOnly',
-                options: { debug: !PROD },
-            }, {
-                default: 'networkOnly',
+                default: 'networkOnly', // external urls
             }],
             staticFileGlobsIgnorePatterns: [/\.map$/, /\.LICENSE$/],
             ignoreUrlParametersMatching: [/^utm_/, /^[a-fA-F0-9]{32}$/],
