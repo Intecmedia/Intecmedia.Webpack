@@ -102,7 +102,7 @@ module.exports = {
     },
 
     entry: {
-        app: (PROD && !DEBUG ? ['babel-polyfill'] : []).concat(`${SOURCE_PATH}/js/app.js`),
+        app: `${SOURCE_PATH}/js/app.js`,
     },
 
     output: {
@@ -449,5 +449,10 @@ module.exports = {
             },
         ],
     },
-
+    // Some libraries import Node modules but don't use them in the browser.
+    node: {
+        fs: 'empty',
+        net: 'empty',
+        tls: 'empty',
+    },
 };

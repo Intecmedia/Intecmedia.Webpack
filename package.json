@@ -95,6 +95,7 @@
         "node-sass": "latest",
         "npm-run-all": "latest",
         "nunjucks": "latest",
+        "object-assign": "^4.1.1",
         "picturefill": "latest",
         "pixrem": "latest",
         "pleeease-filters": "latest",

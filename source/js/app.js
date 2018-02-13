@@ -1,8 +1,8 @@
 /* global NODE_ENV DEBUG */
 require('../css/app.scss');
+require('./polyfills.js');
 
 require('modernizr');
-require('picturefill');
 require('./bootstrap.js');
 
 jQuery(($) => {
