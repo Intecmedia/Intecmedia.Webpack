@@ -1,20 +1,42 @@
 {% if APP.USE_SERVICE_WORKER %}
     <!-- service-worker -->
     <script type="text/javascript">
-        ('serviceWorker' in navigator) && (function(baseURL, hash) {
-            navigator.serviceWorker.getRegistrations().then(function(registrations) {
-                var scriptURL = baseURL + '?' + hash;
-                var registration = registrations.find(function(r) {
-                    return r.active && r.active.scriptURL.indexOf(baseURL) === 0 && scriptURL != r.active.scriptURL;
+        ('serviceWorker' in navigator) && (function (baseURL, hash) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.getRegistrations().then(function (registrations) {
+                    var scriptURL = baseURL + '?' + hash;
+                    var registration = registrations.find(function (r) {
+                        return r.active && r.active.scriptURL.indexOf(baseURL) === 0 && scriptURL != r.active.scriptURL;
+                    });
+                    if (registration && localStorage.getItem('SERVICE_WORKER_HASH') != hash) {
+                        console.log('[sw-precache] Service Worker was updated because hash changed.');
+                        localStorage.setItem('SERVICE_WORKER_HASH', hash);
+                        registration.update();
+                    } else {
+                        localStorage.setItem('SERVICE_WORKER_HASH', hash);
+                        navigator.serviceWorker.register(scriptURL).then(function (registration) {
+                            registration.onupdatefound = function () {
+                                var installingWorker = registration.installing;
+                                installingWorker.onstatechange = function () {
+                                    switch (installingWorker.state) {
+                                        case 'installed':
+                                            if (navigator.serviceWorker.controller) {
+                                                console.log('[sw-precache] New or updated content is available.');
+                                            } else {
+                                                console.log('[sw-precache] Content is now available offline!');
+                                            }
+                                            break;
+                                        case 'redundant':
+                                            console.error('[sw-precache] The installing service worker became redundant.');
+                                            break;
+                                    }
+                                };
+                            };
+                        }).catch(function (error) {
+                            console.error('[sw-precache] Error during service worker registration:', error);
+                        });
+                    }
                 });
-                if (registration && localStorage.getItem('SERVICE_WORKER_HASH') != hash) {
-                    console.log('Service Worker was updated because hash changed.');
-                    localStorage.setItem('SERVICE_WORKER_HASH', hash);
-                    registration.update();
-                } else {
-                    navigator.serviceWorker.register(scriptURL);
-                    localStorage.setItem('SERVICE_WORKER_HASH', hash);
-                }
             });
         })(document.location.protocol + '//' + document.location.host + '/service-worker.js', '{{ APP.SERVICE_WORKER_HASH() }}');
     </script>
