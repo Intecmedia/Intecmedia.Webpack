@@ -2,7 +2,7 @@
     <!-- service-worker -->
     <script type="text/javascript">
         var SERVICE_WORKER_HASH = '{{ APP.SERVICE_WORKER_HASH() }}';
-        if (SERVICE_WORKER_HASH === ('{' + '{ APP.SERVICE_WORKER_HASH() }' + '}')) {
+        if (!SERVICE_WORKER_HASH || SERVICE_WORKER_HASH === ('{' + '{ APP.SERVICE_WORKER_HASH() }' + '}')) {
             throw new Error('[sw-precache] Service Worker hash error, please set hash: md5_file("/service-worker.js").');
         } else if ('serviceWorker' in navigator) {
             window.addEventListener('load', function () {

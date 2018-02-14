@@ -60,7 +60,7 @@ const ManifestPlugin = (APP.USE_FAVICONS ? require('./plugin.manifest.js') : () 
 
 const SERVICE_WORKER_BASE = slash(path.relative(APP.PUBLIC_PATH, '/'));
 const SERVICE_WORKER_PATH = path.join(OUTPUT_PATH, SERVICE_WORKER_BASE, '/service-worker.js');
-const SERVICE_WORKER_HASH = () => fs.existsSync(SERVICE_WORKER_PATH) && md5File.sync(SERVICE_WORKER_PATH);
+const SERVICE_WORKER_HASH = () => (fs.existsSync(SERVICE_WORKER_PATH) ? md5File.sync(SERVICE_WORKER_PATH) : '');
 
 const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.html`, {
     ignore: [
