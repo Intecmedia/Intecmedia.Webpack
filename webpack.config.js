@@ -233,7 +233,7 @@ module.exports = {
         })),
         ...(APP.HTML_PRETTY ? [new PrettyPlugin()] : []),
         ...(APP.USE_SERVICE_WORKER ? [new SWPrecacheWebpackPlugin({
-            minify: !DEBUG,
+            minify: PROD,
             verbose: true,
             handleFetch: true,
             filename: (SERVICE_WORKER_BASE ? `${SERVICE_WORKER_BASE}/service-worker.js` : 'service-worker.js'),
@@ -242,15 +242,15 @@ module.exports = {
                 slash(path.join(OUTPUT_PATH, '/css/*.min.css')),
                 slash(path.join(OUTPUT_PATH, '/fonts/*.woff2')),
             ],
-            mergeStaticsConfig: true,
+            mergeStaticsConfig: false,
             runtimeCaching: [{
                 urlPattern: `${APP.PUBLIC_PATH}(js|css|fonts|img)/(.*)`, // only local urls
                 handler: 'cacheFirst',
-                options: { debug: DEBUG },
+                options: { debug: !PROD },
             }, {
                 urlPattern: '/(.*)', // other local urls
                 handler: 'networkFirst',
-                options: { debug: DEBUG },
+                options: { debug: !PROD },
             }, {
                 default: 'networkOnly', // external urls
             }],
