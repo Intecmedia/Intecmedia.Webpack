@@ -1,10 +1,11 @@
 {% if APP.USE_SERVICE_WORKER %}
     <!-- service-worker -->
     <script type="text/javascript">
-        var SERVICE_WORKER_HASH = '{{ APP.SERVICE_WORKER_HASH() }}';
-        if (!SERVICE_WORKER_HASH || SERVICE_WORKER_HASH === ('{' + '{ APP.SERVICE_WORKER_HASH() }' + '}')) {
+        var SERVICE_WORKER_HASH = {{ APP.SERVICE_WORKER_HASH() | dump | safe }};
+        if (!SERVICE_WORKER_HASH) {
             throw new Error('[sw-precache] Service Worker hash error, please set hash: md5_file("/service-worker.js").');
-        } else if ('serviceWorker' in navigator) {
+        }
+        if ('serviceWorker' in navigator) {
             window.addEventListener('load', function () {
                 var baseURL = (document.location.protocol + '//' + document.location.host + '/service-worker.js');
                 navigator.serviceWorker.getRegistrations().then(function (registrations) {
