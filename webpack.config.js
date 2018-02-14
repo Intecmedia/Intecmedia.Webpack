@@ -235,7 +235,7 @@ module.exports = {
         ...(APP.USE_SERVICE_WORKER ? [new SWPrecacheWebpackPlugin({
             minify: PROD,
             verbose: true,
-            handleFetch: true,
+            handleFetch: (PROD && !DEBUG),
             filename: (SERVICE_WORKER_BASE ? `${SERVICE_WORKER_BASE}/service-worker.js` : 'service-worker.js'),
             staticFileGlobs: [
                 slash(path.join(OUTPUT_PATH, '/js/*.min.js')),
