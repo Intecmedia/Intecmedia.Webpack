@@ -1,8 +1,10 @@
 {% if APP.USE_SERVICE_WORKER %}
     <!-- service-worker -->
     <script type="text/javascript">
-        ('serviceWorker' in navigator) && (function (baseURL, hash) {
+        if ('serviceWorker' in navigator) {
             window.addEventListener('load', function () {
+                var hash = '{{ APP.SERVICE_WORKER_HASH() }}';
+                var baseURL = (document.location.protocol + '//' + document.location.host + '/service-worker.js');
                 navigator.serviceWorker.getRegistrations().then(function (registrations) {
                     var scriptURL = baseURL + '?' + hash;
                     var registration = registrations.find(function (r) {
@@ -38,7 +40,7 @@
                     }
                 });
             });
-        })(document.location.protocol + '//' + document.location.host + '/service-worker.js', '{{ APP.SERVICE_WORKER_HASH() }}');
+        }
     </script>
     <!-- /service-worker -->
 {% endif %}
