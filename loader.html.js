@@ -130,6 +130,9 @@ module.exports = function HtmlLoader() {
     const loaderContext = this;
     const loaderCallback = loaderContext.async();
 
+    loaderContext.addDependency(path.join(__dirname, 'app.config.js'));
+    loaderContext.addDependency(path.join(__dirname, 'source', 'html.data.js'));
+
     const options = deepAssign({}, DEFAULT_OPTIONS, loaderUtils.getOptions(loaderContext));
     validateOptions(OPTIONS_SCHEMA, options, 'loader-html');
 

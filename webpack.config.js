@@ -28,6 +28,7 @@ const { name: PACKAGE_NAME, browserslist: BROWSERS } = require('./package.json')
 const SOURCE_PATH = path.resolve(__dirname, 'source');
 const OUTPUT_PATH = path.resolve(__dirname, 'build');
 const APP = require('./app.config.js');
+const HTML_DATA = require('./source/html.data.js');
 
 if (STANDALONE) {
     logger.info(`Name: ${PACKAGE_NAME}`);
@@ -302,13 +303,14 @@ module.exports = {
                 options: {
                     context: Object.assign(
                         {},
-                        APP.HTML_CONTEXT,
+                        HTML_DATA,
                         APP,
                         {
                             DEBUG,
                             NODE_ENV,
                             SERVICE_WORKER_HASH,
                         },
+                        html.data.json
                     ),
                     searchPath: SOURCE_PATH,
                     svgoEnabled: DEBUG || PROD,
