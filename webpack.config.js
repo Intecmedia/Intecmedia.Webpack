@@ -310,7 +310,6 @@ module.exports = {
                             NODE_ENV,
                             SERVICE_WORKER_HASH,
                         },
-                        html.data.json
                     ),
                     searchPath: SOURCE_PATH,
                     svgoEnabled: DEBUG || PROD,
