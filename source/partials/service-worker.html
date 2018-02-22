@@ -6,40 +6,37 @@
             throw new Error('[sw-precache] Service Worker hash error, please set hash: md5_file("/service-worker.js").');
         }
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function () {
-                var baseURL = (document.location.protocol + '//' + document.location.host + '/service-worker.js');
-                navigator.serviceWorker.getRegistrations().then(function (registrations) {
-                    var scriptURL = baseURL + '?' + SERVICE_WORKER_HASH;
-                    var registration = registrations.find(function (r) {
-                        return r.active && r.active.scriptURL.indexOf(baseURL) === 0 && scriptURL != r.active.scriptURL;
-                    });
-                    if (registration && localStorage.getItem('SERVICE_WORKER_HASH') != SERVICE_WORKER_HASH) {
-                        console.log('[sw-precache] Service Worker was updated because hash changed.');
-                        localStorage.setItem('SERVICE_WORKER_HASH', SERVICE_WORKER_HASH);
-                        registration.update();
-                    }
-                    navigator.serviceWorker.register(scriptURL).then(function (registration) {
-                        localStorage.setItem('SERVICE_WORKER_HASH', SERVICE_WORKER_HASH);
-                        registration.onupdatefound = function () {
-                            var installingWorker = registration.installing;
-                            installingWorker.onstatechange = function () {
-                                switch (installingWorker.state) {
-                                    case 'installed':
-                                        if (navigator.serviceWorker.controller) {
-                                            console.log('[sw-precache] New or updated content is available.');
-                                        } else {
-                                            console.log('[sw-precache] Content is now available offline!');
-                                        }
-                                        break;
-                                    case 'redundant':
-                                        console.error('[sw-precache] The installing service worker became redundant.');
-                                        break;
-                                }
-                            };
+            var SERVICE_WORKER_BASE = (document.location.protocol + '//' + document.location.host + '/service-worker.js');
+            navigator.serviceWorker.getRegistrations().then(function (registrations) {
+                var active = registrations.find(function (r) {
+                    return r.active && r.active.scriptURL.indexOf(SERVICE_WORKER_BASE) === 0;
+                });
+                if (active && localStorage.getItem('SERVICE_WORKER_HASH') != SERVICE_WORKER_HASH) {
+                    console.log('[sw-precache] Service Worker was updated because hash changed.');
+                    localStorage.setItem('SERVICE_WORKER_HASH', SERVICE_WORKER_HASH);
+                    active.update();
+                }
+                navigator.serviceWorker.register(SERVICE_WORKER_BASE).then(function (registration) {
+                    localStorage.setItem('SERVICE_WORKER_HASH', SERVICE_WORKER_HASH);
+                    registration.onupdatefound = function () {
+                        var installingWorker = registration.installing;
+                        installingWorker.onstatechange = function () {
+                            switch (installingWorker.state) {
+                                case 'installed':
+                                    if (navigator.serviceWorker.controller) {
+                                        console.log('[sw-precache] New or updated content is available.');
+                                    } else {
+                                        console.log('[sw-precache] Content is now available offline!');
+                                    }
+                                    break;
+                                case 'redundant':
+                                    console.error('[sw-precache] The installing service worker became redundant.');
+                                    break;
+                            }
                         };
-                    }).catch(function (error) {
-                        console.error('[sw-precache] Error during service worker registration:', error);
-                    });
+                    };
+                }).catch(function (error) {
+                    console.error('[sw-precache] Error during service worker registration:', error);
                 });
             });
         }
