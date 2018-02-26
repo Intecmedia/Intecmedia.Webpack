@@ -140,7 +140,7 @@
         "sw-precache-webpack-plugin": "latest",
         "sw-toolbox": "latest",
         "url-loader": "latest",
-        "webpack": "latest",
+        "webpack": "3.11.0",
         "webpack-bundle-analyzer": "latest",
         "webpack-dev-server": "latest",
         "webpack-log": "latest",

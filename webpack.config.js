@@ -1,5 +1,8 @@
 /* eslint global-require: "off", max-lines: "off", import/no-dynamic-require: "off" */
 const fs = require('fs');
+
+process.chdir(fs.realpathSync(process.cwd()));
+
 const glob = require('glob');
 const path = require('path');
 const slash = require('slash');
