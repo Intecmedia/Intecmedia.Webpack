@@ -429,6 +429,7 @@ module.exports = {
                             loader: 'resolve-url-loader',
                             options: {
                                 sourceMap: USE_SOURCE_MAP ? 'inline' : false,
+                                keepQuery: true,
                             },
                         },
                         {
