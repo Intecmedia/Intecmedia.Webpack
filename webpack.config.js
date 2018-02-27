@@ -439,7 +439,7 @@ module.exports = {
                                     ['$DEBUG', DEBUG],
                                     ['$NODE_ENV', NODE_ENV],
                                     ['$PACKAGE_NAME', PACKAGE_NAME],
-                                ].map(i => `${i[0]}: ${JSON.stringify(i[1])};`).join('\n'),
+                                ].map(i => ((k, v) => `${k}: ${JSON.stringify(v)};`)(...i)).join('\n'),
                                 indentWidth: 4,
                                 sourceMap: USE_SOURCE_MAP ? 'inline' : false,
                                 sourceMapEmbed: USE_SOURCE_MAP,
