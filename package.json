@@ -124,6 +124,7 @@
         "sass-loader": "latest",
         "schema-utils": "latest",
         "slash": "latest",
+        "sort-css-media-queries": "latest",
         "style-loader": "latest",
         "stylefmt": "latest",
         "stylefmt-loader": "latest",

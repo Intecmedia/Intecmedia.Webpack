@@ -1,6 +1,7 @@
 /* eslint global-require: "off" */
 const path = require('path');
 const { URLSearchParams } = require('url');
+const sortCSSmq = require('sort-css-media-queries');
 
 const DEBUG = ('DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0);
 const PROD = ('NODE_ENV' in process.env && process.env.NODE_ENV === 'production') || process.argv.indexOf('-p') !== -1;
@@ -38,7 +39,7 @@ module.exports = {
             require('postcss-color-rgba-fallback')(),
             require('postcss-flexbugs-fixes')(),
             require('postcss-will-change')(),
-            require('css-mqpacker')(),
+            require('css-mqpacker')({ sort: sortCSSmq.desktopFirst }),
             require('autoprefixer')({ browsers: BROWSERS }), // this always last
         ] : []),
         require('postcss-browser-reporter')(),
