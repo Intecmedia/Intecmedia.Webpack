@@ -56,7 +56,7 @@ const { default: ImageminPlugin } = require('imagemin-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const BabelMinifyPlugin = (PROD ? require('babel-minify-webpack-plugin') : () => {});
+const UglifyJsPlugin = (PROD ? require('uglifyjs-webpack-plugin') : () => {});
 const BrowserSyncPlugin = (WATCH ? require('browser-sync-webpack-plugin') : () => {});
 
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
@@ -136,10 +136,16 @@ module.exports = {
         ...(PROD ? [
             new CaseSensitivePathsPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),
-            new BabelMinifyPlugin(
-                { mangle: { topLevel: true } },
-                { comments: false },
-            ),
+            new UglifyJsPlugin({
+                parallel: true,
+                sourceMap: true,
+                extractComments: true,
+                uglifyOptions: {
+                    output: {
+                        comments: false,
+                    },
+                },
+            }),
         ] : []),
         new webpack.BannerPlugin({
             banner: `NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chunkhash]`,
