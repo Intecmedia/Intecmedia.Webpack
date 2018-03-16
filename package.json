@@ -146,7 +146,7 @@
         "webpack-dev-server": "latest",
         "webpack-log": "latest",
         "webpack-notifier": "latest",
-        "webpack-sources": "1.0.1"
+        "webpack-sources": "latest"
     },
     "devDependencies": {}
 }
