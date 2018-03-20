@@ -5,12 +5,16 @@ const DEFAULT_SIZES = {
 const DEFAULT_BREAKPOINTS = ['xs', 'sm', 'md', 'lg', 'xl'];
 
 module.exports = (breakpoints, sizes) => {
-    const sorted = DEFAULT_BREAKPOINTS.filter(i => breakpoints.includes(i));
-    const merged = Object.assign({}, sizes, DEFAULT_SIZES);
-    return sorted.map((breakpoint, index) => [breakpoint, [
+    const sortedBreakpoints = DEFAULT_BREAKPOINTS.filter(i => breakpoints.includes(i));
+    const mergedSizes = Object.assign({}, sizes, DEFAULT_SIZES);
+    return sortedBreakpoints.map((breakpoint, index) => [breakpoint, [
         // not first
-        ...(index >= 1 && sorted[index - 1] ? [`(min-width: ${merged[sorted[index - 1]]}px)`] : []),
+        ...(index >= 1 && sortedBreakpoints[index - 1] ?
+            [`(min-width: ${mergedSizes[sortedBreakpoints[index - 1]]}px)`] :
+            []),
         // not last
-        ...(index !== sorted.length - 1 ? [`(max-width: ${merged[breakpoint] - 1}px)`] : []),
+        ...(index !== sortedBreakpoints.length - 1 ?
+            [`(max-width: ${mergedSizes[breakpoint] - 1}px)`] :
+            []),
     ].join(' and ')]);
 };
