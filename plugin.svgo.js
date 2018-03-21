@@ -45,9 +45,7 @@ module.exports = class SvgoPlugin {
             return tree;
         });
 
-        parser.process(html).then((result) => {
-            callback(null, result.html);
-        }).catch(callback);
+        parser.process(html).then(result => callback(null, result.html)).catch(callback);
     }
 
     apply(compiler) {
