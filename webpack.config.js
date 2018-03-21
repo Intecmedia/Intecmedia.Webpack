@@ -62,6 +62,7 @@ const BrowserSyncPlugin = (WATCH ? require('browser-sync-webpack-plugin') : () =
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
 const PrettyPlugin = (APP.HTML_PRETTY ? require('./plugin.pretty.js') : () => {});
 const ManifestPlugin = (APP.USE_FAVICONS ? require('./plugin.manifest.js') : () => {});
+const SvgoPlugin = require('./plugin.svgo.js');
 
 const SERVICE_WORKER_BASE = slash(path.relative(APP.PUBLIC_PATH, '/'));
 const SERVICE_WORKER_PATH = path.join(OUTPUT_PATH, SERVICE_WORKER_BASE, '/service-worker.js');
@@ -141,6 +142,17 @@ module.exports = {
                 sourceMap: true,
                 extractComments: true,
                 uglifyOptions: {
+                    compress: {
+                        warnings: false,
+                        conditionals: true,
+                        unused: true,
+                        comparisons: true,
+                        sequences: true,
+                        dead_code: true,
+                        evaluate: true,
+                        if_return: true,
+                        join_vars: true,
+                    },
                     output: {
                         comments: false,
                     },
@@ -242,6 +254,7 @@ module.exports = {
                 title: APP.TITLE,
             });
         })),
+        new SvgoPlugin({ enabled: PROD }),
         ...(APP.HTML_PRETTY ? [new PrettyPlugin()] : []),
         ...(APP.USE_SERVICE_WORKER ? [new SWPrecacheWebpackPlugin({
             minify: PROD,
@@ -322,7 +335,6 @@ module.exports = {
                         },
                     ),
                     searchPath: SOURCE_PATH,
-                    svgoEnabled: DEBUG || PROD,
                 },
             },
             // javascript loaders

@@ -10,13 +10,9 @@ const frontMatter = require('front-matter');
 const deepAssign = require('deep-assign');
 
 const posthtml = require('posthtml');
-const posthtmlRender = require('posthtml-render');
 const posthtmlCommentAfter = require('posthtml-comment-after');
 
-const SVGO = require('svgo');
-const svgoConfig = require('./svgo.config.js');
 const helpers = require('./source/helpers/index.js');
-const deasync = require('deasync');
 
 const logger = weblog({ name: 'loader-html' });
 
@@ -36,8 +32,6 @@ const DEFAULT_OPTIONS = {
     requireIgnore: /^(\w+[:]|\/\/)/i,
     requireReplace: {},
     searchPath: './source',
-    svgo: svgoConfig,
-    svgoEnabled: true,
 };
 
 const SRC_SEPARATOR = /\s+/;
@@ -56,8 +50,6 @@ const OPTIONS_SCHEMA = {
         requireIgnore: { instanceof: 'RegExp' },
         requireReplace: { type: 'object' },
         searchPath: { type: 'string' },
-        svgo: { type: 'object' },
-        svgoEnabled: { type: 'boolean' },
     },
 };
 
@@ -87,32 +79,6 @@ function processHtml(html, options, loaderCallback) {
                         node.attrs[attr] = options.requireIdent(val);
                     }
                 });
-                return node;
-            });
-            return tree;
-        });
-    }
-    if (options.svgoEnabled) {
-        const svgoInstance = new SVGO(options.svgo);
-        parser.use((tree) => {
-            tree.match({ tag: 'svg' }, (node) => {
-                if ('data-svgo-ignore' in node.attrs) return node;
-
-                let minifiedSvg;
-                const originalSvg = posthtmlRender(node);
-
-                svgoInstance.optimize(originalSvg).then((result) => {
-                    minifiedSvg = result;
-                }).catch((error) => {
-                    minifiedSvg = { data: originalSvg };
-                    return loaderCallback(error);
-                });
-                deasync.loopWhile(() => minifiedSvg === undefined);
-
-                node.attrs = {};
-                node.content = minifiedSvg.data;
-                node.tag = false;
-
                 return node;
             });
             return tree;
