@@ -243,7 +243,7 @@ module.exports = {
                 title: APP.TITLE,
             });
         })),
-        new SvgoPlugin({ enabled: PROD }),
+        new SvgoPlugin({ enabled: DEBUG || PROD }),
         ...(APP.HTML_PRETTY ? [new PrettyPlugin()] : []),
         ...(APP.USE_SERVICE_WORKER ? [new SWPrecacheWebpackPlugin({
             minify: PROD,
