@@ -1,47 +1,57 @@
 // Debug helper
 @if $NODE_ENV != 'production' or $DEBUG {
-    /* stylelint-disable */
     body::after {
+        /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
         @extend .btn-danger;
-        bottom: 0;
-        content: 'Only visible $NODE_ENV=#{$NODE_ENV} or DEBUG=#{$DEBUG}';
-        font-size: $font-size-sm;
-        line-height: 1rem;
-        margin-bottom: -1rem;
-        opacity: 0.8;
+
         position: fixed;
         right: 0;
-        transition: 0.6s;
-        white-space: nowrap;
+        bottom: 0;
         z-index: $zindex-modal;
+
+        margin-bottom: -1rem;
+
+        font-size: $font-size-sm;
+        line-height: 1rem;
+        white-space: nowrap;
+
+        opacity: 0.8;
+        transition: 0.6s;
+
+        content: 'Only visible $NODE_ENV=#{$NODE_ENV} or DEBUG=#{$DEBUG}';
 
         html:hover & {
             margin-bottom: 0;
         }
     }
-    /* stylelint-enable */
+
 }
 
 // Debug helper
 @if $PACKAGE_NAME == 'Intecmedia.Webpack' {
-    /* stylelint-disable */
     body::after {
+        /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
         @extend .btn-danger;
-        bottom: 0;
-        content: 'Please rename the `name` in `package.json` file';
-        font-size: $font-size-sm;
-        line-height: 1rem;
-        margin-bottom: -1rem;
-        opacity: 0.8;
+
         position: fixed;
         right: 0;
-        transition: 0.6s;
-        white-space: nowrap;
+        bottom: 0;
         z-index: $zindex-modal;
+
+        margin-bottom: -1rem;
+
+        font-size: $font-size-sm;
+        line-height: 1rem;
+        white-space: nowrap;
+
+        opacity: 0.8;
+        transition: 0.6s;
+
+        content: 'Please rename the `name` in `package.json` file';
 
         html:hover & {
             margin-bottom: 0;
         }
     }
-    /* stylelint-enable */
+
 }

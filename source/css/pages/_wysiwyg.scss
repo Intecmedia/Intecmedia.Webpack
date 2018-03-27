@@ -23,9 +23,9 @@
     }
     // disabled table
     table[border='0'] {
+        width: inherit;
         background: transparent;
         border: 0;
-        width: inherit;
 
         > thead,
         > tbody,
@@ -41,20 +41,20 @@
     }
     // colored bulls
     ul:not([class]) > li {
-        list-style: none;
         position: relative;
+        list-style: none;
 
         &::before {
-            color: $body-color;
-            content: '\2022';
-            font-family: inherit;
-            font-size: $font-size-base;
-            line-height: $line-height-base;
-            margin-left: -$font-size-base;
             position: absolute;
+            width: $font-size-base;
+            margin-left: -$font-size-base;
+            color: $body-color;
+            font-size: $font-size-base;
+            font-family: inherit;
+            line-height: $line-height-base;
             text-align: center;
             vertical-align: middle;
-            width: $font-size-base;
+            content: '\2022';
         }
     }
     // responsive images
@@ -86,8 +86,8 @@
     .text-center img,
     img.text-center {
         display: block;
-        margin-left: auto;
         margin-right: auto;
+        margin-left: auto;
     }
     // blockquotes
     blockquote {
