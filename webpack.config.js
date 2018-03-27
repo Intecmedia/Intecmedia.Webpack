@@ -49,7 +49,6 @@ if (PROD && DEBUG) {
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const StyleLintPlugin = require('stylelint-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const SWPrecacheWebpackPlugin = (APP.USE_SERVICE_WORKER ? require('sw-precache-webpack-plugin') : () => {});
 const { default: ImageminPlugin } = require('imagemin-webpack-plugin');
@@ -166,15 +165,6 @@ module.exports = {
             alwaysNotify: true,
             contentImage: path.resolve('./.favicons-source-512x512.png'),
             title: APP.TITLE,
-        }),
-        new StyleLintPlugin({
-            configFile: './.stylelintrc',
-            context: SOURCE_PATH,
-            emitErrors: PROD,
-            failOnError: !PROD,
-            files: ['css/**/*.scss'],
-            syntax: 'scss',
-            quiet: PROD,
         }),
         ...(APP.USE_FAVICONS ? [
             new FaviconsPlugin.AppIcon({
@@ -453,10 +443,10 @@ module.exports = {
                                 sourceComments: USE_SOURCE_MAP,
                             },
                         },
-                        {
-                            loader: 'stylefmt-loader',
-                            options: { config: './.stylelintrc' },
-                        },
+//                        {
+//                            loader: 'stylefmt-loader',
+//                            options: { config: './.stylelintrc' },
+//                        },
                     ],
                 })),
             },

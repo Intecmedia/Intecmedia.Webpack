@@ -24,7 +24,6 @@
         @extend .table;
         /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
         @extend .table-bordered;
-
         width: 100%;
     }
     // disabled table
@@ -39,7 +38,7 @@
             > tr {
                 /* stylelint-disable-next-line selector-max-compound-selectors */
                 > th,
-                > td { 
+                > td {
                     background: transparent;
                     border: 0;
                 }

@@ -135,7 +135,6 @@
         "stylelint-performance-animation": "latest",
         "stylelint-scss": "latest",
         "stylelint-selector-bem-pattern": "latest",
-        "stylelint-webpack-plugin": "latest",
         "svgo": "latest",
         "sw-precache": "latest",
         "sw-precache-webpack-plugin": "latest",
