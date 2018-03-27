@@ -443,10 +443,10 @@ module.exports = {
                                 sourceComments: USE_SOURCE_MAP,
                             },
                         },
-//                        {
-//                            loader: 'stylefmt-loader',
-//                            options: { config: './.stylelintrc' },
-//                        },
+                        {
+                            loader: 'stylefmt-loader',
+                            options: { config: './.stylelintrc' },
+                        },
                     ],
                 })),
             },
