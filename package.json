@@ -128,6 +128,7 @@
         "stylefmt": "latest",
         "stylefmt-loader": "latest",
         "stylelint": "latest",
+        "stylelint-config-rational-order": "latest",
         "stylelint-config-sass-guidelines": "latest",
         "stylelint-no-unsupported-browser-features": "latest",
         "stylelint-order": "latest",
