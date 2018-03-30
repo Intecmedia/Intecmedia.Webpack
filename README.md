@@ -9,7 +9,7 @@
 ## Особености:
 * Webpack 3
 * Progressive Web Apps: offline кеширование статики через [Service Worker-ы](https://github.com/GoogleChromeLabs/sw-precache)
-* Bootstrap 4.0.0-beta.3
+* Bootstrap 4
 * Babel и [babel-preset-airbnb](https://www.npmjs.com/package/babel-preset-airbnb)
 * Линтер с автофиксом [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) ([перевод](https://github.com/leonidlebedev/javascript-airbnb))
 * [Nunjucks](https://mozilla.github.io/nunjucks/) для сборки HTML
