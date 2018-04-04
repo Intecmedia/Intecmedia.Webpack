@@ -9,12 +9,12 @@
 ## Особености:
 * Webpack 3
 * Progressive Web Apps: offline кеширование статики через [Service Worker-ы](https://github.com/GoogleChromeLabs/sw-precache)
-* Bootstrap 4.0.0-beta.3
+* Bootstrap 4
 * Babel и [babel-preset-airbnb](https://www.npmjs.com/package/babel-preset-airbnb)
 * Линтер с автофиксом [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) ([перевод](https://github.com/leonidlebedev/javascript-airbnb))
 * [Nunjucks](https://mozilla.github.io/nunjucks/) для сборки HTML
 * SCSS, autoprefixer, PostCSS: [postcss-input-style](https://github.com/seaneking/postcss-input-style), [postcss-quantity-queries](https://github.com/pascalduez/postcss-quantity-queries), [postcss-responsive-type](https://github.com/seaneking/postcss-responsive-type), [pixrem](https://github.com/robwierzbowski/node-pixrem), [pleeease-filters](https://github.com/iamvdo/pleeease-filters), [postcss-image-set-polyfill](https://github.com/SuperOl3g/postcss-image-set-polyfill), [postcss-color-rgba-fallback](https://github.com/postcss/postcss-color-rgba-fallback), [css-mqpacker](https://github.com/hail2u/node-css-mqpacker), [autoprefixer](https://github.com/postcss/autoprefixer), [cssnano](http://cssnano.co/)
-* Базовая WYSIWYG-типографика текста, форм, таблиц, списков, заголовков: [wysiwyg.scss](https://github.com/Intecmedia/Intecmedia.Webpack/blob/master/source/css/_wysiwyg.scss)
+* Базовая WYSIWYG-типографика текста, форм, таблиц, списков, заголовков: [wysiwyg.scss](https://github.com/Intecmedia/Intecmedia.Webpack/blob/master/source/css/pages/_wysiwyg.scss)
 * Responsive images polyfill через [Picturefill](http://scottjehl.github.io/picturefill)
 * Множество линтеров: eslint, htmllint, stylelint с возможностью autofix кода
 * Модульный Modernizr через [.modernizrrc](https://github.com/Intecmedia/Intecmedia.Webpack/blob/master/.modernizrrc)
