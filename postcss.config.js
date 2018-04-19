@@ -35,7 +35,7 @@ module.exports = {
                     return `${asset.pathname}?${params.toString()}`;
                 },
             }),
-            require('postcss-font-magician')({ display: 'swap', foundries: '' }),
+            require('postcss-font-display')({ display: 'swap' }),
             require('postcss-color-rgba-fallback')(),
             require('postcss-flexbugs-fixes')(),
             require('postcss-will-change')(),
