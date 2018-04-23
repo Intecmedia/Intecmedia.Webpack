@@ -23,6 +23,10 @@
 * Генерация множества app-иконок и manifest.json
 * Автоматический base64-url ресурсов
 
+## Требование:
+* Node.js версии 8 или выше
+* [ImageMagick](https://www.imagemagick.org/) или [GraphicsMagick](http://www.graphicsmagick.org/)
+
 ## Обзор комманд:
 * **npm run browserslist** -- список поддерживаемых браузеров
 * **npm run dev** -- сборка в development-режиме и debug=off, самый быстрый способ
