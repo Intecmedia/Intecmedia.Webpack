@@ -148,6 +148,9 @@ module.exports = function HtmlLoader() {
     nunjucksLoader.getSource = function getSource(filename) {
         loaderContext.addDependency(filename);
         const templateSource = nunjucksGetSource.call(this, filename);
+        if (!(templateSource && templateSource.src)) {
+            return templateSource;
+        }
         if (!frontMatter.test(templateSource.src)) {
             return templateSource;
         }
