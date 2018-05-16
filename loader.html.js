@@ -129,12 +129,19 @@ module.exports = function HtmlLoader() {
 
     const publicPath = ((options.context.APP || {}).PUBLIC_PATH || path.sep);
     const resourcePath = path.sep + path.relative(options.searchPath, loaderContext.resourcePath);
+    const baseName = path.basename(resourcePath, '.html');
+    const resourceUrl = (
+        baseName === 'index' ?
+            path.dirname(resourcePath) :
+            path.dirname(resourcePath) + path.posix.sep + baseName
+    ) + path.posix.sep;
 
     nunjucksEnvironment.addGlobal('APP', options.context);
     const PAGE = {
-        PUBLIC_PATH: slash(path.normalize(publicPath + resourcePath)),
-        RESOURCE_PATH: slash(path.normalize(resourcePath)),
+        URL: slash(path.normalize(path.join(publicPath, resourceUrl))),
+        PATH: slash(path.normalize(resourcePath)),
     };
+
     nunjucksEnvironment.addGlobal('PAGE', PAGE);
 
     const nunjucksGetSource = nunjucksLoader.getSource;
