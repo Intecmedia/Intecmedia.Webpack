@@ -102,8 +102,10 @@ module.exports = {
             app.get('/service-worker.js', (request, response) => response.sendFile(SERVICE_WORKER_PATH));
         },
         compress: false,
+        contentBase: path.resolve(__dirname, 'source'),
         open: true,
         overlay: { warnings: false, errors: true },
+        watchContentBase: true,
     },
 
     entry: {

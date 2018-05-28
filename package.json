@@ -143,7 +143,7 @@
         "url-loader": "latest",
         "webpack": "3.11.0",
         "webpack-bundle-analyzer": "latest",
-        "webpack-dev-server": "latest",
+        "webpack-dev-server": "2.11.0",
         "webpack-log": "latest",
         "webpack-notifier": "latest",
         "webpack-sources": "latest"
