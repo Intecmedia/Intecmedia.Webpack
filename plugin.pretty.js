@@ -41,12 +41,15 @@ module.exports = class PrettyPlugin {
     }
 
     apply(compiler) {
-        compiler.plugin('compilation', (compilation) => {
-            compilation.plugin('html-webpack-plugin-after-html-processing', (htmlPluginData, callback) => {
-                logger.info(`processing '${path.relative(__dirname, htmlPluginData.plugin.options.filename)}'`);
-                const html = pretty(htmlPluginData.html, this.options);
-                callback(null, Object.assign(htmlPluginData, { html }));
-            });
+        compiler.hooks.compilation.tap('PrettyPlugin', (compilation) => {
+            compilation.hooks.htmlWebpackPluginAfterHtmlProcessing.tapAsync(
+                'PrettyPlugin',
+                (htmlPluginData, callback) => {
+                    logger.info(`processing '${path.relative(__dirname, htmlPluginData.plugin.options.filename)}'`);
+                    const html = pretty(htmlPluginData.html, this.options);
+                    callback(null, Object.assign(htmlPluginData, { html }));
+                },
+            );
         });
     }
 };

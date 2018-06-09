@@ -47,7 +47,7 @@ if (PROD && DEBUG) {
     throw new Error(`Dont use NODE_ENV=${NODE_ENV} and DEBUG=${DEBUG} together`);
 }
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const SWPrecacheWebpackPlugin = (APP.USE_SERVICE_WORKER ? require('sw-precache-webpack-plugin') : () => {});
@@ -131,7 +131,7 @@ module.exports = {
 
     plugins: [
         ...(WATCH ? [new BrowserSyncPlugin()] : []),
-        new ExtractTextPlugin({
+        new MiniCssExtractPlugin({
             filename: 'css/app.min.css',
             allChunks: true,
         }),
@@ -406,51 +406,50 @@ module.exports = {
             // css loaders
             {
                 test: /\.(css|scss)$/i,
-                loaders: (DEV_SERVER ? ['css-hot-loader'] : []).concat(ExtractTextPlugin.extract({
-                    use: [
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                sourceMap: USE_SOURCE_MAP,
-                                minimize: (PROD ? {
-                                    discardComments: { removeAll: true },
-                                } : false),
-                            },
+                loaders: (DEV_SERVER ? ['css-hot-loader'] : []).concat([
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: USE_SOURCE_MAP,
+                            minimize: (PROD ? {
+                                discardComments: { removeAll: true },
+                            } : false),
                         },
-                        {
-                            loader: 'postcss-loader',
-                            options: {
-                                sourceMap: USE_SOURCE_MAP ? 'inline' : false,
-                                config: { path: './postcss.config.js' },
-                            },
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            sourceMap: USE_SOURCE_MAP ? 'inline' : false,
+                            config: { path: './postcss.config.js' },
                         },
-                        {
-                            loader: 'resolve-url-loader',
-                            options: {
-                                sourceMap: USE_SOURCE_MAP ? 'inline' : false,
-                                keepQuery: true,
-                            },
+                    },
+                    {
+                        loader: 'resolve-url-loader',
+                        options: {
+                            sourceMap: USE_SOURCE_MAP ? 'inline' : false,
+                            keepQuery: true,
                         },
-                        {
-                            loader: 'sass-loader',
-                            options: {
-                                data: [
-                                    ['$DEBUG', DEBUG],
-                                    ['$NODE_ENV', NODE_ENV],
-                                    ['$PACKAGE_NAME', PACKAGE_NAME],
-                                ].map(i => ((k, v) => `${k}: ${JSON.stringify(v)};`)(...i)).join('\n'),
-                                indentWidth: 4,
-                                sourceMap: USE_SOURCE_MAP ? 'inline' : false,
-                                sourceMapEmbed: USE_SOURCE_MAP,
-                                sourceComments: USE_SOURCE_MAP,
-                            },
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            data: [
+                                ['$DEBUG', DEBUG],
+                                ['$NODE_ENV', NODE_ENV],
+                                ['$PACKAGE_NAME', PACKAGE_NAME],
+                            ].map(i => ((k, v) => `${k}: ${JSON.stringify(v)};`)(...i)).join('\n'),
+                            indentWidth: 4,
+                            sourceMap: USE_SOURCE_MAP ? 'inline' : false,
+                            sourceMapEmbed: USE_SOURCE_MAP,
+                            sourceComments: USE_SOURCE_MAP,
                         },
-                        {
-                            loader: 'stylefmt-loader',
-                            options: { config: './.stylelintrc' },
-                        },
-                    ],
-                })),
+                    },
+                    {
+                        loader: 'stylefmt-loader',
+                        options: { config: './.stylelintrc' },
+                    },
+                ]),
             },
         ],
     },

@@ -49,16 +49,19 @@ module.exports = class SvgoPlugin {
     }
 
     apply(compiler) {
-        compiler.plugin('compilation', (compilation) => {
-            compilation.plugin('html-webpack-plugin-before-html-processing', (htmlPluginData, callback) => {
-                if (this.options.enabled) {
-                    this.processHtml(htmlPluginData.html, (error, html) => {
-                        if (!error) htmlPluginData.html = html;
-                        callback(error, htmlPluginData);
-                    });
-                }
-                callback(null, htmlPluginData);
-            });
+        compiler.hooks.compilation.tap('SvgoPlugin', (compilation) => {
+            compilation.hooks.htmlWebpackPluginAfterHtmlProcessing.tapAsync(
+                'SvgoPlugin',
+                (htmlPluginData, callback) => {
+                    if (this.options.enabled) {
+                        this.processHtml(htmlPluginData.html, (error, html) => {
+                            if (!error) htmlPluginData.html = html;
+                            callback(error, htmlPluginData);
+                        });
+                    }
+                    callback(null, htmlPluginData);
+                },
+            );
         });
     }
 };
