@@ -29,7 +29,7 @@ module.exports = class ManifestPlugin {
     }
 
     apply(compiler) {
-        compiler.plugin('done', () => {
+        compiler.hooks.done.tap('ManifestPlugin', () => {
             [fs, compiler.outputFileSystem].forEach((filesystem) => {
                 if (filesystem.existsSync && filesystem.existsSync(this.options.path)) {
                     let src;
@@ -40,7 +40,10 @@ module.exports = class ManifestPlugin {
                         throw exception;
                     } finally {
                         const dist = deepAssign({}, src, this.options.replace);
-                        filesystem.writeFileSync(this.options.path, JSON.stringify(dist, null, this.options.indent));
+                        filesystem.writeFileSync(
+                            this.options.path,
+                            JSON.stringify(dist, null, this.options.indent),
+                        );
                         logger.info(`processing '${path.relative(__dirname, this.options.path)}'`);
                     }
                 }
