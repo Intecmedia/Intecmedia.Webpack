@@ -189,6 +189,7 @@ module.exports = {
                 path: path.join(OUTPUT_PATH, '/img/favicon/manifest.json'),
                 replace: {
                     lang: APP.LANGUAGE,
+                    short_name: PACKAGE_NAME,
                     start_url: APP.START_URL,
                     theme_color: APP.THEME_COLOR,
                     background_color: APP.BACKGROUND_COLOR,
