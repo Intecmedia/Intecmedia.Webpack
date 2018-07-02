@@ -334,6 +334,22 @@ module.exports = {
                 test: /\.modernizrrc$/,
                 loader: 'modernizr-loader!json-loader',
             },
+            ...(USE_LINTERS ? [{
+                enforce: 'pre',
+                test: /\.js$/i,
+                exclude: [
+                    path.join(__dirname, 'node_modules'),
+                    path.join(SOURCE_PATH, 'js', 'external'),
+                ],
+                loader: 'eslint-loader',
+                options: {
+                    fix: true,
+                    cache: !PROD,
+                    quiet: PROD,
+                    emitError: !PROD,
+                    emitWarning: !PROD,
+                },
+            }]),
             {
                 test: /\.js$/i,
                 exclude: [
@@ -360,16 +376,6 @@ module.exports = {
                             }]],
                             forceEnv: NODE_ENV,
                             cacheDirectory: !PROD,
-                        },
-                    },
-                    {
-                        loader: 'eslint-loader',
-                        options: {
-                            fix: true,
-                            cache: !PROD,
-                            quiet: PROD,
-                            emitError: !PROD,
-                            emitWarning: !PROD,
                         },
                     },
                 ],
@@ -446,10 +452,10 @@ module.exports = {
                             sourceComments: USE_SOURCE_MAP,
                         },
                     },
-                    {
+                    ...(USE_LINTERS ? [{
                         loader: 'stylefmt-loader',
                         options: { config: './.stylelintrc' },
-                    },
+                    }] : []),
                 ]),
             },
         ],
