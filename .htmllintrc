@@ -1,5 +1,6 @@
 {
     "line-end-style": false,
+    "attr-validate": false,
     "attr-bans": [],
     "attr-name-style": false,
     "attr-no-unsafe-char": false,
@@ -19,5 +20,6 @@
     "tag-self-close": false,
     "tag-bans": ["style"],
     "label-req-for": true,
-    "input-req-label": true
+    "input-req-label": true,
+    "title-max-len": 100
 }
