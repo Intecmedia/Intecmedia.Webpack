@@ -352,10 +352,10 @@ module.exports = {
             }]),
             {
                 test: /\.js$/i,
-                exclude: [
-                    path.join(__dirname, 'node_modules'),
-                    path.join(SOURCE_PATH, 'js', 'external'),
-                ],
+                exclude: {
+                    test: path.join(__dirname, 'node_modules'),
+                    exclude: path.join(__dirname, 'node_modules', 'gsap'),
+                },
                 loaders: [
                     {
                         loader: 'imports-loader',
