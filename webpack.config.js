@@ -282,6 +282,7 @@ module.exports = {
         new ImageminPlugin({
             test: /\.(jpeg|jpg|png|gif|svg)$/i,
             ...require('./imagemin.config.js'),
+            cacheFolder: path.join(__dirname, 'node_modules', '.cache', 'imagemin-plugin'),
             disable: !(PROD || DEBUG),
         }),
         new BundleAnalyzerPlugin({
