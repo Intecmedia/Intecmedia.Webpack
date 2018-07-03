@@ -349,7 +349,7 @@ module.exports = {
                     emitError: !PROD,
                     emitWarning: !PROD,
                 },
-            }]),
+            }] : []),
             {
                 test: /\.js$/i,
                 exclude: {
