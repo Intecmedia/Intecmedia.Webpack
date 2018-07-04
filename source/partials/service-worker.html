@@ -26,7 +26,11 @@
                 };
                 if (localStorage.getItem('SERVICE_WORKER_HASH') != SERVICE_WORKER_HASH) {
                     console.log('[sw-precache] Service Worker was updated because hash changed.');
-                    registration.update();
+                    try {
+                        registration.update();
+                    } catch(error) {
+                        console.error(error);
+                    }
                 }
                 localStorage.setItem('SERVICE_WORKER_HASH', SERVICE_WORKER_HASH);
             }).catch(function (error) {
