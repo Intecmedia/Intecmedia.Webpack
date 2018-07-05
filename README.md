@@ -18,7 +18,6 @@
 * Ресайз изображений через [ImageMagick](https://www.imagemagick.org/) / [GraphicsMagick](http://www.graphicsmagick.org/)
 * Responsive images polyfill через [Picturefill](http://scottjehl.github.io/picturefill)
 * Множество линтеров: eslint, htmllint, stylelint с возможностью autofix кода
-* Модульный Modernizr через [.modernizrrc](https://github.com/Intecmedia/Intecmedia.Webpack/blob/master/.modernizrrc)
 * Imagemin для сжатия гарфики: svg, png, jpeg, gif
 * Генерация множества app-иконок и manifest.json
 * Автоматический base64-url ресурсов
