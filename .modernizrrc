@@ -1,8 +1,0 @@
-{
-    "minify": true,
-    "options": [
-        "setClasses"
-    ],
-    "enableJSClass": true,
-    "feature-detects": ["img/webp"]
-}

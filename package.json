@@ -89,8 +89,6 @@
         "loader-utils": "latest",
         "md5-file": "latest",
         "mini-css-extract-plugin": "latest",
-        "modernizr": "latest",
-        "modernizr-loader": "latest",
         "node-sass": "latest",
         "npm-run-all": "latest",
         "nunjucks": "latest",

@@ -296,7 +296,6 @@ module.exports = {
 
     resolve: {
         alias: {
-            ...(require(path.join(SOURCE_PATH, 'js', 'resolve.alias.js'))),
         },
     },
 
@@ -330,10 +329,6 @@ module.exports = {
                     loader: 'expose-loader',
                     options: '$',
                 }],
-            },
-            {
-                test: /\.modernizrrc$/,
-                loader: 'modernizr-loader!json-loader',
             },
             ...(USE_LINTERS ? [{
                 enforce: 'pre',
