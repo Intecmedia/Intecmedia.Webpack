@@ -24,7 +24,7 @@
                         }
                     };
                 };
-                if (localStorage.getItem('SERVICE_WORKER_HASH') != SERVICE_WORKER_HASH) {
+                if (localStorage.getItem('SERVICE_WORKER_HASH') != SERVICE_WORKER_HASH && (registration.installing && registration.installing.state == 'installed')) {
                     console.log('[sw-precache] Service Worker was updated because hash changed.');
                     try {
                         registration.update();
