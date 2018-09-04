@@ -63,7 +63,7 @@
         "deasync": "latest",
         "deep-assign": "latest",
         "eslint": "latest",
-        "eslint-config-airbnb-base": "latest",
+        "eslint-config-airbnb-base": "^12.1.0",
         "eslint-loader": "latest",
         "eslint-plugin-import": "latest",
         "expose-loader": "latest",
