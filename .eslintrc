@@ -21,6 +21,8 @@
             "max": 300, 
             "skipBlankLines": true
         }],
+        "import/order": "off",
+        "sort-requires/sort-requires": "off",
         "linebreak-style": "off"
     }
 }

@@ -131,9 +131,9 @@ module.exports = function HtmlLoader() {
     const resourcePath = path.sep + path.relative(options.searchPath, loaderContext.resourcePath);
     const baseName = path.basename(resourcePath, '.html');
     const resourceUrl = (
-        baseName === 'index' ?
-            path.dirname(resourcePath) :
-            path.dirname(resourcePath) + path.posix.sep + baseName
+        baseName === 'index'
+            ? path.dirname(resourcePath)
+            : path.dirname(resourcePath) + path.posix.sep + baseName
     ) + path.posix.sep;
 
     nunjucksEnvironment.addGlobal('APP', options.context);

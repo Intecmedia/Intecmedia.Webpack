@@ -9,12 +9,12 @@ module.exports = (breakpoints, sizes) => {
     const mergedSizes = Object.assign({}, sizes, DEFAULT_SIZES);
     return sortedBreakpoints.map((breakpoint, index) => [breakpoint, [
         // not first
-        ...(index >= 1 && sortedBreakpoints[index - 1] ?
-            [`(min-width: ${mergedSizes[sortedBreakpoints[index - 1]]}px)`] :
-            []),
+        ...(index >= 1 && sortedBreakpoints[index - 1]
+            ? [`(min-width: ${mergedSizes[sortedBreakpoints[index - 1]]}px)`]
+            : []),
         // not last
-        ...(index !== sortedBreakpoints.length - 1 ?
-            [`(max-width: ${mergedSizes[breakpoint] - 1}px)`] :
-            []),
+        ...(index !== sortedBreakpoints.length - 1
+            ? [`(max-width: ${mergedSizes[breakpoint] - 1}px)`]
+            : []),
     ].join(' and ')]);
 };
