@@ -240,11 +240,11 @@ module.exports = {
         ...(APP.HTML_PRETTY ? [new PrettyPlugin()] : []),
         ...(APP.USE_SERVICE_WORKER ? [new WorkboxPlugin.GenerateSW({
             cacheId: PACKAGE_NAME,
-            swDest: 'service-worker.js',
+            swDest: SERVICE_WORKER_PATH,
             importWorkboxFrom: 'local',
             clientsClaim: true,
             skipWaiting: true,
-            precacheManifestFilename: 'service-worker-precache.js?[manifestHash]',
+            precacheManifestFilename: slash(path.join(SERVICE_WORKER_BASE, 'service-worker-precache.js?[manifestHash]')),
             globDirectory: slash(OUTPUT_PATH),
             globPatterns: [
                 'js/*.min.js',
