@@ -7,8 +7,8 @@
 Предложения и замечания приветствуются в разделе [Issues](https://github.com/Intecmedia/Intecmedia.Webpack/issues/new) или [Pull requests](https://github.com/intecmedia/Intecmedia.Webpack/pulls).
 
 ## Особености:
-* Webpack 3
-* Progressive Web Apps: offline кеширование статики через [Service Worker-ы](https://github.com/GoogleChromeLabs/sw-precache)
+* Webpack 4
+* Progressive Web Apps: offline кеширование статики через [Service Worker-ы](https://github.com/GoogleChrome/workbox)
 * Bootstrap 4
 * Babel и [babel-preset-airbnb](https://www.npmjs.com/package/babel-preset-airbnb)
 * Линтер с автофиксом [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) ([перевод](https://github.com/leonidlebedev/javascript-airbnb))
