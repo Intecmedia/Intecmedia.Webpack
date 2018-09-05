@@ -1,4 +1,4 @@
-/* eslint global-require: "off", max-lines: "off", import/no-dynamic-require: "off" */
+/* eslint global-require: "off", max-lines: "off", import/no-dynamic-require: "off", max-len: "off" */
 const fs = require('fs');
 
 const realcwd = fs.realpathSync(process.cwd());
@@ -50,7 +50,7 @@ if (PROD && DEBUG) {
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
-const SWPrecacheWebpackPlugin = (APP.USE_SERVICE_WORKER ? require('sw-precache-webpack-plugin') : () => {});
+const WorkboxPlugin = (APP.USE_SERVICE_WORKER ? require('workbox-webpack-plugin') : () => {});
 const { default: ImageminPlugin } = require('imagemin-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -238,29 +238,49 @@ module.exports = {
         })),
         new SvgoPlugin({ enabled: DEBUG || PROD }),
         ...(APP.HTML_PRETTY ? [new PrettyPlugin()] : []),
-        ...(APP.USE_SERVICE_WORKER ? [new SWPrecacheWebpackPlugin({
-            minify: PROD,
-            verbose: true,
-            handleFetch: (PROD && !DEBUG),
-            filename: (SERVICE_WORKER_BASE ? `${SERVICE_WORKER_BASE}/service-worker.js` : 'service-worker.js'),
-            staticFileGlobs: [
-                slash(path.join(OUTPUT_PATH, '/js/*.min.js')),
-                slash(path.join(OUTPUT_PATH, '/css/*.min.css')),
-                slash(path.join(OUTPUT_PATH, '/fonts/*.woff2')),
+        ...(APP.USE_SERVICE_WORKER ? [new WorkboxPlugin.GenerateSW({
+            cacheId: PACKAGE_NAME,
+            swDest: 'service-worker.js',
+            importWorkboxFrom: 'local',
+            clientsClaim: true,
+            skipWaiting: true,
+            precacheManifestFilename: 'service-worker-precache.js?[manifestHash]',
+            globDirectory: slash(OUTPUT_PATH),
+            globPatterns: [
+                'js/*.min.js',
+                'css/*.min.css',
+                'fonts/*.woff2',
             ],
-            mergeStaticsConfig: false,
+            globIgnores: [
+                '*.map', '*.LICENSE',
+            ],
+            include: [],
             runtimeCaching: [{
-                urlPattern: `${APP.PUBLIC_PATH}(js|css|fonts|img)/(.*)`, // only local urls
-                handler: 'cacheFirst',
-                options: { debug: !PROD },
-            }, {
-                urlPattern: '/(.*)', // other local urls
+                urlPattern: new RegExp(`${APP.PUBLIC_PATH}(css|js|fonts)/`),
                 handler: 'networkFirst',
-                options: { debug: !PROD },
+                options: {
+                    cacheName: `${PACKAGE_NAME}-assets`,
+                    networkTimeoutSeconds: 10,
+                },
             }, {
-                default: 'networkOnly', // external urls
+                urlPattern: /\/upload\//,
+                handler: 'networkFirst',
+                options: {
+                    cacheName: `${PACKAGE_NAME}-upload`,
+                    networkTimeoutSeconds: 10,
+                    expiration: {
+                        maxEntries: 100,
+                        purgeOnQuotaError: true,
+                    },
+                },
+            }, {
+                urlPattern: /\//,
+                handler: 'networkFirst',
+                options: {
+                    cacheName: `${PACKAGE_NAME}-html`,
+                    networkTimeoutSeconds: 10,
+                },
             }],
-            staticFileGlobsIgnorePatterns: [/\.map$/, /\.LICENSE$/],
             ignoreUrlParametersMatching: [/^utm_/, /^[a-fA-F0-9]{32}$/],
         })] : []),
         new CopyWebpackPlugin([

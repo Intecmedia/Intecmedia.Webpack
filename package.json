@@ -134,9 +134,6 @@
         "stylelint-scss": "latest",
         "stylelint-selector-bem-pattern": "latest",
         "svgo": "latest",
-        "sw-precache": "latest",
-        "sw-precache-webpack-plugin": "latest",
-        "sw-toolbox": "latest",
         "uglifyjs-webpack-plugin": "latest",
         "url-loader": "latest",
         "webpack": "latest",
@@ -145,7 +142,8 @@
         "webpack-dev-server": "latest",
         "webpack-log": "latest",
         "webpack-notifier": "latest",
-        "webpack-sources": "latest"
+        "webpack-sources": "latest",
+        "workbox-webpack-plugin": "latest"
     },
     "devDependencies": {}
 }
