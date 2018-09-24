@@ -35,6 +35,7 @@ module.exports = {
                     return `${asset.pathname}?${params.toString()}`;
                 },
             }),
+            require('postcss-custom-properties')(),
             require('postcss-font-display')({ display: 'swap' }),
             require('postcss-color-rgba-fallback')(),
             require('postcss-flexbugs-fixes')(),
