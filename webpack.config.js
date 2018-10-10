@@ -384,14 +384,20 @@ module.exports = {
                         loader: 'babel-loader',
                         options: {
                             plugins: [
-                                ['transform-runtime', {}],
+                                '@babel/transform-runtime',
                             ],
-                            presets: [['airbnb', {
-                                debug: DEBUG || PROD,
-                                targets: { browsers: BROWSERS },
-                            }]],
-                            forceEnv: NODE_ENV,
-                            cacheDirectory: !PROD,
+                            presets: [
+                                ['@babel/preset-env', {
+                                    modules: 'commonjs',
+                                    useBuiltIns: 'entry',
+                                    targets: { browsers: BROWSERS },
+                                }],
+                                ['airbnb', {
+                                    modules: true,
+                                    targets: { browsers: BROWSERS },
+                                }],
+                            ],
+                            envName: NODE_ENV,
                         },
                     },
                 ],
