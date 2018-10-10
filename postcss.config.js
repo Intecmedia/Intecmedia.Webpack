@@ -3,8 +3,9 @@ const path = require('path');
 const { URLSearchParams } = require('url');
 const sortCSSmq = require('sort-css-media-queries');
 
-const DEBUG = ('DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0);
-const PROD = ('NODE_ENV' in process.env && process.env.NODE_ENV === 'production') || process.argv.indexOf('-p') !== -1;
+const DEBUG = process.env.DEBUG || false;
+const PROD = (process.env.NODE_ENV === 'production');
+
 const { browserslist: BROWSERS } = require('./package.json');
 
 const INLINE_FILES = ['png', 'jpeg', 'jpg', 'gif', 'svg'];

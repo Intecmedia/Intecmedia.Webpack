@@ -19,13 +19,17 @@ const STANDALONE = ['webpack', 'webpack-dev-server'].includes(path.basename(requ
 const WATCH = (process.argv.indexOf('--watch') !== -1) || (process.argv.indexOf('-w') !== -1);
 const PROD = (process.env.NODE_ENV === 'production');
 const NODE_ENV = PROD ? 'production' : 'development';
+const USE_SOURCE_MAP = (DEBUG && !PROD) || DEV_SERVER;
+const USE_LINTERS = PROD || DEBUG;
+
+process.env.DEBUG = DEBUG;
+process.env.NODE_ENV = NODE_ENV;
+process.env.USE_SOURCE_MAP = USE_SOURCE_MAP;
+process.env.USE_LINTERS = USE_LINTERS;
 
 if (!['production', 'development'].includes(process.env.NODE_ENV)) {
     throw new Error(`Unknow NODE_ENV=${JSON.stringify(process.env.NODE_ENV)}`);
 }
-
-const USE_SOURCE_MAP = (DEBUG && !PROD) || DEV_SERVER;
-const USE_LINTERS = PROD || DEBUG;
 
 const { name: PACKAGE_NAME, browserslist: BROWSERS } = require('./package.json');
 
@@ -57,6 +61,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const UglifyJsPlugin = (PROD ? require('uglifyjs-webpack-plugin') : () => {});
 const BrowserSyncPlugin = (WATCH ? require('browser-sync-webpack-plugin') : () => {});
+const StyleLintPlugin = (USE_LINTERS ? require('stylelint-webpack-plugin') : () => {});
 
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
 const PrettyPlugin = (APP.HTML_PRETTY ? require('./plugin.pretty.js') : () => {});
@@ -168,6 +173,16 @@ module.exports = {
             contentImage: path.resolve('./.favicons-source-512x512.png'),
             title: APP.TITLE,
         }),
+        ...(USE_LINTERS ? [
+            new StyleLintPlugin({
+                syntax: 'scss',
+                configFile: './.stylelintrc',
+                ignorePath: './.stylelintignore',
+                emitErrors: true,
+                failOnError: false,
+                fix: !DEV_SERVER,
+            }),
+        ] : []),
         ...(APP.USE_FAVICONS ? [
             new FaviconsPlugin.AppIcon({
                 title: APP.TITLE,
@@ -467,10 +482,6 @@ module.exports = {
                             sourceComments: USE_SOURCE_MAP,
                         },
                     },
-                    ...(USE_LINTERS ? [{
-                        loader: 'stylefmt-loader',
-                        options: { config: './.stylelintrc' },
-                    }] : []),
                 ]),
             },
         ],
