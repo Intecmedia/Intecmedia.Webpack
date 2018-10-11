@@ -176,6 +176,7 @@ module.exports = {
         ...(USE_LINTERS ? [
             new StyleLintPlugin({
                 syntax: 'scss',
+                files: '**/*.scss',
                 configFile: './.stylelintrc',
                 ignorePath: './.stylelintignore',
                 emitErrors: false,
