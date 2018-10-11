@@ -129,7 +129,6 @@
         "stylelint-order": "latest",
         "stylelint-performance-animation": "latest",
         "stylelint-scss": "latest",
-        "stylelint-selector-bem-pattern": "latest",
         "stylelint-webpack-plugin": "latest",
         "svgo": "latest",
         "uglifyjs-webpack-plugin": "latest",

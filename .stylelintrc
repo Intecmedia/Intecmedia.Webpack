@@ -6,7 +6,6 @@
      "plugins": [
         "stylelint-performance-animation",
         "stylelint-no-unsupported-browser-features",
-        "stylelint-selector-bem-pattern",
         "stylelint-scss"
     ],
     "rules": {
@@ -24,9 +23,7 @@
         "scss/at-import-no-partial-leading-underscore": true,
         "scss/at-mixin-argumentless-call-parentheses": "always",
         "scss/selector-no-redundant-nesting-selector": true,
-        "plugin/selector-bem-pattern": {
-            "preset": "bem"
-        },
+        "order/properties-alphabetical-order": false,
         "property-no-unknown": [true, {
             "ignoreProperties": [
                 "font-range", "min-font-size", "max-font-size", "lower-font-range", "upper-font-range",
