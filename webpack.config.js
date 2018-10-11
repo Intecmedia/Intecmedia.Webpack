@@ -181,6 +181,7 @@ module.exports = {
                 ignorePath: './.stylelintignore',
                 emitErrors: false,
                 failOnError: false,
+                lintDirtyModulesOnly: DEV_SERVER || WATCH,
                 fix: !DEV_SERVER,
             }),
         ] : []),
@@ -378,8 +379,8 @@ module.exports = {
                     fix: true,
                     cache: !PROD,
                     quiet: PROD,
-                    emitError: !PROD,
-                    emitWarning: !PROD,
+                    emitError: false,
+                    emitWarning: false,
                 },
             }] : []),
             {
