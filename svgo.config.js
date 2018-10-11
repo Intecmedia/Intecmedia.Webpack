@@ -1,6 +1,6 @@
 module.exports = {
     plugins: [
-        { cleanupIDs: true },
+        { cleanupIDs: false },
         { convertShapeToPath: false },
         { removeAttrs: { attrs: 'data\\-.*' } },
         { removeViewBox: false },
