@@ -129,7 +129,7 @@ module.exports = {
             const ignore = /(\.(css|js)\.map|\.LICENSE|\.eot|\.ttf|manifest\.json|service-worker\.js|@resize-.+)$/;
             return !(ignore.test(filename));
         },
-        hints: 'error',
+        hints: 'warning',
         maxAssetSize: 3 * 1024 * 1024,
         maxEntrypointSize: 512 * 1024,
     } : false),
