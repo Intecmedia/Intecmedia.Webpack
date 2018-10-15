@@ -333,6 +333,7 @@ module.exports = {
 
     resolve: {
         alias: {
+            '~': path.join(SOURCE_PATH, 'js'),
         },
     },
 

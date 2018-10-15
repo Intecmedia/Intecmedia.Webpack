@@ -9,10 +9,17 @@
     "plugins": [
         "import"
     ],
+    "settings": {
+        "import/resolver": {
+            "webpack": {
+                "config": "./webpack.config.js"
+            }
+        }
+    },
     "rules": {
         "no-console": "off",
         "no-param-reassign": [2, {
-            "props": false 
+            "props": false
         }],
         "unicode-bom": ["warn", "never"],
         "max-len": ["warn", 120, 4],

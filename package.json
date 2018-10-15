@@ -63,6 +63,7 @@
         "deep-assign": "latest",
         "eslint": "latest",
         "eslint-config-airbnb-base": "latest",
+        "eslint-import-resolver-webpack": "latest",
         "eslint-loader": "latest",
         "eslint-plugin-import": "latest",
         "expose-loader": "latest",
