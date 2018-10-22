@@ -10,6 +10,7 @@ const slash = require('slash');
 const webpack = require('webpack');
 const md5File = require('md5-file');
 const weblog = require('webpack-log');
+const zopfli = require('@gfx/zopfli');
 
 const logger = weblog({ name: 'webpack-config' });
 
@@ -62,6 +63,8 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const UglifyJsPlugin = (PROD ? require('uglifyjs-webpack-plugin') : () => {});
 const BrowserSyncPlugin = (WATCH ? require('browser-sync-webpack-plugin') : () => {});
 const StyleLintPlugin = (USE_LINTERS ? require('stylelint-webpack-plugin') : () => {});
+const BrotliPlugin = (PROD ? require('brotli-webpack-plugin') : () => {});
+const CompressionPlugin = (PROD ? require('compression-webpack-plugin') : () => {});
 
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
 const PrettyPlugin = (APP.HTML_PRETTY ? require('./plugin.pretty.js') : () => {});
@@ -151,6 +154,20 @@ module.exports = {
                     output: {
                         comments: false,
                     },
+                },
+            }),
+            new BrotliPlugin({
+                asset: '[path].br[query]',
+                test: /\.(js|css)$/,
+            }),
+            new CompressionPlugin({
+                test: /\.(css|js)(\?.*)?$/i,
+                filename: '[path].gz[query]',
+                compressionOptions: {
+                    numiterations: 15,
+                },
+                algorithm(input, compressionOptions, callback) {
+                    return zopfli.gzip(input, compressionOptions, callback);
                 },
             }),
         ] : []),
@@ -302,6 +319,7 @@ module.exports = {
         })] : []),
         new CopyWebpackPlugin([
             ...[
+                '**/.htaccess',
                 'img/**/*.{png,svg,ico,gif,xml,jpeg,jpg,json,webp}',
                 'google*.html',
                 'yandex_*.html',

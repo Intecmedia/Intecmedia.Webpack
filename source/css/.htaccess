@@ -1,0 +1,43 @@
+<IfModule mod_headers.c>
+    # Enable rewrite
+    RewriteEngine On
+
+    # Serve brotli compressed CSS files if they exist and the client accepts gzip.
+    RewriteCond %{HTTP:Accept-encoding} br
+    RewriteCond %{REQUEST_FILENAME}\.br -s
+    RewriteRule ^(.*)\.css $1\.css\.br [QSA]
+
+    # Serve gzip compressed CSS files if they exist and the client accepts gzip.
+    RewriteCond %{HTTP:Accept-encoding} gzip
+    RewriteCond %{REQUEST_FILENAME}\.gz -s
+    RewriteRule ^(.*)\.css $1\.css\.gz [QSA]
+
+    # Serve correct content types, and prevent mod_deflate double gzip.
+    RewriteRule \.css\.gz$ - [T=text/css,E=no-gzip:1]
+    RewriteRule \.css\.br$ - [T=text/css,E=no-gzip:1]
+
+    <Files *.css.gz>
+        # fix content type
+        AddType "text/css" .gz
+        AddEncoding gzip .gz
+        RemoveLanguage .gz
+    </Files>
+    <Files *.css.br>
+        # fix content type
+        AddType "text/css" .br
+        AddEncoding br .br
+        RemoveLanguage .br
+    </Files>
+    <FilesMatch "(\.css\.gz)$">
+        # Serve correct encoding type.
+        Header set Content-Encoding gzip
+        # Force proxies to cache gzipped & non-gzipped css files separately.
+        Header append Vary Accept-Encoding
+    </FilesMatch>
+    <FilesMatch "(\.css\.br)$">
+        # Serve correct encoding type.
+        Header set Content-Encoding br
+        # Force proxies to cache gzipped & non-gzipped css files separately.
+        Header append Vary Accept-Encoding
+    </FilesMatch>
+</IfModule>
