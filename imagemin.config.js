@@ -1,4 +1,5 @@
 const svgoConfig = require('./svgo.config.js');
+const imageminMozjpeg = require('imagemin-mozjpeg');
 
 module.exports = {
     svgo: svgoConfig,
@@ -15,4 +16,10 @@ module.exports = {
     jpegtran: {
         progressive: true,
     },
+    plugins: [
+        imageminMozjpeg({
+            quality: 85,
+            progressive: true,
+        }),
+    ],
 };

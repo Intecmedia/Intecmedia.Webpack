@@ -81,6 +81,7 @@
         "imagemin": "latest",
         "imagemin-gifsicle": "latest",
         "imagemin-jpegtran": "latest",
+        "imagemin-mozjpeg": "latest",
         "imagemin-optipng": "latest",
         "imagemin-pngquant": "latest",
         "imagemin-svgo": "latest",
