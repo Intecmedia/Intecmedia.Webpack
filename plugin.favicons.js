@@ -1,21 +1,28 @@
 const deepAssign = require('deep-assign');
 const ImageSize = require('image-size');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const WebappWebpackPlugin = require('webapp-webpack-plugin');
+const APP = require('./app.config.js');
 
 const DEFAULT_FAVICON = {
     logo: './.favicons-source-64x64.png',
     prefix: 'img/favicon/',
-    icons: {
-        android: false,
-        appleIcon: false,
-        appleStartup: false,
-        coast: false,
-        favicons: true,
-        firefox: false,
-        opengraph: false,
-        twitter: false,
-        yandex: false,
-        windows: false,
+    appName: APP.TITLE,
+    appDescription: APP.DESCRIPTION,
+    background: APP.BACKGROUND_COLOR,
+    theme_color: APP.THEME_COLOR,
+    favicons: {
+        icons: {
+            android: false,
+            appleIcon: false,
+            appleStartup: false,
+            coast: false,
+            favicons: true,
+            firefox: false,
+            opengraph: false,
+            twitter: false,
+            yandex: false,
+            windows: false,
+        },
     },
 };
 
@@ -27,23 +34,29 @@ module.exports.FavIcon = function FavIcon(options) {
     } else if (!(logoSize.width === 64 && logoSize.height === 64)) {
         throw new Error(`FavIcon '${mergedOptions.logo}': image size is not than (64 x 64)`);
     }
-    return new FaviconsWebpackPlugin(mergedOptions);
+    return new WebappWebpackPlugin(mergedOptions);
 };
 
 const DEFAULT_APPICON = {
-    logo: './.favicons-source-512x512.png',
+    logo: './.favicons-source-1024x1024.png',
     prefix: 'img/favicon/',
-    icons: {
-        android: true,
-        appleIcon: true,
-        appleStartup: false,
-        coast: false,
-        favicons: false,
-        firefox: false,
-        opengraph: false,
-        twitter: false,
-        yandex: false,
-        windows: false,
+    appName: APP.TITLE,
+    appDescription: APP.DESCRIPTION,
+    background: APP.BACKGROUND_COLOR,
+    theme_color: APP.THEME_COLOR,
+    favicons: {
+        icons: {
+            android: true,
+            appleIcon: true,
+            appleStartup: false,
+            coast: false,
+            favicons: false,
+            firefox: false,
+            opengraph: false,
+            twitter: false,
+            yandex: false,
+            windows: false,
+        },
     },
 };
 
@@ -52,8 +65,8 @@ module.exports.AppIcon = function AppIcon(options) {
     const logoSize = ImageSize(mergedOptions.logo);
     if (!(logoSize && logoSize.type === 'png')) {
         throw new Error(`AppIcon '${mergedOptions.logo}': the file is not a valid image`);
-    } else if (!(logoSize.width === 512 && logoSize.height === 512)) {
-        throw new Error(`AppIcon '${mergedOptions.logo}': image size is not than (512 x 512)`);
+    } else if (!(logoSize.width === 1024 && logoSize.height === 1024)) {
+        throw new Error(`AppIcon '${mergedOptions.logo}': image size is not than (1024 x 1024)`);
     }
-    return new FaviconsWebpackPlugin(mergedOptions);
+    return new WebappWebpackPlugin(mergedOptions);
 };

@@ -187,7 +187,7 @@ module.exports = {
         }),
         new WebpackNotifierPlugin({
             alwaysNotify: true,
-            contentImage: path.resolve('./.favicons-source-512x512.png'),
+            contentImage: path.resolve('./.favicons-source-1024x1024.png'),
             title: APP.TITLE,
         }),
         ...(USE_LINTERS ? [
@@ -205,7 +205,7 @@ module.exports = {
         ...(APP.USE_FAVICONS ? [
             new FaviconsPlugin.AppIcon({
                 title: APP.TITLE,
-                logo: './.favicons-source-512x512.png',
+                logo: './.favicons-source-1024x1024.png',
                 prefix: 'img/favicon/',
                 background: APP.BACKGROUND_COLOR,
                 theme_color: APP.THEME_COLOR,
