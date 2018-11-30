@@ -2,7 +2,7 @@
 <html class="no-js" lang="{{ APP.LANGUAGE }}">
 <head>
     <meta charset="utf-8">
-    <title>{{ PAGE.title }} :: {{ APP.TITLE }}</title>
+    <title>{% if not PAGE.homepage %}{{ PAGE.title }} -- {% endif %}{{ APP.TITLE }}</title>
     <meta name="description" content="{{ PAGE.description or APP.DESCRIPTION }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
