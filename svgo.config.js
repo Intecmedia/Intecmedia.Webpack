@@ -1,8 +1,23 @@
+class SvgIdPrefix {
+    constructor(counter) {
+        this.counter = counter;
+    }
+
+    toString() {
+        this.counter += 1;
+        return `svg${this.counter}-`;
+    }
+}
+
 module.exports = {
     plugins: [
-        { cleanupIDs: false },
+        {
+            cleanupIDs: {
+                remove: false,
+                prefix: new SvgIdPrefix(0),
+            },
+        },
         { convertShapeToPath: false },
-        { removeAttrs: { attrs: 'data\\-.*' } },
         { removeViewBox: false },
     ],
 };
