@@ -17,6 +17,7 @@ module.exports = {
                 prefix: new SvgIdPrefix(0),
             },
         },
+        { collapseGroups: false },
         { convertShapeToPath: false },
         { removeViewBox: false },
     ],
