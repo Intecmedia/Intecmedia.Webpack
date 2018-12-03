@@ -270,7 +270,7 @@ module.exports = {
                 title: APP.TITLE,
             });
         })),
-        new SvgoPlugin({ enabled: DEBUG || PROD }),
+        new SvgoPlugin({ enabled: true }),
         ...(APP.HTML_PRETTY ? [new PrettyPlugin()] : []),
         ...(APP.USE_SERVICE_WORKER ? [new WorkboxPlugin.GenerateSW({
             cacheId: PACKAGE_NAME,
