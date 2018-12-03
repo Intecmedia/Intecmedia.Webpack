@@ -1,11 +1,8 @@
-class SvgIdPrefix {
-    constructor(counter) {
-        this.counter = counter;
-    }
+const uniqueId = require('lodash.uniqueid');
 
+class SvgIdPrefix {
     toString() {
-        this.counter += 1;
-        return `svg${this.counter}-`;
+        return uniqueId('svgo-');
     }
 }
 
