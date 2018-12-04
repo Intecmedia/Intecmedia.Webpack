@@ -12,6 +12,10 @@ const DEFAULT_FAVICON = {
     background: APP.BACKGROUND_COLOR,
     theme_color: APP.THEME_COLOR,
     favicons: {
+        lang: APP.LANGUAGE,
+        appShortName: PACKAGE_NAME,
+        appDescription: APP.DESCRIPTION,
+        start_url: APP.START_URL,
         icons: {
             android: false,
             appleIcon: false,
@@ -48,6 +52,7 @@ const DEFAULT_APPICON = {
     favicons: {
         lang: APP.LANGUAGE,
         appShortName: PACKAGE_NAME,
+        appDescription: APP.DESCRIPTION,
         start_url: APP.START_URL,
         icons: {
             android: true,
