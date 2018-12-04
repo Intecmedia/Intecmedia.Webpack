@@ -1,7 +1,8 @@
 /* eslint max-len: "off" */
 module.exports = {
-    TITLE: 'Intecmedia.Webpack',
-    DESCRIPTION: 'DESCRIPTION',
+    TITLE: '$APP.TITLE$',
+    SHORT_NAME: '$APP.SHORT_NAME$',
+    DESCRIPTION: '$APP.DESCRIPTION$',
     PUBLIC_PATH: '/',
     USE_FAVICONS: true,
     USE_SERVICE_WORKER: false,

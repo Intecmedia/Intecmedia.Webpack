@@ -13,7 +13,7 @@ const DEFAULT_FAVICON = {
     theme_color: APP.THEME_COLOR,
     favicons: {
         lang: APP.LANGUAGE,
-        appShortName: PACKAGE_NAME,
+        appShortName: APP.SHORT_NAME,
         appDescription: APP.DESCRIPTION,
         start_url: APP.START_URL,
         icons: {
@@ -51,7 +51,7 @@ const DEFAULT_APPICON = {
     theme_color: APP.THEME_COLOR,
     favicons: {
         lang: APP.LANGUAGE,
-        appShortName: PACKAGE_NAME,
+        appShortName: APP.SHORT_NAME,
         appDescription: APP.DESCRIPTION,
         start_url: APP.START_URL,
         icons: {
