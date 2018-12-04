@@ -2,6 +2,7 @@ const deepAssign = require('deep-assign');
 const ImageSize = require('image-size');
 const WebappWebpackPlugin = require('webapp-webpack-plugin');
 const APP = require('./app.config.js');
+const { name: PACKAGE_NAME } = require('./package.json');
 
 const DEFAULT_FAVICON = {
     logo: './.favicons-source-64x64.png',
@@ -45,6 +46,9 @@ const DEFAULT_APPICON = {
     background: APP.BACKGROUND_COLOR,
     theme_color: APP.THEME_COLOR,
     favicons: {
+        lang: APP.LANGUAGE,
+        appShortName: PACKAGE_NAME,
+        start_url: APP.START_URL,
         icons: {
             android: true,
             appleIcon: true,

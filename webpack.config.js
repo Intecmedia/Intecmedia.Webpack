@@ -68,7 +68,6 @@ const CompressionPlugin = (PROD ? require('compression-webpack-plugin') : () => 
 
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
 const PrettyPlugin = (APP.HTML_PRETTY ? require('./plugin.pretty.js') : () => {});
-const ManifestPlugin = (APP.USE_FAVICONS ? require('./plugin.manifest.js') : () => {});
 const SvgoPlugin = require('./plugin.svgo.js');
 
 const SERVICE_WORKER_BASE = slash(path.relative(APP.PUBLIC_PATH, '/'));
@@ -218,16 +217,6 @@ module.exports = {
                 background: APP.BACKGROUND_COLOR,
                 theme_color: APP.THEME_COLOR,
                 persistentCache: !(PROD || DEBUG),
-            }),
-            new ManifestPlugin({
-                path: path.join(OUTPUT_PATH, '/img/favicon/manifest.json'),
-                replace: {
-                    lang: APP.LANGUAGE,
-                    short_name: PACKAGE_NAME,
-                    start_url: APP.START_URL,
-                    theme_color: APP.THEME_COLOR,
-                    background_color: APP.BACKGROUND_COLOR,
-                },
             }),
         ] : []),
         ...(SITEMAP.map((template) => {
