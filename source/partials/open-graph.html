@@ -1,11 +1,12 @@
 <!-- open-graph -->
 <meta property="og:locale" content="{{ APP.LANGUAGE }}">
 <meta property="og:type" content="website">
-<meta property="og:title" content="{{ APP.TITLE }}{% if not PAGE.homepage %} -- {{ PAGE.title }}{% endif %}">
+<meta property="og:title" content="{{ APP.TITLE }}{% if not PAGE.homepage %} &mdash; {{ PAGE.title }}{% endif %}">
 <meta property="og:description" content="{{ PAGE.description or APP.DESCRIPTION }}">
 <meta property="og:image" content="{{ APP.PUBLIC_PATH }}{{ PAGE.og_image or 'img/og-image.jpg' }}">
+
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="{{ APP.PUBLIC_PATH }}{{ PAGE.og_image or 'img/og-image.jpg' }}">
-<meta name="twitter:title" content="{{ APP.TITLE }}{% if not PAGE.homepage %} -- {{ PAGE.title }}{% endif %}">
+<meta name="twitter:title" content="{{ APP.TITLE }}{% if not PAGE.homepage %} &mdash; {{ PAGE.title }}{% endif %}">
 <meta name="twitter:description" content="{{ PAGE.description or APP.DESCRIPTION }}">
 <!-- /open-graph -->
