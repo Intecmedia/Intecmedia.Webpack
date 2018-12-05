@@ -15,6 +15,8 @@ const DEFAULT_FAVICON = {
         appShortName: APP.SHORT_NAME,
         appDescription: APP.DESCRIPTION,
         start_url: APP.START_URL,
+        background: APP.BACKGROUND_COLOR,
+        theme_color: APP.THEME_COLOR,
         icons: {
             android: false,
             appleIcon: false,
@@ -53,6 +55,8 @@ const DEFAULT_APPICON = {
         appShortName: APP.SHORT_NAME,
         appDescription: APP.DESCRIPTION,
         start_url: APP.START_URL,
+        background: APP.BACKGROUND_COLOR,
+        theme_color: APP.THEME_COLOR,
         icons: {
             android: true,
             appleIcon: true,
