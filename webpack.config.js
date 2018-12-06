@@ -245,6 +245,7 @@ module.exports = {
                     decodeEntities: false,
                     minifyCSS: false,
                     minifyJS: false,
+                    removeScriptTypeAttributes: true,
                 } : {
                     html5: true,
                     collapseWhitespace: true,
@@ -253,6 +254,7 @@ module.exports = {
                     decodeEntities: true,
                     minifyCSS: true,
                     minifyJS: true,
+                    removeScriptTypeAttributes: true,
                 }),
                 hash: true,
                 cache: !(PROD || DEBUG),
