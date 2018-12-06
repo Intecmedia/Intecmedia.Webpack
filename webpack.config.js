@@ -460,9 +460,6 @@ module.exports = {
                         loader: 'css-loader',
                         options: {
                             sourceMap: USE_SOURCE_MAP,
-                            minimize: (PROD ? {
-                                discardComments: { removeAll: true },
-                            } : false),
                         },
                     },
                     {

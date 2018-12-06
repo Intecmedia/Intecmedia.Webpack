@@ -62,6 +62,7 @@
         "css-hot-loader": "latest",
         "css-loader": "latest",
         "css-mqpacker": "^6.0.2",
+        "cssnano": "latest",
         "deasync": "latest",
         "deep-assign": "latest",
         "eslint": "latest",
