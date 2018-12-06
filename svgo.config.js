@@ -1,8 +1,12 @@
 const uniqueId = require('lodash.uniqueid');
 
 class SvgIdPrefix {
+    constructor(prefix) {
+        this.prefix = prefix;
+    }
+
     toString() {
-        return uniqueId('svgo-');
+        return uniqueId(this.prefix);
     }
 }
 
@@ -11,7 +15,7 @@ module.exports = {
         {
             cleanupIDs: {
                 remove: false,
-                prefix: new SvgIdPrefix(0),
+                prefix: new SvgIdPrefix('svgo-'),
             },
         },
         { collapseGroups: false },
