@@ -143,7 +143,6 @@ module.exports = {
             'build/**/*',
         ], {
             root: __dirname,
-            watch: WATCH,
         }),
         new MiniCssExtractPlugin({
             filename: 'css/app.min.css',
