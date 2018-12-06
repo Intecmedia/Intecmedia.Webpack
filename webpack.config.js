@@ -203,20 +203,12 @@ module.exports = {
         ] : []),
         ...(APP.USE_FAVICONS ? [
             new FaviconsPlugin.AppIcon({
-                title: APP.TITLE,
                 logo: './.favicons-source-1024x1024.png',
                 prefix: 'img/favicon/',
-                background: APP.BACKGROUND_COLOR,
-                theme_color: APP.THEME_COLOR,
-                persistentCache: !(PROD || DEBUG),
             }),
             new FaviconsPlugin.FavIcon({
-                title: APP.TITLE,
                 logo: './.favicons-source-64x64.png',
                 prefix: 'img/favicon/',
-                background: APP.BACKGROUND_COLOR,
-                theme_color: APP.THEME_COLOR,
-                persistentCache: !(PROD || DEBUG),
             }),
         ] : []),
         ...(SITEMAP.map((template) => {
