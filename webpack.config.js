@@ -140,9 +140,8 @@ module.exports = {
     plugins: [
         ...(WATCH ? [new BrowserSyncPlugin()] : []),
         new CleanWebpackPlugin([
-            'build',
+            'build/**/*',
         ], {
-            exclude: ['.htaccess'],
             root: __dirname,
             watch: WATCH,
         }),

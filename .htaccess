@@ -1,1 +1,3 @@
 Deny from all
+# protect source dir
+RedirectMatch 403 /source/
