@@ -65,6 +65,7 @@ const BrowserSyncPlugin = (WATCH ? require('browser-sync-webpack-plugin') : () =
 const StyleLintPlugin = (USE_LINTERS ? require('stylelint-webpack-plugin') : () => {});
 const BrotliPlugin = (PROD ? require('brotli-webpack-plugin') : () => {});
 const CompressionPlugin = (PROD ? require('compression-webpack-plugin') : () => {});
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
 const PrettyPlugin = (APP.HTML_PRETTY ? require('./plugin.pretty.js') : () => {});
@@ -138,6 +139,13 @@ module.exports = {
 
     plugins: [
         ...(WATCH ? [new BrowserSyncPlugin()] : []),
+        new CleanWebpackPlugin([
+            'build',
+        ], {
+            exclude: ['.htaccess'],
+            root: __dirname,
+            watch: WATCH,
+        }),
         new MiniCssExtractPlugin({
             filename: 'css/app.min.css',
             allChunks: true,
