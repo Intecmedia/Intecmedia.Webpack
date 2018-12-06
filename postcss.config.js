@@ -51,8 +51,6 @@ module.exports = {
                 }],
             }), // this always last
         ] : []),
-
-
         require('postcss-browser-reporter')(),
         require('postcss-reporter')(), // this always last
     ],
