@@ -1,4 +1,4 @@
-const deepAssign = require('lodash.merge');
+const deepMerge = require('lodash.merge');
 
 const posthtml = require('posthtml');
 const posthtmlRender = require('posthtml-render');
