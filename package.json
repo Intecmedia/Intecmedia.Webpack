@@ -65,7 +65,7 @@
         "css-mqpacker": "^6.0.2",
         "cssnano": "latest",
         "deasync": "latest",
-        "deep-assign": "latest",
+        "lodash.merge": "latest",
         "eslint": "latest",
         "eslint-config-airbnb-base": "latest",
         "eslint-import-resolver-webpack": "latest",

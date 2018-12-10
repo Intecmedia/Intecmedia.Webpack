@@ -5,7 +5,7 @@ const flatCache = require('flat-cache');
 const loaderUtils = require('loader-utils');
 const urlLoader = require('url-loader');
 const fileLoader = require('file-loader');
-const deepAssign = require('deep-assign');
+const deepMerge = require('lodash.merge');
 const weblog = require('webpack-log');
 
 const logger = weblog({ name: 'loader-resize' });
@@ -23,7 +23,7 @@ module.exports = function ResizeLoader(content) {
     const loaderCallback = this.async();
 
     const query = loaderContext.resourceQuery ? loaderUtils.parseQuery(loaderContext.resourceQuery) : {};
-    const options = deepAssign(
+    const options = deepMerge(
         {},
         DEFAULT_OPTIONS,
         loaderUtils.getOptions(loaderContext),

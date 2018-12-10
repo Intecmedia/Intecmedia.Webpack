@@ -1,6 +1,6 @@
 const path = require('path');
 const pretty = require('pretty');
-const deepAssign = require('deep-assign');
+const deepMerge = require('lodash.merge');
 const validateOptions = require('schema-utils');
 const weblog = require('webpack-log');
 
@@ -36,7 +36,7 @@ const OPTIONS_SCHEMA = {
 
 module.exports = class PrettyPlugin {
     constructor(options) {
-        this.options = deepAssign({}, DEFAULT_OPTIONS, options);
+        this.options = deepMerge({}, DEFAULT_OPTIONS, options);
         validateOptions(OPTIONS_SCHEMA, this.options, 'manifest.json');
     }
 

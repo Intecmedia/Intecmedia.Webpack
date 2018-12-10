@@ -7,7 +7,7 @@ const weblog = require('webpack-log');
 
 const nunjucks = require('nunjucks');
 const frontMatter = require('front-matter');
-const deepAssign = require('deep-assign');
+const deepMerge = require('lodash.merge');
 
 const posthtml = require('posthtml');
 const posthtmlCommentAfter = require('posthtml-comment-after');
@@ -99,7 +99,7 @@ module.exports = function HtmlLoader() {
     loaderContext.addDependency(path.join(__dirname, 'app.config.js'));
     loaderContext.addDependency(path.join(__dirname, 'source', 'html.data.js'));
 
-    const options = deepAssign({}, DEFAULT_OPTIONS, loaderUtils.getOptions(loaderContext));
+    const options = deepMerge({}, DEFAULT_OPTIONS, loaderUtils.getOptions(loaderContext));
     validateOptions(OPTIONS_SCHEMA, options, 'loader-html');
 
     const nunjucksLoader = new nunjucks.FileSystemLoader(options.searchPath, { noCache: true });
@@ -155,7 +155,7 @@ module.exports = function HtmlLoader() {
             return templateSource;
         }
         const templateData = frontMatter(templateSource.src);
-        nunjucksEnvironment.addGlobal('PAGE', deepAssign(
+        nunjucksEnvironment.addGlobal('PAGE', deepMerge(
             nunjucksEnvironment.getGlobal('PAGE') || {},
             templateData.attributes,
             PAGE,

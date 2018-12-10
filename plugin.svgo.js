@@ -1,4 +1,4 @@
-const deepAssign = require('deep-assign');
+const deepAssign = require('lodash.merge');
 
 const posthtml = require('posthtml');
 const posthtmlRender = require('posthtml-render');
@@ -14,7 +14,7 @@ const DEFAULT_OPTIONS = {
 
 module.exports = class SvgoPlugin {
     constructor(options) {
-        this.options = deepAssign({}, DEFAULT_OPTIONS, options);
+        this.options = deepMerge({}, DEFAULT_OPTIONS, options);
     }
 
     processHtml(html, callback) {

@@ -1,4 +1,4 @@
-const deepAssign = require('deep-assign');
+const deepMerge = require('lodash.merge');
 const ImageSize = require('image-size');
 const WebappWebpackPlugin = require('webapp-webpack-plugin');
 const APP = require('./app.config.js');
@@ -33,7 +33,7 @@ const DEFAULT_FAVICON = {
 };
 
 module.exports.FavIcon = function FavIcon(options) {
-    const mergedOptions = deepAssign({}, DEFAULT_FAVICON, options);
+    const mergedOptions = deepMerge({}, DEFAULT_FAVICON, options);
     const logoSize = ImageSize(mergedOptions.logo);
     if (!(logoSize && logoSize.type === 'png')) {
         throw new Error(`FavIcon '${mergedOptions.logo}': the file is not a valid image`);
@@ -73,7 +73,7 @@ const DEFAULT_APPICON = {
 };
 
 module.exports.AppIcon = function AppIcon(options) {
-    const mergedOptions = deepAssign({}, DEFAULT_APPICON, options);
+    const mergedOptions = deepMerge({}, DEFAULT_APPICON, options);
     const logoSize = ImageSize(mergedOptions.logo);
     if (!(logoSize && logoSize.type === 'png')) {
         throw new Error(`AppIcon '${mergedOptions.logo}': the file is not a valid image`);
