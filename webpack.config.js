@@ -382,23 +382,7 @@ module.exports = {
                     },
                     {
                         loader: 'babel-loader',
-                        options: {
-                            plugins: [
-                                '@babel/transform-runtime',
-                            ],
-                            presets: [
-                                ['@babel/preset-env', {
-                                    modules: 'commonjs',
-                                    useBuiltIns: 'entry',
-                                    targets: { browsers: ENV.BROWSERS },
-                                }],
-                                ['airbnb', {
-                                    modules: true,
-                                    targets: { browsers: ENV.BROWSERS },
-                                }],
-                            ],
-                            envName: ENV.NODE_ENV,
-                        },
+                        options: require('./babel.config.js'),
                     },
                 ],
             },
