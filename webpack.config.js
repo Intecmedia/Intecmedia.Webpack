@@ -382,7 +382,10 @@ module.exports = {
                     },
                     {
                         loader: 'babel-loader',
-                        options: require('./babel.config.js'),
+                        options: {
+                             envName: ENV.NODE_ENV,
+                            ...require('./babel.config.js'),
+                        },
                     },
                 ],
             },

@@ -15,5 +15,4 @@ module.exports = {
             targets: { browsers: ENV.BROWSERS },
         }],
     ],
-    envName: ENV.NODE_ENV,
 };
