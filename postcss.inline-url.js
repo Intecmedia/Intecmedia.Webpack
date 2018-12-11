@@ -9,7 +9,7 @@ module.exports = () => require('postcss-url')({
     filter(asset) {
         if (!asset.pathname) return false;
         if (/[&?]inline=/.test(asset.search)) return false;
-        if (!INLINE_EXCLUDE.test(asset.pathname)) return false;
+        if (INLINE_EXCLUDE.test(asset.pathname)) return false;
         const format = path.extname(asset.pathname).substr(1);
         return INLINE_FILES.includes(format.toLowerCase());
     },
