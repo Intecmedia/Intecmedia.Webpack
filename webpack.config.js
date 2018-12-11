@@ -14,42 +14,17 @@ const zopfli = require('@gfx/zopfli');
 
 const logger = weblog({ name: 'webpack-config' });
 
-const DEBUG = ('DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0);
-const DEV_SERVER = path.basename(require.main.filename, '.js') === 'webpack-dev-server';
-const STANDALONE = ['webpack', 'webpack-dev-server'].includes(path.basename(require.main.filename, '.js'));
-const WATCH = (process.argv.indexOf('--watch') !== -1) || (process.argv.indexOf('-w') !== -1);
-const PROD = (process.env.NODE_ENV === 'production');
-const NODE_ENV = PROD ? 'production' : 'development';
-const USE_SOURCE_MAP = (DEBUG && !PROD) || DEV_SERVER;
-const USE_LINTERS = PROD || DEBUG;
-
-process.env.DEBUG = DEBUG;
-process.env.NODE_ENV = NODE_ENV;
-process.env.USE_SOURCE_MAP = USE_SOURCE_MAP;
-process.env.USE_LINTERS = USE_LINTERS;
-
-if (!['production', 'development'].includes(process.env.NODE_ENV)) {
-    throw new Error(`Unknow NODE_ENV=${JSON.stringify(process.env.NODE_ENV)}`);
-}
-
-const { name: PACKAGE_NAME, browserslist: BROWSERS } = require('./package.json');
-
-const SOURCE_PATH = path.resolve(__dirname, 'source');
-const OUTPUT_PATH = path.resolve(__dirname, 'build');
+const ENV = require('./app.env.js');
 const APP = require('./app.config.js');
 const HTML_DATA = require('./source/html.data.js');
 
-if (STANDALONE) {
-    logger.info(`Name: ${PACKAGE_NAME}`);
-    logger.info(`Enviroment: ${NODE_ENV}`);
-    logger.info(`Debug: ${DEBUG ? 'enabled' : 'disabled'}`);
-    logger.info(`Linters: ${USE_LINTERS ? 'enabled' : 'disabled'}`);
-    logger.info(`Source maps: ${USE_SOURCE_MAP ? 'enabled' : 'disabled'}`);
+if (ENV.STANDALONE) {
+    logger.info(`Name: ${ENV.PACKAGE_NAME}`);
+    logger.info(`Enviroment: ${ENV.NODE_ENV}`);
+    logger.info(`Debug: ${ENV.DEBUG ? 'enabled' : 'disabled'}`);
+    logger.info(`Linters: ${ENV.USE_LINTERS ? 'enabled' : 'disabled'}`);
+    logger.info(`Source maps: ${ENV.USE_SOURCE_MAP ? 'enabled' : 'disabled'}`);
     logger.info(`App config: ${JSON.stringify(APP, null, '    ')}`);
-}
-
-if (PROD && DEBUG) {
-    throw new Error(`Dont use NODE_ENV=${NODE_ENV} and DEBUG=${DEBUG} together`);
 }
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -60,11 +35,11 @@ const { default: ImageminPlugin } = require('imagemin-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const UglifyJsPlugin = (PROD ? require('uglifyjs-webpack-plugin') : () => {});
-const BrowserSyncPlugin = (WATCH ? require('browser-sync-webpack-plugin') : () => {});
-const StyleLintPlugin = (USE_LINTERS ? require('stylelint-webpack-plugin') : () => {});
-const BrotliPlugin = (PROD ? require('brotli-webpack-plugin') : () => {});
-const CompressionPlugin = (PROD ? require('compression-webpack-plugin') : () => {});
+const UglifyJsPlugin = (ENV.PROD ? require('uglifyjs-webpack-plugin') : () => {});
+const BrowserSyncPlugin = (ENV.WATCH ? require('browser-sync-webpack-plugin') : () => {});
+const StyleLintPlugin = (ENV.USE_LINTERS ? require('stylelint-webpack-plugin') : () => {});
+const BrotliPlugin = (ENV.PROD ? require('brotli-webpack-plugin') : () => {});
+const CompressionPlugin = (ENV.PROD ? require('compression-webpack-plugin') : () => {});
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
@@ -72,14 +47,14 @@ const PrettyPlugin = (APP.HTML_PRETTY ? require('./plugin.pretty.js') : () => {}
 const SvgoPlugin = require('./plugin.svgo.js');
 
 const SERVICE_WORKER_BASE = slash(path.relative(APP.PUBLIC_PATH, '/'));
-const SERVICE_WORKER_PATH = path.join(OUTPUT_PATH, SERVICE_WORKER_BASE, '/service-worker.js');
+const SERVICE_WORKER_PATH = path.join(ENV.OUTPUT_PATH, SERVICE_WORKER_BASE, '/service-worker.js');
 const SERVICE_WORKER_HASH = () => (fs.existsSync(SERVICE_WORKER_PATH) ? md5File.sync(SERVICE_WORKER_PATH) : '');
 
-const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.html`, {
+const SITEMAP = glob.sync(`${slash(ENV.SOURCE_PATH)}/**/*.html`, {
     ignore: [
-        `${slash(SOURCE_PATH)}/partials/**/*.html`,
-        `${slash(SOURCE_PATH)}/google*.html`,
-        `${slash(SOURCE_PATH)}/yandex_*.html`,
+        `${slash(ENV.SOURCE_PATH)}/partials/**/*.html`,
+        `${slash(ENV.SOURCE_PATH)}/google*.html`,
+        `${slash(ENV.SOURCE_PATH)}/yandex_*.html`,
     ],
 });
 
@@ -87,7 +62,7 @@ const resourceName = (prefix, hash = false) => {
     const basename = path.basename(prefix);
     const suffix = (hash ? '?[hash]' : '');
     return (resourcePath) => {
-        const url = slash(path.relative(SOURCE_PATH, resourcePath));
+        const url = slash(path.relative(ENV.SOURCE_PATH, resourcePath));
         if (url.startsWith(`${basename}/`)) {
             return url + suffix;
         }
@@ -117,16 +92,16 @@ module.exports = {
     },
 
     entry: {
-        app: `${SOURCE_PATH}/js/app.js`,
+        app: `${ENV.SOURCE_PATH}/js/app.js`,
     },
 
     output: {
         filename: 'js/app.min.js',
-        path: OUTPUT_PATH,
+        path: ENV.OUTPUT_PATH,
         publicPath: APP.PUBLIC_PATH,
     },
 
-    performance: (PROD && !DEBUG ? {
+    performance: (ENV.PROD && !ENV.DEBUG ? {
         assetFilter: (asset) => {
             const [filename] = asset.split('?', 2);
             const ignore = /(\.(css|js)\.map|\.LICENSE|\.eot|\.ttf|manifest\.json|service-worker\.js|@resize-.+)$/;
@@ -138,7 +113,7 @@ module.exports = {
     } : false),
 
     plugins: [
-        ...(WATCH ? [new BrowserSyncPlugin()] : []),
+        ...(ENV.WATCH ? [new BrowserSyncPlugin()] : []),
         new CleanWebpackPlugin([
             'build/**/*',
         ], {
@@ -148,7 +123,7 @@ module.exports = {
             filename: 'css/app.min.css',
             allChunks: true,
         }),
-        ...(PROD ? [
+        ...(ENV.PROD ? [
             new CaseSensitivePathsPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),
             new UglifyJsPlugin({
@@ -177,7 +152,7 @@ module.exports = {
             }),
         ] : []),
         new webpack.BannerPlugin({
-            banner: `NODE_ENV=${NODE_ENV} | DEBUG=${DEBUG} | chunkhash=[chunkhash]`,
+            banner: `ENV.NODE_ENV=${ENV.NODE_ENV} | ENV.DEBUG=${ENV.DEBUG} | chunkhash=[chunkhash]`,
         }),
         new webpack.ProvidePlugin({
             $: 'jquery',
@@ -187,15 +162,15 @@ module.exports = {
             Popper: ['popper.js', 'default'],
         }),
         new webpack.DefinePlugin({
-            DEBUG: JSON.stringify(DEBUG),
-            NODE_ENV: JSON.stringify(NODE_ENV),
+            DEBUG: JSON.stringify(ENV.DEBUG),
+            NODE_ENV: JSON.stringify(ENV.NODE_ENV),
         }),
         new WebpackNotifierPlugin({
             alwaysNotify: true,
             contentImage: path.resolve('./.favicons-source-1024x1024.png'),
             title: APP.TITLE,
         }),
-        ...(USE_LINTERS ? [
+        ...(ENV.USE_LINTERS ? [
             new StyleLintPlugin({
                 syntax: 'scss',
                 files: '**/*.scss',
@@ -203,8 +178,8 @@ module.exports = {
                 ignorePath: './.stylelintignore',
                 emitErrors: false,
                 failOnError: false,
-                lintDirtyModulesOnly: DEV_SERVER || WATCH,
-                fix: !DEV_SERVER,
+                lintDirtyModulesOnly: ENV.DEV_SERVER || ENV.WATCH,
+                fix: !ENV.DEV_SERVER,
             }),
         ] : []),
         ...(APP.USE_FAVICONS ? [
@@ -220,15 +195,15 @@ module.exports = {
         ...(SITEMAP.map((template) => {
             const basename = path.basename(template);
             const filename = (basename === 'index.html' ? path.join(
-                OUTPUT_PATH,
-                path.relative(SOURCE_PATH, template),
+                ENV.OUTPUT_PATH,
+                path.relative(ENV.SOURCE_PATH, template),
             ) : path.join(
-                OUTPUT_PATH,
-                path.relative(SOURCE_PATH, path.dirname(template)),
+                ENV.OUTPUT_PATH,
+                path.relative(ENV.SOURCE_PATH, path.dirname(template)),
                 path.basename(template, '.html'),
                 'index.html',
             ));
-            if (STANDALONE) {
+            if (ENV.STANDALONE) {
                 logger.info(`${path.relative(__dirname, template)} --> ${path.relative(__dirname, filename)}`);
             }
             return new HtmlWebpackPlugin({
@@ -255,20 +230,20 @@ module.exports = {
                     removeScriptTypeAttributes: true,
                 }),
                 hash: true,
-                cache: !(PROD || DEBUG),
+                cache: !(ENV.PROD || ENV.DEBUG),
                 title: APP.TITLE,
             });
         })),
         new SvgoPlugin({ enabled: true }),
         ...(APP.HTML_PRETTY ? [new PrettyPlugin()] : []),
         ...(APP.USE_SERVICE_WORKER ? [new WorkboxPlugin.GenerateSW({
-            cacheId: PACKAGE_NAME,
+            cacheId: ENV.PACKAGE_NAME,
             swDest: SERVICE_WORKER_PATH,
             importWorkboxFrom: 'local',
             clientsClaim: true,
             skipWaiting: true,
             precacheManifestFilename: slash(path.join(SERVICE_WORKER_BASE, 'service-worker-precache.js?[manifestHash]')),
-            globDirectory: slash(OUTPUT_PATH),
+            globDirectory: slash(ENV.OUTPUT_PATH),
             globPatterns: [
                 'js/*.min.js',
                 'css/*.min.css',
@@ -282,14 +257,14 @@ module.exports = {
                 urlPattern: new RegExp(`${APP.PUBLIC_PATH}(css|js|fonts)/`),
                 handler: 'networkFirst',
                 options: {
-                    cacheName: `${PACKAGE_NAME}-assets`,
+                    cacheName: `${ENV.PACKAGE_NAME}-assets`,
                     networkTimeoutSeconds: 10,
                 },
             }, {
                 urlPattern: /\/upload\//,
                 handler: 'networkFirst',
                 options: {
-                    cacheName: `${PACKAGE_NAME}-upload`,
+                    cacheName: `${ENV.PACKAGE_NAME}-upload`,
                     networkTimeoutSeconds: 10,
                     expiration: {
                         maxEntries: 100,
@@ -300,7 +275,7 @@ module.exports = {
                 urlPattern: /\//,
                 handler: 'networkFirst',
                 options: {
-                    cacheName: `${PACKAGE_NAME}-html`,
+                    cacheName: `${ENV.PACKAGE_NAME}-html`,
                     networkTimeoutSeconds: 10,
                 },
             }],
@@ -315,32 +290,32 @@ module.exports = {
                 '*.txt',
             ].map(from => ({
                 from,
-                to: OUTPUT_PATH,
-                context: SOURCE_PATH,
+                to: ENV.OUTPUT_PATH,
+                context: ENV.SOURCE_PATH,
                 ignore: SITEMAP,
             })),
         ], {
-            copyUnmodified: !(PROD || DEBUG),
-            debug: (DEBUG ? 'debug' : 'info'),
+            copyUnmodified: !(ENV.PROD || ENV.DEBUG),
+            debug: (ENV.DEBUG ? 'debug' : 'info'),
         }),
         new ImageminPlugin({
             test: /\.(jpeg|jpg|png|gif|svg)$/i,
             ...require('./imagemin.config.js'),
             cacheFolder: path.join(__dirname, 'node_modules', '.cache', 'imagemin-plugin'),
-            disable: !(PROD || DEBUG),
+            disable: !(ENV.PROD || ENV.DEBUG),
         }),
         new BundleAnalyzerPlugin({
-            analyzerMode: (DEV_SERVER ? 'server' : 'static'),
-            openAnalyzer: DEV_SERVER,
-            reportFilename: path.join(__dirname, 'node_modules', '.cache', `bundle-analyzer-${NODE_ENV}.html`),
+            analyzerMode: (ENV.DEV_SERVER ? 'server' : 'static'),
+            openAnalyzer: ENV.DEV_SERVER,
+            reportFilename: path.join(__dirname, 'node_modules', '.cache', `bundle-analyzer-${ENV.NODE_ENV}.html`),
         }),
     ],
 
-    devtool: USE_SOURCE_MAP ? 'eval-source-map' : 'nosources-source-map',
+    devtool: ENV.USE_SOURCE_MAP ? 'eval-source-map' : 'nosources-source-map',
 
     resolve: {
         alias: {
-            '~': path.join(SOURCE_PATH, 'js'),
+            '~': path.join(ENV.SOURCE_PATH, 'js'),
         },
     },
 
@@ -356,12 +331,12 @@ module.exports = {
                         HTML_DATA,
                         APP,
                         {
-                            DEBUG,
-                            NODE_ENV,
+                            DEBUG: ENV.DEBUG,
+                            NODE_ENV: ENV.NODE_ENV,
                             SERVICE_WORKER_HASH,
                         },
                     ),
-                    searchPath: SOURCE_PATH,
+                    searchPath: ENV.SOURCE_PATH,
                 },
             },
             // javascript loaders
@@ -375,18 +350,18 @@ module.exports = {
                     options: '$',
                 }],
             },
-            ...(USE_LINTERS ? [{
+            ...(ENV.USE_LINTERS ? [{
                 enforce: 'pre',
                 test: /\.js$/i,
                 exclude: [
                     path.join(__dirname, 'node_modules'),
-                    path.join(SOURCE_PATH, 'js', 'external'),
+                    path.join(ENV.SOURCE_PATH, 'js', 'external'),
                 ],
                 loader: 'eslint-loader',
                 options: {
                     fix: true,
-                    cache: !PROD,
-                    quiet: PROD,
+                    cache: !ENV.PROD,
+                    quiet: ENV.PROD,
                     emitError: false,
                     emitWarning: false,
                 },
@@ -415,14 +390,14 @@ module.exports = {
                                 ['@babel/preset-env', {
                                     modules: 'commonjs',
                                     useBuiltIns: 'entry',
-                                    targets: { browsers: BROWSERS },
+                                    targets: { browsers: ENV.BROWSERS },
                                 }],
                                 ['airbnb', {
                                     modules: true,
-                                    targets: { browsers: BROWSERS },
+                                    targets: { browsers: ENV.BROWSERS },
                                 }],
                             ],
-                            envName: NODE_ENV,
+                            envName: ENV.NODE_ENV,
                         },
                     },
                 ],
@@ -460,18 +435,18 @@ module.exports = {
             // css loaders
             {
                 test: /\.(css|scss)$/i,
-                loaders: (DEV_SERVER ? ['css-hot-loader'] : []).concat([
+                loaders: (ENV.DEV_SERVER ? ['css-hot-loader'] : []).concat([
                     MiniCssExtractPlugin.loader,
                     {
                         loader: 'css-loader',
                         options: {
-                            sourceMap: USE_SOURCE_MAP,
+                            sourceMap: ENV.USE_SOURCE_MAP,
                         },
                     },
                     {
                         loader: 'postcss-loader',
                         options: {
-                            sourceMap: USE_SOURCE_MAP ? 'inline' : false,
+                            sourceMap: ENV.USE_SOURCE_MAP ? 'inline' : false,
                             config: { path: './postcss.config.js' },
                         },
                     },
@@ -479,14 +454,14 @@ module.exports = {
                         loader: 'sass-loader',
                         options: {
                             data: [
-                                ['$DEBUG', DEBUG],
-                                ['$NODE_ENV', NODE_ENV],
-                                ['$PACKAGE_NAME', PACKAGE_NAME],
+                                ['$DEBUG', ENV.DEBUG],
+                                ['$NODE_ENV', ENV.NODE_ENV],
+                                ['$PACKAGE_NAME', ENV.PACKAGE_NAME],
                             ].map(i => ((k, v) => `${k}: ${JSON.stringify(v)};`)(...i)).join('\n'),
                             indentWidth: 4,
-                            sourceMap: USE_SOURCE_MAP ? 'inline' : false,
-                            sourceMapEmbed: USE_SOURCE_MAP,
-                            sourceComments: USE_SOURCE_MAP,
+                            sourceMap: ENV.USE_SOURCE_MAP ? 'inline' : false,
+                            sourceMapEmbed: ENV.USE_SOURCE_MAP,
+                            sourceComments: ENV.USE_SOURCE_MAP,
                         },
                     },
                 ]),

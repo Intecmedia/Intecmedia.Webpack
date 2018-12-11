@@ -2,10 +2,7 @@
 const sortCSSmq = require('sort-css-media-queries');
 
 const APP = require('./app.config.js');
-const { browserslist: BROWSERS } = require('./package.json');
-
-const DEBUG = process.env.DEBUG || false;
-const PROD = (process.env.NODE_ENV === 'production');
+const ENV = require('./app.env.js');
 
 module.exports = {
     plugins: [
@@ -13,7 +10,7 @@ module.exports = {
         require('postcss-input-style')(),
         require('postcss-quantity-queries')(),
         require('postcss-responsive-type')(),
-        ...(PROD || DEBUG ? [
+        ...(ENV.PROD || ENV.DEBUG ? [
             require('pixrem')(),
             require('postcss-focus')(),
             require('pleeease-filters')(),
@@ -26,7 +23,7 @@ module.exports = {
             require('postcss-flexbugs-fixes')(),
             require('postcss-will-change')(),
             require('css-mqpacker')({ sort: sortCSSmq.desktopFirst }),
-            require('autoprefixer')({ browsers: BROWSERS }), // this always last
+            require('autoprefixer')({ browsers: ENV.BROWSERS }), // this always last
             require('cssnano')({
                 preset: ['default', {
                     discardComments: { removeAll: true },
