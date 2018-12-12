@@ -118,6 +118,7 @@ module.exports = {
             'build/**/*',
         ], {
             root: __dirname,
+            exclude: ['.gitkeep'],
         }),
         new MiniCssExtractPlugin({
             filename: 'css/app.min.css',
