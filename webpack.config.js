@@ -62,16 +62,12 @@ const resourceName = (prefix, hash = false) => {
     const basename = path.basename(prefix);
     const suffix = (hash ? '?[hash]' : '');
     return (resourcePath) => {
-        const url = slash(path.relative(ENV.SOURCE_PATH, resourcePath));
-        if (url.startsWith('../')) {
-            return url.replace(/\.\.\//g, '') + suffix;
-        }
+        const url = slash(path.relative(ENV.SOURCE_PATH, resourcePath)).replace(/^(\.\.\/)+/g, '');
         if (url.startsWith(`${basename}/`)) {
             return url + suffix;
         }
-        if (url.startsWith('../node_modules/')) {
-            const [, , modulename] = url.split('/', 3);
-            return slash(path.join(basename, `~${modulename}`, `[name].[ext]${suffix}`));
+        if (url.startsWith('node_modules/')) {
+            return slash(path.join(basename, url + suffix));
         }
         return slash(path.join(basename, `[name].[ext]${suffix}`));
     };
@@ -303,14 +299,14 @@ module.exports = {
             debug: (ENV.DEBUG ? 'debug' : 'info'),
             force: true,
         }),
-        new ImageminPlugin({
+        ...(ENV.PROD ? [new ImageminPlugin({
             test: /\.(jpeg|jpg|png|gif|svg)$/i,
             exclude: /(fonts|font)/i,
             name: resourceName('img', true),
             imageminOptions: require('./imagemin.config.js'),
-            cache: false,
+            cache: true,
             loader: true,
-        }),
+        })] : []),
         new BundleAnalyzerPlugin({
             analyzerMode: (ENV.DEV_SERVER ? 'server' : 'static'),
             openAnalyzer: ENV.DEV_SERVER,
@@ -401,16 +397,16 @@ module.exports = {
                 test: /\.(jpeg|jpg|png|gif|svg)$/i,
                 exclude: /(fonts|font)/i,
                 oneOf: [
-//                    {
-//                        resourceQuery: /[&?]resize=.+/,
-//                        loader: './loader.resize.js',
-//                        options: { name: resourceName('img', true), limit: 32 * 1024 },
-//                    },
-//                    {
-//                        resourceQuery: /[&?]inline=inline/,
-//                        loader: 'url-loader',
-//                        options: { name: resourceName('img', true), limit: 32 * 1024 },
-//                    },
+                    //                    {
+                    //                        resourceQuery: /[&?]resize=.+/,
+                    //                        loader: './loader.resize.js',
+                    //                        options: { name: resourceName('img', true), limit: 32 * 1024 },
+                    //                    },
+                    //                    {
+                    //                        resourceQuery: /[&?]inline=inline/,
+                    //                        loader: 'url-loader',
+                    //                        options: { name: resourceName('img', true), limit: 32 * 1024 },
+                    //                    },
                     {
                         loader: 'file-loader',
                         options: { name: resourceName('img', true) },
