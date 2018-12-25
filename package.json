@@ -87,7 +87,7 @@
         "imagemin-optipng": "latest",
         "imagemin-pngquant": "latest",
         "imagemin-svgo": "latest",
-        "imagemin-webpack-plugin": "latest",
+        "imagemin-webpack": "latest",
         "imports-loader": "latest",
         "jquery": "latest",
         "json-loader": "latest",

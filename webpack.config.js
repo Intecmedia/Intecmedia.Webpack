@@ -285,14 +285,6 @@ module.exports = {
             }],
             ignoreUrlParametersMatching: [/^utm_/, /^[a-fA-F0-9]{32}$/],
         })] : []),
-        new ImageminPlugin({
-            test: /\.(jpeg|jpg|png|gif|svg)$/i,
-            exclude: /(fonts|font)/i,
-            name: resourceName('img', true),
-            imageminOptions: require('./imagemin.config.js'),
-            cache: !ENV.PROD,
-            loader: false,
-        }),
         new CopyWebpackPlugin([
             ...[
                 '**/.htaccess',
@@ -309,6 +301,15 @@ module.exports = {
         ], {
             copyUnmodified: !(ENV.PROD || ENV.DEBUG),
             debug: (ENV.DEBUG ? 'debug' : 'info'),
+            force: true,
+        }),
+        new ImageminPlugin({
+            test: /\.(jpeg|jpg|png|gif|svg)$/i,
+            exclude: /(fonts|font)/i,
+            name: resourceName('img', true),
+            imageminOptions: require('./imagemin.config.js'),
+            cache: false,
+            loader: true,
         }),
         new BundleAnalyzerPlugin({
             analyzerMode: (ENV.DEV_SERVER ? 'server' : 'static'),
@@ -400,16 +401,16 @@ module.exports = {
                 test: /\.(jpeg|jpg|png|gif|svg)$/i,
                 exclude: /(fonts|font)/i,
                 oneOf: [
-                    {
-                        resourceQuery: /[&?]resize=.+/,
-                        loader: './loader.resize.js',
-                        options: { name: resourceName('img', true), limit: 32 * 1024 },
-                    },
-                    {
-                        resourceQuery: /[&?]inline=inline/,
-                        loader: 'url-loader',
-                        options: { name: resourceName('img', true), limit: 32 * 1024 },
-                    },
+//                    {
+//                        resourceQuery: /[&?]resize=.+/,
+//                        loader: './loader.resize.js',
+//                        options: { name: resourceName('img', true), limit: 32 * 1024 },
+//                    },
+//                    {
+//                        resourceQuery: /[&?]inline=inline/,
+//                        loader: 'url-loader',
+//                        options: { name: resourceName('img', true), limit: 32 * 1024 },
+//                    },
                     {
                         loader: 'file-loader',
                         options: { name: resourceName('img', true) },
