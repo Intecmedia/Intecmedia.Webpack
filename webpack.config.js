@@ -31,7 +31,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const WorkboxPlugin = (APP.USE_SERVICE_WORKER ? require('workbox-webpack-plugin') : () => {});
-const { default: ImageminPlugin } = require('imagemin-webpack-plugin');
+const ImageminPlugin = require('imagemin-webpack');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
@@ -63,12 +63,15 @@ const resourceName = (prefix, hash = false) => {
     const suffix = (hash ? '?[hash]' : '');
     return (resourcePath) => {
         const url = slash(path.relative(ENV.SOURCE_PATH, resourcePath));
+        if (url.indexOf('favicon') !== -1) {
+            return slash(path.join(basename, 'favicon', `[name].[ext]${suffix}`));
+        }
         if (url.startsWith(`${basename}/`)) {
             return url + suffix;
         }
         if (url.startsWith('../node_modules/')) {
             const [, , modulename] = url.split('/', 3);
-            return slash(path.join(basename, modulename, `[name].[ext]${suffix}`));
+            return slash(path.join(basename, `~${modulename}`, `[name].[ext]${suffix}`));
         }
         return slash(path.join(basename, `[name].[ext]${suffix}`));
     };
@@ -185,11 +188,11 @@ module.exports = {
         ] : []),
         ...(APP.USE_FAVICONS ? [
             new FaviconsPlugin.AppIcon({
-                logo: './.favicons-source-1024x1024.png',
+                logo: path.join(__dirname, '.favicons-source-1024x1024.png'),
                 prefix: 'img/favicon/',
             }),
             new FaviconsPlugin.FavIcon({
-                logo: './.favicons-source-64x64.png',
+                logo: path.join(__dirname, '.favicons-source-64x64.png'),
                 prefix: 'img/favicon/',
             }),
         ] : []),
@@ -301,9 +304,10 @@ module.exports = {
         }),
         new ImageminPlugin({
             test: /\.(jpeg|jpg|png|gif|svg)$/i,
-            ...require('./imagemin.config.js'),
-            cacheFolder: path.join(__dirname, 'node_modules', '.cache', 'imagemin-plugin'),
-            disable: !(ENV.PROD || ENV.DEBUG),
+            exclude: /(fonts|font)/i,
+            name: resourceName('img', true),
+            imageminOptions: require('./imagemin.config.js'),
+            cache: !ENV.PROD,
         }),
         new BundleAnalyzerPlugin({
             analyzerMode: (ENV.DEV_SERVER ? 'server' : 'static'),
@@ -384,7 +388,7 @@ module.exports = {
                     {
                         loader: 'babel-loader',
                         options: {
-                             envName: ENV.NODE_ENV,
+                            envName: ENV.NODE_ENV,
                             ...require('./babel.config.js'),
                         },
                     },
