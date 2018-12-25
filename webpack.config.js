@@ -63,8 +63,8 @@ const resourceName = (prefix, hash = false) => {
     const suffix = (hash ? '?[hash]' : '');
     return (resourcePath) => {
         const url = slash(path.relative(ENV.SOURCE_PATH, resourcePath));
-        if (url.indexOf('favicon') !== -1) {
-            return slash(path.join(basename, 'favicon', `[name].[ext]${suffix}`));
+        if (url.startsWith('../')) {
+            return url.replace(/\.\.\//g, '') + suffix;
         }
         if (url.startsWith(`${basename}/`)) {
             return url + suffix;
@@ -285,6 +285,14 @@ module.exports = {
             }],
             ignoreUrlParametersMatching: [/^utm_/, /^[a-fA-F0-9]{32}$/],
         })] : []),
+        new ImageminPlugin({
+            test: /\.(jpeg|jpg|png|gif|svg)$/i,
+            exclude: /(fonts|font)/i,
+            name: resourceName('img', true),
+            imageminOptions: require('./imagemin.config.js'),
+            cache: !ENV.PROD,
+            loader: false,
+        }),
         new CopyWebpackPlugin([
             ...[
                 '**/.htaccess',
@@ -301,13 +309,6 @@ module.exports = {
         ], {
             copyUnmodified: !(ENV.PROD || ENV.DEBUG),
             debug: (ENV.DEBUG ? 'debug' : 'info'),
-        }),
-        new ImageminPlugin({
-            test: /\.(jpeg|jpg|png|gif|svg)$/i,
-            exclude: /(fonts|font)/i,
-            name: resourceName('img', true),
-            imageminOptions: require('./imagemin.config.js'),
-            cache: !ENV.PROD,
         }),
         new BundleAnalyzerPlugin({
             analyzerMode: (ENV.DEV_SERVER ? 'server' : 'static'),
