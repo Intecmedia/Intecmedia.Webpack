@@ -397,16 +397,16 @@ module.exports = {
                 test: /\.(jpeg|jpg|png|gif|svg)$/i,
                 exclude: /(fonts|font)/i,
                 oneOf: [
-                    //                    {
-                    //                        resourceQuery: /[&?]resize=.+/,
-                    //                        loader: './loader.resize.js',
-                    //                        options: { name: resourceName('img', true), limit: 32 * 1024 },
-                    //                    },
-                    //                    {
-                    //                        resourceQuery: /[&?]inline=inline/,
-                    //                        loader: 'url-loader',
-                    //                        options: { name: resourceName('img', true), limit: 32 * 1024 },
-                    //                    },
+                    {
+                        resourceQuery: /[&?]resize=.+/,
+                        loader: './loader.resize.js',
+                        options: { name: resourceName('img', true), limit: 32 * 1024 },
+                    },
+                    {
+                        resourceQuery: /[&?]inline=inline/,
+                        loader: 'url-loader',
+                        options: { name: resourceName('img', true), limit: 32 * 1024 },
+                    },
                     {
                         loader: 'file-loader',
                         options: { name: resourceName('img', true) },
