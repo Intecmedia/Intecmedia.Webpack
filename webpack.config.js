@@ -398,6 +398,7 @@ module.exports = {
                 exclude: /(fonts|font)/i,
                 oneOf: [
                     {
+                        exclude: /\.(svg)$/i,
                         resourceQuery: /[&?]resize=.+/,
                         loader: './loader.resize.js',
                         options: { name: resourceName('img', true), limit: 32 * 1024 },
