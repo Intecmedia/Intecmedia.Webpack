@@ -331,13 +331,13 @@ module.exports = {
                 options: {
                     context: Object.assign(
                         {},
-                        APP,
-                        ENV,
                         HTML_DATA,
+                        APP,
                         {
+                            ENV,
+                            SERVICE_WORKER_HASH,
                             DEBUG: ENV.DEBUG,
                             NODE_ENV: ENV.NODE_ENV,
-                            SERVICE_WORKER_HASH,
                         },
                     ),
                     searchPath: ENV.SOURCE_PATH,
