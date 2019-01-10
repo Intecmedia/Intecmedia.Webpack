@@ -18,7 +18,7 @@ module.exports = {
         }),
         imageminPngquant({
             speed: 3,
-            quality: '80-100',
+            quality: '85-100',
         }),
         imageminSvgo({
             ...svgoConfig,
