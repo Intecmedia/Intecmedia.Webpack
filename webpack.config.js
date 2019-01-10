@@ -331,8 +331,9 @@ module.exports = {
                 options: {
                     context: Object.assign(
                         {},
-                        HTML_DATA,
                         APP,
+                        ENV,
+                        HTML_DATA,
                         {
                             DEBUG: ENV.DEBUG,
                             NODE_ENV: ENV.NODE_ENV,
