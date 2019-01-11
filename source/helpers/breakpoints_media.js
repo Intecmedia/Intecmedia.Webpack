@@ -10,11 +10,11 @@ module.exports = (breakpoints, sizes) => {
     return sortedBreakpoints.map((breakpoint, index) => [breakpoint, [
         // not first
         ...(index >= 1 && sortedBreakpoints[index - 1]
-            ? [`(min-width: ${mergedSizes[sortedBreakpoints[index - 1]]}px)`]
+            ? [`(min-width: ${mergedSizes[sortedBreakpoints[index - 1]] + 1}px)`]
             : []),
         // not last
         ...(index !== sortedBreakpoints.length - 1
-            ? [`(max-width: ${mergedSizes[breakpoint] - 1}px)`]
+            ? [`(max-width: ${mergedSizes[breakpoint]}px)`]
             : []),
     ].join(' and ')]);
 };
