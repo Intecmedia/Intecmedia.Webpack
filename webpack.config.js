@@ -300,7 +300,7 @@ module.exports = {
             force: true,
         }),
         ...(ENV.PROD ? [new ImageminPlugin({
-            test: /\.(jpeg|jpg|png|gif|svg)$/i,
+            test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
             exclude: /(fonts|font)/i,
             name: resourceName('img', true),
             imageminOptions: require('./imagemin.config.js'),
@@ -395,7 +395,7 @@ module.exports = {
             },
             // image loaders
             {
-                test: /\.(jpeg|jpg|png|gif|svg)$/i,
+                test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
                 exclude: /(fonts|font)/i,
                 oneOf: [
                     {
@@ -417,7 +417,7 @@ module.exports = {
             },
             // font loaders
             {
-                test: /\.(eot|woff|woff2|ttf|svg)(\?v=.+)?$/i,
+                test: /\.(eot|woff|woff2|ttf|svg)(\?.*)?$/i,
                 exclude: /(img|images)/i,
                 loader: 'file-loader',
                 options: {
