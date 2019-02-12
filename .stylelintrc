@@ -46,7 +46,7 @@
         }],
         "plugin/no-unsupported-browser-features": [true, {
             "severity": "warning",
-            "ignore": ["calc", "rem", "flexbox", "viewport-units", "font-unicode-range", "multicolumn", "outline", "will-change"]
+            "ignore": ["calc", "rem", "flexbox", "viewport-units", "font-unicode-range", "multicolumn", "outline", "will-change", "css-sticky"]
         }]
     }
 }
