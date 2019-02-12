@@ -1,5 +1,3 @@
-/* stylelint-disable */
-
 @import '~bootstrap/scss/functions';
 
 // Variables
@@ -1111,5 +1109,3 @@ $positions: static, relative, absolute, fixed, sticky !default;
 
 $print-page-size: a3 !default;
 $print-body-min-width: map-get($grid-breakpoints, 'lg') !default;
-
-/* stylelint-enable */
