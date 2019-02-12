@@ -53,8 +53,6 @@ const SERVICE_WORKER_HASH = () => (fs.existsSync(SERVICE_WORKER_PATH) ? md5File.
 const SITEMAP = glob.sync(`${slash(ENV.SOURCE_PATH)}/**/*.html`, {
     ignore: [
         `${slash(ENV.SOURCE_PATH)}/partials/**/*.html`,
-        `${slash(ENV.SOURCE_PATH)}/google*.html`,
-        `${slash(ENV.SOURCE_PATH)}/yandex_*.html`,
     ],
 });
 
@@ -63,6 +61,9 @@ const resourceName = (prefix, hash = false) => {
     const suffix = (hash ? '?[hash]' : '');
     return (resourcePath) => {
         const url = slash(path.relative(ENV.SOURCE_PATH, resourcePath)).replace(/^(\.\.\/)+/g, '');
+        if (url.startsWith('partials/')) {
+            return slash(url + suffix);
+        }
         if (url.startsWith(`${basename}/`)) {
             return url + suffix;
         }
@@ -285,8 +286,7 @@ module.exports = {
             ...[
                 '**/.htaccess',
                 'img/**/*.{png,svg,ico,gif,xml,jpeg,jpg,json,webp}',
-                'google*.html',
-                'yandex_*.html',
+                'partials/**/*.svg',
                 '*.txt',
             ].map(from => ({
                 from,
