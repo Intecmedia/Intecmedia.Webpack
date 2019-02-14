@@ -1,5 +1,5 @@
 // Debug helper
-@if $NODE_ENV != 'production' or $DEBUG {
+@if $NODE_ENV != "production" or $DEBUG {
     body::after {
         /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
         @extend .btn-danger;
@@ -11,9 +11,9 @@
         font-size: $font-size-sm;
         line-height: 1rem;
         white-space: nowrap;
-        opacity: 0.8;
-        transition: 0.6s;
-        content: 'Only visible $NODE_ENV=#{$NODE_ENV} or DEBUG=#{$DEBUG}';
+        opacity: .8;
+        transition: .6s;
+        content: "Only visible $NODE_ENV=#{$NODE_ENV} or DEBUG=#{$DEBUG}";
 
         html:hover & {
             margin-bottom: 0;
@@ -22,7 +22,7 @@
 }
 
 // Debug helper
-@if $PACKAGE_NAME == 'Intecmedia.Webpack' {
+@if $PACKAGE_NAME == "Intecmedia.Webpack" {
     body::after {
         /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
         @extend .btn-danger;
@@ -34,9 +34,9 @@
         font-size: $font-size-sm;
         line-height: 1rem;
         white-space: nowrap;
-        opacity: 0.8;
-        transition: 0.6s;
-        content: 'Please rename the `name` in `package.json` file';
+        opacity: .8;
+        transition: .6s;
+        content: "Please rename the `name` in `package.json` file";
 
         html:hover & {
             margin-bottom: 0;

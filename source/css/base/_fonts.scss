@@ -1,6 +1,6 @@
 /* stylelint-disable */
 
-@function str-replace($string, $search, $replace: '') {
+@function str-replace($string, $search, $replace: "") {
     $index: str-index($string, $search);
 
     @if $index {
@@ -12,8 +12,8 @@
 
 @mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf) {
     $src: null;
-    $extmods: (eot: '?', svg: '#' + str-replace($name, ' ', '_'));
-    $formats: (otf: 'opentype', ttf: 'truetype');
+    $extmods: (eot: "?", svg: "#" + str-replace($name, " ", "_"));
+    $formats: (otf: "opentype", ttf: "truetype");
 
     @each $ext in $exts {
         $extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);

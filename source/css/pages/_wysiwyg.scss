@@ -27,7 +27,7 @@
         width: 100%;
     }
     // disabled table
-    table[border='0'] {
+    table[border="0"] {
         width: inherit;
         background: transparent;
         border: 0;
@@ -36,7 +36,7 @@
         > tbody,
         > tfoot {
             > tr {
-                /* stylelint-disable-next-line selector-max-compound-selectors */
+                /* stylelint-disable-next-line selector-max-compound-selectors, selector-max-type */
                 > th,
                 > td {
                     background: transparent;
@@ -60,7 +60,7 @@
             line-height: $line-height-base;
             text-align: center;
             vertical-align: middle;
-            content: '\2022';
+            content: "\2022";
         }
     }
     // responsive images
@@ -70,21 +70,23 @@
     }
 
     .img-rounded {
+        /* stylelint-disable-next-line declaration-no-important */
         border-radius: $border-radius !important;
     }
 
     .img-circle {
+        /* stylelint-disable-next-line declaration-no-important */
         border-radius: $border-radius !important;
         border-radius: 50%;
     }
     // image aligment
-    img[align='left'],
+    img[align="left"],
     img.pull-left {
         float: left;
         margin-right: $font-size-base;
     }
 
-    img[align='right'],
+    img[align="right"],
     img.pull-right {
         float: right;
         margin-left: $font-size-base;

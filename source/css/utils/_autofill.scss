@@ -1,6 +1,7 @@
 /* stylelint-disable property-no-vendor-prefix */
-@mixin no-autofill($background-color: '#fff') {
+@mixin no-autofill($background-color: "#fff") {
     &:-webkit-autofill {
+        /* stylelint-disable-next-line declaration-no-important */
         -webkit-box-shadow: 0 0 0 9999px $background-color !important;
     }
 }
@@ -8,6 +9,7 @@
 @mixin autofill($color, $background-color) {
     &:-webkit-autofill {
         -webkit-box-shadow: 0 0 0 9999px $background-color inset;
+        /* stylelint-disable-next-line declaration-no-important */
         -webkit-text-fill-color: $color !important;
     }
 }
@@ -20,6 +22,7 @@
 
 @mixin color-autofill($color) {
     &:-webkit-autofill {
+        /* stylelint-disable-next-line declaration-no-important */
         -webkit-text-fill-color: $color !important;
     }
 }
@@ -27,7 +30,9 @@
 @mixin hover-autofill($color, $background-color) {
     &:-webkit-autofill:hover,
     &:-webkit-autofill:focus {
+        /* stylelint-disable-next-line declaration-no-important */
         -webkit-box-shadow: 0 0 0 9999px $background-color inset !important;
+        /* stylelint-disable-next-line declaration-no-important */
         -webkit-text-fill-color: $color !important;
     }
 }
@@ -35,6 +40,7 @@
 @mixin hover-bg-autofill($background-color) {
     &:-webkit-autofill:hover,
     &:-webkit-autofill:focus {
+        /* stylelint-disable-next-line declaration-no-important */
         -webkit-box-shadow: 0 0 0 9999px $background-color inset !important;
     }
 }
@@ -42,6 +48,7 @@
 @mixin hover-color-autofill($color) {
     &:-webkit-autofill:hover,
     &:-webkit-autofill:focus {
+        /* stylelint-disable-next-line declaration-no-important */
         -webkit-text-fill-color: $color !important;
     }
 }

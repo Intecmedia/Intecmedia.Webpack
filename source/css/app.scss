@@ -1,22 +1,22 @@
 
 // Base
-@import 'base/variables';
-@import 'base/bootstrap';
-@import 'base/fonts';
+@import "base/variables";
+@import "base/bootstrap";
+@import "base/fonts";
 
 // Utils
-@import 'utils/mixins';
-@import 'utils/resize';
-@import 'utils/utils';
+@import "utils/mixins";
+@import "utils/resize";
+@import "utils/utils";
 
 // Layout
-@import 'layout/header';
-@import 'layout/layout';
-@import 'layout/footer';
+@import "layout/header";
+@import "layout/layout";
+@import "layout/footer";
 
 // Pages
-@import 'pages/wysiwyg';
-@import 'pages/index';
+@import "pages/wysiwyg";
+@import "pages/index";
 
 // Vendor
 // @import 'external/foobar';
