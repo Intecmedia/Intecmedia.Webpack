@@ -43,7 +43,7 @@
         }],
         "plugin/no-low-performance-animation": [true, {
             "severity": "warning",
-            "ignore": ["opacity", "transform", "color", "background", "background-position", "background-color", "border-color"]
+            "ignore": ["opacity", "transform", "color", "background", "background-position", "background-color", "border-color", "fill", "stroke-dashoffset"]
         }],
         "plugin/no-unsupported-browser-features": [true, {
             "severity": "warning",
