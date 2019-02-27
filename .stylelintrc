@@ -15,6 +15,8 @@
             "^[a-z0-9\\-_]+$"
         ],
         "max-nesting-depth": 4,
+        "declaration-no-important": null,
+        "selector-max-type": null,
         "selector-max-compound-selectors": 4,
         "scss/at-else-closing-brace-newline-after": "always-last-in-chain",
         "scss/at-else-closing-brace-space-after": "always-intermediate",
