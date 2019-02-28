@@ -58,7 +58,7 @@ const SITEMAP = glob.sync(`${slash(ENV.SOURCE_PATH)}/**/*.html`, {
 
 const resourceName = (prefix, hash = false) => {
     const basename = path.basename(prefix);
-    const suffix = (hash ? '?[hash]' : '');
+    const suffix = (hash ? '?[contenthash]' : '');
     return (resourcePath) => {
         const url = slash(path.relative(ENV.SOURCE_PATH, resourcePath)).replace(/^(\.\.\/)+/g, '');
         if (url.startsWith('partials/')) {
