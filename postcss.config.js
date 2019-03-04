@@ -20,7 +20,6 @@ module.exports = {
             require('postcss-custom-properties')(),
             require('postcss-font-display')({ display: 'swap' }),
             require('postcss-object-fit-images')(),
-            require('postcss-color-rgba-fallback')(),
             require('postcss-flexbugs-fixes')(),
             require('postcss-will-change')(),
             require('css-mqpacker')({ sort: sortCSSmq.desktopFirst }),
