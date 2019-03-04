@@ -105,7 +105,7 @@ module.exports = {
     optimization: {
         minimizer: [
             new TerserPlugin({
-                test: /\.m?js(\?.*)?$/i,
+                test: /\.(js|mjs)(\?.*)?$/i,
             }),
         ],
     },
@@ -365,7 +365,7 @@ module.exports = {
             },
             ...(ENV.USE_LINTERS ? [{
                 enforce: 'pre',
-                test: /\.js(\?.*)?$/i,
+                test: /\.(js|mjs)(\?.*)?$/i,
                 exclude: [
                     path.join(__dirname, 'node_modules'),
                     path.join(ENV.SOURCE_PATH, 'js', 'external'),
@@ -380,16 +380,21 @@ module.exports = {
                 },
             }] : []),
             {
-                test: /\.m?js(\?.*)?$/i,
+                test: /\.(js|mjs)(\?.*)?$/i,
                 exclude: {
-                    test: path.join(__dirname, 'node_modules'),
+                    test: [
+                        // disable babel transform
+                        path.join(__dirname, 'node_modules'),
+                    ],
                     exclude: [
+                        // enable babel transform
                         path.join(__dirname, 'node_modules', 'focus-within'),
                         path.join(__dirname, 'node_modules', 'gsap'),
                     ],
                 },
                 loaders: [
                     {
+                        // global jQuery import
                         loader: 'imports-loader',
                         options: {
                             $: 'jquery',
