@@ -14,6 +14,7 @@ module.exports = {
             require('pixrem')(),
             require('postcss-focus')(),
             require('postcss-focus-visible')(),
+            require('postcss-focus-within')(),
             require('pleeease-filters')(),
             require('postcss-image-set-polyfill')(),
             ...(APP.CSS_INLINE_URL ? [require('./postcss.inline-url.js')()] : []),

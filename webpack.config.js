@@ -41,6 +41,7 @@ const StyleLintPlugin = (ENV.USE_LINTERS ? require('stylelint-webpack-plugin') :
 const BrotliPlugin = (ENV.PROD ? require('brotli-webpack-plugin') : () => {});
 const CompressionPlugin = (ENV.PROD ? require('compression-webpack-plugin') : () => {});
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
 const PrettyPlugin = (APP.HTML_PRETTY ? require('./plugin.pretty.js') : () => {});
@@ -99,6 +100,14 @@ module.exports = {
         filename: 'js/app.min.js',
         path: ENV.OUTPUT_PATH,
         publicPath: APP.PUBLIC_PATH,
+    },
+
+    optimization: {
+        minimizer: [
+            new TerserPlugin({
+                test: /\.m?js(\?.*)?$/i,
+            }),
+        ],
     },
 
     performance: (ENV.PROD && !ENV.DEBUG ? {
@@ -326,7 +335,7 @@ module.exports = {
         rules: [
             // html loaders
             {
-                test: /\.html$/i,
+                test: /\.html(\?.*)?$/i,
                 loader: './loader.html.js',
                 options: {
                     context: Object.assign(
@@ -356,7 +365,7 @@ module.exports = {
             },
             ...(ENV.USE_LINTERS ? [{
                 enforce: 'pre',
-                test: /\.js$/i,
+                test: /\.js(\?.*)?$/i,
                 exclude: [
                     path.join(__dirname, 'node_modules'),
                     path.join(ENV.SOURCE_PATH, 'js', 'external'),
@@ -371,10 +380,13 @@ module.exports = {
                 },
             }] : []),
             {
-                test: /\.js$/i,
+                test: /\.m?js(\?.*)?$/i,
                 exclude: {
                     test: path.join(__dirname, 'node_modules'),
-                    exclude: path.join(__dirname, 'node_modules', 'gsap'),
+                    exclude: [
+                        path.join(__dirname, 'node_modules', 'focus-within'),
+                        path.join(__dirname, 'node_modules', 'gsap'),
+                    ],
                 },
                 loaders: [
                     {
