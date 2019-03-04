@@ -2,18 +2,14 @@
 
 if (NODE_ENV === 'production' || DEBUG) {
     // eslint-disable-next-line global-require
-    require('picturefill');
-    // eslint-disable-next-line global-require
-    require('@babel/polyfill');
-    // eslint-disable-next-line global-require
-    const focusWithin = require('focus-within');
-    focusWithin(document);
-    // eslint-disable-next-line global-require
-    const objectFitImages = require('object-fit-images');
-    objectFitImages(null, { watchMQ: true });
-}
+    require('./polyfills/focus-within.js');
 
-if ((NODE_ENV === 'production' || DEBUG) && !Object.assign) {
     // eslint-disable-next-line global-require
-    Object.assign = require('object-assign');
+    require('./polyfills/object-fit-images.js');
+
+    // eslint-disable-next-line global-require
+    require('./polyfills/picturefill.js');
+
+    // eslint-disable-next-line global-require
+    require('./polyfills/object-assign');
 }
