@@ -6,8 +6,8 @@ if (NODE_ENV === 'production' || DEBUG) {
     // eslint-disable-next-line global-require
     require('@babel/polyfill');
     // eslint-disable-next-line global-require
-    window.focusWithin = require('focus-within');
-    window.focusWithin(document);
+    const focusWithin = require('focus-within');
+    focusWithin(document);
 }
 
 if ((NODE_ENV === 'production' || DEBUG) && !Object.assign) {
