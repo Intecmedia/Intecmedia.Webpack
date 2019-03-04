@@ -169,7 +169,6 @@ module.exports = {
             jQuery: 'jquery',
             'window.$': 'jquery',
             'window.jQuery': 'jquery',
-            Popper: ['popper.js', 'default'],
         }),
         new webpack.DefinePlugin({
             DEBUG: JSON.stringify(ENV.DEBUG),
