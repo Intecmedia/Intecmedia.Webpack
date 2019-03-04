@@ -1,3 +1,5 @@
 const objectFitImages = require('object-fit-images');
 
-objectFitImages(null, { watchMQ: true });
+jQuery(() => {
+    objectFitImages(null, { watchMQ: true });
+});
