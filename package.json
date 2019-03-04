@@ -110,6 +110,7 @@
         "postcss-devtools": "latest",
         "postcss-flexbugs-fixes": "latest",
         "postcss-focus": "latest",
+        "postcss-focus-visible": "latest",
         "postcss-font-display": "latest",
         "postcss-image-set-polyfill": "latest",
         "postcss-input-style": "latest",

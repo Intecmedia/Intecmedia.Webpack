@@ -13,6 +13,7 @@ module.exports = {
         ...(ENV.PROD || ENV.DEBUG ? [
             require('pixrem')(),
             require('postcss-focus')(),
+            require('postcss-focus-visible')(),
             require('pleeease-filters')(),
             require('postcss-image-set-polyfill')(),
             ...(APP.CSS_INLINE_URL ? [require('./postcss.inline-url.js')()] : []),
