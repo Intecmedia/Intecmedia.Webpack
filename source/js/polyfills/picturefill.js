@@ -1,5 +1,10 @@
 const picturefill = require('picturefill');
 
-jQuery(() => {
+jQuery(($) => {
     picturefill();
+
+    $(window).on('newPageReady', () => {
+        // Barba events
+        picturefill({ reevaluate: true });
+    });
 });
