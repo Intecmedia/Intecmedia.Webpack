@@ -1,4 +1,4 @@
-const focusWithin = require('focus-within/index.js');
+import focusWithin from 'focus-within';
 
 jQuery(() => {
     focusWithin(document);

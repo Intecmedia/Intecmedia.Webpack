@@ -379,6 +379,7 @@ module.exports = {
                 },
             }] : []),
             {
+                type: 'javascript/auto',
                 test: /\.(js|mjs)(\?.*)?$/i,
                 exclude: {
                     test: [
