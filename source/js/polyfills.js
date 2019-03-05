@@ -2,6 +2,21 @@
 
 if (NODE_ENV === 'production' || DEBUG) {
     // eslint-disable-next-line global-require
+    require('~/polyfills/object-assign.js');
+
+    // eslint-disable-next-line global-require
+    require('~/polyfills/promise.js');
+
+    // eslint-disable-next-line global-require
+    require('core-js/es6/symbol');
+
+    // eslint-disable-next-line global-require
+    require('core-js/fn/array/from');
+
+    // eslint-disable-next-line global-require
+    require('~/polyfills/intersection-observer.js');
+
+    // eslint-disable-next-line global-require
     require('~/polyfills/focus-within.js');
 
     // eslint-disable-next-line global-require
@@ -9,10 +24,4 @@ if (NODE_ENV === 'production' || DEBUG) {
 
     // eslint-disable-next-line global-require
     require('~/polyfills/picturefill.js');
-
-    // eslint-disable-next-line global-require
-    require('~/polyfills/object-assign.js');
-
-    // eslint-disable-next-line global-require
-    require('~/polyfills/intersection-observer.js');
 }
