@@ -97,12 +97,23 @@ module.exports = {
     },
 
     output: {
-        filename: 'js/app.min.js',
+        filename: 'js/[name].min.js',
+        chunkFilename: 'js/[name].min.js',
         path: ENV.OUTPUT_PATH,
         publicPath: APP.PUBLIC_PATH,
     },
 
     optimization: {
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    test: /node_modules/,
+                    chunks: 'initial',
+                    name: 'vendor',
+                    enforce: true,
+                },
+            },
+        },
         minimizer: [
             new TerserPlugin({
                 test: /\.(js|mjs)(\?.*)?$/i,

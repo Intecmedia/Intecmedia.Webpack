@@ -8,6 +8,9 @@ if (NODE_ENV === 'production' || DEBUG) {
     require('~/polyfills/promise.js');
 
     // eslint-disable-next-line global-require
+    require('~/polyfills/fetch.js');
+
+    // eslint-disable-next-line global-require
     require('core-js/es6/symbol');
 
     // eslint-disable-next-line global-require

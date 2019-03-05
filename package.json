@@ -157,6 +157,7 @@
         "webpack-log": "latest",
         "webpack-notifier": "latest",
         "webpack-sources": "latest",
+        "whatwg-fetch": "latest",
         "workbox-webpack-plugin": "latest"
     },
     "devDependencies": {}
