@@ -89,6 +89,7 @@
         "imagemin-svgo": "latest",
         "imagemin-webpack": "latest",
         "imports-loader": "latest",
+        "intersection-observer": "latest",
         "jquery": "latest",
         "json-loader": "latest",
         "loader-utils": "latest",
