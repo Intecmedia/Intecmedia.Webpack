@@ -136,9 +136,7 @@ module.exports = {
 
     plugins: [
         ...(ENV.WATCH ? [new BrowserSyncPlugin()] : []),
-        new CleanWebpackPlugin([
-            'build/**/*',
-        ], {
+        new CleanWebpackPlugin({
             root: __dirname,
             exclude: ['.gitkeep'],
         }),
