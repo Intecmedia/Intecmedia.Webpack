@@ -41,7 +41,7 @@ const StyleLintPlugin = (ENV.USE_LINTERS ? require('stylelint-webpack-plugin') :
 const BrotliPlugin = (ENV.PROD ? require('brotli-webpack-plugin') : () => {});
 const CompressionPlugin = (ENV.PROD ? require('compression-webpack-plugin') : () => {});
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+// const TerserPlugin = require('terser-webpack-plugin');
 
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
 const PrettyPlugin = (APP.HTML_PRETTY ? require('./plugin.pretty.js') : () => {});
@@ -114,11 +114,13 @@ module.exports = {
                 },
             },
         },
+        /*
         minimizer: [
             new TerserPlugin({
                 test: /\.(js|mjs)(\?.*)?$/i,
             }),
         ],
+        */
     },
 
     performance: (ENV.PROD && !ENV.DEBUG ? {
