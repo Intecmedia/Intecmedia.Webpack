@@ -402,7 +402,6 @@ module.exports = {
             {
                 type: 'javascript/auto',
                 test: /\.(js|mjs)(\?.*)?$/i,
-                /*
                 exclude: {
                     test: [
                         // disable babel transform
@@ -414,7 +413,6 @@ module.exports = {
                         path.join(__dirname, 'node_modules', 'gsap'),
                     ],
                 },
-*/
                 loaders: [
                     {
                         // global jQuery import
