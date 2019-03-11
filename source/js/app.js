@@ -3,6 +3,7 @@ require('../css/app.scss');
 
 require('~/polyfills.js');
 
+require('~/components/sentry.js');
 require('~/components/bootstrap.js');
 
 jQuery(($) => {
