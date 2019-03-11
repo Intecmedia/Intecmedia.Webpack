@@ -3,8 +3,10 @@ const objectFitImages = require('object-fit-images');
 jQuery(($) => {
     objectFitImages(null, { watchMQ: true });
 
-    $(window).on('newPageReady', () => {
+    $(window).on('pushState replaceState', () => {
         // Barba events
-        objectFitImages(null, { watchMQ: true });
+        setTimeout(() => {
+            objectFitImages(null, { watchMQ: true });
+        }, 0);
     });
 });

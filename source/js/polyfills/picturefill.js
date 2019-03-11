@@ -3,8 +3,10 @@ const picturefill = require('picturefill');
 jQuery(($) => {
     picturefill();
 
-    $(window).on('newPageReady', () => {
+    $(window).on('pushState replaceState', () => {
         // Barba events
-        picturefill({ reevaluate: true });
+        setTimeout(() => {
+            picturefill({ reevaluate: true });
+        }, 0);
     });
 });
