@@ -1,7 +1,8 @@
 /* global NODE_ENV DEBUG */
 require('../css/app.scss');
 
-require('~/components/polyfills.js');
+require('~/polyfills.js');
+
 require('~/components/bootstrap.js');
 
 jQuery(($) => {
