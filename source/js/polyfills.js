@@ -1,4 +1,5 @@
 /* global NODE_ENV DEBUG */
+require('~/polyfills/history-events.js');
 
 if (NODE_ENV === 'production' || DEBUG) {
     // eslint-disable-next-line global-require

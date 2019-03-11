@@ -186,6 +186,7 @@ module.exports = {
         new webpack.DefinePlugin({
             DEBUG: JSON.stringify(ENV.DEBUG),
             NODE_ENV: JSON.stringify(ENV.NODE_ENV),
+            SENTRY_DSN: JSON.stringify(APP.SENTRY_DSN),
         }),
         new WebpackNotifierPlugin({
             alwaysNotify: true,
@@ -403,6 +404,7 @@ module.exports = {
             {
                 type: 'javascript/auto',
                 test: /\.(js|mjs)(\?.*)?$/i,
+                /*
                 exclude: {
                     test: [
                         // disable babel transform
@@ -414,6 +416,7 @@ module.exports = {
                         path.join(__dirname, 'node_modules', 'gsap'),
                     ],
                 },
+*/
                 loaders: [
                     {
                         // global jQuery import

@@ -46,6 +46,7 @@
         "@babel/preset-env": "latest",
         "@babel/runtime": "latest",
         "@gfx/zopfli": "latest",
+        "@sentry/browser": "latest",
         "autoprefixer": "latest",
         "babel-eslint": "latest",
         "babel-loader": "latest",

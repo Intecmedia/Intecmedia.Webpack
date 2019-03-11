@@ -1,7 +1,8 @@
 /* global NODE_ENV DEBUG */
 require('../css/app.scss');
-require('~/polyfills.js');
-require('~/bootstrap.js');
+
+require('~/components/polyfills.js');
+require('~/components/bootstrap.js');
 
 jQuery(($) => {
     $(document.documentElement).addClass('ready-js');
