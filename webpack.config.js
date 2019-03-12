@@ -116,6 +116,7 @@ module.exports = {
         },
         minimizer: (ENV.PROD ? [
             new UglifyJsPlugin({
+                cache: !ENV.DEBUG,
                 test: /\.(js)(\?.*)?$/i,
                 parallel: true,
                 sourceMap: true,
@@ -247,7 +248,7 @@ module.exports = {
                     removeScriptTypeAttributes: true,
                 }),
                 hash: true,
-                cache: !(ENV.PROD || ENV.DEBUG),
+                cache: !ENV.DEBUG,
                 title: APP.TITLE,
             });
         })),
@@ -320,7 +321,7 @@ module.exports = {
             exclude: /(fonts|font)/i,
             name: resourceName('img', true),
             imageminOptions: require('./imagemin.config.js'),
-            cache: true,
+            cache: !ENV.DEBUG,
             loader: true,
         })] : []),
         new BundleAnalyzerPlugin({
@@ -389,7 +390,7 @@ module.exports = {
                 loader: 'eslint-loader',
                 options: {
                     fix: true,
-                    cache: !ENV.PROD,
+                    cache: !ENV.DEBUG,
                     quiet: ENV.PROD,
                     emitError: false,
                     emitWarning: false,
