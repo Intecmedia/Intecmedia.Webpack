@@ -147,7 +147,7 @@
         "stylelint-webpack-plugin": "latest",
         "svgo": "latest",
         "tapable": "latest",
-        "terser-webpack-plugin": "latest",
+        "uglifyjs-webpack-plugin": "latest",
         "url-loader": "latest",
         "webapp-webpack-plugin": "latest",
         "webpack": "latest",

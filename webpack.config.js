@@ -40,7 +40,7 @@ const StyleLintPlugin = (ENV.USE_LINTERS ? require('stylelint-webpack-plugin') :
 const BrotliPlugin = (ENV.PROD ? require('brotli-webpack-plugin') : () => {});
 const CompressionPlugin = (ENV.PROD ? require('compression-webpack-plugin') : () => {});
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const TerserPlugin = (ENV.PROD ? require('terser-webpack-plugin') : () => {});
+const UglifyJsPlugin = (ENV.PROD ? require('uglifyjs-webpack-plugin') : () => {});
 
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
 const PrettyPlugin = (APP.HTML_PRETTY ? require('./plugin.pretty.js') : () => {});
@@ -115,12 +115,12 @@ module.exports = {
             },
         },
         minimizer: (ENV.PROD ? [
-            new TerserPlugin({
-                test: /\.(js|mjs)(\?.*)?$/i,
+            new UglifyJsPlugin({
+                test: /\.(js)(\?.*)?$/i,
                 parallel: true,
                 sourceMap: true,
                 extractComments: true,
-                terserOptions: {
+                uglifyOptions: {
                     output: {
                         comments: false,
                     },
