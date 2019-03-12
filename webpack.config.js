@@ -421,7 +421,7 @@ module.exports = {
                         loader: 'babel-loader',
                         options: {
                             envName: ENV.NODE_ENV,
-                            ...BabelConfig.options,
+                            ...BabelConfig,
                         },
                     },
                 ],
