@@ -1,3 +1,4 @@
+const path = require('path');
 const ENV = require('./app.env.js');
 
 module.exports = {
@@ -14,5 +15,14 @@ module.exports = {
             modules: true,
             targets: { browsers: ENV.BROWSERS },
         }],
+    ],
+    exclude: [
+        // disable babel transform
+        path.join(__dirname, 'node_modules'),
+    ],
+    include: [
+        // enable babel transform
+        path.join(__dirname, 'node_modules', 'focus-within'),
+        path.join(__dirname, 'node_modules', 'gsap'),
     ],
 };

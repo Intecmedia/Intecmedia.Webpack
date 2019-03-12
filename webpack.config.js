@@ -45,6 +45,7 @@ const TerserPlugin = (ENV.PROD ? require('terser-webpack-plugin') : () => {});
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
 const PrettyPlugin = (APP.HTML_PRETTY ? require('./plugin.pretty.js') : () => {});
 const SvgoPlugin = require('./plugin.svgo.js');
+const BabelConfig = require('./babel.config.js');
 
 const SERVICE_WORKER_BASE = slash(path.relative(APP.PUBLIC_PATH, '/'));
 const SERVICE_WORKER_PATH = path.join(ENV.OUTPUT_PATH, SERVICE_WORKER_BASE, '/service-worker.js');
@@ -400,12 +401,11 @@ module.exports = {
                 exclude: {
                     test: [
                         // disable babel transform
-                        path.join(__dirname, 'node_modules'),
+                        ...BabelConfig.exclude,
                     ],
                     exclude: [
                         // enable babel transform
-                        path.join(__dirname, 'node_modules', 'focus-within'),
-                        path.join(__dirname, 'node_modules', 'gsap'),
+                        ...BabelConfig.include,
                     ],
                 },
                 loaders: [
@@ -421,7 +421,7 @@ module.exports = {
                         loader: 'babel-loader',
                         options: {
                             envName: ENV.NODE_ENV,
-                            ...require('./babel.config.js'),
+                            ...BabelConfig,
                         },
                     },
                 ],
