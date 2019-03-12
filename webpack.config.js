@@ -401,11 +401,11 @@ module.exports = {
                 exclude: {
                     test: [
                         // disable babel transform
-                        ...BabelConfig.exclude,
+                        ...BabelConfig.excludeTransform,
                     ],
                     exclude: [
                         // enable babel transform
-                        ...BabelConfig.include,
+                        ...BabelConfig.includeTransform,
                     ],
                 },
                 loaders: [
@@ -421,7 +421,7 @@ module.exports = {
                         loader: 'babel-loader',
                         options: {
                             envName: ENV.NODE_ENV,
-                            ...BabelConfig,
+                            ...BabelConfig.options,
                         },
                     },
                 ],
