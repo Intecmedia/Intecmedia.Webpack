@@ -22,22 +22,33 @@
         "server-dev": "cross-env NODE_ENV=development DEBUG=0 webpack-dev-server --hot --inline -d",
         "server-debug": "cross-env NODE_ENV=development DEBUG=1 webpack-dev-server --hot --inline -d",
         "build": "npm-run-all js-lint css-lint prod html-lint",
-        "browserslist": "npx browserslist",
+        "browserslist-dev": "cross-env NODE_ENV=development npx browserslist",
+        "browserslist-prod": "cross-env NODE_ENV=production npx browserslist",
+        "browserslist": "cross-env NODE_ENV=production npx browserslist",
         "start": "npm run build"
     },
     "author": "Dmitry Pyatkov",
     "license": "MIT",
-    "browserslist": [
-        "Android >= 5",
-        "IE >= 10",
-        "iOS >= 9",
-        "Safari >= 9",
-        "last 2 Edge versions",
-        "last 2 Chrome versions",
-        "last 2 ChromeAndroid version",
-        "last 2 Firefox versions",
-        "last 2 Opera versions"
-    ],
+    "browserslist": {
+        "production": [
+            "Android >= 5",
+            "IE >= 10",
+            "iOS >= 9",
+            "Safari >= 9",
+            "last 2 Edge versions",
+            "last 2 Chrome versions",
+            "last 2 ChromeAndroid version",
+            "last 2 Firefox versions",
+            "last 2 Opera versions"
+        ],
+        "development": [
+            "last 2 Safari versions",
+            "last 2 Chrome versions",
+            "last 2 ChromeAndroid version",
+            "last 2 Firefox versions",
+            "last 2 Opera versions"
+        ]
+    },
     "dependencies": {
         "@babel/cli": "latest",
         "@babel/core": "latest",

@@ -9,7 +9,7 @@ const NODE_ENV = PROD ? 'production' : 'development';
 const USE_SOURCE_MAP = (DEBUG && !PROD) || DEV_SERVER;
 const USE_LINTERS = PROD || DEBUG;
 
-const { name: PACKAGE_NAME, browserslist: BROWSERS } = require('./package.json');
+const { name: PACKAGE_NAME, browserslist } = require('./package.json');
 
 const SOURCE_PATH = path.resolve(__dirname, 'source');
 const OUTPUT_PATH = path.resolve(__dirname, 'build');
@@ -37,5 +37,5 @@ module.exports = {
     SOURCE_PATH,
     OUTPUT_PATH,
     PACKAGE_NAME,
-    BROWSERS,
+    BROWSERS: browserslist[NODE_ENV],
 };
