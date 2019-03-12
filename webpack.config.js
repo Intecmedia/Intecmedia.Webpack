@@ -35,13 +35,12 @@ const ImageminPlugin = require('imagemin-webpack');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const UglifyJsPlugin = (ENV.PROD ? require('uglifyjs-webpack-plugin') : () => {});
 const BrowserSyncPlugin = (ENV.WATCH ? require('browser-sync-webpack-plugin') : () => {});
 const StyleLintPlugin = (ENV.USE_LINTERS ? require('stylelint-webpack-plugin') : () => {});
 const BrotliPlugin = (ENV.PROD ? require('brotli-webpack-plugin') : () => {});
 const CompressionPlugin = (ENV.PROD ? require('compression-webpack-plugin') : () => {});
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-// const TerserPlugin = require('terser-webpack-plugin');
+const TerserPlugin = (ENV.PROD ? require('terser-webpack-plugin') : () => {});
 
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
 const PrettyPlugin = (APP.HTML_PRETTY ? require('./plugin.pretty.js') : () => {});
@@ -114,13 +113,19 @@ module.exports = {
                 },
             },
         },
-        /*
-        minimizer: [
+        minimizer: (ENV.PROD ? [
             new TerserPlugin({
                 test: /\.(js|mjs)(\?.*)?$/i,
+                parallel: true,
+                sourceMap: true,
+                extractComments: true,
+                terserOptions: {
+                    output: {
+                        comments: false,
+                    },
+                },
             }),
-        ],
-        */
+        ] : []),
     },
 
     performance: (ENV.PROD && !ENV.DEBUG ? {
@@ -147,16 +152,6 @@ module.exports = {
         ...(ENV.PROD ? [
             new CaseSensitivePathsPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),
-            new UglifyJsPlugin({
-                parallel: true,
-                sourceMap: true,
-                extractComments: true,
-                uglifyOptions: {
-                    output: {
-                        comments: false,
-                    },
-                },
-            }),
             new BrotliPlugin({
                 asset: '[path].br[query]',
                 test: /\.(js|css)$/,
