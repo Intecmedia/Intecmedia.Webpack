@@ -3,7 +3,6 @@ const ENV = require('./app.env.js');
 
 module.exports = {
     options: {
-        configFile: false,
         plugins: [
             '@babel/transform-runtime',
         ],

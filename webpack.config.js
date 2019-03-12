@@ -420,6 +420,8 @@ module.exports = {
                     {
                         loader: 'babel-loader',
                         options: {
+                            babelrc: false,
+                            configFile: false,
                             envName: ENV.NODE_ENV,
                             ...BabelConfig.options,
                         },
