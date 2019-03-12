@@ -142,8 +142,7 @@ module.exports = {
     plugins: [
         ...(ENV.WATCH ? [new BrowserSyncPlugin()] : []),
         new CleanWebpackPlugin({
-            root: __dirname,
-            exclude: ['.gitkeep', '.htaccess'],
+            cleanOnceBeforeBuildPatterns: ['**/*', '!.gitkeep', '!.htaccess'],
         }),
         new MiniCssExtractPlugin({
             filename: 'css/app.min.css',
