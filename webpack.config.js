@@ -334,9 +334,7 @@ module.exports = {
     devtool: ENV.USE_SOURCE_MAP ? 'eval-source-map' : 'nosources-source-map',
 
     resolve: {
-        alias: {
-            '~': path.join(ENV.SOURCE_PATH, 'js'),
-        },
+        ...require('./resolve.config.js'),
     },
 
     module: {
