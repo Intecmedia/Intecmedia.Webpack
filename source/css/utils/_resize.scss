@@ -1,10 +1,10 @@
 @mixin webp-background-image($url, $quality: 85) {
     html.webp & {
-        background-image: url("#{$url}?resize=x&quality=#{$quality}&format=webp&suffix=original");
+        background-image: url("#{$url}?resize=x&quality=#{$quality}&format=webp&suffix=webp");
     }
     html.no-webp &,
     html.no-js & {
-        background-image: url("#{$url}?resize=x&quality=#{$quality}&format=jpg&suffix=original");
+        background-image: url("#{$url}");
     }
 }
 
