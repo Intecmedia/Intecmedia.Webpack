@@ -9,7 +9,7 @@ module.exports = {
         presets: [
             ['@babel/preset-env', {
                 modules: 'commonjs',
-                useBuiltIns: 'entry',
+                useBuiltIns: 'usage',
                 targets: { browsers: ENV.BROWSERS },
             }],
             ['airbnb', {
