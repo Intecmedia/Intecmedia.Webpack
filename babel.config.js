@@ -10,10 +10,12 @@ module.exports = {
             ['@babel/preset-env', {
                 modules: 'commonjs',
                 useBuiltIns: 'usage',
+                debug: ENV.DEBUG || !ENV.PROD,
                 targets: { browsers: ENV.BROWSERS },
             }],
             ['airbnb', {
                 modules: true,
+                debug: ENV.DEBUG || !ENV.PROD,
                 targets: { browsers: ENV.BROWSERS },
             }],
         ],
