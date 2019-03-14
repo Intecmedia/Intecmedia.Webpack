@@ -94,6 +94,7 @@ function processHtml(html, options, loaderCallback) {
 
 module.exports = function HtmlLoader() {
     const loaderContext = this;
+    if (loaderContext.cacheable) loaderContext.cacheable();
     const loaderCallback = loaderContext.async();
 
     loaderContext.addDependency(path.join(__dirname, 'app.config.js'));
