@@ -12,10 +12,10 @@ if (NODE_ENV === 'production' || DEBUG) {
     require('~/polyfills/fetch.js');
 
     // eslint-disable-next-line global-require
-    require('core-js/es6/symbol');
+    require('core-js/es/symbol');
 
     // eslint-disable-next-line global-require
-    require('core-js/fn/array/from');
+    require('core-js/es/array/from');
 
     // eslint-disable-next-line global-require
     require('~/polyfills/intersection-observer.js');
