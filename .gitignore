@@ -3,6 +3,7 @@ build/img
 build/js
 build/css
 build/*.html
+build/partials/svg/*.svg
 node_modules
 package-lock.json
 .DS_Store
