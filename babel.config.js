@@ -8,6 +8,7 @@ module.exports = {
         ],
         presets: [
             ['@babel/preset-env', {
+                corejs: 3,
                 modules: 'commonjs',
                 useBuiltIns: 'usage',
                 debug: ENV.DEBUG || !ENV.PROD,
@@ -26,7 +27,7 @@ module.exports = {
     ],
     includeTransform: [
         // enable babel transform
-        path.join(__dirname, 'node_modules', '@babel', 'polyfill'),        
+        path.join(__dirname, 'node_modules', '@babel', 'polyfill'),
         path.join(__dirname, 'node_modules', 'focus-within'),
         path.join(__dirname, 'node_modules', 'gsap'),
     ],
