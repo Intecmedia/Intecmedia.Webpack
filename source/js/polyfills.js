@@ -24,6 +24,9 @@ if (NODE_ENV === 'production' || DEBUG) {
     require('~/polyfills/focus-within.js');
 
     // eslint-disable-next-line global-require
+    require('~/polyfills/focus-visible.js');
+
+    // eslint-disable-next-line global-require
     require('~/polyfills/object-fit-images.js');
 
     // eslint-disable-next-line global-require

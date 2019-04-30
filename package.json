@@ -85,6 +85,7 @@
         "expose-loader": "latest",
         "file-loader": "latest",
         "flat-cache": "latest",
+        "focus-visible": "latest",
         "focus-within": "latest",
         "front-matter": "latest",
         "glob": "latest",
