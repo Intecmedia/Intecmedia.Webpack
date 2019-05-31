@@ -39,7 +39,7 @@ const BrowserSyncPlugin = (ENV.WATCH ? require('browser-sync-webpack-plugin') : 
 const StyleLintPlugin = (ENV.USE_LINTERS ? require('stylelint-webpack-plugin') : () => {});
 const BrotliPlugin = (ENV.PROD ? require('brotli-webpack-plugin') : () => {});
 const CompressionPlugin = (ENV.PROD ? require('compression-webpack-plugin') : () => {});
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const UglifyJsPlugin = (ENV.PROD ? require('uglifyjs-webpack-plugin') : () => {});
 
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
