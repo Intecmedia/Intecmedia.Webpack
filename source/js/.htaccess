@@ -13,8 +13,8 @@
     RewriteRule ^(.*)\.js $1\.js\.gz [QSA]
 
     # Serve correct content types, and prevent mod_deflate double gzip.
-    RewriteRule \.js\.gz$ - [T=text/js,E=no-gzip:1]
-    RewriteRule \.js\.br$ - [T=text/js,E=no-gzip:1]
+    RewriteRule \.js\.gz$ - [T=application/javascript,E=no-gzip:1]
+    RewriteRule \.js\.br$ - [T=application/javascript,E=no-gzip:1]
 
     <Files *.js.gz>
         # fix content type
