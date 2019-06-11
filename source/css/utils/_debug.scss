@@ -1,19 +1,24 @@
 // Debug helper
 @if $NODE_ENV != "production" or $DEBUG {
     body::after {
-        background-color: $danger;
-        bottom: 0;
-        color: $white;
-        content: "Only visible $NODE_ENV=#{$NODE_ENV} or DEBUG=#{$DEBUG}";
-        font-size: $font-size-sm;
-        line-height: 1rem;
-        margin-bottom: -1rem;
-        opacity: .8;
         position: fixed;
         right: 0;
-        transition: .6s;
-        white-space: nowrap;
+        bottom: 0;
         z-index: $zindex-modal;
+
+        margin-bottom: -1rem;
+
+        color: $white;
+        font-size: $font-size-sm;
+        line-height: 1rem;
+        white-space: nowrap;
+
+        background-color: $danger;
+        opacity: .8;
+
+        transition: .6s;
+
+        content: "Only visible $NODE_ENV=#{$NODE_ENV} or DEBUG=#{$DEBUG}";
 
         html:hover & {
             margin-bottom: 0;
@@ -24,19 +29,24 @@
 // Debug helper
 @if $PACKAGE_NAME == "Intecmedia.Webpack" {
     body::after {
-        background-color: $danger;
-        bottom: 0;
-        color: $white;
-        content: "Please rename the `name` in `package.json` file";
-        font-size: $font-size-sm;
-        line-height: 1rem;
-        margin-bottom: -1rem;
-        opacity: .8;
         position: fixed;
         right: 0;
-        transition: .6s;
-        white-space: nowrap;
+        bottom: 0;
         z-index: $zindex-modal;
+
+        margin-bottom: -1rem;
+
+        color: $white;
+        font-size: $font-size-sm;
+        line-height: 1rem;
+        white-space: nowrap;
+
+        background-color: $danger;
+        opacity: .8;
+
+        transition: .6s;
+
+        content: "Please rename the `name` in `package.json` file";
 
         html:hover & {
             margin-bottom: 0;
