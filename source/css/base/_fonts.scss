@@ -22,11 +22,11 @@
     }
 
     @font-face {
-        font-weight: $weight;
+        font-display: swap;
         font-family: quote($name);
         font-style: $style;
+        font-weight: $weight;
         src: $src;
-        font-display: swap;
     }
 }
 

@@ -28,9 +28,9 @@
     }
     // disabled table
     table[border="0"] {
-        width: inherit;
         background: transparent;
         border: 0;
+        width: inherit;
 
         > thead,
         > tbody,
@@ -47,20 +47,20 @@
     }
     // colored bulls
     ul:not([class]) > li {
-        position: relative;
         list-style: none;
+        position: relative;
 
         &::before {
-            position: absolute;
-            width: $font-size-base;
-            margin-left: -$font-size-base;
             color: $body-color;
-            font-size: $font-size-base;
+            content: "\2022";
             font-family: inherit;
+            font-size: $font-size-base;
             line-height: $line-height-base;
+            margin-left: -$font-size-base;
+            position: absolute;
             text-align: center;
             vertical-align: middle;
-            content: "\2022";
+            width: $font-size-base;
         }
     }
     // responsive images
@@ -95,8 +95,8 @@
     .text-center img,
     img.text-center {
         display: block;
-        margin-right: auto;
         margin-left: auto;
+        margin-right: auto;
     }
     // blockquotes
     blockquote {
