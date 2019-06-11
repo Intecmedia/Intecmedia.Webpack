@@ -252,7 +252,9 @@ module.exports = {
                 title: APP.TITLE,
             });
         })),
-        new SvgoPlugin({ enabled: true }),
+        ...(ENV.PROD || ENV.DEBUG ? [
+            new SvgoPlugin({ enabled: true }),
+        ] : []),
         ...(APP.HTML_PRETTY ? [new PrettyPlugin()] : []),
         ...(APP.USE_SERVICE_WORKER ? [new WorkboxPlugin.GenerateSW({
             cacheId: ENV.PACKAGE_NAME,
