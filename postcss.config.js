@@ -23,7 +23,7 @@ module.exports = {
             require('postcss-flexbugs-fixes')(),
             require('postcss-will-change')(),
             // require('css-mqpacker')({ sort: sortCSSmq.desktopFirst }),
-            require('autoprefixer')({ browsers: ENV.BROWSERS }), // this always last
+            require('autoprefixer')({ overrideBrowserslist: ENV.BROWSERS }), // this always last
             require('cssnano')({
                 preset: ['default', {
                     discardComments: { removeAll: true },
