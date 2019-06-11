@@ -27,6 +27,10 @@
         "scss/at-mixin-argumentless-call-parentheses": "always",
         "scss/selector-no-redundant-nesting-selector": true,
         "order/properties-alphabetical-order": false,
+        "plugin/rational-order": [true, {
+            "border-in-box-model": false,
+            "empty-line-between-groups": true
+        }],
         "property-no-unknown": [true, {
             "ignoreProperties": [
                 "font-range", "min-font-size", "max-font-size", "lower-font-range", "upper-font-range",

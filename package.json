@@ -25,9 +25,6 @@
         "browserslist-dev": "cross-env NODE_ENV=development npx browserslist",
         "browserslist-prod": "cross-env NODE_ENV=production npx browserslist",
         "browserslist": "cross-env NODE_ENV=production npx browserslist",
-        "profile": "cross-env NODE_ENV=development DEBUG=0 webpack -d --profile --json > node_modules/.cache/profile.json",
-        "profile-debug": "cross-env NODE_ENV=development DEBUG=1 webpack -d --profile --json > node_modules/.cache/profile-debug.json",
-        "profile-prod": "cross-env NODE_ENV=production DEBUG=0 webpack -p --profile --json > node_modules/.cache/profile-prod.json",
         "start": "npm run build"
     },
     "author": "Dmitry Pyatkov",

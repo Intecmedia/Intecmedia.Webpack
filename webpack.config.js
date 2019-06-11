@@ -324,11 +324,14 @@ module.exports = {
             cache: !ENV.DEBUG,
             loader: true,
         })] : []),
-        new BundleAnalyzerPlugin({
+        ...(ENV.PROD || ENV.DEBUG ? [new BundleAnalyzerPlugin({
             analyzerMode: (ENV.DEV_SERVER ? 'server' : 'static'),
             openAnalyzer: ENV.DEV_SERVER,
             reportFilename: path.join(__dirname, 'node_modules', '.cache', `bundle-analyzer-${ENV.NODE_ENV}.html`),
         }),
+        new webpack.debug.ProfilingPlugin({
+            outputPath: path.join(__dirname, 'node_modules', '.cache', `profiling-plugin-${ENV.NODE_ENV}.json`),
+        })] : []),
     ],
 
     devtool: ENV.USE_SOURCE_MAP ? 'eval-source-map' : 'nosources-source-map',
