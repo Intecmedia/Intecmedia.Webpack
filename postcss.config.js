@@ -1,7 +1,4 @@
 /* eslint global-require: "off" */
-// const sortCSSmq = require('sort-css-media-queries');
-
-const APP = require('./app.config.js');
 const ENV = require('./app.env.js');
 
 module.exports = {
@@ -21,7 +18,6 @@ module.exports = {
             require('postcss-object-fit-images')(),
             require('postcss-flexbugs-fixes')(),
             require('postcss-will-change')(),
-            // require('css-mqpacker')({ sort: sortCSSmq.desktopFirst }),
             require('autoprefixer')({ overrideBrowserslist: ENV.BROWSERS }), // this always last
             require('cssnano')({
                 preset: ['default', {
