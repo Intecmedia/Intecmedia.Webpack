@@ -357,6 +357,9 @@ module.exports = {
                         },
                     ),
                     searchPath: ENV.SOURCE_PATH,
+                    svgo: {
+                        enabled: ENV.PROD || ENV.DEBUG,
+                    },
                 },
             },
             // javascript loaders

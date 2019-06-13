@@ -12,6 +12,10 @@ const deepMerge = require('lodash.merge');
 const posthtml = require('posthtml');
 const posthtmlCommentAfter = require('posthtml-comment-after');
 
+const SVGO = require('svgo');
+const svgoConfig = require('./svgo.config.js');
+const deasync = require('deasync');
+
 const helpers = require('./source/helpers/index.js');
 
 const logger = weblog({ name: 'loader-html' });
@@ -32,6 +36,10 @@ const DEFAULT_OPTIONS = {
     requireIgnore: /^(\w+[:]|\/\/)/i,
     requireReplace: {},
     searchPath: './source',
+    svgo: {
+        enabled: true,
+        ...svgoConfig,
+    },
 };
 
 const SRC_SEPARATOR = /\s+/;
@@ -50,14 +58,9 @@ const OPTIONS_SCHEMA = {
         requireIgnore: { instanceof: 'RegExp' },
         requireReplace: { type: 'object' },
         searchPath: { type: 'string' },
+        svgo: { type: 'object' },
     },
 };
-
-const SVGO = require('svgo');
-const svgoConfig = require('./svgo.config.js');
-
-const svgoInstance = new SVGO(svgoConfig);
-const deasync = require('deasync');
 
 function processHtml(html, options, loaderCallback) {
     const parser = posthtml();
@@ -108,6 +111,8 @@ module.exports = function HtmlLoader() {
 
     const options = deepMerge({}, DEFAULT_OPTIONS, loaderUtils.getOptions(loaderContext));
     validateOptions(OPTIONS_SCHEMA, options, 'loader-html');
+
+    const svgoInstance = new SVGO(options.svgo);
 
     const nunjucksLoader = new nunjucks.FileSystemLoader(options.searchPath, { noCache: true });
     const nunjucksEnvironment = new nunjucks.Environment(nunjucksLoader, options.environment);
