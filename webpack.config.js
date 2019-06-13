@@ -99,6 +99,7 @@ module.exports = {
         chunkFilename: 'js/[name].min.js',
         path: ENV.OUTPUT_PATH,
         publicPath: APP.PUBLIC_PATH,
+        hashFunction: 'md5',
     },
 
     optimization: {
@@ -265,7 +266,8 @@ module.exports = {
                 'fonts/*.woff2',
             ],
             globIgnores: [
-                '*.map', '*.LICENSE',
+                '*.map',
+                '*.LICENSE',
             ],
             include: [],
             runtimeCaching: [{
