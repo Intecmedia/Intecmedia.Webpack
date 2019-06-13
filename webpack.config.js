@@ -16,7 +16,6 @@ const logger = weblog({ name: 'webpack-config' });
 
 const ENV = require('./app.env.js');
 const APP = require('./app.config.js');
-const HTML_DATA = require('./source/html.data.js');
 
 if (ENV.STANDALONE) {
     logger.info(`Name: ${ENV.PACKAGE_NAME}`);
@@ -347,7 +346,6 @@ module.exports = {
                 options: {
                     context: Object.assign(
                         {},
-                        HTML_DATA,
                         APP,
                         {
                             ENV,

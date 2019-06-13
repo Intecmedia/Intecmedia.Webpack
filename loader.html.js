@@ -106,10 +106,14 @@ module.exports = function HtmlLoader() {
     if (loaderContext.cacheable) loaderContext.cacheable();
     const loaderCallback = loaderContext.async();
 
-    loaderContext.addDependency(path.join(__dirname, 'app.config.js'));
+    delete require.cache[require.resolve('./source/html.data.js')];
+    /* eslint-disable-next-line global-require */
+    const htmlData = require('./source/html.data.js');
     loaderContext.addDependency(path.join(__dirname, 'source', 'html.data.js'));
 
-    const options = deepMerge({}, DEFAULT_OPTIONS, loaderUtils.getOptions(loaderContext));
+    const options = deepMerge({}, DEFAULT_OPTIONS, loaderUtils.getOptions(loaderContext), {
+        context: htmlData,
+    });
     validateOptions(OPTIONS_SCHEMA, options, 'loader-html');
 
     const svgoInstance = new SVGO(options.svgo);
