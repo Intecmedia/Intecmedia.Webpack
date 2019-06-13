@@ -106,13 +106,13 @@ module.exports = function HtmlLoader() {
     if (loaderContext.cacheable) loaderContext.cacheable();
     const loaderCallback = loaderContext.async();
 
-    delete require.cache[require.resolve('./source/html.data.js')];
-    /* eslint-disable-next-line global-require */
-    const htmlData = require('./source/html.data.js');
-    loaderContext.addDependency(path.join(__dirname, 'source', 'html.data.js'));
+    const htmlDataModule = require.resolve('./source/html.data.js');
+    loaderContext.addDependency(htmlDataModule);
+    delete require.cache[htmlDataModule];
 
     const options = deepMerge({}, DEFAULT_OPTIONS, loaderUtils.getOptions(loaderContext), {
-        context: htmlData,
+        /* eslint-disable-next-line global-require, import/no-dynamic-require */
+        context: require(htmlDataModule),
     });
     validateOptions(OPTIONS_SCHEMA, options, 'loader-html');
 
