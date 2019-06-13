@@ -53,6 +53,12 @@ const OPTIONS_SCHEMA = {
     },
 };
 
+const SVGO = require('svgo');
+const svgoConfig = require('./svgo.config.js');
+
+const svgoInstance = new SVGO(svgoConfig);
+const deasync = require('deasync');
+
 function processHtml(html, options, loaderCallback) {
     const parser = posthtml();
     if (options.requireTags && Object.keys(options.requireTags).length) {
@@ -151,6 +157,20 @@ module.exports = function HtmlLoader() {
         const templateSource = nunjucksGetSource.call(this, filename);
         if (!(templateSource && templateSource.src)) {
             return templateSource;
+        }
+        if (filename.endsWith('.svg')) {
+            let minifiedSvg;
+            const originalSvg = templateSource.src;
+            svgoInstance.optimize(originalSvg).then((result) => {
+                minifiedSvg = result;
+            }).catch((error) => {
+                minifiedSvg = { data: originalSvg };
+                return loaderCallback(error);
+            });
+            deasync.loopWhile(() => minifiedSvg === undefined);
+            return Object.assign({}, templateSource, {
+                src: minifiedSvg.data,
+            });
         }
         if (!frontMatter.test(templateSource.src)) {
             return templateSource;

@@ -44,7 +44,6 @@ const UglifyJsPlugin = (ENV.PROD ? require('uglifyjs-webpack-plugin') : () => {}
 
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
 const PrettyPlugin = (APP.HTML_PRETTY ? require('./plugin.pretty.js') : () => {});
-const SvgoPlugin = require('./plugin.svgo.js');
 const BabelConfig = require('./babel.config.js');
 
 const SERVICE_WORKER_BASE = slash(path.relative(APP.PUBLIC_PATH, '/'));
@@ -170,7 +169,7 @@ module.exports = {
             }),
         ] : []),
         new webpack.BannerPlugin({
-            banner: `ENV.NODE_ENV=${ENV.NODE_ENV} | ENV.DEBUG=${ENV.DEBUG} | chunkhash=[chunkhash]`,
+            banner: `ENV.NODE_ENV=${ENV.NODE_ENV} | ENV.DEBUG=${ENV.DEBUG}`,
         }),
         new webpack.ProvidePlugin({
             $: 'jquery',
@@ -247,14 +246,11 @@ module.exports = {
                     minifyJS: true,
                     removeScriptTypeAttributes: true,
                 }),
-                hash: true,
+                hash: ENV.PROD || ENV.DEBUG,
                 cache: !ENV.DEBUG,
                 title: APP.TITLE,
             });
         })),
-        ...(ENV.PROD || ENV.DEBUG ? [
-            new SvgoPlugin({ enabled: true }),
-        ] : []),
         ...(APP.HTML_PRETTY ? [new PrettyPlugin()] : []),
         ...(APP.USE_SERVICE_WORKER ? [new WorkboxPlugin.GenerateSW({
             cacheId: ENV.PACKAGE_NAME,
@@ -321,7 +317,7 @@ module.exports = {
         ...(ENV.PROD ? [new ImageminPlugin({
             test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
             exclude: /(fonts|font)/i,
-            name: resourceName('img', true),
+            name: resourceName('img', ENV.PROD || ENV.DEBUG),
             imageminOptions: require('./imagemin.config.js'),
             cache: !ENV.DEBUG,
             loader: true,
@@ -441,16 +437,16 @@ module.exports = {
                         exclude: /\.(svg)$/i,
                         resourceQuery: /[&?]resize=.+/,
                         loader: './loader.resize.js',
-                        options: { name: resourceName('img', true), limit: 32 * 1024 },
+                        options: { name: resourceName('img', ENV.PROD || ENV.DEBUG), limit: 32 * 1024 },
                     },
                     {
                         resourceQuery: /[&?]inline=inline/,
                         loader: 'url-loader',
-                        options: { name: resourceName('img', true), limit: 32 * 1024 },
+                        options: { name: resourceName('img', ENV.PROD || ENV.DEBUG), limit: 32 * 1024 },
                     },
                     {
                         loader: 'file-loader',
-                        options: { name: resourceName('img', true) },
+                        options: { name: resourceName('img', ENV.PROD || ENV.DEBUG) },
                     },
                 ],
             },
