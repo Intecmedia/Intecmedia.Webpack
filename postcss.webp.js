@@ -1,6 +1,5 @@
-/* eslint global-require: "off" */
 const path = require('path');
-const webpcss = require('webpcss').default;
+const { default: webpcss } = require('webpcss');
 const { URLSearchParams } = require('url');
 
 module.exports = () => webpcss({
