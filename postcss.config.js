@@ -1,4 +1,5 @@
 /* eslint global-require: "off" */
+const path = require('path');
 const ENV = require('./app.env.js');
 const { URLSearchParams } = require('url');
 
@@ -26,8 +27,10 @@ module.exports = {
                 replace_to: ({ url }) => {
                     const [urlPath, searchPath = ''] = url.split('?', 2);
                     const searchParams = new URLSearchParams(searchPath);
+                    const name = path.basename(urlPath, path.extname(urlPath));
                     searchParams.set('resize', '');
                     searchParams.set('format', 'webp');
+                    searchParams.set('name', name);
                     return [urlPath, searchParams].join('?');
                 },
             }),
