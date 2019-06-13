@@ -167,6 +167,7 @@
         "webpack-log": "latest",
         "webpack-notifier": "latest",
         "webpack-sources": "latest",
+        "webpcss": "latest",
         "whatwg-fetch": "latest",
         "workbox-webpack-plugin": "latest"
     },
