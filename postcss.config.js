@@ -16,7 +16,6 @@ module.exports = {
             require('postcss-focus-within')(),
             require('pleeease-filters')(),
             require('postcss-image-set-polyfill')(),
-            ...(APP.CSS_INLINE_URL ? [require('./postcss.inline-url.js')()] : []),
             require('postcss-custom-properties')(),
             require('postcss-font-display')({ display: 'swap' }),
             require('postcss-object-fit-images')(),

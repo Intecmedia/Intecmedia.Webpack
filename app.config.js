@@ -11,6 +11,5 @@ module.exports = {
     THEME_COLOR: '#fff',
     BACKGROUND_COLOR: '#fff',
     HTML_PRETTY: true,
-    CSS_INLINE_URL: false,
     SENTRY_DSN: '',
 };
