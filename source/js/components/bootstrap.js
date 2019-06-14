@@ -1,5 +1,5 @@
-require('bootstrap/js/dist/index');
-require('bootstrap/js/dist/util');
+// require('bootstrap/js/dist/index');
+// require('bootstrap/js/dist/util');
 // require('bootstrap/js/dist/alert');
 // require('bootstrap/js/dist/button');
 // require('bootstrap/js/dist/carousel');
