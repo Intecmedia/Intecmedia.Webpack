@@ -6,13 +6,13 @@ module.exports = () => webpcss({
     webpClass: '.webp',
     noWebpClass: '',
     replace_from: /.(png|jpg|jpeg)(\?.*)?$/i,
-    replace_to: ({ url }) => {
-        const [urlPath, searchPath = ''] = url.split('?', 2);
-        const searchParams = new URLSearchParams(searchPath);
-        const name = path.basename(urlPath, path.extname(urlPath));
-        searchParams.set('resize', '');
-        searchParams.set('format', 'webp');
-        searchParams.set('name', name);
-        return [urlPath, searchParams].join('?');
+    replace_to: (input) => {
+        const [request, search = ''] = input.url.split('?', 2);
+        const params = new URLSearchParams(search);
+        if (params.has('resize')) return input.url;
+        params.set('name', path.basename(request, path.extname(request)));
+        params.set('resize', '');
+        params.set('format', 'webp');
+        return [request, params].join('?');
     },
 });
