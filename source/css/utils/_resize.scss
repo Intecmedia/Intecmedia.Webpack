@@ -1,14 +1,28 @@
 @mixin webp-background-image($url, $quality: 85) {
+    background-image: url("#{$url}");
+
     html.webp & {
         background-image: url("#{$url}?resize=x&quality=#{$quality}&format=webp&suffix=webp");
-    }
-    html.no-webp &,
-    html.no-js & {
-        background-image: url("#{$url}");
     }
 }
 
 @mixin resize-background-image($url, $quality: 85, $breakpoints: $grid-breakpoints) {
+    @include media-breakpoint-only(xs) {
+        background-image: url("#{$url}?resize=576x&quality=#{$quality}&format=jpg&suffix=xs");
+    }
+    @include media-breakpoint-only(sm) {
+        background-image: url("#{$url}?resize=768x&quality=#{$quality}&format=jpg&suffix=sm");
+    }
+    @include media-breakpoint-only(md) {
+        background-image: url("#{$url}?resize=992x&quality=#{$quality}&format=jpg&suffix=md");
+    }
+    @include media-breakpoint-only(lg) {
+        background-image: url("#{$url}?resize=1200x&quality=#{$quality}&format=jpg&suffix=lg");
+    }
+    @include media-breakpoint-only(xl) {
+        background-image: url("#{$url}?resize=1900x&quality=#{$quality}&format=jpg&suffix=xl");
+    }
+
     html.webp & {
         @include media-breakpoint-only(xs) {
             background-image: url("#{$url}?resize=576x&quality=#{$quality}&format=webp&suffix=xs");
@@ -24,25 +38,6 @@
         }
         @include media-breakpoint-only(xl) {
             background-image: url("#{$url}?resize=1900x&quality=#{$quality}&format=webp&suffix=xl");
-        }
-    }
-
-    html.no-webp &,
-    html.no-js & {
-        @include media-breakpoint-only(xs) {
-            background-image: url("#{$url}?resize=576x&quality=#{$quality}&format=jpg&suffix=xs");
-        }
-        @include media-breakpoint-only(sm) {
-            background-image: url("#{$url}?resize=768x&quality=#{$quality}&format=jpg&suffix=sm");
-        }
-        @include media-breakpoint-only(md) {
-            background-image: url("#{$url}?resize=992x&quality=#{$quality}&format=jpg&suffix=md");
-        }
-        @include media-breakpoint-only(lg) {
-            background-image: url("#{$url}?resize=1200x&quality=#{$quality}&format=jpg&suffix=lg");
-        }
-        @include media-breakpoint-only(xl) {
-            background-image: url("#{$url}?resize=1900x&quality=#{$quality}&format=jpg&suffix=xl");
         }
     }
 }

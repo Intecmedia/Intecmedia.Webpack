@@ -3,7 +3,7 @@ const { default: webpcss } = require('webpcss');
 const { URLSearchParams } = require('url');
 
 module.exports = () => webpcss({
-    webpClass: '.webp',
+    webpClass: 'html.webp',
     noWebpClass: '',
     replace_from: /.(png|jpg|jpeg)(\?.*)?$/i,
     replace_to: (input) => {
