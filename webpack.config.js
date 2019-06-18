@@ -47,7 +47,7 @@ const BabelConfig = require('./babel.config.js');
 
 const SERVICE_WORKER_BASE = slash(path.relative(APP.PUBLIC_PATH, '/'));
 const SERVICE_WORKER_PATH = path.join(ENV.OUTPUT_PATH, SERVICE_WORKER_BASE, '/service-worker.js');
-const SERVICE_WORKER_HASH = () => (fs.existsSync(SERVICE_WORKER_PATH) ? md5File.sync(SERVICE_WORKER_PATH) : '');
+APP.SERVICE_WORKER_HASH = () => (fs.existsSync(SERVICE_WORKER_PATH) ? md5File.sync(SERVICE_WORKER_PATH) : '');
 
 const SITEMAP = glob.sync(`${slash(ENV.SOURCE_PATH)}/**/*.html`, {
     ignore: [
@@ -346,16 +346,9 @@ module.exports = {
                 test: /\.html(\?.*)?$/i,
                 loader: './loader.html.js',
                 options: {
-                    context: Object.assign(
-                        {},
-                        APP,
-                        {
-                            ENV,
-                            SERVICE_WORKER_HASH,
-                            DEBUG: ENV.DEBUG,
-                            NODE_ENV: ENV.NODE_ENV,
-                        },
-                    ),
+                    context: {
+                        ...APP,
+                    },
                     searchPath: ENV.SOURCE_PATH,
                     svgo: {
                         enabled: ENV.PROD || ENV.DEBUG,

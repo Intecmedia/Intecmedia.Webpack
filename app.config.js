@@ -1,4 +1,6 @@
 /* eslint max-len: "off" */
+const ENV = require('./app.env.js');
+
 module.exports = {
     TITLE: '$APP.TITLE$',
     SHORT_NAME: '$APP.SHORT_NAME$',
@@ -12,4 +14,5 @@ module.exports = {
     BACKGROUND_COLOR: '#fff',
     HTML_PRETTY: true,
     SENTRY_DSN: '',
+    ENV,
 };
