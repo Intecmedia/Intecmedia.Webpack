@@ -12,11 +12,13 @@ const loggerHtmlLint = weblog({ name: 'html-lint' });
 const loggerW3CValidator = weblog({ name: 'w3c-validator' });
 const htmllintrc = JSON.parse(fs.readFileSync('./.htmllintrc', 'utf8'));
 
+const ENV = require('./app.env.js');
+
 if (htmllintrc.plugins) {
     htmllint.use(htmllintrc.plugins);
 }
 
-const callbackHtmlLint = () => glob('./build/**/*.html', {
+const callbackHtmlLint = () => glob(`${ENV.OUTPUT_PATH}/**/*.html`, {
     ignore: [],
 }, (error, files) => {
     if (error) throw error;
@@ -42,7 +44,7 @@ const callbackHtmlLint = () => glob('./build/**/*.html', {
     });
 });
 
-const callbackW3CValidator = callback => W3CValidator('./build/**/*.html', {
+const callbackW3CValidator = callback => W3CValidator(`${ENV.OUTPUT_PATH}/**/*.html`, {
     format: 'json',
     skipNonHtml: true,
     verbose: false,
