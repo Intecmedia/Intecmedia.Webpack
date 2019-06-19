@@ -85,7 +85,6 @@ module.exports = {
         },
         compress: false,
         contentBase: path.resolve(__dirname, 'source'),
-        open: true,
         overlay: { warnings: false, errors: true },
         watchContentBase: true,
     },
@@ -141,11 +140,14 @@ module.exports = {
     } : false),
 
     plugins: [
-        ...(ENV.WATCH ? [new BrowserSyncPlugin()] : []),
-        new CleanWebpackPlugin({
-            cleanOnceBeforeBuildPatterns: ['**/*', '!.gitkeep', '!.htaccess'],
-            cleanAfterEveryBuildPatterns: ['**/*.br', '**/*.gz'],
-        }),
+        ...(ENV.WATCH ? [
+            new BrowserSyncPlugin(),
+        ] : [
+            new CleanWebpackPlugin({
+                cleanOnceBeforeBuildPatterns: ['**/*', '!.gitkeep', '!.htaccess'],
+                cleanAfterEveryBuildPatterns: ['**/*.br', '**/*.gz'],
+            }),
+        ]),
         new MiniCssExtractPlugin({
             filename: 'css/app.min.css',
             allChunks: true,
