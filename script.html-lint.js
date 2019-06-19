@@ -33,7 +33,6 @@ const callbackHtmlLint = () => glob('./build/**/*.html', {
                 loggerHtmlLint.info(`${relative}: line ${issue.line} col ${issue.column}`);
                 loggerHtmlLint.warn(`${htmllint.messages.renderIssue(issue)}\n`);
             });
-            loggerHtmlLint.error(`found ${issues.length} errors out of ${files.length} files`);
             if (issues.length > 0) {
                 process.exitCode = 1;
             }
