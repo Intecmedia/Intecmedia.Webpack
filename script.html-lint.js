@@ -4,18 +4,19 @@ const glob = require('glob');
 const htmllint = require('htmllint');
 const weblog = require('webpack-log');
 
+const ENV = require('./app.env.js');
+
 const logger = weblog({ name: 'html-lint' });
 const htmllintrc = JSON.parse(fs.readFileSync('./.htmllintrc', 'utf8'));
-const { output: { path: BUILD_PATH } } = require('./webpack.config.js');
 
 if (htmllintrc.plugins) {
     htmllint.use(htmllintrc.plugins);
 }
 
-glob(`${BUILD_PATH}/**/*.html`, {
+glob(`${ENV.OUTPUT_PATH}/**/*.html`, {
     ignore: [
-        `${BUILD_PATH}/google*.html`,
-        `${BUILD_PATH}/yandex_*.html`,
+        `${ENV.OUTPUT_PATH}/google*.html`,
+        `${ENV.OUTPUT_PATH}/yandex_*.html`,
     ],
 }, (error, files) => {
     if (error) throw error;
