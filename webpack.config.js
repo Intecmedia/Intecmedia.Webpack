@@ -203,7 +203,7 @@ module.exports = {
                 prefix: 'img/favicon/',
             }),
         ] : []),
-        ...(ENV.SITEMAP.map((template) => {
+        ...(ENV.SITEMAP.map(({ template }) => {
             const basename = path.basename(template);
             const filename = (basename === 'index.html' ? path.join(
                 ENV.OUTPUT_PATH,
@@ -302,7 +302,7 @@ module.exports = {
                 from,
                 to: ENV.OUTPUT_PATH,
                 context: ENV.SOURCE_PATH,
-                ignore: ENV.SITEMAP,
+                ignore: ENV.SITEMAP.map(i => i.filename),
             })),
         ], {
             copyUnmodified: !(ENV.PROD || ENV.DEBUG),
