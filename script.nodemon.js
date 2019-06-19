@@ -1,5 +1,4 @@
 const path = require('path');
-const glob = require('glob');
 const slash = require('slash');
 const nodemon = require('nodemon');
 const nodemonCli = require('nodemon/lib/cli');
@@ -7,11 +6,7 @@ const deepMerge = require('lodash.merge');
 
 const ENV = require('./app.env.js');
 
-const initialHtml = glob.sync(`${slash(ENV.SOURCE_PATH)}/**/*.html`, {
-    ignore: [
-        `${slash(ENV.SOURCE_PATH)}/partials/**/*.html`,
-    ],
-}).map(i => slash(path.relative(__dirname, i)));
+const initialHtml = ENV.SITEMAP.map(i => slash(path.relative(__dirname, i)));
 
 const nodemonConfig = {
     delay: '2500',

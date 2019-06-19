@@ -4,7 +4,6 @@ const fs = require('fs');
 const realcwd = fs.realpathSync(process.cwd());
 if (process.cwd() !== realcwd) process.chdir(realcwd);
 
-const glob = require('glob');
 const path = require('path');
 const slash = require('slash');
 const webpack = require('webpack');
@@ -48,12 +47,6 @@ const BabelConfig = require('./babel.config.js');
 const SERVICE_WORKER_BASE = slash(path.relative(APP.PUBLIC_PATH, '/'));
 const SERVICE_WORKER_PATH = path.join(ENV.OUTPUT_PATH, SERVICE_WORKER_BASE, '/service-worker.js');
 APP.SERVICE_WORKER_HASH = () => (fs.existsSync(SERVICE_WORKER_PATH) ? md5File.sync(SERVICE_WORKER_PATH) : '');
-
-const SITEMAP = glob.sync(`${slash(ENV.SOURCE_PATH)}/**/*.html`, {
-    ignore: [
-        `${slash(ENV.SOURCE_PATH)}/partials/**/*.html`,
-    ],
-});
 
 const resourceName = (prefix, hash = false) => {
     const basename = path.basename(prefix);
@@ -210,7 +203,7 @@ module.exports = {
                 prefix: 'img/favicon/',
             }),
         ] : []),
-        ...(SITEMAP.map((template) => {
+        ...(ENV.SITEMAP.map((template) => {
             const basename = path.basename(template);
             const filename = (basename === 'index.html' ? path.join(
                 ENV.OUTPUT_PATH,
@@ -309,7 +302,7 @@ module.exports = {
                 from,
                 to: ENV.OUTPUT_PATH,
                 context: ENV.SOURCE_PATH,
-                ignore: SITEMAP,
+                ignore: ENV.SITEMAP,
             })),
         ], {
             copyUnmodified: !(ENV.PROD || ENV.DEBUG),
