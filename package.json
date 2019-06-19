@@ -13,7 +13,6 @@
         "watch": "npm run watch-dev",
         "watch-dev": "nodemon --exec \"cross-env NODE_ENV=development DEBUG=0 webpack --watch -d\"",
         "watch-debug": "nodemon --exec \"cross-env NODE_ENV=development DEBUG=1 webpack --watch -d\"",
-        "watch-prod": "nodemon --exec \"cross-env NODE_ENV=production DEBUG=0 webpack --watch -p\"",
         "js-lint": "cross-env NODE_ENV=development eslint --config .eslintrc --ignore-path .eslintignore --fix *.js source/**/*.js",
         "css-lint": "cross-env NODE_ENV=development stylelint source/**/*.scss --fix --syntax scss --formatter verbose --ignore-path .stylelintignore --config .stylelintrc",
         "html-lint": "cross-env NODE_ENV=development node ./script.html-lint.js",
