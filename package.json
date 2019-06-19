@@ -110,6 +110,7 @@
         "md5-file": "latest",
         "mini-css-extract-plugin": "latest",
         "node-sass": "latest",
+        "node-w3c-validator": "latest",
         "nodemon": "latest",
         "npm-run-all": "latest",
         "nunjucks": "latest",
