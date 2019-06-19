@@ -31,10 +31,23 @@ const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.html`, {
     ignore: [
         `${slash(SOURCE_PATH)}/partials/**/*.html`,
     ],
-}).map(i => ({
-    template: slash(i),
-    filename: slash(path.relative(__dirname, i)),
-}));
+}).map((i) => {
+    const basename = path.basename(i, '.html');
+    const template = slash(path.relative(__dirname, i));
+    const filename = slash(basename === 'index' ? path.join(
+        path.relative(SOURCE_PATH, i),
+    ) : path.join(
+        path.relative(SOURCE_PATH, path.dirname(i)),
+        basename,
+        'index.html',
+    ));
+    const url = slash(path.dirname(filename)) + path.posix.sep;
+    return {
+        template,
+        filename,
+        url: (url === './' ? '' : url),
+    };
+});
 
 module.exports = {
     DEBUG,

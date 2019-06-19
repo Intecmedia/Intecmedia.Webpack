@@ -203,48 +203,33 @@ module.exports = {
                 prefix: 'img/favicon/',
             }),
         ] : []),
-        ...(ENV.SITEMAP.map(({ template }) => {
-            const basename = path.basename(template);
-            const filename = (basename === 'index.html' ? path.join(
-                ENV.OUTPUT_PATH,
-                path.relative(ENV.SOURCE_PATH, template),
-            ) : path.join(
-                ENV.OUTPUT_PATH,
-                path.relative(ENV.SOURCE_PATH, path.dirname(template)),
-                path.basename(template, '.html'),
-                'index.html',
-            ));
-            if (ENV.STANDALONE) {
-                logger.info(`${path.relative(__dirname, template)} --> ${path.relative(__dirname, filename)}`);
-            }
-            return new HtmlWebpackPlugin({
-                filename,
-                template,
-                inject: true,
-                minify: (APP.HTML_PRETTY ? {
-                    html5: true,
-                    collapseWhitespace: false,
-                    conservativeCollapse: false,
-                    removeComments: false,
-                    decodeEntities: false,
-                    minifyCSS: false,
-                    minifyJS: false,
-                    removeScriptTypeAttributes: true,
-                } : {
-                    html5: true,
-                    collapseWhitespace: true,
-                    conservativeCollapse: false,
-                    removeComments: true,
-                    decodeEntities: true,
-                    minifyCSS: true,
-                    minifyJS: true,
-                    removeScriptTypeAttributes: true,
-                }),
-                hash: ENV.PROD || ENV.DEBUG,
-                cache: !ENV.DEBUG,
-                title: APP.TITLE,
-            });
-        })),
+        ...(ENV.SITEMAP.map(({ template, filename }) => new HtmlWebpackPlugin({
+            filename,
+            template,
+            inject: true,
+            minify: (APP.HTML_PRETTY ? {
+                html5: true,
+                collapseWhitespace: false,
+                conservativeCollapse: false,
+                removeComments: false,
+                decodeEntities: false,
+                minifyCSS: false,
+                minifyJS: false,
+                removeScriptTypeAttributes: true,
+            } : {
+                html5: true,
+                collapseWhitespace: true,
+                conservativeCollapse: false,
+                removeComments: true,
+                decodeEntities: true,
+                minifyCSS: true,
+                minifyJS: true,
+                removeScriptTypeAttributes: true,
+            }),
+            hash: ENV.PROD || ENV.DEBUG,
+            cache: !ENV.DEBUG,
+            title: APP.TITLE,
+        }))),
         ...(APP.HTML_PRETTY ? [new PrettyPlugin()] : []),
         ...(APP.USE_SERVICE_WORKER ? [new WorkboxPlugin.GenerateSW({
             cacheId: ENV.PACKAGE_NAME,
@@ -302,7 +287,7 @@ module.exports = {
                 from,
                 to: ENV.OUTPUT_PATH,
                 context: ENV.SOURCE_PATH,
-                ignore: ENV.SITEMAP.map(i => i.filename),
+                ignore: ENV.SITEMAP.map(i => i.template),
             })),
         ], {
             copyUnmodified: !(ENV.PROD || ENV.DEBUG),
