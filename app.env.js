@@ -31,7 +31,7 @@ const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.html`, {
     ignore: [
         `${slash(SOURCE_PATH)}/partials/**/*.html`,
     ],
-});
+}).map(i => slash(path.relative(__dirname, i)));
 
 module.exports = {
     DEBUG,

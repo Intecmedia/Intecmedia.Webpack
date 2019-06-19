@@ -1,12 +1,8 @@
-const path = require('path');
-const slash = require('slash');
 const nodemon = require('nodemon');
 const nodemonCli = require('nodemon/lib/cli');
 const deepMerge = require('lodash.merge');
 
 const ENV = require('./app.env.js');
-
-const initialHtml = ENV.SITEMAP.map(i => slash(path.relative(__dirname, i)));
 
 const nodemonConfig = {
     delay: '2500',
@@ -15,7 +11,7 @@ const nodemonConfig = {
         '.hg', '.git', '.svn',
         'build', 'node_modules',
         'source/js', 'source/partials', 'source/html.data.js',
-    ].concat(initialHtml),
+    ].concat(ENV.SITEMAP),
     verbose: true,
 };
 
