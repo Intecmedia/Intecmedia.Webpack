@@ -30,7 +30,7 @@
     "nodemonConfig": {
         "delay": "2500",
         "ext": "js,html",
-        "ignore": [".git", ".svn", "build", "node_modules", "source/js", "source/partials"],
+        "ignore": [".hg", ".git", ".svn", "build", "node_modules", "source/js", "source/partials"],
         "verbose": true
     },
     "author": "Dmitry Pyatkov",
