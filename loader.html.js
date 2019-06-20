@@ -9,7 +9,7 @@ const nunjucks = require('nunjucks');
 const frontMatter = require('front-matter');
 const deepMerge = require('lodash.merge');
 
-const attributesParser = require('html-loader/lib/attributesParser');
+const attrParser = require('./attr.parser.js');
 
 const SVGO = require('svgo');
 const svgoConfig = require('./svgo.config.js');
@@ -29,8 +29,8 @@ const DEFAULT_OPTIONS = {
     },
     requireTags: {
         img: ['src', 'data-src', 'lowsrc', 'srcset', 'data-srcset'],
-        //        source: ['srcset', 'data-srcset'],
-        //        image: ['href', 'xlink:href'],
+        source: ['srcset', 'data-srcset'],
+        image: ['href', 'xlink:href'],
     },
     requireIgnore: /^(\w+[:]|\/\/)/i,
     requireReplace: {},
@@ -43,6 +43,7 @@ const DEFAULT_OPTIONS = {
 
 const SRC_SEPARATOR = /\s+/;
 const SRCSET_SEPARATOR = /\s*,\s*/;
+const SRCSET_ATTRS = ['srcset', 'data-srcset'];
 const IGNORE_PATTERN = /^\{\{.*\}\}$/;
 const REQUIRE_PATTERN = /\{\{ require\([0-9\\.]+\) \}\}/g;
 const RANDOM_REQUIRE = () => `{{ require(${Math.random()}${Math.random()}) }}`;
@@ -62,21 +63,28 @@ const OPTIONS_SCHEMA = {
 };
 
 function processHtml(html, options, loaderCallback) {
-    const links = attributesParser(html, (tag, attr) => {
+    const links = attrParser(html, (tag, attr) => {
         if (!(tag in options.requireTags)) return false;
-        if (options.requireTags[tag].indexOf(attr) !== -1) return true;
+        if (options.requireTags[tag].includes(attr)) return true;
         return false;
     });
-    links.reverse();
 
     let content = [html];
+    links.reverse();
     links.forEach((link) => {
-        if (IGNORE_PATTERN.test(link.value)) return;
-        const value = link.value.split(SRCSET_SEPARATOR).map((src) => {
-            const [url, size = ''] = src.split(SRC_SEPARATOR, 2);
-            if (IGNORE_PATTERN.test(url) || options.requireIgnore.test(url)) return src;
-            return options.requireIdent(url) + (size ? ` ${size}` : '');
-        }).join(', ');
+        let value;
+        if (SRCSET_ATTRS.includes(link.attr)) {
+            value = link.value.split(SRCSET_SEPARATOR).map((src) => {
+                const [url, size = ''] = src.split(SRC_SEPARATOR, 2);
+                if (IGNORE_PATTERN.test(url) || options.requireIgnore.test(url)) return src;
+                if (!loaderUtils.isUrlRequest(link.value, options.searchPath)) return src;
+                return options.requireIdent(url) + (size ? ` ${size}` : '');
+            }).join(', ');
+        } else {
+            if (IGNORE_PATTERN.test(link.value) || options.requireIgnore.test(link.value)) return;
+            if (!loaderUtils.isUrlRequest(link.value, options.searchPath)) return;
+            value = options.requireIdent(link.value);
+        }
         const last = content.pop();
         content.push(last.substr(link.start + link.length));
         content.push(value);
