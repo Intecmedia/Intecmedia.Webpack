@@ -1,4 +1,4 @@
-/* eslint global-require: "off", max-lines: "off", import/no-dynamic-require: "off", max-len: "off" */
+/* eslint global-require: "off", max-lines: "off", import/no-dynamic-require: "off", max-len: "off", no-nested-ternary: "off" */
 const fs = require('fs');
 
 const realcwd = fs.realpathSync(process.cwd());
