@@ -24,12 +24,12 @@ glob(`${ENV.OUTPUT_PATH}/**/*.html`, {
         const relative = slash(path.relative(__dirname, filename));
         const html = fs.readFileSync(filename, 'utf8').toString();
         htmllint(html, htmllintrc).then((issues) => {
-            if (issues === false) {
+            if (!issues || !issues.length) {
                 logger.info(`skipped ${relative}`);
                 return;
             }
             issues.forEach((issue) => {
-                logger.info(`${relative}: line ${issue.line} col ${issue.column}`);
+                logger.info(`${relative}: line ${issue.line || 0} col [${issue.column || 0}]`);
                 logger.warn(`${htmllint.messages.renderIssue(issue)}\n`);
             });
             if (issues.length > 0) {
