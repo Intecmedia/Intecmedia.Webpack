@@ -128,9 +128,9 @@ module.exports = function HtmlLoader() {
     };
     options.requireExport = exportString => exportString.replace(REQUIRE_PATTERN, (match) => {
         if (!options.requireReplace[match]) return match;
-        const url = path.join(options.searchPath, options.requireReplace[match]);
+        const url = options.requireReplace[match];
         logger.info(`require('${url}')`);
-        const request = loaderUtils.urlToRequest(url, loaderContext.resourcePath);
+        const request = loaderUtils.urlToRequest(path.join(options.searchPath, url));
         return `" + require(${JSON.stringify(request)}) + "`;
     });
 
