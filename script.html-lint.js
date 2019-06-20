@@ -29,7 +29,7 @@ glob(`${ENV.OUTPUT_PATH}/**/*.html`, {
                 return;
             }
             issues.forEach((issue) => {
-                logger.info(`${relative}: line ${issue.line || 0} col [${issue.column || 0}]`);
+                logger.error(`${relative}: line ${issue.line || 0} col [${issue.column || 0}]`);
                 logger.warn(`${htmllint.messages.renderIssue(issue)}\n`);
             });
             if (issues.length > 0) {
