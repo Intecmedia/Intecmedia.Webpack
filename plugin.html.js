@@ -3,8 +3,10 @@ const HtmlWebpackPluginOriginal = require('html-webpack-plugin');
 const SCRIPT_TYPES = ['text/javascript', 'application/javascript'];
 
 const scriptTypeRemove = (tag) => {
-    if (tag.tagName === 'script' && tag.attributes && SCRIPT_TYPES.includes(tag.attributes.type.toLowerCase())) {
-        delete tag.attributes.type;
+    if (tag.tagName === 'script' && tag.attributes) {
+        if (tag.attributes.type && SCRIPT_TYPES.includes(tag.attributes.type.toLowerCase())) {
+            delete tag.attributes.type;
+        }
     }
     return tag;
 };
