@@ -1,4 +1,4 @@
-/* eslint global-require: "off", max-lines: "off", import/no-dynamic-require: "off", max-len: "off", no-nested-ternary: "off" */
+/* eslint global-require: "off", max-lines: "off", import/no-dynamic-require: "off", max-len: "off" */
 const fs = require('fs');
 
 const realcwd = fs.realpathSync(process.cwd());
@@ -207,23 +207,14 @@ module.exports = {
             filename,
             template,
             inject: true,
-            minify: (ENV.PROD || ENV.DEBUG ? (APP.HTML_PRETTY ? {
+            minify: (ENV.PROD || ENV.DEBUG ? ({
                 html5: true,
-                collapseWhitespace: false,
+                collapseWhitespace: !APP.HTML_PRETTY,
                 conservativeCollapse: false,
-                removeComments: false,
-                decodeEntities: false,
-                minifyCSS: false,
-                minifyJS: false,
-                removeScriptTypeAttributes: true,
-            } : {
-                html5: true,
-                collapseWhitespace: true,
-                conservativeCollapse: false,
-                removeComments: true,
-                decodeEntities: true,
-                minifyCSS: true,
-                minifyJS: true,
+                removeComments: !APP.HTML_PRETTY,
+                decodeEntities: !APP.HTML_PRETTY,
+                minifyCSS: !APP.HTML_PRETTY,
+                minifyJS: !APP.HTML_PRETTY,
                 removeScriptTypeAttributes: true,
             }) : false),
             hash: ENV.PROD || ENV.DEBUG,
@@ -325,13 +316,9 @@ module.exports = {
                 test: /\.html(\?.*)?$/i,
                 loader: './loader.html.js',
                 options: {
-                    context: {
-                        ...APP,
-                    },
+                    context: APP,
                     searchPath: ENV.SOURCE_PATH,
-                    svgo: {
-                        enabled: ENV.PROD || ENV.DEBUG,
-                    },
+                    svgo: { enabled: ENV.PROD || ENV.DEBUG },
                 },
             },
             // javascript loaders
