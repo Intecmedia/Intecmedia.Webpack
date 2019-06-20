@@ -4,6 +4,7 @@ const deepMerge = require('lodash.merge');
 const weblog = require('webpack-log');
 
 const ENV = require('./app.env.js');
+
 const logger = weblog({ name: 'nodemon' });
 
 const nodemonConfig = {

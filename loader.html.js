@@ -9,8 +9,7 @@ const nunjucks = require('nunjucks');
 const frontMatter = require('front-matter');
 const deepMerge = require('lodash.merge');
 
-const posthtml = require('posthtml');
-const posthtmlCommentAfter = require('posthtml-comment-after');
+const attributesParser = require('html-loader/lib/attributesParser');
 
 const SVGO = require('svgo');
 const svgoConfig = require('./svgo.config.js');
@@ -30,8 +29,8 @@ const DEFAULT_OPTIONS = {
     },
     requireTags: {
         img: ['src', 'data-src', 'lowsrc', 'srcset', 'data-srcset'],
-        source: ['srcset', 'data-srcset'],
-        image: ['href', 'xlink:href'],
+        //        source: ['srcset', 'data-srcset'],
+        //        image: ['href', 'xlink:href'],
     },
     requireIgnore: /^(\w+[:]|\/\/)/i,
     requireReplace: {},
@@ -63,42 +62,33 @@ const OPTIONS_SCHEMA = {
 };
 
 function processHtml(html, options, loaderCallback) {
-    const parser = posthtml();
-    if (options.requireTags && Object.keys(options.requireTags).length) {
-        parser.use((tree) => {
-            const expression = Object.keys(options.requireTags).map(tag => ({
-                tag,
-                attrs: options.requireTags[tag].reduce((attrs, attr) => ({
-                    ...attrs,
-                    [attr]: true,
-                }), {}),
-            }));
-            tree.match(expression, (node) => {
-                options.requireTags[node.tag].forEach((attr) => {
-                    if (!(attr in node.attrs) || ('data-require-ignore' in node.attrs)) return;
+    const links = attributesParser(html, (tag, attr) => {
+        if (!(tag in options.requireTags)) return false;
+        if (options.requireTags[tag].indexOf(attr) !== -1) return true;
+        return false;
+    });
+    links.reverse();
 
-                    const val = node.attrs[attr];
-                    if (attr in ['srcset', 'data-srcset']) {
-                        node.attrs[attr] = val.split(SRCSET_SEPARATOR).map((src) => {
-                            const [url, size] = src.split(SRC_SEPARATOR, 2);
-                            if (IGNORE_PATTERN.test(url) || options.requireIgnore.test(url)) return src;
-                            return `${options.requireIdent(url)} ${size}`;
-                        }).join(', ');
-                    } else if (!IGNORE_PATTERN.test(val) && !options.requireIgnore.test(val)) {
-                        node.attrs[attr] = options.requireIdent(val);
-                    }
-                });
-                return node;
-            });
-            return tree;
-        });
-    }
-    parser.use(posthtmlCommentAfter());
-    parser.process(html).then((result) => {
-        let exportString = `export default ${JSON.stringify(result.html)};`;
-        exportString = options.requireExport(exportString);
-        loaderCallback(null, exportString);
-    }).catch(loaderCallback);
+    let content = [html];
+    links.forEach((link) => {
+        if (IGNORE_PATTERN.test(link.value)) return;
+        const value = link.value.split(SRCSET_SEPARATOR).map((src) => {
+            const [url, size = ''] = src.split(SRC_SEPARATOR, 2);
+            if (IGNORE_PATTERN.test(url) || options.requireIgnore.test(url)) return src;
+            return options.requireIdent(url) + (size ? ` ${size}` : '');
+        }).join(', ');
+        const last = content.pop();
+        content.push(last.substr(link.start + link.length));
+        content.push(value);
+        content.push(last.substr(0, link.start));
+    });
+    content.reverse();
+    content = content.join('');
+
+    let exportString = `export default ${JSON.stringify(content)};`;
+    exportString = options.requireExport(exportString);
+
+    loaderCallback(null, exportString);
 }
 
 module.exports = function HtmlLoader() {
@@ -133,7 +123,7 @@ module.exports = function HtmlLoader() {
         const url = path.join(options.searchPath, options.requireReplace[match]);
         logger.info(`require('${url}')`);
         const request = loaderUtils.urlToRequest(url, loaderContext.resourcePath);
-        return `"+require(${JSON.stringify(request)})+"`;
+        return `" + require(${JSON.stringify(request)}) + "`;
     });
 
     nunjucksEnvironment.addFilter('require', options.requireIdent);
