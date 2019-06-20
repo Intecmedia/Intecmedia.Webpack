@@ -207,7 +207,7 @@ module.exports = {
             filename,
             template,
             inject: true,
-            minify: (APP.HTML_PRETTY ? {
+            minify: (ENV.PROD || ENV.DEBUG ? (APP.HTML_PRETTY ? {
                 html5: true,
                 collapseWhitespace: false,
                 conservativeCollapse: false,
@@ -225,7 +225,7 @@ module.exports = {
                 minifyCSS: true,
                 minifyJS: true,
                 removeScriptTypeAttributes: true,
-            }),
+            }) : false),
             hash: ENV.PROD || ENV.DEBUG,
             cache: !ENV.DEBUG,
             title: APP.TITLE,
