@@ -26,7 +26,7 @@ if (ENV.STANDALONE) {
 }
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('./plugin.html.js');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const WorkboxPlugin = (APP.USE_SERVICE_WORKER ? require('workbox-webpack-plugin') : () => {});
 const ImageminPlugin = require('imagemin-webpack');
