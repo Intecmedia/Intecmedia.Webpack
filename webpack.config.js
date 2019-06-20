@@ -20,9 +20,7 @@ if (ENV.STANDALONE) {
     logger.info(`Name: ${ENV.PACKAGE_NAME}`);
     logger.info(`Enviroment: ${ENV.NODE_ENV}`);
     logger.info(`Debug: ${ENV.DEBUG ? 'enabled' : 'disabled'}`);
-    logger.info(`Linters: ${ENV.USE_LINTERS ? 'enabled' : 'disabled'}`);
-    logger.info(`Source maps: ${ENV.USE_SOURCE_MAP ? 'enabled' : 'disabled'}`);
-    logger.info(`App config: ${JSON.stringify(APP, null, '    ')}`);
+    logger.info(`Config: ${JSON.stringify(APP, null, '    ')}`);
 }
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
