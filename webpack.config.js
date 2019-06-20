@@ -304,7 +304,7 @@ module.exports = {
     devtool: ENV.USE_SOURCE_MAP ? 'eval-source-map' : 'nosources-source-map',
 
     resolve: {
-        ...require('./resolve.config.js'),
+        ...require('./resolve.config.js').alias,
     },
 
     module: {
