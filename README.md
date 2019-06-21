@@ -33,10 +33,10 @@
 * **npm run watch** -- watch в production-режимеи debug=off, самый медленный способ
 * **npm run watch-dev** -- watch в development-режиме и debug=off, самый быстрый способ
 * **npm run watch-debug** -- watch в development-режиме и debug=on, медленный способ
-* **npm run js-lint** -- линтер [eslint](https://eslint.org/)
-* **npm run css-lint** -- линтер [stylelint](https://stylelint.io/)
-* **npm run html-lint** -- линтер [htmllint](http://htmllint.github.io/)
-* **npm run html-validator** -- линтер [validator.w3.org](https://validator.w3.org/)
+* **npm run js-lint** -- линтер js через [eslint](https://eslint.org/)
+* **npm run css-lint** -- линтер scss через [stylelint](https://stylelint.io/)
+* **npm run html-lint** -- линтер html через [htmllint](http://htmllint.github.io/)
+* **npm run html-validator** -- линтер html через [validator.w3.org](https://validator.w3.org/)
 * **npm run app-lint** -- линтер конфигурации приложения
 * **npm run lint** -- запуск всех линтеров (app, eslint, stylelint, htmllint, validator.w3.org)
 * **npm run server** -- сервер в production-режиме и debug=off, самый медленный способ
@@ -46,6 +46,11 @@
 * **npm run browserslist-dev** -- список поддерживаемых браузеров для NODE_ENV=development
 * **npm run browserslist-prod** -- список поддерживаемых браузеров для NODE_ENV=production
 * **npm run browserslist** -- список поддерживаемых браузеров
+
+### Часто используемые команды:
+* **npm run watch-dev** -- watch в development-режиме и debug=off, самый быстрый способ
+* **npm run server-dev** -- сервер в development-режиме и debug=off, самый быстрый способ
+* **npm run build** -- релизный билд, запускается в production-режиме и debug=off, включая все линтеры, очень медленный способ
 
 ## Стилистика кода
 * Мы использум БЭМ, исключая сторонние пакеты.
