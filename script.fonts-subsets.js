@@ -25,12 +25,12 @@ glob(`${FONTS_SRC}/**/*.ttf`, {
         const dirname = slash(path.dirname(target));
 
         logger.info(`${source} --> ${dirname}/${basename}.ttf`);
-        childProcess.execSync(`pyftsubset ${source} --output-file=${dirname}/${basename}.ttf --unicodes-file=fonts-subsets.txt`, { stdio: 'inherit' });
+        childProcess.execSync(`pyftsubset ${source} --output-file=${dirname}/${basename}.ttf --unicodes-file=.fonts-subsets`, { stdio: 'inherit' });
 
         logger.info(`${source} --> ${dirname}/${basename}.woff`);
-        childProcess.execSync(`pyftsubset ${source} --output-file=${dirname}/${basename}.woff --flavor=woff --unicodes-file=fonts-subsets.txt`, { stdio: 'inherit' });
+        childProcess.execSync(`pyftsubset ${source} --output-file=${dirname}/${basename}.woff --flavor=woff --unicodes-file=.fonts-subsets`, { stdio: 'inherit' });
 
         logger.info(`${source} --> ${dirname}/${basename}.woff2`);
-        childProcess.execSync(`pyftsubset ${source} --output-file=${dirname}/${basename}.woff2 --flavor=woff2 --unicodes-file=fonts-subsets.txt`, { stdio: 'inherit' });
+        childProcess.execSync(`pyftsubset ${source} --output-file=${dirname}/${basename}.woff2 --flavor=woff2 --unicodes-file=.fonts-subsets`, { stdio: 'inherit' });
     });
 });
