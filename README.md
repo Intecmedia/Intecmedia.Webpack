@@ -53,12 +53,14 @@
 * **npm run build** -- релизный билд, запускается в production-режиме и debug=off, включая все линтеры, очень медленный способ
 
 ## Стилистика кода
-* Мы использум БЭМ, исключая сторонние пакеты.
+* JS основна на [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) ([перевод](https://github.com/leonidlebedev/javascript-airbnb))
+* CSS использум БЭМ, как метод именования селекторов (исключение -- сторонние css-пакеты)
+* SCSS основна на [stylelint-config-sass-guidelines](https://sass-guidelin.es/ru/)
+* HTML проверяется через [htmllint](http://htmllint.github.io/) и [validator.w3.org](https://validator.w3.org/)
 * Подробно писать про оформление кода нет смысла -- сборка покрыта линтерами.
 
-### Schema.org для следующего:
+### Стуктура важных блоков (Schema.org):
 * [Адреса и Организации](http://help.yandex.ru/webmaster/supported-schemas/address-organization.xml)
-* [Видео](http://help.yandex.ru/webmaster/supported-schemas/video.xml)
 * [Вопросы и Ответы](http://help.yandex.ru/webmaster/supported-schemas/questions.xml)
 * [Товары и Цены](http://help.yandex.ru/webmaster/supported-schemas/goods-prices.xml)
 * [Картинки](http://help.yandex.ru/webmaster/supported-schemas/image.xml)
