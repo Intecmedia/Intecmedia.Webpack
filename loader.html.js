@@ -130,7 +130,9 @@ module.exports = function HtmlLoader() {
         if (!options.requireReplace[match]) return match;
         const url = options.requireReplace[match];
         logger.info(`require('${url}')`);
-        const request = loaderUtils.urlToRequest(path.join(options.searchPath, url));
+        const resourceDir = path.dirname(loaderContext.resourcePath);
+        const urlPrefix = path.relative(resourceDir, options.searchPath);
+        const request = loaderUtils.urlToRequest(slash(path.join(urlPrefix, url)), resourceDir);
         return `" + require(${JSON.stringify(request)}) + "`;
     });
 
