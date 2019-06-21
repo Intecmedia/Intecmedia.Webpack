@@ -2,7 +2,7 @@
 
 Это внутренний стандарт/шаблон для верстки сайтов компании [Intecmedia](http://intecmedia.ru)
 
-## Цель шаблона: минимальные натройки -- максимальная автоматизация процесса сборки и защита от ошибок.
+## Цель шаблона: минимальные натройки – максимальная автоматизация процесса сборки и защита от ошибок.
 
 Предложения и замечания приветствуются в разделе [Issues](https://github.com/Intecmedia/Intecmedia.Webpack/issues/new)
 или [Pull requests](https://github.com/intecmedia/Intecmedia.Webpack/pulls).
@@ -31,7 +31,7 @@
 * Множество линтеров: eslint, htmllint, stylelint с возможностью autofix кода
 * Imagemin для сжатия гарфики: svg, png, jpeg, gif
 * Генерация множества app-иконок и manifest.json
-* Webp для всех изображений внутри CSS -- [webpcss](https://github.com/lexich/webpcss)
+* Webp для всех изображений внутри CSS – [webpcss](https://github.com/lexich/webpcss)
 
 ## Требование:
 * Node.js версии 8 или выше
@@ -39,38 +39,38 @@
 * python2.7 и выше, для fonttools
 
 ## Обзор комманд:
-* **npm run dev** -- сборка в development-режиме и debug=off, самый быстрый способ
-* **npm run debug** -- сборка в development-режиме и debug=on, медленный способ
-* **npm run prod** -- сборка в production-режиме и debug=off, самый медленный способ
-* **npm run watch** -- watch в production-режимеи debug=off, самый медленный способ
-* **npm run watch-dev** -- watch в development-режиме и debug=off, самый быстрый способ
-* **npm run watch-debug** -- watch в development-режиме и debug=on, медленный способ
-* **npm run js-lint** -- линтер js через [eslint](https://eslint.org/)
-* **npm run css-lint** -- линтер scss через [stylelint](https://stylelint.io/)
-* **npm run html-lint** -- линтер html через [htmllint](http://htmllint.github.io/)
-* **npm run html-validator** -- линтер html через [validator.w3.org](https://validator.w3.org/)
-* **npm run app-lint** -- линтер конфигурации приложения
-* **npm run lint** -- запуск всех линтеров (app, eslint, stylelint, htmllint, validator.w3.org)
-* **npm run server** -- сервер в production-режиме и debug=off, самый медленный способ
-* **npm run server-dev** -- сервер в development-режиме и debug=off, самый быстрый способ
-* **npm run server-debug** -- сервер в development-режиме и debug=on, медленный способ
-* **npm run build** -- релизный билд, запускается в production-режиме и debug=off, включая все линтеры, очень медленный способ
-* **npm run browserslist-dev** -- список поддерживаемых браузеров для NODE_ENV=development
-* **npm run browserslist-prod** -- список поддерживаемых браузеров для NODE_ENV=production
-* **npm run browserslist** -- список поддерживаемых браузеров
-* **npm run fonts-subsets** -- запуск fonts subseting
+* **npm run dev** – сборка в development-режиме и debug=off, самый быстрый способ
+* **npm run debug** – сборка в development-режиме и debug=on, медленный способ
+* **npm run prod** – сборка в production-режиме и debug=off, самый медленный способ
+* **npm run watch** – watch в production-режимеи debug=off, самый медленный способ
+* **npm run watch-dev** – watch в development-режиме и debug=off, самый быстрый способ
+* **npm run watch-debug** – watch в development-режиме и debug=on, медленный способ
+* **npm run js-lint** – линтер js через [eslint](https://eslint.org/)
+* **npm run css-lint** – линтер scss через [stylelint](https://stylelint.io/)
+* **npm run html-lint** – линтер html через [htmllint](http://htmllint.github.io/)
+* **npm run html-validator** – линтер html через [validator.w3.org](https://validator.w3.org/)
+* **npm run app-lint** – линтер конфигурации приложения
+* **npm run lint** – запуск всех линтеров (app, eslint, stylelint, htmllint, validator.w3.org)
+* **npm run server** – сервер в production-режиме и debug=off, самый медленный способ
+* **npm run server-dev** – сервер в development-режиме и debug=off, самый быстрый способ
+* **npm run server-debug** – сервер в development-режиме и debug=on, медленный способ
+* **npm run build** – релизный билд, запускается в production-режиме и debug=off, включая все линтеры, очень медленный способ
+* **npm run browserslist-dev** – список поддерживаемых браузеров для NODE_ENV=development
+* **npm run browserslist-prod** – список поддерживаемых браузеров для NODE_ENV=production
+* **npm run browserslist** – список поддерживаемых браузеров
+* **npm run fonts-subsets** – запуск fonts subseting
 
 ### Часто используемые команды:
-* **npm run watch-dev** -- watch в development-режиме и debug=off, самый быстрый способ
-* **npm run server-dev** -- сервер в development-режиме и debug=off, самый быстрый способ
-* **npm run build** -- релизный билд, запускается в production-режиме и debug=off, включая все линтеры, очень медленный способ
+* **npm run watch-dev** – watch в development-режиме и debug=off, самый быстрый способ
+* **npm run server-dev** – сервер в development-режиме и debug=off, самый быстрый способ
+* **npm run build** – релизный билд, запускается в production-режиме и debug=off, включая все линтеры, очень медленный способ
 
 ## Стилистика кода:
 * JS основна на [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) ([перевод](https://github.com/leonidlebedev/javascript-airbnb))
-* CSS использум БЭМ, как метод именования селекторов (исключение -- сторонние css-пакеты) ([список рекомендаций по БЭМ](https://nicothin.pro/idiomatic-pre-CSS/))
+* CSS использум БЭМ, как метод именования селекторов (исключение – сторонние css-пакеты) ([список рекомендаций по БЭМ](https://nicothin.pro/idiomatic-pre-CSS/))
 * SCSS основна на [stylelint-config-sass-guidelines](https://sass-guidelin.es/ru/)
 * HTML проверяется через [htmllint](http://htmllint.github.io/) и [validator.w3.org](https://validator.w3.org/)
-* Подробно писать про оформление кода нет смысла -- сборка покрыта линтерами.
+* Подробно писать про оформление кода нет смысла – сборка покрыта линтерами.
 
 ### Структура важных блоков (Schema.org):
 * [Адреса и Организации](http://help.yandex.ru/webmaster/supported-schemas/address-organization.xml)
@@ -107,8 +107,8 @@ html {
 * блоки созданые CMS и [WYSIWYG-редактороми](https://ru.wikipedia.org/wiki/CKeditor)
 
 ### Оптимизация шрифтов:
+* Мы используем только 3 формата: `ttf`, `woff`, `woff2`. Устаревшими считаются: `eot` и `svg`.
 * Мы используем [fonttools](https://github.com/fonttools/fonttools)
 * Для fonttools требуется python в системе: `pip install fonttools`
 * Исходники шрифтов только формате `ttf`, должны лежать в директории `source/fonts/src-ttf`
-* `npm run fonts-subsets` -- запуск fonts subseting
-* Мы используем только 3 формата: `ttf`, `woff`, `woff2`. Устаревшими считаются: `eot` и `svg`.
+* `npm run fonts-subsets` – запуск fonts subseting
