@@ -117,6 +117,7 @@ html {
 * Для fonttools требуется python в системе: `pip install fonttools`.
 * Исходники шрифтов только формате `ttf`, должны лежать в директории `source/fonts/src-ttf`.
 * `npm run fonts-subsets` – запуск fonts subseting.
+* Автоматически добавляется `font-display: swap;` плагин [`postcss-font-display`](https://github.com/dkrnl/postcss-font-display).
 
 ## Изображения
 
