@@ -26,6 +26,7 @@
         "browserslist-dev": "cross-env NODE_ENV=development npx browserslist",
         "browserslist-prod": "cross-env NODE_ENV=production npx browserslist",
         "browserslist": "cross-env NODE_ENV=production npx browserslist",
+        "fonts-subsets": "cross-env NODE_ENV=development node ./script.fonts-subsets.js",
         "start": "npm run build"
     },
     "author": "Dmitry Pyatkov",

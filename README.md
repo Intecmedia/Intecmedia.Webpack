@@ -36,6 +36,7 @@
 ## Требование:
 * Node.js версии 8 или выше
 * [ImageMagick](https://www.imagemagick.org/) или [GraphicsMagick](http://www.graphicsmagick.org/)
+* python2.7 и выше, для fonttools
 
 ## Обзор комманд:
 * **npm run dev** -- сборка в development-режиме и debug=off, самый быстрый способ
@@ -57,6 +58,7 @@
 * **npm run browserslist-dev** -- список поддерживаемых браузеров для NODE_ENV=development
 * **npm run browserslist-prod** -- список поддерживаемых браузеров для NODE_ENV=production
 * **npm run browserslist** -- список поддерживаемых браузеров
+* **npm run fonts-subsets** -- запуск fonts subseting
 
 ### Часто используемые команды:
 * **npm run watch-dev** -- watch в development-режиме и debug=off, самый быстрый способ
@@ -65,7 +67,7 @@
 
 ## Стилистика кода:
 * JS основна на [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) ([перевод](https://github.com/leonidlebedev/javascript-airbnb))
-* CSS использум БЭМ, как метод именования селекторов (исключение -- сторонние css-пакеты)
+* CSS использум БЭМ, как метод именования селекторов (исключение -- сторонние css-пакеты) ([список рекомендаций по БЭМ](https://nicothin.pro/idiomatic-pre-CSS/))
 * SCSS основна на [stylelint-config-sass-guidelines](https://sass-guidelin.es/ru/)
 * HTML проверяется через [htmllint](http://htmllint.github.io/) и [validator.w3.org](https://validator.w3.org/)
 * Подробно писать про оформление кода нет смысла -- сборка покрыта линтерами.
@@ -87,7 +89,8 @@
 * [promise](https://github.com/then/promise#readme)
 
 ## Типографика:
-* Для резиновой типографики мы используем [postcss-responsive-type](https://github.com/seaneking/postcss-responsive-type), пример кода:
+### Responstive type
+Для резиновой типографики мы используем [postcss-responsive-type](https://github.com/seaneking/postcss-responsive-type), пример кода:
 ```css 
 html {
     font-size: responsive;
@@ -97,7 +100,15 @@ html {
     upper-font-range: 1280px;
 }
 ```
-* Блоки **user generated content** (теги типографики **без классов и стилей**),
+### WYSIWYG
+Блоки **user generated content** (теги типографики **без классов и стилей**),
 должны быть обвернуты в css-класс [wysiwyg](https://github.com/Intecmedia/Intecmedia.Webpack/blob/master/source/css/pages/_wysiwyg.scss), пример:
-    * текст новости/статьи/описание товара, исключая оформление этих блоков
-    * блоки созданые [WYSIWYG-редактороми](https://ru.wikipedia.org/wiki/CKeditor)
+* текст новости/статьи/описание товара, исключая оформление этих блоков
+* блоки созданые [WYSIWYG-редактороми](https://ru.wikipedia.org/wiki/CKeditor)
+
+### Оптимизация шрифтов:
+* Мы используем [fonttools](https://github.com/fonttools/fonttools)
+* Для fonttools требуется python в системе: `pip install fonttools`
+* Исходники шрифтов только формате TTF, должны лежать в директории `source/fonts/src-ttf`
+* **npm run fonts-subsets** -- запуск fonts subseting
+* Мы используем только 3 формата: ttf, woff, woff2. Устаревшими считаются: eot и svg.
