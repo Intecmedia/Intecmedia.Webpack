@@ -144,12 +144,11 @@ module.exports = function HtmlLoader() {
     });
 
     const publicPath = ((options.context.APP || {}).PUBLIC_PATH || path.sep);
-    const resourcePath = path.sep + path.relative(options.searchPath, loaderContext.resourcePath);
-    const baseName = path.basename(resourcePath, '.html');
-    const resourceUrl = (
-        baseName === 'index'
-            ? path.dirname(resourcePath)
-            : path.dirname(resourcePath) + path.posix.sep + baseName
+    const resourcePath = path.posix.sep + path.relative(options.searchPath, loaderContext.resourcePath);
+    const baseName = path.basename(loaderContext.resourcePath, '.html');
+
+    const resourceUrl = path.dirname(resourcePath) + (
+        baseName === 'index' ? '' : path.posix.sep + baseName
     ) + path.posix.sep;
 
     nunjucksEnvironment.addGlobal('APP', options.context);
