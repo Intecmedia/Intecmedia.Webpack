@@ -4,7 +4,8 @@
 
 ## Цель шаблона: минимальные натройки -- максимальная автоматизация процесса сборки и защита от ошибок.
 
-Предложения и замечания приветствуются в разделе [Issues](https://github.com/Intecmedia/Intecmedia.Webpack/issues/new) или [Pull requests](https://github.com/intecmedia/Intecmedia.Webpack/pulls).
+Предложения и замечания приветствуются в разделе [Issues](https://github.com/Intecmedia/Intecmedia.Webpack/issues/new)
+или [Pull requests](https://github.com/intecmedia/Intecmedia.Webpack/pulls).
 
 ## Особености:
 * Webpack 4
@@ -13,8 +14,18 @@
 * Babel и [babel-preset-airbnb](https://www.npmjs.com/package/babel-preset-airbnb)
 * Линтер с автофиксом [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) ([перевод](https://github.com/leonidlebedev/javascript-airbnb))
 * Шаблонизатор [Nunjucks](https://mozilla.github.io/nunjucks/) для сборки HTML
-* SCSS, autoprefixer, PostCSS: [postcss-input-style](https://github.com/seaneking/postcss-input-style), [postcss-quantity-queries](https://github.com/pascalduez/postcss-quantity-queries), [postcss-responsive-type](https://github.com/seaneking/postcss-responsive-type), [pixrem](https://github.com/robwierzbowski/node-pixrem), [pleeease-filters](https://github.com/iamvdo/pleeease-filters), [postcss-image-set-polyfill](https://github.com/SuperOl3g/postcss-image-set-polyfill), [postcss-color-rgba-fallback](https://github.com/postcss/postcss-color-rgba-fallback), [css-mqpacker](https://github.com/hail2u/node-css-mqpacker), [autoprefixer](https://github.com/postcss/autoprefixer), [cssnano](http://cssnano.co/)
-* Базовая WYSIWYG-типографика текста, форм, таблиц, списков, заголовков: [wysiwyg.scss](https://github.com/Intecmedia/Intecmedia.Webpack/blob/master/source/css/pages/_wysiwyg.scss)
+* SCSS, autoprefixer, PostCSS: [postcss-input-style](https://github.com/seaneking/postcss-input-style),
+[postcss-quantity-queries](https://github.com/pascalduez/postcss-quantity-queries), 
+[postcss-responsive-type](https://github.com/seaneking/postcss-responsive-type), 
+[pixrem](https://github.com/robwierzbowski/node-pixrem), 
+[pleeease-filters](https://github.com/iamvdo/pleeease-filters), 
+[postcss-image-set-polyfill](https://github.com/SuperOl3g/postcss-image-set-polyfill), 
+[postcss-color-rgba-fallback](https://github.com/postcss/postcss-color-rgba-fallback), 
+[css-mqpacker](https://github.com/hail2u/node-css-mqpacker), 
+[autoprefixer](https://github.com/postcss/autoprefixer), 
+[cssnano](http://cssnano.co/)
+* Базовая WYSIWYG-типографика текста, форм, таблиц, списков, заголовков: 
+[wysiwyg.scss](https://github.com/Intecmedia/Intecmedia.Webpack/blob/master/source/css/pages/_wysiwyg.scss)
 * Ресайз изображений через [ImageMagick](https://www.imagemagick.org/) / [GraphicsMagick](http://www.graphicsmagick.org/)
 * Responsive images polyfill через [Picturefill](http://scottjehl.github.io/picturefill)
 * Множество линтеров: eslint, htmllint, stylelint с возможностью autofix кода
@@ -76,7 +87,7 @@
 * [promise](https://github.com/then/promise#readme)
 
 ## Типографика:
-* Мы используем [postcss-responsive-type](https://github.com/seaneking/postcss-responsive-type), пример кода:
+* Для резиновой типографики мы используем [postcss-responsive-type](https://github.com/seaneking/postcss-responsive-type), пример кода:
 ```css 
 html {
     font-size: responsive;
@@ -86,4 +97,7 @@ html {
     upper-font-range: 1280px;
 }
 ```
-* Блоки **user generated content** (теги типографики **без классов и стилей**), должны быть обвернуты в css-класс [wysiwyg](https://github.com/Intecmedia/Intecmedia.Webpack/blob/master/source/css/pages/_wysiwyg.scss)
+* Блоки **user generated content** (теги типографики **без классов и стилей**),
+должны быть обвернуты в css-класс [wysiwyg](https://github.com/Intecmedia/Intecmedia.Webpack/blob/master/source/css/pages/_wysiwyg.scss), пример:
+    * текст новости/статьи/описание товара, исключая оформление этих блоков
+    * блоки созданые [WYSIWYG-редактороми](https://ru.wikipedia.org/wiki/CKeditor)
