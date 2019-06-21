@@ -104,11 +104,11 @@ html {
 Блоки **user generated content** (теги типографики **без классов и стилей**),
 должны быть обвернуты в css-класс [wysiwyg](https://github.com/Intecmedia/Intecmedia.Webpack/blob/master/source/css/pages/_wysiwyg.scss), пример:
 * текст новости/статьи/описание товара, исключая оформление этих блоков
-* блоки созданые [WYSIWYG-редактороми](https://ru.wikipedia.org/wiki/CKeditor)
+* блоки созданые CMS и [WYSIWYG-редактороми](https://ru.wikipedia.org/wiki/CKeditor)
 
 ### Оптимизация шрифтов:
 * Мы используем [fonttools](https://github.com/fonttools/fonttools)
 * Для fonttools требуется python в системе: `pip install fonttools`
-* Исходники шрифтов только формате TTF, должны лежать в директории `source/fonts/src-ttf`
-* **npm run fonts-subsets** -- запуск fonts subseting
-* Мы используем только 3 формата: ttf, woff, woff2. Устаревшими считаются: eot и svg.
+* Исходники шрифтов только формате `ttf`, должны лежать в директории `source/fonts/src-ttf`
+* `npm run fonts-subsets` -- запуск fonts subseting
+* Мы используем только 3 формата: `ttf`, `woff`, `woff2`. Устаревшими считаются: `eot` и `svg`.
