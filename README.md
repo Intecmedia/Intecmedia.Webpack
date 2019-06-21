@@ -122,10 +122,11 @@ html {
 ## Изображения
 
 ### Imagemin
-* ...
+* Конфиг imagemin находится `imagemin.config.js`.
+* Конфиг SVGO находится `svgo.config.js`.
 
 ### Webp
-* Автоматический WebP для всех изображений(png,jpg,jpeg) внутри CSS – [webpcss](https://github.com/lexich/webpcss), пример:
+* Автоматический WebP для всех изображений(png, jpg, jpeg) внутри CSS – [webpcss](https://github.com/lexich/webpcss), пример:
 ```css
 // before
 .test { background-image:url('test.png'); }
@@ -143,3 +144,7 @@ html.webp .test { background-image:url('test.webp'); }
 * Метатеги добавлются автоматически в <head>.
 * manifest.json и browserconfig.xml создаются автоматически на основе `app.config.js`.
 * Иконки герерируются автоматически: смотрите директорию `build/img/favicon`.
+
+# Bootstrap
+* Переопредление переременных в `css/base/_variables.scss`
+* Переопредление миксинов в `css/base/_bootstrap-mixins.scss`
