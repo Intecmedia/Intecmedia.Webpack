@@ -52,20 +52,20 @@
 * **npm run server-dev** -- сервер в development-режиме и debug=off, самый быстрый способ
 * **npm run build** -- релизный билд, запускается в production-режиме и debug=off, включая все линтеры, очень медленный способ
 
-## Стилистика кода
+## Стилистика кода:
 * JS основна на [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) ([перевод](https://github.com/leonidlebedev/javascript-airbnb))
 * CSS использум БЭМ, как метод именования селекторов (исключение -- сторонние css-пакеты)
 * SCSS основна на [stylelint-config-sass-guidelines](https://sass-guidelin.es/ru/)
 * HTML проверяется через [htmllint](http://htmllint.github.io/) и [validator.w3.org](https://validator.w3.org/)
 * Подробно писать про оформление кода нет смысла -- сборка покрыта линтерами.
 
-### Стуктура важных блоков (Schema.org):
+### Структура важных блоков (Schema.org):
 * [Адреса и Организации](http://help.yandex.ru/webmaster/supported-schemas/address-organization.xml)
 * [Вопросы и Ответы](http://help.yandex.ru/webmaster/supported-schemas/questions.xml)
 * [Товары и Цены](http://help.yandex.ru/webmaster/supported-schemas/goods-prices.xml)
 * [Картинки](http://help.yandex.ru/webmaster/supported-schemas/image.xml)
 
-## Полифилы
+## Полифилы:
 * [fetch](https://github.com/github/fetch#readme)
 * [focus-visible](https://github.com/WICG/focus-visible)
 * [focus-within](https://github.com/jonathantneal/focus-within)
@@ -74,3 +74,16 @@
 * [object-fit-images](https://github.com/bfred-it/object-fit-images#readme)
 * [picturefill](https://scottjehl.github.io/picturefill/)
 * [promise](https://github.com/then/promise#readme)
+
+## Типографика:
+* Мы используем [postcss-responsive-type](https://github.com/seaneking/postcss-responsive-type), пример кода:
+```css 
+html {
+    font-size: responsive;
+    min-font-size: 12px;
+    max-font-size: 21px;
+    lower-font-range: 420px;
+    upper-font-range: 1280px;
+}
+```
+* Блоки **user generated content** (теги типографики **без классов и стилей**), должны быть обвернуты в css-класс [wysiwyg](https://github.com/Intecmedia/Intecmedia.Webpack/blob/master/source/css/pages/_wysiwyg.scss)
