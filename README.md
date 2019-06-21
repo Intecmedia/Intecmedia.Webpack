@@ -64,3 +64,13 @@
 * [Вопросы и Ответы](http://help.yandex.ru/webmaster/supported-schemas/questions.xml)
 * [Товары и Цены](http://help.yandex.ru/webmaster/supported-schemas/goods-prices.xml)
 * [Картинки](http://help.yandex.ru/webmaster/supported-schemas/image.xml)
+
+## Полифилы
+* [fetch](https://github.com/github/fetch#readme)
+* [focus-visible](https://github.com/WICG/focus-visible)
+* [focus-within](https://github.com/jonathantneal/focus-within)
+* [intersection-observer](https://github.com/w3c/IntersectionObserver#readme)
+* [object-assign](https://github.com/sindresorhus/object-assign#readme)
+* [object-fit-images](https://github.com/bfred-it/object-fit-images#readme)
+* [picturefill](https://scottjehl.github.io/picturefill/)
+* [promise](https://github.com/then/promise#readme)
