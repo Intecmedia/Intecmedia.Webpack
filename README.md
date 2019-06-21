@@ -31,7 +31,7 @@
 * Множество линтеров: eslint, htmllint, stylelint с возможностью autofix кода.
 * Imagemin для сжатия гарфики: svg, png, jpeg, gif.
 * Генерация множества app-иконок и manifest.json.
-* Webp для всех изображений внутри CSS – [webpcss](https://github.com/lexich/webpcss).
+* Активное использование формат изображений WebP.
 
 ## Системные требования
 * Node.js версии 8 или выше
@@ -122,6 +122,16 @@ html {
 
 ### Imagemin
 * ...
+
+### Webp
+* Автоматический WebP для всех изображений(png,jpg,jpeg) внутри CSS – [webpcss](https://github.com/lexich/webpcss), пример:
+```css
+// before
+.test { background-image:url('test.png'); }
+// after
+.test { background-image:url('test.png'); }
+html.webp .test { background-image:url('test.webp'); }
+```
 
 ### Favicons и App Icons
 * Мы используем [webapp-webpack-plugin](https://github.com/brunocodutra/webapp-webpack-plugin).
