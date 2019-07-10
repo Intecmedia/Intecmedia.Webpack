@@ -1,6 +1,6 @@
 const uniqueId = require('lodash.uniqueid');
 
-class SvgIdPrefix {
+class SvgoIdPrefix {
     constructor(prefix) {
         this.prefix = prefix;
     }
@@ -10,11 +10,11 @@ class SvgIdPrefix {
     }
 }
 
-module.exports = {
+const SvgoPrefixConfig = prefix => ({
     plugins: [
         {
             cleanupIDs: {
-                prefix: new SvgIdPrefix('svgo-'),
+                prefix,
                 preserve: [], // ignore ids
                 preservePrefixes: [], // ignore prefix ids
             },
@@ -23,4 +23,10 @@ module.exports = {
         { convertShapeToPath: false },
         { removeViewBox: false },
     ],
-};
+});
+
+module.exports = SvgoPrefixConfig(new SvgoIdPrefix('svgo-'));
+
+module.exports.SvgoIdPrefix = SvgoIdPrefix;
+
+module.exports.SvgoPrefixConfig = SvgoPrefixConfig;

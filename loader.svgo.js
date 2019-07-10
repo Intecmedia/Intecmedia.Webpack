@@ -1,12 +1,14 @@
+const path = require('path');
 const SVGO = require('svgo');
-const loaderUtils = require('loader-utils');
+const { SvgoIdPrefix, SvgoPrefixConfig } = require('./svgo.config.js');
 
 module.exports = function SvgLoader(content) {
     const loaderContext = this;
     if (loaderContext.cacheable) loaderContext.cacheable();
     const loaderCallback = this.async();
 
-    const options = loaderUtils.getOptions(loaderContext);
+    const name = path.basename(loaderContext.resourcePath, '.svg');
+    const options = SvgoPrefixConfig(new SvgoIdPrefix(`svgo-${name.toLowerCase()}-`));
     const svgoInstance = new SVGO(options);
 
     svgoInstance.optimize(content).then((result) => {
