@@ -11,10 +11,6 @@ const deepMerge = require('lodash.merge');
 
 const attrParser = require('./attr.parser.js');
 
-const SVGO = require('svgo');
-const svgoConfig = require('./svgo.config.js');
-const deasync = require('deasync');
-
 const helpers = require('./source/helpers/index.js');
 
 const logger = weblog({ name: 'loader-html' });
@@ -35,10 +31,6 @@ const DEFAULT_OPTIONS = {
     requireIgnore: /^(\w+[:]|\/\/)/i,
     requireReplace: {},
     searchPath: './source',
-    svgo: {
-        enabled: true,
-        ...svgoConfig,
-    },
 };
 
 const SRC_SEPARATOR = /\s+/;
@@ -58,7 +50,6 @@ const OPTIONS_SCHEMA = {
         requireIgnore: { instanceof: 'RegExp' },
         requireReplace: { type: 'object' },
         searchPath: { type: 'string' },
-        svgo: { type: 'object' },
     },
 };
 
@@ -114,8 +105,6 @@ module.exports = function HtmlLoader() {
     });
     validateOptions(OPTIONS_SCHEMA, options, 'loader-html');
 
-    const svgoInstance = new SVGO(options.svgo);
-
     const nunjucksLoader = new nunjucks.FileSystemLoader(options.searchPath, { noCache: true });
     const nunjucksEnvironment = new nunjucks.Environment(nunjucksLoader, options.environment);
 
@@ -167,17 +156,8 @@ module.exports = function HtmlLoader() {
             return templateSource;
         }
         if (filename.endsWith('.svg')) {
-            let minifiedSvg;
-            const originalSvg = templateSource.src;
-            svgoInstance.optimize(originalSvg).then((result) => {
-                minifiedSvg = result;
-            }).catch((error) => {
-                minifiedSvg = { data: originalSvg };
-                return loaderCallback(error);
-            });
-            deasync.loopWhile(() => minifiedSvg === undefined);
             return Object.assign({}, templateSource, {
-                src: minifiedSvg.data,
+                src: `{{ require("${filename}") }}`,
             });
         }
         if (!frontMatter.test(templateSource.src)) {

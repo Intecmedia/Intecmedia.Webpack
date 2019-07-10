@@ -309,12 +309,11 @@ module.exports = {
         rules: [
             // html loaders
             {
-                test: /\.html(\?.*)?$/i,
+                test: /\.(html)(\?.*)?$/i,
                 loader: './loader.html.js',
                 options: {
                     context: APP,
                     searchPath: ENV.SOURCE_PATH,
-                    svgo: { enabled: ENV.PROD || ENV.DEBUG },
                 },
             },
             // javascript loaders
@@ -388,8 +387,16 @@ module.exports = {
             },
             // image loaders
             {
-                test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
+                test: /\.(svg)(\?.*)?$/i,
+                issuer: /\.(html)(\?.*)?$/i,
+                include: /(partials)/i,
                 exclude: /(fonts|font)/i,
+                loader: './loader.svgo.js',
+                options: require('./svgo.config.js'),
+            },
+            {
+                test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
+                exclude: /(fonts|font|partials)/i,
                 oneOf: [
                     {
                         exclude: /\.(svg)$/i,
@@ -411,7 +418,7 @@ module.exports = {
             // font loaders
             {
                 test: /\.(eot|woff|woff2|ttf|svg)(\?.*)?$/i,
-                exclude: /(img|images)/i,
+                exclude: /(img|images|partials)/i,
                 loader: 'file-loader',
                 options: {
                     name: resourceName('fonts', true),
