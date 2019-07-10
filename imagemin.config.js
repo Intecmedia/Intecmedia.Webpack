@@ -1,4 +1,4 @@
-const svgoConfig = require('./svgo.config.js');
+const {SvgoDefaultConfig} = require('./svgo.config.js');
 
 module.exports = {
     plugins: [
@@ -14,7 +14,7 @@ module.exports = {
             quality: [0.85, 1.0],
         }],
         ['svgo', {
-            ...svgoConfig,
+            plugins: SvgoDefaultConfig.plugins,
         }],
         ['gifsicle', {
             optimizationLevel: 3,

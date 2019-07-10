@@ -27,7 +27,6 @@ const SvgoPrefixConfig = prefix => ({
 
 const SvgoDefaultConfig = SvgoPrefixConfig(new SvgoIdPrefix('svgo-'));
 
-module.exports = SvgoDefaultConfig;
 module.exports.SvgoIdPrefix = SvgoIdPrefix;
 module.exports.SvgoPrefixConfig = SvgoPrefixConfig;
 module.exports.SvgoDefaultConfig = SvgoDefaultConfig;
