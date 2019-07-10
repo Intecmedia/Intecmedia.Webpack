@@ -15,6 +15,8 @@ module.exports = {
         {
             cleanupIDs: {
                 prefix: new SvgIdPrefix('svgo-'),
+                preserve: [], // ignore ids
+                preservePrefixes: [], // ignore prefix ids
             },
         },
         { collapseGroups: false },
