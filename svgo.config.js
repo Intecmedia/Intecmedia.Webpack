@@ -14,7 +14,6 @@ module.exports = {
     plugins: [
         {
             cleanupIDs: {
-                remove: false,
                 prefix: new SvgIdPrefix('svgo-'),
             },
         },
