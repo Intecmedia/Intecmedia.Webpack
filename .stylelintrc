@@ -26,6 +26,10 @@
         "scss/at-import-no-partial-leading-underscore": true,
         "scss/at-mixin-argumentless-call-parentheses": "always",
         "scss/selector-no-redundant-nesting-selector": true,
+        "order/order": [
+           "dollar-variables",
+           "custom-propertie"
+       ],
         "order/properties-alphabetical-order": false,
         "plugin/rational-order": [true, {
             "border-in-box-model": false,
