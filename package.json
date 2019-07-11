@@ -14,6 +14,7 @@
         "watch-dev": "node ./script.nodemon.js --exec \"cross-env NODE_ENV=development DEBUG=0 webpack --watch -d\"",
         "watch-debug": "node ./script.nodemon.js --exec \"cross-env NODE_ENV=development DEBUG=1 webpack --watch -d\"",
         "js-lint": "cross-env NODE_ENV=development eslint --config .eslintrc --ignore-path .eslintignore --fix *.js source/**/*.js",
+        "js-lint-config": "cross-env NODE_ENV=development eslint --print-config .eslintrc --ignore-path .eslintignore",
         "css-lint": "cross-env NODE_ENV=development stylelint source/**/*.scss --fix --syntax scss --formatter verbose --ignore-path .stylelintignore --config .stylelintrc",
         "css-lint-config": "cross-env NODE_ENV=development stylelint --syntax scss  --ignore-path .stylelintignore --print-config .stylelintrc",
         "html-lint": "cross-env NODE_ENV=development node ./script.html-lint.js",
