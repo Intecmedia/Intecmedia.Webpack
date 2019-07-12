@@ -157,7 +157,7 @@ module.exports = function HtmlLoader() {
         }
         if (filename.endsWith('.svg')) {
             return Object.assign({}, templateSource, {
-                src: `{{ require("${filename}") }}`,
+                src: `{{ require("${slash(filename)}") }}`,
             });
         }
         if (!frontMatter.test(templateSource.src)) {
