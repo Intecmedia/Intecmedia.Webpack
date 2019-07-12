@@ -9,7 +9,7 @@ const logger = weblog({ name: 'loader-svgo' });
 module.exports = function SvgLoader(content) {
     const loaderContext = this;
     if (loaderContext.cacheable) loaderContext.cacheable();
-    const loaderCallback = this.async();
+    const loaderCallback = loaderContext.async();
 
     const name = path.basename(loaderContext.resourcePath, '.svg');
     const options = SvgoPrefixConfig(new SvgoIdPrefix(`svgo-${name.toLowerCase()}-`));

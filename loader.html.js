@@ -113,7 +113,7 @@ module.exports = function HtmlLoader() {
         let ident;
         do ident = RANDOM_REQUIRE();
         while (options.requireReplace[ident]);
-        options.requireReplace[ident] = url;
+        options.requireReplace[ident] = slash(url);
         return ident;
     };
     options.requireExport = exportString => exportString.replace(REQUIRE_PATTERN, (match) => {

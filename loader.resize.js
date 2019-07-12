@@ -20,7 +20,7 @@ module.exports.resizeCache = resizeCache;
 module.exports = function ResizeLoader(content) {
     const loaderContext = this;
     if (loaderContext.cacheable) loaderContext.cacheable();
-    const loaderCallback = this.async();
+    const loaderCallback = loaderContext.async();
 
     const query = loaderContext.resourceQuery ? loaderUtils.parseQuery(loaderContext.resourceQuery) : {};
     const options = deepMerge(
