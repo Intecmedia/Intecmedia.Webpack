@@ -96,7 +96,7 @@ module.exports = {
         splitChunks: {
             cacheGroups: {
                 vendor: {
-                    test: /node_modules/,
+                    test: /(node_modules)(.+)\.(js|mjs)(\?.*)?$/,
                     chunks: 'initial',
                     name: 'vendor',
                     enforce: true,
