@@ -39,6 +39,7 @@ const SRCSET_ATTRS = ['srcset', 'data-srcset'];
 const IGNORE_PATTERN = /^\{\{.*\}\}$/;
 const REQUIRE_PATTERN = /\{\{ require\([0-9\\.]+\) \}\}/g;
 const RANDOM_REQUIRE = () => `{{ require(${Math.random()}${Math.random()}) }}`;
+const SVG_PATTERN = /\.(svg)(\?.*)?$/i;
 
 const OPTIONS_SCHEMA = {
     type: 'object',
@@ -155,7 +156,7 @@ module.exports = function HtmlLoader() {
         if (!(templateSource && templateSource.src)) {
             return templateSource;
         }
-        if (filename.endsWith('.svg')) {
+        if (SVG_PATTERN.test(filename)) {
             return Object.assign({}, templateSource, {
                 src: `{{ require("${slash(filename)}") }}`,
             });
