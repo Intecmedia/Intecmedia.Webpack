@@ -28,8 +28,8 @@
         "scss/selector-no-redundant-nesting-selector": true,
         "order/order": [
            "dollar-variables",
-           "custom-propertie"
-       ],
+           "custom-properties"
+        ],
         "order/properties-alphabetical-order": false,
         "plugin/rational-order": [true, {
             "border-in-box-model": false,
