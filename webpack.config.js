@@ -126,7 +126,7 @@ module.exports = {
             return !(ignore.test(filename));
         },
         hints: 'warning',
-        maxAssetSize: 3 * 1024 * 1024,
+        maxAssetSize: Number.MAX_SAFE_INTEGER,
         maxEntrypointSize: 512 * 1024,
     } : false),
 
