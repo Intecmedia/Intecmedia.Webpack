@@ -16,10 +16,10 @@ module.exports = function SvgLoader(content) {
     const svgoInstance = new SVGO(options);
 
     const relativePath = slash(path.relative(__dirname, loaderContext.resourcePath));
-    logger.info(`load: '${relativePath}'...`);
+    logger.info(`optimize(${JSON.stringify(relativePath)})`);
 
     svgoInstance.optimize(content).then((result) => {
-        logger.info(`done: ${JSON.stringify(result.info)}'`);
+        logger.info(result.info);
 
         const exportString = `module.exports = ${JSON.stringify(result.data)}`;
         loaderCallback(null, exportString);
