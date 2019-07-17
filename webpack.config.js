@@ -55,7 +55,7 @@ const resourceName = (prefix, hash = false) => {
             return slash(url + suffix);
         }
         if (url.startsWith(`${basename}/`)) {
-            return url + suffix;
+            return slash(url + suffix);
         }
         if (url.startsWith('node_modules/')) {
             return slash(path.join(basename, url + suffix));
@@ -295,9 +295,6 @@ module.exports = {
             analyzerMode: (ENV.DEV_SERVER ? 'server' : 'static'),
             openAnalyzer: ENV.DEV_SERVER,
             reportFilename: path.join(__dirname, 'node_modules', '.cache', `bundle-analyzer-${ENV.NODE_ENV}.html`),
-        }),
-        new webpack.debug.ProfilingPlugin({
-            outputPath: path.join(__dirname, 'node_modules', '.cache', `profiling-plugin-${ENV.NODE_ENV}.json`),
         })] : []),
     ],
 
