@@ -1,0 +1,6 @@
+{% if not APP.ENV.PROD or APP.ENV.DEBUG %}
+<script>
+    console.log("APP", {{ APP|dump|safe }});
+    console.log("PAGE", {{ PAGE|dump|safe }});
+</script>
+{% endif %}
