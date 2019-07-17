@@ -119,9 +119,13 @@ module.exports = function HtmlLoader() {
     options.requireExport = exportString => exportString.replace(REQUIRE_PATTERN, (match) => {
         if (!options.requireReplace[match]) return match;
         const url = options.requireReplace[match];
-        logger.info(`require('${url}')`);
+
+        const relativeUrl = slash(path.relative(__dirname, url));
+        logger.info(`require(${JSON.stringify(relativeUrl)})`);
+
         const resourceDir = path.dirname(loaderContext.resourcePath);
         const urlPrefix = path.relative(resourceDir, options.searchPath);
+
         const request = loaderUtils.urlToRequest(slash(path.join(urlPrefix, url)), resourceDir);
         return `" + require(${JSON.stringify(request)}) + "`;
     });
@@ -182,7 +186,9 @@ module.exports = function HtmlLoader() {
         });
     };
 
-    logger.info(`processing '${path.relative(__dirname, loaderContext.resourcePath)}'`);
+    const relativePath = slash(path.relative(__dirname, loaderContext.resourcePath));
+    logger.info(`render(${JSON.stringify(relativePath)})`);
+
     nunjucksEnvironment.render(loaderContext.resourcePath, {}, (error, result) => {
         if (error) {
             loaderCallback(error);
