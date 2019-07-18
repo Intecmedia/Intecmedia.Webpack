@@ -106,7 +106,7 @@
         "imagemin-optipng": "latest",
         "imagemin-pngquant": "latest",
         "imagemin-svgo": "latest",
-        "imagemin-webpack": "latest",
+        "imagemin-webpack": "^4.1.0",
         "imports-loader": "latest",
         "intersection-observer": "latest",
         "jquery": "latest",

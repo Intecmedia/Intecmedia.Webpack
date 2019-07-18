@@ -1,26 +1,31 @@
 const { SvgoDefaultConfig } = require('./svgo.config.js');
 
+const imageminMozjpeg = require('imagemin-mozjpeg');
+const imageminOptipng = require('imagemin-optipng');
+const imageminPngquant = require('imagemin-pngquant');
+const imageminSvgo = require('imagemin-svgo');
+const imageminGifsicle = require('imagemin-gifsicle');
+const imageminJpegtran = require('imagemin-jpegtran');
+
 module.exports = {
     plugins: [
-        ['mozjpeg', {
+        imageminMozjpeg({
             quality: 85,
             progressive: true,
-        }],
-        ['optipng', {
+        }),
+        imageminOptipng({
             optimizationLevel: 3,
-        }],
-        ['pngquant', {
+        }),
+        imageminPngquant({
             speed: 3,
-            quality: [0.85, 1.0],
-        }],
-        ['svgo', {
-            plugins: SvgoDefaultConfig.plugins,
-        }],
-        ['gifsicle', {
+            quality: '80-100',
+        }),
+        imageminSvgo(SvgoDefaultConfig),
+        imageminGifsicle({
             optimizationLevel: 3,
-        }],
-        ['jpegtran', {
+        }),
+        imageminJpegtran({
             progressive: true,
-        }],
+        }),
     ],
 };
