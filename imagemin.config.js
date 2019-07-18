@@ -18,7 +18,7 @@ module.exports = {
         }),
         imageminPngquant({
             speed: 3,
-            quality: '80-100',
+            quality: [0.85, 1.0],
         }),
         imageminSvgo(SvgoDefaultConfig),
         imageminGifsicle({
