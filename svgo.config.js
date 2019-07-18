@@ -11,6 +11,7 @@ class SvgoIdPrefix {
 }
 
 const SvgoPrefixConfig = prefix => ({
+    js2svg: { pretty: true },
     plugins: [
         {
             cleanupIDs: {
@@ -19,7 +20,6 @@ const SvgoPrefixConfig = prefix => ({
                 preservePrefixes: [], // ignore prefix ids
             },
         },
-        { collapseGroups: false },
         { convertShapeToPath: false },
         { removeViewBox: false },
     ],
