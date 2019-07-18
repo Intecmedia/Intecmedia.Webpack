@@ -423,18 +423,20 @@ module.exports = {
             },
             // css loaders
             {
-                test: /\.(css|scss)$/i,
+                test: /\.(css|scss)(\?.*)?$/i,
                 loaders: (ENV.DEV_SERVER ? ['css-hot-loader'] : []).concat([
                     MiniCssExtractPlugin.loader,
                     {
                         loader: 'css-loader',
                         options: {
+                            importLoaders: 2,
                             sourceMap: ENV.USE_SOURCE_MAP,
                         },
                     },
                     {
                         loader: 'postcss-loader',
                         options: {
+                            ident: 'postcss',
                             sourceMap: ENV.USE_SOURCE_MAP ? 'inline' : false,
                             config: { path: './postcss.config.js' },
                         },
