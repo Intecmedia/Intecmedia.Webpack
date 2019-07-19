@@ -31,6 +31,13 @@ glob(`${ENV.OUTPUT_PATH}/**/*.html`, {
 }, (error, files) => {
     if (error) throw error;
 
+    const statMessages = {};
+    const increaseStat = (type) => {
+        if (type in statMessages) statMessages[type] += 1;
+        else statMessages[type] = 1;
+    };
+
+    let processed = 0;
     files.forEach(async (filename) => {
         const relative = slash(path.relative(__dirname, filename));
         const html = fs.readFileSync(filename, 'utf8').toString();
@@ -41,15 +48,17 @@ glob(`${ENV.OUTPUT_PATH}/**/*.html`, {
             result.messages.forEach((message) => {
                 if (message.message && ignoreTest(message.message)) {
                     skipped = true;
+                    increaseStat('ignore');
                     return;
                 }
                 if (message.type === 'error') {
                     process.exitCode = 1;
                 }
+                increaseStat(message.type);
                 const log = errorsLogger[message.type] || logger.error;
                 log(`${relative}: line ${message.lastLine || 0} col [${message.firstColumn || 0}-${message.lastColumn || 0}]`);
-                log(`${message.type}: ${JSON.stringify(message.message)}.`);
-                log(`${JSON.stringify(message.extract)}.`);
+                log(`${message.type}: ${JSON.stringify(message.message)}`);
+                log(`${JSON.stringify(message.extract.trim())}`);
                 console.log('');
             });
         } else {
@@ -58,6 +67,11 @@ glob(`${ENV.OUTPUT_PATH}/**/*.html`, {
 
         if (skipped) {
             logger.info(`skipped ${relative}`);
+        }
+
+        processed += 1;
+        if (processed === files.length) {
+            logger.info(statMessages);
         }
     });
 });
