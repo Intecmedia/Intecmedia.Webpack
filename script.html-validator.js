@@ -14,6 +14,11 @@ const ignoreLines = fs.readFileSync('./.htmlvalidatorignore')
     .toString().trim().split('\n')
     .map(i => i.toLowerCase().trim());
 
+const ignoreTest = (message) => {
+    const lowerMessage = message.toLowerCase().trim();
+    return ignoreLines.some(i => i.includes(lowerMessage));
+};
+
 const errorsLogger = {
     error: logger.error,
     'non-document-error': logger.error,
@@ -34,7 +39,7 @@ glob(`${ENV.OUTPUT_PATH}/**/*.html`, {
         let skipped = false;
         if (result.messages && result.messages.length) {
             result.messages.forEach((message) => {
-                if (message.message && ignoreLines.includes(message.message.toLowerCase().trim())) {
+                if (message.message && ignoreTest(message.message)) {
                     skipped = true;
                     return;
                 }
