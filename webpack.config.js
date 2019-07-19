@@ -16,7 +16,7 @@ const logger = weblog({ name: 'webpack-config' });
 const ENV = require('./app.env.js');
 const APP = require('./app.config.js');
 
-ENV.SITEMAP = ENV.SITEMAP.map(i => ({ ...i, path: path.posix.join(APP.PUBLIC_PATH, i.url) }));
+ENV.SITEMAP = ENV.SITEMAP.map(i => Object.assign(i, { path: path.posix.join(APP.PUBLIC_PATH, i.url) }));
 
 if (ENV.STANDALONE) {
     logger.info(`Name: ${ENV.PACKAGE_NAME}`);
