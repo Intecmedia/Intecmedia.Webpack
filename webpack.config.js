@@ -146,6 +146,23 @@ module.exports = {
             filename: 'css/app.min.css',
             allChunks: true,
         }),
+        new CopyWebpackPlugin([
+            ...[
+                '**/.htaccess',
+                'img/**/*.{png,svg,ico,gif,xml,jpeg,jpg,json,webp}',
+                'partials/**/*.svg',
+                '*.txt',
+            ].map(from => ({
+                from,
+                to: ENV.OUTPUT_PATH,
+                context: ENV.SOURCE_PATH,
+                ignore: ENV.SITEMAP.map(i => i.template),
+            })),
+        ], {
+            copyUnmodified: !(ENV.PROD || ENV.DEBUG),
+            debug: (ENV.DEBUG ? 'debug' : 'info'),
+            force: true,
+        }),
         ...(ENV.PROD ? [
             new CaseSensitivePathsPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),
@@ -270,23 +287,6 @@ module.exports = {
             }],
             ignoreUrlParametersMatching: [/^utm_/, /^[a-fA-F0-9]{32}$/],
         })] : []),
-        new CopyWebpackPlugin([
-            ...[
-                '**/.htaccess',
-                'img/**/*.{png,svg,ico,gif,xml,jpeg,jpg,json,webp}',
-                'partials/**/*.svg',
-                '*.txt',
-            ].map(from => ({
-                from,
-                to: ENV.OUTPUT_PATH,
-                context: ENV.SOURCE_PATH,
-                ignore: ENV.SITEMAP.map(i => i.template),
-            })),
-        ], {
-            copyUnmodified: !(ENV.PROD || ENV.DEBUG),
-            debug: (ENV.DEBUG ? 'debug' : 'info'),
-            force: true,
-        }),
         ...(ENV.PROD ? [new ImageminPlugin({
             test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
             exclude: /(fonts|font)/i,
