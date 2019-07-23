@@ -8,6 +8,13 @@ module.exports = {
         require('postcss-quantity-queries')(),
         require('postcss-responsive-type')(),
         ...(ENV.PROD || ENV.DEBUG ? [
+            require('@fullhuman/postcss-purgecss')({
+                content: [
+                    './source/*.html',
+                    './source/partials/*.html',
+                    './source/partials/**/*.html',
+                ],
+            }),
             require('postcss-focus')(),
             require('postcss-focus-visible')(),
             require('postcss-focus-within')(),

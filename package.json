@@ -174,7 +174,8 @@
         "webpack-sources": "latest",
         "webpcss": "latest",
         "whatwg-fetch": "latest",
-        "workbox-webpack-plugin": "latest"
+        "workbox-webpack-plugin": "latest",
+        "@fullhuman/postcss-purgecss": "latest"
     },
     "devDependencies": {}
 }
