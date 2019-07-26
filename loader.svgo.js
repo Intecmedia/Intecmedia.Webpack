@@ -20,8 +20,8 @@ module.exports = function SvgLoader(content) {
 
     svgoInstance.optimize(content).then((result) => {
         logger.info(result.info);
-        const prefix = `<!-- ${relativePath} -->\n`;
-        const suffix = `\n<!-- /${relativePath} -->\n`;
+        const prefix = `<!-- ${JSON.stringify(relativePath)} -->\n`;
+        const suffix = `\n<!-- /${JSON.stringify(relativePath)} -->\n`;
         const exportString = `module.exports = ${JSON.stringify(prefix + result.data.trim() + suffix)}`;
         loaderCallback(null, exportString);
     }).catch((error) => {
