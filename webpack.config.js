@@ -290,7 +290,7 @@ module.exports = {
         ...(ENV.PROD ? [new ImageminPlugin({
             test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
             exclude: /(fonts|font)/i,
-            name: resourceName('img', ENV.PROD || ENV.DEBUG),
+            name: resourceName('img'),
             imageminOptions: require('./imagemin.config.js'),
             cache: !ENV.DEBUG,
             loader: true,
@@ -403,16 +403,16 @@ module.exports = {
                         exclude: /\.(svg)$/i,
                         resourceQuery: /[&?]resize=.+/,
                         loader: './loader.resize.js',
-                        options: { name: resourceName('img', ENV.PROD || ENV.DEBUG), limit: 32 * 1024 },
+                        options: { name: resourceName('img'), limit: 32 * 1024 },
                     },
                     {
                         resourceQuery: /[&?]inline=inline/,
                         loader: 'url-loader',
-                        options: { name: resourceName('img', ENV.PROD || ENV.DEBUG), limit: 32 * 1024 },
+                        options: { name: resourceName('img'), limit: 32 * 1024 },
                     },
                     {
                         loader: 'file-loader',
-                        options: { name: resourceName('img', ENV.PROD || ENV.DEBUG) },
+                        options: { name: resourceName('img') },
                     },
                 ],
             },
@@ -422,7 +422,7 @@ module.exports = {
                 exclude: /(img|images|partials)/i,
                 loader: 'file-loader',
                 options: {
-                    name: resourceName('fonts', true),
+                    name: resourceName('fonts'),
                 },
             },
             // css loaders
