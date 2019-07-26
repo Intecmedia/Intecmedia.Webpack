@@ -61,6 +61,7 @@ module.exports = {
     SOURCE_PATH,
     OUTPUT_PATH,
     PACKAGE_NAME,
+    BROWSERSLIST: browserslist,
     BROWSERS: browserslist[NODE_ENV],
     SITEMAP,
 };
