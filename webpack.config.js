@@ -320,15 +320,6 @@ module.exports = {
             // javascript loaders
             {
                 test: require.resolve('jquery'),
-                exclude: {
-                    test: [
-                        // disable jquery expose
-                        path.join(__dirname, 'node_modules'),
-                    ],
-                    exclude: [
-                        // enable jquery expose
-                    ],
-                },
                 use: [{
                     loader: 'expose-loader',
                     options: 'jQuery',
