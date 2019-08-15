@@ -116,7 +116,7 @@ module.exports = function HtmlLoader() {
         options.requireReplace[ident] = slash(url);
         return ident;
     };
-    options.requireExport = exportString => exportString.replace(REQUIRE_PATTERN, (match) => {
+    options.requireExport = (exportString) => exportString.replace(REQUIRE_PATTERN, (match) => {
         if (!options.requireReplace[match]) return match;
         const url = options.requireReplace[match];
 
@@ -161,9 +161,7 @@ module.exports = function HtmlLoader() {
             return templateSource;
         }
         if (SVG_PATTERN.test(filename)) {
-            return Object.assign({}, templateSource, {
-                src: `{{ require(${JSON.stringify(slash(filename))}) }}`,
-            });
+            return { ...templateSource, src: `{{ require(${JSON.stringify(slash(filename))}) }}` };
         }
         if (!frontMatter.test(templateSource.src)) {
             return templateSource;
@@ -174,7 +172,8 @@ module.exports = function HtmlLoader() {
             templateData.attributes,
             PAGE,
         ));
-        return Object.assign({}, templateSource, {
+        return {
+            ...templateSource,
             src: [
                 '{#---',
                 templateData.frontmatter
@@ -183,7 +182,7 @@ module.exports = function HtmlLoader() {
                 '---#}',
                 templateData.body,
             ].join('\n'),
-        });
+        };
     };
 
     const relativePath = slash(path.relative(__dirname, loaderContext.resourcePath));

@@ -13,7 +13,7 @@ const nodemonConfig = {
     ignore: [
         '**/.hg/**', '**/.git/**', '**/.svn/**',
         'build', 'source/js', 'source/partials', 'source/html.data.js',
-    ].concat(ENV.SITEMAP.map(i => i.template)),
+    ].concat(ENV.SITEMAP.map((i) => i.template)),
     verbose: true,
 };
 

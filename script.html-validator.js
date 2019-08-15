@@ -12,11 +12,11 @@ const ENV = require('./app.env.js');
 
 const ignoreLines = fs.readFileSync('./.htmlvalidatorignore')
     .toString().trim().split('\n')
-    .map(i => i.toLowerCase().trim());
+    .map((i) => i.toLowerCase().trim());
 
 const ignoreTest = (message) => {
     const lowerMessage = message.toLowerCase().trim();
-    return ignoreLines.some(i => i.includes(lowerMessage));
+    return ignoreLines.some((i) => i.includes(lowerMessage));
 };
 
 const errorsLogger = {

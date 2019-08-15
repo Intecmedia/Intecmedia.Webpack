@@ -1,6 +1,6 @@
 const uniqueId = require('lodash.uniqueid');
 
-const SvgoPrefixConfig = prefix => ({
+const SvgoPrefixConfig = (prefix) => ({
     js2svg: { pretty: true },
     plugins: [
         {

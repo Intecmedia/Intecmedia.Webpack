@@ -29,8 +29,8 @@ if (APP.DESCRIPTION === '$APP.DESCRIPTION$') {
     lintWarns.push('empty `DESCRIPTION` in `app.config.js`');
 }
 
-lintWarns.map(i => logger.warn(i));
-lintErrors.map(i => logger.error(i));
+lintWarns.map((i) => logger.warn(i));
+lintErrors.map((i) => logger.error(i));
 
 logger.info(`errors: ${lintErrors.length} warnings: ${lintWarns.length}`);
 

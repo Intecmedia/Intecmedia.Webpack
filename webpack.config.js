@@ -16,7 +16,7 @@ const logger = weblog({ name: 'webpack-config' });
 const ENV = require('./app.env.js');
 const APP = require('./app.config.js');
 
-ENV.SITEMAP = ENV.SITEMAP.map(i => Object.assign(i, {
+ENV.SITEMAP = ENV.SITEMAP.map((i) => Object.assign(i, {
     path: path.posix.join(APP.PUBLIC_PATH, i.url, 'index.html'),
 }));
 
@@ -152,11 +152,11 @@ module.exports = {
                 'img/**/*.{png,svg,ico,gif,xml,jpeg,jpg,json,webp}',
                 'partials/**/*.svg',
                 '*.txt',
-            ].map(from => ({
+            ].map((from) => ({
                 from,
                 to: ENV.OUTPUT_PATH,
                 context: ENV.SOURCE_PATH,
-                ignore: ENV.SITEMAP.map(i => i.template),
+                ignore: ENV.SITEMAP.map((i) => i.template),
             })),
         ], {
             copyUnmodified: !(ENV.PROD || ENV.DEBUG),
@@ -443,7 +443,7 @@ module.exports = {
                                 ['$DEBUG', ENV.DEBUG],
                                 ['$NODE_ENV', ENV.NODE_ENV],
                                 ['$PACKAGE_NAME', ENV.PACKAGE_NAME],
-                            ].map(i => ((k, v) => `${k}: ${JSON.stringify(v)};`)(...i)).join('\n'),
+                            ].map((i) => ((k, v) => `${k}: ${JSON.stringify(v)};`)(...i)).join('\n'),
                             indentWidth: 4,
                             sourceMap: ENV.USE_SOURCE_MAP ? 'inline' : false,
                             sourceMapEmbed: ENV.USE_SOURCE_MAP,

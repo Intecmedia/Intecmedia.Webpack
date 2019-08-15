@@ -7,13 +7,13 @@ const DEFAULT_BREAKPOINTS = ['xs', 'sm', 'md', 'lg', 'xl'];
 module.exports = (breakpoints = DEFAULT_BREAKPOINTS, sizes = DEFAULT_SIZES) => {
     const sortedBreakpoints = Object.entries(sizes)
         .sort((a, b) => (a[1] - b[1]))
-        .map(i => i[0])
-        .filter(i => breakpoints.includes(i));
-    const mergedSizes = Object.assign(
-        {},
-        sortedBreakpoints.reduce((entries, [k, v]) => ({ ...entries, [k]: v })),
-        sizes,
-    );
+        .map((i) => i[0])
+        .filter((i) => breakpoints.includes(i));
+    const mergedSizes = {
+
+        ...sortedBreakpoints.reduce((entries, [k, v]) => ({ ...entries, [k]: v })),
+        ...sizes,
+    };
     return sortedBreakpoints.map((breakpoint, index) => [breakpoint, [
         // not first
         ...(index >= 1 && sortedBreakpoints[index - 1]
