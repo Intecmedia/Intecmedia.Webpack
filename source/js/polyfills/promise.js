@@ -1,3 +1,4 @@
+// for polyfill use only require
 if (!window.Promise) {
     // eslint-disable-next-line global-require
     require('promise/lib/rejection-tracking').enable();

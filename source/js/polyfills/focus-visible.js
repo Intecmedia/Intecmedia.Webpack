@@ -1,1 +1,2 @@
-import 'focus-visible';
+// for polyfill use only require
+require('focus-visible');

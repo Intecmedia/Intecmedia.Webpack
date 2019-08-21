@@ -85,7 +85,10 @@ module.exports = {
     },
 
     entry: {
-        app: `${ENV.SOURCE_PATH}/js/app.js`,
+        app: [
+            `${ENV.SOURCE_PATH}/js/polyfills.js`, // this always first
+            `${ENV.SOURCE_PATH}/js/app.js`,
+        ],
     },
 
     output: {

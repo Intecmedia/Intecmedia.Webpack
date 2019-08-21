@@ -1,3 +1,4 @@
+// for polyfill use only require
 const picturefill = require('picturefill');
 
 jQuery(($) => {

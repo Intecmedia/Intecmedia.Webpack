@@ -1,4 +1,5 @@
 /* global NODE_ENV DEBUG */
+// for polyfill use only require
 require('~/polyfills/history-events.js');
 
 if (NODE_ENV === 'production' || DEBUG) {

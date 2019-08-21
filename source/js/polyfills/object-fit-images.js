@@ -1,3 +1,4 @@
+// for polyfill use only require
 const objectFitImages = require('object-fit-images');
 
 jQuery(($) => {
