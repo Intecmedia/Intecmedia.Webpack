@@ -1,0 +1,43 @@
+@mixin fluid-property($properties, $min-value, $max-value, $min-width: 420px, $max-width: 1280px) {
+    @each $property in $properties {
+        #{$property}: $min-value;
+    }
+
+    @media (min-width: $min-width) {
+        @each $property in $properties {
+            #{$property}: calc(#{$min-value} + #{strip-unit($max-value - $min-value)} * (100vw - #{$min-width}) / #{strip-unit($max-width - $min-width)});
+        }
+    }
+
+    @media (min-width: $max-width) {
+        @each $property in $properties {
+            #{$property}: $max-value;
+        }
+    }
+}
+
+@mixin fluid-property-vertical($properties, $min-value, $max-value, $min-height: 320px, $max-height: 1024px) {
+    @each $property in $properties {
+        #{$property}: $min-value;
+    }
+
+    @media (min-height: $min-height) {
+        @each $property in $properties {
+            #{$property}: calc(#{$min-value} + #{strip-unit($max-value - $min-value)} * (100vh - #{$min-height}) / #{strip-unit($max-height - $min-height)});
+        }
+    }
+
+    @media (min-height: $max-height) {
+        @each $property in $properties {
+            #{$property}: $max-value;
+        }
+    }
+}
+
+@mixin fluid-font-size($min-value, $max-value, $min-width: 420px, $max-width: 1280px) {
+    @include fluid-property(font-size, $min-value, $max-value, $min-width, $max-width);
+}
+
+@mixin fluid-font-size-vertical($min-value, $max-value, $min-height: 320px, $max-height: 1024px) {
+    @include fluid-property-vertical(font-size, $min-value, $max-value, $min-height, $max-height);
+}
