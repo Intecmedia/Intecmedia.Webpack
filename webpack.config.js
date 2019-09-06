@@ -442,15 +442,17 @@ module.exports = {
                     {
                         loader: 'sass-loader',
                         options: {
-                            data: [
+                            prependData: [
                                 ['$DEBUG', ENV.DEBUG],
                                 ['$NODE_ENV', ENV.NODE_ENV],
                                 ['$PACKAGE_NAME', ENV.PACKAGE_NAME],
                             ].map((i) => ((k, v) => `${k}: ${JSON.stringify(v)};`)(...i)).join('\n'),
-                            indentWidth: 4,
                             sourceMap: ENV.USE_SOURCE_MAP ? 'inline' : false,
-                            sourceMapEmbed: ENV.USE_SOURCE_MAP,
-                            sourceComments: ENV.USE_SOURCE_MAP,
+                            sassOptions: {
+                                indentWidth: 4,
+                                sourceMapEmbed: ENV.USE_SOURCE_MAP,
+                                sourceComments: ENV.USE_SOURCE_MAP,
+                            }
                         },
                     },
                 ]),
