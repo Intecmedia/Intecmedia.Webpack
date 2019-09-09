@@ -15,6 +15,7 @@ const logger = weblog({ name: 'webpack-config' });
 
 const ENV = require('./app.env.js');
 const APP = require('./app.config.js');
+const UTILS = require('./webpack.utils.js');
 
 ENV.SITEMAP = ENV.SITEMAP.map((i) => Object.assign(i, {
     path: path.posix.join(APP.PUBLIC_PATH, i.url, 'index.html'),
@@ -49,24 +50,6 @@ const BabelConfig = require('./babel.config.js');
 const SERVICE_WORKER_BASE = slash(path.relative(APP.PUBLIC_PATH, '/'));
 const SERVICE_WORKER_PATH = path.join(ENV.OUTPUT_PATH, SERVICE_WORKER_BASE, '/service-worker.js');
 APP.SERVICE_WORKER_HASH = () => (fs.existsSync(SERVICE_WORKER_PATH) ? md5File.sync(SERVICE_WORKER_PATH) : '');
-
-const resourceName = (prefix, hash = false) => {
-    const basename = path.basename(prefix);
-    const suffix = (hash ? '?[contenthash]' : '');
-    return (resourcePath) => {
-        const url = slash(path.relative(ENV.SOURCE_PATH, resourcePath)).replace(/^(\.\.\/)+/g, '');
-        if (url.startsWith('partials/')) {
-            return slash(url + suffix);
-        }
-        if (url.startsWith(`${basename}/`)) {
-            return slash(url + suffix);
-        }
-        if (url.startsWith('node_modules/')) {
-            return slash(path.join(basename, url + suffix));
-        }
-        return slash(path.join(basename, `[name].[ext]${suffix}`));
-    };
-};
 
 module.exports = {
 
@@ -293,7 +276,7 @@ module.exports = {
         ...(ENV.PROD ? [new ImageminPlugin({
             test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
             exclude: /(fonts|font)/i,
-            name: resourceName('img'),
+            name: UTILS.resourceName('img'),
             imageminOptions: require('./imagemin.config.js'),
             cache: !ENV.DEBUG,
             loader: true,
@@ -397,16 +380,16 @@ module.exports = {
                         exclude: /\.(svg)$/i,
                         resourceQuery: /[&?]resize=.+/,
                         loader: './loader.resize.js',
-                        options: { name: resourceName('img'), limit: 32 * 1024 },
+                        options: { name: UTILS.resourceName('img'), limit: 32 * 1024 },
                     },
                     {
                         resourceQuery: /[&?]inline=inline/,
                         loader: 'url-loader',
-                        options: { name: resourceName('img'), limit: 32 * 1024 },
+                        options: { name: UTILS.resourceName('img'), limit: 32 * 1024 },
                     },
                     {
                         loader: 'file-loader',
-                        options: { name: resourceName('img') },
+                        options: { name: UTILS.resourceName('img') },
                     },
                 ],
             },
@@ -416,7 +399,7 @@ module.exports = {
                 exclude: /(img|images|partials)/i,
                 loader: 'file-loader',
                 options: {
-                    name: resourceName('fonts'),
+                    name: UTILS.resourceName('fonts'),
                 },
             },
             // css loaders
@@ -442,11 +425,11 @@ module.exports = {
                     {
                         loader: 'sass-loader',
                         options: {
-                            prependData: [
-                                ['$DEBUG', ENV.DEBUG],
-                                ['$NODE_ENV', ENV.NODE_ENV],
-                                ['$PACKAGE_NAME', ENV.PACKAGE_NAME],
-                            ].map((i) => ((k, v) => `${k}: ${JSON.stringify(v)};`)(...i)).join('\n'),
+                            prependData: UTILS.toScssVars({
+                                $DEBUG: ENV.DEBUG,
+                                $NODE_ENV: ENV.NODE_ENV,
+                                $PACKAGE_NAME: ENV.PACKAGE_NAME,
+                            }),
                             sourceMap: ENV.USE_SOURCE_MAP ? 'inline' : false,
                             sassOptions: {
                                 indentWidth: 4,
