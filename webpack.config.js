@@ -426,9 +426,7 @@ module.exports = {
                         loader: 'sass-loader',
                         options: {
                             prependData: UTILS.toScssVars({
-                                $DEBUG: ENV.DEBUG,
-                                $NODE_ENV: ENV.NODE_ENV,
-                                $PACKAGE_NAME: ENV.PACKAGE_NAME,
+                                ...ENV,
                             }),
                             sourceMap: ENV.USE_SOURCE_MAP ? 'inline' : false,
                             sassOptions: {
