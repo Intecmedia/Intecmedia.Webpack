@@ -135,7 +135,7 @@ module.exports = {
         new CopyWebpackPlugin([
             ...[
                 '**/.htaccess',
-                'img/**/*.{png,svg,ico,gif,xml,jpeg,jpg,json,webp}',
+                'img/**/*.*',
                 'partials/**/*.svg',
                 '*.txt',
             ].map((from) => ({
@@ -154,17 +154,15 @@ module.exports = {
             new webpack.NoEmitOnErrorsPlugin(),
             new BrotliPlugin({
                 asset: '[path].br[query]',
-                test: /\.(js|css)$/,
+                test: /\.(js|css|json)$/,
             }),
             new CompressionPlugin({
-                test: /\.(css|js)(\?.*)?$/i,
+                test: /\.(css|js|json)(\?.*)?$/i,
                 filename: '[path].gz[query]',
                 compressionOptions: {
                     numiterations: 15,
                 },
-                algorithm(input, compressionOptions, callback) {
-                    return zopfli.gzip(input, compressionOptions, callback);
-                },
+                algorithm: zopfli.gzip,
             }),
         ] : []),
         new webpack.BannerPlugin({
