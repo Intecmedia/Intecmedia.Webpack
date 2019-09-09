@@ -3,27 +3,24 @@ const slash = require('slash');
 
 const ENV = require('./app.env.js');
 
-function castScssReplacer(key, value) {
-    if (typeof value === 'object') {
-        return value.toString();
-    }
-    return value;
-}
-
 function castScssVar(obj) {
     if (Array.isArray(obj)) {
-        return obj.map((v) => JSON.stringify(v, castScssReplacer)).join(', ');
+        return [
+            '(',
+            obj.map((v) => castScssVar(v)).join(', '),
+            ')',
+        ].join('');
     }
     if (typeof obj === 'object') {
         return [
             '(',
             Object.entries(obj).map((i) => (
-                (k, v) => `${JSON.stringify(k, castScssReplacer)}: ${JSON.stringify(v, castScssReplacer)}`
+                (k, v) => `${JSON.stringify(k)}: ${castScssVar(v)}`
             )(...i)).join(', '),
             ')',
         ].join('');
     }
-    return JSON.stringify(obj, castScssReplacer);
+    return JSON.stringify(obj);
 }
 
 function toScssVars(obj) {
