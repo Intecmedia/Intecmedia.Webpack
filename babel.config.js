@@ -5,6 +5,7 @@ module.exports = {
     options: {
         plugins: [
             '@babel/transform-runtime',
+            '@babel/plugin-proposal-optional-chaining',
         ],
         presets: [
             ['@babel/preset-env', {

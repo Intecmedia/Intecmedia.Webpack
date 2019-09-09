@@ -55,6 +55,7 @@
     "dependencies": {
         "@babel/cli": "latest",
         "@babel/core": "latest",
+        "@babel/plugin-proposal-optional-chaining": "latest",
         "@babel/plugin-transform-runtime": "latest",
         "@babel/polyfill": "latest",
         "@babel/preset-env": "latest",

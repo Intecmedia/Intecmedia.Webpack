@@ -452,7 +452,7 @@ module.exports = {
                                 indentWidth: 4,
                                 sourceMapEmbed: ENV.USE_SOURCE_MAP,
                                 sourceComments: ENV.USE_SOURCE_MAP,
-                            }
+                            },
                         },
                     },
                 ]),
