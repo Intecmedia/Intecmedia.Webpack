@@ -1,4 +1,4 @@
-<!-- webp-test -->
+<!-- head-js -->
 <script>
     (document.documentElement && document.documentElement.className && (function (html) {
         html.className = html.className.replace('no-js', 'js');
@@ -7,6 +7,7 @@
             html.className += (webp.width == 1 &&  webp.height == 1 ? ' webp' : ' no-webp');
         };
         webp.src = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuUAAA=';
+        html.className += (navigator.connection.saveData ? ' save-data' : ' no-save-data');
     })(document.documentElement));
 </script>
-<!-- /webp-test -->
+<!-- /head-js -->
