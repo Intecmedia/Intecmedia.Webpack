@@ -1,3 +1,4 @@
+Attribute “intrinsicsize” not allowed on element “img” at this point.
 Attribute “importance” not allowed on element “img” at this point.
 Attribute “loading” not allowed on element “img” at this point.
 The “align” attribute on the “img” element is obsolete. Use CSS instead.
