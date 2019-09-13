@@ -1,13 +1,18 @@
 <!-- head-js -->
 <script>
-    (document.documentElement && document.documentElement.className && (function (html) {
-        html.className = html.className.replace('no-js', 'js');
+    (document.documentElement && document.documentElement.className && (function ($html, $conn) {
+        // js test
+        $html.className = $html.className.replace('no-js', 'js');
+        // webp support test
         var webp = new Image();
         webp.onload = webp.onerror = function () {
-            html.className += (webp.width == 1 &&  webp.height == 1 ? ' webp' : ' no-webp');
+            $html.className += (webp.width == 1 &&  webp.height == 1 ? ' webp' : ' no-webp');
         };
         webp.src = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuUAAA=';
-        html.className += (navigator.connection.saveData ? ' save-data' : ' no-save-data');
-    })(document.documentElement));
+        // save-data header test
+        $html.className += ($conn && $conn.saveData ? ' save-data' : ' no-save-data');
+        // network information test: 'slow-2g', '2g', '3g', or '4g'
+        $html.className += ($conn && $conn.effectiveType ? ' network-detected network-' + $conn.effectiveType : ' network-unknown');
+    })(document.documentElement, navigator.connection));
 </script>
 <!-- /head-js -->
