@@ -13,6 +13,6 @@
         $html.className += ($conn && $conn.saveData ? ' save-data' : ' no-save-data');
         // network information test: 'slow-2g', '2g', '3g', or '4g'
         $html.className += ($conn && $conn.effectiveType ? ' network-detected network-' + $conn.effectiveType : ' network-unknown');
-    })(document.documentElement, navigator.connection));
+    })(document.documentElement, navigator.connection || navigator.mozConnection || navigator.webkitConnection));
 </script>
 <!-- /head-js -->
