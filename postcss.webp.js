@@ -2,11 +2,14 @@ const path = require('path');
 const { default: webpcss } = require('webpcss');
 const { URLSearchParams } = require('url');
 
+const IMAGE_PATTERN = /.(png|jpg|jpeg)(\?.*)?$/i;
+
 module.exports = () => webpcss({
-    webpClass: 'html.webp',
     noWebpClass: '',
-    replace_from: /.(png|jpg|jpeg)(\?.*)?$/i,
-    replace_to: (input) => {
+    replace_from: IMAGE_PATTERN,
+    webpClass: 'html.webp',
+    replace_to(input) {
+        if (!IMAGE_PATTERN.test(input.url)) return input.url;
         const [request, search = ''] = input.url.split('?', 2);
         const params = new URLSearchParams(search);
         if (params.has('resize')) return input.url;
