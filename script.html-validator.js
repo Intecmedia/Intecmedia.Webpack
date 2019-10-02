@@ -1,4 +1,6 @@
+/* eslint-env node */
 /* eslint max-len: "off", "compat/compat": "off" */
+
 const fs = require('fs');
 const path = require('path');
 const glob = require('glob');

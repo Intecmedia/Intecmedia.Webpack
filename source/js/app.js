@@ -1,8 +1,6 @@
 /* global NODE_ENV DEBUG */
-require('../css/app.scss');
-
-require('~/components/sentry.js');
-require('~/components/bootstrap.js');
+import('~/components/sentry.js');
+import('~/components/bootstrap.js');
 
 jQuery(($) => {
     $(document.documentElement).addClass('ready-js');

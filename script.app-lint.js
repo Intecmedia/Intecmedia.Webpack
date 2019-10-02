@@ -1,4 +1,6 @@
+/* eslint-env node */
 /* eslint "compat/compat": "off" */
+
 const weblog = require('webpack-log');
 
 const logger = weblog({ name: 'app-lint' });

@@ -1,4 +1,6 @@
+/* eslint-env node */
 /* eslint "compat/compat": "off" */
+
 const Parser = require('fastparse');
 
 function processMatch(match, orig, attr, value, index) {

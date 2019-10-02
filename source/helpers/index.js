@@ -1,4 +1,6 @@
+/* eslint-env node */
 /* eslint global-require: "off", import/no-dynamic-require: "off", "compat/compat": "off" */
+
 const path = require('path');
 const glob = require('glob');
 

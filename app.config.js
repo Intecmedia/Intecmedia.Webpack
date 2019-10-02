@@ -1,4 +1,6 @@
+/* eslint-env node */
 /* eslint max-len: "off" */
+
 const ENV = require('./app.env.js');
 
 module.exports = {

@@ -1,4 +1,6 @@
+/* eslint-env node */
 /* eslint "compat/compat": "off" */
+
 const nodemon = require('nodemon');
 const nodemonCli = require('nodemon/lib/cli');
 const deepMerge = require('lodash.merge');

@@ -1,4 +1,6 @@
+/* eslint-env node */
 /* eslint "compat/compat": "off" */
+
 const uniqueId = require('lodash.uniqueid');
 
 const SvgoPrefixConfig = (prefix) => ({

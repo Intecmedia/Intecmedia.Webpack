@@ -1,4 +1,6 @@
+/* eslint-env node */
 /* eslint "compat/compat": "off" */
+
 const { SvgoDefaultConfig } = require('./svgo.config.js');
 
 module.exports = {

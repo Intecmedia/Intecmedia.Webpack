@@ -1,4 +1,6 @@
+/* eslint-env node */
 /* eslint global-require: "off", max-lines: "off", import/no-dynamic-require: "off", max-len: "off", "compat/compat": "off" */
+
 const fs = require('fs');
 
 const realcwd = fs.realpathSync(process.cwd());
@@ -70,6 +72,7 @@ module.exports = {
     entry: {
         app: [
             `${ENV.SOURCE_PATH}/js/polyfills.js`, // this always first
+            `${ENV.SOURCE_PATH}/css/app.scss`,
             `${ENV.SOURCE_PATH}/js/app.js`,
         ],
     },

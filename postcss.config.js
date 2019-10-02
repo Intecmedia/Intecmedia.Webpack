@@ -1,4 +1,6 @@
+/* eslint-env node */
 /* eslint global-require: "off", "compat/compat": "off" */
+
 const ENV = require('./app.env.js');
 
 module.exports = {

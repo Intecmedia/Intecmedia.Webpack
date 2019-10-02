@@ -1,4 +1,6 @@
+/* eslint-env node */
 /* eslint "compat/compat": "off" */
+
 const path = require('path');
 const ImageSize = require('image-size');
 

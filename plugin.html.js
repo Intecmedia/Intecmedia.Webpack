@@ -1,4 +1,6 @@
+/* eslint-env node */
 /* eslint "compat/compat": "off" */
+
 const HtmlWebpackPluginOriginal = require('html-webpack-plugin');
 
 const SCRIPT_TYPES = ['text/javascript', 'application/javascript'];

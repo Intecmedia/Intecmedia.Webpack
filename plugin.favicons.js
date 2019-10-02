@@ -1,4 +1,6 @@
+/* eslint-env node */
 /* eslint "compat/compat": "off" */
+
 const deepMerge = require('lodash.merge');
 const ImageSize = require('image-size');
 const WebappWebpackPlugin = require('webapp-webpack-plugin');
