@@ -86,16 +86,7 @@ module.exports = {
     },
 
     optimization: {
-        splitChunks: {
-            cacheGroups: {
-                vendor: {
-                    test: /(node_modules)(.+)\.(js|mjs)(\?.*)?$/,
-                    chunks: 'initial',
-                    name: 'vendor',
-                    enforce: true,
-                },
-            },
-        },
+        splitChunks: false,
         minimizer: (ENV.PROD && !ENV.DEBUG ? [
             new UglifyJsPlugin({
                 cache: !ENV.DEBUG,
@@ -170,6 +161,9 @@ module.exports = {
         ] : []),
         new webpack.BannerPlugin({
             banner: `ENV.NODE_ENV=${ENV.NODE_ENV} | ENV.DEBUG=${ENV.DEBUG}`,
+        }),
+        new webpack.optimize.LimitChunkCountPlugin({
+            maxChunks: 1,
         }),
         new webpack.ProvidePlugin({
             $: 'jquery',
