@@ -85,7 +85,7 @@
         "eslint-config-airbnb-base": "latest",
         "eslint-import-resolver-webpack": "latest",
         "eslint-loader": "latest",
-        "eslint-plugin-compat": "^3.3.0",
+        "eslint-plugin-compat": "latest",
         "eslint-plugin-import": "latest",
         "expose-loader": "latest",
         "fastparse": "latest",
