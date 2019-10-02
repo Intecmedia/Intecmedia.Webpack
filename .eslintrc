@@ -13,6 +13,13 @@
         "import"
     ],
     "settings": {
+        "polyfills": [
+            "fetch",
+            "IntersectionObserver",
+            "Object.assign",
+            "Promise",
+            "ResizeObserver"
+        ],
         "import/resolver": {
             "node": {},
             "webpack": {
