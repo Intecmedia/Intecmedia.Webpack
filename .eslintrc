@@ -17,10 +17,12 @@
     "settings": {
         "polyfills": [
             "fetch",
+            "Array.from",
             "IntersectionObserver",
             "Object.assign",
             "Promise",
-            "ResizeObserver"
+            "ResizeObserver",
+            "Symbol"
         ],
         "import/resolver": {
             "node": {},
