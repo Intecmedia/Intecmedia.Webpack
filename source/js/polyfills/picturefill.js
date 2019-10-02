@@ -1,3 +1,5 @@
+/* eslint "compat/compat": "off" */
+
 // for polyfill use only require
 const picturefill = require('picturefill');
 

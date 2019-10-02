@@ -1,3 +1,4 @@
+/* eslint "compat/compat": "off" */
 const path = require('path');
 const pretty = require('pretty');
 const deepMerge = require('lodash.merge');

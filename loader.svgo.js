@@ -1,3 +1,4 @@
+/* eslint "compat/compat": "off" */
 const path = require('path');
 const slash = require('slash');
 const SVGO = require('svgo');

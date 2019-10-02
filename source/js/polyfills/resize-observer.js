@@ -1,5 +1,6 @@
-// for polyfill use only require
+/* eslint "compat/compat": "off" */
 
+// for polyfill use only require
 if (!window.ResizeObserver) {
     // eslint-disable-next-line global-require
     const ResizeObserver = require('resize-observer-polyfill');

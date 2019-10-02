@@ -1,7 +1,10 @@
 {
     "root": true,
     "parser": "babel-eslint",
-    "extends": "airbnb-base",
+    "extends": [
+        "plugin:compat/recommended",
+        "airbnb-base"
+    ],
     "env": {
         "browser": true,
         "jquery": true

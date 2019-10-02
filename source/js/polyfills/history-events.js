@@ -1,5 +1,5 @@
 /* global NODE_ENV */
-/* eslint 'prefer-rest-params': 'off' */
+/* eslint "prefer-rest-params": "off", "compat/compat": "off" */
 
 /*
     Note that just calling history.pushState() or history.replaceState() won't trigger a popstate event.

@@ -1,3 +1,4 @@
+/* eslint "compat/compat": "off" */
 const path = require('path');
 const glob = require('glob');
 const slash = require('slash');

@@ -1,4 +1,4 @@
-/* eslint max-len: "off" */
+/* eslint max-len: "off", "compat/compat": "off" */
 const path = require('path');
 const glob = require('glob');
 const slash = require('slash');

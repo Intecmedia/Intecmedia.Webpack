@@ -1,3 +1,4 @@
+/* eslint "compat/compat": "off" */
 const path = require('path');
 const md5File = require('md5-file');
 
