@@ -147,6 +147,7 @@
         "postcss-will-change": "latest",
         "pretty": "latest",
         "promise": "latest",
+        "resize-observer-polyfill": "latest",
         "sass-loader": "latest",
         "schema-utils": "latest",
         "slash": "latest",

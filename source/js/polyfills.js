@@ -22,6 +22,9 @@ if (NODE_ENV === 'production' || DEBUG) {
     require('~/polyfills/intersection-observer.js');
 
     // eslint-disable-next-line global-require
+    require('~/polyfills/resize-observer.js');
+
+    // eslint-disable-next-line global-require
     require('~/polyfills/focus-within.js');
 
     // eslint-disable-next-line global-require
