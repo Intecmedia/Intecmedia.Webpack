@@ -174,7 +174,10 @@ module.exports = {
         new webpack.DefinePlugin({
             DEBUG: JSON.stringify(ENV.DEBUG),
             NODE_ENV: JSON.stringify(ENV.NODE_ENV),
-            ...Object.assign({}, ...Object.entries(APP).map(([k, v]) => ({ [`APP.${k}`]: JSON.stringify(v) }))),
+            PACKAGE_NAME: JSON.stringify(ENV.PACKAGE_NAME),
+            ...Object.assign({}, ...Object.entries(APP).map(([k, v]) => ({
+                [`APP.${k}`]: JSON.stringify(v),
+            }))),
         }),
         new WebpackNotifierPlugin({
             alwaysNotify: true,
@@ -421,7 +424,12 @@ module.exports = {
                         loader: 'sass-loader',
                         options: {
                             prependData: UTILS.toScssVars({
-                                ...ENV,
+                                DEBUG: JSON.stringify(ENV.DEBUG),
+                                NODE_ENV: JSON.stringify(ENV.NODE_ENV),
+                                PACKAGE_NAME: JSON.stringify(ENV.PACKAGE_NAME),
+                                ...Object.assign({}, ...Object.entries(APP).map(([k, v]) => ({
+                                    [`APP-${k}`]: JSON.stringify(v),
+                                }))),
                             }),
                             sourceMap: ENV.USE_SOURCE_MAP ? 'inline' : false,
                             sassOptions: {
