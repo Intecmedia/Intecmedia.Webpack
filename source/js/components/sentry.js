@@ -1,10 +1,10 @@
-/* global NODE_ENV SENTRY_DSN */
-if (NODE_ENV === 'production' && SENTRY_DSN) {
+/* global NODE_ENV APP */
+if (NODE_ENV === 'production' && APP.SENTRY_DSN) {
     // eslint-disable-next-line global-require
     const { init: sentryInit } = require('@sentry/browser');
 
     sentryInit({
-        dsn: SENTRY_DSN,
+        dsn: APP.SENTRY_DSN,
         beforeSend(event) {
             // Detect if we got a ReportingObserver event
             if (event.message && event.message.indexOf('ReportingObserver') === 0) {

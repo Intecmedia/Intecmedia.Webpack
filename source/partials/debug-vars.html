@@ -1,8 +1,10 @@
 {% if not APP.ENV.PROD or APP.ENV.DEBUG %}
 <!-- debug-vars -->
 <script>
+(function() {
     console.log("APP", {{ APP|dump|safe }});
     console.log("PAGE", {{ PAGE|dump|safe }});
+})();
 </script>
 <!-- /debug-vars -->
 {% endif %}

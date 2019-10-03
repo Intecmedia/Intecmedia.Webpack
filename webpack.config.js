@@ -174,7 +174,7 @@ module.exports = {
         new webpack.DefinePlugin({
             DEBUG: JSON.stringify(ENV.DEBUG),
             NODE_ENV: JSON.stringify(ENV.NODE_ENV),
-            SENTRY_DSN: JSON.stringify(APP.SENTRY_DSN),
+            ...Object.assign({}, ...Object.entries(APP).map(([k, v]) => ({ [`APP.${k}`]: JSON.stringify(v) }))),
         }),
         new WebpackNotifierPlugin({
             alwaysNotify: true,
