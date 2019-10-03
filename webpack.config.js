@@ -44,6 +44,7 @@ const BrotliPlugin = (ENV.PROD ? require('brotli-webpack-plugin') : () => {});
 const CompressionPlugin = (ENV.PROD ? require('compression-webpack-plugin') : () => {});
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const UglifyJsPlugin = (ENV.PROD ? require('uglifyjs-webpack-plugin') : () => {});
+const { default: EagerImportsPlugin } = require('eager-imports-webpack-plugin');
 
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
 const PrettyPlugin = (APP.HTML_PRETTY ? require('./plugin.pretty.js') : () => {});
@@ -86,7 +87,16 @@ module.exports = {
     },
 
     optimization: {
-        splitChunks: false,
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    test: /(node_modules)(.+)\.(js|mjs)(\?.*)?$/,
+                    chunks: 'initial',
+                    name: 'vendor',
+                    enforce: true,
+                },
+            },
+        },
         minimizer: (ENV.PROD && !ENV.DEBUG ? [
             new UglifyJsPlugin({
                 cache: !ENV.DEBUG,
@@ -144,6 +154,7 @@ module.exports = {
             force: true,
         }),
         ...(ENV.PROD ? [
+            new EagerImportsPlugin(),
             new CaseSensitivePathsPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),
             new BrotliPlugin({
@@ -161,9 +172,6 @@ module.exports = {
         ] : []),
         new webpack.BannerPlugin({
             banner: `ENV.NODE_ENV=${ENV.NODE_ENV} | ENV.DEBUG=${ENV.DEBUG}`,
-        }),
-        new webpack.optimize.LimitChunkCountPlugin({
-            maxChunks: 1,
         }),
         new webpack.ProvidePlugin({
             $: 'jquery',

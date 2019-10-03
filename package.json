@@ -81,6 +81,7 @@
         "css-loader": "latest",
         "cssnano": "latest",
         "deasync": "latest",
+        "eager-imports-webpack-plugin": "latest",
         "eslint": "latest",
         "eslint-config-airbnb-base": "latest",
         "eslint-import-resolver-webpack": "latest",
