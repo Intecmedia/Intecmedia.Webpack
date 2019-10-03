@@ -435,10 +435,4 @@ module.exports = {
             },
         ],
     },
-    // Some libraries import Node modules but don't use them in the browser.
-    node: {
-        fs: 'empty',
-        net: 'empty',
-        tls: 'empty',
-    },
 };
