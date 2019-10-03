@@ -18,13 +18,15 @@
 
     <Files *.js.gz>
         # fix content type
-        AddType "application/javascript; charset=UTF-8" .gz
+        Header set Content-Type "application/javascript; charset=UTF-8"
+        AddType "application/javascript" .gz
         AddEncoding gzip .gz
         RemoveLanguage .gz
     </Files>
     <Files *.js.br>
         # fix content type
-        AddType "application/javascript; charset=UTF-8" .br
+        Header set Content-Type "application/javascript; charset=UTF-8"
+        AddType "application/javascript" .br
         AddEncoding br .br
         RemoveLanguage .br
     </Files>
