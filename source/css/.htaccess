@@ -18,13 +18,13 @@
 
     <Files *.css.gz>
         # fix content type
-        AddType "text/css" .gz
+        AddType "text/css; charset=UTF-8" .gz
         AddEncoding gzip .gz
         RemoveLanguage .gz
     </Files>
     <Files *.css.br>
         # fix content type
-        AddType "text/css" .br
+        AddType "text/css; charset=UTF-8" .br
         AddEncoding br .br
         RemoveLanguage .br
     </Files>
