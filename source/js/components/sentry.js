@@ -21,5 +21,8 @@ if (NODE_ENV === 'production' && SENTRY_DSN) {
             // Otherwise, just let it through
             return event;
         },
+        ignoreErrors: [],
+        blacklistUrls: [],
+        whitelistUrls: [],
     });
 }
