@@ -3,7 +3,7 @@
 
 const deepMerge = require('lodash.merge');
 const ImageSize = require('image-size');
-const WebappWebpackPlugin = require('webapp-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const APP = require('./app.config.js');
 
 const DEFAULT_FAVICON = {
@@ -43,7 +43,7 @@ module.exports.FavIcon = function FavIcon(options) {
     } else if (!(logoSize.width === 64 && logoSize.height === 64)) {
         throw new Error(`FavIcon '${mergedOptions.logo}': image size is not than (64 x 64)`);
     }
-    return new WebappWebpackPlugin(mergedOptions);
+    return new FaviconsWebpackPlugin(mergedOptions);
 };
 
 const DEFAULT_APPICON = {
@@ -83,5 +83,5 @@ module.exports.AppIcon = function AppIcon(options) {
     } else if (!(logoSize.width === 1024 && logoSize.height === 1024)) {
         throw new Error(`AppIcon '${mergedOptions.logo}': image size is not than (1024 x 1024)`);
     }
-    return new WebappWebpackPlugin(mergedOptions);
+    return new FaviconsWebpackPlugin(mergedOptions);
 };
