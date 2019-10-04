@@ -208,12 +208,10 @@ module.exports = {
             new FaviconsPlugin.AppIcon({
                 logo: path.join(__dirname, '.favicons-source-1024x1024.png'),
                 publicPath: APP.PUBLIC_PATH || './',
-                prefix: 'img/favicon/',
             }),
             new FaviconsPlugin.FavIcon({
                 logo: path.join(__dirname, '.favicons-source-64x64.png'),
                 publicPath: APP.PUBLIC_PATH || './',
-                prefix: 'img/favicon/',
             }),
         ] : []),
         ...(ENV.SITEMAP.map(({ template, filename }) => new HtmlWebpackPlugin({

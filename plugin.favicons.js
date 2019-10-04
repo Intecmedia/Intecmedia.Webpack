@@ -10,6 +10,7 @@ const DEFAULT_FAVICON = {
     mode: 'webapp',
     devMode: 'webapp',
     logo: './.favicons-source-64x64.png',
+    outputPath: 'img/favicon/',
     prefix: 'img/favicon/',
     appName: APP.TITLE,
     appDescription: APP.DESCRIPTION,
@@ -22,6 +23,7 @@ const DEFAULT_FAVICON = {
         start_url: APP.START_URL,
         background: APP.BACKGROUND_COLOR,
         theme_color: APP.THEME_COLOR,
+        manifestRelativePaths: true,
         icons: {
             android: false,
             appleIcon: false,
@@ -52,6 +54,7 @@ const DEFAULT_APPICON = {
     mode: 'webapp',
     devMode: 'webapp',
     logo: './.favicons-source-1024x1024.png',
+    outputPath: 'img/favicon/',
     prefix: 'img/favicon/',
     appName: APP.TITLE,
     appDescription: APP.DESCRIPTION,
@@ -64,6 +67,7 @@ const DEFAULT_APPICON = {
         start_url: APP.START_URL,
         background: APP.BACKGROUND_COLOR,
         theme_color: APP.THEME_COLOR,
+        manifestRelativePaths: true,
         icons: {
             android: true,
             appleIcon: true,
