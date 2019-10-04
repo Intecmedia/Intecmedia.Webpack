@@ -9,19 +9,19 @@
 {% set default_breakpoints = ['xs', 'sm', 'md', 'lg', 'xl'] %}
 {% set default_sizes = {xs: default_xs, sm: default_sm, md: default_md, lg: default_lg, xl: default_xl} %}
 
-{% macro xs(url, resize=default_xs, quality=default_quality, format='') -%}
+{% macro xs (url, resize=default_xs, quality=default_quality, format='') -%}
     {{ require(url + '?resize=' + resize + 'x&quality=' + quality + '&format=' + format + '&suffix=xs') }}
 {%- endmacro %}
-{% macro sm(url, resize=default_sm, quality=default_quality, format='') -%}
+{% macro sm (url, resize=default_sm, quality=default_quality, format='') -%}
     {{ require(url + '?resize=' + resize + 'x&quality=' + quality + '&format=' + format + '&suffix=sm') }}
 {%- endmacro %}
-{% macro md(url, resize=default_md, quality=default_quality, format='') -%}
+{% macro md (url, resize=default_md, quality=default_quality, format='') -%}
     {{ require(url + '?resize=' + resize + 'x&quality=' + quality + '&format=' + format + '&suffix=md') }}
 {%- endmacro %}
-{% macro lg(url, resize=default_lg, quality=default_quality, format='') -%}
+{% macro lg (url, resize=default_lg, quality=default_quality, format='') -%}
     {{ require(url + '?resize=' + resize + 'x&quality=' + quality + '&format=' + format + '&suffix=lg') }}
 {%- endmacro %}
-{% macro xl(url, resize=default_xl, quality=default_quality, format='') -%}
+{% macro xl (url, resize=default_xl, quality=default_quality, format='') -%}
     {{ require(url + '?resize=' + resize + 'x&quality=' + quality + '&format=' + format + '&suffix=xl') }}
 {%- endmacro %}
 
@@ -35,6 +35,23 @@
         {% for breakpoint, media in breakpoints_media(breakpoints, sizes) %}
         <source media="{{ media }}" srcset="{{ require(url + '?resize=' + sizes[breakpoint] + 'x&quality=' + quality + '&format=jpg&suffix=' + breakpoint) }}" type="image/jpeg">
         {% endfor %}
+
+        {% set dimensions = image_size(url) %}
+        <img 
+            src="{{ require(url) }}"
+            loading="lazy"
+            width="{{ dimensions.width }}"
+            height="{{ dimensions.height }}" 
+            intrinsicsize="{{ dimensions.width }}x{{ dimensions.height }}"
+            alt="{{ alt }}"
+        >
+    </picture>
+{% endmacro %}
+
+{% macro webp (url, alt, attrs={}, quality=default_quality) %}
+    <picture{% for k, v in attrs %} {{ k }}="{{ v }}"{% endfor %}>
+
+        <source media="{{ media }}" srcset="{{ require(url + '?resize=&quality=' + quality + '&format=webp') }}" type="image/webp">
 
         {% set dimensions = image_size(url) %}
         <img 
