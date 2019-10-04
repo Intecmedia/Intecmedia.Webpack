@@ -7,6 +7,8 @@ const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const APP = require('./app.config.js');
 
 const DEFAULT_FAVICON = {
+    mode: 'webapp',
+    devMode: 'webapp',
     logo: './.favicons-source-64x64.png',
     prefix: 'img/favicon/',
     appName: APP.TITLE,
@@ -47,6 +49,8 @@ module.exports.FavIcon = function FavIcon(options) {
 };
 
 const DEFAULT_APPICON = {
+    mode: 'webapp',
+    devMode: 'webapp',
     logo: './.favicons-source-1024x1024.png',
     prefix: 'img/favicon/',
     appName: APP.TITLE,
