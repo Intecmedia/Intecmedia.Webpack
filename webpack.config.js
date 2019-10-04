@@ -207,10 +207,14 @@ module.exports = {
         ...(APP.USE_FAVICONS ? [
             new FaviconsPlugin.AppIcon({
                 logo: path.join(__dirname, '.favicons-source-1024x1024.png'),
+                outputPath: 'img/favicon/',
+                prefix: 'img/favicon/',
                 publicPath: APP.PUBLIC_PATH || './',
             }),
             new FaviconsPlugin.FavIcon({
                 logo: path.join(__dirname, '.favicons-source-64x64.png'),
+                outputPath: 'img/favicon/',
+                prefix: 'img/favicon/',
                 publicPath: APP.PUBLIC_PATH || './',
             }),
         ] : []),
