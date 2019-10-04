@@ -19,6 +19,12 @@ if (NODE_ENV === 'production' || DEBUG) {
     require('core-js/es/array/from');
 
     // eslint-disable-next-line global-require
+    require('~/polyfills/array-includes.js');
+
+    // eslint-disable-next-line global-require
+    require('~/polyfills/string-includes.js');
+
+    // eslint-disable-next-line global-require
     require('~/polyfills/intersection-observer.js');
 
     // eslint-disable-next-line global-require
