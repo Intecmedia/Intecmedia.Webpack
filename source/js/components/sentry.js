@@ -7,14 +7,9 @@ if (NODE_ENV === 'production' && APP.SENTRY_DSN) {
         dsn: APP.SENTRY_DSN,
         beforeSend(event) {
             // Detect if we got a ReportingObserver event
-            if (event.message && event.message.indexOf('ReportingObserver') === 0) {
+            if (event?.message?.indexOf('ReportingObserver') === 0) {
                 // And check whether sourceFile points to chrome-extension.
-                if (
-                    event.extra
-                    && event.extra.body
-                    && event.extra.body.sourceFile
-                    && event.extra.body.sourceFile.indexOf('chrome-extension') === 0
-                ) {
+                if (event?.extra?.body?.sourceFile?.indexOf('chrome-extension') === 0) {
                     return null;
                 }
             }
