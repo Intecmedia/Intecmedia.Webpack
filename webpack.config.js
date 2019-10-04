@@ -40,10 +40,10 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const BrowserSyncPlugin = (ENV.WATCH ? require('browser-sync-webpack-plugin') : () => {});
 const StyleLintPlugin = (ENV.USE_LINTERS ? require('stylelint-webpack-plugin') : () => {});
-const BrotliPlugin = (ENV.PROD ? require('brotli-webpack-plugin') : () => {});
-const CompressionPlugin = (ENV.PROD ? require('compression-webpack-plugin') : () => {});
+const BrotliPlugin = (ENV.PROD || ENV.DEBUG ? require('brotli-webpack-plugin') : () => {});
+const CompressionPlugin = (ENV.PROD || ENV.DEBUG ? require('compression-webpack-plugin') : () => {});
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const UglifyJsPlugin = (ENV.PROD ? require('uglifyjs-webpack-plugin') : () => {});
+const UglifyJsPlugin = (ENV.PROD || ENV.DEBUG ? require('uglifyjs-webpack-plugin') : () => {});
 const { default: EagerImportsPlugin } = require('eager-imports-webpack-plugin');
 
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
@@ -97,7 +97,7 @@ module.exports = {
                 },
             },
         },
-        minimizer: (ENV.PROD && !ENV.DEBUG ? [
+        minimizer: (ENV.PROD ? [
             new UglifyJsPlugin({
                 cache: !ENV.DEBUG,
                 test: /\.(js)(\?.*)?$/i,
@@ -113,7 +113,7 @@ module.exports = {
         ] : []),
     },
 
-    performance: (ENV.PROD && !ENV.DEBUG ? {
+    performance: (ENV.PROD ? {
         assetFilter: (asset) => {
             const [filename] = asset.split('?', 2);
             const ignore = /(\.(css|js)\.map|\.LICENSE|\.eot|\.ttf|manifest\.json|service-worker\.js|@resize-.+|favicon|workbox)$/;
@@ -153,7 +153,7 @@ module.exports = {
             debug: (ENV.DEBUG ? 'debug' : 'info'),
             force: true,
         }),
-        ...(ENV.PROD ? [
+        ...(ENV.PROD || ENV.DEBUG ? [
             new EagerImportsPlugin(),
             new CaseSensitivePathsPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),
@@ -279,19 +279,21 @@ module.exports = {
             }],
             ignoreUrlParametersMatching: [/^utm_/, /^[a-fA-F0-9]{32}$/],
         })] : []),
-        ...(ENV.PROD ? [new ImageminPlugin({
-            test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
-            exclude: /(fonts|font)/i,
-            name: UTILS.resourceName('img'),
-            imageminOptions: require('./imagemin.config.js'),
-            cache: !ENV.DEBUG,
-            loader: true,
-        })] : []),
-        ...(ENV.PROD || ENV.DEBUG ? [new BundleAnalyzerPlugin({
-            analyzerMode: (ENV.DEV_SERVER ? 'server' : 'static'),
-            openAnalyzer: ENV.DEV_SERVER,
-            reportFilename: path.join(__dirname, 'node_modules', '.cache', `bundle-analyzer-${ENV.NODE_ENV}.html`),
-        })] : []),
+        ...(ENV.PROD || ENV.DEBUG ? [
+            new ImageminPlugin({
+                test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
+                exclude: /(fonts|font)/i,
+                name: UTILS.resourceName('img'),
+                imageminOptions: require('./imagemin.config.js'),
+                cache: !ENV.DEBUG,
+                loader: true,
+            }),
+            new BundleAnalyzerPlugin({
+                analyzerMode: (ENV.DEV_SERVER ? 'server' : 'static'),
+                openAnalyzer: ENV.DEV_SERVER,
+                reportFilename: path.join(__dirname, 'node_modules', '.cache', `bundle-analyzer-${ENV.NODE_ENV}.html`),
+            }),
+        ] : []),
     ],
 
     devtool: ENV.USE_SOURCE_MAP ? 'eval-source-map' : 'nosources-source-map',
