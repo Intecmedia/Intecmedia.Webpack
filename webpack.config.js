@@ -184,7 +184,7 @@ module.exports = {
             NODE_ENV: ENV.NODE_ENV,
             PACKAGE_NAME: ENV.PACKAGE_NAME,
             ...Object.assign({}, ...Object.entries(APP).map(([k, v]) => ({
-                [`APP.${k}`]: (typeof(v) == 'object' ? JSON.stringify(v) : v),
+                [`APP.${k}`]: JSON.stringify(v),
             }))),
         }),
         new WebpackNotifierPlugin({
@@ -440,7 +440,7 @@ module.exports = {
                                 NODE_ENV: ENV.NODE_ENV,
                                 PACKAGE_NAME: ENV.PACKAGE_NAME,
                                 ...Object.assign({}, ...Object.entries(APP).map(([k, v]) => ({
-                                    [`APP-${k}`]: (typeof(v) == 'object' ? JSON.stringify(v) : v),
+                                    [`APP-${k}`]: JSON.stringify(v),
                                 }))),
                             }),
                             sourceMap: ENV.USE_SOURCE_MAP ? 'inline' : false,
