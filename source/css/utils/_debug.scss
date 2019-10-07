@@ -1,5 +1,5 @@
 // Debug helper
-@if $APP-NODE_ENV != "production" or $APP-DEBUG {
+@if $NODE_ENV != "production" or $DEBUG {
     body::after {
         position: fixed;
         right: 0;
@@ -18,7 +18,7 @@
 
         transition: .6s;
 
-        content: "Only visible NODE_ENV=#{$APP-NODE_ENV} or DEBUG=#{$APP-DEBUG}";
+        content: "Only visible NODE_ENV=#{$NODE_ENV} or DEBUG=#{$DEBUG}";
 
         html:hover & {
             margin-bottom: 0;
@@ -27,7 +27,7 @@
 }
 
 // Debug helper
-@if $APP-PACKAGE_NAME == "Intecmedia.Webpack" {
+@if $PACKAGE_NAME == "Intecmedia.Webpack" {
     body::after {
         position: fixed;
         right: 0;
