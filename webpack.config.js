@@ -102,7 +102,7 @@ module.exports = {
                 },
             },
         },
-        minimizer: (ENV.PROD ? [
+        minimizer: (ENV.PROD && !ENV.DEBUG ? [
             new UglifyJsPlugin({
                 cache: !ENV.DEBUG,
                 test: /\.(js)(\?.*)?$/i,

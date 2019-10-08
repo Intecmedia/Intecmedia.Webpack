@@ -10,6 +10,7 @@
         "dev": "cross-env NODE_ENV=development DEBUG=0 webpack -d",
         "debug": "cross-env NODE_ENV=development DEBUG=1 webpack -d",
         "prod": "cross-env NODE_ENV=production DEBUG=0 webpack -p",
+        "prod-debug": "cross-env NODE_ENV=production DEBUG=1 webpack -p",
         "watch": "npm run watch-dev",
         "watch-dev": "node ./script.nodemon.js --exec \"cross-env NODE_ENV=development DEBUG=0 webpack --watch -d\"",
         "watch-debug": "node ./script.nodemon.js --exec \"cross-env NODE_ENV=development DEBUG=1 webpack --watch -d\"",

@@ -26,10 +26,6 @@ if (!['production', 'development'].includes(NODE_ENV)) {
     throw new Error(`Unknow NODE_ENV=${JSON.stringify(NODE_ENV)}`);
 }
 
-if (PROD && DEBUG) {
-    throw new Error(`Dont use ENV.NODE_ENV=${NODE_ENV} and ENV.DEBUG=${DEBUG} together`);
-}
-
 const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.html`, {
     ignore: [
         `${slash(SOURCE_PATH)}/partials/**/*.html`,
