@@ -54,6 +54,11 @@ const SERVICE_WORKER_BASE = slash(path.relative(APP.PUBLIC_PATH, '/'));
 const SERVICE_WORKER_PATH = path.join(ENV.OUTPUT_PATH, SERVICE_WORKER_BASE, '/service-worker.js');
 APP.SERVICE_WORKER_HASH = () => (fs.existsSync(SERVICE_WORKER_PATH) ? md5File.sync(SERVICE_WORKER_PATH) : '');
 
+const BANNER_STRING = [
+    `ENV.NODE_ENV=${ENV.NODE_ENV} | ENV.DEBUG=${ENV.DEBUG}`,
+    fs.readFileSync(path.join(ENV.SOURCE_PATH, 'humans.txt')),
+].join('\n');
+
 module.exports = {
 
     watchOptions: {
@@ -103,7 +108,11 @@ module.exports = {
                 test: /\.(js)(\?.*)?$/i,
                 parallel: true,
                 sourceMap: true,
-                extractComments: true,
+                extractComments: {
+                    condition: 'some',
+                    filename: (file) => `${file}.LICENSE`,
+                    banner: (file) => [`License information can be found in ${file}`, BANNER_STRING].join('\n'),
+                },
                 uglifyOptions: {
                     output: {
                         comments: false,
@@ -153,8 +162,8 @@ module.exports = {
             debug: (ENV.DEBUG ? 'debug' : 'info'),
             force: true,
         }),
+        new EagerImportsPlugin(),
         ...(ENV.PROD || ENV.DEBUG ? [
-            new EagerImportsPlugin(),
             new CaseSensitivePathsPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),
             new BrotliPlugin({
@@ -171,7 +180,7 @@ module.exports = {
             }),
         ] : []),
         new webpack.BannerPlugin({
-            banner: `ENV.NODE_ENV=${ENV.NODE_ENV} | ENV.DEBUG=${ENV.DEBUG}`,
+            banner: BANNER_STRING,
         }),
         new webpack.ProvidePlugin({
             $: 'jquery',
