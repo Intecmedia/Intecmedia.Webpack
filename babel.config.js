@@ -31,8 +31,6 @@ module.exports = {
     ],
     includeTransform: [
         // enable babel transform
-        path.join(__dirname, 'node_modules', 'core-js'),
-        path.join(__dirname, 'node_modules', '@babel', 'polyfill'),
         path.join(__dirname, 'node_modules', 'focus-within'),
         path.join(__dirname, 'node_modules', 'gsap'),
         path.join(__dirname, 'node_modules', 'three'),
