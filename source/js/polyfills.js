@@ -1,4 +1,6 @@
 /* global NODE_ENV DEBUG */
+import 'core-js';
+
 // for polyfill use only require
 require('~/polyfills/history-events.js');
 
@@ -13,10 +15,10 @@ if (NODE_ENV === 'production' || DEBUG) {
     require('~/polyfills/fetch.js');
 
     // eslint-disable-next-line global-require
-    require('core-js/es/symbol');
+    require('~/polyfills/symbol.js');
 
     // eslint-disable-next-line global-require
-    require('core-js/es/array/from');
+    require('~/polyfills/array-from.js');
 
     // eslint-disable-next-line global-require
     require('~/polyfills/array-includes.js');
