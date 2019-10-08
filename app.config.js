@@ -16,6 +16,11 @@ module.exports = {
     BACKGROUND_COLOR: '#fff',
     HTML_PRETTY: true,
     FONTS_SUBSETS: true,
-    SENTRY_DSN: '',
+    SENTRY: {
+        dsn: '',
+        ignoreErrors: [],
+        blacklistUrls: [],
+        whitelistUrls: [],
+    },
     ENV,
 };
