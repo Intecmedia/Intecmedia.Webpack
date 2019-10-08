@@ -67,7 +67,6 @@
         "autoprefixer": "latest",
         "babel-eslint": "latest",
         "babel-loader": "latest",
-        "babel-preset-airbnb": "latest",
         "bootstrap": "latest",
         "brotli-webpack-plugin": "latest",
         "browser-sync": "latest",

@@ -11,7 +11,7 @@
 * Webpack 4.
 * Bootstrap 4.
 * Progressive Web Apps: offline кеширование статики через [Service Worker-ы](https://github.com/GoogleChrome/workbox).
-* Babel и [babel-preset-airbnb](https://www.npmjs.com/package/babel-preset-airbnb).
+* Babel и [babel-preset-env](https://babeljs.io/docs/en/babel-preset-env).
 * Линтер с автофиксом [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) ([перевод](https://github.com/leonidlebedev/javascript-airbnb)).
 * Шаблонизатор [Nunjucks](https://mozilla.github.io/nunjucks/) для сборки HTML.
 * SCSS, autoprefixer, PostCSS: [postcss-input-style](https://github.com/seaneking/postcss-input-style),

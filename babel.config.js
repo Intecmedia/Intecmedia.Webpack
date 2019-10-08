@@ -8,7 +8,7 @@ module.exports = {
     options: {
         plugins: [
             '@babel/transform-runtime',
-            '@babel/plugin-proposal-optional-chaining',
+            ['@babel/plugin-proposal-optional-chaining', { loose: false }],
             ['@babel/plugin-proposal-pipeline-operator', { proposal: 'minimal' }],
         ],
         presets: [
@@ -16,11 +16,6 @@ module.exports = {
                 corejs: 3,
                 modules: false,
                 useBuiltIns: 'entry',
-                debug: ENV.DEBUG || !ENV.PROD,
-                targets: { browsers: ENV.BROWSERS },
-            }],
-            ['airbnb', {
-                modules: false,
                 debug: ENV.DEBUG || !ENV.PROD,
                 targets: { browsers: ENV.BROWSERS },
             }],
