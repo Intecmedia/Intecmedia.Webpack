@@ -9,6 +9,7 @@ module.exports = {
         plugins: [
             '@babel/transform-runtime',
             '@babel/plugin-proposal-optional-chaining',
+            ['@babel/plugin-proposal-pipeline-operator', { proposal: 'minimal' }],
         ],
         presets: [
             ['@babel/preset-env', {
