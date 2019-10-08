@@ -239,8 +239,6 @@ module.exports = {
             cacheId: ENV.PACKAGE_NAME,
             swDest: SERVICE_WORKER_PATH,
             importWorkboxFrom: 'local',
-            clientsClaim: true,
-            skipWaiting: true,
             precacheManifestFilename: slash(path.join(SERVICE_WORKER_BASE, 'service-worker-precache.js?[manifestHash]')),
             globDirectory: slash(ENV.OUTPUT_PATH),
             globPatterns: [
@@ -440,7 +438,7 @@ module.exports = {
                                 NODE_ENV: ENV.NODE_ENV,
                                 PACKAGE_NAME: ENV.PACKAGE_NAME,
                                 ...Object.assign({}, ...Object.entries(APP).map(([k, v]) => ({
-                                    [`APP-${k}`]: JSON.stringify(v),
+                                    [`APP-${k}`]: v,
                                 }))),
                             }),
                             sourceMap: ENV.USE_SOURCE_MAP ? 'inline' : false,
