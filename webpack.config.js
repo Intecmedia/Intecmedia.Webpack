@@ -458,6 +458,7 @@ module.exports = {
                             sourceMap: ENV.USE_SOURCE_MAP ? 'inline' : false,
                             sassOptions: {
                                 indentWidth: 4,
+                                outputStyle: 'expanded',
                                 sourceMapEmbed: ENV.USE_SOURCE_MAP,
                                 sourceComments: ENV.USE_SOURCE_MAP,
                             },
