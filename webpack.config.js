@@ -40,10 +40,10 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const BrowserSyncPlugin = (ENV.WATCH ? require('browser-sync-webpack-plugin') : () => {});
 const StyleLintPlugin = (ENV.USE_LINTERS ? require('stylelint-webpack-plugin') : () => {});
-const BrotliPlugin = (ENV.PROD || ENV.DEBUG ? require('brotli-webpack-plugin') : () => {});
-const CompressionPlugin = (ENV.PROD || ENV.DEBUG ? require('compression-webpack-plugin') : () => {});
+const BrotliPlugin = (ENV.PROD && !ENV.DEBUG ? require('brotli-webpack-plugin') : () => {});
+const CompressionPlugin = (ENV.PROD && !ENV.DEBUG ? require('compression-webpack-plugin') : () => {});
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const UglifyJsPlugin = (ENV.PROD || ENV.DEBUG ? require('uglifyjs-webpack-plugin') : () => {});
+const UglifyJsPlugin = (ENV.PROD && !ENV.DEBUG ? require('uglifyjs-webpack-plugin') : () => {});
 const { default: EagerImportsPlugin } = require('eager-imports-webpack-plugin');
 
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
