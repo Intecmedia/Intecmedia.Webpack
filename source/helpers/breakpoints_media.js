@@ -1,8 +1,14 @@
 /* eslint-env node */
 /* eslint "compat/compat": "off" */
 
+const DEFAULT_XS = 576;
+const DEFAULT_SM = 768;
+const DEFAULT_MD = 992;
+const DEFAULT_LG = 1200;
+const DEFAULT_XL = 1900;
+
 const DEFAULT_SIZES = {
-    xs: 576, sm: 768, md: 992, lg: 1200, xl: 1900,
+    xs: DEFAULT_XS, sm: DEFAULT_SM, md: DEFAULT_MD, lg: DEFAULT_LG, xl: DEFAULT_XL,
 };
 
 const DEFAULT_BREAKPOINTS = ['xs', 'sm', 'md', 'lg', 'xl'];
