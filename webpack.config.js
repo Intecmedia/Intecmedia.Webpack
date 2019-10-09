@@ -341,7 +341,6 @@ module.exports = {
                 loader: 'eslint-loader',
                 options: {
                     fix: true,
-                    cache: !ENV.DEBUG,
                     quiet: ENV.PROD,
                     emitError: false,
                     emitWarning: false,
