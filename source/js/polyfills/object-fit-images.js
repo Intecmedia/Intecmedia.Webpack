@@ -1,4 +1,4 @@
-/* eslint "compat/compat": "off" */
+/* eslint 'compat/compat': 'off' */
 
 // for polyfill use only require
 const objectFitImages = require('object-fit-images');

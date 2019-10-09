@@ -1,5 +1,4 @@
 /* global NODE_ENV DEBUG */
-import 'core-js';
 
 // for polyfill use only require
 require('~/polyfills/history-events.js');
