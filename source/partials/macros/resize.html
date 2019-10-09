@@ -1,31 +1,31 @@
-{% set default_quality = 85 %}
+{% set DEFAULT_QUALITY = 85 %}
 
-{% set default_xs = 576 %}
-{% set default_sm = 768 %}
-{% set default_md = 992 %}
-{% set default_lg = 1200 %}
-{% set default_xl = 1900 %}
+{% set DEFAULT_XS = 576 %}
+{% set DEFAULT_SM = 768 %}
+{% set DEFAULT_MD = 992 %}
+{% set DEFAULT_LG = 1200 %}
+{% set DEFAULT_XL = 1900 %}
 
-{% set default_breakpoints = ['xs', 'sm', 'md', 'lg', 'xl'] %}
-{% set default_sizes = {xs: default_xs, sm: default_sm, md: default_md, lg: default_lg, xl: default_xl} %}
+{% set DEFAULT_BREAKPOINTS = ['xs', 'sm', 'md', 'lg', 'xl'] %}
+{% set DEFAULT_SIZES = {xs: DEFAULT_XS, sm: DEFAULT_SM, md: DEFAULT_MD, lg: DEFAULT_LG, xl: DEFAULT_XL} %}
 
-{% macro xs (url, resize=default_xs, quality=default_quality, format='') -%}
+{% macro xs (url, resize=DEFAULT_XS, quality=DEFAULT_QUALITY, format='') -%}
     {{ require(url + '?resize=' + resize + 'x&quality=' + quality + '&format=' + format + '&suffix=xs') }}
 {%- endmacro %}
-{% macro sm (url, resize=default_sm, quality=default_quality, format='') -%}
+{% macro sm (url, resize=DEFAULT_SM, quality=DEFAULT_QUALITY, format='') -%}
     {{ require(url + '?resize=' + resize + 'x&quality=' + quality + '&format=' + format + '&suffix=sm') }}
 {%- endmacro %}
-{% macro md (url, resize=default_md, quality=default_quality, format='') -%}
+{% macro md (url, resize=DEFAULT_MD, quality=DEFAULT_QUALITY, format='') -%}
     {{ require(url + '?resize=' + resize + 'x&quality=' + quality + '&format=' + format + '&suffix=md') }}
 {%- endmacro %}
-{% macro lg (url, resize=default_lg, quality=default_quality, format='') -%}
+{% macro lg (url, resize=DEFAULT_LG, quality=DEFAULT_QUALITY, format='') -%}
     {{ require(url + '?resize=' + resize + 'x&quality=' + quality + '&format=' + format + '&suffix=lg') }}
 {%- endmacro %}
-{% macro xl (url, resize=default_xl, quality=default_quality, format='') -%}
+{% macro xl (url, resize=DEFAULT_XL, quality=DEFAULT_QUALITY, format='') -%}
     {{ require(url + '?resize=' + resize + 'x&quality=' + quality + '&format=' + format + '&suffix=xl') }}
 {%- endmacro %}
 
-{% macro picture (url, alt, attrs={}, breakpoints=default_breakpoints, sizes=default_sizes, quality=default_quality) %}
+{% macro picture (url, alt, attrs={}, breakpoints=DEFAULT_BREAKPOINTS, sizes=DEFAULT_SIZES, quality=DEFAULT_QUALITY) %}
     <picture{% for k, v in attrs %} {{ k }}="{{ v }}"{% endfor %}>
 
         {% for breakpoint, media in breakpoints_media(breakpoints, sizes) %}
@@ -48,7 +48,7 @@
     </picture>
 {% endmacro %}
 
-{% macro webp (url, alt, attrs={}, quality=default_quality) %}
+{% macro webp (url, alt, attrs={}, quality=DEFAULT_QUALITY) %}
     <picture{% for k, v in attrs %} {{ k }}="{{ v }}"{% endfor %}>
         <source srcset="{{ require(url + '?resize=&quality=' + quality + '&format=webp') }}" type="image/webp">
         {% set dimensions = image_size(url) %}
