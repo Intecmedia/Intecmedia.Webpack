@@ -1,5 +1,5 @@
 picture {
-    display: block;
+    display: inline-block;
     @include img-fluid();
 
     > img {
