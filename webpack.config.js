@@ -169,7 +169,7 @@ module.exports = {
             force: true,
         }),
         new EagerImportsPlugin(),
-        ...(ENV.PROD || ENV.DEBUG ? [
+        ...(ENV.PROD && !ENV.DEBUG ? [
             new CaseSensitivePathsPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),
             new BrotliPlugin({
