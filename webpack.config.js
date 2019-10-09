@@ -128,7 +128,7 @@ module.exports = {
         ] : []),
     },
 
-    performance: (ENV.PROD ? {
+    performance: (ENV.PROD && !ENV.DEBUG ? {
         assetFilter: (asset) => {
             const [filename] = asset.split('?', 2);
             const ignore = /(\.(css|js)\.map|\.LICENSE|\.eot|\.ttf|manifest\.json|service-worker\.js|@resize-.+|favicon|workbox)$/;

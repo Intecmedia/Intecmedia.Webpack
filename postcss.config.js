@@ -22,11 +22,11 @@ module.exports = {
             require('postcss-will-change')(),
             require('./postcss.webp.js')(),
             require('autoprefixer')({ overrideBrowserslist: ENV.BROWSERS }), // this always last
-            require('cssnano')({
+            ...(!ENV.DEBUG ? [require('cssnano')({
                 preset: ['default', {
                     discardComments: { removeAll: true },
                 }],
-            }), // this always last
+            })] : []), // this always last
         ] : []),
         require('postcss-browser-reporter')(),
         require('postcss-reporter')(), // this always last
