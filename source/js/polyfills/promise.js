@@ -3,5 +3,5 @@
 // for polyfill use only require
 if (!window.Promise) {
     // eslint-disable-next-line global-require
-    require('core-js/modules/es.promise');
+    require('core-js/features/promise');
 }

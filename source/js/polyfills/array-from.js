@@ -1,4 +1,4 @@
 if (!Array.prototype.from) {
     // eslint-disable-next-line
-    require('core-js/es/array/from');
+    require('core-js/features/array/from');
 }

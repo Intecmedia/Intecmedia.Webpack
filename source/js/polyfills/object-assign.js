@@ -3,5 +3,5 @@
 // for polyfill use only require
 if (!Object.assign) {
     // eslint-disable-next-line global-require
-    require('core-js/modules/es.object.assign');
+    require('core-js/features/object/assign');
 }

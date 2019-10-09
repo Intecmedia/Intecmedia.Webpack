@@ -1,4 +1,4 @@
 if (!Array.prototype.includes) {
     // eslint-disable-next-line
-    require('core-js/modules/es.array.includes');
+    require('core-js/features/array/includes');
 }
