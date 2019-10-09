@@ -92,6 +92,12 @@ module.exports = {
     },
 
     optimization: {
+        ...(!ENV.PROD || ENV.DEBUG ? {
+            namedChunks: true,
+            namedModules: true,
+            chunkIds: 'named',
+            moduleIds: 'named',
+        } : {}),
         splitChunks: {
             cacheGroups: {
                 vendor: {
