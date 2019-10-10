@@ -78,7 +78,6 @@
         "copy-webpack-plugin": "latest",
         "core-js": "latest",
         "cross-env": "latest",
-        "css-hot-loader": "latest",
         "css-loader": "latest",
         "cssnano": "latest",
         "deasync": "latest",

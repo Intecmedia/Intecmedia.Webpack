@@ -427,8 +427,14 @@ module.exports = {
             // css loaders
             {
                 test: /\.(css|scss)(\?.*)?$/i,
-                loaders: (ENV.DEV_SERVER ? ['css-hot-loader'] : []).concat([
-                    MiniCssExtractPlugin.loader,
+                loaders: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            hmr: ENV.DEV_SERVER,
+                            publicPath: APP.PUBLIC_PATH && APP.PUBLIC_PATH !== './' ? APP.PUBLIC_PATH : '../',
+                        },
+                    },
                     {
                         loader: 'css-loader',
                         options: {
@@ -464,7 +470,7 @@ module.exports = {
                             },
                         },
                     },
-                ]),
+                ],
             },
         ],
     },
