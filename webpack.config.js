@@ -223,12 +223,10 @@ module.exports = {
             new FaviconsPlugin.AppIcon({
                 logo: path.join(__dirname, '.favicons-source-1024x1024.png'),
                 prefix: 'img/favicon/',
-                publicPath: APP.PUBLIC_PATH || './',
             }),
             new FaviconsPlugin.FavIcon({
                 logo: path.join(__dirname, '.favicons-source-64x64.png'),
                 prefix: 'img/favicon/',
-                publicPath: APP.PUBLIC_PATH || './',
             }),
         ] : []),
         ...(ENV.SITEMAP.map(({ template, filename }) => new HtmlWebpackPlugin({
@@ -432,7 +430,7 @@ module.exports = {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
                             hmr: ENV.DEV_SERVER,
-                            publicPath: APP.PUBLIC_PATH && APP.PUBLIC_PATH !== './' ? APP.PUBLIC_PATH : '../',
+                            publicPath: '../',
                         },
                     },
                     {
