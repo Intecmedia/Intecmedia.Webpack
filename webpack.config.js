@@ -223,13 +223,13 @@ module.exports = {
             new FaviconsPlugin.AppIcon({
                 logo: path.join(__dirname, '.favicons-source-1024x1024.png'),
                 publicPath: APP.PUBLIC_PATH,
-                outputPath: ENV.BUILD_PATH,
+                outputPath: 'img/favicons',
                 prefix: 'img/favicons',
             }),
             new FaviconsPlugin.FavIcon({
                 logo: path.join(__dirname, '.favicons-source-64x64.png'),
                 publicPath: APP.PUBLIC_PATH,
-                outputPath: ENV.BUILD_PATH,
+                outputPath: 'img/favicons',
                 prefix: 'img/favicons',
             }),
         ] : []),
