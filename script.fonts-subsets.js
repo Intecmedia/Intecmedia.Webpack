@@ -20,7 +20,7 @@ glob(`${FONTS_SRC}/**/*.ttf`, {
 }, (error, files) => {
     if (error) throw error;
 
-    const subsetsCommandSuffix = APP.FONTS_SUBSETS ? ' --unicodes-file=.fonts-subsets' : ' ';
+    const subsetsCommandSuffix = ' --unicodes-file=.fonts-subsets';
 
     files.forEach((filename) => {
         const source = slash(path.relative(__dirname, filename));

@@ -25,7 +25,7 @@
         "server": "npm run server-dev",
         "server-dev": "node ./script.nodemon.js --exec \"cross-env NODE_ENV=development DEBUG=0 webpack-dev-server --hot --inline -d\"",
         "server-debug": "node ./script.nodemon.js --exec \"cross-env NODE_ENV=development DEBUG=1 webpack-dev-server --hot --inline -d\"",
-        "build": "npm-run-all app-lint js-lint css-lint prod html-lint html-validator",
+        "build": "npm-run-all app-lint js-lint css-lint utf-fix fonts-subsets prod html-lint html-validator",
         "browserslist-dev": "cross-env NODE_ENV=development npx browserslist",
         "browserslist-prod": "cross-env NODE_ENV=production npx browserslist",
         "browserslist": "cross-env NODE_ENV=production npx browserslist",

@@ -15,7 +15,6 @@ module.exports = {
     THEME_COLOR: '#fff',
     BACKGROUND_COLOR: '#fff',
     HTML_PRETTY: true,
-    FONTS_SUBSETS: true,
     SENTRY: {
         dsn: '',
         ignoreErrors: [],
