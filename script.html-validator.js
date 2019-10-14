@@ -46,7 +46,11 @@ glob(`${ENV.OUTPUT_PATH}/**/*.html`, {
         const result = await validator({ format: 'json', data: html });
 
         let skipped = false;
-        if (result.messages && result.messages.length) {
+
+        if (path.basename(filename).indexOf('_') === 0) {
+            skipped = true;
+            logger.info(`ignored ${relative}`);
+        } else if (result.messages && result.messages.length) {
             result.messages.forEach((message) => {
                 if (message.message && ignoreTest(message.message)) {
                     skipped = true;

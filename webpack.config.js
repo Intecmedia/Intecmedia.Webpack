@@ -236,7 +236,7 @@ module.exports = {
         ...(ENV.SITEMAP.map(({ template, filename }) => new HtmlWebpackPlugin({
             filename,
             template,
-            inject: true,
+            inject: path.basename(template).indexOf('_') !== 0,
             minify: (ENV.PROD || ENV.DEBUG ? ({
                 html5: true,
                 collapseWhitespace: !APP.HTML_PRETTY,
