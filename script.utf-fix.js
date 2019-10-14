@@ -10,7 +10,7 @@ const weblog = require('webpack-log');
 const logger = weblog({ name: 'utf-fix' });
 const ENV = require('./app.env.js');
 
-glob(`${ENV.SOURCE_PATH}/**/*.html`, {
+glob(`${ENV.SOURCE_PATH}/**/*.{html,svg}`, {
     ignore: [],
 }, (error, files) => {
     if (error) throw error;
