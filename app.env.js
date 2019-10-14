@@ -32,15 +32,15 @@ const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.html`, {
     ],
 }).map((i) => {
     const basename = path.basename(i, '.html');
+    const underscored = basename.indexOf('_') === 0;
     const template = slash(path.relative(__dirname, i));
     const filename = slash(basename === 'index' ? path.join(
         path.relative(SOURCE_PATH, i),
     ) : path.join(
         path.relative(SOURCE_PATH, path.dirname(i)),
-        basename,
-        'index.html',
+        ...(underscored ? [`${basename}.html`] : [basename, 'index.html']),
     ));
-    const url = slash(path.dirname(filename)) + path.posix.sep;
+    const url = slash(path.dirname(filename)) + (underscored ? '' : path.posix.sep);
     return {
         template,
         filename,
