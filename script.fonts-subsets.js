@@ -9,7 +9,6 @@ const childProcess = require('child_process');
 
 const logger = weblog({ name: 'fonts-subsets' });
 
-const APP = require('./app.config.js');
 const ENV = require('./app.env.js');
 
 const FONTS_SRC = `${ENV.SOURCE_PATH}/fonts/src-ttf`;

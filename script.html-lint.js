@@ -24,6 +24,12 @@ glob(`${ENV.OUTPUT_PATH}/**/*.html`, {
 
     files.forEach((filename) => {
         const relative = slash(path.relative(__dirname, filename));
+
+        if (path.basename(filename).indexOf('_') === 0) {
+            logger.info(`ignored ${relative}`);
+            return;
+        }
+
         const html = fs.readFileSync(filename, 'utf8').toString();
         htmllint(html, htmllintrc).then((issues) => {
             if (!issues || !issues.length) {
