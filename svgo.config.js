@@ -3,11 +3,11 @@
 
 const uniqueId = require('lodash.uniqueid');
 
-const SvgoPrefixConfig = (prefix) => ({
+const SvgoPrefixConfig = (prefix = false) => ({
     js2svg: { pretty: true },
     plugins: [
         {
-            cleanupIDs: {
+            cleanupIDs: (prefix ? {
                 prefix: {
                     toString() {
                         return uniqueId(prefix);
@@ -15,7 +15,7 @@ const SvgoPrefixConfig = (prefix) => ({
                 },
                 preserve: [], // ignore ids
                 preservePrefixes: [], // ignore prefix ids
-            },
+            } : false),
         },
         { convertShapeToPath: false },
         { removeViewBox: false },
