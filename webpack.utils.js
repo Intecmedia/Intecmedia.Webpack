@@ -1,10 +1,8 @@
 /* eslint-env node */
-/* eslint "compat/compat": "off" */
+/* eslint global-require: "off", "compat/compat": "off" */
 
 const path = require('path');
 const slash = require('slash');
-
-const ENV = require('./app.env.js');
 
 function castScssVar(obj) {
     if (Array.isArray(obj)) {
@@ -35,8 +33,9 @@ module.exports.toScssVars = toScssVars;
 function resourceName(prefix, hash = false) {
     const basename = path.basename(prefix);
     const suffix = (hash ? '?[contenthash]' : '');
+    const { SOURCE_PATH } = require('./app.env.js');
     return (resourcePath) => {
-        const url = slash(path.relative(ENV.SOURCE_PATH, resourcePath)).replace(/^(\.\.\/)+/g, '');
+        const url = slash(path.relative(SOURCE_PATH, resourcePath)).replace(/^(\.\.\/)+/g, '');
         if (url.startsWith('partials/')) {
             return slash(url + suffix);
         }
