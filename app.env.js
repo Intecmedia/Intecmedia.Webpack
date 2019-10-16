@@ -11,7 +11,7 @@ const STANDALONE = ['webpack', 'webpack-dev-server'].includes(path.basename(requ
 const WATCH = (process.argv.indexOf('--watch') !== -1) || (process.argv.indexOf('-w') !== -1);
 const PROD = (process.env.NODE_ENV === 'production');
 const NODE_ENV = PROD ? 'production' : 'development';
-const USE_SOURCE_MAP = (DEBUG && !PROD) || DEV_SERVER;
+const USE_SOURCE_MAP = DEBUG || !PROD || DEV_SERVER;
 const USE_LINTERS = PROD || DEBUG;
 
 const { name: PACKAGE_NAME, browserslist } = require('./package.json');

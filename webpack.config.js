@@ -448,7 +448,7 @@ module.exports = {
                         loader: 'postcss-loader',
                         options: {
                             ident: 'postcss',
-                            sourceMap: ENV.USE_SOURCE_MAP ? 'inline' : false,
+                            sourceMap: ENV.USE_SOURCE_MAP,
                             config: { path: './postcss.config.js' },
                         },
                     },
@@ -463,7 +463,7 @@ module.exports = {
                                     [`APP-${k}`]: v,
                                 }))),
                             }),
-                            sourceMap: ENV.USE_SOURCE_MAP ? 'inline' : false,
+                            sourceMap: ENV.USE_SOURCE_MAP,
                             sassOptions: {
                                 indentWidth: 4,
                                 outputStyle: 'expanded',
