@@ -157,6 +157,7 @@ module.exports = {
                 'img/**/*.*',
                 'partials/**/*.svg',
                 '*.txt',
+                '*.php',
             ].map((from) => ({
                 from,
                 to: ENV.OUTPUT_PATH,
@@ -174,10 +175,10 @@ module.exports = {
             new webpack.NoEmitOnErrorsPlugin(),
             new BrotliPlugin({
                 asset: '[path].br[query]',
-                test: /\.(js|css|json)$/,
+                test: /\.(js|css|json|lottie)(\?.*)?$/,
             }),
             new CompressionPlugin({
-                test: /\.(css|js|json)(\?.*)?$/i,
+                test: /\.(js|css|json|lottie)(\?.*)?$/i,
                 filename: '[path].gz[query]',
                 compressionOptions: {
                     numiterations: 15,
