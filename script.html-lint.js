@@ -13,8 +13,10 @@ const htmllintrc = JSON.parse(fs.readFileSync('./.htmllintrc', 'utf8'));
 
 const ENV = require('./app.env.js');
 
+
+const linter = new htmllint.Linter(htmllint.rules);
 if (htmllintrc.plugins) {
-    htmllint.use(htmllintrc.plugins);
+    linter.use(htmllintrc.plugins);
 }
 
 glob(`${ENV.OUTPUT_PATH}/**/*.html`, {
@@ -31,7 +33,7 @@ glob(`${ENV.OUTPUT_PATH}/**/*.html`, {
         }
 
         const html = fs.readFileSync(filename, 'utf8').toString();
-        htmllint(html, htmllintrc).then((issues) => {
+        linter.lint(html, htmllintrc).then((issues) => {
             if (!issues || !issues.length) {
                 logger.info(`skipped ${relative}`);
                 return;
