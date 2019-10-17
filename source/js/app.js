@@ -1,6 +1,7 @@
 /* global NODE_ENV DEBUG */
-import('~/components/sentry.js');
-import('~/components/bootstrap.js');
+import('~/components/network-information');
+import('~/components/sentry');
+import('~/components/bootstrap');
 
 jQuery(($) => {
     console.log(`NODE_ENV=${NODE_ENV}; DEBUG=${DEBUG}; jQuery=${$.fn.jquery};`);
