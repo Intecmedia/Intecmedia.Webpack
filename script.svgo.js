@@ -19,12 +19,13 @@ glob(`${ENV.SOURCE_PATH}/**/*.svg`, {
 }, (error, files) => {
     if (error) throw error;
 
-    const options = SvgoPrefixConfig(false);
-    const svgoInstance = new SVGO(options);
-
     files.forEach((filename) => {
         const svg = fs.readFileSync(filename, 'utf8').toString();
         const relative = slash(path.relative(__dirname, filename));
+
+        const name = path.basename(filename, '.svg');
+        const options = SvgoPrefixConfig(`svgo-${name.toLowerCase()}-`);
+        const svgoInstance = new SVGO(options);
 
         svgoInstance.optimize(svg).then((result) => {
             fs.writeFileSync(filename, result.data);
