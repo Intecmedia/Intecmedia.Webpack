@@ -20,6 +20,9 @@ if (NODE_ENV === 'production' || DEBUG) {
     require('~/polyfills/array-from.js');
 
     // eslint-disable-next-line global-require
+    require('~/polyfills/weak-map.js');
+
+    // eslint-disable-next-line global-require
     require('~/polyfills/array-includes.js');
 
     // eslint-disable-next-line global-require
