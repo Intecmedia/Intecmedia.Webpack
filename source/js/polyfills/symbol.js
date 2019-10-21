@@ -3,5 +3,5 @@
 // for polyfill use only require
 if (!window.Symbol) {
     // eslint-disable-next-line global-require
-    require('core-js/features/symbol');
+    require('core-js/stable/symbol');
 }
