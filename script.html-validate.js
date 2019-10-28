@@ -27,7 +27,7 @@ glob(`${ENV.OUTPUT_PATH}/**/*.html`, {
 
         const report = htmlvalidate.validateFile(filename);
 
-        if (!report || !report.results) {
+        if (!report.results.length) {
             logger.info(`skipped ${relative}`);
             return;
         }
