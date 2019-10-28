@@ -144,7 +144,7 @@ module.exports = {
             new BrowserSyncPlugin(),
         ] : []),
         new CleanWebpackPlugin({
-            cleanOnceBeforeBuildPatterns: (!ENV.WATCH ? ['**/*', '!.gitkeep', '!.htaccess'] : []),
+            cleanOnceBeforeBuildPatterns: (!(ENV.WATCH && ENV.DEV_SERVER) ? ['**/*', '!.gitkeep', '!.htaccess'] : []),
             cleanAfterEveryBuildPatterns: ['**/*.br', '**/*.gz'],
         }),
         new MiniCssExtractPlugin({
