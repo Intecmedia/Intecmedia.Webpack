@@ -72,6 +72,7 @@ module.exports = {
         compress: false,
         contentBase: path.resolve(__dirname, 'source'),
         overlay: { warnings: false, errors: true },
+        publicPath: path.posix.resolve(APP.PUBLIC_PATH, '/'),
         watchContentBase: true,
     },
 
