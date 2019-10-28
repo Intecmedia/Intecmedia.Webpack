@@ -7,7 +7,6 @@
         "long-title": ["error", {
             "maxlength": 70
         }],
-        "input-missing-label": "off",
         "heading-level": "off",
         "no-inline-style": "off",
         "require-sri": "off",
