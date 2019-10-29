@@ -137,6 +137,7 @@ module.exports = function HtmlLoader() {
     nunjucksEnvironment.addGlobal('require', options.requireIdent);
 
     helpers.forEach((helper, name) => {
+        nunjucksEnvironment.addFilter(name, helper);
         nunjucksEnvironment.addGlobal(name, helper);
     });
 
