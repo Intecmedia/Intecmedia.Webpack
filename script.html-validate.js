@@ -17,6 +17,8 @@ glob(`${ENV.OUTPUT_PATH}/**/*.html`, {
 }, (error, files) => {
     if (error) throw error;
 
+    logger.info(`${files.length} files`);
+
     files.forEach((filename) => {
         const relative = slash(path.relative(__dirname, filename));
 
