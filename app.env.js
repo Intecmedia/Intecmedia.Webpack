@@ -8,7 +8,7 @@ const slash = require('slash');
 const DEBUG = ('DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0);
 const DEV_SERVER = path.basename(require.main.filename, '.js') === 'webpack-dev-server';
 const STANDALONE = ['webpack', 'webpack-dev-server'].includes(path.basename(require.main.filename, '.js'));
-const WATCH = (process.argv.indexOf('--watch') !== -1) || (process.argv.indexOf('-w') !== -1);
+const WATCH = (process.argv.includes('--watch')) || (process.argv.includes('-w'));
 const PROD = (process.env.NODE_ENV === 'production');
 const NODE_ENV = PROD ? 'production' : 'development';
 const USE_SOURCE_MAP = DEBUG || !PROD || DEV_SERVER;
@@ -32,7 +32,7 @@ const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.html`, {
     ],
 }).map((i) => {
     const basename = path.basename(i, '.html');
-    const underscored = basename.indexOf('_') === 0;
+    const underscored = basename.startsWith('_');
     const template = slash(path.relative(__dirname, i));
     const filename = slash(basename === 'index' ? path.join(
         path.relative(SOURCE_PATH, i),

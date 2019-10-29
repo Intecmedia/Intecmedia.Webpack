@@ -49,7 +49,7 @@ glob(`${ENV.OUTPUT_PATH}/**/*.html`, {
 
         let skipped = false;
 
-        if (path.basename(filename).indexOf('_') === 0) {
+        if (path.basename(filename).startsWith('_')) {
             skipped = true;
             logger.info(`ignored ${relative}`);
         } else if (result.messages && result.messages.length) {

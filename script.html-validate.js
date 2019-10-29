@@ -22,7 +22,7 @@ glob(`${ENV.OUTPUT_PATH}/**/*.html`, {
     files.forEach((filename) => {
         const relative = slash(path.relative(__dirname, filename));
 
-        if (path.basename(filename).indexOf('_') === 0) {
+        if (path.basename(filename).startsWith('_')) {
             logger.info(`ignored ${relative}`);
             return;
         }
