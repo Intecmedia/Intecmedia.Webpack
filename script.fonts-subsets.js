@@ -21,6 +21,8 @@ glob(`${FONTS_SRC}/**/*.ttf`, {
 
     const subsetsCommandSuffix = ' --unicodes-file=.fonts-subsets';
 
+    logger.info(`${files.length} files`);
+
     files.forEach((filename) => {
         const source = slash(path.relative(__dirname, filename));
         const target = slash(path.relative(__dirname, path.join(FONTS_DST, path.relative(FONTS_SRC, filename))));
