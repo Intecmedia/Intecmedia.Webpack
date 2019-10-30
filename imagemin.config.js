@@ -3,26 +3,27 @@
 
 const { SvgoDefaultConfig } = require('./svgo.config.js');
 
+// https://web.dev/use-imagemin-to-compress-images
 module.exports = {
     plugins: [
-        ['mozjpeg', {
+        ['mozjpeg', { // lossy
             quality: 85,
             progressive: true,
         }],
-        ['optipng', {
+        ['optipng', { // lossless
             optimizationLevel: 3,
         }],
-        ['pngquant', {
+        ['pngquant', { // lossy
             speed: 3,
             quality: [0.85, 1.0],
         }],
-        ['svgo', {
+        ['svgo', { // lossy
             ...SvgoDefaultConfig,
         }],
-        ['gifsicle', {
+        ['gifsicle', { // lossless
             optimizationLevel: 3,
         }],
-        ['jpegtran', {
+        ['jpegtran', { // lossless
             progressive: true,
         }],
     ],
