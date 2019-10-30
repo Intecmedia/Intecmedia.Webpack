@@ -16,7 +16,9 @@ module.exports = {
             speed: 3,
             quality: [0.85, 1.0],
         }],
-        ['svgo', SvgoDefaultConfig],
+        ['svgo', {
+            ...SvgoDefaultConfig,
+        }],
         ['gifsicle', {
             optimizationLevel: 3,
         }],
