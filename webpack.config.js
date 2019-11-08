@@ -102,7 +102,7 @@ module.exports = {
         splitChunks: {
             cacheGroups: {
                 vendor: {
-                    test: /(node_modules)(.+)\.(js|mjs)(\?.*)?$/,
+                    test: /(node_modules)(.+)\.(js|mjs|cjs)(\?.*)?$/,
                     chunks: 'initial',
                     name: 'vendor',
                     enforce: true,
@@ -343,7 +343,7 @@ module.exports = {
             },
             ...(ENV.USE_LINTERS ? [{
                 enforce: 'pre',
-                test: /\.(js|mjs)(\?.*)?$/i,
+                test: /\.(js|mjs|cjs)(\?.*)?$/i,
                 exclude: [
                     path.join(__dirname, 'node_modules'),
                     path.join(ENV.SOURCE_PATH, 'js', 'external'),
@@ -358,7 +358,7 @@ module.exports = {
             }] : []),
             {
                 type: 'javascript/auto',
-                test: /\.(js|mjs)(\?.*)?$/i,
+                test: /\.(js|mjs|cjs)(\?.*)?$/i,
                 exclude: {
                     test: [
                         // disable babel transform
