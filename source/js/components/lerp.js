@@ -6,6 +6,6 @@ export default function lerp(start, end, factor) {
 }
 
 // inverse linear interpolation function
-export function invlerp(a, b, v) {
-    return clamp((v - a) / (b - a));
+export function invlerp(start, end, factor) {
+    return clamp((factor - start) / (end - start));
 }
