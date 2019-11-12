@@ -17,11 +17,7 @@
 * SCSS, autoprefixer, PostCSS: [postcss-input-style](https://github.com/seaneking/postcss-input-style),
 [postcss-quantity-queries](https://github.com/pascalduez/postcss-quantity-queries), 
 [postcss-responsive-type](https://github.com/seaneking/postcss-responsive-type), 
-[pixrem](https://github.com/robwierzbowski/node-pixrem), 
-[pleeease-filters](https://github.com/iamvdo/pleeease-filters), 
 [postcss-image-set-polyfill](https://github.com/SuperOl3g/postcss-image-set-polyfill), 
-[postcss-color-rgba-fallback](https://github.com/postcss/postcss-color-rgba-fallback), 
-[css-mqpacker](https://github.com/hail2u/node-css-mqpacker), 
 [autoprefixer](https://github.com/postcss/autoprefixer), 
 [cssnano](http://cssnano.co/).
 * Базовая WYSIWYG-типографика текста, форм, таблиц, списков, заголовков: 
