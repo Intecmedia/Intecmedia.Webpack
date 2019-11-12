@@ -442,8 +442,17 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
-                            importLoaders: 2,
+                            importLoaders: 3,
                             sourceMap: ENV.USE_SOURCE_MAP,
+                        },
+                    },
+                    {
+                        loader: 'resolve-url-loader',
+                        options: {
+                            keepQuery: true,
+                            sourceMap: ENV.USE_SOURCE_MAP,
+                            root: path.join(ENV.SOURCE_PATH, 'css'),
+                            debug: !ENV.PROD || ENV.DEBUG ? logger.info : false,
                         },
                     },
                     {

@@ -154,6 +154,7 @@
         "pretty": "latest",
         "promise": "latest",
         "resize-observer-polyfill": "latest",
+        "resolve-url-loader": "latest",
         "sass-loader": "latest",
         "schema-utils": "latest",
         "slash": "latest",
