@@ -60,6 +60,8 @@
     "dependencies": {
         "@babel/cli": "latest",
         "@babel/core": "latest",
+        "@babel/plugin-proposal-class-properties": "latest",
+        "@babel/plugin-proposal-decorators": "latest",
         "@babel/plugin-proposal-optional-chaining": "latest",
         "@babel/plugin-proposal-pipeline-operator": "latest",
         "@babel/plugin-transform-runtime": "latest",
