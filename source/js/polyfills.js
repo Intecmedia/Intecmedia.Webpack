@@ -29,6 +29,9 @@ if (NODE_ENV === 'production' || DEBUG) {
     require('~/polyfills/string-includes.js');
 
     // eslint-disable-next-line global-require
+    require('~/polyfills/matchmedia-polyfill.js');
+
+    // eslint-disable-next-line global-require
     require('~/polyfills/intersection-observer.js');
 
     // eslint-disable-next-line global-require

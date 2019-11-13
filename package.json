@@ -122,6 +122,7 @@
         "loader-utils": "latest",
         "lodash.merge": "latest",
         "lodash.uniqueid": "latest",
+        "matchmedia-polyfill": "latest",
         "md5-file": "latest",
         "mini-css-extract-plugin": "latest",
         "node-sass": "latest",
