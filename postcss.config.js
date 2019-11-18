@@ -28,10 +28,7 @@ module.exports = {
                 }],
             })] : []), // this always last
         ] : []),
-        require('postcss-url')([{
-            filter: '**/*', 
-            url: (asset) => asset.url.replace(/^\//, '../'), // resolve absolute urls
-        }]),
+        require('./postcss.resolve-absolute.js')(),
         require('postcss-browser-reporter')(),
         require('postcss-reporter')(), // this always last
     ],
