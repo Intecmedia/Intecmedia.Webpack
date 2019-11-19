@@ -19,7 +19,7 @@ module.exports = (options) => postcssUrl({
             'Please fix to relative.',
         ].join(' ');
 
-        logger.warn(message);
+        logger.error(message);
         if (!options.silent) throw new Error(message);
 
         return url; // resolve absolute urls
