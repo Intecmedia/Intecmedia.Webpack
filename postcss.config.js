@@ -28,7 +28,9 @@ module.exports = {
                 }],
             })] : []), // this always last
         ] : []),
-        require('./postcss.resolve-absolute.js')(),
+        require('./postcss.resolve-absolute.js')({
+            silent: !(ENV.PROD || ENV.DEBUG),
+        }),
         require('postcss-browser-reporter')(),
         require('postcss-reporter')(), // this always last
     ],
