@@ -9,19 +9,22 @@ const logger = weblog({ name: 'resolve-absolute' });
 const ABSOLUTE_PATTERN = /^\/([^/])/;
 const ABSOLUTE_REPLACE = '../$1';
 
-module.exports = (options) => postcssUrl({
-    url(asset) {
-        if (!ABSOLUTE_PATTERN.test(asset.url)) return asset.url;
+module.exports = ({ silent }) => postcssUrl({
+    url(asset, dir, options, decl, warn) {
+        const { originUrl } = asset;
 
-        const url = asset.url.replace(ABSOLUTE_PATTERN, ABSOLUTE_REPLACE);
+        if (!ABSOLUTE_PATTERN.test(originUrl)) return originUrl;
+
+        const resolvedUrl = originUrl.replace(ABSOLUTE_PATTERN, ABSOLUTE_REPLACE); // resolve absolute urls
         const message = [
-            `Absolute url(${JSON.stringify(asset.url)}) resolved as url(${JSON.stringify(url)}).`,
+            `Absolute url(${JSON.stringify(originUrl)}) resolved as url(${JSON.stringify(resolvedUrl)}).`,
             'Please fix to relative.',
         ].join(' ');
 
+        warn(message);
         logger.error(message);
-        if (!options.silent) throw new Error(message);
+        if (!silent) throw new Error(message);
 
-        return url; // resolve absolute urls
+        return resolvedUrl;
     },
 });
