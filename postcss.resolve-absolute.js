@@ -10,7 +10,8 @@ const ABSOLUTE_PATTERN = /^\/([^/])/;
 const ABSOLUTE_REPLACE = '../$1';
 
 module.exports = ({ silent }) => postcssUrl({
-    url(asset, dir, options, decl, warn) {
+    url(...args) {
+        const [asset, /* dir */, /* options */, /* decl */, warn] = args;
         const { originUrl } = asset;
 
         if (!ABSOLUTE_PATTERN.test(originUrl)) return originUrl;
