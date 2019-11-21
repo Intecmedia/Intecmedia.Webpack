@@ -81,6 +81,7 @@
                 "flexbox",
                 "font-unicode-range",
                 "multicolumn",
+                "object-fit",
                 "outline",
                 "pointer-events",
                 "rem",
