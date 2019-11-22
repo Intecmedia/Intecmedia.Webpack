@@ -7,7 +7,8 @@
      "plugins": [
         "stylelint-performance-animation",
         "stylelint-no-unsupported-browser-features",
-        "stylelint-scss"
+        "stylelint-scss",
+        "./stylelint.max-lines.js"
     ],
     "rules": {
         "indentation": 4,
@@ -15,6 +16,11 @@
             "^[a-z0-9\\-_]+$"
         ],
         "max-nesting-depth": 4,
+        "intecmedia/max-lines": 300,
+        "max-line-length": [120, {
+            "ignore": ["comments"],
+            "ignorePattern": "/\\$(.+?):/"
+        }],
         "declaration-no-important": null,
         "selector-max-type": null,
         "selector-max-compound-selectors": 4,
