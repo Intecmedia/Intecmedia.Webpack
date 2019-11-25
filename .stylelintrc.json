@@ -68,6 +68,7 @@
                 "background-color",
                 "background-position",
                 "border-color",
+                "box-shadow",
                 "color",
                 "fill",
                 "height",
