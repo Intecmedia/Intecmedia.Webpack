@@ -12,7 +12,7 @@ const logger = weblog({ name: 'html-validator' });
 
 const ENV = require('./app.env.js');
 
-const ignoreLines = fs.readFileSync('./.htmlvalidatorignore')
+const ignoreLines = fs.readFileSync('./.htmlignore')
     .toString().trim().split('\n')
     .map((i) => i.toLowerCase().trim());
 

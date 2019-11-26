@@ -4,3 +4,4 @@ Attribute “loading” not allowed on element “img” at this point.
 The “align” attribute on the “img” element is obsolete. Use CSS instead.
 The “align” attribute on the “td” element is obsolete. Use CSS instead.
 The “align” attribute on the “th” element is obsolete. Use CSS instead.
+<th> is missing required "scope" attribute
