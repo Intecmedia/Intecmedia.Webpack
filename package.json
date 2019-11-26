@@ -57,6 +57,9 @@
             "last 1 Opera versions"
         ]
     },
+    "engines": {
+        "node": ">= 10.13.0"
+    },
     "dependencies": {
         "@babel/cli": "latest",
         "@babel/core": "latest",
