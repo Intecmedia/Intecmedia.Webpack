@@ -54,7 +54,6 @@ glob(`${ENV.OUTPUT_PATH}/**/*.html`, {
         report.results.forEach((result) => {
             result.messages.forEach((message) => {
                 if (message.message && ignoreTest(message.message)) {
-                    skipped = true;
                     increaseStat('ignore');
                     return;
                 }
