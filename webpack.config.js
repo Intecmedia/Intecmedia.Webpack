@@ -156,7 +156,6 @@ module.exports = {
             ...[
                 '**/.htaccess',
                 'img/**/*.*',
-                'partials/**/*.svg',
                 '*.txt',
                 '*.php',
             ].map((from) => ({
