@@ -11,7 +11,7 @@ const logger = weblog({ name: 'plugin-pretty' });
 
 const DEFAULT_OPTIONS = {
     ocd: false,
-    unformatted: ['code', 'pre', 'em', 'strong', 'span'],
+    unformatted: ['code', 'pre', 'textarea'],
     indent_inner_html: false,
     indent_char: ' ',
     indent_size: 4,
