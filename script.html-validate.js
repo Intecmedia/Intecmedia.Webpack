@@ -59,16 +59,15 @@ glob(`${ENV.OUTPUT_PATH}/**/*.html`, {
                 }
 
                 const messageType = (message.severity === 2 ? 'error' : 'warning');
+                if (messageType == 'error') {
+                    process.exitCode = 1;
+                }   
                 increaseStat(messageType);
 
                 logger.error(`${relative}: line ${message.line || 0} col [${message.column || 0}]`);
                 logger.warn(`${messageType}[${message.ruleId}]: ${JSON.stringify(message.message)}`);
             });
         });
-
-        if (report.errorCount > 0) {
-            process.exitCode = 1;
-        }
 
         processed += 1;
         if (processed === files.length) {
