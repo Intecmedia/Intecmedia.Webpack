@@ -59,7 +59,7 @@ glob(`${ENV.OUTPUT_PATH}/**/*.html`, {
                 }
 
                 const messageType = (message.severity === 2 ? 'error' : 'warning');
-                if (messageType == 'error') {
+                if (messageType === 'error') {
                     process.exitCode = 1;
                 }   
                 increaseStat(messageType);
