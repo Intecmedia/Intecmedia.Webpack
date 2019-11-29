@@ -20,6 +20,7 @@ module.exports = {
             require('postcss-flexbugs-fixes')(),
             require('postcss-will-change')(),
             require('./postcss.webp.js')(),
+            require('./postcss.stylelint.js')(),
             require('autoprefixer')({ overrideBrowserslist: ENV.BROWSERS }), // this always last
             ...(!ENV.DEBUG ? [require('cssnano')({
                 preset: ['default', {
