@@ -1,6 +1,6 @@
 // Debug helper
 @if $NODE_ENV != "production" or $DEBUG {
-    body::after {
+    body::after { // stylelint-disable-line no-duplicate-selectors
         position: fixed;
         right: 0;
         bottom: 0;
@@ -28,7 +28,7 @@
 
 // Debug helper
 @if $PACKAGE_NAME == "Intecmedia.Webpack" {
-    body::after {
+    body::after { // stylelint-disable-line no-duplicate-selectors
         position: fixed;
         right: 0;
         bottom: 0;
