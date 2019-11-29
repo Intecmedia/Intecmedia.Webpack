@@ -111,6 +111,7 @@ module.exports = function HtmlLoader() {
 
     const nunjucksLoader = new nunjucks.FileSystemLoader(options.searchPath, { noCache: true });
     const nunjucksEnvironment = new nunjucks.Environment(nunjucksLoader, options.environment);
+    const relativePath = slash(path.relative(__dirname, loaderContext.resourcePath));
 
     options.requireIdent = (url) => {
         let ident;
@@ -124,7 +125,7 @@ module.exports = function HtmlLoader() {
         const url = options.requireReplace[match];
 
         const relativeUrl = slash(path.relative(__dirname, url));
-        logger.info(`require(${JSON.stringify(relativeUrl)})`);
+        logger.info(`require(${JSON.stringify(relativeUrl)}) from ${JSON.stringify(relativePath)}`);
 
         const resourceDir = path.dirname(loaderContext.resourcePath);
         const urlPrefix = path.relative(resourceDir, options.searchPath);
@@ -189,7 +190,6 @@ module.exports = function HtmlLoader() {
         };
     };
 
-    const relativePath = slash(path.relative(__dirname, loaderContext.resourcePath));
     logger.info(`render(${JSON.stringify(relativePath)})`);
 
     nunjucksEnvironment.render(loaderContext.resourcePath, {}, (error, result) => {
