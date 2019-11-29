@@ -65,8 +65,7 @@ function processHtml(html, options, loaderCallback) {
     });
 
     let content = [html];
-    links.reverse();
-    links.forEach((link) => {
+    links.reverse().forEach((link) => {
         let value;
         if (SRCSET_ATTRS.includes(link.attr)) {
             value = link.value.split(SRCSET_SEPARATOR).map((src) => {
@@ -85,8 +84,7 @@ function processHtml(html, options, loaderCallback) {
         content.push(value);
         content.push(last.substr(0, link.start));
     });
-    content.reverse();
-    content = content.join('');
+    content = content.reverse().join('');
 
     let exportString = `export default ${JSON.stringify(content)};`;
     exportString = options.requireExport(exportString);
