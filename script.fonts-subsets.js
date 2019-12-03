@@ -30,8 +30,8 @@ glob(`${FONTS_SRC}/**/*.ttf`, {
         const basename = path.basename(target, '.ttf');
         const dirname = slash(path.dirname(target));
 
-        logger.info(`${source} --> ${dirname}/${basename}.ttf`);
-        childProcess.execSync(`pyftsubset ${source} --output-file=${dirname}/${basename}.ttf ${subsetsCommandSuffix}`, { stdio: 'inherit' });
+        // logger.info(`${source} --> ${dirname}/${basename}.ttf`);
+        // childProcess.execSync(`pyftsubset ${source} --output-file=${dirname}/${basename}.ttf ${subsetsCommandSuffix}`, { stdio: 'inherit' });
 
         logger.info(`${source} --> ${dirname}/${basename}.woff`);
         childProcess.execSync(`pyftsubset ${source} --output-file=${dirname}/${basename}.woff --flavor=woff ${subsetsCommandSuffix}`, { stdio: 'inherit' });
