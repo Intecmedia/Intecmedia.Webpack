@@ -1,4 +1,4 @@
-import clamp from './clamp';
+import clamp from '~/utils/clamp';
 
 // linear interpolation function
 export default function lerp(start, end, factor) {
