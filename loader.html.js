@@ -57,6 +57,15 @@ const OPTIONS_SCHEMA = {
     },
 };
 
+const ABSOLUTE_PATTERN = /^\/([^/])/;
+const ABSOLUTE_REPLACE = '../$1';
+
+function resolveAbsolute(originUrl) {
+    const url = slash(originUrl);
+    if (!ABSOLUTE_PATTERN.test(url)) return url;
+    return url.replace(ABSOLUTE_PATTERN, ABSOLUTE_REPLACE);
+}
+
 function processHtml(html, options, loaderCallback) {
     const links = attrParser(html, (tag, attr) => {
         if (!(tag in options.requireTags)) return false;
@@ -115,7 +124,7 @@ module.exports = function HtmlLoader() {
         let ident;
         do ident = RANDOM_REQUIRE();
         while (options.requireReplace[ident]);
-        options.requireReplace[ident] = slash(url);
+        options.requireReplace[ident] = resolveAbsolute(url);
         return ident;
     };
     options.requireExport = (exportString) => exportString.replace(REQUIRE_PATTERN, (match) => {

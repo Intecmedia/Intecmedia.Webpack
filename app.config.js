@@ -7,7 +7,7 @@ module.exports = {
     TITLE: '$APP.TITLE$',
     SHORT_NAME: '$APP.SHORT_NAME$',
     DESCRIPTION: '$APP.DESCRIPTION$',
-    PUBLIC_PATH: './',
+    PUBLIC_PATH: '/', // for relative use './'
     USE_FAVICONS: true,
     USE_SERVICE_WORKER: false,
     LANGUAGE: 'ru',
