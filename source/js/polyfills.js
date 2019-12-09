@@ -8,6 +8,9 @@ if (NODE_ENV === 'production' || DEBUG) {
     require('~/polyfills/object-assign.js');
 
     // eslint-disable-next-line global-require
+    require('~/polyfills/object-values.js');
+
+    // eslint-disable-next-line global-require
     require('~/polyfills/promise.js');
 
     // eslint-disable-next-line global-require
