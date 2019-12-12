@@ -124,6 +124,7 @@
         "intersection-observer": "latest",
         "jquery": "latest",
         "json-loader": "latest",
+        "line-column": "latest",
         "loader-utils": "latest",
         "lodash.merge": "latest",
         "lodash.uniqueid": "latest",
