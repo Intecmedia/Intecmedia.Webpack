@@ -3,10 +3,6 @@
 
 const ENV = require('./app.env.js');
 
-const lineEllipsis = 80;
-const lineColumn = require('line-column');
-const reporterFormatter = require('postcss-reporter/lib/formatter.js')({});
-
 module.exports = {
     plugins: [
         require('postcss-devtools')({ precise: true }),
@@ -37,16 +33,6 @@ module.exports = {
             silent: !(ENV.PROD || ENV.DEBUG),
         }),
         require('postcss-browser-reporter')(),
-        require('postcss-reporter')({
-            formatter: (input) => {
-                input.messages.forEach((message) => {
-                    const { css } = message.node.source.input;
-                    const index = lineColumn(css).toIndex({ line: message.line, col: message.column });
-                    const ellipsis = css.substring(index - lineEllipsis, index + lineEllipsis);
-                    message.text += `:\n...\n${ellipsis}...\n`;
-                });
-                return reporterFormatter(input);
-            },
-        }), // this always last
+        require('./postcss.reporter.js')(), // this always last
     ],
 };
