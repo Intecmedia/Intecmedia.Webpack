@@ -428,7 +428,7 @@ module.exports = {
                 include: /(svg-sprite)/i,
                 exclude: /(fonts|font|partials)/i,
                 loader: 'svg-sprite-loader',
-                options: {                 
+                options: {
                     extract: true,
                     spriteFilename: 'img/svg-sprite.svg',
                 },
