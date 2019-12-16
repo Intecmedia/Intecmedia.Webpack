@@ -176,6 +176,8 @@
         "stylelint-performance-animation": "latest",
         "stylelint-scss": "latest",
         "stylelint-webpack-plugin": "latest",
+        "svg-sprite-loader": "latest",
+        "svg4everybody": "latest",
         "svgo": "latest",
         "tapable": "latest",
         "uglifyjs-webpack-plugin": "latest",

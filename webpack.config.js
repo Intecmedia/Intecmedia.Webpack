@@ -45,6 +45,7 @@ const CompressionPlugin = (ENV.PROD && !ENV.DEBUG ? require('compression-webpack
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const UglifyJsPlugin = (ENV.PROD && !ENV.DEBUG ? require('uglifyjs-webpack-plugin') : () => {});
 const { default: EagerImportsPlugin } = require('eager-imports-webpack-plugin');
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
 const PrettyPlugin = (APP.HTML_PRETTY ? require('./plugin.pretty.js') : () => {});
@@ -188,6 +189,7 @@ module.exports = {
         ] : []),
         new webpack.BannerPlugin({
             banner: BANNER_STRING,
+            include: /\.(css|js)(\?.*)?$/i,
         }),
         new webpack.ProvidePlugin({
             $: 'jquery',
@@ -253,6 +255,9 @@ module.exports = {
             title: APP.TITLE,
         }))),
         ...(APP.HTML_PRETTY ? [new PrettyPlugin()] : []),
+        new SpriteLoaderPlugin({
+            plainSprite: true,
+        }),
         ...(APP.USE_SERVICE_WORKER ? [new WorkboxPlugin.GenerateSW({
             cacheId: ENV.PACKAGE_NAME,
             swDest: SERVICE_WORKER_PATH,
@@ -300,7 +305,7 @@ module.exports = {
         ...(ENV.PROD || ENV.DEBUG ? [
             new ImageminPlugin({
                 test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
-                exclude: /(fonts|font)/i,
+                exclude: /(fonts|font|svg-sprite)/i,
                 name: UTILS.resourceName('img'),
                 imageminOptions: require('./imagemin.config.js'),
                 cache: !ENV.DEBUG,
@@ -393,13 +398,13 @@ module.exports = {
                 test: /\.(svg)(\?.*)?$/i,
                 issuer: /\.(html)(\?.*)?$/i,
                 include: /(partials)/i,
-                exclude: /(fonts|font)/i,
+                exclude: /(fonts|font|svg-sprite)/i,
                 loader: './loader.svgo.js',
                 options: require('./svgo.config.js'),
             },
             {
                 test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
-                exclude: /(fonts|font|partials)/i,
+                exclude: /(fonts|font|partials|svg-sprite)/i,
                 oneOf: [
                     {
                         exclude: /\.(svg)$/i,
@@ -418,10 +423,20 @@ module.exports = {
                     },
                 ],
             },
+            {
+                test: /\.svg$/,
+                include: /(svg-sprite)/i,
+                exclude: /(fonts|font|partials)/i,
+                loader: 'svg-sprite-loader',
+                options: {                 
+                    extract: true,
+                    spriteFilename: 'img/svg-sprite.svg',
+                },
+            },
             // font loaders
             {
                 test: /\.(eot|woff|woff2|ttf|svg)(\?.*)?$/i,
-                exclude: /(img|images|partials)/i,
+                exclude: /(img|images|partials|svg-sprite)/i,
                 loader: 'file-loader',
                 options: { name: UTILS.resourceName('fonts'), esModule: false },
             },
