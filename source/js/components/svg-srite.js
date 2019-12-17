@@ -1,6 +1,11 @@
+/* global NODE_ENV DEBUG */
 const svg4everybody = require('svg4everybody');
 
-require.context('../../img/svg-sprite/', true, /\.svg$/);
+const svgSprites = require.context('../../img/svg-sprite/', true, /\.svg$/);
+
+if (NODE_ENV === 'development' || DEBUG) {
+    console.log('[svg-sprite]', svgSprites.keys());
+}
 
 jQuery(($) => {
     svg4everybody();
