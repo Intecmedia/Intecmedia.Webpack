@@ -433,6 +433,11 @@ module.exports = {
                 options: {
                     extract: true,
                     spriteFilename: 'img/svg-sprite.svg',
+                    symbolId: (filePath) => {
+                        const spriteDir = path.join(ENV.SOURCE_PATH, 'img/svg-sprite');
+                        const relativePath = slash(path.relative(spriteDir, path.normalize(filePath)));
+                        return relativePath.replace(path.posix.sep, '-');
+                    },
                 },
             },
             // font loaders
