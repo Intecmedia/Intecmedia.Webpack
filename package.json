@@ -107,6 +107,7 @@
         "front-matter": "latest",
         "glob": "latest",
         "gm": "latest",
+        "html-beautify-webpack-plugin": "latest",
         "html-loader": "latest",
         "html-validate": "latest",
         "html-validator": "latest",

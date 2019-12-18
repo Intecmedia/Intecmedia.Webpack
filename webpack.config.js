@@ -48,7 +48,7 @@ const { default: EagerImportsPlugin } = require('eager-imports-webpack-plugin');
 const SpriteLoaderPlugin = require('./plugin.svg-sprite.js');
 
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
-const PrettyPlugin = (APP.HTML_PRETTY ? require('./plugin.pretty.js') : () => {});
+const HtmlBeautifyPlugin = (APP.HTML_PRETTY ? require('html-beautify-webpack-plugin') : () => {});
 const BabelConfig = require('./babel.config.js');
 
 const SERVICE_WORKER_BASE = slash(path.relative(APP.PUBLIC_PATH, '/'));
@@ -256,7 +256,21 @@ module.exports = {
             cache: !ENV.DEBUG,
             title: APP.TITLE,
         }))),
-        ...(APP.HTML_PRETTY ? [new PrettyPlugin()] : []),
+        ...(APP.HTML_PRETTY ? [new HtmlBeautifyPlugin({
+            config: {
+                html: {
+                    ocd: false,
+                    unformatted: ['code', 'pre', 'textarea'],
+                    indent_inner_html: false,
+                    indent_char: ' ',
+                    indent_size: 4,
+                    wrap_line_length: Number.MAX_SAFE_INTEGER,
+                    preserve_newlines: true,
+                    max_preserve_newlines: 1,
+                    sep: '\n',
+                },
+            },
+        })] : []),
         new SpriteLoaderPlugin({
             plainSprite: true,
         }),
