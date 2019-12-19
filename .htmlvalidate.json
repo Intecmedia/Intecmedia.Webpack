@@ -8,6 +8,7 @@
     ],
     "rules": {
         "intecmedia/img-picture-required": ["error", {
+            "ignore": ".wysiwyg img",
             "webp": true
         }],
         "id-pattern": ["error", {
