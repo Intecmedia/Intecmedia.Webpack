@@ -7,9 +7,7 @@
         "id-pattern": ["error", {
             "pattern": "kebabcase"
         }],
-        "long-title": ["error", {
-            "maxlength": 70
-        }],
+        "long-title": "off",
         "heading-level": "off",
         "no-inline-style": "off",
         "require-sri": "off",
