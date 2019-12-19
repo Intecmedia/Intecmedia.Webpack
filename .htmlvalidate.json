@@ -3,7 +3,12 @@
         "htmlvalidate:recommended",
         "htmlvalidate:document"
     ],
+    "plugins": [
+        "./plugin.html-validate.js"
+    ],
     "rules": {
+        "intecmedia/img-picture-required": ["error", {
+        }],
         "id-pattern": ["error", {
             "pattern": "kebabcase"
         }],
