@@ -1,6 +1,8 @@
 /* eslint-env node */
 const { Rule } = require('html-validate/build/rule');
 
+const nodeEqual = (a, b) => JSON.stringify(a.location) === JSON.stringify(b.location);
+
 class ImgPictureRequired extends Rule {
     constructor(options) {
         super({ webp: true, ignore: '.wysiwyg img', ...options });
@@ -11,7 +13,7 @@ class ImgPictureRequired extends Rule {
             const imgs = event.document.getElementsByTagName('img');
             const ignores = this.options.ignore ? event.document.querySelectorAll(this.options.ignore) : [];
             imgs.forEach((img) => {
-                if (ignores && ignores.some((i) => JSON.stringify(i.location) === JSON.stringify(img.location))) {
+                if (ignores && ignores.some((i) => nodeEqual(i, img))) {
                     return;
                 }
                 const picture = img.parent;
