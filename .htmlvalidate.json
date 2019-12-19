@@ -4,6 +4,9 @@
         "htmlvalidate:document"
     ],
     "rules": {
+        "id-pattern": ["error", {
+            "pattern": "kebabcase"
+        }],
         "long-title": ["error", {
             "maxlength": 70
         }],
