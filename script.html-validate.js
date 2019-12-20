@@ -19,6 +19,7 @@ const ignoreTest = (message) => {
     return ignoreLines.some((i) => i.includes(lowerMessage));
 };
 
+const lineEllipsis = 80;
 const htmlvalidate = new HtmlValidate();
 const logger = weblog({ name: 'html-validate' });
 
@@ -27,7 +28,7 @@ glob(`${ENV.OUTPUT_PATH}/**/*.html`, {
 }, (error, files) => {
     if (error) throw error;
 
-    logger.info(`${files.length} files`);
+    logger.info(`${files.length} files\n`);
 
     const statMessages = {};
     const increaseStat = (type) => {
@@ -44,6 +45,7 @@ glob(`${ENV.OUTPUT_PATH}/**/*.html`, {
             return;
         }
 
+        const html = fs.readFileSync(filename).toString('utf-8');
         const report = htmlvalidate.validateFile(filename);
 
         if (!report.results.length) {
@@ -66,6 +68,10 @@ glob(`${ENV.OUTPUT_PATH}/**/*.html`, {
 
                 logger.error(`${relative}: line ${message.line || 0} col [${message.column || 0}]`);
                 logger.warn(`${messageType}[${message.ruleId}]: ${JSON.stringify(message.message)}`);
+
+                const ellipsis = html.substring(message.offset - lineEllipsis, message.offset + lineEllipsis);
+                logger.info(JSON.stringify(ellipsis));
+                console.log('');
             });
         });
 
