@@ -11,6 +11,10 @@
             "ignore": ".wysiwyg img",
             "webp": true
         }],
+        "intecmedia/img-loading-required": ["error", {
+            "ignore": ".wysiwyg img",
+            "intrinsicsize": true
+        }],
         "id-pattern": ["error", {
             "pattern": "kebabcase"
         }],

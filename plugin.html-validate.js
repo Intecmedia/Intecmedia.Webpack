@@ -1,4 +1,6 @@
 /* eslint-env node */
+/* eslint "compat/compat": "off", "max-classes-per-file": "off" */
+
 const { Rule } = require('html-validate/build/rule');
 
 const nodeEqual = (a, b) => JSON.stringify(a.location) === JSON.stringify(b.location);
@@ -34,9 +36,40 @@ class ImgPictureRequired extends Rule {
     }
 }
 
+class ImgLoadingRequired extends Rule {
+    constructor(options) {
+        super({ intrinsicsize: true, ignore: '.wysiwyg img', ...options });
+    }
+
+    setup() {
+        this.on('dom:ready', (event) => this.domReady(event));
+    }
+
+    domReady(event) {
+        const imgs = event.document.getElementsByTagName('img');
+        const ignores = this.options.ignore ? event.document.querySelectorAll(this.options.ignore) : [];
+        imgs.forEach((img) => {
+            if (ignores && ignores.some((i) => nodeEqual(i, img))) {
+                return;
+            }
+            const loading = img.getAttribute('loading');
+            if (!loading) {
+                this.report(img, '<img> required `loading` attribute.');
+            }
+            if (this.options.intrinsicsize) {
+                const intrinsicsize = img.getAttribute('intrinsicsize');
+                if (!intrinsicsize) {
+                    this.report(img, '<img> required `intrinsicsize` attribute.');
+                }
+            }
+        });
+    }
+}
+
 module.exports = {
     name: 'intecmedia',
     rules: {
         'intecmedia/img-picture-required': ImgPictureRequired,
+        'intecmedia/img-loading-required': ImgLoadingRequired,
     },
 };
