@@ -70,7 +70,7 @@ glob(`${ENV.OUTPUT_PATH}/**/*.html`, {
                 logger.warn(`${messageType}[${message.ruleId}]: ${JSON.stringify(message.message)}`);
 
                 const ellipsis = html.substring(message.offset - lineEllipsis, message.offset + lineEllipsis).trim();
-                logger.info(JSON.stringify(ellipsis));
+                console.log(ellipsis);
                 console.log('');
             });
         });

@@ -66,7 +66,7 @@ glob(`${ENV.OUTPUT_PATH}/**/*.html`, {
                 const log = errorsLogger[message.type] || logger.error;
                 log(`${relative}: line ${message.lastLine || 0} col [${message.firstColumn || 0}-${message.lastColumn || 0}]`);
                 log(`${message.type}: ${JSON.stringify(message.message)}`);
-                log(`${JSON.stringify(message.extract.trim())}`);
+                console.log(message.extract.trim());
                 console.log('');
             });
         } else {
