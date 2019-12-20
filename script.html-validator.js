@@ -33,7 +33,7 @@ glob(`${ENV.OUTPUT_PATH}/**/*.html`, {
 }, (error, files) => {
     if (error) throw error;
 
-    logger.info(`${files.length} files`);
+    logger.info(`${files.length} files\n`);
 
     const statMessages = {};
     const increaseStat = (type) => {
