@@ -4,6 +4,7 @@
 const { Rule } = require('html-validate/build/rule');
 
 const nodeEqual = (a, b) => JSON.stringify(a.location) === JSON.stringify(b.location);
+const nodeIgnore = (node, ignores) => ignores && ignores.some((i) => nodeEqual(i, node));
 
 class ImgPictureRequired extends Rule {
     constructor(options) {
@@ -18,7 +19,7 @@ class ImgPictureRequired extends Rule {
         const imgs = event.document.getElementsByTagName('img');
         const ignores = this.options.ignore ? event.document.querySelectorAll(this.options.ignore) : [];
         imgs.forEach((img) => {
-            if (ignores && ignores.some((i) => nodeEqual(i, img))) {
+            if (nodeIgnore(img, ignores)) {
                 return;
             }
             const picture = img.parent;
@@ -49,7 +50,7 @@ class ImgLoadingRequired extends Rule {
         const imgs = event.document.getElementsByTagName('img');
         const ignores = this.options.ignore ? event.document.querySelectorAll(this.options.ignore) : [];
         imgs.forEach((img) => {
-            if (ignores && ignores.some((i) => nodeEqual(i, img))) {
+            if (nodeIgnore(img, ignores)) {
                 return;
             }
             const loading = img.getAttribute('loading');
