@@ -7,10 +7,11 @@ const glob = require('glob');
 const slash = require('slash');
 const validator = require('html-validator');
 const weblog = require('webpack-log');
-
-const logger = weblog({ name: 'html-validator' });
+const { argv } = require('yargs');
 
 const ENV = require('./app.env.js');
+
+const logger = weblog({ name: 'html-validator' });
 
 const ignoreLines = fs.readFileSync('./.htmlignore')
     .toString().trim().split('\n')
@@ -28,7 +29,9 @@ const errorsLogger = {
     warning: logger.warn,
 };
 
-glob(`${ENV.OUTPUT_PATH}/**/*.html`, {
+const pathSuffix = argv.pathSuffix && typeof (argv.pathSuffix) === 'string' ? argv.pathSuffix : '';
+
+glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'), {
     ignore: [],
 }, (error, files) => {
     if (error) throw error;
