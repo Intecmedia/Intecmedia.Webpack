@@ -37,6 +37,7 @@
         "no-param-reassign": [2, {
             "props": false
         }],
+        "no-unused-expressions": "off",
         "unicode-bom": ["warn", "never"],
         "max-len": ["warn", 120, 4],
         "indent": ["warn", 4],
