@@ -10,8 +10,8 @@ if (NODE_ENV === 'development' || DEBUG) {
 jQuery(($) => {
     svg4everybody();
 
+    // SPA events
     $(window).on('pushState replaceState', () => {
-        // Barba events
         setTimeout(() => {
             svg4everybody();
         }, 0);

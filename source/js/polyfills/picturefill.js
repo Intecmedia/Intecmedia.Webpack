@@ -6,8 +6,8 @@ const picturefill = require('picturefill');
 jQuery(($) => {
     picturefill();
 
+    // SPA events
     $(window).on('pushState replaceState', () => {
-        // Barba events
         setTimeout(() => {
             picturefill({ reevaluate: true });
         }, 0);

@@ -8,7 +8,7 @@
 function historyEventDecorator(type) {
     const origHandler = window.history[type];
     return function newHandler() {
-        if (NODE_ENV === 'production' || DEBUG) {
+        if (NODE_ENV === 'development' || DEBUG) {
             console.log(`[history-events.js] ${type}:`, JSON.stringify(arguments));
         }
         const result = origHandler.apply(this, arguments);
