@@ -8,6 +8,7 @@ jQuery(($) => {
 
     // SPA events
     $(window).on('pushState replaceState', () => {
+        // wait side effects changes
         setTimeout(() => {
             picturefill({ reevaluate: true });
         }, 0);

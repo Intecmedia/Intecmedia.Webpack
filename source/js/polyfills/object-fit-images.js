@@ -8,6 +8,7 @@ jQuery(($) => {
 
     // SPA events
     $(window).on('pushState replaceState', () => {
+        // wait side effects changes
         setTimeout(() => {
             objectFitImages(null, { watchMQ: true });
         }, 0);

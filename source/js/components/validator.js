@@ -3,6 +3,7 @@ jQuery(($) => {
 
     // SPA events
     $(window).on('pushState replaceState', () => {
+        // wait side effects changes
         setTimeout(() => {
         // find new validators
             $('[data-provide="aquilon-validator"]').each((index, item) => {

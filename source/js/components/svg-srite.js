@@ -12,6 +12,7 @@ jQuery(($) => {
 
     // SPA events
     $(window).on('pushState replaceState', () => {
+        // wait side effects changes
         setTimeout(() => {
             svg4everybody();
         }, 0);
