@@ -16,7 +16,7 @@ const scriptTypeRemove = (tag) => {
 
 class HtmlWebpackPlugin extends HtmlWebpackPluginOriginal {
     generateHtmlTags(assets) {
-        const result = HtmlWebpackPluginOriginal.prototype.generateHtmlTags.apply(this, [assets]);
+        const result = super.generateHtmlTags(assets);
         result.head = result.head.map(scriptTypeRemove);
         result.body = result.body.map(scriptTypeRemove);
         return result;
