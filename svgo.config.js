@@ -19,6 +19,7 @@ const SvgoPrefixConfig = (prefix = false) => ({
         },
         { convertShapeToPath: false },
         { convertStyleToAttrs: false },
+        { convertTransform: false },
         { removeViewBox: false },
         { removeUselessDefs: false },
     ],
