@@ -32,10 +32,11 @@ if (APP.DESCRIPTION === '$APP.DESCRIPTION$') {
     lintWarns.push('empty `DESCRIPTION` in `app.config.js`');
 }
 
-lintWarns.map((i) => logger.warn(i));
-lintErrors.map((i) => logger.error(i));
+lintWarns.forEach((i) => logger.warn(i));
+lintErrors.forEach((i) => logger.error(i));
 
-logger.info(`errors: ${lintErrors.length} warnings: ${lintWarns.length}`);
+console.log('');
+logger.info(`errors: ${lintErrors.length} warnings: ${lintWarns.length}\n`);
 
 if (lintErrors.length > 0) {
     process.exit(1);
