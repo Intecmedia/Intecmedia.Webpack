@@ -7,6 +7,7 @@ $pitcher-logo-hover-color: $link-hover-color !default;
         --fill-color: #{$pitcher-logo-color};
     }
 
+    /*
     &:hover,
     &:focus,
     &:active {
@@ -14,4 +15,5 @@ $pitcher-logo-hover-color: $link-hover-color !default;
             --fill-color: #{$pitcher-logo-hover-color};
         }
     }
+    */
 }
