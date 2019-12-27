@@ -1,0 +1,17 @@
+$pitcher-logo-color: $link-color !default;
+$pitcher-logo-hover-color: $link-hover-color !default;
+
+
+.pitcher-logo {
+    svg {
+        --fill-color: #{$pitcher-logo-color};
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+        svg {
+            --fill-color: #{$pitcher-logo-hover-color};
+        }
+    }
+}
