@@ -416,7 +416,6 @@ module.exports = {
                 include: /(partials)/i,
                 exclude: /(fonts|font|svg-sprite)/i,
                 loader: './loader.svgo.js',
-                options: require('./svgo.config.js'),
             },
             {
                 test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
