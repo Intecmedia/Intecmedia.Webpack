@@ -23,7 +23,7 @@ glob(`${ENV.SOURCE_PATH}/**/*.svg`, {
         const relative = slash(path.relative(__dirname, filename));
 
         const name = path.basename(filename, '.svg');
-        const options = SvgoCreateConfig(`svgo-${name.toLowerCase()}-`);
+        const options = SvgoCreateConfig({ prefix: `svgo-${name.toLowerCase()}-` });
         const svgoInstance = new SVGO(options);
 
         svgoInstance.optimize(svg).then((result) => {
