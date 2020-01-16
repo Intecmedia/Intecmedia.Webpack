@@ -1,7 +1,7 @@
 /* eslint-env node */
 /* eslint "compat/compat": "off" */
 
-const { SvgoDefaultConfig } = require('./svgo.config.js');
+const { SvgoNoPrefixConfig } = require('./svgo.config.js');
 
 // https://web.dev/use-imagemin-to-compress-images
 module.exports = {
@@ -18,7 +18,7 @@ module.exports = {
             quality: [0.85, 1.0],
         }],
         ['svgo', { // lossy
-            ...SvgoDefaultConfig,
+            ...SvgoNoPrefixConfig,
         }],
         ['gifsicle', { // lossless
             optimizationLevel: 3,

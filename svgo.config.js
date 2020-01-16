@@ -3,7 +3,7 @@
 
 const uniqueId = require('lodash.uniqueid');
 
-const SvgoPrefixConfig = (prefix = false) => ({
+const SvgoCreateConfig = (prefix = false) => ({
     js2svg: { pretty: true },
     plugins: [
         {
@@ -25,7 +25,10 @@ const SvgoPrefixConfig = (prefix = false) => ({
     ],
 });
 
-const SvgoDefaultConfig = SvgoPrefixConfig('svgo-');
+module.exports.SvgoCreateConfig = SvgoCreateConfig;
 
-module.exports.SvgoPrefixConfig = SvgoPrefixConfig;
+const SvgoDefaultConfig = SvgoCreateConfig('svgo-');
+const SvgoNoPrefixConfig = SvgoCreateConfig(false);
+
 module.exports.SvgoDefaultConfig = SvgoDefaultConfig;
+module.exports.SvgoNoPrefixConfig = SvgoNoPrefixConfig;

@@ -7,9 +7,8 @@ const glob = require('glob');
 const slash = require('slash');
 const weblog = require('webpack-log');
 
-
 const SVGO = require('svgo');
-const { SvgoPrefixConfig } = require('./svgo.config.js');
+const { SvgoCreateConfig } = require('./svgo.config.js');
 
 const logger = weblog({ name: 'svgo' });
 const ENV = require('./app.env.js');
@@ -24,7 +23,7 @@ glob(`${ENV.SOURCE_PATH}/**/*.svg`, {
         const relative = slash(path.relative(__dirname, filename));
 
         const name = path.basename(filename, '.svg');
-        const options = SvgoPrefixConfig(`svgo-${name.toLowerCase()}-`);
+        const options = SvgoCreateConfig(`svgo-${name.toLowerCase()}-`);
         const svgoInstance = new SVGO(options);
 
         svgoInstance.optimize(svg).then((result) => {
