@@ -36,8 +36,9 @@
         > thead,
         > tbody,
         > tfoot {
+            /* stylelint-disable-next-line selector-max-compound-selectors */
             > tr {
-                /* stylelint-disable-next-line selector-max-compound-selectors, selector-max-type */
+                /* stylelint-disable-next-line selector-max-compound-selectors, max-nesting-depth */
                 > th,
                 > td {
                     background: transparent;

@@ -15,7 +15,7 @@
         "selector-class-pattern": [
             "^[a-z0-9\\-_]+$"
         ],
-        "max-nesting-depth": 4,
+        "max-nesting-depth": 3,
         "intecmedia/max-lines": 300,
         "max-line-length": [120, {
             "ignore": ["comments"],
@@ -23,7 +23,7 @@
         }],
         "declaration-no-important": null,
         "selector-max-type": null,
-        "selector-max-compound-selectors": 4,
+        "selector-max-compound-selectors": 3,
         "scss/at-else-closing-brace-newline-after": "always-last-in-chain",
         "scss/at-else-closing-brace-space-after": "always-intermediate",
         "scss/at-else-empty-line-before": "never",
