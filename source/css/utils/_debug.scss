@@ -20,7 +20,8 @@
 
         content: "Only visible NODE_ENV=#{$NODE_ENV} or DEBUG=#{$DEBUG}";
 
-        html:hover & {
+        html:hover &,
+        html:focus & {
             margin-bottom: 0;
         }
     }
@@ -48,7 +49,8 @@
 
         content: "Please rename the `name` in `package.json` file";
 
-        html:hover & {
+        html:hover &,
+        html:focus & {
             margin-bottom: 0;
         }
     }
