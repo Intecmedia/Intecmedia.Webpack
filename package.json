@@ -82,6 +82,7 @@
         "browser-sync-webpack-plugin": "latest",
         "browserslist": "latest",
         "case-sensitive-paths-webpack-plugin": "latest",
+        "classlist.js": "latest",
         "clean-webpack-plugin": "latest",
         "compression-webpack-plugin": "latest",
         "copy-webpack-plugin": "latest",
