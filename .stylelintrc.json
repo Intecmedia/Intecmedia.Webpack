@@ -5,10 +5,11 @@
         "stylelint-config-rational-order"
     ],
      "plugins": [
-        "stylelint-performance-animation",
-        "stylelint-no-unsupported-browser-features",
-        "stylelint-scss",
         "stylelint-a11y",
+        "stylelint-csstree-validator",
+        "stylelint-no-unsupported-browser-features",
+        "stylelint-performance-animation",
+        "stylelint-scss",
         "./stylelint.max-lines.js"
     ],
     "rules": {
@@ -103,6 +104,9 @@
             ]
         }],
         "a11y/no-outline-none": true,
-        "a11y/selector-pseudo-class-focus": true
+        "a11y/selector-pseudo-class-focus": true,
+        "csstree/validator": {
+            "ignore": ["font-display"]
+        }
     }
 }
