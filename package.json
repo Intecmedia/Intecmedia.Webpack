@@ -192,7 +192,6 @@
         "webpack-sources": "latest",
         "webpcss": "latest",
         "whatwg-fetch": "latest",
-        "workbox-webpack-plugin": "latest",
         "yargs": "latest"
     },
     "devDependencies": {}

@@ -9,7 +9,6 @@ module.exports = {
     DESCRIPTION: '$APP.DESCRIPTION$',
     PUBLIC_PATH: '/', // for relative use './'
     USE_FAVICONS: true,
-    USE_SERVICE_WORKER: false,
     LANGUAGE: 'ru',
     START_URL: '/?utm_source=app_manifest',
     THEME_COLOR: '#fff',

@@ -33,7 +33,6 @@ if (ENV.STANDALONE) {
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('./plugin.html.js');
 const WebpackNotifierPlugin = require('webpack-notifier');
-const WorkboxPlugin = (APP.USE_SERVICE_WORKER ? require('workbox-webpack-plugin') : () => {});
 const ImageminPlugin = require('imagemin-webpack');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -51,10 +50,6 @@ const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () 
 const HtmlBeautifyPlugin = (APP.HTML_PRETTY ? require('html-beautify-webpack-plugin') : () => {});
 const BabelConfig = require('./babel.config.js');
 
-const SERVICE_WORKER_BASE = slash(path.relative(APP.PUBLIC_PATH, '/'));
-const SERVICE_WORKER_PATH = path.join(ENV.OUTPUT_PATH, SERVICE_WORKER_BASE, '/service-worker.js');
-APP.SERVICE_WORKER_HASH = () => (fs.existsSync(SERVICE_WORKER_PATH) ? md5File.sync(SERVICE_WORKER_PATH) : '');
-
 const BANNER_STRING = [
     `ENV.NODE_ENV=${ENV.NODE_ENV} | ENV.DEBUG=${ENV.DEBUG}`,
     fs.readFileSync(path.join(ENV.SOURCE_PATH, 'humans.txt')),
@@ -67,9 +62,6 @@ module.exports = {
     },
 
     devServer: {
-        before(app) {
-            app.get('/service-worker.js', (request, response) => response.sendFile(SERVICE_WORKER_PATH));
-        },
         compress: false,
         contentBase: path.resolve(__dirname, 'source'),
         overlay: { warnings: false, errors: true },
@@ -133,7 +125,7 @@ module.exports = {
     performance: (ENV.PROD && !ENV.DEBUG ? {
         assetFilter: (asset) => {
             const [filename] = asset.split('?', 2);
-            const ignore = /(\.(css|js)\.map|\.LICENSE|\.eot|\.ttf|manifest\.json|service-worker\.js|@resize-.+|favicon|workbox)$/;
+            const ignore = /(\.(css|js)\.map|\.LICENSE|\.eot|\.ttf|manifest\.json|@resize-.+|favicon|workbox)$/;
             return !(ignore.test(filename));
         },
         hints: 'warning',
@@ -274,50 +266,6 @@ module.exports = {
         new SpriteLoaderPlugin({
             plainSprite: true,
         }),
-        ...(APP.USE_SERVICE_WORKER ? [new WorkboxPlugin.GenerateSW({
-            cacheId: ENV.PACKAGE_NAME,
-            swDest: SERVICE_WORKER_PATH,
-            importWorkboxFrom: 'local',
-            precacheManifestFilename: slash(path.join(SERVICE_WORKER_BASE, 'service-worker-precache.js?[manifestHash]')),
-            globDirectory: slash(ENV.OUTPUT_PATH),
-            globPatterns: [
-                'js/*.min.js',
-                'css/*.min.css',
-                'fonts/*.woff2',
-            ],
-            globIgnores: [
-                '*.map',
-                '*.LICENSE',
-            ],
-            include: [],
-            runtimeCaching: [{
-                urlPattern: new RegExp(`${APP.PUBLIC_PATH}(css|js|fonts)/`),
-                handler: 'networkFirst',
-                options: {
-                    cacheName: `${ENV.PACKAGE_NAME}-assets`,
-                    networkTimeoutSeconds: 10,
-                },
-            }, {
-                urlPattern: /\/upload\//,
-                handler: 'networkFirst',
-                options: {
-                    cacheName: `${ENV.PACKAGE_NAME}-upload`,
-                    networkTimeoutSeconds: 10,
-                    expiration: {
-                        maxEntries: 100,
-                        purgeOnQuotaError: true,
-                    },
-                },
-            }, {
-                urlPattern: /\//,
-                handler: 'networkFirst',
-                options: {
-                    cacheName: `${ENV.PACKAGE_NAME}-html`,
-                    networkTimeoutSeconds: 10,
-                },
-            }],
-            ignoreUrlParametersMatching: [/^utm_/, /^[a-fA-F0-9]{32}$/],
-        })] : []),
         ...(ENV.PROD || ENV.DEBUG ? [
             new ImageminPlugin({
                 test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
