@@ -9,7 +9,6 @@ if (process.cwd() !== realcwd) process.chdir(realcwd);
 const path = require('path');
 const slash = require('slash');
 const webpack = require('webpack');
-const md5File = require('md5-file');
 const weblog = require('webpack-log');
 const zopfli = require('@gfx/zopfli');
 
