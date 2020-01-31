@@ -77,7 +77,6 @@
         "babel-eslint": "latest",
         "babel-loader": "latest",
         "bootstrap": "latest",
-        "brotli-webpack-plugin": "latest",
         "browser-sync": "latest",
         "browser-sync-webpack-plugin": "latest",
         "browserslist": "latest",

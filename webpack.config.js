@@ -38,7 +38,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const BrowserSyncPlugin = (ENV.WATCH ? require('browser-sync-webpack-plugin') : () => {});
 const StyleLintPlugin = (ENV.USE_LINTERS ? require('stylelint-webpack-plugin') : () => {});
-const BrotliPlugin = (ENV.PROD && !ENV.DEBUG ? require('brotli-webpack-plugin') : () => {});
 const CompressionPlugin = (ENV.PROD && !ENV.DEBUG ? require('compression-webpack-plugin') : () => {});
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const UglifyJsPlugin = (ENV.PROD && !ENV.DEBUG ? require('uglifyjs-webpack-plugin') : () => {});
@@ -165,9 +164,13 @@ module.exports = {
         ...(ENV.PROD && !ENV.DEBUG ? [
             new CaseSensitivePathsPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),
-            new BrotliPlugin({
-                asset: '[path].br[query]',
-                test: /\.(js|css|json|lottie)(\?.*)?$/,
+            new CompressionPlugin({
+                test: /\.(js|css|json|lottie)(\?.*)?$/i,
+                filename: '[path].br[query]',
+                compressionOptions: {
+                    level: 11,
+                },
+                algorithm: 'brotliCompress',
             }),
             new CompressionPlugin({
                 test: /\.(js|css|json|lottie)(\?.*)?$/i,
