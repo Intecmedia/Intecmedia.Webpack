@@ -58,7 +58,7 @@
         ]
     },
     "engines": {
-        "node": ">= 10.13.0"
+        "node": ">= 11.7.0"
     },
     "dependencies": {
         "@babel/cli": "latest",
