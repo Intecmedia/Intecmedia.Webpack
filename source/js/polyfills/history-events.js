@@ -1,4 +1,4 @@
-/* global NODE_ENV DEBUG */
+/* global VERBOSE */
 /* eslint 'prefer-rest-params': 'off', 'compat/compat': 'off' */
 
 /*
@@ -8,7 +8,7 @@
 function historyEventDecorator(type) {
     const origHandler = window.history[type];
     return function newHandler() {
-        if (NODE_ENV === 'development' || DEBUG) {
+        if (VERBOSE) {
             console.log(`[history-events.js] ${type}:`, JSON.stringify(arguments));
         }
         const result = origHandler.apply(this, arguments);

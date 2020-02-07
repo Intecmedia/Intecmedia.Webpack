@@ -1,4 +1,4 @@
-/* global NODE_ENV DEBUG */
+/* global VERBOSE */
 import $breakpoints from '~/components/breakpoints';
 
 const $wnd = $(window);
@@ -8,7 +8,7 @@ const createMatchMedia = (query, name) => {
     mql.addListener((event) => {
         const { matches } = event;
         $wnd.triggerHandler('matches.breakpoints', { name, query, matches });
-        if (NODE_ENV === 'development' || DEBUG) {
+        if (VERBOSE) {
             console.log(`[breakpoints] name=${name} query=${JSON.stringify(query)} matches=${JSON.stringify(matches)}`);
         }
     });

@@ -194,6 +194,7 @@ module.exports = {
         new webpack.DefinePlugin({
             DEBUG: JSON.stringify(ENV.DEBUG),
             NODE_ENV: JSON.stringify(ENV.NODE_ENV),
+            VERBOSE: JSON.stringify(ENV.VERBOSE),
             PACKAGE_NAME: JSON.stringify(ENV.PACKAGE_NAME),
             ...Object.assign({}, ...Object.entries(APP).map(([k, v]) => ({
                 [`APP.${k}`]: JSON.stringify(v),

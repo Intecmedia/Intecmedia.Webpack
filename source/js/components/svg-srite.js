@@ -1,9 +1,9 @@
-/* global NODE_ENV DEBUG */
+/* global VERBOSE */
 const svg4everybody = require('svg4everybody');
 
 const svgSprites = require.context('../../img/svg-sprite/', true, /\.svg$/);
 
-if (NODE_ENV === 'development' || DEBUG) {
+if (VERBOSE) {
     console.log('[svg-sprite]', svgSprites.keys());
 }
 

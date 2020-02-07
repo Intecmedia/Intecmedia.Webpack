@@ -11,6 +11,8 @@ const STANDALONE = ['webpack', 'webpack-dev-server'].includes(path.basename(requ
 const WATCH = (process.argv.includes('--watch')) || (process.argv.includes('-w'));
 const PROD = (process.env.NODE_ENV === 'production');
 const NODE_ENV = PROD ? 'production' : 'development';
+
+const VERBOSE = (NODE_ENV === 'development' || DEBUG);
 const USE_SOURCE_MAP = DEBUG || !PROD || DEV_SERVER;
 const USE_LINTERS = PROD || DEBUG;
 
@@ -63,4 +65,5 @@ module.exports = {
     BROWSERSLIST: browserslist,
     BROWSERS: browserslist[NODE_ENV],
     SITEMAP,
+    VERBOSE,
 };

@@ -1,4 +1,4 @@
-/* global NODE_ENV DEBUG */
+/* global VERBOSE */
 const $html = $(document.documentElement);
 
 const $breakpoints = {
@@ -9,7 +9,7 @@ const $breakpoints = {
     xl: $html.css('--breakpoint-xl'),
 };
 
-if (NODE_ENV === 'development' || DEBUG) {
+if (VERBOSE) {
     console.log(`[breakpoints] ${JSON.stringify($breakpoints)}`);
 }
 

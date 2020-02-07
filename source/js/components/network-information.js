@@ -1,4 +1,4 @@
-/* global NODE_ENV DEBUG */
+/* global VERBOSE */
 
 jQuery(($) => {
     const $html = $(document.documentElement);
@@ -6,7 +6,7 @@ jQuery(($) => {
     const $conn = (navigator.connection || navigator.mozConnection || navigator.webkitConnection);
 
     if (!$conn) {
-        if (NODE_ENV === 'development' || DEBUG) {
+        if (VERBOSE) {
             console.log('[network-information] unknown');
         }
         $html.addClass('network-unknown');
@@ -17,7 +17,7 @@ jQuery(($) => {
     let $effectiveType = $conn.effectiveType;
     const $makeNetworkClass = ($type) => ($type ? ` network-detected network-${$type}` : ' network-unknown');
     $html.addClass($makeNetworkClass($effectiveType));
-    if (NODE_ENV === 'development' || DEBUG) {
+    if (VERBOSE) {
         console.log(`[network-information] set effectiveType=${$effectiveType}`);
     }
 
@@ -25,7 +25,7 @@ jQuery(($) => {
     let $saveData = $conn.saveData;
     $html.toggleClass('save-data', $saveData);
     $html.toggleClass('no-save-data', !$saveData);
-    if (NODE_ENV === 'development' || DEBUG) {
+    if (VERBOSE) {
         console.log(`[network-information] set saveData=${JSON.stringify($saveData)}`);
     }
 
@@ -33,7 +33,7 @@ jQuery(($) => {
         $conn.addEventListener('change', () => {
             // detect network type
             if ($effectiveType !== $conn.effectiveType) {
-                if (NODE_ENV === 'development' || DEBUG) {
+                if (VERBOSE) {
                     console.log('[network-information] change effectiveType:', {
                         from: $effectiveType,
                         to: $conn.effectiveType,
@@ -46,7 +46,7 @@ jQuery(($) => {
 
             // detect save-data header
             if ($saveData !== $conn.saveData) {
-                if (NODE_ENV === 'development' || DEBUG) {
+                if (VERBOSE) {
                     console.log('[network-information] change saveData:', {
                         from: $saveData,
                         to: $conn.saveData,
