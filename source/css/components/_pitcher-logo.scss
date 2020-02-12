@@ -3,7 +3,11 @@ $pitcher-logo-hover-color: $link-hover-color !default;
 
 
 .pitcher-logo {
+
     svg {
+        width: 58px;
+        height: 51px;
+
         --fill-color: #{$pitcher-logo-color};
     }
 
