@@ -18,6 +18,10 @@ const ENV = require('./app.env.js');
 const APP = require('./app.config.js');
 const UTILS = require('./webpack.utils.js');
 
+if (ENV.NODE_ENV === 'production') {
+    require('./script.app-lint.js');
+}
+
 ENV.SITEMAP = ENV.SITEMAP.map((i) => Object.assign(i, {
     path: path.posix.join(APP.PUBLIC_PATH, i.url, 'index.html'),
 }));
