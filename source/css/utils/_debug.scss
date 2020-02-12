@@ -1,10 +1,8 @@
-@mixin debug-overlay($content) {
+@mixin debug-popover($content) {
     position: fixed;
     right: 0;
     bottom: 0;
     z-index: $zindex-modal;
-
-    margin-bottom: -1rem;
 
     padding: 2px;
 
@@ -14,9 +12,11 @@
     white-space: nowrap;
 
     background-color: $danger;
-    opacity: .8;
 
-    transition: .6s;
+    transform: translateY(100%);
+    opacity: .5;
+
+    transition: transform .3s;
 
     @each $breakpoint in map-keys($grid-breakpoints){
         @include media-breakpoint-up($breakpoint){
@@ -26,12 +26,12 @@
 
     html:hover &,
     html:focus & {
-        margin-bottom: 0;
+        transform: translateY(0);
     }
 }
 
 @if $NODE_ENV != "production" or $DEBUG {
     body::after { // stylelint-disable-line no-duplicate-selectors
-        @include debug-overlay("NODE_ENV=#{$NODE_ENV} DEBUG=#{$DEBUG}");
+        @include debug-popover("NODE_ENV=#{$NODE_ENV} DEBUG=#{$DEBUG}");
     }
 }
