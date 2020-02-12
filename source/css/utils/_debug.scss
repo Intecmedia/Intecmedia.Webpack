@@ -1,57 +1,37 @@
-// Debug helper
-@if $NODE_ENV != "production" or $DEBUG {
-    body::after { // stylelint-disable-line no-duplicate-selectors
-        position: fixed;
-        right: 0;
-        bottom: 0;
-        z-index: $zindex-modal;
+@mixin debug-overlay($content) {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    z-index: $zindex-modal;
 
-        margin-bottom: -1rem;
+    margin-bottom: -1rem;
 
-        color: $white;
-        font-size: $font-size-sm;
-        line-height: 1rem;
-        white-space: nowrap;
+    padding: 2px;
 
-        background-color: $danger;
-        opacity: .8;
+    color: $white;
+    font-size: $font-size-sm;
+    line-height: 1rem;
+    white-space: nowrap;
 
-        transition: .6s;
+    background-color: $danger;
+    opacity: .8;
 
-        content: "Only visible NODE_ENV=#{$NODE_ENV} or DEBUG=#{$DEBUG}";
+    transition: .6s;
 
-        html:hover &,
-        html:focus & {
-            margin-bottom: 0;
+    @each $breakpoint in map-keys($grid-breakpoints){
+        @include media-breakpoint-up($breakpoint){
+            content: "Breakpoint=" + to-upper-case("#{$breakpoint} ") + $content;
         }
+    }
+
+    html:hover &,
+    html:focus & {
+        margin-bottom: 0;
     }
 }
 
-// Debug helper
-@if $PACKAGE_NAME == "Intecmedia.Webpack" {
+@if $NODE_ENV != "production" or $DEBUG {
     body::after { // stylelint-disable-line no-duplicate-selectors
-        position: fixed;
-        right: 0;
-        bottom: 0;
-        z-index: $zindex-modal;
-
-        margin-bottom: -1rem;
-
-        color: $white;
-        font-size: $font-size-sm;
-        line-height: 1rem;
-        white-space: nowrap;
-
-        background-color: $danger;
-        opacity: .8;
-
-        transition: .6s;
-
-        content: "Please rename the `name` in `package.json` file";
-
-        html:hover &,
-        html:focus & {
-            margin-bottom: 0;
-        }
+        @include debug-overlay("NODE_ENV=#{$NODE_ENV} DEBUG=#{$DEBUG}");
     }
 }
