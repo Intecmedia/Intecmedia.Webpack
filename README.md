@@ -39,7 +39,7 @@
 * Запустите линтер конфигурации приложения: `npm run app-lint`.
 
 ## Обзор комманд
-* **npm run dev** – сборка в development-режиме и debug=off, самый быстрый способ.
+* **npm run development** – сборка в development-режиме и debug=off, самый быстрый способ.
 * **npm run debug** – сборка в development-режиме и debug=on, медленный способ.
 * **npm run prod** – сборка в production-режиме и debug=off, самый медленный способ.
 * **npm run watch** – watch в production-режимеи debug=off, самый медленный способ.
@@ -61,6 +61,7 @@
 * **npm run browserslist-prod** – список поддерживаемых браузеров для NODE_ENV=production.
 * **npm run browserslist** – список поддерживаемых браузеров.
 * **npm run fonts-subsets** – запуск fonts subseting.
+* **npm run svgo** – минимизая svg-файлов.
 
 ### Часто используемые команды
 * **npm run watch-dev** – watch в development-режиме и debug=off, самый быстрый способ.
