@@ -9,6 +9,7 @@
     "scripts": {
         "dev": "cross-env NODE_ENV=development DEBUG=0 webpack -d",
         "debug": "cross-env NODE_ENV=development DEBUG=1 webpack -d",
+        "preprod": "npm run pre-build",
         "prod": "cross-env NODE_ENV=production DEBUG=0 webpack -p",
         "prod-debug": "cross-env NODE_ENV=production DEBUG=1 webpack -p",
         "watch": "npm run watch-dev",
@@ -27,7 +28,9 @@
         "server-debug": "node ./script.nodemon.js --exec \"cross-env NODE_ENV=development DEBUG=1 webpack-dev-server --hot --inline -d\"",
         "pre-build": "npm-run-all app-lint js-lint css-lint utf-fix svgo fonts-subsets",
         "post-build": "npm-run-all html-validate html-validator",
-        "build": "npm-run-all pre-build prod post-build",
+        "prebuild": "npm run pre-build",
+        "postbuild": "npm run post-build",
+        "build": "npm run cross-env NODE_ENV=production DEBUG=0 webpack -p",
         "browserslist-dev": "cross-env NODE_ENV=development npx browserslist",
         "browserslist-prod": "cross-env NODE_ENV=production npx browserslist",
         "browserslist": "cross-env NODE_ENV=production npx browserslist",
