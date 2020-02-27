@@ -105,8 +105,9 @@
         }],
         "a11y/no-outline-none": true,
         "a11y/selector-pseudo-class-focus": true,
-        "csstree/validator": {
+        "csstree/validator": [true, {
+            "severity": "error",
             "ignore": ["font-display"]
-        }
+        }]
     }
 }

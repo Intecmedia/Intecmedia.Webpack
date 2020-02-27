@@ -11,7 +11,9 @@ module.exports = () => require('stylelint')({
         ],
         rules: {
             'csstree/validator': stylelintrc.rules['csstree/validator'],
-            'csstools/use-nesting': true,
+            'csstools/use-nesting': [true, {
+                severity: 'error',
+            }],
         },
     },
 });
