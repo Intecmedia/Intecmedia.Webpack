@@ -180,6 +180,7 @@
         "stylelint-order": "latest",
         "stylelint-performance-animation": "latest",
         "stylelint-scss": "latest",
+        "stylelint-use-nesting": "latest",
         "stylelint-webpack-plugin": "latest",
         "svg-sprite-loader": "latest",
         "svg4everybody": "latest",
