@@ -10,7 +10,6 @@ const path = require('path');
 const slash = require('slash');
 const webpack = require('webpack');
 const weblog = require('webpack-log');
-const zopfli = require('@gfx/zopfli');
 
 const logger = weblog({ name: 'webpack-config' });
 
@@ -182,7 +181,7 @@ module.exports = {
                 compressionOptions: {
                     numiterations: 15,
                 },
-                algorithm: zopfli.gzip,
+                algorithm: require('@gfx/zopfli').gzip,
             }),
         ] : []),
         new webpack.BannerPlugin({
