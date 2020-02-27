@@ -181,7 +181,10 @@ module.exports = {
                 compressionOptions: {
                     numiterations: 15,
                 },
-                algorithm: require('@gfx/zopfli').gzip,
+                algorithm(input, compressionOptions, callback) {
+                    const zopfli = require('@gfx/zopfli');
+                    return zopfli.gzip(input, compressionOptions, callback);
+                },
             }),
         ] : []),
         new webpack.BannerPlugin({
