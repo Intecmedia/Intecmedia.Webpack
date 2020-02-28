@@ -31,7 +31,7 @@
         "post-build": "npm-run-all html-validate html-validator",
         "prebuild": "npm run pre-build",
         "postbuild": "npm run post-build",
-        "build": "npm run cross-env NODE_ENV=production DEBUG=0 webpack -p",
+        "build": "cross-env NODE_ENV=production DEBUG=0 webpack -p",
         "browserslist-dev": "cross-env NODE_ENV=development npx browserslist",
         "browserslist-prod": "cross-env NODE_ENV=production npx browserslist",
         "browserslist": "cross-env NODE_ENV=production npx browserslist",
