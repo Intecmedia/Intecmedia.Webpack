@@ -28,7 +28,11 @@ glob(`${ENV.SOURCE_PATH}/**/*.svg`, {
 
         svgoInstance.optimize(svg).then((result) => {
             fs.writeFileSync(filename, result.data);
-            logger.info(`fixed ${relative}`);
+            if (svg !== result.data) {
+                logger.info(`fixed ${relative}`);
+            } else {
+                logger.info(`skipped ${relative}`);
+            }
         }).catch((exception) => {
             throw new Error(`error in ${relative}: ${exception}`);
         });
