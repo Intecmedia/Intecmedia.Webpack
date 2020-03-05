@@ -31,7 +31,9 @@
 }
 
 @if $NODE_ENV != "production" or $DEBUG {
-    body::after { // stylelint-disable-line no-duplicate-selectors
+    /* stylelint-disable no-duplicate-selectors */
+    body::after {
         @include debug-popover("NODE_ENV=#{$NODE_ENV} DEBUG=#{$DEBUG}");
     }
+    /* stylelint-enable no-duplicate-selectors */
 }

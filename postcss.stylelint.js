@@ -10,6 +10,7 @@ module.exports = () => require('stylelint')({
             'stylelint-use-nesting',
         ],
         rules: {
+            'no-duplicate-selectors': true,
             'csstree/validator': stylelintrc.rules['csstree/validator'],
             'csstools/use-nesting': [true, {
                 severity: 'error',

@@ -29,6 +29,7 @@
         "rule-empty-line-before": ["always", {
             "ignore": ["after-comment", "first-nested"]
         }],
+        "no-duplicate-selectors": true,
         "scss/at-else-closing-brace-newline-after": "always-last-in-chain",
         "scss/at-else-closing-brace-space-after": "always-intermediate",
         "scss/at-else-empty-line-before": "never",
