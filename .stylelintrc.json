@@ -5,9 +5,6 @@
         "stylelint-config-rational-order"
     ],
      "plugins": [
-        "stylelint-a11y",
-        "stylelint-no-unsupported-browser-features",
-        "stylelint-performance-animation",
         "stylelint-scss",
         "./stylelint.max-lines.js"
     ],
@@ -65,48 +62,6 @@
         }],
         "selector-no-qualifying-type": [true, {
             "ignore": ["attribute", "class", "id"]
-        }],
-        "plugin/no-low-performance-animation": [true, {
-            "severity": "warning",
-            "ignore": [
-                "background",
-                "background-color",
-                "background-position",
-                "border-color",
-                "border-top-color",
-                "border-right-color",
-                "border-bottom-color",
-                "border-left-color",
-                "box-shadow",
-                "color",
-                "fill",
-                "height",
-                "opacity",
-                "stroke-dashoffset",
-                "transform",
-                "width"
-            ]
-        }],
-        "plugin/no-unsupported-browser-features": [true, {
-            "severity": "warning",
-            "ignore": [
-                "calc",
-                "css-featurequeries",
-                "css-gradients",
-                "css-sticky",
-                "flexbox",
-                "font-unicode-range",
-                "multicolumn",
-                "object-fit",
-                "outline",
-                "pointer-events",
-                "rem",
-                "transforms3d",
-                "viewport-units",
-                "will-change"
-            ]
-        }],
-        "a11y/no-outline-none": true,
-        "a11y/selector-pseudo-class-focus": true
+        }]
     }
 }
