@@ -6,7 +6,6 @@
     ],
      "plugins": [
         "stylelint-a11y",
-        "stylelint-csstree-validator",
         "stylelint-no-unsupported-browser-features",
         "stylelint-performance-animation",
         "stylelint-scss",
@@ -108,9 +107,6 @@
             ]
         }],
         "a11y/no-outline-none": true,
-        "a11y/selector-pseudo-class-focus": true,
-        "csstree/validator": {
-            "ignore": ["font-display"]
-        }
+        "a11y/selector-pseudo-class-focus": true
     }
 }

@@ -1,8 +1,6 @@
 /* eslint-env node */
 /* eslint global-require: 'off', 'compat/compat': 'off' */
 
-const stylelintrc = require('./.stylelintrc.json');
-
 module.exports = () => require('stylelint')({
     config: {
         plugins: [
@@ -11,7 +9,9 @@ module.exports = () => require('stylelint')({
         ],
         rules: {
             'no-duplicate-selectors': true,
-            'csstree/validator': stylelintrc.rules['csstree/validator'],
+            'csstree/validator': {
+                ignore: ['font-display'],
+            },
             'csstools/use-nesting': [true, {
                 severity: 'error',
             }],
