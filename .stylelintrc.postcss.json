@@ -53,6 +53,7 @@
                 "opacity",
                 "stroke-dashoffset",
                 "transform",
+                "text-underline-color",
                 "width"
             ]
         }]
