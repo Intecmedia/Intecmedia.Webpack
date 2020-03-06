@@ -13,11 +13,8 @@
         "csstree/validator": {
             "ignore": ["font-display"]
         },
-        "csstools/use-nesting": [true, {
-            "severity": "error"
-        }],
+        "csstools/use-nesting": true, 
         "plugin/no-unsupported-browser-features": [true, {
-            "severity": "warning",
             "ignore": [
                 "calc",
                 "css-featurequeries",
@@ -36,7 +33,6 @@
             ]
         }],
         "plugin/no-low-performance-animation": [true, {
-            "severity": "warning",
             "ignore": [
                 "background",
                 "background-color",
