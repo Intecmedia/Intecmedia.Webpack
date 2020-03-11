@@ -12,9 +12,9 @@ const nunjucks = require('nunjucks');
 const frontMatter = require('front-matter');
 const deepMerge = require('lodash.merge');
 
-const attrParser = require('./attr.parser.js');
+const attributeParser = require('./attr.parser.js');
 
-const helpers = require('./source/helpers/index.js');
+const helpers = require('./source/helpers');
 
 const logger = weblog({ name: 'loader-html' });
 
@@ -31,7 +31,7 @@ const DEFAULT_OPTIONS = {
         source: ['srcset', 'data-srcset'],
         image: ['href', 'xlink:href'],
     },
-    requireIgnore: /^(\w+[:]|\/\/)/i,
+    requireIgnore: /^(\w+:|\/\/)/i,
     requireReplace: {},
     searchPath: './source',
 };
@@ -39,8 +39,8 @@ const DEFAULT_OPTIONS = {
 const SRC_SEPARATOR = /\s+/;
 const SRCSET_SEPARATOR = /\s*,\s*/;
 const SRCSET_ATTRS = ['srcset', 'data-srcset'];
-const IGNORE_PATTERN = /^\{\{.*\}\}$/;
-const REQUIRE_PATTERN = /\{\{ require\([0-9\\.]+\) \}\}/g;
+const IGNORE_PATTERN = /^{{.*}}$/;
+const REQUIRE_PATTERN = /{{ require\([\d.\\]+\) }}/g;
 const RANDOM_REQUIRE = () => `{{ require(${Math.random()}${Math.random()}) }}`;
 const SVG_PATTERN = /\.(svg)(\?.*)?$/i;
 
@@ -67,9 +67,9 @@ function resolveAbsolute(originUrl) {
 }
 
 function processHtml(html, options, loaderCallback) {
-    const links = attrParser(html, (tag, attr) => {
+    const links = attributeParser(html, (tag, attribute) => {
         if (!(tag in options.requireTags)) return false;
-        if (options.requireTags[tag].includes(attr)) return true;
+        if (options.requireTags[tag].includes(attribute)) return true;
         return false;
     });
 
@@ -77,10 +77,10 @@ function processHtml(html, options, loaderCallback) {
     links.reverse().forEach((link) => {
         let value;
         if (SRCSET_ATTRS.includes(link.attr)) {
-            value = link.value.split(SRCSET_SEPARATOR).map((src) => {
-                const [url, size = ''] = src.split(SRC_SEPARATOR, 2);
-                if (IGNORE_PATTERN.test(url) || options.requireIgnore.test(url)) return src;
-                if (!loaderUtils.isUrlRequest(link.value, options.searchPath)) return src;
+            value = link.value.split(SRCSET_SEPARATOR).map((source) => {
+                const [url, size = ''] = source.split(SRC_SEPARATOR, 2);
+                if (IGNORE_PATTERN.test(url) || options.requireIgnore.test(url)) return source;
+                if (!loaderUtils.isUrlRequest(link.value, options.searchPath)) return source;
                 return options.requireIdent(url) + (size ? ` ${size}` : '');
             }).join(', ');
         } else {
@@ -89,9 +89,9 @@ function processHtml(html, options, loaderCallback) {
             value = options.requireIdent(link.value);
         }
         const last = content.pop();
-        content.push(last.substr(link.start + link.length));
+        content.push(last.slice(link.start + link.length));
         content.push(value);
-        content.push(last.substr(0, link.start));
+        content.push(last.slice(0, link.start));
     });
     content = content.reverse().join('');
 
@@ -134,10 +134,10 @@ module.exports = function HtmlLoader() {
         const relativeUrl = slash(path.relative(__dirname, url));
         logger.info(`require(${JSON.stringify(relativeUrl)}) from ${JSON.stringify(relativePath)}`);
 
-        const resourceDir = path.dirname(loaderContext.resourcePath);
-        const urlPrefix = path.relative(resourceDir, options.searchPath);
+        const resourceDirectory = path.dirname(loaderContext.resourcePath);
+        const urlPrefix = path.relative(resourceDirectory, options.searchPath);
 
-        const request = loaderUtils.urlToRequest(slash(path.join(urlPrefix, url)), resourceDir);
+        const request = loaderUtils.urlToRequest(slash(path.join(urlPrefix, url)), resourceDirectory);
         return `" + require(${JSON.stringify(request)}) + "`;
     });
 
