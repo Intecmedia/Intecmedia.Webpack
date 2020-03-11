@@ -1,5 +1,7 @@
 /* global VERBOSE */
 
+const $makeNetworkClass = ($type) => ($type ? ` network-detected network-${$type}` : ' network-unknown');
+
 jQuery(($) => {
     const $html = $(document.documentElement);
     // eslint-disable-next-line compat/compat
@@ -15,7 +17,6 @@ jQuery(($) => {
 
     // network information test: 'slow-2g', '2g', '3g', or '4g'
     let $effectiveType = $conn.effectiveType;
-    const $makeNetworkClass = ($type) => ($type ? ` network-detected network-${$type}` : ' network-unknown');
     $html.addClass($makeNetworkClass($effectiveType));
     if (VERBOSE) {
         console.log(`[network-information] set effectiveType=${$effectiveType}`);
