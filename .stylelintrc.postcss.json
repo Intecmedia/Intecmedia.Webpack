@@ -13,7 +13,9 @@
         "csstree/validator": {
             "ignore": ["font-display"]
         },
-        "csstools/use-nesting": true, 
+        "csstools/use-nesting": ["always", {
+             "only": ["/@media/"]
+        }],
         "plugin/no-unsupported-browser-features": [true, {
             "ignore": [
                 "calc",
