@@ -7,7 +7,6 @@
         "stylelint-use-nesting"
     ],
     "rules": {
-        "no-duplicate-selectors": true,
         "a11y/no-outline-none": true,
         "a11y/selector-pseudo-class-focus": true,
         "csstree/validator": {
