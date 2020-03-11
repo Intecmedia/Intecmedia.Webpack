@@ -33,8 +33,8 @@ glob(`${ENV.SOURCE_PATH}/**/*.svg`, {
             } else {
                 logger.info(`skipped ${relative}`);
             }
-        }).catch((exception) => {
-            throw new Error(`error in ${relative}: ${exception}`);
+        }).catch((svgoError) => {
+            throw new Error(`error in ${relative}: ${svgoError}`);
         });
     });
 });

@@ -46,7 +46,7 @@ module.exports = function ResizeLoader(content) {
     const resourceHash = md5File.sync(loaderContext.resourcePath);
     const cacheKey = `${relativePath}?${JSON.stringify(query)}&${resourceHash}`;
 
-    let [, resizeWidth,, resizeHeight, resizeFlag] = query.resize.trim().match(/^(\d*)(x(\d*))?([!><^])?$/);
+    let [, resizeWidth,, resizeHeight, resizeFlag] = query.resize.trim().match(/^(\d*)(x(\d*))?([!<>^])?$/);
     resizeWidth = parseInt(resizeWidth, 10);
     resizeHeight = parseInt(resizeHeight, 10);
     resizeFlag = (resizeFlag || '').trim();
@@ -57,7 +57,7 @@ module.exports = function ResizeLoader(content) {
         return loaderCallback(`Unknow resize flag: '${query.resize}'`);
     }
 
-    const format = (query.format || resourceInfo.ext.substr(1)).toLowerCase();
+    const format = (query.format || resourceInfo.ext.slice(1)).toLowerCase();
     const name = (query.name || (
         `${resourceInfo.name}@resize-${resizeWidth || ''}x${resizeHeight || ''}${resizeFlagNames[resizeFlag]}`
     )) + (query.suffix ? `-${query.suffix}` : '');

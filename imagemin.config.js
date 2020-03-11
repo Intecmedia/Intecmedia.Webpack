@@ -15,7 +15,7 @@ module.exports = {
         }],
         ['pngquant', { // lossy
             speed: 3,
-            quality: [0.85, 1.0],
+            quality: [0.85, 1],
         }],
         ['svgo', { // lossy
             ...SvgoNoPrefixConfig,

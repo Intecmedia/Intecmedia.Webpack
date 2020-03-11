@@ -51,7 +51,7 @@ glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'),
         const html = fs.readFileSync(filename).toString('utf-8');
         const report = htmlvalidate.validateFile(filename);
 
-        if (!report.results.length) {
+        if (report.results.length === 0) {
             logger.info(`skipped ${relative}`);
             return;
         }

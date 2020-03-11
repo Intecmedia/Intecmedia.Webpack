@@ -55,7 +55,7 @@ glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'),
         if (path.basename(filename).startsWith('_')) {
             skipped = true;
             logger.info(`ignored ${relative}`);
-        } else if (result.messages && result.messages.length) {
+        } else if (result.messages && result.messages.length > 0) {
             result.messages.forEach((message) => {
                 if (message.message && ignoreTest(message.message)) {
                     skipped = true;

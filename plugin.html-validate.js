@@ -16,7 +16,7 @@ class ImgPictureRequired extends Rule {
     }
 
     domReady(event) {
-        const imgs = event.document.getElementsByTagName('img');
+        const imgs = event.document.querySelectorAll('img');
         const ignores = this.options.ignore ? event.document.querySelectorAll(this.options.ignore) : [];
         imgs.forEach((img) => {
             if (nodeIgnore(img, ignores)) {
@@ -29,7 +29,7 @@ class ImgPictureRequired extends Rule {
             }
             if (this.options.webp) {
                 const sources = picture.querySelectorAll('> source[type="image/webp"]');
-                if (!(sources && sources.length)) {
+                if (!(sources && sources.length > 0)) {
                     this.report(picture, '<picture> required <source type="image/webp"> element.');
                 }
             }
@@ -47,7 +47,7 @@ class ImgLoadingRequired extends Rule {
     }
 
     domReady(event) {
-        const imgs = event.document.getElementsByTagName('img');
+        const imgs = event.document.querySelectorAll('img');
         const ignores = this.options.ignore ? event.document.querySelectorAll(this.options.ignore) : [];
         imgs.forEach((img) => {
             if (nodeIgnore(img, ignores)) {

@@ -12,7 +12,7 @@ module.exports = () => require('postcss-reporter')({
             const { css } = message.node.source.input;
             const index = lineColumn(css).toIndex({ line: message.line, col: message.column });
             const ellipsis = css.substring(index - lineEllipsis, index + lineEllipsis).trim();
-            message.text += `:\n...\n${ellipsis}...\n`;
+            message.text += `:\n…\n${ellipsis}…\n`;
         });
         return reporterFormatter(input);
     },
