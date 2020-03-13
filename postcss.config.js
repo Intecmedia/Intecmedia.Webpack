@@ -34,7 +34,7 @@ module.exports = {
         }),
         require('postcss-browser-reporter')(),
         require('./postcss.reporter.js')(), // this always last
-        ...(!(ENV.DEV_SERVER || ENV.WATCH) ? [
+        ...(!(ENV.DEV_SERVER || ENV.WATCH) && !ENV.DEBUG ? [
             require('postcss-fail-on-warn')(),
         ] : []), // this always last
     ],
