@@ -3,9 +3,11 @@
         "stylelint-a11y",
         "stylelint-no-unsupported-browser-features",
         "stylelint-performance-animation",
-        "stylelint-csstree-validator"
+        "stylelint-csstree-validator",
+        "./stylelint.no-nested-media.js"
     ],
     "rules": {
+        "intecmedia/no-nested-media": true,
         "a11y/no-outline-none": true,
         "a11y/selector-pseudo-class-focus": true,
         "csstree/validator": {
