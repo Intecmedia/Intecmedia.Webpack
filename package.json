@@ -147,6 +147,7 @@
         "postcss-browser-reporter": "latest",
         "postcss-custom-properties": "latest",
         "postcss-devtools": "latest",
+        "postcss-fail-on-warn": "latest",
         "postcss-flexbugs-fixes": "latest",
         "postcss-focus": "latest",
         "postcss-focus-visible": "latest",
