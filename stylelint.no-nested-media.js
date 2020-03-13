@@ -5,7 +5,10 @@ const stylelint = require('stylelint');
 
 const ruleName = 'intecmedia/no-nested-media';
 const messages = stylelint.utils.ruleMessages(ruleName, {
-    error: `Partial support nested media queries: https://caniuse.com/#feat=mdn-css_at-rules_media_nested-queries`,
+    error: (media) => [
+        `Partial support nested media queries: ${media}.`,
+        '[https://caniuse.com/#feat=mdn-css_at-rules_media_nested-queries]',
+    ].join(' '),
 });
 
 module.exports = stylelint.createPlugin(ruleName, (actual) => ((postcssRoot, postcssResult) => {
@@ -14,14 +17,20 @@ module.exports = stylelint.createPlugin(ruleName, (actual) => ((postcssRoot, pos
 
     return postcssRoot.walkAtRules(/^media$/i, (atRule) => {
         const { parent } = atRule;
+
         if (!parent) return undefined;
         if (!(parent.type === 'atrule' && parent.name === 'media')) return undefined;
 
+        const source = atRule.source || parent.source;
+        const media = `@media (${parent.params}) { @media (${atRule.params}) { … } }`;
+
         return stylelint.utils.report({
-            message: messages.error,
+            ruleName,
+            message: messages.error(media),
             node: parent,
             result: postcssResult,
-            ruleName,
+            line: source.start.line,
+            column: source.start.column,
         });
     });
 }));
