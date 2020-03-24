@@ -382,16 +382,16 @@ module.exports = {
                         exclude: /\.(svg)$/i,
                         resourceQuery: /[&?]resize=.+/,
                         loader: './loader.resize.js',
-                        options: { name: UTILS.resourceName('img'), limit: 32 * 1024, esModule: false },
+                        options: { name: UTILS.resourceName('img'), limit: 32 * 1024, esModule: false, hashType: 'md5' },
                     },
                     {
                         resourceQuery: /[&?]inline=inline/,
                         loader: 'url-loader',
-                        options: { name: UTILS.resourceName('img'), limit: 32 * 1024, esModule: false },
+                        options: { name: UTILS.resourceName('img'), limit: 32 * 1024, esModule: false, hashType: 'md5' },
                     },
                     {
                         loader: 'file-loader',
-                        options: { name: UTILS.resourceName('img'), esModule: false },
+                        options: { name: UTILS.resourceName('img'), esModule: false, hashType: 'md5' },
                     },
                 ],
             },
@@ -416,7 +416,7 @@ module.exports = {
                 test: /\.(eot|woff|woff2|ttf|svg)(\?.*)?$/i,
                 exclude: /(img|images|partials|svg-sprite)/i,
                 loader: 'file-loader',
-                options: { name: UTILS.resourceName('fonts'), esModule: false },
+                options: { name: UTILS.resourceName('fonts'), esModule: false, hashType: 'md5' },
             },
             // css loaders
             {
