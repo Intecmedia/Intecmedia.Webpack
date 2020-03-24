@@ -33,7 +33,8 @@ if ((NODE_ENV === 'production' || DEBUG) && APP.SENTRY.dsn) {
 
     jQuery(($) => {
         const trackImageErrors = () => {
-            $('img').on('error.sentry', (error) => {
+            $('img').on('error.sentry', (event) => {
+                const error = `${event.type}: ${event?.currentTarget?.src || '(no src)'}`;
                 throw error;
             });
         };
