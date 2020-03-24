@@ -32,7 +32,7 @@ module.exports.toScssVars = toScssVars;
 
 function resourceName(prefix, hash = false) {
     const basename = path.basename(prefix);
-    const suffix = (hash ? '?[contenthash]' : '');
+    const suffix = (hash ? '?[md5:contenthash]' : '');
     const { SOURCE_PATH } = require('./app.env.js');
     return (resourcePath) => {
         const url = slash(path.relative(SOURCE_PATH, resourcePath)).replace(/^(\.\.\/)+/g, '');
