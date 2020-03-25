@@ -382,16 +382,22 @@ module.exports = {
                         exclude: /\.(svg)$/i,
                         resourceQuery: /[&?]resize=.+/,
                         loader: './loader.resize.js',
-                        options: { name: UTILS.resourceName('img'), limit: 32 * 1024, esModule: false, hashType: 'md5' },
+                        options: {
+                            name: UTILS.resourceName('img'), limit: 32 * 1024, esModule: false, hashType: 'md5',
+                        },
                     },
                     {
                         resourceQuery: /[&?]inline=inline/,
                         loader: 'url-loader',
-                        options: { name: UTILS.resourceName('img'), limit: 32 * 1024, esModule: false, hashType: 'md5' },
+                        options: {
+                            name: UTILS.resourceName('img'), limit: 32 * 1024, esModule: false, hashType: 'md5',
+                        },
                     },
                     {
                         loader: 'file-loader',
-                        options: { name: UTILS.resourceName('img'), esModule: false, hashType: 'md5' },
+                        options: {
+                            name: UTILS.resourceName('img'), esModule: false, hashType: 'md5',
+                        },
                     },
                 ],
             },
