@@ -7,7 +7,7 @@
         "url": "https://github.com/Intecmedia/Intecmedia.Webpack.git"
     },
     "scripts": {
-        "update": "npm update",
+        "update": "cross-env NODE_ENV=production node script.update.js",
         "development": "cross-env NODE_ENV=development DEBUG=0 webpack -d",
         "debug": "cross-env NODE_ENV=development DEBUG=1 webpack -d",
         "production": "cross-env NODE_ENV=production DEBUG=0 webpack -p",
