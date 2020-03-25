@@ -1,5 +1,5 @@
 /* eslint-env node */
-/* eslint max-len: "off", "compat/compat": "off" */
+/* eslint "compat/compat": "off" */
 const childProcess = require('child_process');
 
 console.log('npm outdate\n');
@@ -13,10 +13,8 @@ childProcess.exec('npm outdate --json', (err, stdout, stderr) => {
 
     // install missing package
     missing.forEach(([pkgName, pkgVersion]) => {
-        if (pkgVersion.location === '') { // missing package
-            const command = `npm install ${pkgName}@${pkgVersion.wanted}\n`;
-            childProcess.exec(command);
-            console.log(command);
-        }
+        const command = `npm install ${pkgName}@${pkgVersion.wanted}\n`;
+        childProcess.exec(command);
+        console.log(command);
     });
 });
