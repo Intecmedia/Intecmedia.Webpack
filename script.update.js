@@ -21,10 +21,12 @@ childProcess.exec('npm outdate --json', (err, stdout, stderr) => {
 
     const installed = [];
     missing.forEach(([pkgName, pkgVersion], pkgIndex) => {
-        const installCommand = `npm install ${pkgName}@${pkgVersion.wanted}`;
         logger.info(`#${pkgIndex + 1} ${pkgName}`, pkgVersion);
+
+        const installCommand = `npm install ${pkgName}@${pkgVersion.wanted}`;
         logger.info(`#${pkgIndex + 1} ${installCommand}`);
         childProcess.execSync(installCommand, { stdio: 'inherit' });
+
         installed.push([pkgName, pkgVersion]);
         console.log('');
     });
