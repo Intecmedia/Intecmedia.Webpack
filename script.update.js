@@ -13,18 +13,19 @@ childProcess.exec('npm outdate --json', (err, stdout, stderr) => {
     const outdated = Object.entries(JSON.parse(stdout));
 
     const missing = outdated.filter(([, pkgVersion]) => !pkgVersion.location);
-    logger.info(`${missing.length} missing packages`);
+    logger.info(`missing ${missing.length} packages`);
 
     const installed = [];
     missing.forEach(([pkgName, pkgVersion], pkgIndex) => {
         const installCommand = `npm install ${pkgName}@${pkgVersion.wanted}`;
+        logger.info(`#${pkgIndex + 1} ${pkgName}`, pkgVersion);
         logger.info(`#${pkgIndex + 1} ${installCommand}`);
         childProcess.execSync(installCommand, { stdio: 'inherit' });
         installed.push([pkgName, pkgVersion]);
         console.log('');
     });
 
-    logger.info(`${installed.length} installed packages`);
+    logger.info(`installed ${installed.length} packages`);
 
     logger.info('npm audit fix');
     childProcess.execSync('npm audit fix', { stdio: 'inherit' });
