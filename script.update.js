@@ -6,6 +6,10 @@ const weblog = require('webpack-log');
 
 const logger = weblog({ name: 'update' });
 
+logger.info('npm update');
+childProcess.execSync('npm update', { stdio: 'inherit' });
+console.log('');
+
 logger.info('npm outdate');
 childProcess.exec('npm outdate --json', (err, stdout, stderr) => {
     if (stderr) throw stderr;
