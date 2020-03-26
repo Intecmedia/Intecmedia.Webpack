@@ -77,6 +77,11 @@ module.exports = function ResizeLoader(content) {
                 this.quality(quality);
             }
 
+            const lossless = (typeof (query.lossless) !== 'undefined' ? !!query.lossless : format === 'png');
+            if (lossless) {
+                this.define('webp:lossless=true');
+            }
+
             this.toBuffer(format.toUpperCase(), (bufferError, buffer) => {
                 if (bufferError) { loaderCallback(bufferError); return; }
                 logger.info(`save cache '${relativePath}${loaderContext.resourceQuery}'`);
