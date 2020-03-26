@@ -12,7 +12,7 @@ childProcess.exec('npm outdate --json', (err, stdout, stderr) => {
 
     const outdated = Object.entries(JSON.parse(stdout));
 
-    const missing = outdated.filter(([, pkgVersion]) => pkgVersion.location === '');
+    const missing = outdated.filter(([, pkgVersion]) => !pkgVersion.location);
     logger.info(`${missing.length} missing packages`);
 
     const installed = [];
