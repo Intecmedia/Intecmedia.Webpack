@@ -40,6 +40,7 @@ module.exports = function ResizeLoader(content) {
     }
 
     const resourceInfo = path.parse(loaderContext.resourcePath);
+    const resourceFormat = resourceInfo.ext.slice(1).toLowerCase();
     const relativePath = path.relative(__dirname, loaderContext.resourcePath);
     const imageMagick = gm.subClass({ imageMagick: options.imageMagick });
 
@@ -57,7 +58,7 @@ module.exports = function ResizeLoader(content) {
         return loaderCallback(`Unknow resize flag: '${query.resize}'`);
     }
 
-    const format = (query.format || resourceInfo.ext.slice(1)).toLowerCase();
+    const format = (query.format || resourceFormat).toLowerCase();
     const name = (query.name || (
         `${resourceInfo.name}@resize-${resizeWidth || ''}x${resizeHeight || ''}${resizeFlagNames[resizeFlag]}`
     )) + (query.suffix ? `-${query.suffix}` : '');
@@ -77,9 +78,12 @@ module.exports = function ResizeLoader(content) {
                 this.quality(quality);
             }
 
-            const lossless = (typeof (query.lossless) !== 'undefined' ? !!query.lossless : format === 'png');
-            if (lossless) {
-                this.define('webp:lossless=true');
+            if (format === 'webp') {
+                const lossless = (typeof (query.lossless) !== 'undefined'
+                    ? !!query.lossless : resourceFormat === 'png');
+                if (lossless) {
+                    this.define('webp:lossless=true');
+                }
             }
 
             this.toBuffer(format.toUpperCase(), (bufferError, buffer) => {
