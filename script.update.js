@@ -2,19 +2,26 @@
 /* eslint "compat/compat": "off" */
 const childProcess = require('child_process');
 
-console.log('npm outdate');
+const weblog = require('webpack-log');
+
+const logger = weblog({ name: 'update' });
+
+logger.info('npm outdate');
 childProcess.exec('npm outdate --json', (err, stdout, stderr) => {
     if (stderr) throw stderr;
 
     const outdated = Object.entries(JSON.parse(stdout));
 
     const missing = outdated.filter(([, pkgVersion]) => pkgVersion.location === '');
-    console.log(`missing: ${missing.length} packages`);
+    logger.info(`${missing.length} missing packages`);
 
-    // install missing package
-    missing.forEach(([pkgName, pkgVersion]) => {
+    const installed = [];
+    missing.forEach(([pkgName, pkgVersion], pkgIndex) => {
         const installCommand = `npm install ${pkgName}@${pkgVersion.wanted}`;
-        console.log(installCommand);
+        logger.info(`\n#${pkgIndex + 1} ${installCommand}`);
         childProcess.execSync(installCommand, { stdio: 'inherit' });
+        installed.push([pkgName, pkgVersion]);
     });
+
+    logger.info(`${installed.length} installed packages`);
 });
