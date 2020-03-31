@@ -6,6 +6,7 @@
     ],
      "plugins": [
         "stylelint-scss",
+        "./stylelint.max-root-rules.js",
         "./stylelint.max-lines.js"
     ],
     "rules": {
@@ -14,7 +15,8 @@
             "^[a-z0-9\\-_]+$"
         ],
         "max-nesting-depth": 3,
-        "intecmedia/max-lines": 300,
+        "pitcher/max-lines": 300,
+        "pitcher/max-root-rules": 1,
         "max-line-length": [120, {
             "ignore": ["comments"],
             "ignorePattern": "/\\$(.+?):/"

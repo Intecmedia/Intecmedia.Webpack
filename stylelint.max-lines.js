@@ -3,7 +3,7 @@
 
 const stylelint = require('stylelint');
 
-const ruleName = 'intecmedia/max-lines';
+const ruleName = 'pitcher/max-lines';
 const messages = stylelint.utils.ruleMessages(ruleName, {
     expected: (maxLines, countLines) => [
         `Expected no more than ${maxLines} lines.`,
