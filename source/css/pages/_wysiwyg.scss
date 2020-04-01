@@ -1,5 +1,5 @@
+/* stylelint-disable scss/selector-nest-combinators */
 .wysiwyg {
-
     // default image
     img:not([class]) {
         /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
@@ -119,3 +119,4 @@
         @extend .blockquote;
     }
 }
+/* stylelint-enable scss/selector-nest-combinators */

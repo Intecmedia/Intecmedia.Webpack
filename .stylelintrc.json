@@ -42,6 +42,7 @@
             "except": ["first-nested"],
             "ignore": ["between-comments", "stylelint-commands"]
         }],
+        "scss/selector-nest-combinators": "always",
         "order/order": [
            "dollar-variables",
            "custom-properties"
