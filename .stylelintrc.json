@@ -6,6 +6,7 @@
     ],
      "plugins": [
         "stylelint-scss",
+        "stylelint-use-nesting",
         "./stylelint.max-root-rules.js",
         "./stylelint.max-lines.js"
     ],
@@ -14,6 +15,7 @@
         "selector-class-pattern": [
             "^[a-z0-9\\-_]+$"
         ],
+        "csstools/use-nesting": true,
         "max-nesting-depth": 3,
         "pitcher/max-lines": 300,
         "pitcher/max-root-rules": 1,
