@@ -1,8 +1,11 @@
 .wysiwyg {
+
+    // default image
     img:not([class]) {
         /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
         @extend .img-responsive;
     }
+
     // image with caption
     figure {
         /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
@@ -18,6 +21,7 @@
             @extend .figure-caption;
         }
     }
+
     // default tables
     table:not([class]) {
         /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
@@ -26,6 +30,7 @@
         @extend .table-bordered;
         width: 100%;
     }
+
     // disabled table
     table[border="0"] {
         width: inherit;
@@ -47,6 +52,7 @@
             }
         }
     }
+
     // colored bulls
     ul:not([class]) > li {
         position: relative;
@@ -69,6 +75,7 @@
             content: "\2022";
         }
     }
+
     // responsive images
     .img-responsive {
         /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
@@ -85,6 +92,7 @@
         border-radius: $border-radius !important;
         border-radius: 50%;
     }
+
     // image aligment
     img[align="left"],
     img.pull-left {
@@ -104,6 +112,7 @@
         margin-right: auto;
         margin-left: auto;
     }
+
     // blockquotes
     blockquote {
         /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
