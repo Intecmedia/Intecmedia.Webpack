@@ -20,8 +20,10 @@ module.exports = stylelint.createPlugin(ruleName, (maxRootRules) => ((postcssRoo
 
     let lastRootRule;
     let countRootRules = 0;
-    postcssRoot.walkRules((rule) => {
-        if (rule.parent === postcssRoot) {
+    postcssRoot.walk((rule) => {
+        if (rule.parent === postcssRoot && (rule.type === 'rule'
+            || (rule.type === 'atrule' || rule.name === 'media')
+        )) {
             countRootRules += 1;
             lastRootRule = rule;
         }
