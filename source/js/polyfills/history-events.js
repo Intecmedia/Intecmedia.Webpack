@@ -1,6 +1,8 @@
 /* global VERBOSE */
 /* eslint 'prefer-rest-params': 'off', 'compat/compat': 'off' */
 
+const Reflect = require('core-js/stable/reflect/index.js');
+
 /*
     Note that just calling history.pushState() or history.replaceState() won't trigger a popstate event.
     https://developer.mozilla.org/ru/docs/Web/Events/popstate
@@ -12,7 +14,13 @@ function historyEventDecorator(type) {
             console.log(`[history-events.js] ${type}:`, JSON.stringify(arguments));
         }
         const result = Reflect.apply(origHandler, this, arguments);
-        const event = new Event(type);
+        let event;
+        if (typeof (Event) === 'function') {
+            event = new Event(type);
+        } else {
+            event = document.createEvent('Event');
+            event.initEvent(type, true, true);
+        }
         event.arguments = arguments;
         window.dispatchEvent(event);
         return result;
