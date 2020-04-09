@@ -63,7 +63,7 @@ module.exports = {
     OUTPUT_PATH,
     PACKAGE_NAME,
     BROWSERSLIST: browserslist,
-    BROWSERS: browserslist[NODE_ENV],
+    BROWSERS: DEBUG ? browserslist.production : browserslist[NODE_ENV],
     SITEMAP,
     VERBOSE,
 };
