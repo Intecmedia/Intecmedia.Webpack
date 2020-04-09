@@ -174,6 +174,7 @@ module.exports = {
                     level: 11,
                 },
                 algorithm: 'brotliCompress',
+                cache: path.join(__dirname, 'node_modules', '.cache', `CompressionPlugin-br`),
             }),
             new CompressionPlugin({
                 test: /\.(js|css|json|lottie)(\?.*)?$/i,
@@ -185,6 +186,7 @@ module.exports = {
                     const zopfli = require('@gfx/zopfli');
                     return zopfli.gzip(input, compressionOptions, callback);
                 },
+                cache: path.join(__dirname, 'node_modules', '.cache', `CompressionPlugin-gz`),
             }),
         ] : []),
         new webpack.BannerPlugin({
