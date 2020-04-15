@@ -174,7 +174,7 @@ module.exports = {
                     level: 11,
                 },
                 algorithm: 'brotliCompress',
-                cache: path.join(__dirname, 'node_modules', '.cache', `compression-webpack-plugin-br`),
+                cache: path.join(__dirname, 'node_modules', '.cache', 'compression-webpack-plugin-br'),
             }),
             new CompressionPlugin({
                 test: /\.(js|css|json|lottie)(\?.*)?$/i,
@@ -186,7 +186,7 @@ module.exports = {
                     const zopfli = require('@gfx/zopfli');
                     return zopfli.gzip(input, compressionOptions, callback);
                 },
-                cache: path.join(__dirname, 'node_modules', '.cache', `compression-webpack-plugin-gz`),
+                cache: path.join(__dirname, 'node_modules', '.cache', 'compression-webpack-plugin-gz'),
             }),
         ] : []),
         new webpack.BannerPlugin({
@@ -363,6 +363,7 @@ module.exports = {
                             babelrc: false,
                             configFile: false,
                             envName: ENV.NODE_ENV,
+                            cacheDirectory: ENV.DEBUG ? false : path.join(__dirname, 'node_modules', '.cache', `babel-${ENV.NODE_ENV}`),
                             ...BabelConfig.options,
                         },
                     },
