@@ -1,4 +1,4 @@
-if (!Array.prototype.includes) {
-    // eslint-disable-next-line global-require
-    require('core-js/stable/array/includes');
+if (!('includes' in Array.prototype)) {
+    // eslint-disable-next-line global-require, no-extend-native
+    Array.prototype.includes = require('core-js/stable/array/includes');
 }
