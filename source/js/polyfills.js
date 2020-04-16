@@ -17,6 +17,12 @@ if (NODE_ENV === 'production' || DEBUG) {
     require('~/polyfills/promise.js');
 
     // eslint-disable-next-line global-require
+    require('~/polyfills/map.js');
+
+    // eslint-disable-next-line global-require
+    require('~/polyfills/set.js');
+
+    // eslint-disable-next-line global-require
     require('~/polyfills/fetch.js');
 
     // eslint-disable-next-line global-require
@@ -24,6 +30,9 @@ if (NODE_ENV === 'production' || DEBUG) {
 
     // eslint-disable-next-line global-require
     require('~/polyfills/array-from.js');
+
+    // eslint-disable-next-line global-require
+    require('~/polyfills/array-find.js');
 
     // eslint-disable-next-line global-require
     require('~/polyfills/weak-map.js');
