@@ -3,14 +3,26 @@
     RewriteEngine On
 
     # Serve brotli compressed CSS files if they exist and the client accepts gzip.
+    RewriteCond %{REQUEST_FILENAME} \.css$ [NC]
     RewriteCond %{HTTP:Accept-encoding} br
     RewriteCond %{REQUEST_FILENAME}\.br -s
     RewriteRule ^(.*)\.css $1\.css\.br [QSA]
+    # Brotli not accepted
+    RewriteCond %{REQUEST_FILENAME} \.css\.br$ [NC]
+    RewriteCond %{HTTP:Accept-encoding} !br
+    RewriteCond %{REQUEST_FILENAME} -s
+    RewriteRule ^(.*)\.css\.br $1\.css [L,QSA]
 
     # Serve gzip compressed CSS files if they exist and the client accepts gzip.
+    RewriteCond %{REQUEST_FILENAME} \.css$ [NC]
     RewriteCond %{HTTP:Accept-encoding} gzip
     RewriteCond %{REQUEST_FILENAME}\.gz -s
     RewriteRule ^(.*)\.css $1\.css\.gz [QSA]
+    # Gzip not accepted
+    RewriteCond %{REQUEST_FILENAME} \.css\.gz$ [NC]
+    RewriteCond %{HTTP:Accept-encoding} !gzip
+    RewriteCond %{REQUEST_FILENAME} -s
+    RewriteRule ^(.*)\.css\.gz $1\.css [L,QSA]
 
     # Serve correct content types, and prevent mod_deflate double gzip.
     RewriteRule \.css\.gz$ - [T=text/css,E=no-gzip:1]
