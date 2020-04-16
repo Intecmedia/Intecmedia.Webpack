@@ -6,7 +6,7 @@ if (!window.Promise) {
     require('core-js/stable/promise');
 }
 
-if (window.Promise && !window.Promise.finally) {
+if (window.Promise && !window.Promise.prototype.finally) {
     // eslint-disable-next-line global-require
     require('core-js/stable/promise/finally');
 }
