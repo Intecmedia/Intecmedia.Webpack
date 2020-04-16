@@ -3,14 +3,26 @@
     RewriteEngine On
 
     # Serve brotli compressed js files if they exist and the client accepts gzip.
+    RewriteCond %{REQUEST_FILENAME} \.js$ [NC]
     RewriteCond %{HTTP:Accept-encoding} br
     RewriteCond %{REQUEST_FILENAME}\.br -s
     RewriteRule ^(.*)\.js $1\.js\.br [QSA]
+    # Brotli not accepted
+    RewriteCond %{REQUEST_FILENAME} \.js\.br$ [NC]
+    RewriteCond %{HTTP:Accept-encoding} !br
+    RewriteCond %{REQUEST_FILENAME} -s
+    RewriteRule ^(.*)\.js\.br $1\.js [L,QSA]
 
     # Serve gzip compressed js files if they exist and the client accepts gzip.
+    RewriteCond %{REQUEST_FILENAME} \.js$ [NC]
     RewriteCond %{HTTP:Accept-encoding} gzip
     RewriteCond %{REQUEST_FILENAME}\.gz -s
     RewriteRule ^(.*)\.js $1\.js\.gz [QSA]
+    # Gzip not accepted
+    RewriteCond %{REQUEST_FILENAME} \.js\.gz$ [NC]
+    RewriteCond %{HTTP:Accept-encoding} !gzip
+    RewriteCond %{REQUEST_FILENAME} -s
+    RewriteRule ^(.*)\.js\.gz $1\.js [L,QSA]
 
     # Serve correct content types, and prevent mod_deflate double gzip.
     RewriteRule \.js\.gz$ - [T=application/javascript,E=no-gzip:1]
