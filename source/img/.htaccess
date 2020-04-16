@@ -2,15 +2,27 @@
     # Enable rewrite
     RewriteEngine On
 
-    # Serve brotli compressed js files if they exist and the client accepts gzip.
+    # Serve brotli compressed lottie files if they exist and the client accepts gzip.
+    RewriteCond %{REQUEST_FILENAME} \.lottie$ [NC]
     RewriteCond %{HTTP:Accept-encoding} br
     RewriteCond %{REQUEST_FILENAME}\.br -s
     RewriteRule ^(.*)\.lottie $1\.lottie\.br [QSA]
+    # Brotli not accepted
+    RewriteCond %{REQUEST_FILENAME} \.lottie\.br$ [NC]
+    RewriteCond %{HTTP:Accept-encoding} !br
+    RewriteCond %{REQUEST_FILENAME} -s
+    RewriteRule ^(.*)\.lottie\.br $1\.lottie [L,QSA]
 
-    # Serve gzip compressed js files if they exist and the client accepts gzip.
+    # Serve gzip compressed lottie files if they exist and the client accepts gzip.
+    RewriteCond %{REQUEST_FILENAME} \.lottie$ [NC]
     RewriteCond %{HTTP:Accept-encoding} gzip
     RewriteCond %{REQUEST_FILENAME}\.gz -s
     RewriteRule ^(.*)\.lottie $1\.lottie\.gz [QSA]
+    # Gzip not accepted
+    RewriteCond %{REQUEST_FILENAME} \.lottie\.gz$ [NC]
+    RewriteCond %{HTTP:Accept-encoding} !gzip
+    RewriteCond %{REQUEST_FILENAME} -s
+    RewriteRule ^(.*)\.lottie\.gz $1\.lottie [L,QSA]
 
     # Serve correct content types, and prevent mod_deflate double gzip.
     RewriteRule \.lottie\.gz$ - [T=application/json,E=no-gzip:1]
