@@ -17,7 +17,6 @@
         "no-duplicate-selectors": true,
         "plugin/no-unsupported-browser-features": [true, {
             "ignore": [
-                "calc",
                 "css-featurequeries",
                 "css-gradients",
                 "flexbox",
