@@ -19,15 +19,10 @@
             "ignore": [
                 "css-featurequeries",
                 "css-gradients",
-                "flexbox",
                 "font-unicode-range",
-                "multicolumn",
                 "object-fit",
                 "outline",
                 "pointer-events",
-                "rem",
-                "transforms3d",
-                "viewport-units",
                 "will-change"
             ]
         }],
