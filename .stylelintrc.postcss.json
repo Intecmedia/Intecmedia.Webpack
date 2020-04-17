@@ -19,9 +19,11 @@
             "ignore": [
                 "css-featurequeries",
                 "css-gradients",
+                "flexbox",
                 "font-unicode-range",
                 "object-fit",
                 "outline",
+                "rem",
                 "pointer-events",
                 "will-change"
             ]
