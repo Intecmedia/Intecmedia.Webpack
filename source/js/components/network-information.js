@@ -30,33 +30,41 @@ jQuery(($) => {
         console.log(`[network-information] set saveData=${JSON.stringify($saveData)}`);
     }
 
-    if ($conn.addEventListener) {
-        $conn.addEventListener('change', () => {
-            // detect network type
-            if ($effectiveType !== $conn.effectiveType) {
-                if (VERBOSE) {
-                    console.log('[network-information] change effectiveType:', {
-                        from: $effectiveType,
-                        to: $conn.effectiveType,
-                    });
-                }
-                $html.removeClass($makeNetworkClass($effectiveType));
-                $html.addClass($makeNetworkClass($conn.effectiveType));
-                $effectiveType = $conn.effectiveType;
+    const $listener = () => {
+        // detect network type
+        if ($effectiveType !== $conn.effectiveType) {
+            if (VERBOSE) {
+                console.log('[network-information] change effectiveType:', {
+                    from: $effectiveType,
+                    to: $conn.effectiveType,
+                });
             }
+            $html.removeClass($makeNetworkClass($effectiveType));
+            $html.addClass($makeNetworkClass($conn.effectiveType));
+            $effectiveType = $conn.effectiveType;
+        }
 
-            // detect save-data header
-            if ($saveData !== $conn.saveData) {
-                if (VERBOSE) {
-                    console.log('[network-information] change saveData:', {
-                        from: $saveData,
-                        to: $conn.saveData,
-                    });
-                }
-                $saveData = $conn.saveData;
-                $html.toggleClass('save-data', $conn.saveData);
-                $html.toggleClass('no-save-data', !$conn.saveData);
+        // detect save-data header
+        if ($saveData !== $conn.saveData) {
+            if (VERBOSE) {
+                console.log('[network-information] change saveData:', {
+                    from: $saveData,
+                    to: $conn.saveData,
+                });
             }
-        });
+            $saveData = $conn.saveData;
+            $html.toggleClass('save-data', $conn.saveData);
+            $html.toggleClass('no-save-data', !$conn.saveData);
+        }
+    };
+
+    if ($conn.addEventListener && ($conn instanceof EventTarget)) {
+        try {
+            $conn.addEventListener('change', $listener);
+        } catch (error) {
+            if (VERBOSE) {
+                console.log('[network-information] error:', error);
+            }
+        }
     }
 });
