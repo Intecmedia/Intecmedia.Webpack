@@ -27,6 +27,7 @@
                 "pointer-events",
                 "rem",
                 "transforms3d",
+                "viewport-units",
                 "will-change"
             ]
         }],
