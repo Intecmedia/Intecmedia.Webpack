@@ -1,10 +1,13 @@
 /* eslint-env node */
 /* eslint "compat/compat": "off" */
 
+
 const uniqueId = require('lodash.uniqueid');
 
+const ENV = require('./app.env.js');
+
 const SvgoCreateConfig = (config) => ({
-    js2svg: { pretty: true },
+    js2svg: { pretty: !ENV.PROD || ENV.DEBUG },
     plugins: [
         {
             cleanupIDs: (config.prefix ? {
