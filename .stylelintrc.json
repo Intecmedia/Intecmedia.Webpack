@@ -61,16 +61,6 @@
                 "letter-spacing-range", "min-letter-spacing", "max-letter-spacing", "letter-spacing-range", "letter-spacing-range"
             ]
         }],
-        "selector-pseudo-element-no-unknown": [true, {
-            "ignorePseudoElements": [
-                "at-least",
-                "at-most",
-                "between",
-                "exactly",
-                "thumb",
-                "track"
-            ]
-        }],
         "selector-no-qualifying-type": [true, {
             "ignore": ["attribute", "class", "id"]
         }]
