@@ -24,7 +24,10 @@
             "ignorePattern": "/\\$(.+?):/"
         }],
         "declaration-no-important": null,
-        "selector-max-type": null,
+        "selector-max-type": [0, {
+            "ignore": ["child"],
+            "ignoreTypes": ["/^(html|body)\\.?/"]
+        }],
         "selector-max-compound-selectors": 3,
         "rule-empty-line-before": ["always", {
             "ignore": ["after-comment", "first-nested"]
