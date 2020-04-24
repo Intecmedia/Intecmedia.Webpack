@@ -1,4 +1,4 @@
-/* stylelint-disable scss/selector-nest-combinators */
+/* stylelint-disable scss/selector-nest-combinators, selector-max-type */
 .wysiwyg {
     // default image
     img:not([class]) {
@@ -119,4 +119,4 @@
         @extend .blockquote;
     }
 }
-/* stylelint-enable scss/selector-nest-combinators */
+/* stylelint-enable scss/selector-nest-combinators, selector-max-type */

@@ -4,7 +4,7 @@ $pitcher-logo-hover-color: $link-hover-color !default;
 
 .pitcher-logo {
 
-    svg {
+    > svg {
         width: 58px;
         height: 51px;
 
@@ -15,7 +15,7 @@ $pitcher-logo-hover-color: $link-hover-color !default;
     &:hover,
     &:focus,
     &:active {
-        svg {
+        > svg {
             --fill-color: #{$pitcher-logo-hover-color};
         }
     }

@@ -1,3 +1,4 @@
+/* stylelint-disable selector-max-type */
 picture {
     display: inline-block;
     @include img-fluid();
@@ -6,3 +7,4 @@ picture {
         @include img-fluid();
     }
 }
+/* stylelint-enable selector-max-type */
