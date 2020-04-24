@@ -62,7 +62,7 @@
             ]
         }],
         "selector-no-qualifying-type": [true, {
-            "ignore": ["attribute", "class", "id"]
+            "ignore": ["attribute", "class"]
         }]
     }
 }
