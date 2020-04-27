@@ -33,10 +33,14 @@ if ((NODE_ENV === 'production' || DEBUG) && APP.SENTRY.dsn) {
 
     jQuery(($) => {
         const trackImageErrors = () => {
-            $('img').on('error.sentry', (event) => {
-                const error = `${event.type}: ${event?.currentTarget?.src || '(no src)'}`;
+            $('img:not(.sentry-onerror-binded)').on('error.sentry', (event) => {
+                const img = $(event.currentTarget);
+                const error = `${event.type}: ${img.attr('src') || '(no src)'}`;
                 throw error;
-            });
+            }).on('abort.sentry', (event) => {
+                const img = $(event.currentTarget);
+                img.off('error.sentry');
+            }).addClass('.sentry-onerror-binded', 1);
         };
 
         trackImageErrors();
