@@ -35,7 +35,7 @@ if ((NODE_ENV === 'production' || DEBUG) && APP.SENTRY.dsn) {
         const trackImageErrors = () => {
             $('img:not(.sentry-onerror-binded)').on('error.sentry', (event) => {
                 const img = $(event.currentTarget);
-                const error = `${event.type}: ${img.attr('src') || '(no src)'}`;
+                const error = `Image onerror: ${img.attr('src') || '(no src)'}`;
                 throw error;
             }).on('abort.sentry', (event) => {
                 const img = $(event.currentTarget);
