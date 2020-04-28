@@ -40,7 +40,7 @@ if ((NODE_ENV === 'production' || DEBUG) && APP.SENTRY.dsn) {
             }).on('abort.sentry', (event) => {
                 const img = $(event.currentTarget);
                 img.off('error.sentry');
-            }).addClass('.sentry-onerror-binded', 1);
+            }).addClass('sentry-onerror-binded');
         };
 
         trackImageErrors();
