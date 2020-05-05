@@ -31,24 +31,9 @@ if ((NODE_ENV === 'production' || DEBUG) && APP.SENTRY.dsn) {
         whitelistUrls: APP.SENTRY.whitelistUrls || [],
     });
 
-    jQuery(($) => {
-        const trackImageErrors = () => {
-            $('img:not(.sentry-onerror-binded)').on('error.sentry', (event) => {
-                const img = $(event.currentTarget);
-                const error = `Image onerror: ${img.attr('src') || '(no src)'}`;
-                throw error;
-            }).on('abort.sentry', (event) => {
-                const img = $(event.currentTarget);
-                img.off('error.sentry');
-            }).addClass('sentry-onerror-binded');
-        };
-
-        trackImageErrors();
-
-        // SPA events
-        $(window).on('pushState replaceState', () => {
-            // wait side effects changes
-            setTimeout(trackImageErrors, 0);
-        });
+    // SPA events
+    $(window).on('pushState replaceState', () => {
+        // wait side effects changes
+        setTimeout(trackImageErrors, 0);
     });
 }
