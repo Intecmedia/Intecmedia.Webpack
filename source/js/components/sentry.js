@@ -30,10 +30,4 @@ if ((NODE_ENV === 'production' || DEBUG) && APP.SENTRY.dsn) {
         blacklistUrls: APP.SENTRY.blacklistUrls || [],
         whitelistUrls: APP.SENTRY.whitelistUrls || [],
     });
-
-    // SPA events
-    $(window).on('pushState replaceState', () => {
-        // wait side effects changes
-        setTimeout(trackImageErrors, 0);
-    });
 }
