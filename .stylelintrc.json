@@ -45,6 +45,9 @@
             "ignore": ["between-comments", "stylelint-commands"]
         }],
         "scss/selector-nest-combinators": "always",
+        "scss/dollar-variable-default": [true, {
+            "ignore": "local"
+        }],
         "order/order": [
            "dollar-variables",
            "custom-properties"
