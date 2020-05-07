@@ -13,9 +13,6 @@ class HtmlBeautifyPlugin {
                 indent_size: 4,
                 indent_with_tabs: false,
                 html: {
-                    end_with_newline: true,
-                    indent_inner_html: true,
-                    preserve_newlines: true,
                 },
             },
         };
