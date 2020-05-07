@@ -261,16 +261,12 @@ module.exports = {
         ] : []),
         ...(APP.HTML_PRETTY ? [new HtmlBeautifyPlugin({
             config: {
+                indent_char: ' ',
+                indent_size: 4,
                 html: {
-                    ocd: false,
                     unformatted: ['code', 'pre', 'textarea'],
-                    indent_inner_html: false,
-                    indent_char: ' ',
-                    indent_size: 4,
                     wrap_line_length: Number.MAX_SAFE_INTEGER,
-                    preserve_newlines: true,
                     max_preserve_newlines: 1,
-                    sep: '\n',
                 },
             },
         })] : []),

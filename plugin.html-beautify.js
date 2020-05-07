@@ -9,7 +9,7 @@ class HtmlBeautifyPlugin {
         this.pluginName = 'BeautifyPlugin';
 
         const defaultOptions = {
-            beautifyOptions: {
+            config: {
                 indent_size: 4,
                 indent_with_tabs: false,
                 html: {
