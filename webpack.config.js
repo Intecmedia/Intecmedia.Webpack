@@ -48,7 +48,7 @@ const { default: EagerImportsPlugin } = require('eager-imports-webpack-plugin');
 const SpriteLoaderPlugin = require('./plugin.svg-sprite.js');
 
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
-const HtmlBeautifyPlugin = (APP.HTML_PRETTY ? require('html-beautify-webpack-plugin') : () => {});
+const HtmlBeautifyPlugin = (APP.HTML_PRETTY ? require('./plugin.html-beautify.js') : () => {});
 const BabelConfig = require('./babel.config.js');
 
 const BANNER_STRING = [
@@ -259,6 +259,9 @@ module.exports = {
             cache: !ENV.DEBUG,
             title: APP.TITLE,
         }))),
+        new SpriteLoaderPlugin({
+            plainSprite: true,
+        }),
         ...(APP.HTML_PRETTY ? [new HtmlBeautifyPlugin({
             config: {
                 html: {
@@ -274,9 +277,6 @@ module.exports = {
                 },
             },
         })] : []),
-        new SpriteLoaderPlugin({
-            plainSprite: true,
-        }),
         ...(ENV.PROD || ENV.DEBUG ? [
             new ImageminPlugin({
                 test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
