@@ -225,20 +225,6 @@ module.exports = {
                 fix: !ENV.DEV_SERVER,
             }),
         ] : []),
-        ...(APP.USE_FAVICONS ? [
-            new FaviconsPlugin.AppIcon({
-                logo: path.join(__dirname, '.favicons-source-1024x1024.png'),
-                publicPath: APP.PUBLIC_PATH,
-                outputPath: 'img/favicons',
-                prefix: 'img/favicons',
-            }),
-            new FaviconsPlugin.FavIcon({
-                logo: path.join(__dirname, '.favicons-source-64x64.png'),
-                publicPath: APP.PUBLIC_PATH,
-                outputPath: 'img/favicons',
-                prefix: 'img/favicons',
-            }),
-        ] : []),
         ...(ENV.SITEMAP.map(({ template, filename }) => new HtmlWebpackPlugin({
             filename,
             template,
@@ -259,6 +245,20 @@ module.exports = {
             cache: !ENV.DEBUG,
             title: APP.TITLE,
         }))),
+        ...(APP.USE_FAVICONS ? [
+            new FaviconsPlugin.AppIcon({
+                logo: path.join(__dirname, '.favicons-source-1024x1024.png'),
+                publicPath: APP.PUBLIC_PATH,
+                outputPath: 'img/favicons',
+                prefix: 'img/favicons',
+            }),
+            new FaviconsPlugin.FavIcon({
+                logo: path.join(__dirname, '.favicons-source-64x64.png'),
+                publicPath: APP.PUBLIC_PATH,
+                outputPath: 'img/favicons',
+                prefix: 'img/favicons',
+            }),
+        ] : []),
         new SpriteLoaderPlugin({
             plainSprite: true,
         }),
