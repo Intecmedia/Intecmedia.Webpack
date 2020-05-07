@@ -13,10 +13,6 @@ const DEFAULT_FAVICON = {
     publicPath: '/',
     outputPath: 'img/favicons',
     prefix: 'img/favicons',
-    appName: APP.TITLE,
-    appDescription: APP.DESCRIPTION,
-    background: APP.BACKGROUND_COLOR,
-    theme_color: APP.THEME_COLOR,
     favicons: {
         lang: APP.LANGUAGE,
         appShortName: APP.SHORT_NAME,
@@ -58,10 +54,6 @@ const DEFAULT_APPICON = {
     publicPath: '/',
     outputPath: 'img/favicons',
     prefix: 'img/favicons',
-    appName: APP.TITLE,
-    appDescription: APP.DESCRIPTION,
-    background: APP.BACKGROUND_COLOR,
-    theme_color: APP.THEME_COLOR,
     favicons: {
         lang: APP.LANGUAGE,
         appShortName: APP.SHORT_NAME,
