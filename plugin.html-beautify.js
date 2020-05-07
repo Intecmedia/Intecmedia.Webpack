@@ -26,7 +26,7 @@ class HtmlBeautifyPlugin {
     apply(compiler) {
         compiler.hooks.compilation.tap(this.pluginName, (compilation) => HtmlWebpackPlugin.getHooks(
             compilation,
-        ).afterTemplateExecution.tapPromise(this.pluginName, async (htmlPluginData) => {
+        ).beforeEmit.tapPromise(this.pluginName, async (htmlPluginData) => {
             htmlPluginData.html = beautify.html(htmlPluginData.html, this.options);
         }));
     }
