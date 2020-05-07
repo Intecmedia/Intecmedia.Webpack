@@ -259,9 +259,6 @@ module.exports = {
                 prefix: 'img/favicons',
             }),
         ] : []),
-        new SpriteLoaderPlugin({
-            plainSprite: true,
-        }),
         ...(APP.HTML_PRETTY ? [new HtmlBeautifyPlugin({
             config: {
                 html: {
@@ -277,6 +274,9 @@ module.exports = {
                 },
             },
         })] : []),
+        new SpriteLoaderPlugin({
+            plainSprite: true,
+        }),
         ...(ENV.PROD || ENV.DEBUG ? [
             new ImageminPlugin({
                 test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
