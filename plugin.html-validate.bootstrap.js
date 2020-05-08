@@ -10,7 +10,7 @@ const COLS_COUNT = 12;
 const COLS_BREAKPOINTS = ['xs', 'sm', 'md', 'lg', 'xl'];
 
 const colClassList = (cols = COLS_COUNT, breakpoints = COLS_BREAKPOINTS) => {
-    const numbers = Array.from({ length: cols }).map((v, i) => i + 1);
+    const numbers = Array.from({ length: cols }, (v, i) => (i + 1));
     return [
         ...(numbers.map((n) => `col-${n}`)),
         'col',
