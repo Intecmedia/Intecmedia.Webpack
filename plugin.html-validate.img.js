@@ -12,7 +12,7 @@ class ImgPictureRequired extends Rule {
     }
 
     setup() {
-        this.on('dom:ready', (event) => this.domReady(event));
+        this.on('dom:ready', this.domReady.bind(this));
     }
 
     domReady(event) {
@@ -43,7 +43,7 @@ class ImgLoadingRequired extends Rule {
     }
 
     setup() {
-        this.on('dom:ready', (event) => this.domReady(event));
+        this.on('dom:ready', this.domReady.bind(this));
     }
 
     domReady(event) {
@@ -68,3 +68,8 @@ class ImgLoadingRequired extends Rule {
 }
 
 module.exports = { ImgPictureRequired, ImgLoadingRequired };
+
+module.exports.rules = {
+    'intecmedia/img-picture-required': ImgPictureRequired,
+    'intecmedia/img-loading-required': ImgLoadingRequired,
+};

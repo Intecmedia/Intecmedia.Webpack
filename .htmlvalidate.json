@@ -7,6 +7,9 @@
         "./plugin.html-validate.js"
     ],
     "rules": {
+        "bootstrap/container-no-nested": ["error", {
+            "ignore": ""
+        }],
         "intecmedia/img-picture-required": ["error", {
             "ignore": ".wysiwyg img",
             "webp": true
