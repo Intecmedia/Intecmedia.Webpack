@@ -30,7 +30,9 @@ const colSelector = (cols = COLS_COUNT, breakpoints = COLS_BREAKPOINTS) => {
 
 class AbsRule extends Rule {
     constructor(options) {
-        super({ ignore: '', ...options });
+        super({
+            ignore: '', cols: COLS_COUNT, breakpoints: COLS_BREAKPOINTS, ...options,
+        });
     }
 
     setup() {
@@ -56,12 +58,6 @@ class ContainerNoNested extends AbsRule {
 }
 
 class ColNoRow extends AbsRule {
-    constructor(options) {
-        super({
-            ignore: '', cols: COLS_COUNT, breakpoints: COLS_BREAKPOINTS, ...options,
-        });
-    }
-
     domReady(event) {
         const selector = colSelector(this.options.cols, this.options.breakpoints);
         const cols = event.document.querySelectorAll(selector);
@@ -80,9 +76,27 @@ class ColNoRow extends AbsRule {
     }
 }
 
-module.exports = { ContainerNoNested };
+class RowNoChilds extends AbsRule {
+    domReady(event) {
+        const cols = colClassList(this.options.cols, this.options.breakpoints);
+        const elements = event.document.querySelectorAll(`.row > *`);
+        const ignores = this.options.ignore ? event.document.querySelectorAll(this.options.ignore) : [];
+        elements.forEach((el) => {
+            if (nodeIgnore(el, ignores)) {
+                return;
+            }
+            const { classList } = el;
+            if (!cols.some((i) => classList.contains(i))) {
+                this.report(el, 'Only columns (`.col-*-*`) may be children of `.row`s.');
+            }
+        });
+    }
+}
+
+module.exports = { ColNoRow, RowNoChilds, ContainerNoNested };
 
 module.exports.rules = {
     'bootstrap/col-no-row': ColNoRow,
+    'bootstrap/row-no-childs': RowNoChilds,
     'bootstrap/container-no-nested': ContainerNoNested,
 };

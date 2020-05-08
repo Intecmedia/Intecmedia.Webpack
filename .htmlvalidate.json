@@ -7,6 +7,9 @@
         "./plugin.html-validate.js"
     ],
     "rules": {
+        "bootstrap/row-no-childs": ["error", {
+            "ignore": ""
+        }],
         "bootstrap/col-no-row": ["error", {
             "ignore": ""
         }],
