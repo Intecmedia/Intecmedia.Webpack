@@ -19,6 +19,8 @@ $pitcherLogo-hover-color: $link-hover-color !default;
     &:hover,
     &:focus,
     &:active {
+        color: #{$pitcherLogo-hover-color};
+
         .pitcherLogo-image {
             --fill-color: #{$pitcherLogo-hover-color};
         }
