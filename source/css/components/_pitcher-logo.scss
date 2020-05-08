@@ -3,6 +3,8 @@ $pitcherLogo-color: $link-color !default;
 $pitcherLogo-hover-color: $link-hover-color !default;
 
 .pitcherLogo {
+    display: inline-block;
+
     color: #{$pitcherLogo-color};
 
     .pitcherLogo-text {
@@ -10,6 +12,8 @@ $pitcherLogo-hover-color: $link-hover-color !default;
     }
 
     .pitcherLogo-image {
+
+        display: inline-block;
         width: 58px;
         height: 51px;
 
