@@ -1,23 +1,26 @@
-$pitcher-logo-color: $link-color !default;
+$pitcherLogo-color: $link-color !default;
 
-$pitcher-logo-hover-color: $link-hover-color !default;
+$pitcherLogo-hover-color: $link-hover-color !default;
 
-.pitcher-logo {
+.pitcherLogo {
+    color: #{$pitcherLogo-color};
 
-    svg {
+    .pitcherLogo-text {
+        @include sr-only();
+    }
+
+    .pitcherLogo-image {
         width: 58px;
         height: 51px;
 
-        --fill-color: #{$pitcher-logo-color};
+        --fill-color: #{$pitcherLogo-color};
     }
 
-    /*
     &:hover,
     &:focus,
     &:active {
-        > svg {
-            --fill-color: #{$pitcher-logo-hover-color};
+        .pitcherLogo-image {
+            --fill-color: #{$pitcherLogo-hover-color};
         }
     }
-    */
 }

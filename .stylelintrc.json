@@ -13,7 +13,7 @@
     "rules": {
         "indentation": 4,
         "selector-class-pattern": [
-            "^[a-z0-9\\-_]+$"
+            "^[a-zA-Z0-9\\-_]+$"
         ],
         "csstools/use-nesting": true,
         "max-nesting-depth": 3,
@@ -48,6 +48,9 @@
         "scss/dollar-variable-default": [true, {
             "ignore": "local"
         }],
+        "scss/dollar-variable-pattern": [
+            "^[a-zA-Z][a-zA-Z-\\d]*$"
+        ],
         "order/order": [
            "dollar-variables",
            "custom-properties"
