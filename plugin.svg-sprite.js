@@ -1,6 +1,6 @@
 /* eslint-env node */
 
-const HtmlWebpackPlugin = require('./plugin.html.js');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const SpriteLoaderPluginOriginal = require('svg-sprite-loader/plugin');
 
 const APP = require('./app.config.js');

@@ -1,6 +1,6 @@
 /* eslint-env node */
 
-const HtmlWebpackPlugin = require('./plugin.html.js');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const deepMerge = require('lodash.merge');
 const beautify = require('js-beautify');
 

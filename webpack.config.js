@@ -33,7 +33,7 @@ if (ENV.STANDALONE) {
 }
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('./plugin.html.js');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const ImageminPlugin = require('imagemin-webpack');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
