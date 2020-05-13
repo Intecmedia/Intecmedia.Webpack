@@ -12,6 +12,7 @@ module.exports = {
             ['@babel/plugin-proposal-pipeline-operator', { proposal: 'minimal' }],
             ['@babel/plugin-proposal-decorators', { legacy: true }],
             ['@babel/plugin-proposal-class-properties', { loose: true }],
+            '@babel/plugin-proposal-logical-assignment-operators',
         ],
         presets: [
             ['@babel/preset-env', {
