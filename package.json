@@ -36,7 +36,7 @@
         "browserslist-dev": "cross-env NODE_ENV=development npx browserslist",
         "browserslist-prod": "cross-env NODE_ENV=production npx browserslist",
         "browserslist": "cross-env NODE_ENV=production npx browserslist",
-        "browsersync": "browser-sync start --config browsersync.config.js",
+        "browsersync": "cross-env NODE_ENV=development npx browser-sync start --config browsersync.config.js",
         "fonts-subsets": "cross-env NODE_ENV=production node ./script.fonts-subsets.js",
         "utf-fix": "cross-env NODE_ENV=production node ./script.utf-fix.js",
         "svgo": "cross-env NODE_ENV=production node ./script.svgo.js",
