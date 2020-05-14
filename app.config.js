@@ -2,6 +2,7 @@
 /* eslint max-len: "off" */
 
 const ENV = require('./app.env.js');
+const BROWSERSYNC = require('./browsersync.config.js');
 
 module.exports = {
     TITLE: '$APP.TITLE$',
@@ -20,12 +21,7 @@ module.exports = {
         blacklistUrls: [],
         whitelistUrls: [],
     },
-    BROWSERSYNC: {
-        files: [
-            '../include/module/**/*.{php,phtml}',
-            '../include/template/**/*.{php,phtml}',
-        ],
-    },
 };
 
 module.exports.ENV = ENV;
+module.exports.BROWSERSYNC = BROWSERSYNC;
