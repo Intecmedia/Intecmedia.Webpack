@@ -45,21 +45,19 @@
     "license": "MIT",
     "browserslist": {
         "production": [
-            "Android >= 5",
-            "IE >= 10",
-            "iOS >= 9",
-            "Safari >= 9",
-            "last 2 Edge versions",
-            "last 2 Chrome versions",
-            "last 2 ChromeAndroid version",
-            "last 2 Firefox versions",
-            "last 2 Opera versions"
+            "Android >= 6",
+            "IE >= 11",
+            "iOS >= 10",
+            "Safari >= 10",
+            "Edge >= 16.16299",
+            "Chrome >= 60"
+            "ChromeAndroid >= 60",
+            "Firefox >= 60"
         ],
         "development": [
             "last 1 Safari versions",
             "last 1 Chrome versions",
-            "last 1 Firefox versions",
-            "last 1 Opera versions"
+            "last 1 Firefox versions"
         ]
     },
     "engines": {
