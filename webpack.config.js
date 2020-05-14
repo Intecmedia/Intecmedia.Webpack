@@ -136,7 +136,9 @@ module.exports = {
 
     plugins: [
         ...(ENV.WATCH ? [
-            new BrowserSyncPlugin(),
+            new BrowserSyncPlugin({
+                ...APP.BROWSERSYNC,
+            }),
         ] : []),
         new CleanWebpackPlugin({
             cleanOnceBeforeBuildPatterns: (ENV.WATCH || ENV.DEV_SERVER ? [] : ['**/*', '!.gitkeep', '!.htaccess']),

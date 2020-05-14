@@ -20,5 +20,12 @@ module.exports = {
         blacklistUrls: [],
         whitelistUrls: [],
     },
-    ENV,
+    BROWSERSYNC: {
+        files: [
+            '../include/module/**/*.{php,phtml}',
+            '../include/template/**/*.{php,phtml}',
+        ],
+    },
 };
+
+module.exports.ENV = ENV;
