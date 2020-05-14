@@ -33,8 +33,9 @@
         }
     },
     "rules": {
+        "func-names": ["error"],
         "no-console": "off",
-        "no-param-reassign": [2, {
+        "no-param-reassign": ["error", {
             "props": false
         }],
         "no-unused-expressions": "off",
