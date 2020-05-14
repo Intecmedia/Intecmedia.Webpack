@@ -50,7 +50,7 @@
             "iOS >= 10",
             "Safari >= 10",
             "Edge >= 16.16299",
-            "Chrome >= 60"
+            "Chrome >= 60",
             "ChromeAndroid >= 60",
             "Firefox >= 60"
         ],
