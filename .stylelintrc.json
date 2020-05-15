@@ -25,7 +25,7 @@
         }],
         "selector-max-type": [0, {
             "ignore": ["child"],
-            "ignoreTypes": ["/^(html|body)\\.?/"]
+            "ignoreTypes": ["/^(html|body|svg)\\.?/"]
         }],
         "selector-max-compound-selectors": 3,
         "rule-empty-line-before": ["always", {
