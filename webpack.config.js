@@ -148,8 +148,8 @@ module.exports = {
             filename: 'css/app.min.css',
             allChunks: true,
         }),
-        new CopyWebpackPlugin([
-            ...[
+        new CopyWebpackPlugin({
+            patterns: [
                 '**/.htaccess',
                 'img/**/*.*',
                 '*.txt',
@@ -158,12 +158,10 @@ module.exports = {
                 from,
                 to: ENV.OUTPUT_PATH,
                 context: ENV.SOURCE_PATH,
-                ignore: ENV.SITEMAP.map((i) => i.template),
+                globOptions: { ignore: ENV.SITEMAP.map((i) => i.template) },
+                noErrorOnMissing: true,
+                force: true,
             })),
-        ], {
-            copyUnmodified: !(ENV.PROD || ENV.DEBUG),
-            debug: (ENV.DEBUG ? 'debug' : 'info'),
-            force: true,
         }),
         new EagerImportsPlugin(),
         ...(ENV.PROD && !ENV.DEBUG ? [
