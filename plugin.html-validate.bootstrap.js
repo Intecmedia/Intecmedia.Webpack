@@ -79,7 +79,7 @@ class ColNoRow extends AbsRule {
 class RowNoChilds extends AbsRule {
     domReady(event) {
         const cols = colClassList(this.options.cols, this.options.breakpoints);
-        const elements = event.document.querySelectorAll(`.row > *`);
+        const elements = event.document.querySelectorAll('.row > *');
         const ignores = this.options.ignore ? event.document.querySelectorAll(this.options.ignore) : [];
         elements.forEach((el) => {
             if (nodeIgnore(el, ignores)) {
