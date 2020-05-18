@@ -16,8 +16,8 @@ module.exports = {
             require('postcss-image-set-polyfill')(),
             require('postcss-custom-properties')(),
             require('postcss-font-display')([
-              { display: 'swap' },
-              { test: 'FontAwesome', display: 'block' },
+                { display: 'swap' },
+                { test: 'FontAwesome', display: 'block' },
             ]),
             require('postcss-object-fit-images')(),
             require('postcss-flexbugs-fixes')(),
