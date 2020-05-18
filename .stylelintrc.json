@@ -16,7 +16,9 @@
             "^[a-zA-Z0-9\\-_]+$"
         ],
         "csstools/use-nesting": true,
-        "max-nesting-depth": 3,
+        "max-nesting-depth": [3, {
+             "ignore": ["blockless-at-rules", "pseudo-classes"]
+        }],
         "pitcher/max-lines": 300,
         "pitcher/max-root-rules": 1,
         "max-line-length": [120, {
