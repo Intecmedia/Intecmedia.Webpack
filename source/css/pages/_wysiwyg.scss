@@ -2,32 +2,27 @@
 .wysiwyg {
     // default image
     img:not([class]) {
-        /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
         @extend .img-responsive;
     }
 
     // image with caption
     figure {
-        /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
         @extend .figure;
 
         img {
-            /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
             @extend .figure-img;
         }
 
         figcaption {
-            /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
             @extend .figure-caption;
         }
     }
 
     // default tables
     table:not([class]) {
-        /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
         @extend .table;
-        /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
         @extend .table-bordered;
+
         width: 100%;
     }
 
@@ -78,7 +73,6 @@
 
     // responsive images
     .img-responsive {
-        /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
         @extend .img-fluid;
     }
 
@@ -115,7 +109,6 @@
 
     // blockquotes
     blockquote {
-        /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
         @extend .blockquote;
     }
 }

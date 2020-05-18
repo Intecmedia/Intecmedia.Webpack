@@ -51,6 +51,7 @@
         "scss/dollar-variable-pattern": [
             "^[a-zA-Z][a-zA-Z-\\d]*$"
         ],
+        "scss/at-extend-no-missing-placeholder": null,
         "order/order": [
            "dollar-variables",
            "custom-properties"
