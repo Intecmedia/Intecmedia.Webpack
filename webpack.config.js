@@ -57,6 +57,9 @@ const BANNER_STRING = [
 ].join('\n');
 
 module.exports = {
+    mode: ENV.PROD ? 'production' : 'development',
+
+    ...(ENV.DEBUG ? { stats: 'verbose' } : {}),
 
     watchOptions: {
         ignored: /node_modules/,
