@@ -11,7 +11,7 @@ $pitcherLogo-hover-color: $link-hover-color !default;
         @include sr-only();
     }
 
-    .pitcherLogo-image {
+    .pitcherLogo-icon {
 
         display: inline-block;
         width: 58px;
@@ -25,7 +25,7 @@ $pitcherLogo-hover-color: $link-hover-color !default;
     &:active {
         color: #{$pitcherLogo-hover-color};
 
-        .pitcherLogo-image {
+        .pitcherLogo-icon {
             --fill-color: #{$pitcherLogo-hover-color};
         }
     }
