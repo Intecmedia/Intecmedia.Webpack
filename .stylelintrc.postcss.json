@@ -14,7 +14,7 @@
             "ignore": ["font-display"]
         },
         "unit-blacklist": ["em"],
-        "no-duplicate-selectors": true,
+        "no-duplicate-selectors": null,
         "plugin/no-unsupported-browser-features": [true, {
             "ignore": [
                 "calc",
