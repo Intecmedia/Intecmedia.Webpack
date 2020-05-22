@@ -143,10 +143,12 @@ module.exports = {
                 ...APP.BROWSERSYNC,
             }),
         ] : []),
-        new CleanWebpackPlugin({
-            cleanOnceBeforeBuildPatterns: (ENV.WATCH || ENV.DEV_SERVER ? [] : ['**/*', '!.gitkeep', '!.htaccess']),
-            cleanAfterEveryBuildPatterns: ['**/*.br', '**/*.gz'],
-        }),
+        ...(ENV.PROD && !ENV.DEBUG ? [
+            new CleanWebpackPlugin({
+                cleanOnceBeforeBuildPatterns: (ENV.WATCH || ENV.DEV_SERVER ? [] : ['**/*', '!.gitkeep', '!.htaccess']),
+                cleanAfterEveryBuildPatterns: ['**/*.br', '**/*.gz'],
+            }),
+        ] : []),
         new MiniCssExtractPlugin({
             filename: 'css/app.min.css',
             allChunks: true,
@@ -293,7 +295,7 @@ module.exports = {
         ] : []),
     ],
 
-    devtool: ENV.USE_SOURCE_MAP ? 'eval-source-map' : 'nosources-source-map',
+    devtool: (ENV.USE_SOURCE_MAP ? (['eval-source-map', 'source-map'])[+ENV.DEBUG] : 'nosources-source-map'),
 
     resolve: require('./resolve.config.js').resolve,
 
