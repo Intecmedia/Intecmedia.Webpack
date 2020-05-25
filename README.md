@@ -21,7 +21,7 @@
 [wysiwyg.scss](https://github.com/Intecmedia/Intecmedia.Webpack/blob/master/source/css/pages/_wysiwyg.scss).
 * Ресайз изображений через [ImageMagick](https://www.imagemagick.org/) / [GraphicsMagick](http://www.graphicsmagick.org/).
 * Responsive images polyfill через [Picturefill](http://scottjehl.github.io/picturefill).
-* Множество линтеров: eslint, htmllint, stylelint с возможностью autofix кода.
+* Множество линтеров: eslint, html-validate, stylelint с возможностью autofix кода.
 * Imagemin для сжатия гарфики: svg, png, jpeg, gif.
 * Генерация множества app-иконок и manifest.json.
 * Активное использование формат изображений WebP.
@@ -50,7 +50,7 @@
 * **npm run html-validate** – линтер html через [html-validate](https://html-validate.org/).
 * **npm run html-validator** – линтер html через [validator.w3.org](https://validator.w3.org/).
 * **npm run app-lint** – линтер конфигурации приложения.
-* **npm run lint** – запуск всех линтеров (app, eslint, stylelint, htmllint, validator.w3.org).
+* **npm run lint** – запуск всех линтеров (app, eslint, stylelint, html-validate, validator.w3.org).
 * **npm run server** – сервер в production-режиме и debug=off, самый медленный способ.
 * **npm run server-dev** – сервер в development-режиме и debug=off, самый быстрый способ.
 * **npm run server-debug** – сервер в development-режиме и debug=on, медленный способ.
@@ -70,7 +70,7 @@
 * JS основна на [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) ([перевод](https://github.com/leonidlebedev/javascript-airbnb)).
 * CSS использум БЭМ, как метод именования селекторов (исключение – сторонние css-пакеты) ([список рекомендаций по БЭМ](https://nicothin.pro/idiomatic-pre-CSS/)).
 * SCSS основна на [stylelint-config-sass-guidelines](https://sass-guidelin.es/ru/).
-* HTML проверяется через [htmllint](http://htmllint.github.io/) и [validator.w3.org](https://validator.w3.org/).
+* HTML проверяется через [html-validate](https://html-validate.org/) и [validator.w3.org](https://validator.w3.org/).
 * Подробно писать про оформление кода нет смысла – сборка покрыта линтерами.
 
 ### Структура важных блоков (Schema.org)
