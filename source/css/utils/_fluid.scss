@@ -14,11 +14,17 @@ $fluid-max-height: 1024px !default;
         #{$property}: $min-value;
     }
 
-    @if unit($min-value) != unit($min-width-calc) or not comparable($min-value, $min-width-calc) {
+    @if (
+        unit($min-value) != unit($min-width-calc) or
+        not comparable($min-value, $min-width-calc)
+    ) {
         @error "Cant calc $min-value=#{$min-value} and $min-width-calc=#{$min-width-calc} with different units.";
     }
 
-    @if unit($max-value) != unit($max-width-calc) or not comparable($max-value, $max-width-calc) {
+    @if (
+        unit($max-value) != unit($max-width-calc) or
+        not comparable($max-value, $max-width-calc)
+    ) {
         @error "Cant calc $max-value=#{$max-value} and $max-width-calc=#{$max-width-calc} with different units.";
     }
 
@@ -48,11 +54,17 @@ $fluid-max-height: 1024px !default;
         #{$property}: $min-value;
     }
 
-    @if unit($min-value) != unit($min-height-calc) or not comparable($min-value, $min-height-calc) {
+    @if (
+        unit($min-value) != unit($min-height-calc) or
+        not comparable($min-value, $min-height-calc)
+    ) {
         @error "Cant calc $min-value=#{$min-value} and $min-height-calc=#{$min-height-calc} with different units.";
     }
 
-    @if unit($max-value) != unit($max-height-calc) or not comparable($max-value, $max-height-calc) {
+    @if (
+        unit($max-value) != unit($max-height-calc) or
+        not comparable($max-value, $max-height-calc)
+    ) {
         @error "Cant calc $max-value=#{$max-value} and $max-height-calc=#{$max-height-calc} with different units.";
     }
 
