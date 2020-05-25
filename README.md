@@ -14,7 +14,6 @@
 * Линтер с автофиксом [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) ([перевод](https://github.com/leonidlebedev/javascript-airbnb)).
 * Шаблонизатор [Nunjucks](https://mozilla.github.io/nunjucks/) для сборки HTML.
 * SCSS, autoprefixer, PostCSS: [postcss-input-style](https://github.com/seaneking/postcss-input-style),
-[postcss-quantity-queries](https://github.com/pascalduez/postcss-quantity-queries), 
 [postcss-image-set-polyfill](https://github.com/SuperOl3g/postcss-image-set-polyfill), 
 [autoprefixer](https://github.com/postcss/autoprefixer), 
 [cssnano](http://cssnano.co/).

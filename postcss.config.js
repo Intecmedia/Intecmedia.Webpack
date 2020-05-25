@@ -7,7 +7,6 @@ module.exports = {
     plugins: [
         require('postcss-devtools')({ precise: true }),
         require('postcss-input-style')(),
-        require('postcss-quantity-queries')(),
         ...(ENV.PROD || ENV.DEBUG ? [
             require('postcss-focus')(),
             require('postcss-focus-visible')(),

@@ -159,7 +159,6 @@
         "postcss-input-style": "latest",
         "postcss-loader": "latest",
         "postcss-object-fit-images": "latest",
-        "postcss-quantity-queries": "latest",
         "postcss-reporter": "latest",
         "postcss-sorting": "latest",
         "postcss-url": "latest",
