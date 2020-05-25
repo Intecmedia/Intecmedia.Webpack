@@ -8,7 +8,6 @@ module.exports = {
         require('postcss-devtools')({ precise: true }),
         require('postcss-input-style')(),
         require('postcss-quantity-queries')(),
-        require('postcss-responsive-type')(),
         ...(ENV.PROD || ENV.DEBUG ? [
             require('postcss-focus')(),
             require('postcss-focus-visible')(),

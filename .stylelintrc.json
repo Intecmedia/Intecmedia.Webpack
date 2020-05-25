@@ -64,6 +64,9 @@
             "empty-line-between-groups": true
         }],
         "property-no-unknown": [true, {}],
+        "selector-pseudo-element-no-unknown": [true, {
+            "ignorePseudoElements": ["track", "thumb"]
+        }],
         "selector-no-qualifying-type": [true, {
             "ignore": ["attribute", "class"]
         }]
