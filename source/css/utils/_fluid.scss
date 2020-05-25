@@ -14,6 +14,14 @@ $fluid-max-height: 1024px !default;
         #{$property}: $min-value;
     }
 
+    @if not (unit($min-value) == unit($min-width-calc))  {
+        @error "Cant calc $min-value=#{$min-value} and $min-width-calc=#{$min-width-calc} with different units.";
+    }
+
+    @if not (unit($max-value) == unit($max-width-calc))  {
+        @error "Cant calc $max-value=#{$max-value} and $max-width-calc=#{$max-width-calc} with different units.";
+    }
+
     $value-calc: strip-unit($max-value - $min-value);
     $width-calc: strip-unit($max-width-calc - $min-width-calc);
 
@@ -40,6 +48,14 @@ $fluid-max-height: 1024px !default;
         #{$property}: $min-value;
     }
 
+    @if not (unit($min-value) == unit($min-height-calc))  {
+        @error "Cant calc $min-value=#{$min-value} and $min-height-calc=#{$min-height-calc} with different units.";
+    }
+
+    @if not (unit($max-value) == unit($max-height-calc))  {
+        @error "Cant calc $max-value=#{$max-value} and $max-height-calc=#{$max-height-calc} with different units.";
+    }
+
     $value-calc: strip-unit($max-value - $min-value);
     $height-calc: strip-unit($max-height-calc - $min-height-calc);
 
@@ -63,9 +79,9 @@ $fluid-max-height: 1024px !default;
 ) {
     @include fluid-property(
         font-size,
-       $min-value, $max-value,
-       $min-width, $max-width,
-       $min-width-calc, $max-width-calc,
+        $min-value, $max-value,
+        $min-width, $max-width,
+        $min-width-calc, $max-width-calc,
     );
 }
 
