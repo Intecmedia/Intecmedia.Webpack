@@ -161,7 +161,6 @@
         "postcss-object-fit-images": "latest",
         "postcss-quantity-queries": "latest",
         "postcss-reporter": "latest",
-        "postcss-responsive-type": "latest",
         "postcss-sorting": "latest",
         "postcss-url": "latest",
         "postcss-will-change": "latest",

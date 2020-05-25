@@ -15,7 +15,6 @@
 * Шаблонизатор [Nunjucks](https://mozilla.github.io/nunjucks/) для сборки HTML.
 * SCSS, autoprefixer, PostCSS: [postcss-input-style](https://github.com/seaneking/postcss-input-style),
 [postcss-quantity-queries](https://github.com/pascalduez/postcss-quantity-queries), 
-[postcss-responsive-type](https://github.com/seaneking/postcss-responsive-type), 
 [postcss-image-set-polyfill](https://github.com/SuperOl3g/postcss-image-set-polyfill), 
 [autoprefixer](https://github.com/postcss/autoprefixer), 
 [cssnano](http://cssnano.co/).
@@ -93,14 +92,10 @@
 
 ## Типографика
 ### Responstive type
-Для резиновой типографики мы используем [postcss-responsive-type](https://github.com/seaneking/postcss-responsive-type), пример кода:
-```css 
-html {
-    font-size: responsive;
-    min-font-size: 12px;
-    max-font-size: 21px;
-    lower-font-range: 420px;
-    upper-font-range: 1280px;
+Для резиновой типографики мы используем [scss-mixins](https://github.com/Intecmedia/Intecmedia.Webpack/blob/master/source/css/utils/_fluid.scss), пример кода:
+```scss 
+.foobar {
+    @include fluid-font-size(12px, 21px, 420px, 1280px)
 }
 ```
 ### WYSIWYG
