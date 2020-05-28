@@ -143,12 +143,10 @@ module.exports = {
                 ...APP.BROWSERSYNC,
             }),
         ] : []),
-        ...(ENV.PROD && !ENV.DEBUG ? [
-            new CleanWebpackPlugin({
-                cleanOnceBeforeBuildPatterns: (ENV.WATCH || ENV.DEV_SERVER ? [] : ['**/*', '!.gitkeep', '!.htaccess']),
-                cleanAfterEveryBuildPatterns: ['**/*.br', '**/*.gz'],
-            }),
-        ] : []),
+        new CleanWebpackPlugin({
+            cleanOnceBeforeBuildPatterns: (ENV.WATCH || ENV.DEV_SERVER ? [] : ['**/*', '!.gitkeep', '!.htaccess']),
+            cleanAfterEveryBuildPatterns: ['**/*.br', '**/*.gz'],
+        }),
         new MiniCssExtractPlugin({
             filename: 'css/app.min.css',
             allChunks: true,
