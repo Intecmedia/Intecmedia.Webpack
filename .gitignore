@@ -6,7 +6,3 @@ build/**/*.html
 build/partials/svg/**/*.svg
 build/humans.txt
 node_modules
-package-lock.json
-.DS_Store
-/build/service-worker.js
-/build/service-worker-precache.js
