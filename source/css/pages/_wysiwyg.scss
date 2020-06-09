@@ -48,9 +48,13 @@
         }
     }
 
-    // cells: collapse last child
+    // cells: collapse childs
     td,
     th {
+        > *:first-child {
+            margin-top: 0;
+        }
+
         > *:last-child {
             margin-bottom: 0;
         }
