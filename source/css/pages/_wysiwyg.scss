@@ -48,6 +48,14 @@
         }
     }
 
+    // cells: collapse last child
+    td,
+    th {
+        > *:last-child {
+            margin-bottom: 0;
+        }
+    }
+
     // colored bulls
     ul:not([class]) > li {
         position: relative;
