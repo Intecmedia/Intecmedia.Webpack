@@ -143,7 +143,6 @@
         "object-assign": "latest",
         "object-fit-images": "latest",
         "picturefill": "latest",
-        "playwright": "^1.0.1",
         "popper.js": "latest",
         "postcss": "latest",
         "postcss-browser-reporter": "latest",
