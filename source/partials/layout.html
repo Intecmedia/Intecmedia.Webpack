@@ -22,6 +22,7 @@
 
 </head>
 <body class="{% block body_class %}{% endblock %}">
+    {% include 'partials/counters-body-open.html' %}
 
     {% block body %}{% endblock %}
 
@@ -30,6 +31,6 @@
     {% include 'partials/browser-sync.html' %}
     {% include 'partials/debug-vars.html' %}
 
-    {% include 'partials/counters-body.html' %}
+    {% include 'partials/counters-body-close.html' %}
 </body>
 </html>
