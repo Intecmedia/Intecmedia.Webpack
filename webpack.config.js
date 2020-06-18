@@ -129,8 +129,8 @@ module.exports = {
     performance: (ENV.PROD && !ENV.DEBUG ? {
         assetFilter: (asset) => {
             const [filename] = asset.split('?', 2);
-            const ignore = /(\.(css|js)\.map|\.LICENSE|\.eot|\.ttf|manifest\.json|@resize-.+|favicon|workbox)$/;
-            return !(ignore.test(filename));
+            const assetFilter = /\.(css|js)(\?.*)?$/;
+            return assetFilter.test(filename);
         },
         hints: 'warning',
         maxAssetSize: Number.MAX_SAFE_INTEGER,
@@ -352,8 +352,10 @@ module.exports = {
                         // global jQuery import
                         loader: 'imports-loader',
                         options: {
-                            $: 'jquery',
-                            jQuery: 'jquery',
+                            imports: [
+                                'default jquery $',
+                                'default jquery jQuery',
+                            ],
                         },
                     },
                     {
