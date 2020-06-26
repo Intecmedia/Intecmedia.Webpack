@@ -234,6 +234,7 @@ module.exports = {
             inject: !path.basename(template).startsWith('_'),
             minify: (ENV.PROD || ENV.DEBUG ? ({
                 html5: true,
+                collapseBooleanAttributes: true,
                 collapseWhitespace: !APP.HTML_PRETTY,
                 removeComments: !APP.HTML_PRETTY,
                 decodeEntities: !APP.HTML_PRETTY,
