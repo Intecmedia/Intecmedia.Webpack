@@ -39,7 +39,7 @@ class ImgPictureRequired extends Rule {
 
 class ImgLoadingRequired extends Rule {
     constructor(options) {
-        super({ intrinsicsize: true, dimensions: true, ignore: '.wysiwyg img', ...options });
+        super({ intrinsicsize: true, ignore: '.wysiwyg img', ...options });
     }
 
     setup() {
@@ -61,16 +61,15 @@ class ImgLoadingRequired extends Rule {
                 const intrinsicsize = img.getAttribute('intrinsicsize');
                 if (!intrinsicsize) {
                     this.report(img, '<img> required `intrinsicsize` attribute.');
-                }
-            }
-            if (this.options.dimensions) {
-                const width = img.getAttribute('width');
-                if (!width) {
-                    this.report(img, '<img> required `width` attribute.');
-                }
-                const height = img.getAttribute('height');
-                if (!height) {
-                    this.report(img, '<img> required `height` attribute.');
+                } else if (intrinsicsize.toLowerCase() === 'lazy') {
+                    const width = img.getAttribute('width');
+                    if (!width) {
+                        this.report(img, '<img> required `width` attribute.');
+                    }
+                    const height = img.getAttribute('height');
+                    if (!height) {
+                        this.report(img, '<img> required `height` attribute.');
+                    }
                 }
             }
         });
