@@ -1,7 +1,6 @@
 /* eslint-env node */
 /* eslint "compat/compat": "off" */
 
-
 const uniqueId = require('lodash.uniqueid');
 
 const ENV = require('./app.env.js');
@@ -23,6 +22,7 @@ const SvgoCreateConfig = (config) => ({
         { convertShapeToPath: false },
         { convertStyleToAttrs: false },
         { convertTransform: false },
+        { removeDimensions: false },
         { removeViewBox: false },
         { removeUselessDefs: false },
     ],
