@@ -144,7 +144,8 @@ module.exports = {
             }),
         ] : []),
         new CleanWebpackPlugin({
-            cleanOnceBeforeBuildPatterns: (ENV.WATCH || ENV.DEV_SERVER ? [] : ['**/*', '!.gitkeep', '!.htaccess']),
+            cleanStaleWebpackAssets: false,
+            cleanOnceBeforeBuildPatterns: ['**/*', '!.gitkeep', '!.htaccess'],
             cleanAfterEveryBuildPatterns: ['**/*.br', '**/*.gz'],
         }),
         new MiniCssExtractPlugin({
