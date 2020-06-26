@@ -17,11 +17,11 @@
             "ignore": ""
         }],
         "intecmedia/img-picture-required": ["error", {
-            "ignore": ".wysiwyg img",
+            "ignore": ".wysiwyg img, .counters-body img",
             "webp": true
         }],
         "intecmedia/img-loading-required": ["error", {
-            "ignore": ".wysiwyg img",
+            "ignore": ".wysiwyg img, .counters-body img",
             "intrinsicsize": true
         }],
         "id-pattern": ["error", {
