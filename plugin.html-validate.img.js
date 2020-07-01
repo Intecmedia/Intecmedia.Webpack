@@ -23,6 +23,10 @@ class ImgPictureRequired extends Rule {
                 return;
             }
             const picture = img.parent;
+            const src = img.getAttributeValue('src');
+            if (src.endsWith('.svg')) {
+                return;
+            }
             if (!(picture && picture.nodeName.toLowerCase() === 'picture')) {
                 this.report(img, '<img> required <picture> element.');
                 return;
