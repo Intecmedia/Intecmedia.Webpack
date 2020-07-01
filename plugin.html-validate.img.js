@@ -53,20 +53,20 @@ class ImgLoadingRequired extends Rule {
             if (nodeIgnore(img, ignores)) {
                 return;
             }
-            const loading = img.getAttribute('loading');
+            const loading = img.getAttributeValue('loading');
             if (!loading) {
                 this.report(img, '<img> required `loading` attribute.');
             }
             if (this.options.intrinsicsize) {
-                const intrinsicsize = img.getAttribute('intrinsicsize');
+                const intrinsicsize = img.getAttributeValue('intrinsicsize');
                 if (!intrinsicsize) {
                     this.report(img, '<img> required `intrinsicsize` attribute.');
                 } else if (intrinsicsize.toLowerCase() === 'lazy') {
-                    const width = img.getAttribute('width');
+                    const width = img.getAttributeValue('width');
                     if (!width) {
                         this.report(img, '<img> required `width` attribute.');
                     }
-                    const height = img.getAttribute('height');
+                    const height = img.getAttributeValue('height');
                     if (!height) {
                         this.report(img, '<img> required `height` attribute.');
                     }
