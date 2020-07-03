@@ -39,7 +39,9 @@
 ## Обзор комманд
 * **npm run development** – сборка в development-режиме и debug=off, самый быстрый способ.
 * **npm run debug** – сборка в development-режиме и debug=on, медленный способ.
-* **npm run prod** – сборка в production-режиме и debug=off, самый медленный способ.
+* **npm run prod** – сборка в production-режиме (с линтерами) и debug=off, самый медленный способ.
+* **npm run prod-debug** – сборка в production-режиме (с линтерами) и debug=on, самый медленный способ.
+* **npm run production** – сборка в production-режиме (без линтеров) и debug=off, самый медленный способ.
 * **npm run watch** – watch в production-режимеи debug=off, самый медленный способ.
 * **npm run watch-dev** – watch в development-режиме и debug=off, самый быстрый способ.
 * **npm run watch-debug** – watch в development-режиме и debug=on, медленный способ.
