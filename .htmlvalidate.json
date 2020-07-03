@@ -16,11 +16,11 @@
         "bootstrap/container-no-nested": ["error", {
             "ignore": ""
         }],
-        "intecmedia/img-picture-required": ["error", {
+        "pitcher/img-picture-required": ["error", {
             "ignore": ".wysiwyg img, .counters-body img",
             "webp": true
         }],
-        "intecmedia/img-loading-required": ["error", {
+        "pitcher/img-loading-required": ["error", {
             "ignore": ".wysiwyg img, .counters-body img",
             "intrinsicsize": true
         }],

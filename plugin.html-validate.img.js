@@ -83,6 +83,6 @@ class ImgLoadingRequired extends Rule {
 module.exports = { ImgPictureRequired, ImgLoadingRequired };
 
 module.exports.rules = {
-    'intecmedia/img-picture-required': ImgPictureRequired,
-    'intecmedia/img-loading-required': ImgLoadingRequired,
+    'pitcher/img-picture-required': ImgPictureRequired,
+    'pitcher/img-loading-required': ImgLoadingRequired,
 };

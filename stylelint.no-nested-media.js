@@ -3,7 +3,7 @@
 
 const stylelint = require('stylelint');
 
-const ruleName = 'intecmedia/no-nested-media';
+const ruleName = 'pitcher/no-nested-media';
 const messages = stylelint.utils.ruleMessages(ruleName, {
     error: (media) => [
         `Partial support nested media queries: ${media}.`,

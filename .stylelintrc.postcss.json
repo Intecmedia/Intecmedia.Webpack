@@ -7,7 +7,7 @@
         "./stylelint.no-nested-media.js"
     ],
     "rules": {
-        "intecmedia/no-nested-media": true,
+        "pitcher/no-nested-media": true,
         "a11y/no-outline-none": true,
         "a11y/selector-pseudo-class-focus": true,
         "csstree/validator": {

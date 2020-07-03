@@ -129,6 +129,7 @@
         "jquery": "latest",
         "js-beautify": "latest",
         "json-loader": "latest",
+        "lighthouse": "^6.1.0",
         "line-column": "latest",
         "loader-utils": "latest",
         "lodash.merge": "latest",
