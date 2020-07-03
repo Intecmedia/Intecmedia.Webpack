@@ -68,6 +68,7 @@ module.exports = {
     devServer: {
         compress: false,
         contentBase: path.resolve(__dirname, 'source'),
+        hot: true,
         overlay: { warnings: false, errors: true },
         publicPath: path.posix.resolve(APP.PUBLIC_PATH, '/'),
         watchContentBase: true,
