@@ -15,10 +15,8 @@ const logger = weblog({ name: 'loader-resize' });
 
 const DEFAULT_OPTIONS = {
     imageMagick: true,
+    cacheDirectory: false,
 };
-
-const resizeCache = flatCache.load('loader-resize.json', path.resolve('./node_modules/.cache/'));
-module.exports.resizeCache = resizeCache;
 
 module.exports = function ResizeLoader(content) {
     const loaderContext = this;
@@ -31,6 +29,10 @@ module.exports = function ResizeLoader(content) {
         DEFAULT_OPTIONS,
         loaderUtils.getOptions(loaderContext),
     );
+
+    const resizeCache = options.cacheDirectory ? flatCache.load('loader-resize.json', options.cacheDirectory) : false;
+    delete options.cacheDirectory;
+
     const nextLoader = (query.inline === 'inline' ? urlLoader : fileLoader);
     if (!('resize' in query)) {
         return loaderCallback(null, nextLoader.call(loaderContext, content));
@@ -63,7 +65,7 @@ module.exports = function ResizeLoader(content) {
         `${resourceInfo.name}@resize-${resizeWidth || ''}x${resizeHeight || ''}${resizeFlagNames[resizeFlag]}`
     )) + (query.suffix ? `-${query.suffix}` : '');
 
-    const cacheData = resizeCache.getKey(cacheKey);
+    const cacheData = resizeCache ? resizeCache.getKey(cacheKey) : undefined;
     if (cacheData !== undefined && cacheData.type === 'Buffer' && cacheData.data) {
         logger.info(`load cache '${relativePath}${loaderContext.resourceQuery}'`);
         loaderContext.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
@@ -89,10 +91,10 @@ module.exports = function ResizeLoader(content) {
             this.toBuffer(format.toUpperCase(), (bufferError, buffer) => {
                 if (bufferError) { loaderCallback(bufferError); return; }
                 logger.info(`save cache '${relativePath}${loaderContext.resourceQuery}'`);
-                resizeCache.setKey(cacheKey, buffer.toJSON());
+                if (resizeCache) resizeCache.setKey(cacheKey, buffer.toJSON());
                 loaderContext.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
                 loaderCallback(null, nextLoader.call(loaderContext, buffer));
-                resizeCache.save(true);
+                if (resizeCache) resizeCache.save(true);
             });
         });
     }

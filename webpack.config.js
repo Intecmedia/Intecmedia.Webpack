@@ -385,7 +385,11 @@ module.exports = {
                         resourceQuery: /[&?]resize=.+/,
                         loader: './loader.resize.js',
                         options: {
-                            name: UTILS.resourceName('img'), limit: 32 * 1024, esModule: false, hashType: 'md5',
+                            cacheDirectory: ENV.DEBUG ? false : path.join(__dirname, 'node_modules', '.cache', `loader-resize-${ENV.NODE_ENV}`),
+                            name: UTILS.resourceName('img'),
+                            limit: 32 * 1024,
+                            esModule: false,
+                            hashType: 'md5',
                         },
                     },
                     {
