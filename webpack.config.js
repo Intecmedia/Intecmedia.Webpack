@@ -362,6 +362,7 @@ module.exports = {
                             babelrc: false,
                             configFile: false,
                             envName: ENV.NODE_ENV,
+                            cacheCompression: false,
                             cacheDirectory: ENV.DEBUG ? false : path.join(__dirname, 'node_modules', '.cache', `babel-${ENV.NODE_ENV}`),
                             ...BabelConfig.options,
                         },
