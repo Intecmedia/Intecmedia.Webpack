@@ -8,7 +8,7 @@
         "stylelint-scss",
         "stylelint-use-nesting",
         "./stylelint.max-root-rules.js",
-        "./stylelint.max-lines.js"
+        "stylelint-max-lines"
     ],
     "rules": {
         "indentation": 4,
