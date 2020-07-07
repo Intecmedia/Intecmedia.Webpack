@@ -4,7 +4,7 @@
         "stylelint-no-unsupported-browser-features",
         "stylelint-performance-animation",
         "stylelint-csstree-validator",
-        "./stylelint.no-nested-media.js"
+        "stylelint-no-nested-media"
     ],
     "rules": {
         "pitcher/no-nested-media": true,
