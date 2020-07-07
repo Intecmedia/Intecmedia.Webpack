@@ -179,7 +179,7 @@ module.exports = {
                     level: 11,
                 },
                 algorithm: 'brotliCompress',
-                cache: path.join(__dirname, 'node_modules', '.cache', 'compression-webpack-plugin-br'),
+                cache: ENV.DEBUG ? false : path.join(__dirname, 'node_modules', '.cache', 'compression-webpack-plugin-br'),
             }),
             new CompressionPlugin({
                 test: /\.(js|css|json|lottie)(\?.*)?$/i,
@@ -191,7 +191,7 @@ module.exports = {
                     const zopfli = require('@gfx/zopfli');
                     return zopfli.gzip(input, compressionOptions, callback);
                 },
-                cache: path.join(__dirname, 'node_modules', '.cache', 'compression-webpack-plugin-gz'),
+                cache: ENV.DEBUG ? false : path.join(__dirname, 'node_modules', '.cache', 'compression-webpack-plugin-gz'),
             }),
         ] : []),
         new webpack.BannerPlugin({
@@ -253,12 +253,14 @@ module.exports = {
                 publicPath: APP.PUBLIC_PATH,
                 outputPath: 'img/favicons',
                 prefix: 'img/favicons',
+                cache: !ENV.DEBUG,
             }),
             new FaviconsPlugin.FavIcon({
                 logo: path.join(__dirname, '.favicons-source-64x64.png'),
                 publicPath: APP.PUBLIC_PATH,
                 outputPath: 'img/favicons',
                 prefix: 'img/favicons',
+                cache: !ENV.DEBUG,
             }),
         ] : []),
         ...(APP.HTML_PRETTY ? [new HtmlBeautifyPlugin({
