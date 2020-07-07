@@ -7,7 +7,7 @@
      "plugins": [
         "stylelint-scss",
         "stylelint-use-nesting",
-        "./stylelint.max-root-rules.js",
+        "stylelint-max-root-rules",
         "stylelint-max-lines"
     ],
     "rules": {

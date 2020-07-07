@@ -178,6 +178,7 @@
         "stylelint-config-twbs-bootstrap": "latest",
         "stylelint-csstree-validator": "latest",
         "stylelint-max-lines": "latest",
+        "stylelint-max-root-rules": "latest",
         "stylelint-no-unsupported-browser-features": "latest",
         "stylelint-order": "latest",
         "stylelint-performance-animation": "latest",
