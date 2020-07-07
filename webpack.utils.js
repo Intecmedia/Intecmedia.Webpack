@@ -3,6 +3,7 @@
 
 const path = require('path');
 const slash = require('slash');
+const findCacheDir = require('find-cache-dir');
 
 function castScssVar(obj) {
     if (Array.isArray(obj)) {
@@ -50,3 +51,10 @@ function resourceName(prefix, hash = false) {
 }
 
 module.exports.resourceName = resourceName;
+
+function cacheDir(name) {
+    const { NODE_ENV } = require('./app.env.js');
+    return findCacheDir({ name: `${name}-${NODE_ENV}` });
+}
+
+module.exports.cacheDir = cacheDir;

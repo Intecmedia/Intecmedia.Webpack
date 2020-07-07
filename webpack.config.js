@@ -179,7 +179,7 @@ module.exports = {
                     level: 11,
                 },
                 algorithm: 'brotliCompress',
-                cache: ENV.DEBUG ? false : path.join(__dirname, 'node_modules', '.cache', 'compression-webpack-plugin-br'),
+                cache: ENV.DEBUG ? false : UTILS.cacheDir('compression-webpack-plugin-br'),
             }),
             new CompressionPlugin({
                 test: /\.(js|css|json|lottie)(\?.*)?$/i,
@@ -191,7 +191,7 @@ module.exports = {
                     const zopfli = require('@gfx/zopfli');
                     return zopfli.gzip(input, compressionOptions, callback);
                 },
-                cache: ENV.DEBUG ? false : path.join(__dirname, 'node_modules', '.cache', 'compression-webpack-plugin-gz'),
+                cache: ENV.DEBUG ? false : UTILS.cacheDir('compression-webpack-plugin-gz'),
             }),
         ] : []),
         new webpack.BannerPlugin({
@@ -253,14 +253,14 @@ module.exports = {
                 publicPath: APP.PUBLIC_PATH,
                 outputPath: 'img/favicons',
                 prefix: 'img/favicons',
-                cache: !ENV.DEBUG,
+                cache: ENV.DEBUG ? false : UTILS.cacheDir('favicons-webpack-plugin-1024'),
             }),
             new FaviconsPlugin.FavIcon({
                 logo: path.join(__dirname, '.favicons-source-64x64.png'),
                 publicPath: APP.PUBLIC_PATH,
                 outputPath: 'img/favicons',
                 prefix: 'img/favicons',
-                cache: !ENV.DEBUG,
+                cache: ENV.DEBUG ? false : UTILS.cacheDir('favicons-webpack-plugin-64'),
             }),
         ] : []),
         ...(APP.HTML_PRETTY ? [new HtmlBeautifyPlugin({
@@ -289,7 +289,7 @@ module.exports = {
             new BundleAnalyzerPlugin({
                 analyzerMode: (ENV.DEV_SERVER ? 'server' : 'static'),
                 openAnalyzer: ENV.DEV_SERVER,
-                reportFilename: path.join(__dirname, 'node_modules', '.cache', `bundle-analyzer-${ENV.NODE_ENV}.html`),
+                reportFilename: path.join(UTILS.cacheDir('bundle-analyzer'), 'bundle-analyzer.html'),
             }),
         ] : []),
     ],
@@ -363,7 +363,7 @@ module.exports = {
                             configFile: false,
                             envName: ENV.NODE_ENV,
                             cacheCompression: false,
-                            cacheDirectory: ENV.DEBUG ? false : path.join(__dirname, 'node_modules', '.cache', `babel-${ENV.NODE_ENV}`),
+                            cacheDirectory: ENV.DEBUG ? false : UTILS.cacheDir('babel-loader'),
                             ...BabelConfig.options,
                         },
                     },
@@ -386,7 +386,7 @@ module.exports = {
                         resourceQuery: /[&?]resize=.+/,
                         loader: './loader.resize.js',
                         options: {
-                            cacheDirectory: ENV.DEBUG ? false : path.join(__dirname, 'node_modules', '.cache', `loader-resize-${ENV.NODE_ENV}`),
+                            cacheDirectory: ENV.DEBUG ? false : UTILS.cacheDir('loader-resize'),
                             name: UTILS.resourceName('img'),
                             limit: 32 * 1024,
                             esModule: false,
