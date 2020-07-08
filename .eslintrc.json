@@ -48,6 +48,6 @@
         }],
         "import/order": "off",
         "sort-requires/sort-requires": "off",
-        "linebreak-style": "off"
+        "linebreak-style": ["error", "unix"]
     }
 }

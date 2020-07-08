@@ -11,6 +11,7 @@
         "stylelint-max-lines"
     ],
     "rules": {
+        "linebreaks": "unix",
         "indentation": 4,
         "selector-class-pattern": [
             "^[a-zA-Z0-9\\-_]+$"
