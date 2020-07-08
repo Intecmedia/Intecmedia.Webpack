@@ -18,7 +18,7 @@ glob(`${ENV.SOURCE_PATH}/**/*.{html,svg,js,json,css,scss}`, {
     files.forEach((filename) => {
         const html = fs.readFileSync(filename, 'utf8').toString();
 
-        const newHtml = html.normalize('NFC').replace('\r\n', '\n');
+        const newHtml = html.normalize('NFC').replace(/\r\n/g, '\n');
         fs.writeFileSync(filename, newHtml);
 
         const relative = slash(path.relative(__dirname, filename));
