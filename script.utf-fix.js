@@ -10,7 +10,10 @@ const weblog = require('webpack-log');
 const logger = weblog({ name: 'utf-fix' });
 const ENV = require('./app.env.js');
 
-glob(`${ENV.SOURCE_PATH}/**/*.{html,svg,js,json,css,scss}`, {
+[
+    path.join(__dirname, '*.*'),
+    `${ENV.SOURCE_PATH}/**/*.{html,svg,js,json,css,scss}`,
+].map((i) => glob(i, {
     ignore: [],
 }, (error, files) => {
     if (error) throw error;
@@ -29,4 +32,4 @@ glob(`${ENV.SOURCE_PATH}/**/*.{html,svg,js,json,css,scss}`, {
             logger.info(`fixed ${relative}`);
         }
     });
-});
+}));
