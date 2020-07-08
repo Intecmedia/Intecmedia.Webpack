@@ -13,18 +13,11 @@ module.exports = {
         ['optipng', { // lossless
             optimizationLevel: 3,
         }],
-        ['pngquant', { // lossy
-            speed: 3,
-            quality: [0.85, 1],
-        }],
-        ['svgo', { // lossy
-            ...SvgoNoPrefixConfig,
-        }],
         ['gifsicle', { // lossless
             optimizationLevel: 3,
         }],
-        ['jpegtran', { // lossless
-            progressive: true,
+        ['svgo', { // lossy
+            ...SvgoNoPrefixConfig,
         }],
     ],
 };
