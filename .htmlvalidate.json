@@ -17,11 +17,11 @@
             "ignore": ""
         }],
         "pitcher/img-picture-required": ["error", {
-            "ignore": ".wysiwyg img, .counters-body img",
+            "ignore": ".wysiwyg img, .counters-body img, img.ignore-html-validate",
             "webp": true
         }],
         "pitcher/img-loading-required": ["error", {
-            "ignore": ".wysiwyg img, .counters-body img",
+            "ignore": ".wysiwyg img, .counters-body img, img.ignore-html-validate",
             "intrinsicsize": true
         }],
         "id-pattern": ["error", {
