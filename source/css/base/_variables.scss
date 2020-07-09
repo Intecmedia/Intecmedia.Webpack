@@ -13,4 +13,16 @@ $font-size-base:              1rem !default; // Assumes the browser default, typ
 $font-size-lg:                $font-size-base * 1.25 !default;
 $font-size-sm:                $font-size-base * .875 !default;
 
-@import "bootstrap-variables"; // always last
+$enable-caret:                                false !default;
+$enable-rounded:                              false !default;
+$enable-shadows:                              false !default;
+$enable-gradients:                            false !default;
+$enable-transitions:                          false !default;
+$enable-prefers-reduced-motion-media-query:   false !default;
+$enable-grid-classes:                         true !default;
+$enable-pointer-cursor-for-buttons:           true !default;
+$enable-print-styles:                         true !default;
+$enable-responsive-font-sizes:                true !default;
+$enable-validation-icons:                     false !default;
+
+@import "~bootstrap/scss/variables"; // always last
