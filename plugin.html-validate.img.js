@@ -23,7 +23,7 @@ class ImgPictureRequired extends Rule {
                 return;
             }
             const picture = img.parent;
-            const [src] = img.getAttributeValue('src')?.split('?', 2);
+            const [src] = img.getAttributeValue('src').split('?', 2);
             if (src.endsWith('.svg')) {
                 return;
             }
