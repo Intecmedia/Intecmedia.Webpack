@@ -8,10 +8,10 @@
 /* stylelint-disable */
 
 @import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
+// @import "~bootstrap/scss/variables"; // @see: _bootstrap-variables.scss
 @import "~bootstrap/scss/mixins";
 @import "bootstrap-mixins"; // override
-@import "~bootstrap/scss/root";
+// @import "~bootstrap/scss/root";
 @import "~bootstrap/scss/reboot";
 @import "~bootstrap/scss/type";
 @import "~bootstrap/scss/images";

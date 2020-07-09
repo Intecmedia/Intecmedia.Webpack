@@ -25,4 +25,9 @@ $enable-print-styles:                         true !default;
 $enable-responsive-font-sizes:                true !default;
 $enable-validation-icons:                     false !default;
 
+$theme-colors: (
+);
+
 @import "bootstrap-variables"; // always last
+// stylelint-disable-next-line scss/dollar-variable-default
+$theme-colors: map-remove($theme-colors, "secondary", "success", "info", "warning", "danger", "light", "dark");
