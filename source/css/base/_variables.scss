@@ -25,4 +25,4 @@ $enable-print-styles:                         true !default;
 $enable-responsive-font-sizes:                true !default;
 $enable-validation-icons:                     false !default;
 
-@import "~bootstrap/scss/variables"; // always last
+@import "bootstrap-variables"; // always last
