@@ -1,36 +1,4 @@
 @import "~bootstrap/scss/functions";
+@import "bootstrap-variables";
 
-$body-bg:                   #fff !default;
-$body-color:                #000 !default;
-
-// stylelint-disable value-keyword-case
-$font-family-sans-serif:      -apple-system, blinkmacsystemfont, "Segoe UI", roboto, "Helvetica Neue", arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
-$font-family-monospace:       sfmono-regular, menlo, monaco, consolas, "Liberation Mono", "Courier New", monospace !default;
-$font-family-base:            $font-family-sans-serif !default;
-// stylelint-enable value-keyword-case
-
-$font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
-$font-size-lg:                $font-size-base * 1.25 !default;
-$font-size-sm:                $font-size-base * .875 !default;
-
-$enable-caret:                                false !default;
-$enable-rounded:                              false !default;
-$enable-shadows:                              false !default;
-$enable-gradients:                            false !default;
-$enable-transitions:                          false !default;
-$enable-prefers-reduced-motion-media-query:   false !default;
-$enable-grid-classes:                         true !default;
-$enable-pointer-cursor-for-buttons:           true !default;
-$enable-print-styles:                         true !default;
-$enable-responsive-font-sizes:                true !default;
-$enable-validation-icons:                     false !default;
-
-$theme-colors: (
-    "primary": #007bff,
-    "success": #28a745,
-    "danger":  #dc3545,
-) !default;
-
-@import "bootstrap-variables"; // always last
-// stylelint-disable-next-line scss/dollar-variable-default
-$theme-colors: map-remove($theme-colors, "secondary", "success", "info", "warning", "danger", "light", "dark");
+// Common variables (Not bootstrap)
