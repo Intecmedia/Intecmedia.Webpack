@@ -26,7 +26,10 @@ $enable-responsive-font-sizes:                true !default;
 $enable-validation-icons:                     false !default;
 
 $theme-colors: (
-);
+    "primary": #007bff,
+    "success": #28a745,
+    "danger":  #dc3545,
+) !default;
 
 @import "bootstrap-variables"; // always last
 // stylelint-disable-next-line scss/dollar-variable-default
