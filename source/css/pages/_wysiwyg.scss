@@ -18,6 +18,10 @@
         }
     }
 
+    caption {
+        caption-side: top;
+    }
+
     // default tables
     table:not([class]) {
         @extend .table;
