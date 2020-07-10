@@ -7,3 +7,5 @@ The “align” attribute on the “th” element is obsolete. Use CSS instead.
 The “border” attribute on the “table” element is obsolete. Use CSS instead.
 <th> is missing required "scope" attribute
 Attribute "align" is deprecated on <img> element
+Attribute "align" is deprecated on <td> element
+Attribute "align" is deprecated on <th> element
