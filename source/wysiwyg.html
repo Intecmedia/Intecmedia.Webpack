@@ -1,0 +1,84 @@
+---
+title: title
+homepage: true
+description:
+og_image:
+---
+
+{% extends "partials/layouts/default.html" %}
+
+{% import "partials/macros/resize.html" as resize %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="wysiwyg">
+                <p>WYSIWYG  &mdash; Content from WYSIWYG-editor</p>
+
+                <h2>Headings and paragraphs <small>#</small></h2>
+
+                <p>
+                    All heading elements &mdash; e.g., <code class="highlighter-rouge">&lt;h1&gt;</code> &mdash; and <code class="highlighter-rouge">&lt;p&gt;</code> 
+                    are reset to have their <code class="highlighter-rouge">margin-top</code> removed. Headings have <code class="highlighter-rouge">margin-bottom: .5rem</code> 
+                    added and paragraphs <code class="highlighter-rouge">margin-bottom: 1rem</code> for easy spacing. 
+                </p>
+
+                <h1>h1. Bootstrap heading</h1>
+                <h2>h2. Bootstrap heading</h2>
+                <h3>h3. Bootstrap heading</h3>
+                <h4>h4. Bootstrap heading</h4>
+                <h5>h5. Bootstrap heading</h5>
+                <h6>h6. Bootstrap heading</h6>
+
+                <p>
+                    Default paragraph: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+                </p>
+
+                <p class="lead">
+                    Lead paragraph: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+                </p>
+
+                <h2>Lists <small>#</small></h2>
+
+                <p>
+                    All lists &mdash; <code class="highlighter-rouge">&lt;ul&gt;</code>, <code class="highlighter-rouge">&lt;ol&gt;</code>, 
+                    and <code class="highlighter-rouge">&lt;dl&gt;</code> &mdash; have their <code class="highlighter-rouge">margin-top</code>
+                    removed and a <code class="highlighter-rouge">margin-bottom: 1rem</code>.
+                    Nested lists have no <code class="highlighter-rouge">margin-bottom</code>.
+                </p>
+
+                <ul>
+                  <li>Lorem ipsum dolor sit amet</li>
+                  <li>Consectetur adipiscing elit</li>
+                  <li>Integer molestie lorem at massa</li>
+                  <li>Facilisis in pretium nisl aliquet</li>
+                  <li>Nulla volutpat aliquam velit
+                    <ul>
+                      <li>Phasellus iaculis neque</li>
+                      <li>Purus sodales ultricies</li>
+                      <li>Vestibulum laoreet porttitor sem</li>
+                      <li>Ac tristique libero volutpat at</li>
+                    </ul>
+                  </li>
+                  <li>Faucibus porta lacus fringilla vel</li>
+                  <li>Aenean sit amet erat nunc</li>
+                  <li>Eget porttitor lorem</li>
+                </ul>
+
+                <ol>
+                  <li>Lorem ipsum dolor sit amet</li>
+                  <li>Consectetur adipiscing elit</li>
+                  <li>Integer molestie lorem at massa</li>
+                  <li>Facilisis in pretium nisl aliquet</li>
+                  <li>Nulla volutpat aliquam velit</li>
+                  <li>Faucibus porta lacus fringilla vel</li>
+                  <li>Aenean sit amet erat nunc</li>
+                  <li>Eget porttitor lorem</li>
+                </ol>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

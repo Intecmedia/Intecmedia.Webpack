@@ -1,0 +1,13 @@
+{% extends "partials/layout.html" %}
+
+{% block body %}
+<div class="wrapper">
+    {% include 'partials/header.html' %}
+
+    <main class="main">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include 'partials/footer.html' %}
+</div>
+{% endblock %}
