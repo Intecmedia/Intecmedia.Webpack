@@ -69,15 +69,13 @@ $colors: map-merge(
 );
 
 $primary:       $blue !default;
-$secondary:     $gray-600 !default;
 $success:       $green !default;
-$info:          $cyan !default;
 $warning:       $yellow !default;
 $danger:        $red !default;
-$light:         $gray-100 !default;
-$dark:          $gray-800 !default;
 
 $theme-colors: () !default;
+
+/*
 // stylelint-disable-next-line scss/dollar-variable-default
 $theme-colors: map-merge(
     (
@@ -89,6 +87,18 @@ $theme-colors: map-merge(
         "danger":     $danger,
         "light":      $light,
         "dark":       $dark
+    ),
+    $theme-colors
+);
+*/
+
+// stylelint-disable-next-line scss/dollar-variable-default
+$theme-colors: map-merge(
+    (
+        "primary":    $primary,
+        "success":    $success,
+        "warning":    $warning,
+        "danger":     $danger
     ),
     $theme-colors
 );
@@ -118,7 +128,7 @@ $escaped-characters: (
 // Quickly modify global styling by enabling or disabling optional features.
 
 $enable-caret:                                true !default;
-$enable-rounded:                              false !default;
+$enable-rounded:                              true !default;
 $enable-shadows:                              false !default;
 $enable-gradients:                            false !default;
 $enable-transitions:                          false !default;
