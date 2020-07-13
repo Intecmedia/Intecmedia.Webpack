@@ -29,7 +29,17 @@ if (APP.SHORT_NAME === '$APP.SHORT_NAME$' || APP.SHORT_NAME.trim() === '') {
 if (APP.DESCRIPTION === '$APP.DESCRIPTION$') {
     lintErrors.push('rename `DESCRIPTION in `app.config.js`');
 } else if (APP.DESCRIPTION.trim() === '') {
-    lintWarns.push('empty `DESCRIPTION` in `app.config.js`');
+    lintErrors.push('empty `DESCRIPTION` in `app.config.js`');
+}
+
+if (APP.TITLE === APP.SHORT_NAME || APP.TITLE === APP.DESCRIPTION) {
+    lintErrors.push('`TITLE` is equal `SHORT_NAME` or `DESCRIPTION`');
+}
+if (APP.SHORT_NAME === APP.TITLE || APP.SHORT_NAME === APP.DESCRIPTION) {
+    lintErrors.push('`SHORT_NAME` is equal `TITLE` or `DESCRIPTION`');
+}
+if (APP.DESCRIPTION === APP.TITLE || APP.DESCRIPTION === APP.SHORT_NAME) {
+    lintErrors.push('`DESCRIPTION` is equal `TITLE` or `SHORT_NAME`');
 }
 
 lintWarns.forEach((i) => logger.warn(i));

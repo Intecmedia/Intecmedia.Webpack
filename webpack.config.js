@@ -112,7 +112,7 @@ module.exports = {
                 cache: !ENV.DEBUG,
                 test: /\.(js)(\?.*)?$/i,
                 parallel: true,
-                sourceMap: true,
+                sourceMap: ENV.USE_SOURCE_MAP,
                 extractComments: {
                     condition: 'some',
                     filename: (file) => `${file}.LICENSE`,
