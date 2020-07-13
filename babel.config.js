@@ -7,12 +7,12 @@ const ENV = require('./app.env.js');
 module.exports = {
     options: {
         plugins: [
-            '@babel/transform-runtime',
+            ['@babel/transform-runtime', {}],
             ['@babel/plugin-proposal-optional-chaining', { loose: false }],
             ['@babel/plugin-proposal-pipeline-operator', { proposal: 'minimal' }],
             ['@babel/plugin-proposal-decorators', { legacy: true }],
             ['@babel/plugin-proposal-class-properties', { loose: true }],
-            '@babel/plugin-proposal-logical-assignment-operators',
+            ['@babel/plugin-proposal-logical-assignment-operators', {}],
         ],
         presets: [
             ['@babel/preset-env', {
