@@ -70,20 +70,27 @@
 
         list-style: none;
 
+        $ul-bull-symbol: "•" !default;
+        $ul-bull-color: $body-color !default;
+        $ul-bull-font-size: $font-size-base !default;
+        $ul-bull-line-height: $line-height-base !default;
+
         &::before {
             position: absolute;
 
-            width: $font-size-base;
-            margin-left: -$font-size-base;
+            width: $ul-bull-font-size;
+            margin-left: -$ul-bull-font-size;
 
-            color: $body-color;
-            font-size: $font-size-base;
+            color: $ul-bull-color;
+
+            font-size: $ul-bull-font-size;
             font-family: inherit;
-            line-height: $line-height-base;
+            line-height: $ul-bull-line-height;
+
             text-align: center;
             vertical-align: middle;
 
-            content: "\2022";
+            content: $ul-bull-symbol;
         }
     }
 
