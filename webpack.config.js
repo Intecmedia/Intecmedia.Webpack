@@ -292,9 +292,16 @@ module.exports = {
                 reportFilename: path.join(UTILS.cacheDir('bundle-analyzer'), 'bundle-analyzer.html'),
             }),
         ] : []),
+        ...(ENV.USE_SOURCE_MAP ? [
+            new webpack.SourceMapDevToolPlugin({
+                test: /\.(js|mjs|cjs|ts|css|scss)(\?.*)?$/i,
+            }),
+        ] : []),
     ],
 
-    devtool: (ENV.USE_SOURCE_MAP ? (['eval-source-map', 'source-map'])[+ENV.DEBUG] : 'nosources-source-map'),
+    ...(!ENV.USE_SOURCE_MAP ? {
+        devtool: 'nosources-source-map',
+    } : {}),
 
     resolve: require('./resolve.config.js').resolve,
 
@@ -469,11 +476,11 @@ module.exports = {
                                 }))),
                             }),
                             sourceMap: ENV.USE_SOURCE_MAP,
+                            implementation: require('sass'),
                             sassOptions: {
                                 indentWidth: 4,
                                 outputStyle: 'expanded',
-                                sourceMapEmbed: ENV.USE_SOURCE_MAP,
-                                sourceComments: ENV.USE_SOURCE_MAP,
+                                fiber: require('fibers'),
                             },
                         },
                     },
