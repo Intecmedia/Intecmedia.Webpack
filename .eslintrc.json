@@ -3,6 +3,7 @@
     "parser": "babel-eslint",
     "extends": [
         "plugin:compat/recommended",
+        "plugin:eslint-comments/recommended",
         "airbnb-base"
     ],
     "env": {

@@ -100,6 +100,7 @@
         "eslint-import-resolver-webpack": "latest",
         "eslint-loader": "latest",
         "eslint-plugin-compat": "latest",
+        "eslint-plugin-eslint-comments": "latest",
         "eslint-plugin-import": "latest",
         "expose-loader": "latest",
         "fastparse": "latest",
