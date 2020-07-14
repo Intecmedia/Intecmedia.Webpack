@@ -39,6 +39,7 @@
         "no-param-reassign": ["error", {
             "props": false
         }],
+        "no-plusplus": "off",
         "no-unused-expressions": "off",
         "unicode-bom": ["error", "never"],
         "max-len": ["error", 120, {
