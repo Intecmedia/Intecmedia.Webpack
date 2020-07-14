@@ -40,15 +40,26 @@
             "props": false
         }],
         "no-unused-expressions": "off",
-        "unicode-bom": ["warn", "never"],
-        "max-len": ["warn", 120, 4],
-        "indent": ["warn", 4],
-        "max-lines": ["warn", {
+        "unicode-bom": ["error", "never"],
+        "max-len": ["error", 120, {
+            "ignoreComments": true,
+            "ignoreTrailingComments": true,
+            "ignoreUrls": true,
+            "ignoreStrings": true,
+            "ignoreTemplateLiterals": true,
+            "ignoreRegExpLiterals": true
+        }],
+        "indent": ["error", 4],
+        "max-lines": ["error", {
             "max": 300, 
-            "skipBlankLines": true
+            "skipBlankLines": true,
+            "skipComments": true
         }],
         "import/order": "off",
         "sort-requires/sort-requires": "off",
-        "linebreak-style": ["error", "unix"]
+        "linebreak-style": ["error", "unix"],
+        "eslint-comments/require-description": ["error", {
+            "ignore": []
+        }]
     }
 }
