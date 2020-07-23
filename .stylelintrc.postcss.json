@@ -14,7 +14,10 @@
             "ignore": ["font-display"]
         },
         "unit-blacklist": ["em"],
-        "no-duplicate-selectors": null,
+        "no-duplicate-selectors": [true, {}],
+        "declaration-block-no-duplicate-properties": [true, {
+            "ignore": ["consecutive-duplicates-with-different-values"]
+        }],
         "plugin/no-unsupported-browser-features": [true, {
             "ignore": [
                 "calc",
