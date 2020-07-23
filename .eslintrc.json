@@ -58,9 +58,6 @@
         }],
         "import/order": "off",
         "sort-requires/sort-requires": "off",
-        "linebreak-style": ["error", "unix"],
-        "eslint-comments/require-description": ["error", {
-            "ignore": []
-        }]
+        "linebreak-style": ["error", "unix"]
     }
 }
