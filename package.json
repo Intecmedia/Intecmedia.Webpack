@@ -172,7 +172,6 @@
         "sort-css-media-queries": "latest",
         "style-loader": "latest",
         "stylelint": "latest",
-        "stylelint-a11y": "latest",
         "stylelint-config-rational-order": "latest",
         "stylelint-config-sass-guidelines": "latest",
         "stylelint-config-twbs-bootstrap": "latest",

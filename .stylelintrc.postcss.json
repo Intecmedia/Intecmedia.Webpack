@@ -1,6 +1,5 @@
 {
     "plugins": [
-        "stylelint-a11y",
         "stylelint-no-unsupported-browser-features",
         "stylelint-performance-animation",
         "stylelint-csstree-validator",
@@ -8,8 +7,6 @@
     ],
     "rules": {
         "pitcher/no-nested-media": true,
-        "a11y/no-outline-none": true,
-        "a11y/selector-pseudo-class-focus": true,
         "csstree/validator": {
             "ignore": ["font-display"]
         },
