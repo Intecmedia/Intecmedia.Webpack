@@ -3,6 +3,9 @@
 // for polyfill use only require
 require('~/polyfills/history-events.js');
 
+// eslint-disable-next-line global-require
+require('~/polyfills/focus-visible.js');
+
 if (NODE_ENV === 'production' || DEBUG) {
     // eslint-disable-next-line global-require
     require('~/polyfills/classlist.js');
@@ -54,9 +57,6 @@ if (NODE_ENV === 'production' || DEBUG) {
 
     // eslint-disable-next-line global-require
     require('~/polyfills/focus-within.js');
-
-    // eslint-disable-next-line global-require
-    require('~/polyfills/focus-visible.js');
 
     // eslint-disable-next-line global-require
     require('~/polyfills/object-fit-images.js');
