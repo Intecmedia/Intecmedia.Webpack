@@ -452,6 +452,7 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
+                            esModule: false,
                             importLoaders: 2,
                             sourceMap: ENV.USE_SOURCE_MAP,
                         },
