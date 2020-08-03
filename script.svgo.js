@@ -13,7 +13,10 @@ const { SvgoCreateConfig } = require('./svgo.config.js');
 const logger = weblog({ name: 'svgo' });
 const ENV = require('./app.env.js');
 
-glob(`${ENV.SOURCE_PATH}/**/*.svg`, {
+[
+    `${ENV.SOURCE_PATH}/**/*.svg`,
+    `../include/template/**/*.svg`,
+].map((i) => glob(i, {
     ignore: [],
 }, (error, files) => {
     if (error) throw error;
@@ -37,4 +40,4 @@ glob(`${ENV.SOURCE_PATH}/**/*.svg`, {
             throw new Error(`error in ${relative}: ${svgoError}`);
         });
     });
-});
+}));
