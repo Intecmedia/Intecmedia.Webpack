@@ -55,6 +55,9 @@
             "^[a-zA-Z][a-zA-Z-\\d]*$"
         ],
         "scss/at-extend-no-missing-placeholder": null,
+        "scss/at-rule-no-unknown": [true, {
+            "ignoreAtRules": ["property"]
+        }],
         "order/order": [
            "dollar-variables",
            "custom-properties"
@@ -64,7 +67,9 @@
             "border-in-box-model": false,
             "empty-line-between-groups": true
         }],
-        "property-no-unknown": [true, {}],
+        "property-no-unknown": [true, {
+            "ignoreProperties": ["inherits", "initial-value", "syntax"]
+        }],
         "selector-pseudo-element-no-unknown": [true, {
             "ignorePseudoElements": ["track", "thumb"]
         }],
