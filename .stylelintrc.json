@@ -21,7 +21,7 @@
              "ignore": ["blockless-at-rules", "pseudo-classes"]
         }],
         "pitcher/max-lines": 300,
-        "pitcher/max-root-rules": 1,
+        "pitcher/max-root-rules": 12,
         "max-line-length": [120, {
             "ignore": ["comments"],
             "ignorePattern": "/\\$(.+?):/"
