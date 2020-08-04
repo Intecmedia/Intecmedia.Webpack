@@ -1,7 +1,6 @@
 {
     "plugins": [
         "stylelint-no-unsupported-browser-features",
-        "stylelint-performance-animation",
         "stylelint-csstree-validator",
         "stylelint-no-nested-media"
     ],
@@ -29,27 +28,6 @@
                 "transforms3d",
                 "viewport-units",
                 "will-change"
-            ]
-        }],
-        "plugin/no-low-performance-animation": [true, {
-            "ignore": [
-                "background",
-                "background-color",
-                "background-position",
-                "border-color",
-                "border-top-color",
-                "border-right-color",
-                "border-bottom-color",
-                "border-left-color",
-                "box-shadow",
-                "color",
-                "fill",
-                "height",
-                "opacity",
-                "stroke-dashoffset",
-                "transform",
-                "text-underline-color",
-                "width"
             ]
         }],
         "property-no-unknown": [true, {
