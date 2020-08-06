@@ -31,7 +31,7 @@
             ]
         }],
         "property-no-unknown": [true, {
-            "ignoreProperties": ["inherits", "initial-value", "syntax"]
+            "ignoreProperties": ["inherits", "initial-value", "syntax", "content-visibility"]
         }]
     }
 }
