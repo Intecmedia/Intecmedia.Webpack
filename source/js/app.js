@@ -2,7 +2,7 @@
 import('~/components/network-information');
 import('~/components/sentry');
 import('~/components/bootstrap');
-import('~/components/svg-srite');
+import('~/components/svg-sprite');
 import('~/components/validator');
 
 jQuery(($) => {
