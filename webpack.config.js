@@ -44,8 +44,8 @@ const StyleLintPlugin = (ENV.USE_LINTERS ? require('stylelint-webpack-plugin') :
 const CompressionPlugin = (ENV.PROD && !ENV.DEBUG ? require('compression-webpack-plugin') : () => {});
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const UglifyJsPlugin = (ENV.PROD && !ENV.DEBUG ? require('uglifyjs-webpack-plugin') : () => {});
-const { default: EagerImportsPlugin } = require('eager-imports-webpack-plugin');
 const SpriteLoaderPlugin = require('./plugin.svg-sprite.js');
+const JsonpScriptSrcPlugin = require('./plugin.jsonp-script-src.js');
 
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
 const HtmlBeautifyPlugin = (APP.HTML_PRETTY ? require('./plugin.html-beautify.js') : () => {});
@@ -98,12 +98,14 @@ module.exports = {
             moduleIds: 'named',
         } : {}),
         splitChunks: {
+            maxAsyncRequests: Infinity,
+            maxInitialRequests: Infinity,
             cacheGroups: {
                 vendor: {
-                    test: /(node_modules)(.+)\.(js|mjs|cjs)(\?.*)?$/,
-                    chunks: 'initial',
-                    name: 'vendor',
+                    chunks: 'all',
                     enforce: true,
+                    test: /(node_modules)(.+)\.(js|mjs|cjs)(\?.*)?$/,
+                    name: 'vendor',
                 },
             },
         },
@@ -139,6 +141,9 @@ module.exports = {
     } : false),
 
     plugins: [
+        new webpack.optimize.MinChunkSizePlugin({
+            minChunkSize: 14 * 1024,
+        }),
         ...(ENV.WATCH ? [
             new BrowserSyncPlugin({
                 ...APP.BROWSERSYNC,
@@ -168,7 +173,7 @@ module.exports = {
                 force: true,
             })),
         }),
-        new EagerImportsPlugin(),
+        new JsonpScriptSrcPlugin(),
         ...(ENV.PROD && !ENV.DEBUG ? [
             new CaseSensitivePathsPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),

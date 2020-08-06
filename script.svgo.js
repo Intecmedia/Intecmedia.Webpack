@@ -15,7 +15,7 @@ const ENV = require('./app.env.js');
 
 [
     `${ENV.SOURCE_PATH}/**/*.svg`,
-    `../include/template/**/*.svg`,
+    '../include/template/**/*.svg',
 ].map((i) => glob(i, {
     ignore: [],
 }, (error, files) => {
