@@ -1,8 +1,7 @@
 /* global NODE_ENV APP DEBUG VERBOSE */
-if ((NODE_ENV === 'production' || DEBUG) && APP.SENTRY.dsn) {
-    // eslint-disable-next-line global-require
-    const { init: sentryInit } = require('@sentry/browser');
+import * as Sentry from '@sentry/browser';
 
+if ((NODE_ENV === 'production' || DEBUG) && APP.SENTRY.dsn) {
     const sentryCheckIgnore = (event) => {
         // Detect if we got a ReportingObserver event
         if (event?.message?.indexOf('ReportingObserver') === 0) {
@@ -14,7 +13,7 @@ if ((NODE_ENV === 'production' || DEBUG) && APP.SENTRY.dsn) {
         return false;
     };
 
-    sentryInit({
+    Sentry.init({
         debug: DEBUG || false,
         dsn: APP.SENTRY.dsn,
         beforeSend(event) {

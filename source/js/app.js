@@ -1,6 +1,5 @@
 /* global NODE_ENV DEBUG */
 import('~/components/network-information');
-import('~/components/sentry');
 import('~/components/bootstrap');
 import('~/components/svg-sprite');
 import('~/components/validator');
