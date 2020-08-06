@@ -7,7 +7,7 @@
     "rules": {
         "pitcher/no-nested-media": true,
         "csstree/validator": {
-            "ignore": ["font-display", "inherits", "initial-value", "syntax"]
+            "ignore": ["font-display", "inherits", "initial-value", "syntax", "content-visibility"]
         },
         "unit-blacklist": ["em"],
         "no-duplicate-selectors": [true, {}],
