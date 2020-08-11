@@ -1,9 +1,7 @@
-@mixin focus-outline-none($outline: none) {
-    &:focus {
-        &:not(:focus-visible) {
-            outline: $outline;
-
-            @content;
+.js-focus-visible {
+    :focus {
+        &:not(.focus-visible) {
+            outline: none;
         }
     }
 }
