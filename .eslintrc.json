@@ -57,6 +57,7 @@
             "skipComments": true
         }],
         "import/order": "off",
+        "import/no-cycle": "off",
         "sort-requires/sort-requires": "off",
         "linebreak-style": ["error", "unix"]
     }
