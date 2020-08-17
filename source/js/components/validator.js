@@ -2,7 +2,7 @@ jQuery(($) => {
     if (!$.fn.aquilonValidator) return;
 
     // SPA events
-    $(window).on('pushState replaceState', () => {
+    $(window).on('pushstate popstate', () => {
         // wait side effects changes
         setTimeout(() => {
         // find new validators

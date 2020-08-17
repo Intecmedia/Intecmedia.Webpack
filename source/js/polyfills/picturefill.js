@@ -1,16 +1,24 @@
+/* global VERBOSE */
 /* eslint 'compat/compat': 'off' */
 
 // for polyfill use only require
 const picturefill = require('picturefill');
 
-jQuery(($) => {
-    picturefill();
+const init = (reevaluate = false) => picturefill({ reevaluate });
 
-    // SPA events
-    $(window).on('pushState replaceState', () => {
-        // wait side effects changes
-        setTimeout(() => {
-            picturefill({ reevaluate: true });
-        }, 0);
-    });
-});
+// SPA events
+const eventCallback = () => {
+    if (VERBOSE) {
+        console.log('[picturefill.js] init');
+    }
+    // wait side effects changes
+    setTimeout(() => init(true), 0);
+};
+
+// SPA events
+window.addEventListener('pushstate', eventCallback);
+window.addEventListener('popstate', eventCallback);
+
+init();
+
+export default init;

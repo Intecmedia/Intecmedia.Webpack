@@ -16,10 +16,10 @@ function historyEventDecorator(type) {
         const result = Reflect.apply(origHandler, this, arguments);
         let event;
         if (typeof (Event) === 'function') {
-            event = new Event(type);
+            event = new Event(type.toLowerCase());
         } else {
             event = document.createEvent('Event');
-            event.initEvent(type, true, true);
+            event.initEvent(type.toLowerCase(), true, true);
         }
         event.arguments = arguments;
         window.dispatchEvent(event);

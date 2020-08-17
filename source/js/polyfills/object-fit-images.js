@@ -1,16 +1,23 @@
+/* global VERBOSE */
 /* eslint 'compat/compat': 'off' */
 
 // for polyfill use only require
 const objectFitImages = require('object-fit-images');
 
-jQuery(($) => {
-    objectFitImages(null, { watchMQ: true });
+const init = () => objectFitImages(null, { watchMQ: true });
 
-    // SPA events
-    $(window).on('pushState replaceState', () => {
-        // wait side effects changes
-        setTimeout(() => {
-            objectFitImages(null, { watchMQ: true });
-        }, 0);
-    });
-});
+const eventCallback = () => {
+    if (VERBOSE) {
+        console.log('[object-fit-images.js] init');
+    }
+    // wait side effects changes
+    setTimeout(() => init, 0);
+};
+
+// SPA events
+window.addEventListener('pushstate', eventCallback);
+window.addEventListener('popstate', eventCallback);
+
+init();
+
+export default init;
