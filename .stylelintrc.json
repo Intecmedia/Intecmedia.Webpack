@@ -75,6 +75,7 @@
         }],
         "selector-no-qualifying-type": [true, {
             "ignore": ["attribute", "class"]
-        }]
+        }],
+        "selector-list-comma-newline-after": "always-multi-line"
     }
 }
