@@ -9,7 +9,6 @@
         "csstree/validator": {
             "ignore": ["font-display", "inherits", "initial-value", "syntax", "content-visibility"]
         },
-        "unit-blacklist": ["em"],
         "no-duplicate-selectors": [true, {}],
         "declaration-block-no-duplicate-properties": [true, {
             "ignore": ["consecutive-duplicates-with-different-values"]
