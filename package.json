@@ -155,7 +155,7 @@
         "postcss-font-display": "latest",
         "postcss-image-set-polyfill": "latest",
         "postcss-input-style": "latest",
-        "postcss-loader": "latest",
+        "postcss-loader": "^3.0.0",
         "postcss-object-fit-images": "latest",
         "postcss-reporter": "latest",
         "postcss-sorting": "latest",
