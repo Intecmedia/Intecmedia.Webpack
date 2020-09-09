@@ -478,9 +478,8 @@ module.exports = {
                     {
                         loader: 'postcss-loader',
                         options: {
-                            ident: 'postcss',
                             sourceMap: ENV.USE_SOURCE_MAP,
-                            config: { path: './postcss.config.js' },
+                            postcssOptions: require('./postcss.config.js'),
                         },
                     },
                     {
