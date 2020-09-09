@@ -181,7 +181,6 @@
         "stylelint-no-nested-media": "latest",
         "stylelint-no-unsupported-browser-features": "latest",
         "stylelint-order": "latest",
-        "stylelint-performance-animation": "latest",
         "stylelint-scss": "latest",
         "stylelint-use-nesting": "latest",
         "stylelint-webpack-plugin": "latest",
