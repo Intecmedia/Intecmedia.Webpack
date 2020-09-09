@@ -23,12 +23,6 @@ module.exports = {
             require('./postcss.webp.js')(),
             require('./postcss.stylelint.js')(),
             require('autoprefixer')({ overrideBrowserslist: ENV.BROWSERS }), // this always last
-            ...(!ENV.DEBUG ? [require('cssnano')({
-                preset: ['default', {
-                    minifyFontValues: { removeQuotes: false },
-                    discardComments: { removeAll: true },
-                }],
-            })] : []), // this always last
         ] : []),
         require('./postcss.resolve-absolute.js')({
             silent: !(ENV.PROD || ENV.DEBUG),

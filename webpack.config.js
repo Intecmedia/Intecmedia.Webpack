@@ -33,6 +33,7 @@ if (ENV.STANDALONE) {
 }
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const ImageminPlugin = require('imagemin-webpack');
@@ -159,6 +160,17 @@ module.exports = {
             filename: 'css/app.min.css',
             allChunks: true,
         }),
+        ...(ENV.PROD && !ENV.DEBUG ? [new OptimizeCssAssetsPlugin({
+            assetNameRegExp: /\.css$/g,
+            cssProcessor: require('cssnano'),
+            cssProcessorPluginOptions: {
+                preset: ['default', {
+                    minifyFontValues: { removeQuotes: false },
+                    discardComments: { removeAll: true },
+                }],
+            },
+            canPrint: true,
+        })] : []),
         new CopyWebpackPlugin({
             patterns: [
                 '**/.htaccess',
