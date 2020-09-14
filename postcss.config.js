@@ -19,8 +19,8 @@ module.exports = {
             ]),
             require('postcss-object-fit-images')(),
             require('postcss-flexbugs-fixes')(),
-            require('./postcss.webp.js')(),
             require('./postcss.stylelint.js')(),
+            require('./postcss.webp.js')(),
             require('autoprefixer')({ overrideBrowserslist: ENV.BROWSERS }), // this always last
         ] : []),
         require('./postcss.resolve-absolute.js')({
