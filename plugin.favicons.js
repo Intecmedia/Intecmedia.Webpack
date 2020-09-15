@@ -79,7 +79,7 @@ const DEFAULT_APPICON = {
             opengraph: false,
             twitter: false,
             yandex: false,
-            windows: true,
+            windows: false,
         },
     },
 };
