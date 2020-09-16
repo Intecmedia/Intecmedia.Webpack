@@ -180,7 +180,6 @@
         "svgo": "latest",
         "uglifyjs-webpack-plugin": "latest",
         "url-loader": "latest",
-        "webp-converter": "2.2.3",
         "webpack": "latest",
         "webpack-bundle-analyzer": "latest",
         "webpack-cli": "latest",
