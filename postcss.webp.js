@@ -1,5 +1,5 @@
 /* eslint-env node */
-/* eslint "compat/compat": "off" */
+/* eslint "compat/compat": "off", "no-underscore-dangle": "off" */
 
 const path = require('path');
 const { URLSearchParams } = require('url');
@@ -10,9 +10,6 @@ const IMAGE_PATTERN = /.(png|jpg|jpeg)(\?.*)?$/i;
 module.exports = () => postcssUrl({
     url(asset, dir, options, decl) {
         const { originUrl } = asset;
-
-        if (decl.__postcssWebpSkip__) return originUrl;
-        decl.__postcssWebpSkip__ = true;
 
         if (!IMAGE_PATTERN.test(originUrl)) return originUrl;
 
@@ -26,18 +23,24 @@ module.exports = () => postcssUrl({
         const webpUrl = [originRequest, originParams].join('?');
 
         const originRule = decl.parent;
-        const webpRule = originRule.cloneAfter();
+        const webpRule = originRule.__postcssWebpRule__ || originRule.cloneAfter();
 
-        webpRule.selectors = webpRule.selectors.map((i) => `html.wepb ${i}`);
+        if (!originRule.__postcssWebpRule__) {
+            originRule.__postcssWebpRule__ = webpRule;
+
+            webpRule.selectors = webpRule.selectors.map((i) => `html.wepb ${i}`);
+            webpRule.each((i) => {
+                if (i.prop !== decl.prop && i.value !== decl.value) {
+                    i.remove();
+                }
+            });
+            webpRule.raws.semicolon = true;
+            webpRule.raws.before = '\n';
+        }
+
         webpRule.each((i) => {
-            if (i.prop !== decl.prop && i.value !== decl.value) {
-                i.remove();
-            } else {
-                i.value = i.value.replace(originUrl, webpUrl);
-            }
+            i.value = i.value.replace(originUrl, webpUrl);
         });
-        webpRule.raws.semicolon = true;
-        webpRule.raws.before = '\n';
 
         return originUrl;
     },
