@@ -45,7 +45,7 @@ const StyleLintPlugin = (ENV.USE_LINTERS ? require('stylelint-webpack-plugin') :
 const CompressionPlugin = (ENV.PROD && !ENV.DEBUG ? require('compression-webpack-plugin') : () => {});
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const UglifyJsPlugin = (ENV.PROD && !ENV.DEBUG ? require('uglifyjs-webpack-plugin') : () => {});
-const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
+const SvgSpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const JsonpScriptSrcPlugin = require('./plugin.jsonp-script-src.js');
 
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
@@ -292,7 +292,7 @@ module.exports = {
                 },
             },
         })] : []),
-        new SpriteLoaderPlugin({
+        new SvgSpriteLoaderPlugin({
             plainSprite: true,
         }),
         ...(ENV.PROD || ENV.DEBUG ? [
@@ -479,7 +479,7 @@ module.exports = {
                         loader: 'postcss-loader',
                         options: {
                             sourceMap: ENV.USE_SOURCE_MAP,
-                            postcssOptions: require('./postcss.config.js'),
+                            postcssOptions: { config: './postcss.config.js' },
                         },
                     },
                     {
