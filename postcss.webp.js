@@ -15,7 +15,7 @@ module.exports = () => postcssUrl({
 
         const [originRequest, originSearch = ''] = originUrl.split('?', 2);
         const originParams = new URLSearchParams(originSearch);
-        if (originParams.has('resize')) return originUrl;
+        if (originParams.get('format') === 'webp') return originUrl;
 
         originParams.set('resize', '');
         originParams.set('format', 'webp');
