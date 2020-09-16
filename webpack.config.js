@@ -45,7 +45,7 @@ const StyleLintPlugin = (ENV.USE_LINTERS ? require('stylelint-webpack-plugin') :
 const CompressionPlugin = (ENV.PROD && !ENV.DEBUG ? require('compression-webpack-plugin') : () => {});
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const UglifyJsPlugin = (ENV.PROD && !ENV.DEBUG ? require('uglifyjs-webpack-plugin') : () => {});
-const SpriteLoaderPlugin = require('./plugin.svg-sprite.js');
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const JsonpScriptSrcPlugin = require('./plugin.jsonp-script-src.js');
 
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
@@ -445,7 +445,7 @@ module.exports = {
                         const spriteDir = path.join(ENV.SOURCE_PATH, 'img/svg-sprite');
                         const relativePath = slash(path.relative(spriteDir, path.normalize(filePath)));
                         const symbolId = path.basename(relativePath, '.svg').replace(path.posix.sep, '-');
-                        return `svg-sprite-${symbolId}`;
+                        return symbolId;
                     },
                 },
             },
