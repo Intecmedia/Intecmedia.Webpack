@@ -11,6 +11,9 @@ module.exports = () => postcssUrl({
     url(asset, dir, options, decl) {
         const { originUrl } = asset;
 
+        if (decl.__postcssWebpSkip__) return originUrl;
+        decl.__postcssWebpSkip__ = true;
+
         if (!IMAGE_PATTERN.test(originUrl)) return originUrl;
 
         const [originRequest, originSearch = ''] = originUrl.split('?', 2);
