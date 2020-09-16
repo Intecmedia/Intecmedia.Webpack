@@ -13,14 +13,14 @@ module.exports = () => postcssUrl({
 
         if (!IMAGE_PATTERN.test(originUrl)) return originUrl;
 
-        const [request, search = ''] = originUrl.split('?', 2);
-        const params = new URLSearchParams(search);
-        if (params.has('resize')) return originUrl;
+        const [originRequest, originSearch = ''] = originUrl.split('?', 2);
+        const originParams = new URLSearchParams(originSearch);
+        if (originParams.has('resize')) return originUrl;
 
-        params.set('resize', '');
-        params.set('format', 'webp');
-        params.set('name', path.basename(request, path.extname(request)));
-        const webpUrl = [request, params].join('?');
+        originParams.set('resize', '');
+        originParams.set('format', 'webp');
+        originParams.set('name', path.basename(originRequest, path.extname(originRequest)));
+        const webpUrl = [originRequest, originParams].join('?');
 
         const originRule = decl.parent;
         const webpRule = originRule.cloneAfter();
