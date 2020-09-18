@@ -192,7 +192,7 @@ module.exports = {
             new webpack.NoEmitOnErrorsPlugin(),
             new CompressionPlugin({
                 test: /\.(js|css|json|lottie)(\?.*)?$/i,
-                filename: '[path].br[query]',
+                filename: '[path][name].br[query]',
                 compressionOptions: {
                     level: 11,
                 },
@@ -201,7 +201,7 @@ module.exports = {
             }),
             new CompressionPlugin({
                 test: /\.(js|css|json|lottie)(\?.*)?$/i,
-                filename: '[path].gz[query]',
+                filename: '[path][name].gz[query]',
                 compressionOptions: {
                     numiterations: 15,
                 },
