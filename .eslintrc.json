@@ -34,6 +34,7 @@
         }
     },
     "rules": {
+        "class-methods-use-this": "off",
         "func-names": ["error"],
         "no-console": "off",
         "no-param-reassign": ["error", {
