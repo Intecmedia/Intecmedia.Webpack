@@ -2,7 +2,7 @@
 import('~/components/network-information');
 import('~/components/bootstrap');
 import('~/components/svg-sprite');
-import('~/components/validator');
+import('~/components/aquilon-validator');
 
 jQuery(($) => {
     console.log(`NODE_ENV=${NODE_ENV}; DEBUG=${DEBUG}; jQuery=${$.fn.jquery};`);
