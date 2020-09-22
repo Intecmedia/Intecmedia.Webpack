@@ -116,7 +116,7 @@ module.exports = {
                 cache: !ENV.DEBUG,
                 test: /\.(js)(\?.*)?$/i,
                 parallel: true,
-                sourceMap: ENV.USE_SOURCE_MAP,
+                sourceMap: true,
                 extractComments: {
                     condition: 'some',
                     filename: (file) => `${file}.LICENSE`,
@@ -472,13 +472,13 @@ module.exports = {
                         options: {
                             esModule: false,
                             importLoaders: 2,
-                            sourceMap: ENV.USE_SOURCE_MAP,
+                            sourceMap: true,
                         },
                     },
                     {
                         loader: 'postcss-loader',
                         options: {
-                            sourceMap: ENV.USE_SOURCE_MAP,
+                            sourceMap: true,
                             postcssOptions: { config: './postcss.config.js' },
                         },
                     },
@@ -493,7 +493,7 @@ module.exports = {
                                     [`APP-${k}`]: v,
                                 }))),
                             }),
-                            sourceMap: ENV.USE_SOURCE_MAP,
+                            sourceMap: true,
                             implementation: require('sass'),
                             sassOptions: {
                                 indentWidth: 4,
