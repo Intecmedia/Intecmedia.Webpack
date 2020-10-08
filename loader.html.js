@@ -5,7 +5,7 @@ const path = require('path');
 const slash = require('slash');
 
 const loaderUtils = require('loader-utils');
-const validateOptions = require('schema-utils');
+const { validate: validateOptions } = require('schema-utils');
 const weblog = require('webpack-log');
 
 const nunjucks = require('nunjucks');
