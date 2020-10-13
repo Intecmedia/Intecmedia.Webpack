@@ -180,7 +180,7 @@ module.exports = {
             new CaseSensitivePathsPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),
             new CompressionPlugin({
-                test: /\.(js|css|json|lottie)(\?.*)?$/i,
+                test: /\.(js|css|svg|json|lottie)(\?.*)?$/i,
                 filename: '[path][base].br[query]',
                 compressionOptions: {
                     level: 11,
@@ -189,7 +189,7 @@ module.exports = {
                 cache: ENV.DEBUG ? false : UTILS.cacheDir('compression-webpack-plugin-br'),
             }),
             new CompressionPlugin({
-                test: /\.(js|css|json|lottie)(\?.*)?$/i,
+                test: /\.(js|css|svg|json|lottie)(\?.*)?$/i,
                 filename: '[path][base].gz[query]',
                 compressionOptions: {
                     numiterations: 15,
