@@ -117,6 +117,7 @@
         "html-validate": "latest",
         "html-validator": "latest",
         "html-webpack-plugin": "latest",
+        "ignore": "latest",
         "image-size": "latest",
         "imagemin": "latest",
         "imagemin-gifsicle": "latest",

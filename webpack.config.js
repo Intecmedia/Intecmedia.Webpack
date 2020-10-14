@@ -8,6 +8,7 @@ if (process.cwd() !== realcwd) process.chdir(realcwd);
 
 const path = require('path');
 const slash = require('slash');
+const ignore = require('ignore');
 const webpack = require('webpack');
 const weblog = require('webpack-log');
 
@@ -47,6 +48,7 @@ const UglifyJsPlugin = (ENV.PROD && !ENV.DEBUG ? require('uglifyjs-webpack-plugi
 const SvgSpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const JsonpScriptSrcPlugin = require('./plugin.jsonp-script-src.js');
 
+const ImageminIgnore = ignore().add(fs.readFileSync('./.imageminignore').toString());
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
 const HtmlBeautifyPlugin = (APP.HTML_PRETTY ? require('./plugin.html-beautify.js') : () => {});
 const BabelConfig = require('./babel.config.js');
@@ -287,7 +289,10 @@ module.exports = {
         ...(ENV.PROD || ENV.DEBUG ? [
             new ImageminPlugin({
                 test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
-                exclude: /(fonts|font|svg-sprite)/i,
+                exclude: (filePath) => {
+                    const relativePath = slash(path.relative(__dirname, path.normalize(filePath)));
+                    return /(fonts|font|svg-sprite)/i.test(filePath) && ImageminIgnore.filter([relativePath]).length === 0;
+                },
                 name: UTILS.resourceName('img'),
                 imageminOptions: require('./imagemin.config.js'),
                 cache: !ENV.DEBUG,
