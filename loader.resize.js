@@ -16,6 +16,7 @@ const logger = weblog({ name: 'loader-resize' });
 const DEFAULT_OPTIONS = {
     imageMagick: true,
     cacheDirectory: false,
+    esModule: false,
 };
 
 module.exports = function ResizeLoader(content) {
@@ -45,6 +46,7 @@ module.exports = function ResizeLoader(content) {
     const resourceFormat = resourceInfo.ext.slice(1).toLowerCase();
     const relativePath = path.relative(__dirname, loaderContext.resourcePath);
     const imageMagick = gm.subClass({ imageMagick: options.imageMagick });
+    delete options.imageMagick;
 
     const resourceHash = md5File.sync(loaderContext.resourcePath);
     const cacheKey = `${relativePath}?${JSON.stringify(query)}&${resourceHash}`;
