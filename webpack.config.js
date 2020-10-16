@@ -43,6 +43,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const BrowserSyncPlugin = (ENV.WATCH ? require('browser-sync-webpack-plugin') : () => {});
 const StyleLintPlugin = (ENV.USE_LINTERS ? require('stylelint-webpack-plugin') : () => {});
+const ESLintPlugin = (ENV.USE_LINTERS ? require('eslint-webpack-plugin') : () => {});
 const CompressionPlugin = (ENV.PROD && !ENV.DEBUG ? require('compression-webpack-plugin') : () => {});
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const UglifyJsPlugin = (ENV.PROD && !ENV.DEBUG ? require('uglifyjs-webpack-plugin') : () => {});
@@ -239,6 +240,12 @@ module.exports = {
                 lintDirtyModulesOnly: ENV.DEV_SERVER || ENV.WATCH,
                 fix: !ENV.DEV_SERVER,
             }),
+            new ESLintPlugin({
+                fix: true,
+                quiet: ENV.PROD,
+                emitError: false,
+                emitWarning: false,
+            }),
         ] : []),
         ...(ENV.SITEMAP.map(({ template, filename }) => new HtmlWebpackPlugin({
             filename,
@@ -339,21 +346,6 @@ module.exports = {
                     exposes: ['$', 'jQuery'],
                 },
             },
-            ...(ENV.USE_LINTERS ? [{
-                enforce: 'pre',
-                test: /\.(js|mjs|cjs)(\?.*)?$/i,
-                exclude: [
-                    path.join(__dirname, 'node_modules'),
-                    path.join(ENV.SOURCE_PATH, 'js', 'external'),
-                ],
-                loader: 'eslint-loader',
-                options: {
-                    fix: true,
-                    quiet: ENV.PROD,
-                    emitError: false,
-                    emitWarning: false,
-                },
-            }] : []),
             {
                 type: 'javascript/auto',
                 test: /\.(js|mjs|cjs)(\?.*)?$/i,

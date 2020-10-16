@@ -98,10 +98,10 @@
         "eslint": "latest",
         "eslint-config-airbnb-base": "latest",
         "eslint-import-resolver-webpack": "latest",
-        "eslint-loader": "latest",
         "eslint-plugin-compat": "latest",
         "eslint-plugin-eslint-comments": "latest",
         "eslint-plugin-import": "latest",
+        "eslint-webpack-plugin": "latest",
         "expose-loader": "latest",
         "fastparse": "latest",
         "favicons-webpack-plugin": "latest",
@@ -190,6 +190,5 @@
         "webpack-sources": "latest",
         "whatwg-fetch": "latest",
         "yargs": "latest"
-    },
-    "devDependencies": {}
+    }
 }
