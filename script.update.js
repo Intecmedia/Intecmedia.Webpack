@@ -32,7 +32,4 @@ childProcess.exec('npm outdate --json', (err, stdout, stderr) => {
     });
 
     logger.info(`installed ${installed.length} packages`);
-
-    logger.info('npm audit fix');
-    childProcess.execSync('npm audit fix', { stdio: 'inherit' });
 });
