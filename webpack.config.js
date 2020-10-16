@@ -13,6 +13,7 @@ const webpack = require('webpack');
 const weblog = require('webpack-log');
 
 const logger = weblog({ name: 'webpack-config' });
+const imageminLogger = weblog({ name: 'imagemin' });
 
 const ENV = require('./app.env.js');
 const APP = require('./app.config.js');
@@ -292,7 +293,9 @@ module.exports = {
                 exclude: /(fonts|font|svg-sprite)/i,
                 filter: (input, name) => {
                     const relativePath = slash(path.relative(__dirname, path.normalize(name)));
-                    return !ImageminIgnore.ignores(relativePath);
+                    const ignores = ImageminIgnore.ignores(relativePath);
+                    imageminLogger.info(`${JSON.stringify(relativePath)} ${ignores ? 'ignores' : 'minified'}`);
+                    return !ignores;
                 },
                 minimizerOptions: require('./imagemin.config.js'),
                 cache: !ENV.DEBUG,
