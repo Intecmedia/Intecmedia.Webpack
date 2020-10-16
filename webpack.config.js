@@ -36,7 +36,7 @@ if (ENV.STANDALONE) {
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
-const ImageminPlugin = require('image-minimizer-webpack-plugin');
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
@@ -287,7 +287,7 @@ module.exports = {
             plainSprite: true,
         }),
         ...(ENV.PROD || ENV.DEBUG ? [
-            new ImageminPlugin({
+            new ImageMinimizerPlugin({
                 test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
                 exclude: /(fonts|font|svg-sprite)/i,
                 filter: (input, name) => {
