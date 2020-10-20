@@ -177,7 +177,6 @@
         "stylelint-use-nesting": "latest",
         "stylelint-webpack-plugin": "latest",
         "svg-sprite-loader": "latest",
-        "svg4everybody": "latest",
         "svgo": "latest",
         "uglifyjs-webpack-plugin": "latest",
         "url-loader": "latest",
