@@ -291,7 +291,7 @@ module.exports = {
                 indent_size: 4,
                 html: {
                     unformatted: ['code', 'pre', 'textarea'],
-                    wrap_line_length: Number.MAX_SAFE_INTEGER,
+                    wrap_line_length: 120,
                     max_preserve_newlines: 1,
                 },
             },

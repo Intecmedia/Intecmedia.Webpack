@@ -10,9 +10,12 @@ class HtmlBeautifyPlugin {
 
         const defaultOptions = {
             config: {
+                indent_char: ' ',
                 indent_size: 4,
-                indent_with_tabs: false,
                 html: {
+                    unformatted: ['code', 'pre', 'textarea'],
+                    wrap_line_length: 120,
+                    max_preserve_newlines: 1,
                 },
             },
         };
