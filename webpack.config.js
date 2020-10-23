@@ -394,7 +394,6 @@ module.exports = {
             },
             // file loaders
             {
-                test: /.*/i,
                 include: [
                     path.join(ENV.SOURCE_PATH, 'upload'),
                 ],
