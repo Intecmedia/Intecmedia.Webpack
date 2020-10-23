@@ -31,6 +31,7 @@ if (!['production', 'development'].includes(NODE_ENV)) {
 const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.html`, {
     ignore: [
         `${slash(SOURCE_PATH)}/partials/**/*.html`,
+        `${slash(SOURCE_PATH)}/upload/**/*.html`,
     ],
 }).map((i) => {
     const basename = path.basename(i, '.html');
