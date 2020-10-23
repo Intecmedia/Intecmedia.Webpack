@@ -1,6 +1,6 @@
 {% macro svg_sprite (id, attrs = {}) %}
     <svg{% for k, v in attrs %} {{ k }}="{{ v }}"{% endfor %}>
-        <use xlink:href="/img/svg-sprite.svg#icon-{{ id }}" />
+        <use xlink:href="{{ APP.PUBLIC_PATH }}img/svg-sprite.svg#icon-{{ id }}" />
     </svg>
 {% endmacro %}
 
