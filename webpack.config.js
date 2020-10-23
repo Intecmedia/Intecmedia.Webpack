@@ -471,7 +471,7 @@ module.exports = {
                         const spriteDir = path.join(ENV.SOURCE_PATH, 'img/svg-sprite');
                         const relativePath = slash(path.relative(spriteDir, path.normalize(filePath)));
                         const symbolId = path.basename(relativePath, '.svg').replace(path.posix.sep, '-');
-                        return `svg-sprite-${symbolId}`;
+                        return `icon-${symbolId}`;
                     },
                 },
             },
