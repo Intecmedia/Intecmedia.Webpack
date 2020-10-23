@@ -168,6 +168,7 @@ module.exports = {
             patterns: [
                 '**/.htaccess',
                 'img/**/*.*',
+                'upload/**/*.*',
                 '*.txt',
                 '*.php',
             ].map((from) => ({
@@ -176,7 +177,6 @@ module.exports = {
                 context: ENV.SOURCE_PATH,
                 globOptions: {
                     ignore: [
-                        ...ENV.SITEMAP.map((i) => i.template),
                         '**/svg-sprite/**',
                     ],
                 },
@@ -388,17 +388,45 @@ module.exports = {
                     },
                 ],
             },
+            // file loaders
+            {
+                test: /.*/i,
+                include: [
+                    path.join(ENV.SOURCE_PATH, 'upload'),
+                ],
+                oneOf: [
+                    {
+                        include: /\.(jpeg|jpg|png|gif)(\?.*)?$/i,
+                        exclude: /\.(svg)$/i,
+                        resourceQuery: /[&?]resize=.+/,
+                        loader: './loader.resize.js',
+                        options: {
+                            cacheDirectory: ENV.DEBUG ? false : UTILS.cacheDir('loader-resize'),
+                            name: UTILS.resourceName('upload'),
+                            limit: 32 * 1024,
+                            esModule: false,
+                            hashType: 'md5',
+                        },
+                    },
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: UTILS.resourceName('upload'), esModule: false, hashType: 'md5',
+                        },
+                    },
+                ],
+            },
             // image loaders
             {
                 test: /\.(svg)(\?.*)?$/i,
                 issuer: /\.(html)(\?.*)?$/i,
                 include: /(partials)/i,
-                exclude: /(fonts|font|svg-sprite)/i,
+                exclude: /(fonts|font|svg-sprite|upload)/i,
                 loader: './loader.svgo.js',
             },
             {
                 test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
-                exclude: /(fonts|font|partials|svg-sprite)/i,
+                exclude: /(fonts|font|partials|svg-sprite|upload)/i,
                 oneOf: [
                     {
                         exclude: /\.(svg)$/i,

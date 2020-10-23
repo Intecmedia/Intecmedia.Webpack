@@ -16,7 +16,9 @@ const logger = weblog({ name: 'loader-resize' });
 const DEFAULT_OPTIONS = {
     imageMagick: true,
     cacheDirectory: false,
+    limit: 32 * 1024,
     esModule: false,
+    hashType: 'md5',
 };
 
 module.exports = function ResizeLoader(content) {
