@@ -1,5 +1,5 @@
 /* eslint-env node */
-/* eslint "compat/compat": "off" */
+/* eslint global-require: "off", "compat/compat": "off" */
 
 const uniqueId = require('lodash.uniqueid');
 
