@@ -338,6 +338,9 @@ module.exports = {
             {
                 test: /\.(html)(\?.*)?$/i,
                 loader: './loader.html.js',
+                exclude: [
+                    path.join(ENV.SOURCE_PATH, 'upload'),
+                ],
                 options: {
                     context: APP,
                     searchPath: ENV.SOURCE_PATH,
@@ -362,6 +365,7 @@ module.exports = {
                     exclude: [
                         // enable babel transform
                         ...BabelConfig.includeTransform,
+                        path.join(ENV.SOURCE_PATH, 'upload'),
                     ],
                 },
                 loaders: [
@@ -458,7 +462,7 @@ module.exports = {
             {
                 test: /\.svg$/,
                 include: /(svg-sprite)/i,
-                exclude: /(fonts|font|partials)/i,
+                exclude: /(fonts|font|partials|upload)/i,
                 loader: 'svg-sprite-loader',
                 options: {
                     extract: true,
@@ -474,13 +478,16 @@ module.exports = {
             // font loaders
             {
                 test: /\.(eot|woff|woff2|ttf|svg)(\?.*)?$/i,
-                exclude: /(img|images|partials|svg-sprite)/i,
+                exclude: /(img|images|partials|svg-sprite|upload)/i,
                 loader: 'file-loader',
                 options: { name: UTILS.resourceName('fonts'), esModule: false, hashType: 'md5' },
             },
             // css loaders
             {
                 test: /\.(css|scss)(\?.*)?$/i,
+                exclude: [
+                    path.join(ENV.SOURCE_PATH, 'upload'),
+                ],
                 loaders: [
                     {
                         loader: MiniCssExtractPlugin.loader,
