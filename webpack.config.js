@@ -177,7 +177,7 @@ module.exports = {
                 context: ENV.SOURCE_PATH,
                 globOptions: {
                     ignore: [
-                        '**/svg-sprite/**',
+                        '**/img/svg-sprite/**',
                     ],
                 },
                 noErrorOnMissing: true,
@@ -302,7 +302,10 @@ module.exports = {
         ...(ENV.PROD || ENV.DEBUG ? [
             new ImageMinimizerPlugin({
                 test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
-                exclude: /(fonts|font|svg-sprite)/i,
+                exclude: [
+                    /(fonts|font)/i,
+                    path.join(ENV.SOURCE_PATH, 'img/svg-sprite'),
+                ],
                 filter: (input, name) => {
                     const relativePath = slash(path.relative(__dirname, path.normalize(name)));
                     const ignores = ImageminIgnore.ignores(relativePath);
@@ -423,13 +426,24 @@ module.exports = {
             {
                 test: /\.(svg)(\?.*)?$/i,
                 issuer: /\.(html)(\?.*)?$/i,
-                include: /(partials)/i,
-                exclude: /(fonts|font|svg-sprite|upload)/i,
+                include: [
+                    path.join(ENV.SOURCE_PATH, 'partials'),
+                ],
+                exclude: [
+                    /(fonts|font)/i,
+                    path.join(ENV.SOURCE_PATH, 'img/svg-sprite'),
+                    path.join(ENV.SOURCE_PATH, 'upload'),
+                ],
                 loader: './loader.svgo.js',
             },
             {
                 test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
-                exclude: /(fonts|font|partials|svg-sprite|upload)/i,
+                exclude: [
+                    /(fonts|font)/i,
+                    path.join(ENV.SOURCE_PATH, 'img/svg-sprite'),
+                    path.join(ENV.SOURCE_PATH, 'upload'),
+                    path.join(ENV.SOURCE_PATH, 'partials'),
+                ],
                 oneOf: [
                     {
                         exclude: /\.(svg)$/i,
@@ -461,7 +475,11 @@ module.exports = {
             {
                 test: /\.svg$/,
                 include: /(svg-sprite)/i,
-                exclude: /(fonts|font|partials|upload)/i,
+                exclude: [
+                    /(fonts|font)/i,
+                    path.join(ENV.SOURCE_PATH, 'upload'),
+                    path.join(ENV.SOURCE_PATH, 'partials'),
+                ],
                 loader: 'svg-sprite-loader',
                 options: {
                     extract: true,
@@ -477,7 +495,12 @@ module.exports = {
             // font loaders
             {
                 test: /\.(eot|woff|woff2|ttf|svg)(\?.*)?$/i,
-                exclude: /(img|images|partials|svg-sprite|upload)/i,
+                exclude: [
+                    /(img|images)/i,
+                    path.join(ENV.SOURCE_PATH, 'img/svg-sprite'),
+                    path.join(ENV.SOURCE_PATH, 'upload'),
+                    path.join(ENV.SOURCE_PATH, 'partials'),
+                ],
                 loader: 'file-loader',
                 options: { name: UTILS.resourceName('fonts'), esModule: false, hashType: 'md5' },
             },
