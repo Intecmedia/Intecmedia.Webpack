@@ -174,7 +174,12 @@ module.exports = {
                 from,
                 to: ENV.OUTPUT_PATH,
                 context: ENV.SOURCE_PATH,
-                globOptions: { ignore: ENV.SITEMAP.map((i) => i.template) },
+                globOptions: {
+                    ignore: [
+                        ...ENV.SITEMAP.map((i) => i.template),
+                        '**/svg-sprite/**',
+                    ],
+                },
                 noErrorOnMissing: true,
                 force: true,
             })),
