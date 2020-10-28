@@ -7,6 +7,7 @@ const $breakpoints = {
     md: $html.css('--breakpoint-md'),
     lg: $html.css('--breakpoint-lg'),
     xl: $html.css('--breakpoint-xl'),
+    xxl: $html.css('--breakpoint-xxl'),
 };
 
 if (VERBOSE) {
