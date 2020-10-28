@@ -48,7 +48,7 @@
     </picture>
 {% endmacro %}
 
-{% macro webp (url, alt, attrs={}, quality=DEFAULT_QUALITY) %}
+{% macro picture_webp (url, alt, attrs={}, quality=DEFAULT_QUALITY) %}
     <picture{% for k, v in attrs %} {{ k }}="{{ v }}"{% endfor %}>
         <source srcset="{{ require(url + '?resize=&quality=' + quality + '&format=webp') }}" type="image/webp">
         {% set dimensions = image_size(url) %}
