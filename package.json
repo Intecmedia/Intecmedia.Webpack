@@ -68,6 +68,8 @@
     "dependencies": {
         "@babel/cli": "latest",
         "@babel/core": "latest",
+        "@babel/eslint-parser": "latest",
+        "@babel/eslint-plugin": "latest",
         "@babel/plugin-proposal-class-properties": "latest",
         "@babel/plugin-proposal-decorators": "latest",
         "@babel/plugin-proposal-logical-assignment-operators": "latest",
@@ -80,7 +82,6 @@
         "@gfx/zopfli": "latest",
         "@sentry/browser": "latest",
         "autoprefixer": "latest",
-        "babel-eslint": "latest",
         "babel-loader": "latest",
         "bootstrap": "latest",
         "browser-sync": "latest",

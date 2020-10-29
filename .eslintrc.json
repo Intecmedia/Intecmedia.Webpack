@@ -1,6 +1,11 @@
 {
     "root": true,
-    "parser": "babel-eslint",
+    "parser": "@babel/eslint-parser",
+    "parserOptions": {
+        "babelOptions": {
+            "configFile": "./babel.options.js"
+        }
+    },
     "extends": [
         "plugin:compat/recommended",
         "plugin:eslint-comments/recommended",
@@ -13,6 +18,7 @@
         "jquery": true
     },
     "plugins": [
+        "@babel",
         "import"
     ],
     "settings": {
