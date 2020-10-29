@@ -15,6 +15,7 @@ const deepMerge = require('lodash.merge');
 const attributeParser = require('./attr.parser.js');
 
 const helpers = require('./source/helpers');
+const IncludeWithExtension = require('./plugin.nunjucks-include-with');
 
 const logger = weblog({ name: 'loader-html' });
 
@@ -117,8 +118,12 @@ module.exports = function HtmlLoader() {
     validateOptions(OPTIONS_SCHEMA, options, 'loader-html');
 
     const nunjucksLoader = new nunjucks.FileSystemLoader(options.searchPath, { noCache: true });
-    const nunjucksEnvironment = new nunjucks.Environment(nunjucksLoader, options.environment);
+    const nunjucksEnv = new nunjucks.Environment(nunjucksLoader, options.environment);
     const relativePath = slash(path.relative(__dirname, loaderContext.resourcePath));
+
+    nunjucksEnv.addExtension('includeWith', new IncludeWithExtension({
+        nunjucksEnv,
+    }));
 
     options.requireIdent = (url) => {
         let ident;
@@ -141,12 +146,12 @@ module.exports = function HtmlLoader() {
         return `" + require(${JSON.stringify(request)}) + "`;
     });
 
-    nunjucksEnvironment.addFilter('require', options.requireIdent);
-    nunjucksEnvironment.addGlobal('require', options.requireIdent);
+    nunjucksEnv.addFilter('require', options.requireIdent);
+    nunjucksEnv.addGlobal('require', options.requireIdent);
 
     helpers.forEach((helper, name) => {
-        nunjucksEnvironment.addFilter(name, helper);
-        nunjucksEnvironment.addGlobal(name, helper);
+        nunjucksEnv.addFilter(name, helper);
+        nunjucksEnv.addGlobal(name, helper);
     });
 
     const publicPath = ((options.context.APP || {}).PUBLIC_PATH || path.sep);
@@ -157,13 +162,13 @@ module.exports = function HtmlLoader() {
         baseName === 'index' ? '' : path.posix.sep + baseName
     ) + path.posix.sep;
 
-    nunjucksEnvironment.addGlobal('APP', options.context);
+    nunjucksEnv.addGlobal('APP', options.context);
     const PAGE = {
         URL: slash(path.normalize(path.join(publicPath, resourceUrl))),
         PATH: slash(path.normalize(resourcePath)),
     };
 
-    nunjucksEnvironment.addGlobal('PAGE', PAGE);
+    nunjucksEnv.addGlobal('PAGE', PAGE);
 
     const nunjucksGetSource = nunjucksLoader.getSource;
     nunjucksLoader.getSource = function getSource(filename) {
@@ -179,8 +184,8 @@ module.exports = function HtmlLoader() {
             return templateSource;
         }
         const templateData = frontMatter(templateSource.src);
-        nunjucksEnvironment.addGlobal('PAGE', deepMerge(
-            nunjucksEnvironment.getGlobal('PAGE') || {},
+        nunjucksEnv.addGlobal('PAGE', deepMerge(
+            nunjucksEnv.getGlobal('PAGE') || {},
             templateData.attributes,
             PAGE,
         ));
@@ -199,7 +204,7 @@ module.exports = function HtmlLoader() {
 
     logger.info(`render(${JSON.stringify(relativePath)})`);
 
-    nunjucksEnvironment.render(loaderContext.resourcePath, {}, (error, result) => {
+    nunjucksEnv.render(loaderContext.resourcePath, {}, (error, result) => {
         if (error) {
             loaderCallback(error);
         } else {
