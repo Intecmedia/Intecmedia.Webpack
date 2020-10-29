@@ -7,8 +7,8 @@ const nunjucks = require('nunjucks');
 const RELATIVE_PATTERN = /^\.{1,2}\//;
 
 function IncludeWithExtension({ nunjucksEnv, tagName = 'includeWith' }) {
-    this.nunjucksEnv = nunjucksEnv;
     this.cwd = '';
+    this.nunjucksEnv = nunjucksEnv;
     this.tags = [tagName];
 
     this.parse = (parser, nodes) => {
@@ -19,7 +19,9 @@ function IncludeWithExtension({ nunjucksEnv, tagName = 'includeWith' }) {
     };
 
     this.preprocess = (templateSrc, templatePath) => {
-        this.cwd = path.dirname(templatePath || '');
+        if (templatePath) {
+            this.cwd = path.dirname(templatePath);
+        }
         return templateSrc;
     };
 
