@@ -120,7 +120,7 @@
 * Конфиг SVGO находится `svgo.config.js`.
 
 ### Webp
-* Автоматический WebP для всех изображений(png, jpg, jpeg) внутри CSS – [webpcss](https://github.com/lexich/webpcss), пример:
+* Автоматический WebP для всех изображений(png, jpg, jpeg) внутри стилей, пример:
 ```css
 // before
 .test { background-image:url('test.png'); }
