@@ -21,3 +21,7 @@ module.exports = {
         }],
     ],
 };
+
+module.exports.wepb = {
+    quality: 85,
+};

@@ -2,6 +2,7 @@ build/fonts
 build/img
 build/js
 build/css
+build/upload
 build/**/*.html
 build/partials/svg/**/*.svg
 build/humans.txt

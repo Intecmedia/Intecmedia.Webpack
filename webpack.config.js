@@ -13,7 +13,10 @@ const webpack = require('webpack');
 const weblog = require('webpack-log');
 
 const logger = weblog({ name: 'webpack-config' });
+const imageminConfig = require('./imagemin.config.js');
+
 const imageminLogger = weblog({ name: 'imagemin' });
+const imageminWebpLogger = weblog({ name: 'imagemin-webp' });
 
 const ENV = require('./app.env.js');
 const APP = require('./app.config.js');
@@ -312,10 +315,27 @@ module.exports = {
                     imageminLogger.info(`${JSON.stringify(relativePath)} ${ignores ? 'ignores' : 'minified'}`);
                     return !ignores;
                 },
-                minimizerOptions: require('./imagemin.config.js'),
+                minimizerOptions: { plugins: imageminConfig.plugins },
                 cache: !ENV.DEBUG,
                 loader: true,
             }),
+        ] : []),
+        new ImageMinimizerPlugin({
+            test: /\.(jpeg|jpg|png)(\?.*)?$/i,
+            filename: '[path][name].webp',
+            filter: (input, name) => {
+                const relativePath = slash(path.relative(__dirname, path.normalize(name)));
+                const ignores = ImageminIgnore.ignores(relativePath);
+                imageminWebpLogger.info(`${JSON.stringify(relativePath)} ${ignores ? 'ignores' : 'minified'}`);
+                return !ignores;
+            },
+            minimizerOptions: {
+                plugins: [['imagemin-webp', { ...imageminConfig.webp }]],
+            },
+            cache: !ENV.DEBUG,
+            loader: false,
+        }),
+        ...(ENV.PROD || ENV.DEBUG ? [
             new BundleAnalyzerPlugin({
                 analyzerMode: (ENV.DEV_SERVER ? 'server' : 'static'),
                 openAnalyzer: ENV.DEV_SERVER,
