@@ -20,7 +20,10 @@ module.exports = () => {
 
             originParams.set('resize', '');
             originParams.set('format', 'webp');
-            originParams.set('name', path.basename(originRequest, path.extname(originRequest)));
+
+            const originName = path.basename(originRequest, path.extname(originRequest));
+            originParams.set('name', `${originName}@postcss`);
+
             const webpUrl = [originRequest, originParams].join('?');
 
             const originRule = decl.parent;
