@@ -329,9 +329,7 @@ module.exports = {
                 imageminWebpLogger.info(`${JSON.stringify(relativePath)} ${ignores ? 'ignores' : 'minified'}`);
                 return !ignores;
             },
-            minimizerOptions: {
-                plugins: [['imagemin-webp', { ...imageminConfig.webp }]],
-            },
+            minimizerOptions: { plugins: [['imagemin-webp', { ...imageminConfig.webp }]] },
             cache: !ENV.DEBUG,
             loader: false,
         }),
