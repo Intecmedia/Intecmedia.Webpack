@@ -19,35 +19,36 @@ const DEFAULT_OPTIONS = {
 };
 
 module.exports = function ResizeLoader(content) {
-    const loaderContext = this;
-    if (loaderContext.cacheable) loaderContext.cacheable();
-    const loaderCallback = loaderContext.async();
+    const thisLoader = this;
 
-    const query = loaderContext.resourceQuery ? loaderUtils.parseQuery(loaderContext.resourceQuery) : {};
+    if (thisLoader.cacheable) thisLoader.cacheable();
+    const loaderCallback = thisLoader.async();
+
+    const query = thisLoader.resourceQuery ? loaderUtils.parseQuery(thisLoader.resourceQuery) : {};
     const options = deepMerge(
         {},
         DEFAULT_OPTIONS,
-        loaderUtils.getOptions(loaderContext),
+        loaderUtils.getOptions(thisLoader),
     );
-
+    const context = options.context || thisLoader.rootContext;
     const resizeCache = options.cacheDirectory ? flatCache.load('loader-resize.json', options.cacheDirectory) : false;
     delete options.cacheDirectory;
 
     const nextLoader = (query.inline === 'inline' ? urlLoader : fileLoader);
     if (!('resize' in query)) {
-        return loaderCallback(null, nextLoader.call(loaderContext, content));
+        return loaderCallback(null, nextLoader.call(thisLoader, content));
     }
     if ('inline' in query) {
         delete query.inline;
     }
 
-    const resourceInfo = path.parse(loaderContext.resourcePath);
+    const resourceInfo = path.parse(thisLoader.resourcePath);
     const resourceFormat = resourceInfo.ext.slice(1).toLowerCase();
-    const relativePath = path.relative(__dirname, loaderContext.resourcePath);
+    const relativePath = path.relative(__dirname, thisLoader.resourcePath);
     const imageMagick = gm.subClass({ imageMagick: options.imageMagick });
     delete options.imageMagick;
 
-    const resourceHash = md5File.sync(loaderContext.resourcePath);
+    const resourceHash = md5File.sync(thisLoader.resourcePath);
     const cacheKey = `${relativePath}?${JSON.stringify(query)}&${resourceHash}`;
 
     let [, resizeWidth,, resizeHeight, resizeFlag] = query.resize.trim().match(/^(\d*)(x(\d*))?([!<>^])?$/);
@@ -62,15 +63,18 @@ module.exports = function ResizeLoader(content) {
     }
 
     const format = (query.format || resourceFormat).toLowerCase();
-    const name = ((query.name ? loaderUtils.interpolateName(loaderContext, query.name, {}) : null) || (
+    const name = ((query.name ? loaderUtils.interpolateName(thisLoader, query.name, {
+        context,
+        content,
+    }) : null) || (
         `${resourceInfo.name}@resize-${resizeWidth || ''}x${resizeHeight || ''}${resizeFlagNames[resizeFlag]}`
     )) + (query.suffix ? `-${query.suffix}` : '');
 
     const cacheData = resizeCache ? resizeCache.getKey(cacheKey) : undefined;
     if (cacheData !== undefined && cacheData.type === 'Buffer' && cacheData.data) {
-        logger.info(`load cache '${relativePath}${loaderContext.resourceQuery}'`);
-        loaderContext.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
-        loaderCallback(null, nextLoader.call(loaderContext, Buffer.from(cacheData.data)));
+        logger.info(`load cache '${relativePath}${thisLoader.resourceQuery}'`);
+        thisLoader.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
+        loaderCallback(null, nextLoader.call(thisLoader, Buffer.from(cacheData.data)));
     } else {
         imageMagick(content).size(function sizeCallback(sizeError, size) {
             if (sizeError) { loaderCallback(sizeError); return; }
@@ -91,10 +95,10 @@ module.exports = function ResizeLoader(content) {
 
             this.toBuffer(format.toUpperCase(), (bufferError, buffer) => {
                 if (bufferError) { loaderCallback(bufferError); return; }
-                logger.info(`save cache '${relativePath}${loaderContext.resourceQuery}'`);
+                logger.info(`save cache '${relativePath}${thisLoader.resourceQuery}'`);
                 if (resizeCache) resizeCache.setKey(cacheKey, buffer.toJSON());
-                loaderContext.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
-                loaderCallback(null, nextLoader.call(loaderContext, buffer));
+                thisLoader.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
+                loaderCallback(null, nextLoader.call(thisLoader, buffer));
                 if (resizeCache) resizeCache.save(true);
             });
         });
