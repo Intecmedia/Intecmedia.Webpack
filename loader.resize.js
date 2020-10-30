@@ -62,7 +62,7 @@ module.exports = function ResizeLoader(content) {
     }
 
     const format = (query.format || resourceFormat).toLowerCase();
-    const name = ((query.name ? loaderUtils.interpolateName(loaderContext, query.name) : null) || (
+    const name = ((query.name ? loaderUtils.interpolateName(loaderContext, query.name, {}) : null) || (
         `${resourceInfo.name}@resize-${resizeWidth || ''}x${resizeHeight || ''}${resizeFlagNames[resizeFlag]}`
     )) + (query.suffix ? `-${query.suffix}` : '');
 
