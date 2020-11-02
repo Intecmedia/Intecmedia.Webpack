@@ -56,7 +56,7 @@ const JsonpScriptSrcPlugin = require('./plugin.jsonp-script-src.js');
 const ImageminIgnore = ignore().add(fs.readFileSync('./.imageminignore').toString());
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
 const HtmlBeautifyPlugin = (APP.HTML_PRETTY ? require('./plugin.html-beautify.js') : () => {});
-const BabelConfig = require('./babel.config.js');
+const BabelOptions = require('./babel.options.js');
 
 const BANNER_STRING = [
     `ENV.NODE_ENV=${ENV.NODE_ENV} | ENV.DEBUG=${ENV.DEBUG}`,
@@ -381,11 +381,11 @@ module.exports = {
                 exclude: {
                     test: [
                         // disable babel transform
-                        ...BabelConfig.excludeTransform,
+                        ...BabelOptions.excludeTransform,
                     ],
                     exclude: [
                         // enable babel transform
-                        ...BabelConfig.includeTransform,
+                        ...BabelOptions.includeTransform,
                         path.join(ENV.SOURCE_PATH, 'upload'),
                     ],
                 },
@@ -404,11 +404,10 @@ module.exports = {
                         loader: 'babel-loader',
                         options: {
                             babelrc: false,
-                            configFile: false,
+                            configFile: './babel.config.js',
                             envName: ENV.NODE_ENV,
                             cacheCompression: false,
                             cacheDirectory: ENV.DEBUG ? false : UTILS.cacheDir('babel-loader'),
-                            ...BabelConfig.options,
                         },
                     },
                 ],
