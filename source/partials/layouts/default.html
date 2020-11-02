@@ -4,12 +4,12 @@
 
 {% block body %}
 <div class="wrapper">
-    {% include 'partials/header.html' %}
+    {% includeWith 'partials/header.html' %}
 
     <main class="main">
         {% block content %}{% endblock %}
     </main>
 
-    {% include 'partials/footer.html' %}
+    {% includeWith 'partials/footer.html' %}
 </div>
 {% endblock %}

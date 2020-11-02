@@ -11,27 +11,27 @@
     <base href="{{ APP.PUBLIC_PATH }}">
     {% endif %}
 
-    {% include 'partials/head-js.html' %}
+    {% includeWith 'partials/head-js.html' %}
 
     <!-- block-head -->
     {% block head %}{% endblock %}
     <!-- /block-head -->
 
-    {% include 'partials/counters-head.html' %}
+    {% includeWith 'partials/counters-head.html' %}
 
-    {% include 'partials/open-graph.html' %}
+    {% includeWith 'partials/open-graph.html' %}
 
 </head>
 <body class="{% block body_class %}{% endblock %}">
 
-    {% include 'partials/counters-body-open.html' %}
+    {% includeWith 'partials/counters-body-open.html' %}
 
     {% block body %}{% endblock %}
 
-    {% include 'partials/browser-sync.html' %}
-    {% include 'partials/debug-vars.html' %}
+    {% includeWith 'partials/browser-sync.html' %}
+    {% includeWith 'partials/debug-vars.html' %}
 
-    {% include 'partials/counters-body-close.html' %}
+    {% includeWith 'partials/counters-body-close.html' %}
 
 </body>
 </html>
