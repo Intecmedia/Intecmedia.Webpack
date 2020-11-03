@@ -50,7 +50,7 @@ const ESLintPlugin = (ENV.USE_LINTERS ? require('eslint-webpack-plugin') : () =>
 const CompressionPlugin = (ENV.PROD && !ENV.DEBUG ? require('compression-webpack-plugin') : () => {});
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const UglifyJsPlugin = (ENV.PROD && !ENV.DEBUG ? require('uglifyjs-webpack-plugin') : () => {});
-const SvgSpriteLoaderPlugin = require('./plugin.svg-sprite.js');
+const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 const JsonpScriptSrcPlugin = require('./plugin.jsonp-script-src.js');
 
 const ImageminIgnore = ignore().add(fs.readFileSync('./.imageminignore').toString());
@@ -299,8 +299,20 @@ module.exports = {
                 },
             },
         })] : []),
-        new SvgSpriteLoaderPlugin({
-            plainSprite: true,
+        new SVGSpritemapPlugin([
+            'source/img/svg-sprite/*.svg',
+        ], {
+            output: {
+                filename: 'img/svg-sprite.svg',
+                svg4everybody: false,
+                svgo: false,
+            },
+            sprite: {
+                prefix: 'icon-',
+                generate: {
+                    title: false,
+                },
+            },
         }),
         ...(ENV.PROD || ENV.DEBUG ? [
             new ImageMinimizerPlugin({
@@ -488,26 +500,6 @@ module.exports = {
                         },
                     },
                 ],
-            },
-            {
-                test: /\.svg$/,
-                include: /(svg-sprite)/i,
-                exclude: [
-                    /(fonts|font)/i,
-                    path.join(ENV.SOURCE_PATH, 'upload'),
-                    path.join(ENV.SOURCE_PATH, 'partials'),
-                ],
-                loader: 'svg-sprite-loader',
-                options: {
-                    extract: true,
-                    spriteFilename: 'img/svg-sprite.svg',
-                    symbolId: (filePath) => {
-                        const spriteDir = path.join(ENV.SOURCE_PATH, 'img/svg-sprite');
-                        const relativePath = slash(path.relative(spriteDir, path.normalize(filePath)));
-                        const symbolId = path.basename(relativePath, '.svg').replace(path.posix.sep, '-');
-                        return `icon-${symbolId}`;
-                    },
-                },
             },
             // font loaders
             {

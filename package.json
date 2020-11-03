@@ -178,7 +178,7 @@
         "stylelint-scss": "latest",
         "stylelint-use-nesting": "latest",
         "stylelint-webpack-plugin": "latest",
-        "svg-sprite-loader": "latest",
+        "svg-spritemap-webpack-plugin": "^3.7.0",
         "svg4everybody": "latest",
         "svgo": "latest",
         "uglifyjs-webpack-plugin": "latest",
