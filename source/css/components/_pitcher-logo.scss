@@ -17,7 +17,7 @@ $pitcherLogo-hover-color: $link-hover-color !default;
         width: 58px;
         height: 51px;
 
-        --fill-color: #{$pitcherLogo-color};
+        fill: #{$pitcherLogo-color};
     }
 
     &:hover,
@@ -26,7 +26,7 @@ $pitcherLogo-hover-color: $link-hover-color !default;
         color: #{$pitcherLogo-hover-color};
 
         .pitcherLogo-icon {
-            --fill-color: #{$pitcherLogo-hover-color};
+            fill: #{$pitcherLogo-hover-color};
         }
     }
 }
