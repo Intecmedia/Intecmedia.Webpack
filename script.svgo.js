@@ -26,7 +26,7 @@ const ENV = require('./app.env.js');
         const relative = slash(path.relative(__dirname, filename));
 
         const name = path.basename(filename, '.svg');
-        const options = SvgoCreateConfig({ prefix: `svgo-${name.toLowerCase()}-` });
+        const options = SvgoCreateConfig({ prefix: `svgo-${name.toLowerCase()}-`, pretty: true });
         const svgoInstance = new SVGO(options);
 
         svgoInstance.optimize(svg).then((result) => {
