@@ -3,10 +3,8 @@
 
 const uniqueId = require('lodash.uniqueid');
 
-const ENV = require('./app.env.js');
-
 const SvgoCreateConfig = (config) => ({
-    js2svg: { pretty: (config.pretty ? true : false) },
+    js2svg: { pretty: (!!config.pretty) },
     plugins: [
         {
             cleanupIDs: (config.prefix ? {
