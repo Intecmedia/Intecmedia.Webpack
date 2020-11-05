@@ -217,12 +217,14 @@ module.exports = {
             banner: BANNER_STRING,
             include: /\.(css|js)(\?.*)?$/i,
         }),
-        ...(APP.USE_JQUERY ? [new webpack.ProvidePlugin({
-            $: 'jquery',
-            jQuery: 'jquery',
-            'window.$': 'jquery',
-            'window.jQuery': 'jquery',
-        })] : []),
+        new webpack.ProvidePlugin({
+            ...(APP.USE_JQUERY ? {
+                $: 'jquery',
+                jQuery: 'jquery',
+                'window.$': 'jquery',
+                'window.jQuery': 'jquery',
+            } : {}),
+        }),
         new webpack.DefinePlugin({
             DEBUG: JSON.stringify(ENV.DEBUG),
             NODE_ENV: JSON.stringify(ENV.NODE_ENV),
