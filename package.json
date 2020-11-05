@@ -144,7 +144,7 @@
         "object-fit-images": "latest",
         "picturefill": "latest",
         "popper.js": "latest",
-        "postcss": "8.1.2",
+        "postcss": "latest",
         "postcss-browser-reporter": "latest",
         "postcss-custom-properties": "latest",
         "postcss-devtools": "latest",
