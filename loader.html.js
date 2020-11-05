@@ -31,6 +31,7 @@ const DEFAULT_OPTIONS = {
         img: ['src', 'data-src', 'lowsrc', 'srcset', 'data-srcset'],
         source: ['srcset', 'data-srcset'],
         image: ['href', 'xlink:href'],
+        object: ['data'],
     },
     requireIgnore: /^(\w+:|\/\/)/i,
     requireReplace: {},
