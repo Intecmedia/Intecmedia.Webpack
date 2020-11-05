@@ -21,6 +21,7 @@ module.exports = {
         blacklistUrls: [],
         whitelistUrls: [],
     },
+    USE_JQUERY: true,
 };
 
 module.exports.ENV = ENV;
