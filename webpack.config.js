@@ -249,6 +249,7 @@ module.exports = {
                 fix: !ENV.DEV_SERVER,
             }),
             new ESLintPlugin({
+                files: [ENV.SOURCE_PATH],
                 fix: true,
                 quiet: ENV.PROD,
                 emitError: false,
