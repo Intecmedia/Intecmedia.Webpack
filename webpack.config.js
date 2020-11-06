@@ -311,7 +311,16 @@ module.exports = {
                 svgo: false,
             },
             sprite: {
-                prefix: 'icon-',
+                prefix: (filename) => {
+                    const svgContent = fs.readFileSync(filename).toString();
+                    const URL_PATTERN = /url\((.+)\)/i;
+                    if (URL_PATTERN.test(svgContent)) {
+                        const [svgUrl] = svgContent.match(URL_PATTERN);
+                        const relativePath = slash(path.relative(__dirname, path.normalize(filename)));
+                        throw new Error(`[svg-sprite] external content (${svgUrl}) not allowed in: ${relativePath}`);
+                    }
+                    return 'icon-';
+                },
                 generate: {
                     title: false,
                 },
