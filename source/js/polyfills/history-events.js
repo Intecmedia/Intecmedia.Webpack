@@ -11,7 +11,7 @@ function historyEventDecorator(type) {
     const origHandler = window.history[type];
     return function newHandler() {
         if (VERBOSE) {
-            console.log(`[history-events.js] ${type}:`, JSON.stringify(arguments));
+            console.log(`[history-events.js] ${type}:`, arguments);
         }
         const result = Reflect.apply(origHandler, this, arguments);
         let event;
