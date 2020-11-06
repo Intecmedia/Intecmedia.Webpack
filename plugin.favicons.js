@@ -108,5 +108,5 @@ module.exports.AppIcon = function AppIcon(options) {
     } else if (!(logoSize.width === 1024 && logoSize.height === 1024)) {
         throw new Error(`AppIcon '${mergedOptions.logo}': image size is not than (1024 x 1024)`);
     }
-    return new FaviconsWebpackPlugin(fixWebpackConfig(mergedOptions));
+    return new FaviconsWebpackPluginOriginal(fixWebpackConfig(mergedOptions));
 };
