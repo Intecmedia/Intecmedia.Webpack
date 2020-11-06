@@ -3,8 +3,24 @@
 
 const deepMerge = require('lodash.merge');
 const ImageSize = require('image-size');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FaviconsWebpackPluginOriginal = require('favicons-webpack-plugin');
+
 const APP = require('./app.config.js');
+
+const ICO_PATTERN = /<link rel="shortcut icon" href="[^"]+favicon.ico">/;
+
+class FaviconsWebpackPlugin extends FaviconsWebpackPluginOriginal {
+    apply(compiler) {
+        super.apply(compiler);
+
+        compiler.hooks.compilation.tap('FaviconsWebpackPlugin', (compilation) => HtmlWebpackPlugin.getHooks(
+            compilation,
+        ).beforeEmit.tapPromise('FaviconsWebpackPlugin', async (htmlPluginData) => {
+            htmlPluginData.html = htmlPluginData.html.replace(ICO_PATTERN, '');
+        }));
+    }
+}
 
 // https://github.com/jantimon/favicons-webpack-plugin/issues/46
 const fixWebpackConfig = (obj) => Object.fromEntries(Object.entries(obj).map(([k, v]) => {
