@@ -40,6 +40,9 @@ if (NODE_ENV === 'production' || DEBUG) {
     require('~/polyfills/array-find.js');
 
     // eslint-disable-next-line global-require
+    require('~/polyfills/nodelist-foreach.js');
+
+    // eslint-disable-next-line global-require
     require('~/polyfills/weak-map.js');
 
     // eslint-disable-next-line global-require
