@@ -1,7 +1,7 @@
 /* eslint-env node */
 /* eslint "compat/compat": "off", "max-classes-per-file": "off" */
 
-const { Rule } = require('html-validate/build/rule');
+const { Rule } = require('html-validate/dist/rule');
 
 const nodeEqual = (a, b) => JSON.stringify(a.location) === JSON.stringify(b.location);
 const nodeIgnore = (node, ignores) => ignores && ignores.some((i) => nodeEqual(i, node));

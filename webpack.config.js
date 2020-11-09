@@ -163,9 +163,7 @@ module.exports = {
             cleanAfterEveryBuildPatterns: ['**/*.br', '**/*.gz'],
         }),
         new MiniCssExtractPlugin({
-            sourceMap: true,
             filename: 'css/app.min.css',
-            allChunks: true,
         }),
         new CopyWebpackPlugin({
             patterns: [
@@ -535,9 +533,8 @@ module.exports = {
                     {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
-                            hmr: ENV.DEV_SERVER,
+                            esModule: false,
                             publicPath: '../',
-                            sourceMap: true,
                         },
                     },
                     {
