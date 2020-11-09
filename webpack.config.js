@@ -367,6 +367,9 @@ module.exports = {
                 test: /\.(js|mjs|cjs|ts|css|scss)(\?.*)?$/i,
             }),
         ] : []),
+        ...(ENV.DEV_SERVER ? [
+            webpack.HotModuleReplacementPlugin(),
+        ] : []),
     ],
 
     ...(!ENV.USE_SOURCE_MAP ? {
