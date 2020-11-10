@@ -43,6 +43,9 @@ if (NODE_ENV === 'production' || DEBUG) {
     require('~/polyfills/element-matches.js');
 
     // eslint-disable-next-line global-require
+    require('~/polyfills/element-closest.js');
+
+    // eslint-disable-next-line global-require
     require('~/polyfills/nodelist-foreach.js');
 
     // eslint-disable-next-line global-require
