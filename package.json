@@ -96,6 +96,7 @@
         "cross-env": "latest",
         "css-loader": "latest",
         "cssnano": "latest",
+        "date-fns": "latest",
         "eslint": "latest",
         "eslint-config-airbnb-base": "latest",
         "eslint-import-resolver-webpack": "latest",
