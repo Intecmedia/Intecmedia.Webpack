@@ -269,7 +269,7 @@ module.exports = {
                 minifyCSS: !APP.HTML_PRETTY,
                 minifyJS: !APP.HTML_PRETTY,
             }) : false),
-            hash: ENV.PROD || ENV.DEBUG,
+            hash: true,
             cache: !ENV.DEBUG,
             title: APP.TITLE,
         }))),
