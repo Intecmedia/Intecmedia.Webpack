@@ -40,6 +40,9 @@ if (NODE_ENV === 'production' || DEBUG) {
     require('~/polyfills/array-find.js');
 
     // eslint-disable-next-line global-require
+    require('~/polyfills/element-remove.js');
+
+    // eslint-disable-next-line global-require
     require('~/polyfills/element-matches.js');
 
     // eslint-disable-next-line global-require
