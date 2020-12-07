@@ -90,7 +90,7 @@
         "case-sensitive-paths-webpack-plugin": "latest",
         "classlist.js": "latest",
         "clean-webpack-plugin": "latest",
-        "compression-webpack-plugin": "latest",
+        "compression-webpack-plugin": "^6.1.1",
         "copy-webpack-plugin": "latest",
         "core-js": "latest",
         "cross-env": "latest",
