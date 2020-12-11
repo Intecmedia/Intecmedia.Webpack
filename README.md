@@ -64,6 +64,8 @@
 * **npm run svgo** – минимизая svg-файлов.
 
 ### Часто используемые команды
+* **npm run js-lint** – линтер js через [eslint](https://eslint.org/).
+* **npm run css-lint** – линтер scss через [stylelint](https://stylelint.io/).
 * **npm run watch-dev** – watch в development-режиме и debug=off, самый быстрый способ.
 * **npm run server-dev** – сервер в development-режиме и debug=off, самый быстрый способ.
 * **npm run build** – релизный билд, запускается в production-режиме и debug=off, включая все линтеры, очень медленный способ.
