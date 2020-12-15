@@ -91,7 +91,7 @@
         "classlist.js": "latest",
         "clean-webpack-plugin": "latest",
         "compression-webpack-plugin": "^6.1.1",
-        "copy-webpack-plugin": "latest",
+        "copy-webpack-plugin": "^6.4.0",
         "core-js": "latest",
         "cross-env": "latest",
         "css-loader": "latest",
