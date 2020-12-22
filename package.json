@@ -120,7 +120,7 @@
         "html-validator": "latest",
         "html-webpack-plugin": "latest",
         "ignore": "latest",
-        "image-minimizer-webpack-plugin": "latest",
+        "image-minimizer-webpack-plugin": "^1.0.0",
         "image-size": "latest",
         "imagemin": "latest",
         "imagemin-gifsicle": "latest",
