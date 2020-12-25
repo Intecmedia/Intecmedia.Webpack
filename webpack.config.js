@@ -52,7 +52,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const UglifyJsPlugin = (ENV.PROD && !ENV.DEBUG ? require('uglifyjs-webpack-plugin') : () => {});
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 const JsonpScriptSrcPlugin = require('./plugin.jsonp-script-src.js');
-const WebpackAssetsManifest = require('webpack-assets-manifest');
 
 const ImageminIgnore = ignore().add(fs.readFileSync('./.imageminignore').toString());
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
@@ -187,13 +186,6 @@ module.exports = {
             })),
         }),
         new JsonpScriptSrcPlugin(),
-        new WebpackAssetsManifest({
-            publicPath: true,
-            writeToDisk: true,
-            integrity: true,
-            integrityHashes: ENV.PROD ? ['sha256', 'sha384', 'sha512'] : [],
-            output: 'assets-manifest.json',
-        }),
         ...(ENV.PROD && !ENV.DEBUG ? [
             new CaseSensitivePathsPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),

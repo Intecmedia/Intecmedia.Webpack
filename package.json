@@ -184,7 +184,6 @@
         "uglifyjs-webpack-plugin": "latest",
         "url-loader": "latest",
         "webpack": "4.44.2",
-        "webpack-assets-manifest": "^4.0.0",
         "webpack-bundle-analyzer": "latest",
         "webpack-cli": "3.3.12",
         "webpack-dev-server": "latest",
