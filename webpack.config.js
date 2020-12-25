@@ -190,6 +190,8 @@ module.exports = {
         new WebpackAssetsManifest({
             publicPath: true,
             writeToDisk: true,
+            integrity: true,
+            integrityHashes: ENV.PROD ? ['sha256', 'sha384', 'sha512'] : [],
             output: 'assets-manifest.json',
         }),
         ...(ENV.PROD && !ENV.DEBUG ? [
