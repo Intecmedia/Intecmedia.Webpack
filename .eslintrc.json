@@ -65,6 +65,10 @@
         }],
         "import/order": "off",
         "import/no-cycle": "off",
+        "import/dynamic-import-chunkname": [2, {
+            "importFunctions": ["dynamicImport"],
+            "webpackChunknameFormat": "^[a-zA-Z0-9\\-_]+$"
+        }],
         "sort-requires/sort-requires": "off",
         "linebreak-style": ["error", "unix"]
     }
