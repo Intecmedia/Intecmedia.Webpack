@@ -52,6 +52,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const UglifyJsPlugin = (ENV.PROD && !ENV.DEBUG ? require('uglifyjs-webpack-plugin') : () => {});
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 const JsonpScriptSrcPlugin = require('./plugin.jsonp-script-src.js');
+const WebpackAssetsManifest = require('webpack-assets-manifest');
 
 const ImageminIgnore = ignore().add(fs.readFileSync('./.imageminignore').toString());
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
@@ -186,11 +187,17 @@ module.exports = {
             })),
         }),
         new JsonpScriptSrcPlugin(),
+        new WebpackAssetsManifest({
+            publicPath: true,
+            writeToDisk: true,
+            output: 'assets-manifest.json',
+        }),
         ...(ENV.PROD && !ENV.DEBUG ? [
             new CaseSensitivePathsPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),
             new CompressionPlugin({
                 test: /\.(js|css|svg|json|lottie)(\?.*)?$/i,
+                exclude: ['assets-manifest.json'],
                 filename: '[path][base].br[query]',
                 compressionOptions: {
                     level: 11,
@@ -200,6 +207,7 @@ module.exports = {
             }),
             new CompressionPlugin({
                 test: /\.(js|css|svg|json|lottie)(\?.*)?$/i,
+                exclude: ['assets-manifest.json'],
                 filename: '[path][base].gz[query]',
                 compressionOptions: {
                     numiterations: 15,

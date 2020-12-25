@@ -1,3 +1,8 @@
 # Disable parent deny
 Allow from all
 Options -Indexes -Includes -MultiViews +FollowSymLinks
+
+<Files assets-manifest.json>
+    Order Allow,Deny
+    Deny from all
+</Files>
