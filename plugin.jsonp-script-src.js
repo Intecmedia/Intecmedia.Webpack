@@ -23,6 +23,7 @@ class JsonpScriptSrcPlugin {
         this.pluginName = pluginName;
 
         const defaultOptions = {
+            assertIncludes: false,
             callbackFn: '__webpack_get_script_src__',
         };
 
@@ -32,10 +33,12 @@ class JsonpScriptSrcPlugin {
     applyMainTemplate(mainTemplate) {
         // use stage 1 to ensure this executes after webpack/lib/web/JsonpMainTemplatePlugin.js
         mainTemplate.hooks.localVars.tap({ name: pluginName, stage: 1 }, (source) => {
-            assert(
-                source.includes('function jsonpScriptSrc'),
-                "JsonpScriptSrcPlugin: main template bootstrap source doesn't have function jsonpScriptSrc",
-            );
+            if (this.options.assertIncludes) {
+                assert(
+                    source.includes('function jsonpScriptSrc'),
+                    "JsonpScriptSrcPlugin: main template bootstrap source doesn't have function jsonpScriptSrc",
+                );
+            }
             return [
                 source.replace('function jsonpScriptSrc', 'function webpackJsonpScriptSrc'),
                 `var userGetScriptSrc = window[${JSON.stringify(this.options.callbackFn)}];`,
