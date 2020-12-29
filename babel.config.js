@@ -17,8 +17,10 @@ module.exports = {
             corejs: 3,
             modules: false,
             useBuiltIns: false,
+            forceAllTransforms: true, // UglifyJS support only es5
             debug: ENV.DEBUG || !ENV.PROD,
             targets: { browsers: ENV.BROWSERS },
+            ignoreBrowserslistConfig: true,
         }],
     ],
 };
