@@ -99,6 +99,7 @@ module.exports = {
     },
 
     optimization: {
+        concatenateModules: false,
         ...(!ENV.PROD || ENV.DEBUG ? {
             namedChunks: true,
             namedModules: true,
