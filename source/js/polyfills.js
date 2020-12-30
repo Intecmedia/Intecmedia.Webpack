@@ -61,7 +61,7 @@ if (NODE_ENV === 'production' || DEBUG) {
     require('~/polyfills/string-includes.js');
 
     // eslint-disable-next-line global-require
-    require('~/polyfills/string-string-replace-all.js');
+    require('~/polyfills/string-replace-all.js');
 
     // eslint-disable-next-line global-require
     require('~/polyfills/matchmedia-polyfill.js');
