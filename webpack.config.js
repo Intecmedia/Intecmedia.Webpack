@@ -246,7 +246,7 @@ module.exports = {
                 files: '**/*.scss',
                 configFile: './.stylelintrc.json',
                 ignorePath: './.stylelintignore',
-                emitErrors: false,
+                emitError: false,
                 failOnError: false,
                 lintDirtyModulesOnly: ENV.DEV_SERVER || ENV.WATCH,
                 fix: !ENV.DEV_SERVER,
@@ -377,7 +377,9 @@ module.exports = {
 
     ...(!ENV.USE_SOURCE_MAP ? {
         devtool: 'nosources-source-map',
-    } : {}),
+    } : {
+        devtool: false,
+    }),
 
     resolve: require('./resolve.config.js').resolve,
 
