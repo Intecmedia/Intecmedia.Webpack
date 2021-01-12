@@ -7,7 +7,7 @@ const nodeEqual = (a, b) => JSON.stringify(a.location) === JSON.stringify(b.loca
 const nodeIgnore = (node, ignores) => ignores && ignores.some((i) => nodeEqual(i, node));
 
 const COLS_COUNT = 12;
-const COLS_BREAKPOINTS = ['xs', 'sm', 'md', 'lg', 'xl'];
+const COLS_BREAKPOINTS = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
 
 const colClassList = (cols = COLS_COUNT, breakpoints = COLS_BREAKPOINTS) => {
     const numbers = Array.from({ length: cols }, (v, i) => (i + 1));
