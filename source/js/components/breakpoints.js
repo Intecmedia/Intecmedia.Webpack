@@ -1,7 +1,7 @@
 /* global VERBOSE */
 const $html = $(document.documentElement);
 
-const $breakpoints = {
+const breakpoints = {
     xs: $html.css('--breakpoint-xs'),
     sm: $html.css('--breakpoint-sm'),
     md: $html.css('--breakpoint-md'),
@@ -11,7 +11,7 @@ const $breakpoints = {
 };
 
 if (VERBOSE) {
-    console.log(`[breakpoints] ${JSON.stringify($breakpoints)}`);
+    console.log(`[breakpoints] ${JSON.stringify(breakpoints)}`);
 }
 
-export default $breakpoints;
+export default breakpoints;
