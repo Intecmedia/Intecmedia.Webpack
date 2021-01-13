@@ -29,7 +29,10 @@ const $matchBreakpoints = {
     lgOnly: createMatchMedia(`(min-width: ${$breakpoints.lg}) and (max-width: ${$breakpoints.xl})`, 'lg-only'),
 
     xl: createMatchMedia(`(min-width: ${$breakpoints.xl})`, 'xl'),
-    xlOnly: createMatchMedia(`(min-width: ${$breakpoints.xl})`, 'xl-only'),
+    xlOnly: createMatchMedia(`(min-width: ${$breakpoints.xl}) and (max-width: ${$breakpoints.xxl})`, 'xl-only'),
+
+    xxl: createMatchMedia(`(min-width: ${$breakpoints.xxl})`, 'xxl'),
+    xxlOnly: createMatchMedia(`(min-width: ${$breakpoints.xxl})`, 'xxl-only'),
 };
 
 export default $matchBreakpoints;
