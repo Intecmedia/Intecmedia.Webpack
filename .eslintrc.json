@@ -70,6 +70,7 @@
             "webpackChunknameFormat": "^[a-zA-Z0-9\\-_]+$"
         }],
         "sort-requires/sort-requires": "off",
-        "linebreak-style": ["error", "unix"]
+        "linebreak-style": ["error", "unix"],
+        "require-await": ["error"]
     }
 }
