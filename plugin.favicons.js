@@ -1,5 +1,5 @@
 /* eslint-env node */
-/* eslint "compat/compat": "off" */
+/* eslint "compat/compat": "off", "require-await": "off" */
 
 const deepMerge = require('lodash.merge');
 const ImageSize = require('image-size');

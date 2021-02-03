@@ -1,4 +1,5 @@
 /* eslint-env node */
+/* eslint "compat/compat": "off", "require-await": "off" */
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const deepMerge = require('lodash.merge');
