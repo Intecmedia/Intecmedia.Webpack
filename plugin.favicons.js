@@ -34,8 +34,8 @@ const DEFAULT_FAVICON = {
     devMode: 'webapp',
     logo: './.favicons-source-64x64.png',
     publicPath: '/',
-    outputPath: 'img/favicons',
-    prefix: 'img/favicons',
+    outputPath: 'img/favicons/',
+    prefix: 'img/favicons/',
     favicons: {
         lang: APP.LANGUAGE,
         appShortName: APP.SHORT_NAME,
@@ -75,8 +75,8 @@ const DEFAULT_APPICON = {
     devMode: 'webapp',
     logo: './.favicons-source-1024x1024.png',
     publicPath: '/',
-    outputPath: 'img/favicons',
-    prefix: 'img/favicons',
+    outputPath: 'img/favicons/',
+    prefix: 'img/favicons/',
     favicons: {
         lang: APP.LANGUAGE,
         appShortName: APP.SHORT_NAME,

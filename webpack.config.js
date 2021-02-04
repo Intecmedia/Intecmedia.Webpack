@@ -16,7 +16,6 @@ const logger = weblog({ name: 'webpack-config' });
 const imageminConfig = require('./imagemin.config.js');
 
 const imageminLogger = weblog({ name: 'imagemin' });
-const imageminWebpLogger = weblog({ name: 'imagemin-webp' });
 
 const ENV = require('./app.env.js');
 const APP = require('./app.config.js');
@@ -49,9 +48,8 @@ const StyleLintPlugin = (ENV.USE_LINTERS ? require('stylelint-webpack-plugin') :
 const ESLintPlugin = (ENV.USE_LINTERS ? require('eslint-webpack-plugin') : () => {});
 const CompressionPlugin = (ENV.PROD && !ENV.DEBUG ? require('compression-webpack-plugin') : () => {});
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const UglifyJsPlugin = (ENV.PROD && !ENV.DEBUG ? require('uglifyjs-webpack-plugin') : () => {});
+const TerserPlugin = (ENV.PROD && !ENV.DEBUG ? require('terser-webpack-plugin') : () => {});
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
-const JsonpScriptSrcPlugin = require('./plugin.jsonp-script-src.js');
 
 const ImageminIgnore = ignore().add(fs.readFileSync('./.imageminignore').toString());
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
@@ -66,7 +64,7 @@ const BANNER_STRING = [
 module.exports = {
     mode: ENV.PROD ? 'production' : 'development',
 
-    ...(ENV.DEBUG ? { stats: 'detailed' } : {}),
+    ...(ENV.DEBUG ? { stats: 'detailed' } : { stats: true }),
 
     watchOptions: {
         ignored: /node_modules/,
@@ -79,6 +77,7 @@ module.exports = {
         overlay: { warnings: false, errors: true },
         publicPath: path.posix.resolve(APP.PUBLIC_PATH, '/'),
         watchContentBase: true,
+        port: 9000,
     },
 
     entry: {
@@ -101,8 +100,6 @@ module.exports = {
     optimization: {
         concatenateModules: false,
         ...(!ENV.PROD || ENV.DEBUG ? {
-            namedChunks: true,
-            namedModules: true,
             chunkIds: 'named',
             moduleIds: 'named',
         } : {}),
@@ -119,17 +116,15 @@ module.exports = {
             },
         },
         minimizer: (ENV.PROD && !ENV.DEBUG ? [
-            new UglifyJsPlugin({
-                cache: !ENV.DEBUG,
+            new TerserPlugin({
                 test: /\.(js)(\?.*)?$/i,
                 parallel: true,
-                sourceMap: true,
                 extractComments: {
                     condition: 'some',
-                    filename: (file) => `${file}.LICENSE`,
-                    banner: (file) => [`License information can be found in ${file}`, BANNER_STRING].join('\n'),
+                    filename: (fileData) => `${fileData.filename}.LICENSE`,
+                    banner: (licenseFile) => [`License information can be found in ${licenseFile}`, BANNER_STRING].join('\n'),
                 },
-                uglifyOptions: {
+                terserOptions: {
                     output: {
                         comments: false,
                     },
@@ -186,7 +181,6 @@ module.exports = {
                 force: true,
             })),
         }),
-        new JsonpScriptSrcPlugin(),
         ...(ENV.PROD && !ENV.DEBUG ? [
             new CaseSensitivePathsPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),
@@ -198,7 +192,6 @@ module.exports = {
                     level: 11,
                 },
                 algorithm: 'brotliCompress',
-                cache: ENV.DEBUG ? false : UTILS.cacheDir('compression-webpack-plugin-br'),
             }),
             new CompressionPlugin({
                 test: /\.(js|css|svg|json|lottie)(\?.*)?$/i,
@@ -211,7 +204,6 @@ module.exports = {
                     const zopfli = require('@gfx/zopfli');
                     return zopfli.gzip(input, compressionOptions, callback);
                 },
-                cache: ENV.DEBUG ? false : UTILS.cacheDir('compression-webpack-plugin-gz'),
             }),
         ] : []),
         new webpack.BannerPlugin({
@@ -280,15 +272,15 @@ module.exports = {
             new FaviconsPlugin.AppIcon({
                 logo: path.join(__dirname, '.favicons-source-1024x1024.png'),
                 publicPath: APP.PUBLIC_PATH,
-                outputPath: 'img/favicons',
-                prefix: 'img/favicons',
+                outputPath: 'img/favicons/',
+                prefix: 'img/favicons/',
                 cache: ENV.DEBUG ? false : UTILS.cacheDir('favicons-webpack-plugin-1024'),
             }),
             new FaviconsPlugin.FavIcon({
                 logo: path.join(__dirname, '.favicons-source-64x64.png'),
                 publicPath: APP.PUBLIC_PATH,
-                outputPath: 'img/favicons',
-                prefix: 'img/favicons',
+                outputPath: 'img/favicons/',
+                prefix: 'img/favicons/',
                 cache: ENV.DEBUG ? false : UTILS.cacheDir('favicons-webpack-plugin-64'),
             }),
         ] : []),
@@ -341,23 +333,9 @@ module.exports = {
                     return !ignores;
                 },
                 minimizerOptions: { plugins: imageminConfig.plugins },
-                cache: !ENV.DEBUG,
                 loader: true,
             }),
         ] : []),
-        new ImageMinimizerPlugin({
-            test: /\.(jpeg|jpg|png)(\?.*)?$/i,
-            filename: '[path][name].webp',
-            filter: (input, name) => {
-                const relativePath = slash(path.relative(__dirname, path.normalize(name)));
-                const ignores = ImageminIgnore.ignores(relativePath);
-                imageminWebpLogger.info(`${JSON.stringify(relativePath)} ${ignores ? 'ignores' : 'minified'}`);
-                return !ignores;
-            },
-            minimizerOptions: { plugins: [['imagemin-webp', { ...imageminConfig.webp }]] },
-            cache: !ENV.DEBUG,
-            loader: false,
-        }),
         ...(ENV.PROD || ENV.DEBUG ? [
             new BundleAnalyzerPlugin({
                 analyzerMode: (ENV.DEV_SERVER ? 'server' : 'static'),
@@ -409,17 +387,17 @@ module.exports = {
                 type: 'javascript/auto',
                 test: /\.(js|mjs|cjs)(\?.*)?$/i,
                 exclude: {
-                    test: [
+                    and: [
                         // disable babel transform
                         ...BabelOptions.excludeTransform,
                     ],
-                    exclude: [
+                    not: [
                         // enable babel transform
                         ...BabelOptions.includeTransform,
                         path.join(ENV.SOURCE_PATH, 'upload'),
                     ],
                 },
-                loaders: [
+                rules: [
                     ...(APP.USE_JQUERY ? [{
                         // global jQuery import
                         loader: 'imports-loader',
@@ -537,7 +515,7 @@ module.exports = {
                 exclude: [
                     path.join(ENV.SOURCE_PATH, 'upload'),
                 ],
-                loaders: [
+                rules: [
                     {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
