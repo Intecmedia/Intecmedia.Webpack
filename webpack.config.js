@@ -156,7 +156,7 @@ module.exports = {
         new CleanWebpackPlugin({
             cleanStaleWebpackAssets: false,
             cleanOnceBeforeBuildPatterns: ['**/*', '!.gitkeep', '!.htaccess'],
-            cleanAfterEveryBuildPatterns: ['**/*.br', '**/*.gz'],
+            cleanAfterEveryBuildPatterns: (!ENV.PROD || ENV.DEBUG ? ['**/*.br', '**/*.gz'] : []),
         }),
         new MiniCssExtractPlugin({
             filename: 'css/app.min.css',
