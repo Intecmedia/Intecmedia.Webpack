@@ -103,6 +103,7 @@ module.exports = {
             chunkIds: 'named',
             moduleIds: 'named',
         } : {}),
+        emitOnErrors: ENV.PROD && !ENV.DEBUG,
         splitChunks: {
             maxAsyncRequests: Infinity,
             maxInitialRequests: Infinity,
@@ -183,7 +184,6 @@ module.exports = {
         }),
         ...(ENV.PROD && !ENV.DEBUG ? [
             new CaseSensitivePathsPlugin(),
-            new webpack.NoEmitOnErrorsPlugin(),
             new CompressionPlugin({
                 test: /\.(js|css|svg|json|lottie)(\?.*)?$/i,
                 exclude: ['assets-manifest.json'],
