@@ -72,6 +72,7 @@
         "sort-requires/sort-requires": "off",
         "linebreak-style": ["error", "unix"],
         "require-await": ["error"],
+        "no-underscore-dangle": "off",
         "eslint-comments/require-description": ["error",  {
             "ignore": ["global", "globals"]
         }]
