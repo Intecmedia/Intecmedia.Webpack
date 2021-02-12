@@ -1,4 +1,4 @@
-/* stylelint-disable selector-max-type */
+/* stylelint-disable selector-max-type -- all <picture> are responsive */
 picture {
     display: inline-block;
     @include img-fluid();

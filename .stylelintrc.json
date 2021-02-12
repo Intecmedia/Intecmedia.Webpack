@@ -1,4 +1,5 @@
 {
+    "reportDescriptionlessDisables": true,
     "extends": [
         "stylelint-config-sass-guidelines",
         "stylelint-config-twbs-bootstrap/scss",

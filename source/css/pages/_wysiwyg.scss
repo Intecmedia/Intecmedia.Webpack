@@ -1,4 +1,4 @@
-/* stylelint-disable scss/selector-nest-combinators, selector-max-type */
+/* stylelint-disable scss/selector-nest-combinators, selector-max-type -- wysiwyg is semantic tags */
 .wysiwyg {
     // default image
     img:not([class]) {
@@ -40,9 +40,9 @@
         > thead,
         > tbody,
         > tfoot {
-            /* stylelint-disable-next-line selector-max-compound-selectors */
+            /* stylelint-disable-next-line selector-max-compound-selectors -- its ok for tables */
             > tr {
-                /* stylelint-disable-next-line selector-max-compound-selectors, max-nesting-depth */
+                /* stylelint-disable-next-line selector-max-compound-selectors, max-nesting-depth -- its ok for tables */
                 > th,
                 > td {
                     background: transparent;
@@ -100,12 +100,12 @@
     }
 
     .img-rounded {
-        /* stylelint-disable-next-line declaration-no-important */
+        /* stylelint-disable-next-line declaration-no-important -- force set border radius */
         border-radius: $border-radius !important;
     }
 
     .img-circle {
-        /* stylelint-disable-next-line declaration-no-important */
+        /* stylelint-disable-next-line declaration-no-important -- force set border radius */
         border-radius: $border-radius !important;
         border-radius: 50%;
     }
