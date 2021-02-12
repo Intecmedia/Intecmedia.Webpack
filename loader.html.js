@@ -1,5 +1,5 @@
-/* eslint-env node */
-/* eslint "compat/compat": "off" */
+/* eslint-env node -- webpack is node env */
+/* eslint "compat/compat": "off" -- webpack is node env */
 
 const path = require('path');
 const slash = require('slash');
@@ -113,7 +113,7 @@ module.exports = function HtmlLoader() {
     delete require.cache[htmlDataModule];
 
     const options = deepMerge({}, DEFAULT_OPTIONS, loaderUtils.getOptions(loaderContext), {
-        /* eslint-disable-next-line global-require, import/no-dynamic-require */
+        /* eslint-disable-next-line global-require, import/no-dynamic-require -- webpack is node env */
         context: require(htmlDataModule),
     });
     validateOptions(OPTIONS_SCHEMA, options, 'loader-html');

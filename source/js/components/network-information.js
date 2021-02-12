@@ -4,7 +4,7 @@ const $makeNetworkClass = ($type) => ($type ? ` network-detected network-${$type
 
 jQuery(($) => {
     const $html = $(document.documentElement);
-    // eslint-disable-next-line compat/compat
+    // eslint-disable-next-line compat/compat -- we are detect vendor prefix
     const $conn = (navigator.connection || navigator.mozConnection || navigator.webkitConnection);
 
     if (!$conn) {

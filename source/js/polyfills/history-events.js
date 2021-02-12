@@ -1,5 +1,6 @@
 /* global VERBOSE */
-/* eslint 'prefer-rest-params': 'off', 'compat/compat': 'off' */
+/* eslint 'compat/compat': 'off' -- useless for polyfill */
+/* eslint 'prefer-rest-params': 'off' -- arguments are alllowed for decorators */
 
 const Reflect = require('core-js/stable/reflect/index.js');
 

@@ -71,6 +71,9 @@
         }],
         "sort-requires/sort-requires": "off",
         "linebreak-style": ["error", "unix"],
-        "require-await": ["error"]
+        "require-await": ["error"],
+        "eslint-comments/require-description": ["error",  {
+            "ignore": ["global", "globals"]
+        }]
     }
 }

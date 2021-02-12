@@ -1,5 +1,5 @@
-/* global VERBOSE */
-/* eslint 'compat/compat': 'off' */
+/* global VERBOSE  */
+/* eslint 'compat/compat': 'off' -- useless for polyfill */
 
 // for polyfill use only require
 const picturefill = require('picturefill');

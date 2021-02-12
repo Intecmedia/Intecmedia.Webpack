@@ -1,4 +1,4 @@
-/* eslint-env node */
+/* eslint-env node -- webpack is node env */
 
 module.exports = {
     files: [

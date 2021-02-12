@@ -1,5 +1,5 @@
-/* eslint-env node */
-/* eslint global-require: "off", max-lines: "off", import/no-dynamic-require: "off", max-len: "off", "compat/compat": "off" */
+/* eslint-env node -- webpack is node env */
+/* eslint global-require: "off", max-lines: "off", import/no-dynamic-require: "off", max-len: "off", "compat/compat": "off" -- webpack is node env */
 
 const fs = require('fs');
 

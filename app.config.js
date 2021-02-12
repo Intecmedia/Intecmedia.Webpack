@@ -1,5 +1,5 @@
-/* eslint-env node */
-/* eslint max-len: "off" */
+/* eslint-env node -- webpack is node env */
+/* eslint max-len: "off" -- webpack is node env */
 
 const ENV = require('./app.env.js');
 const BROWSERSYNC = require('./browsersync.config.js');

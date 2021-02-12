@@ -1,5 +1,5 @@
-/* eslint-env node */
-/* eslint "compat/compat": "off" */
+/* eslint-env node -- webpack is node env */
+/* eslint "compat/compat": "off" -- webpack is node env */
 const childProcess = require('child_process');
 
 const weblog = require('webpack-log');

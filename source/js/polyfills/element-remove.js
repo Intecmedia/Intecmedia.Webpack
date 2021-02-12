@@ -1,5 +1,5 @@
 [Element.prototype, CharacterData.prototype, DocumentType.prototype].filter(Boolean).forEach((item) => {
-    // eslint-disable-next-line no-prototype-builtins
+    // eslint-disable-next-line no-prototype-builtins -- useless for polyfill
     if (item.hasOwnProperty('remove')) {
         return;
     }

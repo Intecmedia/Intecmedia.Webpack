@@ -1,5 +1,5 @@
 /* global VERBOSE */
-/* eslint 'compat/compat': 'off' */
+/* eslint 'compat/compat': 'off' -- useless for polyfill */
 
 // for polyfill use only require
 const objectFitImages = require('object-fit-images');
