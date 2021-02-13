@@ -14,6 +14,11 @@
     "rules": {
         "linebreaks": "unix",
         "indentation": 4,
+        "max-empty-lines": 2,
+        "selector-max-empty-lines": 0,
+        "function-max-empty-lines": 0,
+        "value-list-max-empty-lines": 1,
+        "declaration-empty-line-before": null,
         "selector-class-pattern": [
             "^[a-zA-Z0-9\\-_]+$"
         ],
