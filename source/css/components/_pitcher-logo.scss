@@ -1,32 +1,31 @@
-$pitcherLogo-color: $link-color !default;
+$pitcher-logo-color: $link-color !default;
 
-$pitcherLogo-hover-color: $link-hover-color !default;
+$pitcher-logo-hover-color: $link-hover-color !default;
 
-.pitcherLogo {
+.pitcher-logo {
     display: inline-block;
 
-    color: #{$pitcherLogo-color};
-
-    .pitcherLogo-text {
-        @include sr-only();
-    }
-
-    .pitcherLogo-icon {
-
-        display: inline-block;
-        width: 58px;
-        height: 29px;
-
-        fill: #{$pitcherLogo-color};
-    }
+    color: #{$pitcher-logo-color};
 
     &:hover,
     &:focus,
     &:active {
-        color: #{$pitcherLogo-hover-color};
+        color: #{$pitcher-logo-hover-color};
 
-        .pitcherLogo-icon {
-            fill: #{$pitcherLogo-hover-color};
+        .pitcher-logo__icon {
+            fill: #{$pitcher-logo-hover-color};
         }
     }
+}
+
+.pitcher-logo__text {
+    @include sr-only();
+}
+
+.pitcher-logo__icon {
+    display: inline-block;
+    width: 58px;
+    height: 29px;
+
+    fill: #{$pitcher-logo-color};
 }

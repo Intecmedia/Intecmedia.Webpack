@@ -1,4 +1,4 @@
-/* stylelint-disable scss/selector-nest-combinators, selector-max-type -- wysiwyg is semantic tags */
+/* stylelint-disable scss/selector-nest-combinators, selector-max-type, plugin/selector-bem-pattern -- wysiwyg is semantic tags */
 .wysiwyg {
     // default image
     img:not([class]) {
@@ -136,4 +136,4 @@
         @extend .blockquote;
     }
 }
-/* stylelint-enable scss/selector-nest-combinators, selector-max-type */
+/* stylelint-enable scss/selector-nest-combinators, selector-max-type, plugin/selector-bem-pattern */

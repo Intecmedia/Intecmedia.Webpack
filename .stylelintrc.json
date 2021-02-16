@@ -9,6 +9,7 @@
         "stylelint-scss",
         "stylelint-use-nesting",
         "stylelint-max-root-rules",
+        "stylelint-selector-bem-pattern",
         "stylelint-max-lines"
     ],
     "rules": {
@@ -85,6 +86,10 @@
         "selector-list-comma-newline-after": "always-multi-line",
         "value-list-comma-newline-after": "always-multi-line",
         "value-list-comma-newline-before": "never-multi-line",
-        "value-list-comma-space-after": "always-single-line"
+        "value-list-comma-space-after": "always-single-line",
+        "plugin/selector-bem-pattern": {
+            "preset": "bem",
+            "implicitComponents": ["source/css/components/**/*.scss", "source/css/layout/**/*.scss", "source/css/pages/**/*.scss"]
+        }
     }
 }

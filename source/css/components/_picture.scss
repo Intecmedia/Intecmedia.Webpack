@@ -1,4 +1,4 @@
-/* stylelint-disable selector-max-type -- all <picture> are responsive */
+/* stylelint-disable selector-max-type, plugin/selector-bem-pattern -- all <picture> are responsive component */
 picture {
     display: inline-block;
     @include img-fluid();
@@ -7,4 +7,4 @@ picture {
         @include img-fluid();
     }
 }
-/* stylelint-enable selector-max-type */
+/* stylelint-enable selector-max-type, plugin/selector-bem-pattern */
