@@ -13,6 +13,7 @@ const { SvgoCreateConfig } = require('./svgo.config.js');
 
 const logger = weblog({ name: 'svgo' });
 const ENV = require('./app.env.js');
+
 const ImageminIgnore = ignore().add(fs.readFileSync('./.imageminignore').toString());
 
 [
@@ -25,11 +26,12 @@ const ImageminIgnore = ignore().add(fs.readFileSync('./.imageminignore').toStrin
 
     files.forEach((filename) => {
         const svg = fs.readFileSync(filename, 'utf8').toString();
-        const relative = slash(path.relative(__dirname, filename));
+        const relative = slash(path.relative(__dirname, path.normalize(filename)));
 
         const ignores = ImageminIgnore.ignores(relative);
         if (ignores) {
-           logger.info(`ignored ${relative}`);
+            logger.info(`ignored ${relative}`);
+            return;
         }
 
         const name = path.basename(filename, '.svg');
