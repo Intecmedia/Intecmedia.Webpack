@@ -6,12 +6,14 @@ const path = require('path');
 const glob = require('glob');
 const slash = require('slash');
 const weblog = require('webpack-log');
+const ignore = require('ignore');
 
 const SVGO = require('svgo');
 const { SvgoCreateConfig } = require('./svgo.config.js');
 
 const logger = weblog({ name: 'svgo' });
 const ENV = require('./app.env.js');
+const ImageminIgnore = ignore().add(fs.readFileSync('./.imageminignore').toString());
 
 [
     `${ENV.SOURCE_PATH}/**/*.svg`,
@@ -24,6 +26,11 @@ const ENV = require('./app.env.js');
     files.forEach((filename) => {
         const svg = fs.readFileSync(filename, 'utf8').toString();
         const relative = slash(path.relative(__dirname, filename));
+
+        const ignores = ImageminIgnore.ignores(relative);
+        if (ignores) {
+           logger.info(`ignored ${relative}`);
+        }
 
         const name = path.basename(filename, '.svg');
         const options = SvgoCreateConfig({ prefix: `svgo-${name.toLowerCase()}-`, pretty: true });
