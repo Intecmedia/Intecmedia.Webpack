@@ -26,7 +26,7 @@ const ImageminIgnore = ignore().add(fs.readFileSync('./.imageminignore').toStrin
 
     files.forEach((filename) => {
         const svg = fs.readFileSync(filename, 'utf8').toString();
-        const relative = slash(path.relative(__dirname, path.normalize(filename)));
+        const relative = slash(path.relative(ENV.SOURCE_PATH, path.normalize(filename)));
 
         const ignores = ImageminIgnore.ignores(relative);
         if (ignores) {
