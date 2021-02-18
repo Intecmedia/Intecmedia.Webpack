@@ -48,6 +48,7 @@
     "browserslist": {
         "production": [
             "Android >= 6",
+            "not Explorer <= 11",
             "iOS >= 10",
             "Safari >= 10",
             "Edge >= 16.16299",
