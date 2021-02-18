@@ -75,9 +75,12 @@ module.exports = {
         contentBase: path.resolve(__dirname, 'source'),
         hot: true,
         overlay: { warnings: false, errors: true },
+        inline: true,
+        injectClient: true,
+        clientLogLevel: 'error',
         publicPath: path.posix.resolve(APP.PUBLIC_PATH, '/'),
         watchContentBase: true,
-        port: 9000,
+        port: 8888,
     },
 
     entry: {
@@ -103,6 +106,7 @@ module.exports = {
             chunkIds: 'named',
             moduleIds: 'named',
         } : {}),
+        emitOnErrors: true,
         splitChunks: {
             maxAsyncRequests: Infinity,
             maxInitialRequests: Infinity,
