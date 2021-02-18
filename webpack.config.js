@@ -106,7 +106,7 @@ module.exports = {
             chunkIds: 'named',
             moduleIds: 'named',
         } : {}),
-        emitOnErrors: true,
+        emitOnErrors: !(ENV.PROD && !ENV.DEBUG),
         splitChunks: {
             maxAsyncRequests: Infinity,
             maxInitialRequests: Infinity,
