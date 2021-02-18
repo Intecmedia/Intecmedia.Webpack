@@ -241,6 +241,7 @@ module.exports = {
             failOnError: false,
             failOnWarning: false,
             lintDirtyModulesOnly: ENV.DEV_SERVER || ENV.WATCH,
+            quiet: true,
             fix: true,
         }),
         new ESLintPlugin({
@@ -251,6 +252,7 @@ module.exports = {
             failOnError: false,
             failOnWarning: false,
             lintDirtyModulesOnly: ENV.DEV_SERVER || ENV.WATCH,
+            quiet: true,
             fix: true,
         }),
         ...(ENV.SITEMAP.map(({ template, filename }) => new HtmlWebpackPlugin({
