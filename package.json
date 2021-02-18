@@ -54,7 +54,8 @@
             "Edge >= 16.16299",
             "Chrome >= 60",
             "ChromeAndroid >= 60",
-            "Firefox >= 60"
+            "Firefox >= 60",
+            "Firefox ESR"
         ],
         "development": [
             "last 1 Safari versions",
