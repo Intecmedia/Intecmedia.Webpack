@@ -171,6 +171,7 @@
         "stylelint-config-sass-guidelines": "latest",
         "stylelint-config-twbs-bootstrap": "latest",
         "stylelint-csstree-validator": "latest",
+        "stylelint-high-performance-animation": "latest",
         "stylelint-max-lines": "latest",
         "stylelint-max-root-rules": "latest",
         "stylelint-no-nested-media": "latest",

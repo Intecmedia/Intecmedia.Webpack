@@ -10,6 +10,7 @@
         "stylelint-use-nesting",
         "stylelint-max-root-rules",
         "stylelint-selector-bem-pattern",
+        "stylelint-high-performance-animation",
         "stylelint-max-lines"
     ],
     "rules": {
@@ -90,6 +91,15 @@
         "plugin/selector-bem-pattern": {
             "preset": "bem",
             "implicitComponents": ["source/css/components/**/*.scss", "source/css/layout/**/*.scss", "source/css/pages/**/*.scss"]
-        }
+        },
+        "plugin/no-low-performance-animation-properties": [true, {
+            "severity": "warning",
+            "ignore": "paint-properties",
+            "ignoreProperties": [
+                "fill",
+                "stroke-dashoffset",
+                "text-decoration-color"
+            ]
+        }]
     }
 }
