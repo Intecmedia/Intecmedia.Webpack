@@ -44,8 +44,8 @@ const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const BrowserSyncPlugin = (ENV.WATCH ? require('browser-sync-webpack-plugin') : () => {});
-const StyleLintPlugin = (ENV.USE_LINTERS ? require('stylelint-webpack-plugin') : () => {});
-const ESLintPlugin = (ENV.USE_LINTERS ? require('eslint-webpack-plugin') : () => {});
+const StyleLintPlugin = require('stylelint-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const CompressionPlugin = (ENV.PROD && !ENV.DEBUG ? require('compression-webpack-plugin') : () => {});
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const TerserPlugin = (ENV.PROD && !ENV.DEBUG ? require('terser-webpack-plugin') : () => {});
@@ -103,7 +103,6 @@ module.exports = {
             chunkIds: 'named',
             moduleIds: 'named',
         } : {}),
-        emitOnErrors: ENV.PROD && !ENV.DEBUG,
         splitChunks: {
             maxAsyncRequests: Infinity,
             maxInitialRequests: Infinity,
@@ -232,25 +231,28 @@ module.exports = {
             contentImage: path.resolve('./.favicons-source-1024x1024.png'),
             title: APP.TITLE,
         }),
-        ...(ENV.USE_LINTERS ? [
-            new StyleLintPlugin({
-                syntax: 'scss',
-                files: '**/*.scss',
-                configFile: './.stylelintrc.json',
-                ignorePath: './.stylelintignore',
-                emitError: false,
-                failOnError: false,
-                lintDirtyModulesOnly: ENV.DEV_SERVER || ENV.WATCH,
-                fix: !ENV.DEV_SERVER,
-            }),
-            new ESLintPlugin({
-                files: [ENV.SOURCE_PATH],
-                fix: true,
-                quiet: ENV.PROD,
-                emitError: false,
-                emitWarning: false,
-            }),
-        ] : []),
+        new StyleLintPlugin({
+            syntax: 'scss',
+            files: '**/*.scss',
+            configFile: './.stylelintrc.json',
+            ignorePath: './.stylelintignore',
+            emitError: true,
+            emitWarning: true,
+            failOnError: false,
+            failOnWarning: false,
+            lintDirtyModulesOnly: ENV.DEV_SERVER || ENV.WATCH,
+            fix: true,
+        }),
+        new ESLintPlugin({
+            files: '**/*.js',
+            exclude: ['node_modules', 'external'],
+            emitError: true,
+            emitWarning: true,
+            failOnError: false,
+            failOnWarning: false,
+            lintDirtyModulesOnly: ENV.DEV_SERVER || ENV.WATCH,
+            fix: true,
+        }),
         ...(ENV.SITEMAP.map(({ template, filename }) => new HtmlWebpackPlugin({
             filename,
             template,
@@ -556,6 +558,7 @@ module.exports = {
                                 outputStyle: 'expanded',
                                 fiber: require('fibers'),
                             },
+                            webpackImporter: false,
                         },
                     },
                 ],

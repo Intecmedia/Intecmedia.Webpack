@@ -14,7 +14,6 @@ const NODE_ENV = PROD ? 'production' : 'development';
 
 const VERBOSE = (NODE_ENV === 'development' || DEBUG);
 const USE_SOURCE_MAP = DEBUG || !PROD || DEV_SERVER;
-const USE_LINTERS = PROD || DEBUG;
 
 const { name: PACKAGE_NAME, browserslist } = require('./package.json');
 
@@ -59,7 +58,6 @@ module.exports = {
     PROD,
     NODE_ENV,
     USE_SOURCE_MAP,
-    USE_LINTERS,
     SOURCE_PATH,
     OUTPUT_PATH,
     PACKAGE_NAME,
