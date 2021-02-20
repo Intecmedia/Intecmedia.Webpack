@@ -8,9 +8,9 @@
         "pitcher/no-nested-media": true,
         "csstree/validator": {
             "ignore": [],
-            "properties": [
+            "properties": {
                 "content-visibility": "visible | hidden | auto | initial | unset"
-            ]
+            }
         },
         "no-duplicate-selectors": [true, {}],
         "declaration-block-no-duplicate-properties": [true, {
