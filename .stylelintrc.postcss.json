@@ -33,7 +33,7 @@
             ]
         }],
         "property-no-unknown": [true, {
-            "ignoreProperties": ["inherits", "initial-value", "syntax", "content-visibility"]
+            "ignoreProperties": ["content-visibility"]
         }]
     }
 }
