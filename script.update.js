@@ -7,25 +7,21 @@ const weblog = require('webpack-log');
 const logger = weblog({ name: 'update' });
 
 logger.info('npm outdate');
-childProcess.exec('npm outdate --json', (err, stdout, stderr) => {
-    if (stderr) throw stderr;
+const outdated = Object.entries(JSON.parse(childProcess.execSync('npm outdate --json' || '{}')));
 
-    const outdated = Object.entries(JSON.parse(stdout || '{}'));
+const missing = outdated.filter(([, version]) => !version.location || version.current !== version.wanted);
+logger.info(`missing ${missing.length} packages`);
 
-    const missing = outdated.filter(([, version]) => !version.location || version.current !== version.wanted);
-    logger.info(`missing ${missing.length} packages`);
+const installed = [];
+missing.forEach(([pkg, version], index) => {
+    logger.info(`#${index + 1} ${pkg}`, version);
 
-    const installed = [];
-    missing.forEach(([pkg, version], index) => {
-        logger.info(`#${index + 1} ${pkg}`, version);
+    const command = (version.location ? `npm update ${pkg}` : `npm install ${pkg}@${version.wanted}`);
+    logger.info(`#${index + 1} ${command}`);
+    childProcess.execSync(command, { stdio: 'inherit' });
 
-        const command = (version.location ? `npm update ${pkg}` : `npm install ${pkg}@${version.wanted}`);
-        logger.info(`#${index + 1} ${command}`);
-        childProcess.execSync(command, { stdio: 'inherit' });
-
-        installed.push([pkg, version]);
-        console.log('');
-    });
-
-    logger.info(`installed ${installed.length} packages`);
+    installed.push([pkg, version]);
+    console.log('');
 });
+
+logger.info(`installed ${installed.length} packages`);
