@@ -65,7 +65,7 @@
     },
     "engines": {
         "node": ">= 11.7.0",
-        "npm": ">=7.0.0"
+        "npm": ">= 7.0.0"
     },
     "dependencies": {
         "@babel/cli": "latest",
@@ -167,6 +167,7 @@
         "sass": "latest",
         "sass-loader": "latest",
         "schema-utils": "latest",
+        "semver": "latest",
         "slash": "latest",
         "stylelint": "latest",
         "stylelint-config-rational-order": "latest",

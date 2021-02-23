@@ -1,6 +1,8 @@
 /* eslint-env node -- webpack is node env */
 /* eslint "compat/compat": "off" -- webpack is node env */
 
+const semver = require('semver');
+const childProcess = require('child_process');
 const weblog = require('webpack-log');
 
 const logger = weblog({ name: 'app-lint' });
@@ -40,6 +42,16 @@ if (APP.SHORT_NAME === APP.TITLE || APP.SHORT_NAME === APP.DESCRIPTION) {
 }
 if (APP.DESCRIPTION === APP.TITLE || APP.DESCRIPTION === APP.SHORT_NAME) {
     lintErrors.push('`DESCRIPTION` is equal `TITLE` or `SHORT_NAME`');
+}
+
+const version = JSON.parse(childProcess.execSync('npm version --json') || '{}');
+
+if (!semver.satisfies(version.npm, PACKAGE.engines.npm)) {
+    lintErrors.push(`required node@${PACKAGE.engines.npm} version (current is node@${version.node})`);
+}
+
+if (!semver.satisfies(version.node, PACKAGE.engines.node)) {
+    lintErrors.push(`required npm@${PACKAGE.engines.npm} version (current is npm@${version.npm})`);
 }
 
 lintWarns.forEach((i) => logger.warn(i));
