@@ -238,7 +238,7 @@ module.exports = {
         new StyleLintPlugin({
             syntax: 'scss',
             files: '**/*.scss',
-            configFile: './.stylelintrc.json',
+            configFile: './.stylelintrc.js',
             ignorePath: './.stylelintignore',
             emitError: true,
             emitWarning: true,

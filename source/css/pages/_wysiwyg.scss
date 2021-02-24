@@ -80,12 +80,12 @@
 
             width: $ul-bull-font-size;
             margin-left: -$ul-bull-font-size;
-
-            color: $ul-bull-color;
+            font-family: inherit;
 
             font-size: $ul-bull-font-size;
-            font-family: inherit;
             line-height: $ul-bull-line-height;
+
+            color: $ul-bull-color;
 
             text-align: center;
             vertical-align: middle;

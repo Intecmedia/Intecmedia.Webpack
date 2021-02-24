@@ -5,18 +5,18 @@
     z-index: $zindex-modal;
 
     padding: 2px;
-
-    color: $white;
     font-size: $font-size-sm;
     line-height: 1rem;
+
+    color: $white;
     white-space: nowrap;
 
     background-color: $danger;
-
-    transform: translateY(100%);
     opacity: .5;
 
     transition: transform .3s;
+
+    transform: translateY(100%);
 
     @each $breakpoint in map-keys($grid-breakpoints){
         @include media-breakpoint-up($breakpoint){
