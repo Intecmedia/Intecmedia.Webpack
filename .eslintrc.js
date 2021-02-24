@@ -3,11 +3,13 @@
 /* eslint "quote-props": ["error", "always"] -- more readability keys */
 /* eslint "sort-keys": "error" -- more readability keys */
 
+const APP = require('./app.config.js');
+
 module.exports = {
     'env': {
         'amd': true,
         'browser': true,
-        'jquery': true,
+        'jquery': APP.USE_JQUERY,
         'node': false,
     },
     'extends': [
