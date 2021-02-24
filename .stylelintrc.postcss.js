@@ -7,6 +7,9 @@ const deepMerge = require('lodash.merge');
 const sharedConfig = require('./.stylelintrc.shared.js');
 
 module.exports = deepMerge({}, sharedConfig, {
+    'extends': [
+        ...sharedConfig.extends,
+    ],
     'plugins': [
         'stylelint-no-nested-media',
         ...sharedConfig.plugins,

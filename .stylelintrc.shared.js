@@ -6,6 +6,7 @@
 const ENV = require('./app.env.js');
 
 module.exports = {
+    'extends': [],
     'plugins': [
         'stylelint-csstree-validator',
         'stylelint-no-unsupported-browser-features',
@@ -18,15 +19,15 @@ module.exports = {
                 'font-display': 'auto | block | swap | fallback | optional',
             },
         },
+        'declaration-block-no-duplicate-custom-properties': true,
         'declaration-block-no-duplicate-properties': [true, {
             'ignore': [
                 'consecutive-duplicates-with-different-values',
             ],
         }],
-        'no-duplicate-selectors': [
-            true,
-            {},
-        ],
+        'no-duplicate-selectors': [true, {
+            'disallowInList': false,
+        }],
         'plugin/no-unsupported-browser-features': [true, {
             'browsers': ENV.BROWSERS,
             'ignore': [

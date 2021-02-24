@@ -11,6 +11,7 @@ module.exports = deepMerge({}, sharedConfig, {
         'stylelint-config-rational-order',
         'stylelint-config-sass-guidelines',
         'stylelint-config-twbs-bootstrap/scss',
+        ...sharedConfig.extends,
     ],
     'plugins': [
         'stylelint-high-performance-animation',
