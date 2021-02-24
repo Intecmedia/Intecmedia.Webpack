@@ -19,6 +19,7 @@ module.exports = deepMerge({}, sharedConfig, {
         'stylelint-scss',
         'stylelint-selector-bem-pattern',
         'stylelint-use-nesting',
+        ...sharedConfig.plugins,
     ],
     'reportDescriptionlessDisables': true,
     'rules': {

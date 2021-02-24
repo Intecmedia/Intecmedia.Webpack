@@ -3,6 +3,8 @@
 /* eslint "quote-props": ["error", "always"] -- more readability keys */
 /* eslint "sort-keys": "error" -- more readability keys */
 
+const ENV = require('./app.env.js');
+
 module.exports = {
     'plugins': [
         'stylelint-csstree-validator',
@@ -25,6 +27,7 @@ module.exports = {
             {},
         ],
         'plugin/no-unsupported-browser-features': [true, {
+            'browsers': ENV.BROWSERS,
             'ignore': [
                 'calc',
                 'css-featurequeries',

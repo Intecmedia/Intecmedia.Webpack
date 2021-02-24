@@ -9,6 +9,7 @@ const sharedConfig = require('./.stylelintrc.shared.js');
 module.exports = deepMerge({}, sharedConfig, {
     'plugins': [
         'stylelint-no-nested-media',
+        ...sharedConfig.plugins,
     ],
     'rules': {
         'pitcher/no-nested-media': true,
