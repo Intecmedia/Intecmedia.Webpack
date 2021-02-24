@@ -125,9 +125,9 @@
 ### Webp
 * Автоматический WebP для всех изображений(png, jpg, jpeg) внутри стилей, пример:
 ```css
-// before
+/* before */
 .test { background-image:url('test.png'); }
-// after
+/* after */
 .test { background-image:url('test.png'); }
 html.webp .test { background-image:url('test.webp'); }
 ```
