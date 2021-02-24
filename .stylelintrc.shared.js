@@ -15,6 +15,7 @@ module.exports = {
             'ignore': [],
             'properties': {
                 'content-visibility': 'visible | hidden | auto | initial | unset',
+                'font-display': 'auto | block | swap | fallback | optional',
             },
         },
         'declaration-block-no-duplicate-properties': [true, {
@@ -42,6 +43,8 @@ module.exports = {
                 'viewport-units',
                 'will-change',
             ],
+            'ignorePartialSupport': true,
+            'severity': 'warning',
         }],
         'property-no-unknown': [true, {
             'ignoreProperties': [

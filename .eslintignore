@@ -4,3 +4,4 @@ source/js/external/*.min.js
 !/.eslintrc.js
 !/.stylelintrc.js
 !/.stylelintrc.postcss.js
+!/.stylelintrc.shared.js
