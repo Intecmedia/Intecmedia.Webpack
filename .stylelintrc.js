@@ -3,7 +3,10 @@
 /* eslint "quote-props": ["error", "always"] -- more readability keys */
 /* eslint "sort-keys": "error" -- more readability keys */
 
-module.exports = {
+const deepMerge = require('lodash.merge');
+const sharedConfig = require('./.stylelintrc.shared.js');
+
+module.exports = deepMerge({}, sharedConfig, {
     'extends': [
         'stylelint-config-rational-order',
         'stylelint-config-sass-guidelines',
@@ -25,22 +28,18 @@ module.exports = {
         'indentation': 4,
         'linebreaks': 'unix',
         'max-empty-lines': 2,
-        'max-line-length': [
-            120,
-            {
-                'ignore': [
-                    'comments',
-                ],
-                'ignorePattern': '/\\$(.+?):/',
-            },
-        ],
+        'max-line-length': [120, {
+            'ignore': [
+                'comments',
+            ],
+            'ignorePattern': '/\\$(.+?):/',
+        }],
         'max-nesting-depth': [4, {
             'ignore': [
                 'blockless-at-rules',
                 'pseudo-classes',
             ],
         }],
-        'no-duplicate-selectors': true,
         'order/order': [
             'custom-properties',
             'dollar-variables',
@@ -69,14 +68,6 @@ module.exports = {
             ],
             'preset': 'bem',
         },
-        'property-no-unknown': [true, {
-            'ignoreProperties': [
-                'content-visibility',
-                'inherits',
-                'initial-value',
-                'syntax',
-            ],
-        }],
         'rule-empty-line-before': ['always', {
             'ignore': [
                 'after-comment',
@@ -145,4 +136,4 @@ module.exports = {
         'value-list-comma-space-after': 'always-single-line',
         'value-list-max-empty-lines': 1,
     },
-};
+});
