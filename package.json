@@ -1,6 +1,6 @@
 {
     "name": "Intecmedia.Webpack",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "Intecmedia Webpack bootstrap",
     "repository": {
         "type": "git",
@@ -186,7 +186,7 @@
         "stylelint-webpack-plugin": "latest",
         "svg-spritemap-webpack-plugin": "latest",
         "svg4everybody": "latest",
-        "svgo": "latest",
+        "svgo": "^1.3.2",
         "terser-webpack-plugin": "latest",
         "url-loader": "latest",
         "webpack": "latest",
