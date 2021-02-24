@@ -28,6 +28,7 @@
 
 ## Системные требования
 * Node.js версии 11.7.0 или выше
+* NPM версии 7 или выше 
 * [ImageMagick](https://www.imagemagick.org/) или [GraphicsMagick](http://www.graphicsmagick.org/).
 * python2.7 и выше, для `fonttools`.
 
@@ -124,9 +125,9 @@
 ### Webp
 * Автоматический WebP для всех изображений(png, jpg, jpeg) внутри стилей, пример:
 ```css
-// before
+/* before */
 .test { background-image:url('test.png'); }
-// after
+/* after */
 .test { background-image:url('test.png'); }
 html.webp .test { background-image:url('test.webp'); }
 ```
