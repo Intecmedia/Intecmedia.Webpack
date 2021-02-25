@@ -17,6 +17,12 @@ $enable-responsive-font-sizes:                true !default;
 $enable-validation-icons:                     false !default;
 $enable-deprecation-messages:                 true !default;
 
+// Disable Utilities selectors
+$displays: () !default;
+$overflows: () !default;
+$positions: () !default;
+$user-selects: () !default;
+
 @import "bootstrap-variables";
 
 // Common variables (Not bootstrap)
