@@ -82,30 +82,17 @@ $danger:        $red !default;
 
 $theme-colors: () !default;
 
-/*
-// stylelint-disable-next-line scss/dollar-variable-default -- stylelint not detect map-merge()
-$theme-colors: map-merge(
-    (
-        "primary":    $primary,
-        "secondary":  $secondary,
-        "success":    $success,
-        "info":       $info,
-        "warning":    $warning,
-        "danger":     $danger,
-        "light":      $light,
-        "dark":       $dark
-    ),
-    $theme-colors
-);
-*/
-
 // stylelint-disable-next-line scss/dollar-variable-default -- stylelint not detect map-merge()
 $theme-colors: map-merge(
     (
         // "primary":    $primary,
+        // "secondary":  $secondary,
         // "success":    $success,
+        // "info":       $info,
         // "warning":    $warning,
-        // "danger":     $danger
+        // "danger":     $danger,
+        // "light":      $light,
+        // "dark":       $dark
     ),
     $theme-colors
 );
