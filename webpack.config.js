@@ -57,7 +57,7 @@ const HtmlBeautifyPlugin = (APP.HTML_PRETTY ? require('./plugin.html-beautify.js
 const BabelOptions = require('./babel.options.js');
 
 const BANNER_STRING = [
-    `ENV.NODE_ENV=${ENV.NODE_ENV} | ENV.DEBUG=${ENV.DEBUG}`,
+    `[${ENV.PACKAGE_NAME}]: ENV.NODE_ENV=${ENV.NODE_ENV} | ENV.DEBUG=${ENV.DEBUG}`,
     fs.readFileSync(path.join(ENV.SOURCE_PATH, 'humans.txt')),
 ].join('\n');
 
