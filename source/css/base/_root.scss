@@ -1,4 +1,8 @@
 :root {
+    --NODE_ENV: "#{$NODE_ENV}";
+    --DEBUG: "#{$DEBUG}";
+    --PACKAGE_NAME: "#{$PACKAGE_NAME}";
+
     @each $bp, $value in $grid-breakpoints {
         --breakpoint-#{$bp}: #{$value};
     }
