@@ -9,7 +9,7 @@ const SvgoCreateConfig = (config) => ({
     plugins: SVGO.extendDefaultPlugins([
         {
             name: 'cleanupIDs',
-            active: config.prefix ? true : false,
+            active: !!config.prefix,
             params: (config.prefix ? {
 
                 prefix: {

@@ -13,11 +13,11 @@ exports.params = {};
 
 const DATA_URL_PATTERN = /^data:image\/[^,;]+(;charset=[^;,]*)?(;base64)?,/;
 
-exports.fn = function noDataURL(item) {
+exports.fn = function noDataURL(item, params, extra) {
     if (item.isElem('image')) {
         const href = item.attr('xlink:href') || item.attr('href');
         if (href !== undefined && DATA_URL_PATTERN.test(href.value)) {
-            throw new Error(exports.description);
+            throw new Error(`In ${JSON.stringify(extra.path)} -- ${exports.description}`);
         }
     }
 };

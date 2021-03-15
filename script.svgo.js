@@ -36,7 +36,7 @@ const ImageminIgnore = ignore().add(fs.readFileSync('./.imageminignore').toStrin
 
         const name = path.basename(filename, '.svg');
         const options = SvgoCreateConfig({ prefix: `svgo-${name.toLowerCase()}-`, pretty: true });
-        options.path = filename;
+        options.path = relative;
 
         const result = SVGO.optimize(svg, options);
         if (result.error) {

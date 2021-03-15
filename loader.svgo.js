@@ -17,9 +17,9 @@ module.exports = function SvgLoader(content) {
 
     const name = path.basename(loaderContext.resourcePath, '.svg');
     const options = SvgoCreateConfig({ prefix: `svgo-${name.toLowerCase()}-` });
-    options.path = loaderContext.resourcePath;
 
     const relativePath = slash(path.relative(__dirname, loaderContext.resourcePath));
+    options.path = relativePath;
     logger.info(`optimize(${JSON.stringify(relativePath)})`);
 
     const prefix = `<!-- ${JSON.stringify(relativePath)} -->\n`;
@@ -27,7 +27,7 @@ module.exports = function SvgLoader(content) {
 
     const result = SVGO.optimize(content, options);
     if (result.error) {
-        loaderCallback(`${JSON.stringify(relativePath)} -- ${result.error}`);
+        loaderCallback(`In ${JSON.stringify(relativePath)} -- ${result.error}`);
     } else {
         logger.info(result.info);
         loaderCallback(null, `module.exports = ${JSON.stringify(prefix + result.data.trim() + suffix)}`);
