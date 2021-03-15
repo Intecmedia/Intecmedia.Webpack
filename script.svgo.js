@@ -41,13 +41,11 @@ const ImageminIgnore = ignore().add(fs.readFileSync('./.imageminignore').toStrin
         const result = SVGO.optimize(svg, options);
         if (result.error) {
             throw new Error(`${JSON.stringify(relativePath)} -- ${result.error}`);
+        } else if (svg !== result.data) {
+            fs.writeFileSync(resourcePath, result.data);
+            logger.info(`fixed ${relativePath}`);
         } else {
-            if (svg !== result.data) {
-                fs.writeFileSync(resourcePath, result.data);
-                logger.info(`fixed ${relativePath}`);
-            } else {
-                logger.info(`skipped ${relativePath}`);
-            }
+            logger.info(`skipped ${relativePath}`);
         }
     });
 }));
