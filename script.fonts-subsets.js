@@ -23,9 +23,9 @@ glob(`${FONTS_SRC}/**/*.ttf`, {
 
     logger.info(`${files.length} files`);
 
-    files.forEach((filename) => {
-        const source = slash(path.relative(__dirname, filename));
-        const target = slash(path.relative(__dirname, path.join(FONTS_DST, path.relative(FONTS_SRC, filename))));
+    files.forEach((resourcePath) => {
+        const source = slash(path.relative(__dirname, resourcePath));
+        const target = slash(path.relative(__dirname, path.join(FONTS_DST, path.relative(FONTS_SRC, resourcePath))));
 
         const basename = path.basename(target, '.ttf');
         const dirname = slash(path.dirname(target));

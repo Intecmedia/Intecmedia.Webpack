@@ -22,14 +22,12 @@ module.exports = function SvgLoader(content) {
     options.path = relativePath;
     logger.info(`optimize(${JSON.stringify(relativePath)})`);
 
-    const prefix = `<!-- ${JSON.stringify(relativePath)} -->\n`;
-    const suffix = `\n<!-- /${JSON.stringify(relativePath)} -->\n`;
-
     const result = SVGO.optimize(content, options);
     if (result.error) {
         loaderCallback(`In ${JSON.stringify(relativePath)} -- ${result.error}`);
     } else {
-        logger.info(result.info);
+        const prefix = `<!-- ${JSON.stringify(relativePath)} -->\n`;
+        const suffix = `\n<!-- /${JSON.stringify(relativePath)} -->\n`;
         loaderCallback(null, `module.exports = ${JSON.stringify(prefix + result.data.trim() + suffix)}`);
     }
 };

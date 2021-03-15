@@ -40,19 +40,19 @@ glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'),
     };
 
     let processed = 0;
-    files.forEach((filename) => {
-        const relative = slash(path.relative(__dirname, filename));
+    files.forEach((resourcePath) => {
+        const relativePath = slash(path.relative(__dirname, resourcePath));
 
-        if (path.basename(filename).startsWith('_')) {
-            logger.info(`ignored ${relative}`);
+        if (path.basename(resourcePath).startsWith('_')) {
+            logger.info(`ignored ${relativePath}`);
             return;
         }
 
-        const html = fs.readFileSync(filename).toString('utf-8');
-        const report = htmlvalidate.validateFile(filename);
+        const html = fs.readFileSync(resourcePath).toString('utf-8');
+        const report = htmlvalidate.validateFile(resourcePath);
 
         if (report.results.length === 0) {
-            logger.info(`skipped ${relative}`);
+            logger.info(`skipped ${relativePath}`);
             return;
         }
 
@@ -69,7 +69,7 @@ glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'),
                 }
                 increaseStat(messageType);
 
-                logger.error(`${relative}: line ${message.line || 0} col [${message.column || 0}]`);
+                logger.error(`${relativePath}: line ${message.line || 0} col [${message.column || 0}]`);
                 logger.warn(`${messageType}[${message.ruleId}]: ${JSON.stringify(message.message)}`);
 
                 const ellipsis = html.substring(message.offset - lineEllipsis, message.offset + lineEllipsis).trim();

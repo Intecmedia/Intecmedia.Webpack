@@ -45,16 +45,16 @@ glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'),
     };
 
     let processed = 0;
-    files.forEach(async (filename) => {
-        const relative = slash(path.relative(__dirname, filename));
-        const html = fs.readFileSync(filename, 'utf8').toString();
+    files.forEach(async (resourcePath) => {
+        const relativePath = slash(path.relative(__dirname, resourcePath));
+        const html = fs.readFileSync(resourcePath, 'utf8').toString();
         const result = await validator({ format: 'json', data: html });
 
         let skipped = false;
 
-        if (path.basename(filename).startsWith('_')) {
+        if (path.basename(resourcePath).startsWith('_')) {
             skipped = true;
-            logger.info(`ignored ${relative}`);
+            logger.info(`ignored ${relativePath}`);
         } else if (result.messages && result.messages.length > 0) {
             result.messages.forEach((message) => {
                 if (message.message && ignoreTest(message.message)) {
@@ -67,7 +67,7 @@ glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'),
                 }
                 increaseStat(message.type);
                 const log = errorsLogger[message.type] || logger.error;
-                log(`${relative}: line ${message.lastLine || 0} col [${message.firstColumn || 0}-${message.lastColumn || 0}]`);
+                log(`${relativePath}: line ${message.lastLine || 0} col [${message.firstColumn || 0}-${message.lastColumn || 0}]`);
                 log(`${message.type}: ${JSON.stringify(message.message)}`);
                 console.log(message.extract.trim());
                 console.log('');
@@ -77,7 +77,7 @@ glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'),
         }
 
         if (skipped) {
-            logger.info(`skipped ${relative}`);
+            logger.info(`skipped ${relativePath}`);
         }
 
         processed += 1;

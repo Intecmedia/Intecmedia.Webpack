@@ -24,30 +24,29 @@ const ImageminIgnore = ignore().add(fs.readFileSync('./.imageminignore').toStrin
 }, (error, files) => {
     if (error) throw error;
 
-    files.forEach((filename) => {
-        const svg = fs.readFileSync(filename, 'utf8').toString();
-        const relative = slash(path.relative(ENV.SOURCE_PATH, path.normalize(filename)));
+    files.forEach((resourcePath) => {
+        const svg = fs.readFileSync(resourcePath, 'utf8').toString();
+        const relativePath = slash(path.relative(ENV.SOURCE_PATH, path.normalize(resourcePath)));
 
-        const ignores = ImageminIgnore.ignores(relative);
+        const ignores = ImageminIgnore.ignores(relativePath);
         if (ignores) {
-            logger.info(`ignored ${relative}`);
+            logger.info(`ignored ${relativePath}`);
             return;
         }
 
-        const name = path.basename(filename, '.svg');
+        const name = path.basename(resourcePath, '.svg');
         const options = SvgoCreateConfig({ prefix: `svgo-${name.toLowerCase()}-`, pretty: true });
-        options.path = relative;
+        options.path = relativePath;
 
         const result = SVGO.optimize(svg, options);
         if (result.error) {
-            throw new Error(`${JSON.stringify(relative)} -- ${result.error}`);
+            throw new Error(`${JSON.stringify(relativePath)} -- ${result.error}`);
         } else {
-            logger.info(result.info);
             if (svg !== result.data) {
-                fs.writeFileSync(filename, result.data);
-                logger.info(`fixed ${relative}`);
+                fs.writeFileSync(resourcePath, result.data);
+                logger.info(`fixed ${relativePath}`);
             } else {
-                logger.info(`skipped ${relative}`);
+                logger.info(`skipped ${relativePath}`);
             }
         }
     });

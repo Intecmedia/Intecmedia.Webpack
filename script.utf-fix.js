@@ -18,18 +18,16 @@ const ENV = require('./app.env.js');
 }, (error, files) => {
     if (error) throw error;
 
-    files.forEach((filename) => {
-        const html = fs.readFileSync(filename, 'utf8').toString();
+    files.forEach((resourcePath) => {
+        const source = fs.readFileSync(resourcePath, 'utf8').toString();
+        const fixedSource = source.normalize('NFC').replace(/\r\n/g, '\n');
+        const relativePath = slash(path.relative(__dirname, resourcePath));
 
-        const newHtml = html.normalize('NFC').replace(/\r\n/g, '\n');
-        fs.writeFileSync(filename, newHtml);
-
-        const relative = slash(path.relative(__dirname, filename));
-
-        if (newHtml === html) {
-            logger.info(`skiped ${relative}`);
+        if (fixedSource === source) {
+            fs.writeFileSync(resourcePath, fixedSource);
+            logger.info(`skiped ${relativePath}`);
         } else {
-            logger.info(`fixed ${relative}`);
+            logger.info(`fixed ${relativePath}`);
         }
     });
 }));
