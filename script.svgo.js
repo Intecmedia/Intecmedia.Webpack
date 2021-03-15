@@ -36,17 +36,19 @@ const ImageminIgnore = ignore().add(fs.readFileSync('./.imageminignore').toStrin
 
         const name = path.basename(filename, '.svg');
         const options = SvgoCreateConfig({ prefix: `svgo-${name.toLowerCase()}-`, pretty: true });
-        const svgoInstance = new SVGO(options);
+        options.path = filename;
 
-        svgoInstance.optimize(svg).then((result) => {
-            fs.writeFileSync(filename, result.data);
+        const result = SVGO.optimize(svg, options);
+        if (result.error) {
+            throw new Error(`${JSON.stringify(relative)} -- ${result.error}`);
+        } else {
+            logger.info(result.info);
             if (svg !== result.data) {
+                fs.writeFileSync(filename, result.data);
                 logger.info(`fixed ${relative}`);
             } else {
                 logger.info(`skipped ${relative}`);
             }
-        }).catch((svgoError) => {
-            throw new Error(`error in ${relative}: ${svgoError}`);
-        });
+        }
     });
 }));

@@ -186,7 +186,7 @@
         "stylelint-webpack-plugin": "latest",
         "svg-spritemap-webpack-plugin": "latest",
         "svg4everybody": "latest",
-        "svgo": "^1.3.2",
+        "svgo": "latest",
         "terser-webpack-plugin": "latest",
         "url-loader": "latest",
         "webpack": "latest",

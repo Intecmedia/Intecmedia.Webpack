@@ -17,19 +17,20 @@ module.exports = function SvgLoader(content) {
 
     const name = path.basename(loaderContext.resourcePath, '.svg');
     const options = SvgoCreateConfig({ prefix: `svgo-${name.toLowerCase()}-` });
-    const svgoInstance = new SVGO(options);
+    options.path = loaderContext.resourcePath;
 
     const relativePath = slash(path.relative(__dirname, loaderContext.resourcePath));
     logger.info(`optimize(${JSON.stringify(relativePath)})`);
 
-    svgoInstance.optimize(content).then((result) => {
+    const prefix = `<!-- ${JSON.stringify(relativePath)} -->\n`;
+    const suffix = `\n<!-- /${JSON.stringify(relativePath)} -->\n`;
+
+    const result = SVGO.optimize(content, options);
+    if (result.error) {
+        loaderCallback(`${JSON.stringify(relativePath)} -- ${result.error}`);
+    } else {
         logger.info(result.info);
-        const prefix = `<!-- ${JSON.stringify(relativePath)} -->\n`;
-        const suffix = `\n<!-- /${JSON.stringify(relativePath)} -->\n`;
-        const exportString = `module.exports = ${JSON.stringify(prefix + result.data.trim() + suffix)}`;
-        loaderCallback(null, exportString);
-    }).catch((error) => {
-        loaderCallback(error);
-    });
+        loaderCallback(null, `module.exports = ${JSON.stringify(prefix + result.data.trim() + suffix)}`);
+    }
 };
 module.exports.raw = true;

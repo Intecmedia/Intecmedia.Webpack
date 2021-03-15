@@ -1,9 +1,11 @@
 /* eslint-env node  -- webpack is node env */
 /* eslint "compat/compat": "off" -- webpack is node env */
 
+exports.name = 'noDataURL';
+
 exports.type = 'perItem';
 
-exports.active = false;
+exports.active = true;
 
 exports.description = 'Not allowed data URL(<image xlink:href="data:...">). Please use files instead.';
 

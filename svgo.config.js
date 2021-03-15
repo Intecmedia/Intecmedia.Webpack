@@ -7,7 +7,9 @@ const SvgoCreateConfig = (config) => ({
     js2svg: { pretty: (!!config.pretty) },
     plugins: [
         {
-            cleanupIDs: (config.prefix ? {
+            name: 'cleanupIDs',
+            ...(config.prefix ? {
+                active: true,
                 prefix: {
                     toString() {
                         return uniqueId(config.prefix);
@@ -15,16 +17,19 @@ const SvgoCreateConfig = (config) => ({
                 },
                 preserve: [], // ignore ids
                 preservePrefixes: [], // ignore prefix ids
-            } : false),
+            } : {
+                active: false,
+            }),
         },
-        { convertShapeToPath: false },
-        { convertStyleToAttrs: false },
-        { convertTransform: false },
-        { removeDimensions: false },
-        { removeViewBox: false },
-        { removeUselessDefs: false },
-        { noDataURL: require('./svgo.no-data-url.js') },
+        { name: 'convertShapeToPath', active: false },
+        { name: 'convertStyleToAttrs', active: false },
+        { name: 'convertTransform', active: false },
+        { name: 'removeDimensions', active: false },
+        { name: 'removeViewBox', active: false },
+        { name: 'removeUselessDefs', active: false },
+        { name: 'noDataURL', ...require('./svgo.no-data-url.js') },
     ],
+    multipass: true,
 });
 
 module.exports.SvgoCreateConfig = SvgoCreateConfig;
