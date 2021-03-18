@@ -1,3 +1,5 @@
+/* eslint "no-invalid-this": "off" -- its ok for 3d-party */
+
 function closestPolyfill(selector) {
     let element = this;
     while (element) {

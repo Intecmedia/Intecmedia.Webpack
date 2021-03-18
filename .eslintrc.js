@@ -56,6 +56,10 @@ module.exports = {
             'skipComments': true,
         }],
         'no-console': 'off',
+        'no-invalid-this': ['error', {
+            'capIsConstructor': true,
+        }],
+
         'no-param-reassign': ['error', {
             'props': false,
         }],

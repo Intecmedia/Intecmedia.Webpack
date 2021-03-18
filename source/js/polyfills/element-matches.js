@@ -1,3 +1,5 @@
+/* eslint "no-invalid-this": "off" -- its ok for 3d-party */
+
 function matchesPolyfill(selector) {
     const matches = (this.document || this.ownerDocument).querySelectorAll(selector);
     let i = matches.length;

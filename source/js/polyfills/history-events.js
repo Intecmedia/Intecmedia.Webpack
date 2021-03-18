@@ -1,6 +1,7 @@
 /* global VERBOSE */
 /* eslint 'compat/compat': 'off' -- useless for polyfill */
 /* eslint 'prefer-rest-params': 'off' -- arguments are alllowed for decorators */
+/* eslint "no-invalid-this": "off" -- its ok for 3d-party */
 
 const Reflect = require('core-js/stable/reflect/index.js');
 
