@@ -10,6 +10,7 @@ module.exports = {
     ],
     includeTransform: [
         // enable babel transform
+        path.join(__dirname, 'source'),
         // path.join(__dirname, 'node_modules', 'example-package-name'),
     ],
     excludeJquery: [
@@ -20,6 +21,7 @@ module.exports = {
     ],
     includeJquery: [
         // enable jquery global
+        path.join(__dirname, 'source'),
         // path.join(__dirname, 'node_modules', 'example-package-name'),
     ],
 };

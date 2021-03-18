@@ -421,7 +421,6 @@ module.exports = {
                     not: [
                         // enable babel transform
                         ...BabelOptions.includeTransform,
-                        path.join(ENV.SOURCE_PATH, 'upload'),
                     ],
                 },
                 loader: 'babel-loader',
