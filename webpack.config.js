@@ -392,6 +392,28 @@ module.exports = {
                     exposes: ['$', 'jQuery'],
                 },
             }] : []),
+            ...(APP.USE_JQUERY ? [{
+                type: 'javascript/auto',
+                test: /\.(js|mjs|cjs)(\?.*)?$/i,
+                exclude: {
+                    and: [
+                        // disable jquery global
+                        ...BabelOptions.excludeJquery,
+                    ],
+                    not: [
+                        // enable jquery global
+                        ...BabelOptions.includeJquery,
+                    ],
+                },
+                loader: 'imports-loader',
+                options: {
+                    imports: [
+                        'default jquery $',
+                        'default jquery jQuery',
+                    ],
+                },
+
+            }] : []),
             {
                 type: 'javascript/auto',
                 test: /\.(js|mjs|cjs)(\?.*)?$/i,
@@ -406,29 +428,15 @@ module.exports = {
                         path.join(ENV.SOURCE_PATH, 'upload'),
                     ],
                 },
-                rules: [
-                    ...(APP.USE_JQUERY ? [{
-                        // global jQuery import
-                        loader: 'imports-loader',
-                        options: {
-                            imports: [
-                                'default jquery $',
-                                'default jquery jQuery',
-                            ],
-                        },
-                    }] : []),
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            babelrc: false,
-                            configFile: './babel.config.js',
-                            envName: ENV.NODE_ENV,
-                            cacheCompression: false,
-                            cacheDirectory: ENV.DEBUG ? false : UTILS.cacheDir('babel-loader'),
-                            highlightCode: false,
-                        },
-                    },
-                ],
+                loader: 'babel-loader',
+                options: {
+                    babelrc: false,
+                    configFile: './babel.config.js',
+                    envName: ENV.NODE_ENV,
+                    cacheCompression: false,
+                    cacheDirectory: ENV.DEBUG ? false : UTILS.cacheDir('babel-loader'),
+                    highlightCode: false,
+                },
             },
             // file loaders
             {

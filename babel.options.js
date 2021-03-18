@@ -10,8 +10,13 @@ module.exports = {
     ],
     includeTransform: [
         // enable babel transform
-        path.join(__dirname, 'node_modules', 'focus-within'),
-        path.join(__dirname, 'node_modules', 'gsap'),
-        path.join(__dirname, 'node_modules', 'three'),
+        // path.join(__dirname, 'node_modules', 'example-package-name'),
+    ],
+    excludeJquery: [
+        // disable jquery global
+        // path.join(__dirname, 'node_modules', 'example-package-name'),
+    ],
+    includeJquery: [
+        // enable jquery global
     ],
 };
