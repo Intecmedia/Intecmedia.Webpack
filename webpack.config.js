@@ -393,18 +393,15 @@ module.exports = {
                 },
             }] : []),
             ...(APP.USE_JQUERY ? [{
-                type: 'javascript/auto',
                 test: /\.(js|mjs|cjs)(\?.*)?$/i,
-                exclude: {
-                    and: [
-                        // disable jquery global
-                        ...BabelOptions.excludeJquery,
-                    ],
-                    not: [
-                        // enable jquery global
-                        ...BabelOptions.includeJquery,
-                    ],
-                },
+                include: [
+                    // enable jquery global
+                    ...BabelOptions.includeJquery,
+                ],
+                exclude: [
+                    // disable jquery global
+                    ...BabelOptions.excludeJquery,
+                ],
                 loader: 'imports-loader',
                 options: {
                     imports: [
@@ -412,7 +409,6 @@ module.exports = {
                         'default jquery jQuery',
                     ],
                 },
-
             }] : []),
             {
                 type: 'javascript/auto',
