@@ -14,9 +14,12 @@ module.exports = {
     ],
     excludeJquery: [
         // disable jquery global
+        path.join(__dirname, 'node_modules', 'core-js'),
+        path.join(__dirname, 'node_modules', '@babel'),
         // path.join(__dirname, 'node_modules', 'example-package-name'),
     ],
     includeJquery: [
         // enable jquery global
+        // path.join(__dirname, 'node_modules', 'example-package-name'),
     ],
 };
