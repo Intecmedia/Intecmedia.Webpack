@@ -63,6 +63,11 @@ module.exports = deepMerge({}, sharedConfig, {
             'empty-line-between-groups': true,
         }],
         'plugin/selector-bem-pattern': {
+            'ignoreSelectors': [
+                '^\.js-.+', 
+                '^.(js|no-js)\+s',
+                '^(html|body)\..+',
+            ],
             'implicitComponents': [
                 'source/css/components/**/*.scss',
                 'source/css/layout/**/*.scss',
