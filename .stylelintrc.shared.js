@@ -8,17 +8,9 @@ const ENV = require('./app.env.js');
 module.exports = {
     'extends': [],
     'plugins': [
-        'stylelint-csstree-validator',
         'stylelint-no-unsupported-browser-features',
     ],
     'rules': {
-        'csstree/validator': {
-            'ignore': [],
-            'properties': {
-                'content-visibility': 'visible | hidden | auto | initial | unset',
-                'font-display': 'auto | block | swap | fallback | optional',
-            },
-        },
         'declaration-block-no-duplicate-custom-properties': true,
         'declaration-block-no-duplicate-properties': [true, {
             'ignore': [
