@@ -1,4 +1,5 @@
 /* stylelint-disable no-duplicate-selectors -- already in 'node_modules/bootstrap/scss/reboot.scss', but we need it */
+/* stylelint-disable plugin/selector-bem-pattern -- is common styles, not component */
 
 /* postcss-bem-linter: ignore */
 html {
@@ -17,4 +18,5 @@ body {
     }
 }
 
+/* stylelint-enable plugin/selector-bem-pattern */
 /* stylelint-enable no-duplicate-selectors */
