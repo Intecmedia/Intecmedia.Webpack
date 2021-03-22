@@ -64,9 +64,9 @@ module.exports = deepMerge({}, sharedConfig, {
         }],
         'plugin/selector-bem-pattern': {
             'ignoreSelectors': [
-                '^\.(js|no)\-(.+)',
-                '^\.(js|no\-js)(\s+)',
-                '^(html|body)\.(.+)',
+                '^\\.(js|no)\\-(.+)',
+                '^\\.(js|no\\-js)(\\s+)',
+                '^(html|body)\\.(.+)',
             ],
             'implicitComponents': [
                 'source/css/components/**/*.scss',
