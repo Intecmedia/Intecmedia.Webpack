@@ -4,6 +4,10 @@
 /* eslint "sort-keys": "error" -- more readability keys */
 
 module.exports = {
+    'env': {
+        'browser': true,
+        'node': false,
+    },
     'extends': ['plugin:@typescript-eslint/recommended'],
     'parser': '@typescript-eslint/parser',
     'plugins': ['@typescript-eslint'],
