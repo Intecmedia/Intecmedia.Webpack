@@ -10,6 +10,7 @@ module.exports = {
     ],
     includeTransform: [
         // enable babel transform
+        /\.(ts)(\?.*)?$/i,
         path.join(__dirname, 'source'),
         // path.join(__dirname, 'node_modules', 'example-package-name'),
     ],
