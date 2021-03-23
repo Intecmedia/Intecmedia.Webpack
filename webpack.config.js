@@ -114,7 +114,7 @@ module.exports = {
                 vendor: {
                     chunks: 'all',
                     enforce: true,
-                    test: /(node_modules)(.+)\.(js|mjs|cjs)(\?.*)?$/,
+                    test: /(node_modules)(.+)\.(js|mjs|cjs|ts)(\?.*)?$/,
                     name: 'vendor',
                 },
             },
