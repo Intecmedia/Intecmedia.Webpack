@@ -251,7 +251,8 @@ module.exports = {
         }),
         new ESLintPlugin({
             files: '**/*.js',
-            overrideConfigFile: './.eslintrc.js',
+            configFile: './.eslintrc.js',
+            ignorePath: './.eslintignore',
             exclude: ['node_modules', 'external'],
             emitError: true,
             emitWarning: true,
