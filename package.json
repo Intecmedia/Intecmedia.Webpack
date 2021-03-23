@@ -80,6 +80,7 @@
         "@babel/plugin-transform-runtime": "latest",
         "@babel/polyfill": "latest",
         "@babel/preset-env": "latest",
+        "@babel/preset-typescript": "latest",
         "@babel/runtime": "latest",
         "@gfx/zopfli": "latest",
         "@sentry/browser": "latest",

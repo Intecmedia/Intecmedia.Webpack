@@ -412,7 +412,7 @@ module.exports = {
             }] : []),
             {
                 type: 'javascript/auto',
-                test: /\.(js|mjs|cjs)(\?.*)?$/i,
+                test: /\.(js|mjs|cjs|ts)(\?.*)?$/i,
                 exclude: {
                     and: [
                         // disable babel transform
