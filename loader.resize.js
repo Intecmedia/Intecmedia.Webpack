@@ -13,6 +13,7 @@ const deepMerge = require('lodash.merge');
 const weblog = require('webpack-log');
 
 const logger = weblog({ name: 'loader-resize' });
+const imageminConfig = require('./imagemin.config.js');
 
 const DEFAULT_OPTIONS = {
     imageMagick: true,
@@ -91,6 +92,8 @@ module.exports = function ResizeLoader(content) {
                     ? !!query.lossless : resourceFormat === 'png');
                 if (lossless) {
                     this.define('webp:lossless=true');
+                } else if (!quality) {
+                    this.quality(imageminConfig.webp.quality);
                 }
             }
 
