@@ -22,6 +22,6 @@ module.exports = {
     ],
 };
 
-module.exports.wepb = {
+module.exports.webp = {
     quality: 85,
 };
