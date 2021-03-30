@@ -33,18 +33,18 @@ glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'),
 
     logger.info(`${files.length} files\n`);
 
-    const statMessages = {};
+    const statMessages = { ignored: 0, skipped: 0 };
     const increaseStat = (type) => {
         if (type in statMessages) statMessages[type] += 1;
         else statMessages[type] = 1;
     };
 
-    let processed = 0;
     files.forEach((resourcePath) => {
         const relativePath = slash(path.relative(__dirname, resourcePath));
 
         if (path.basename(resourcePath).startsWith('_')) {
-            logger.info(`ignored ${relativePath}`);
+            logger.info(`skipped ${relativePath}`);
+            increaseStat('skipped');
             return;
         }
 
@@ -53,13 +53,14 @@ glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'),
 
         if (report.results.length === 0) {
             logger.info(`skipped ${relativePath}`);
+            increaseStat('skipped');
             return;
         }
 
         report.results.forEach((result) => {
             result.messages.forEach((message) => {
                 if (message.message && ignoreTest(message.message)) {
-                    increaseStat('ignore');
+                    increaseStat('ignored');
                     return;
                 }
 
@@ -73,14 +74,12 @@ glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'),
                 logger.warn(`${messageType}[${message.ruleId}]: ${JSON.stringify(message.message)}`);
 
                 const ellipsis = html.substring(message.offset - lineEllipsis, message.offset + lineEllipsis).trim();
-                console.log(ellipsis);
+                console.log(`${ellipsis}...`);
                 console.log('');
             });
         });
-
-        processed += 1;
-        if (processed === files.length) {
-            logger.info(statMessages);
-        }
     });
+
+    console.log('');
+    logger.info('stats:', statMessages);
 });

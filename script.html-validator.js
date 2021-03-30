@@ -29,37 +29,42 @@ const errorsLogger = {
     warning: logger.warn,
 };
 
+async function validatorAsync(options) {
+    const result = await validator(options);
+    return result;
+}
+
 const pathSuffix = argv.pathSuffix && typeof (argv.pathSuffix) === 'string' ? argv.pathSuffix : '';
 
 glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'), {
     ignore: [],
-}, (error, files) => {
+}, async (error, files) => {
     if (error) throw error;
 
     logger.info(`${files.length} files\n`);
 
-    const statMessages = {};
+    const statMessages = { ignored: 0, skipped: 0 };
     const increaseStat = (type) => {
         if (type in statMessages) statMessages[type] += 1;
         else statMessages[type] = 1;
     };
 
-    let processed = 0;
-    files.forEach(async (resourcePath) => {
+    const promises = files.map(async (resourcePath) => {
         const relativePath = slash(path.relative(__dirname, resourcePath));
         const html = fs.readFileSync(resourcePath, 'utf8').toString();
-        const result = await validator({ format: 'json', data: html });
+        const result = await validatorAsync({ format: 'json', data: html });
 
         let skipped = false;
 
         if (path.basename(resourcePath).startsWith('_')) {
+            logger.info(`skipped ${relativePath}`);
+            increaseStat('skipped');
             skipped = true;
-            logger.info(`ignored ${relativePath}`);
         } else if (result.messages && result.messages.length > 0) {
             result.messages.forEach((message) => {
                 if (message.message && ignoreTest(message.message)) {
                     skipped = true;
-                    increaseStat('ignore');
+                    increaseStat('ignored');
                     return;
                 }
                 if (message.type === 'error') {
@@ -69,20 +74,23 @@ glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'),
                 const log = errorsLogger[message.type] || logger.error;
                 log(`${relativePath}: line ${message.lastLine || 0} col [${message.firstColumn || 0}-${message.lastColumn || 0}]`);
                 log(`${message.type}: ${JSON.stringify(message.message)}`);
-                console.log(message.extract.trim());
+                const ellipsis = message.extract.trim();
+                console.log(`${ellipsis}...`);
                 console.log('');
             });
+            skipped = false;
         } else {
             skipped = true;
         }
 
         if (skipped) {
+            increaseStat('skipped');
             logger.info(`skipped ${relativePath}`);
         }
-
-        processed += 1;
-        if (processed === files.length) {
-            logger.info(statMessages);
-        }
+        return result;
     });
+
+    await Promise.all(promises);
+    console.log('');
+    logger.info('stats:', statMessages);
 });
