@@ -71,9 +71,11 @@ glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'),
                     process.exitCode = 1;
                 }
                 increaseStat(message.type);
+
                 const log = errorsLogger[message.type] || logger.error;
                 log(`${relativePath}: line ${message.lastLine || 0} col [${message.firstColumn || 0}-${message.lastColumn || 0}]`);
                 log(`${message.type}: ${JSON.stringify(message.message)}`);
+
                 const ellipsis = message.extract.trim();
                 console.log(`...${ellipsis}...`);
                 console.log('');
