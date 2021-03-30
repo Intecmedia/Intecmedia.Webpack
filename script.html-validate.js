@@ -74,7 +74,7 @@ glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'),
                 logger.warn(`${messageType}[${message.ruleId}]: ${JSON.stringify(message.message)}`);
 
                 const ellipsis = html.substring(message.offset - lineEllipsis, message.offset + lineEllipsis).trim();
-                console.log(`${ellipsis}...`);
+                console.log(`...${ellipsis}...`);
                 console.log('');
             });
         });

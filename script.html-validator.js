@@ -61,9 +61,9 @@ glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'),
             increaseStat('skipped');
             skipped = true;
         } else if (result.messages && result.messages.length > 0) {
+            skipped = false;
             result.messages.forEach((message) => {
                 if (message.message && ignoreTest(message.message)) {
-                    skipped = true;
                     increaseStat('ignored');
                     return;
                 }
@@ -75,10 +75,9 @@ glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'),
                 log(`${relativePath}: line ${message.lastLine || 0} col [${message.firstColumn || 0}-${message.lastColumn || 0}]`);
                 log(`${message.type}: ${JSON.stringify(message.message)}`);
                 const ellipsis = message.extract.trim();
-                console.log(`${ellipsis}...`);
+                console.log(`...${ellipsis}...`);
                 console.log('');
             });
-            skipped = false;
         } else {
             skipped = true;
         }
