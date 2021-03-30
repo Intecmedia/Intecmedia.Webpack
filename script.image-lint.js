@@ -110,8 +110,8 @@ glob(ENV.SOURCE_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.{jpg,jp
 
         return identifyData;
     });
-
     await Promise.all(promises);
+
     console.log('');
     logger.info('stats:', statMessages);
 });

@@ -89,8 +89,8 @@ glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'),
         }
         return result;
     });
-
     await Promise.all(promises);
+
     console.log('');
     logger.info('stats:', statMessages);
 });
