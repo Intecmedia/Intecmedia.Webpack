@@ -1,6 +1,7 @@
 /* eslint-env node -- webpack is node env */
 
 module.exports = {
+    port: 3000,
     files: [
         '../include/module/**/*.{php,phtml}',
         '../include/template/**/*.{php,phtml,svg}',

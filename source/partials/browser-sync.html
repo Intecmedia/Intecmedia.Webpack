@@ -1,10 +1,12 @@
 {% if APP.ENV.WATCH %}
+<!-- browser-sync -->
 <script id="browser-sync-script">
 (function () {
     var browserSync = document.createElement("script");
     browserSync.async = true;
-    browserSync.src = location.origin + ":3000/browser-sync/browser-sync-client.js";
+    browserSync.src = location.origin + ":{{ APP.BROWSERSYNC.port }}/browser-sync/browser-sync-client.js";
     document.body.insertBefore(browserSync, document.getElementById("browser-sync-script"));
 })();
 </script>
+<!-- /browser-sync -->
 {% endif %}
