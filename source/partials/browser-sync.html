@@ -1,5 +1,10 @@
 {% if APP.ENV.WATCH %}
 <script id="browser-sync-script">
-    document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js'><\/script>".replace("HOST", location.hostname));
+(function () {
+    var browserSync = document.createElement("script");
+    browserSync.async = true;
+    browserSync.src = location.origin + ":3000/browser-sync/browser-sync-client.js";
+    document.body.insertBefore(browserSync, document.getElementById("browser-sync-script"));
+})();
 </script>
 {% endif %}
