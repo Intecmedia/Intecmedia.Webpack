@@ -32,7 +32,7 @@ module.exports = () => {
             if (!originRule.__postcssWebpRule__) {
                 originRule.__postcssWebpRule__ = webpRule;
 
-                webpRule.selectors = webpRule.selectors.map((i) => `html.wepb ${i}`);
+                webpRule.selectors = webpRule.selectors.map((i) => `html.webp ${i}`);
                 webpRule.each((i) => {
                     if (i.prop !== decl.prop && i.value !== decl.value) {
                         i.remove();
