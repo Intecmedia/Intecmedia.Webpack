@@ -87,13 +87,21 @@ module.exports = function ResizeLoader(content) {
                 this.quality(quality);
             }
 
+            const lossless = (typeof (query.lossless) !== 'undefined' ? !!query.lossless : resourceFormat === 'png');
+
             if (format === 'webp') {
-                const lossless = (typeof (query.lossless) !== 'undefined'
-                    ? !!query.lossless : resourceFormat === 'png');
                 if (lossless) {
                     this.define('webp:lossless=true');
                 } else if (!quality) {
                     this.quality(imageminConfig.webp.quality);
+                }
+            }
+
+            if (format === 'avif') {
+                if (lossless) {
+                    this.quality(100);
+                } else if (!quality) {
+                    this.quality(imageminConfig.avif.quality);
                 }
             }
 
