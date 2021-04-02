@@ -24,9 +24,9 @@ const ENV = require('./app.env.js');
         const relativePath = slash(path.relative(__dirname, resourcePath));
 
         if (fixedSource === source) {
-            fs.writeFileSync(resourcePath, fixedSource);
             logger.info(`skiped ${relativePath}`);
         } else {
+            fs.writeFileSync(resourcePath, fixedSource);
             logger.info(`fixed ${relativePath}`);
         }
     });
