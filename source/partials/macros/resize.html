@@ -2,8 +2,12 @@
 {% set DEFAULT_BREAKPOINTS = ['xs', 'sm', 'md', 'lg', 'xl'] %}
 {% set DEFAULT_SIZES = {xs: 576, sm: 768, md: 992, lg: 1200, xl: 1900} %}
 
-{% macro picture (url, alt, attrs={}, breakpoints=DEFAULT_BREAKPOINTS, sizes=DEFAULT_SIZES, quality=DEFAULT_QUALITY) %}
+{% macro breakpoints (url, alt, attrs={}, breakpoints=DEFAULT_BREAKPOINTS, sizes=DEFAULT_SIZES, quality=DEFAULT_QUALITY) %}
     <picture{% for k, v in attrs %} {{ k }}="{{ v }}"{% endfor %}>
+
+        {% for breakpoint, media in breakpoints_media(breakpoints, sizes) %}
+        <source media="{{ media }}" srcset="{{ require(url + '?resize=' + sizes[breakpoint] + 'x&quality=' + quality + '&format=avif&suffix=' + breakpoint) }}" type="image/avif">
+        {% endfor %}
 
         {% for breakpoint, media in breakpoints_media(breakpoints, sizes) %}
         <source media="{{ media }}" srcset="{{ require(url + '?resize=' + sizes[breakpoint] + 'x&quality=' + quality + '&format=webp&suffix=' + breakpoint) }}" type="image/webp">
@@ -25,8 +29,9 @@
     </picture>
 {% endmacro %}
 
-{% macro picture_webp (url, alt, attrs={}, quality=DEFAULT_QUALITY) %}
+{% macro picture (url, alt, attrs={}, quality=DEFAULT_QUALITY) %}
     <picture{% for k, v in attrs %} {{ k }}="{{ v }}"{% endfor %}>
+        <source srcset="{{ require(url + '?resize=&quality=' + quality + '&format=avif') }}" type="image/avif">
         <source srcset="{{ require(url + '?resize=&quality=' + quality + '&format=webp') }}" type="image/webp">
         {% set dimensions = image_size(url) %}
         <img 
