@@ -20,6 +20,7 @@ module.exports = {
             require('postcss-object-fit-images')(),
             require('postcss-flexbugs-fixes')(),
             require('./postcss.stylelint.js')(),
+            require('./postcss.avif.js')(),
             require('./postcss.webp.js')(),
             require('autoprefixer')({ overrideBrowserslist: ENV.BROWSERS }), // this always last
             ...(!ENV.DEBUG ? [require('cssnano')({
