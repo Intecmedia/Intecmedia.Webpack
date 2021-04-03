@@ -4,14 +4,14 @@
 
 {% macro breakpoints (url, alt, attrs={}, breakpoints=DEFAULT_BREAKPOINTS, sizes=DEFAULT_SIZES, quality=DEFAULT_QUALITY) %}
     <picture{% for k, v in attrs %} {{ k }}="{{ v }}"{% endfor %}>
-
+        {% if APP.ENV.PROD or APP.ENV.DEBUG %}
         {% for breakpoint, media in breakpoints_media(breakpoints, sizes) %}
         <source media="{{ media }}" srcset="{{ require(url + '?resize=' + sizes[breakpoint] + 'x&quality=' + quality + '&format=avif&suffix=' + breakpoint) }}" type="image/avif">
         {% endfor %}
-
         {% for breakpoint, media in breakpoints_media(breakpoints, sizes) %}
         <source media="{{ media }}" srcset="{{ require(url + '?resize=' + sizes[breakpoint] + 'x&quality=' + quality + '&format=webp&suffix=' + breakpoint) }}" type="image/webp">
         {% endfor %}
+        {% endif %}
 
         {% for breakpoint, media in breakpoints_media(breakpoints, sizes) %}
         <source media="{{ media }}" srcset="{{ require(url + '?resize=' + sizes[breakpoint] + 'x&quality=' + quality + '&format=jpg&suffix=' + breakpoint) }}" type="image/jpeg">
@@ -31,8 +31,11 @@
 
 {% macro picture (url, alt, attrs={}, quality=DEFAULT_QUALITY) %}
     <picture{% for k, v in attrs %} {{ k }}="{{ v }}"{% endfor %}>
+        {% if APP.ENV.PROD or APP.ENV.DEBUG %}
         <source srcset="{{ require(url + '?resize=&quality=' + quality + '&format=avif') }}" type="image/avif">
         <source srcset="{{ require(url + '?resize=&quality=' + quality + '&format=webp') }}" type="image/webp">
+        {% endif %}
+
         {% set dimensions = image_size(url) %}
         <img 
             src="{{ require(url) }}"
