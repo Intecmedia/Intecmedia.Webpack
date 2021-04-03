@@ -3,6 +3,7 @@
 
 const path = require('path');
 const { URLSearchParams } = require('url');
+const postcss = require('postcss');
 const postcssUrl = require('postcss-url');
 
 const IMAGE_PATTERN = /.(png|jpg|jpeg)(\?.*)?$/i;
@@ -17,6 +18,18 @@ module.exports = () => {
             const [originRequest, originSearch = ''] = originUrl.split('?', 2);
             const originParams = new URLSearchParams(originSearch);
             if (originParams.get('format') === 'webp') return originUrl;
+            if (originParams.get('format') === 'avif') return originUrl;
+
+            const originRule = decl.parent;
+
+            let ignored = false;
+            originRule.walkComments((i) => {
+                if (i.text === 'postcss.webp: ignore') {
+                    ignored = true;
+                }
+            });
+            if (ignored) return originUrl;
+            originRule.append(postcss.comment({ text: 'postcss.webp: ignore' }));
 
             originParams.set('resize', '');
             originParams.set('format', 'webp');
@@ -25,8 +38,6 @@ module.exports = () => {
             originParams.set('name', `${originName}@postcss`);
 
             const webpUrl = [originRequest, originParams].join('?');
-
-            const originRule = decl.parent;
             const webpRule = originRule.__postcssWebpRule__ || originRule.cloneAfter();
 
             if (!originRule.__postcssWebpRule__) {
