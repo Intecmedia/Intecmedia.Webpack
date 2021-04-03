@@ -3,12 +3,12 @@
 
     /* postcss.webp: ignore */
     html.webp & {
-        background-image: url("#{$url}?resize=x&quality=#{$quality}&format=webp&suffix=webp");
+        background-image: url("#{$url}?resize=x&quality=#{$quality}&format=webp");
     }
 
     /* postcss.avif: ignore */
     html.avif & {
-        background-image: url("#{$url}?resize=x&quality=#{$quality}&format=avif&suffix=avif");
+        background-image: url("#{$url}?resize=x&quality=#{$quality}&format=avif");
     }
 }
 
