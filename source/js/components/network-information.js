@@ -34,10 +34,10 @@ jQuery(($) => {
         // detect network type
         if ($effectiveType !== $conn.effectiveType) {
             if (VERBOSE) {
-                console.log('[network-information] change effectiveType:', {
+                console.log('[network-information] change effectiveType:', JSON.stringify({
                     from: $effectiveType,
                     to: $conn.effectiveType,
-                });
+                }));
             }
             $html.removeClass($makeNetworkClass($effectiveType));
             $html.addClass($makeNetworkClass($conn.effectiveType));
@@ -47,10 +47,10 @@ jQuery(($) => {
         // detect save-data header
         if ($saveData !== $conn.saveData) {
             if (VERBOSE) {
-                console.log('[network-information] change saveData:', {
+                console.log('[network-information] change saveData:', JSON.stringify({
                     from: $saveData,
                     to: $conn.saveData,
-                });
+                }));
             }
             $saveData = $conn.saveData;
             $html.toggleClass('save-data', $conn.saveData);
