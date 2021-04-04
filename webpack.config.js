@@ -335,8 +335,6 @@ module.exports = {
                 test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
                 exclude: [
                     /(fonts|font)/i,
-                    path.join(ENV.SOURCE_PATH, 'img/svg-sprite'),
-                    path.join(ENV.OUTPUT_PATH, 'img/svg-sprite.svg'),
                 ],
                 filter: (input, name) => {
                     const relativePath = slash(path.relative(__dirname, path.normalize(name)));
