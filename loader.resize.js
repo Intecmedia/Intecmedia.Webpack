@@ -20,7 +20,7 @@ const DEFAULT_OPTIONS = {
     cacheDirectory: false,
 };
 
-module.exports = function ResizeLoader(content) {
+module.exports = async function ResizeLoader(content) {
     const thisLoader = this;
 
     if (thisLoader.cacheable) thisLoader.cacheable();
@@ -78,41 +78,41 @@ module.exports = function ResizeLoader(content) {
         thisLoader.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
         loaderCallback(null, nextLoader.call(thisLoader, Buffer.from(cacheData.data)));
     } else {
-        imageMagick(content).size(function sizeCallback(sizeError, size) {
-            if (sizeError) { loaderCallback(sizeError); return; }
+        const resourceImage = imageMagick(content);
 
-            this.resize(resizeWidth || size.width, resizeHeight || size.height, resizeFlag);
-            const quality = query.quality ? parseInt(query.quality, 10) : 0;
-            if (quality > 0) {
-                this.quality(quality);
+        const resourceSize = await resourceImage.size();
+        resourceImage.resize(resizeWidth || resourceSize.width, resizeHeight || resourceSize.height, resizeFlag);
+
+        const quality = query.quality ? parseInt(query.quality, 10) : 0;
+        if (quality > 0) {
+            resourceImage.quality(quality);
+        }
+
+        const lossless = (typeof (query.lossless) !== 'undefined' ? !!query.lossless : resourceFormat === 'png');
+
+        if (format === 'webp') {
+            if (lossless) {
+                resourceImage.define('webp:lossless=true');
+            } else if (!quality) {
+                resourceImage.quality(imageminConfig.webp.quality);
             }
+        }
 
-            const lossless = (typeof (query.lossless) !== 'undefined' ? !!query.lossless : resourceFormat === 'png');
-
-            if (format === 'webp') {
-                if (lossless) {
-                    this.define('webp:lossless=true');
-                } else if (!quality) {
-                    this.quality(imageminConfig.webp.quality);
-                }
+        if (format === 'avif') {
+            if (lossless) {
+                resourceImage.quality(100);
+            } else if (!quality) {
+                resourceImage.quality(imageminConfig.avif.quality);
             }
+        }
 
-            if (format === 'avif') {
-                if (lossless) {
-                    this.quality(100);
-                } else if (!quality) {
-                    this.quality(imageminConfig.avif.quality);
-                }
-            }
-
-            this.toBuffer(format.toUpperCase(), (bufferError, buffer) => {
-                if (bufferError) { loaderCallback(bufferError); return; }
-                logger.info(`save cache '${relativePath}${thisLoader.resourceQuery}'`);
-                if (resizeCache) resizeCache.setKey(cacheKey, buffer.toJSON());
-                thisLoader.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
-                loaderCallback(null, nextLoader.call(thisLoader, buffer));
-                if (resizeCache) resizeCache.save(true);
-            });
+        resourceImage.toBuffer(format.toUpperCase(), (bufferError, buffer) => {
+            if (bufferError) { loaderCallback(bufferError); return; }
+            logger.info(`save cache '${relativePath}${thisLoader.resourceQuery}'`);
+            if (resizeCache) resizeCache.setKey(cacheKey, buffer.toJSON());
+            thisLoader.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
+            loaderCallback(null, nextLoader.call(thisLoader, buffer));
+            if (resizeCache) resizeCache.save(true);
         });
     }
 };
