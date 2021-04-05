@@ -69,6 +69,17 @@ if (!semver.satisfies(imagemagickVersion, PACKAGE.engines.imagemagick)) {
     lintErrors.push(`required ImageMagick@${PACKAGE.engines.imagemagick} version (current is ImageMagick@${imagemagickVersion})`);
 }
 
+let fonttoolsVersion = null;
+try {
+    [, fonttoolsVersion] = childProcess.execSync('pip show fonttools').toString().match(/Version: ([\d.-]+)/);
+} catch (fonttoolsError) {
+    fonttoolsVersion = null;
+}
+
+if (!semver.satisfies(fonttoolsVersion, PACKAGE.engines.fonttools)) {
+    lintErrors.push(`required fonttools@${PACKAGE.engines.fonttools} version (current is fonttools@${fonttoolsVersion})`);
+}
+
 lintWarns.forEach((i) => logger.warn(i));
 lintErrors.forEach((i) => logger.error(i));
 

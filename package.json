@@ -68,6 +68,7 @@
     },
     "engines": {
         "imagemagick": ">= 7.0.10-25",
+        "fonttools": "*.*.*",
         "node": ">= 11.7.0",
         "npm": ">= 7.0.0"
     },
