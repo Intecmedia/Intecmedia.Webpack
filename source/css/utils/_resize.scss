@@ -1,7 +1,7 @@
 /* stylelint-disable plugin/no-unsupported-browser-features -- wrong error */
 
 $resize-quality: 85 !default;
-$resize-avif-quality: 30 !default;
+$resize-avif-quality: 50 !default;
 $resize-breakpoints: $grid-breakpoints !default;
 
 @mixin background-image($url, $quality: $resize-quality, $avif-quality: $resize-avif-quality) {
