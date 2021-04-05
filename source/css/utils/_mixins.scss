@@ -1,3 +1,7 @@
+@import "map-get";
+@import "map-set";
+@import "map-to-string";
+
 @function strip-unit($number) {
     @if type-of($number) == "number" and not unitless($number) {
         @return $number / ($number * 0 + 1);
