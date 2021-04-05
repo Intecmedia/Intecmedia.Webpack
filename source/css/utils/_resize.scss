@@ -7,7 +7,7 @@ $resize-breakpoints: $grid-breakpoints !default;
 @mixin background-image($url, $quality: $resize-quality, $avif-quality: $resize-avif-quality) {
     background-image: url("#{$url}");
 
-    @if $NODE_ENV != "production" or $DEBUG {
+    @if $NODE_ENV == "production" or $DEBUG {
         /* postcss.webp: ignore */
         html.webp & {
             background-image: url("#{$url}?resize=x&quality=#{$quality}&format=webp");
@@ -30,7 +30,7 @@ $resize-breakpoints: $grid-breakpoints !default;
     }
 
 
-    @if $NODE_ENV != "production" or $DEBUG {
+    @if $NODE_ENV == "production" or $DEBUG {
         /* postcss.webp: ignore */
         html.webp & {
             @each $breakpoint in map-keys($breakpoints) {
