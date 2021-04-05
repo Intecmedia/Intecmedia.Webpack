@@ -20,4 +20,3 @@ if (window.Promise && !('allSettled' in window.Promise.prototype)) {
     // eslint-disable-next-line global-require -- conditinal polyfill
     window.Promise.prototype.allSettled = require('core-js/stable/promise/all-settled');
 }
-

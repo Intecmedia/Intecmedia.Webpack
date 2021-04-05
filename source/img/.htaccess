@@ -1,3 +1,8 @@
+<IfModule mod_mime.c>
+    AddType image/webp .webp
+    AddType image/avif .avif
+</IfModule>
+
 <IfModule mod_headers.c>
     # Enable rewrite
     RewriteEngine On
