@@ -19,9 +19,12 @@ const ENV = require('./app.env.js');
     if (error) throw error;
 
     files.forEach((resourcePath) => {
+        const resourceStat = fs.lstatSync(resourcePath);
+        if (!resourceStat.isFile()) return;
+
+        const relativePath = slash(path.relative(__dirname, resourcePath));
         const source = fs.readFileSync(resourcePath, 'utf8').toString();
         const fixedSource = source.normalize('NFC').replace(/\r\n/g, '\n');
-        const relativePath = slash(path.relative(__dirname, resourcePath));
 
         if (fixedSource === source) {
             logger.info(`skiped ${relativePath}`);
