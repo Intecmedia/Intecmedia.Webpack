@@ -36,6 +36,9 @@ async function identifyAsync(filename) {
     if (result.format === 'JPEG') {
         result.format = 'JPG';
     }
+    if (result.format === 'MVG' && result.extension.toLowerCase() === 'svg') {
+        result.format = 'SVG';
+    }
     return result;
 }
 
