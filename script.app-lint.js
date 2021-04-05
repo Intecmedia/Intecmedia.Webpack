@@ -44,14 +44,20 @@ if (APP.DESCRIPTION === APP.TITLE || APP.DESCRIPTION === APP.SHORT_NAME) {
     lintErrors.push('`DESCRIPTION` is equal `TITLE` or `SHORT_NAME`');
 }
 
-const version = JSON.parse(childProcess.execSync('npm version --json') || '{}');
+const npmVersion = JSON.parse(childProcess.execSync('npm version --json').toString() || '{}');
 
-if (!semver.satisfies(version.npm, PACKAGE.engines.npm)) {
-    lintErrors.push(`required node@${PACKAGE.engines.npm} version (current is node@${version.node})`);
+if (!semver.satisfies(npmVersion.npm, PACKAGE.engines.npm)) {
+    lintErrors.push(`required node@${PACKAGE.engines.npm} version (current is node@${npmVersion.node})`);
 }
 
-if (!semver.satisfies(version.node, PACKAGE.engines.node)) {
-    lintErrors.push(`required npm@${PACKAGE.engines.npm} version (current is npm@${version.npm})`);
+if (!semver.satisfies(npmVersion.node, PACKAGE.engines.node)) {
+    lintErrors.push(`required npm@${PACKAGE.engines.npm} version (current is npm@${npmVersion.npm})`);
+}
+
+const imagemagickVersion = childProcess.execSync('magick -version').toString().match(/Version: ImageMagick ([\d.-]+)/)[1];
+
+if (!semver.satisfies(imagemagickVersion, PACKAGE.engines.imagemagick)) {
+    lintErrors.push(`required ImageMagick@${PACKAGE.engines.imagemagick} version (current is ImageMagick@${imagemagickVersion})`);
 }
 
 lintWarns.forEach((i) => logger.warn(i));
