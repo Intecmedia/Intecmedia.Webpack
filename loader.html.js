@@ -19,6 +19,8 @@ const IncludeWithExtension = require('./plugin.nunjucks-include-with');
 
 const logger = weblog({ name: 'loader-html' });
 
+const htmlDataModule = require.resolve('./source/html.data.js');
+
 const DEFAULT_OPTIONS = {
     context: {},
     environment: {
@@ -108,7 +110,6 @@ module.exports = function HtmlLoader() {
     if (loaderContext.cacheable) loaderContext.cacheable();
     const loaderCallback = loaderContext.async();
 
-    const htmlDataModule = require.resolve('./source/html.data.js');
     loaderContext.addDependency(htmlDataModule);
     delete require.cache[htmlDataModule];
 

@@ -23,9 +23,9 @@ module.exports = {
 };
 
 module.exports.webp = {
-    quality: 85, // 0 - 100
+    quality: 85, // 0 - 100, or 100 for lossless
 };
 
 module.exports.avif = {
-    quality: 63, // 0 - 62
+    quality: 63, // 0 - 63 or 100 for lossless
 };

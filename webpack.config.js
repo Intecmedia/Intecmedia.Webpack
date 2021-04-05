@@ -66,6 +66,12 @@ module.exports = {
 
     ...(ENV.DEBUG ? { stats: 'detailed' } : { stats: true }),
 
+    cache: (ENV.PROD || ENV.DEBUG ? false : {
+        name: 'webpack',
+        type: (ENV.WATCH || ENV.DEV_SERVER ? 'memory' : 'filesystem'),
+        cacheDirectory: UTILS.cacheDir('webpack'),
+    }),
+
     watchOptions: {
         ignored: /node_modules/,
     },

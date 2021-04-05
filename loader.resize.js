@@ -15,6 +15,8 @@ const weblog = require('webpack-log');
 const logger = weblog({ name: 'loader-resize' });
 const imageminConfig = require('./imagemin.config.js');
 
+const imageminConfigModule = require.resolve('./imagemin.config.js');
+
 const DEFAULT_OPTIONS = {
     imageMagick: true,
     cacheDirectory: false,
@@ -34,6 +36,9 @@ module.exports = async function ResizeLoader(content) {
 
     if (thisLoader.cacheable) thisLoader.cacheable();
     const loaderCallback = thisLoader.async();
+
+    thisLoader.addDependency(imageminConfigModule);
+    delete require.cache[imageminConfigModule];
 
     const query = thisLoader.resourceQuery ? loaderUtils.parseQuery(thisLoader.resourceQuery) : {};
     const options = deepMerge(
@@ -100,7 +105,7 @@ module.exports = async function ResizeLoader(content) {
         const lossless = (typeof (query.lossless) !== 'undefined' ? !!query.lossless : resourceFormat === 'png');
 
         if (format === 'webp') {
-            if (lossless) {
+            if (lossless || quality === 100) {
                 resourceImage.define('webp:lossless=true');
             } else if (!quality) {
                 resourceImage.quality(imageminConfig.webp.quality);
