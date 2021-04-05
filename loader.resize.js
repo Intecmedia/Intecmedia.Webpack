@@ -20,6 +20,15 @@ const DEFAULT_OPTIONS = {
     cacheDirectory: false,
 };
 
+const resizeCacheMap = new Map();
+
+function getResizeCache(cacheDirectory) {
+    if (!resizeCacheMap.has(cacheDirectory)) {
+        resizeCacheMap.set(cacheDirectory, cacheDirectory ? flatCache.load('loader-resize.json', cacheDirectory) : false);
+    }
+    return resizeCacheMap.get(cacheDirectory);
+}
+
 module.exports = async function ResizeLoader(content) {
     const thisLoader = this;
 
@@ -33,7 +42,7 @@ module.exports = async function ResizeLoader(content) {
         loaderUtils.getOptions(thisLoader),
     );
     const context = options.context || thisLoader.rootContext;
-    const resizeCache = options.cacheDirectory ? flatCache.load('loader-resize.json', options.cacheDirectory) : false;
+    const resizeCache = getResizeCache(options.cacheDirectory);
     delete options.cacheDirectory;
 
     const nextLoader = (query.inline === 'inline' ? urlLoader : fileLoader);
