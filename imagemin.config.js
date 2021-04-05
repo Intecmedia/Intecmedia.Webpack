@@ -27,5 +27,5 @@ module.exports.webp = {
 };
 
 module.exports.avif = {
-    quality: 85, // 0 - 60
+    quality: 30, // 0 - 62
 };
