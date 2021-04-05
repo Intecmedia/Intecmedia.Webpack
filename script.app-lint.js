@@ -12,6 +12,10 @@ const PACKAGE = require('./package.json');
 const lintWarns = [];
 const lintErrors = [];
 
+if (process.platform === 'win32') {
+    childProcess.execSync('chcp 65001');
+}
+
 if (PACKAGE.name === 'Intecmedia.Webpack') {
     lintErrors.push('rename `name` in `package.json`');
 }
@@ -54,7 +58,12 @@ if (!semver.satisfies(npmVersion.node, PACKAGE.engines.node)) {
     lintErrors.push(`required npm@${PACKAGE.engines.npm} version (current is npm@${npmVersion.npm})`);
 }
 
-const imagemagickVersion = childProcess.execSync('magick -version').toString().match(/Version: ImageMagick ([\d.-]+)/)[1];
+let imagemagickVersion = null;
+try {
+    [, imagemagickVersion] = childProcess.execSync('magick -version').toString().match(/Version: ImageMagick ([\d.-]+)/);
+} catch (imagemagickError) {
+    imagemagickVersion = null;
+}
 
 if (!semver.satisfies(imagemagickVersion, PACKAGE.engines.imagemagick)) {
     lintErrors.push(`required ImageMagick@${PACKAGE.engines.imagemagick} version (current is ImageMagick@${imagemagickVersion})`);

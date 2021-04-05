@@ -313,8 +313,8 @@ module.exports = {
                 filename: 'img/svg-sprite.svg',
                 svg4everybody: false,
                 svgo: {
-                   js2svg: { pretty: ENV.DEBUG },
-                   plugins: [],
+                    js2svg: { pretty: ENV.DEBUG },
+                    plugins: [],
                 },
             },
             sprite: {

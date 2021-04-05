@@ -14,6 +14,10 @@ const ENV = require('./app.env.js');
 const FONTS_SRC = `${ENV.SOURCE_PATH}/fonts/src-ttf`;
 const FONTS_DST = `${ENV.SOURCE_PATH}/fonts`;
 
+if (process.platform === 'win32') {
+    childProcess.execSync('chcp 65001');
+}
+
 glob(`${FONTS_SRC}/**/*.ttf`, {
     ignore: [],
 }, (error, files) => {
