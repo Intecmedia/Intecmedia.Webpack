@@ -38,7 +38,6 @@ module.exports = async function ResizeLoader(content) {
     const loaderCallback = thisLoader.async();
 
     thisLoader.addDependency(imageminConfigModule);
-    delete require.cache[imageminConfigModule];
 
     const query = thisLoader.resourceQuery ? loaderUtils.parseQuery(thisLoader.resourceQuery) : {};
     const options = deepMerge(
