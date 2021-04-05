@@ -1,4 +1,10 @@
-@mixin background-image($url, $quality: 85) {
+/* stylelint-disable plugin/no-unsupported-browser-features -- wrong error */
+
+$resize-quality: 85 !default;
+$resize-avif-quality: 30 !default;
+$resize-breakpoints: $grid-breakpoints !default;
+
+@mixin background-image($url, $quality: $resize-quality, $avif-quality: $resize-avif-quality) {
     background-image: url("#{$url}");
 
     @if $NODE_ENV != "production" or $DEBUG {
@@ -9,12 +15,12 @@
 
         /* postcss.avif: ignore */
         html.avif & {
-            background-image: url("#{$url}?resize=x&quality=#{$quality}&format=avif");
+            background-image: url("#{$url}?resize=x&quality=#{$avif-quality}&format=avif");
         }
     }
 }
 
-@mixin breakpoints-background-image($url, $quality: 85, $breakpoints: $grid-breakpoints) {
+@mixin breakpoints-background-image($url, $breakpoints: $resize-breakpoints, $quality: $resize-quality, $avif-quality: $resize-avif-quality) {
 
     @each $breakpoint in map-keys($breakpoints) {
         $infix: breakpoint-infix($breakpoint, $breakpoints);
@@ -40,9 +46,11 @@
             @each $breakpoint in map-keys($breakpoints) {
                 $infix: breakpoint-infix($breakpoint, $breakpoints);
                 @include media-breakpoint-only($infix) {
-                    background-image: url("#{$url}?resize=#{breakpoint}x&quality=#{$quality}&format=avif&suffix=#{$infix}");
+                    background-image: url("#{$url}?resize=#{breakpoint}x&quality=#{$avif-quality}&format=avif&suffix=#{$infix}");
                 }
             }
         }
     }
 }
+
+/* stylelint-enable plugin/no-unsupported-browser-features */
