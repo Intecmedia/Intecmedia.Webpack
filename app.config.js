@@ -3,6 +3,7 @@
 
 const ENV = require('./app.env.js');
 const BROWSERSYNC = require('./browsersync.config.js');
+const IMAGEMIN = require('./imagemin.config.js');
 
 module.exports = {
     TITLE: '$APP.TITLE$',
@@ -26,3 +27,4 @@ module.exports = {
 
 module.exports.ENV = ENV;
 module.exports.BROWSERSYNC = BROWSERSYNC;
+module.exports.IMAGEMIN = IMAGEMIN;
