@@ -66,7 +66,7 @@ module.exports = {
 
     ...(ENV.DEBUG ? { stats: 'detailed' } : { stats: true }),
 
-    cache: (ENV.PROD || ENV.DEBUG ? false : {
+    cache: (ENV.DEBUG ? false : {
         name: 'webpack',
         type: 'filesystem',
         cacheDirectory: UTILS.cacheDir('webpack'),
