@@ -59,7 +59,6 @@ module.exports = {
         'no-invalid-this': ['error', {
             'capIsConstructor': true,
         }],
-
         'no-param-reassign': ['error', {
             'props': false,
         }],
