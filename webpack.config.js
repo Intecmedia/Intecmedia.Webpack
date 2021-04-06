@@ -291,14 +291,14 @@ module.exports = {
                 publicPath: APP.PUBLIC_PATH,
                 outputPath: 'img/favicons/',
                 prefix: 'img/favicons/',
-                cache: ENV.DEBUG ? false : UTILS.cacheDir('favicons-webpack-plugin-1024'),
+                cache: !ENV.DEBUG,
             }),
             new FaviconsPlugin.FavIcon({
                 logo: path.join(__dirname, '.favicons-source-64x64.png'),
                 publicPath: APP.PUBLIC_PATH,
                 outputPath: 'img/favicons/',
                 prefix: 'img/favicons/',
-                cache: ENV.DEBUG ? false : UTILS.cacheDir('favicons-webpack-plugin-64'),
+                cache: !ENV.DEBUG,
             }),
         ] : []),
         ...(APP.HTML_PRETTY ? [new HtmlBeautifyPlugin({
