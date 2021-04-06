@@ -11,15 +11,6 @@ if (NODE_ENV === 'production' || DEBUG) {
     require('~/polyfills/fetch.js');
 
     // eslint-disable-next-line global-require -- conditinal polyfill
-    require('~/polyfills/element-remove.js');
-
-    // eslint-disable-next-line global-require -- conditinal polyfill
-    require('~/polyfills/element-matches.js');
-
-    // eslint-disable-next-line global-require -- conditinal polyfill
-    require('~/polyfills/element-closest.js');
-
-    // eslint-disable-next-line global-require -- conditinal polyfill
     require('~/polyfills/intersection-observer.js');
 
     // eslint-disable-next-line global-require -- conditinal polyfill
