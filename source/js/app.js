@@ -1,8 +1,8 @@
 /* global NODE_ENV DEBUG */
-import '~/components/network-information';
-import '~/components/bootstrap';
-import '~/components/svg-sprite';
+
 // import '~/components/aquilon-validator';
+import '~/components/bootstrap';
+import '~/components/network-information';
 
 jQuery(($) => {
     console.log(`NODE_ENV=${NODE_ENV}; DEBUG=${DEBUG}; jQuery=${$.fn.jquery};`);

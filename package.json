@@ -187,7 +187,6 @@
         "stylelint-use-nesting": "latest",
         "stylelint-webpack-plugin": "latest",
         "svg-spritemap-webpack-plugin": "latest",
-        "svg4everybody": "latest",
         "svgo": "latest",
         "terser-webpack-plugin": "latest",
         "typescript": "latest",
