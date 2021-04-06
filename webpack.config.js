@@ -68,7 +68,7 @@ module.exports = {
 
     cache: (ENV.PROD || ENV.DEBUG ? false : {
         name: 'webpack',
-        type: (ENV.WATCH || ENV.DEV_SERVER ? 'memory' : 'filesystem'),
+        type: 'filesystem',
         cacheDirectory: UTILS.cacheDir('webpack'),
     }),
 
