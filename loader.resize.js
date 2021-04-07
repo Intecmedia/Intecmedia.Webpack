@@ -11,6 +11,7 @@ const urlLoader = require('url-loader');
 const fileLoader = require('file-loader');
 const deepMerge = require('lodash.merge');
 const weblog = require('webpack-log');
+const slash = require('slash');
 
 const logger = weblog({ name: 'loader-resize' });
 const imageminConfig = require('./imagemin.config.js');
@@ -59,7 +60,7 @@ module.exports = async function ResizeLoader(content) {
 
     const resourceInfo = path.parse(thisLoader.resourcePath);
     const resourceFormat = resourceInfo.ext.slice(1).toLowerCase();
-    const relativePath = path.relative(__dirname, thisLoader.resourcePath);
+    const relativePath = slash(path.relative(__dirname, thisLoader.resourcePath));
     const imageMagick = gm.subClass({ imageMagick: options.imageMagick });
     delete options.imageMagick;
 
