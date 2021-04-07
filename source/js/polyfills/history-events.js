@@ -23,7 +23,7 @@ function historyEventDecorator(type) {
             event = document.createEvent('Event');
             event.initEvent(type.toLowerCase(), true, true);
         }
-        event.detail = arguments;
+        event.detail = { ...arguments };
         window.dispatchEvent(event);
         return result;
     };
