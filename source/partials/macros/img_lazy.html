@@ -1,0 +1,13 @@
+{% macro img_lazy (url, alt, attrs = {}) %}
+    {% set dimensions = image_size(url) %}
+    <img 
+        src="{{ require(url) }}"
+        loading="lazy"
+        width="{{ dimensions.width }}"
+        height="{{ dimensions.height }}" 
+        intrinsicsize="{{ dimensions.width }}x{{ dimensions.height }}"
+        alt="{{ alt }}"
+        {% for k, v in attrs %} {{ k }}="{{ v }}"{% endfor %}
+    >
+{% endmacro %}
+
