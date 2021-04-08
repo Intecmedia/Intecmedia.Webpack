@@ -34,6 +34,7 @@ async function validatorAsync(options) {
     return result;
 }
 
+const verbose = 'verbose' in argv && argv.verbose;
 const pathSuffix = argv.pathSuffix && typeof (argv.pathSuffix) === 'string' ? argv.pathSuffix : '';
 
 glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'), {
@@ -57,7 +58,7 @@ glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'),
         let skipped = false;
 
         if (path.basename(resourcePath).startsWith('_')) {
-            logger.info(`skipped ${relativePath}`);
+            if (verbose) logger.info(`skipped ${relativePath}`);
             increaseStat('skipped');
             skipped = true;
         } else if (result.messages && result.messages.length > 0) {
@@ -86,7 +87,7 @@ glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'),
 
         if (skipped) {
             increaseStat('skipped');
-            logger.info(`skipped ${relativePath}`);
+            if (verbose) logger.info(`skipped ${relativePath}`);
         }
         return result;
     });

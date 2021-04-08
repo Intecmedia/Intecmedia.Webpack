@@ -24,6 +24,8 @@ const ignoreTest = (message) => {
 
 const lineEllipsis = 80;
 const htmlvalidate = new HtmlValidate();
+
+const verbose = 'verbose' in argv && argv.verbose;
 const pathSuffix = argv.pathSuffix && typeof (argv.pathSuffix) === 'string' ? argv.pathSuffix : '';
 
 glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'), {
@@ -43,7 +45,7 @@ glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'),
         const relativePath = slash(path.relative(__dirname, resourcePath));
 
         if (path.basename(resourcePath).startsWith('_')) {
-            logger.info(`skipped ${relativePath}`);
+            if (verbose) logger.info(`skipped ${relativePath}`);
             increaseStat('skipped');
             return;
         }
@@ -52,7 +54,7 @@ glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'),
         const report = htmlvalidate.validateFile(resourcePath);
 
         if (report.results.length === 0) {
-            logger.info(`skipped ${relativePath}`);
+            if (verbose) logger.info(`skipped ${relativePath}`);
             increaseStat('skipped');
             return;
         }

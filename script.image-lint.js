@@ -75,7 +75,9 @@ const LINT_RULES = [
     },
 ];
 
+const verbose = 'verbose' in argv && argv.verbose;
 const pathSuffix = argv.pathSuffix && typeof (argv.pathSuffix) === 'string' ? argv.pathSuffix : '';
+
 glob(ENV.SOURCE_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.{jpg,jpeg,png,svg,gif}'), {
     ignore: [],
 }, async (error, files) => {
@@ -108,7 +110,7 @@ glob(ENV.SOURCE_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.{jpg,jp
             process.exitCode = 1;
         } else {
             increaseStat('skipped');
-            logger.info(`skipped ${relativePath}`);
+            if (verbose) logger.info(`skipped ${relativePath}`);
         }
 
         return identifyData;
