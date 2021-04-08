@@ -152,8 +152,9 @@ module.exports = function HtmlLoader() {
     nunjucksEnv.addGlobal('require', options.requireIdent);
 
     helpers.forEach((helper, name) => {
-        nunjucksEnv.addFilter(name, helper);
-        nunjucksEnv.addGlobal(name, helper);
+        loaderContext.addDependency(helper.filename);
+        nunjucksEnv.addFilter(name, helper.bind(loaderContext));
+        nunjucksEnv.addGlobal(name, helper.bind(loaderContext));
     });
 
     const publicPath = ((options.context.APP || {}).PUBLIC_PATH || path.sep);
