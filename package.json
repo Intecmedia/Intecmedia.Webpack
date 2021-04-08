@@ -27,7 +27,7 @@
         "html-validate": "cross-env NODE_ENV=production node ./script.html-validate.js --path-suffix",
         "html-validator": "cross-env NODE_ENV=production node ./script.html-validator.js --path-suffix",
         "app-lint": "cross-env NODE_ENV=production node ./script.app-lint.js",
-        "image-lint": "cross-env NODE_ENV=production node ./script.image-lint.js",
+        "image-lint": "cross-env NODE_ENV=production node ./script.image-lint.js --path-suffix",
         "lint": "npm run app-lint && npm run js-lint && npm run ts-lint && npm run css-lint && npm run html-validate && npm run html-validator && npm run image-lint",
         "server": "npm run server-dev",
         "server-dev": "node ./script.nodemon.js --exec \"cross-env NODE_ENV=development DEBUG=0 webpack serve --hot --inline --env development\"",
