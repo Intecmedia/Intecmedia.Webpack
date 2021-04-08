@@ -152,7 +152,6 @@ module.exports = function HtmlLoader() {
     nunjucksEnv.addGlobal('require', options.requireIdent);
 
     helpers.forEach((helper, name) => {
-        loaderContext.addDependency(helper.filename);
         nunjucksEnv.addFilter(name, helper.bind(loaderContext));
         nunjucksEnv.addGlobal(name, helper.bind(loaderContext));
     });
