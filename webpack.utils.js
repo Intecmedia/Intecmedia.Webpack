@@ -52,9 +52,9 @@ function resourceName(prefix, hash = false) {
 
 module.exports.resourceName = resourceName;
 
-function cacheDir(name) {
+function cacheDir(name, skipEnv = false) {
     const { NODE_ENV } = require('./app.env.js');
-    return findCacheDir({ name: `${name}-${NODE_ENV}` });
+    return findCacheDir({ name: skipEnv ? name : `${name}-${NODE_ENV}` });
 }
 
 module.exports.cacheDir = cacheDir;

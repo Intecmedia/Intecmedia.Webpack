@@ -455,7 +455,7 @@ module.exports = {
                         resourceQuery: /[&?]resize=.+/,
                         loader: './loader.resize.js',
                         options: {
-                            cacheDirectory: ENV.DEBUG ? false : UTILS.cacheDir('loader-resize'),
+                            cacheDirectory: UTILS.cacheDir('loader-resize', true),
                             name: UTILS.resourceName('upload'),
                             limit: 32 * 1024,
                             esModule: false,
@@ -498,7 +498,7 @@ module.exports = {
                         resourceQuery: /[&?]resize=.+/,
                         loader: './loader.resize.js',
                         options: {
-                            cacheDirectory: ENV.DEBUG ? false : UTILS.cacheDir('loader-resize'),
+                            cacheDirectory: UTILS.cacheDir('loader-resize', true),
                             name: UTILS.resourceName('img'),
                             limit: 32 * 1024,
                             esModule: false,
