@@ -164,7 +164,7 @@ module.exports = {
             }),
         ] : []),
         new CleanWebpackPlugin({
-            verbose: true,
+            verbose: ENV.DEBUG,
             cleanStaleWebpackAssets: false,
             cleanOnceBeforeBuildPatterns: ['**/*', '!.gitkeep', '!.htaccess'],
             cleanAfterEveryBuildPatterns: (!ENV.PROD || ENV.DEBUG ? ['**/*.br', '**/*.gz'] : []),
