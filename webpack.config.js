@@ -64,7 +64,10 @@ const BANNER_STRING = [
 module.exports = {
     mode: ENV.PROD ? 'production' : 'development',
 
-    ...(ENV.DEBUG ? { stats: 'detailed' } : { stats: true }),
+    stats: {
+        preset: (ENV.DEBUG ? 'detailed' : 'normal'),
+        children: true,
+    },
 
     cache: (ENV.DEBUG ? false : {
         name: 'webpack',
@@ -348,7 +351,9 @@ module.exports = {
                 filter: (input, name) => {
                     const relativePath = slash(path.relative(__dirname, path.normalize(name)));
                     const ignores = ImageminIgnore.ignores(relativePath);
-                    imageminLogger.info(`${JSON.stringify(relativePath)} ${ignores ? 'ignores' : 'minified'}`);
+                    if (ENV.DEBUG) {
+                        imageminLogger.info(`${JSON.stringify(relativePath)} ${ignores ? 'ignores' : 'minified'}`);
+                    }
                     return !ignores;
                 },
                 minimizerOptions: { plugins: imageminConfig.plugins },
@@ -392,6 +397,7 @@ module.exports = {
                 options: {
                     context: APP,
                     searchPath: ENV.SOURCE_PATH,
+                    verbose: ENV.DEBUG,
                 },
             },
             // javascript loaders
@@ -460,6 +466,7 @@ module.exports = {
                             limit: 32 * 1024,
                             esModule: false,
                             hashType: 'md5',
+                            verbose: ENV.DEBUG,
                         },
                     },
                     {
@@ -483,6 +490,9 @@ module.exports = {
                     path.join(ENV.SOURCE_PATH, 'upload'),
                 ],
                 loader: './loader.svgo.js',
+                options: {
+                    verbose: ENV.DEBUG,
+                },
             },
             {
                 test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
@@ -503,6 +513,7 @@ module.exports = {
                             limit: 32 * 1024,
                             esModule: false,
                             hashType: 'md5',
+                            verbose: ENV.DEBUG,
                         },
                     },
                     {

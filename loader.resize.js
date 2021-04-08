@@ -21,6 +21,7 @@ const imageminConfigModule = require.resolve('./imagemin.config.js');
 const DEFAULT_OPTIONS = {
     imageMagick: true,
     cacheDirectory: false,
+    verbose: false,
 };
 
 const resizeCacheMap = new Map();
@@ -88,7 +89,9 @@ module.exports = async function ResizeLoader(content) {
 
     const cacheData = resizeCache ? resizeCache.getKey(cacheKey) : undefined;
     if (cacheData !== undefined && cacheData.type === 'Buffer' && cacheData.data) {
-        logger.info(`load cache '${relativePath}${thisLoader.resourceQuery}'`);
+        if (options.verbose) {
+            logger.info(`load cache '${relativePath}${thisLoader.resourceQuery}'`);
+        }
         thisLoader.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
         loaderCallback(null, nextLoader.call(thisLoader, Buffer.from(cacheData.data)));
     } else {
@@ -122,7 +125,9 @@ module.exports = async function ResizeLoader(content) {
 
         resourceImage.toBuffer(format.toUpperCase(), (bufferError, buffer) => {
             if (bufferError) { loaderCallback(bufferError); return; }
-            logger.info(`save cache '${relativePath}${thisLoader.resourceQuery}'`);
+            if (options.verbose) {
+                logger.info(`save cache '${relativePath}${thisLoader.resourceQuery}'`);
+            }
             if (resizeCache) resizeCache.setKey(cacheKey, buffer.toJSON());
             thisLoader.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
             loaderCallback(null, nextLoader.call(thisLoader, buffer));

@@ -20,7 +20,10 @@ module.exports = function SvgLoader(content) {
 
     const relativePath = slash(path.relative(__dirname, loaderContext.resourcePath));
     options.path = relativePath;
-    logger.info(`optimize(${JSON.stringify(relativePath)})`);
+
+    if (options.verbose) {
+        logger.info(`optimize(${JSON.stringify(relativePath)})`);
+    }
 
     const result = SVGO.optimize(content, options);
     if (result.error) {

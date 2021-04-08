@@ -39,6 +39,7 @@ const DEFAULT_OPTIONS = {
     requireIgnore: /^(\w+:|\/\/)/i,
     requireReplace: {},
     searchPath: './source',
+    verbose: false,
 };
 
 const SRC_SEPARATOR = /\s+/;
@@ -59,6 +60,7 @@ const OPTIONS_SCHEMA = {
         requireIgnore: { instanceof: 'RegExp' },
         requireReplace: { type: 'object' },
         searchPath: { type: 'string' },
+        verbose: { type: 'boolean' },
     },
 };
 
@@ -141,8 +143,10 @@ module.exports = function HtmlLoader() {
         if (!options.requireReplace[match]) return match;
         const url = options.requireReplace[match];
 
-        const relativeUrl = slash(path.relative(__dirname, url));
-        logger.info(`require(${JSON.stringify(relativeUrl)}) from ${JSON.stringify(relativePath)}`);
+        if (options.verbose) {
+            const relativeUrl = slash(path.relative(__dirname, url));
+            logger.info(`require(${JSON.stringify(relativeUrl)}) from ${JSON.stringify(relativePath)}`);
+        }
 
         const resourceDirectory = path.dirname(loaderContext.resourcePath);
         const urlPrefix = path.relative(resourceDirectory, options.searchPath);
@@ -209,7 +213,9 @@ module.exports = function HtmlLoader() {
         };
     };
 
-    logger.info(`render(${JSON.stringify(relativePath)})`);
+    if (options.verbose) {
+        logger.info(`render(${JSON.stringify(relativePath)})`);
+    }
 
     nunjucksEnv.render(loaderContext.resourcePath, {}, (error, result) => {
         if (error) {
