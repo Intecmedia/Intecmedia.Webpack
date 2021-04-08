@@ -6,8 +6,9 @@ const md5File = require('md5-file');
 
 const cacheMap = {};
 
-module.exports = (filename) => {
+module.exports = function helper(filename) {
     const fullpath = path.join(process.cwd(), 'source', filename);
+    this.addDependency(fullpath);
     if (!(fullpath in cacheMap)) {
         cacheMap[fullpath] = md5File.sync(fullpath);
     }

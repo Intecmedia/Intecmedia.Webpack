@@ -3,7 +3,7 @@
 
 const nunjucksRuntime = require('nunjucks/src/runtime');
 
-module.exports = (str) => {
+module.exports = function helper(str) {
     if (str === null || str === undefined) {
         return '';
     }

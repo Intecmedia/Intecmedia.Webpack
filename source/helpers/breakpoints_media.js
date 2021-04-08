@@ -13,7 +13,7 @@ const DEFAULT_SIZES = {
 
 const DEFAULT_BREAKPOINTS = ['xs', 'sm', 'md', 'lg', 'xl'];
 
-module.exports = (breakpoints = DEFAULT_BREAKPOINTS, sizes = DEFAULT_SIZES) => {
+module.exports = function helper(breakpoints = DEFAULT_BREAKPOINTS, sizes = DEFAULT_SIZES) {
     const sortedBreakpoints = Object.entries(sizes)
         .sort((a, b) => (a[1] - b[1]))
         .map((i) => i[0])

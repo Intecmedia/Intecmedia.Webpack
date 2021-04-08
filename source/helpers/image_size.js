@@ -4,7 +4,8 @@
 const path = require('path');
 const ImageSize = require('image-size');
 
-module.exports = (filename) => {
+module.exports = function helper(filename) {
     const fullpath = path.join(process.cwd(), 'source', filename);
+    this.addDependency(fullpath);
     return ImageSize(fullpath);
 };

@@ -3,7 +3,12 @@
 
 const path = require('path');
 const glob = require('glob');
+const slash = require('slash');
 
 module.exports = new Map(glob.sync(path.join(__dirname, '*.js'), {
-    ignore: 'index.js',
-}).map((filename) => [path.basename(filename, '.js'), require(filename)]));
+    ignore: path.join(__dirname, 'index.js'),
+}).map((filename) => {
+    const helper = require(filename);
+    helper.filename = slash(filename);
+    return [path.basename(filename, '.js'), helper];
+}));
