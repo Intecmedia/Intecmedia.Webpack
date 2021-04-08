@@ -1,13 +1,13 @@
 /* global VERBOSE */
-const $html = $(document.documentElement);
+const htmlStyle = getComputedStyle(document.documentElement);
 
 const breakpoints = {
-    xs: $html.css('--breakpoint-xs'),
-    sm: $html.css('--breakpoint-sm'),
-    md: $html.css('--breakpoint-md'),
-    lg: $html.css('--breakpoint-lg'),
-    xl: $html.css('--breakpoint-xl'),
-    xxl: $html.css('--breakpoint-xxl'),
+    xs: htmlStyle.getPropertyValue('--breakpoint-xs'),
+    sm: htmlStyle.getPropertyValue('--breakpoint-sm'),
+    md: htmlStyle.getPropertyValue('--breakpoint-md'),
+    lg: htmlStyle.getPropertyValue('--breakpoint-lg'),
+    xl: htmlStyle.getPropertyValue('--breakpoint-xl'),
+    xxl: htmlStyle.getPropertyValue('--breakpoint-xxl'),
 };
 
 if (VERBOSE) {

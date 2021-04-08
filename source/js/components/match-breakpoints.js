@@ -1,12 +1,20 @@
 /* global VERBOSE */
 import breakpoints from '~/components/breakpoints';
 
-const $wnd = $(window);
-
 const createMatchMedia = (query, name) => {
     const mql = window.matchMedia(query);
     mql.addListener((event) => {
-        $wnd.triggerHandler('matches.breakpoints', { name, query, matches: event.matches });
+        let newEvent;
+        if (typeof (Event) === 'function') {
+            newEvent = new Event('matches-breakpoints');
+        } else {
+            newEvent = document.createEvent('Event');
+            newEvent.initEvent('matches-breakpoints', true, true);
+        }
+        newEvent.detail = {
+            name, query, matches: event.matches, originalEvent: event,
+        };
+        window.dispatchEvent(newEvent);
         if (VERBOSE) {
             console.log(`[breakpoints] name=${name} query=${JSON.stringify(query)} matches=${JSON.stringify(event.matches)}`);
         }
