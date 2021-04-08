@@ -19,6 +19,7 @@ const IncludeWithExtension = require('./plugin.nunjucks-include-with');
 
 const logger = weblog({ name: 'loader-html' });
 
+const helpersDir = path.join(__dirname, './source/helpers/');
 const htmlDataModule = require.resolve('./source/html.data.js');
 
 const DEFAULT_OPTIONS = {
@@ -112,6 +113,8 @@ module.exports = function HtmlLoader() {
 
     loaderContext.addDependency(htmlDataModule);
     delete require.cache[htmlDataModule];
+
+    loaderContext.addContextDependency(helpersDir);
 
     const options = deepMerge({}, DEFAULT_OPTIONS, loaderUtils.getOptions(loaderContext), {
         /* eslint-disable-next-line global-require, import/no-dynamic-require -- webpack is node env */
