@@ -120,7 +120,7 @@ module.exports = {
             maxInitialRequests: Infinity,
             cacheGroups: {
                 vendor: {
-                    chunks: 'all',
+                    chunks: 'initial',
                     enforce: true,
                     test: /(node_modules)(.+)\.(js|mjs|cjs|ts)(\?.*)?$/,
                     name: 'vendor',
