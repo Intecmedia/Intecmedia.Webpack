@@ -113,8 +113,9 @@ module.exports = async function ResizeLoader(content) {
             } else if (!quality) {
                 resourceImage.quality(imageminConfig.webp.quality);
             }
-            if (imageminConfig.webp.define && imageminConfig.webp.define.length > 0) {
-                imageminConfig.webp.define.forEach((i) => resourceImage.define(i));
+            const define = query.define || imageminConfig.webp.define;
+            if (define && define.length > 0) {
+                define.forEach((i) => resourceImage.define(i));
             }
         }
 
@@ -124,8 +125,9 @@ module.exports = async function ResizeLoader(content) {
             } else if (!quality) {
                 resourceImage.quality(imageminConfig.avif.quality);
             }
-            if (imageminConfig.avif.define && imageminConfig.avif.define.length > 0) {
-                imageminConfig.avif.define.forEach((i) => resourceImage.define(i));
+            const define = query.define || imageminConfig.avif.define;
+            if (define && define.length > 0) {
+                define.forEach((i) => resourceImage.define(i));
             }
         }
 
