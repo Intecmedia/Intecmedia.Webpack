@@ -30,6 +30,7 @@ if (ENV.PROD && ENV.STANDALONE) {
 }
 
 if (ENV.STANDALONE) {
+    logger.info('Argv:', ENV.ARGV);
     logger.info('Name:', ENV.PACKAGE_NAME);
     logger.info('Enviroment:', ENV.NODE_ENV);
     logger.info('Debug:', ENV.DEBUG ? 'enabled' : 'disabled');

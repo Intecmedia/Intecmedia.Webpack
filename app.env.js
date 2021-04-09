@@ -5,6 +5,14 @@ const path = require('path');
 const glob = require('glob');
 const slash = require('slash');
 
+const argv = require('yargs/yargs')(process.argv.slice(2))
+    .option('env', { default: [], type: 'array' }).parse();
+
+const ARGV = Object.fromEntries(argv.env.map((i) => {
+    const [k, v = true] = i.split('=', 2);
+    return [k, v];
+}));
+
 const DEBUG = ('DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0);
 const DEV_SERVER = path.basename(require.main.filename, '.js') === 'webpack-dev-server';
 const STANDALONE = ['webpack', 'webpack-dev-server'].includes(path.basename(require.main.filename, '.js'));
@@ -51,6 +59,7 @@ const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.html`, {
 });
 
 module.exports = {
+    ARGV,
     DEBUG,
     DEV_SERVER,
     STANDALONE,
