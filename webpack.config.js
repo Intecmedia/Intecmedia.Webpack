@@ -116,8 +116,6 @@ module.exports = {
         } : {}),
         emitOnErrors: !(ENV.PROD && !ENV.DEBUG),
         splitChunks: {
-            maxAsyncRequests: Infinity,
-            maxInitialRequests: Infinity,
             cacheGroups: {
                 vendor: {
                     chunks: 'initial',
@@ -157,9 +155,6 @@ module.exports = {
     } : false),
 
     plugins: [
-        new webpack.optimize.MinChunkSizePlugin({
-            minChunkSize: 14 * 1024,
-        }),
         ...(ENV.WATCH ? [
             new BrowserSyncPlugin({
                 ...APP.BROWSERSYNC,
