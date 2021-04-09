@@ -108,6 +108,8 @@ function processHtml(html, options, loaderCallback) {
     loaderCallback(null, exportString);
 }
 
+nunjucks.installJinjaCompat();
+
 module.exports = function HtmlLoader() {
     const loaderContext = this;
     if (loaderContext.cacheable) loaderContext.cacheable();
