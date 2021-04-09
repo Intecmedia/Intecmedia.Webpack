@@ -162,7 +162,7 @@ module.exports = {
             }),
         ] : []),
         new CleanWebpackPlugin({
-            verbose: ENV.DEBUG,
+            verbose: ENV.DEBUG || ENV.ARGV.verbose,
             cleanStaleWebpackAssets: false,
             cleanOnceBeforeBuildPatterns: ['**/*', '!.gitkeep', '!.htaccess'],
             cleanAfterEveryBuildPatterns: (!ENV.PROD || ENV.DEBUG ? ['**/*.br', '**/*.gz'] : []),
@@ -392,7 +392,7 @@ module.exports = {
                 options: {
                     context: APP,
                     searchPath: ENV.SOURCE_PATH,
-                    verbose: ENV.DEBUG,
+                    verbose: ENV.DEBUG || ENV.ARGV.verbose,
                 },
             },
             // javascript loaders
@@ -461,7 +461,7 @@ module.exports = {
                             limit: 32 * 1024,
                             esModule: false,
                             hashType: 'md5',
-                            verbose: ENV.DEBUG,
+                            verbose: ENV.DEBUG || ENV.ARGV.verbose,
                         },
                     },
                     {
@@ -486,7 +486,7 @@ module.exports = {
                 ],
                 loader: './loader.svgo.js',
                 options: {
-                    verbose: ENV.DEBUG,
+                    verbose: ENV.DEBUG || ENV.ARGV.verbose,
                 },
             },
             {
@@ -508,7 +508,7 @@ module.exports = {
                             limit: 32 * 1024,
                             esModule: false,
                             hashType: 'md5',
-                            verbose: ENV.DEBUG,
+                            verbose: ENV.DEBUG || ENV.ARGV.verbose,
                         },
                     },
                     {
