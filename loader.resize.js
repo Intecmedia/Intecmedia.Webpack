@@ -113,7 +113,7 @@ module.exports = async function ResizeLoader(content) {
             } else if (!quality) {
                 resourceImage.quality(imageminConfig.webp.quality);
             }
-            if (imageminConfig.webp.define) {
+            if (imageminConfig.webp.define && imageminConfig.webp.define.length > 0) {
                 imageminConfig.webp.define.forEach((i) => resourceImage.define(i));
             }
         }
@@ -124,7 +124,7 @@ module.exports = async function ResizeLoader(content) {
             } else if (!quality) {
                 resourceImage.quality(imageminConfig.avif.quality);
             }
-            if (imageminConfig.avif.define) {
+            if (imageminConfig.avif.define && imageminConfig.avif.define.length > 0) {
                 imageminConfig.avif.define.forEach((i) => resourceImage.define(i));
             }
         }
