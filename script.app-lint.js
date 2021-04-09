@@ -60,7 +60,7 @@ if (!semver.satisfies(npmVersion.node, PACKAGE.engines.node)) {
 
 let imagemagickVersion = null;
 try {
-    [, imagemagickVersion] = childProcess.execSync('magick -version').toString().match(/Version: ImageMagick ([\d.-]+)/);
+    [, imagemagickVersion] = childProcess.execSync('magick -version').toString().match(/Version: ImageMagick ([\d.]+)/);
 } catch (imagemagickError) {
     imagemagickVersion = null;
 }
