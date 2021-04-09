@@ -29,6 +29,5 @@ module.exports.webp = {
 
 module.exports.avif = {
     quality: 63, // 0 - 63 or 100 for lossless
-   // https://github.com/AOMediaCodec/libavif/blob/master/apps/avifenc.c
-    define: ['heic:speed=10'],
+    define: [],
 };
