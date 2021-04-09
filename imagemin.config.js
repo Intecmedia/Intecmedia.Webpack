@@ -7,14 +7,14 @@ const { SvgoNoPrefixConfig } = require('./svgo.config.js');
 module.exports = {
     plugins: [
         ['mozjpeg', { // lossy
-            quality: 85,
+            quality: 90,
             progressive: true,
         }],
         ['optipng', { // lossless
-            optimizationLevel: 3,
+            optimizationLevel: 1,
         }],
         ['gifsicle', { // lossless
-            optimizationLevel: 3,
+            optimizationLevel: 1,
         }],
         ['svgo', { // lossy
             ...SvgoNoPrefixConfig,
@@ -23,9 +23,12 @@ module.exports = {
 };
 
 module.exports.webp = {
-    quality: 85, // 0 - 100, or 100 for lossless
+    quality: 90, // 0 - 100, or 100 for lossless
+    define: [],
 };
 
 module.exports.avif = {
     quality: 63, // 0 - 63 or 100 for lossless
+   // https://github.com/AOMediaCodec/libavif/blob/master/apps/avifenc.c
+    define: ['heic:speed=10'],
 };
