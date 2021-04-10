@@ -65,9 +65,6 @@ module.exports = async function ResizeLoader(content) {
     const imageMagick = gm.subClass({ imageMagick: options.imageMagick });
     delete options.imageMagick;
 
-    const resourceHash = md5File.sync(thisLoader.resourcePath);
-    const cacheKey = `${relativePath}?${JSON.stringify(query)}&${resourceHash}`;
-
     let [, resizeWidth,, resizeHeight, resizeFlag] = query.resize.trim().match(/^(\d*)(x(\d*))?([!<>^])?$/);
     resizeWidth = parseInt(resizeWidth, 10);
     resizeHeight = parseInt(resizeHeight, 10);
@@ -86,6 +83,10 @@ module.exports = async function ResizeLoader(content) {
     }) : null) || (
         `${resourceInfo.name}@resize-${resizeWidth || ''}x${resizeHeight || ''}${resizeFlagNames[resizeFlag]}`
     )) + (query.suffix ? `-${query.suffix}` : '');
+
+    const resourceHash = md5File.sync(thisLoader.resourcePath);
+    const formatConfig = imageminConfig[format] || {};
+    const cacheKey = `${relativePath}?${JSON.stringify(query)}&${JSON.stringify(formatConfig)}&${resourceHash}`;
 
     const cacheData = resizeCache ? resizeCache.getKey(cacheKey) : undefined;
     if (cacheData !== undefined && cacheData.type === 'Buffer' && cacheData.data) {
