@@ -353,7 +353,7 @@ module.exports = {
                     return !ignores;
                 },
                 minimizerOptions: { plugins: imageminConfig.plugins },
-                loader: true,
+                loader: false,
             }),
         ] : []),
         ...(ENV.PROD || ENV.DEBUG ? [
