@@ -2,6 +2,7 @@
 /* eslint "compat/compat": "off" -- webpack is node env */
 /* eslint "no-invalid-this": "off" -- its ok for 3d-party */
 
+const os = require('os');
 const gm = require('gm');
 const path = require('path');
 const md5File = require('md5-file');
@@ -12,6 +13,7 @@ const fileLoader = require('file-loader');
 const deepMerge = require('lodash.merge');
 const weblog = require('webpack-log');
 const slash = require('slash');
+const pLimit = require('p-limit');
 
 const logger = weblog({ name: 'loader-resize' });
 const imageminConfig = require('./imagemin.config.js');
@@ -24,6 +26,7 @@ const DEFAULT_OPTIONS = {
     verbose: false,
 };
 
+const resizeLimit = pLimit(os.cpus().length - 1);
 const resizeCacheMap = new Map();
 
 function getResizeCache(cacheDirectory) {
@@ -132,15 +135,27 @@ module.exports = async function ResizeLoader(content) {
             }
         }
 
-        resourceImage.toBuffer(format.toUpperCase(), (bufferError, buffer) => {
-            if (bufferError) { loaderCallback(bufferError); return; }
-            if (options.verbose) {
-                logger.info(`save cache '${relativePath}${thisLoader.resourceQuery}'`);
-            }
-            if (resizeCache) resizeCache.setKey(cacheKey, buffer.toJSON());
-            thisLoader.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
-            loaderCallback(null, nextLoader.call(thisLoader, buffer));
-            if (resizeCache) resizeCache.save(true);
+        await resizeLimit(async () => {
+            const resizePromise = await new Promise((resizeResolve, resizeReject) => {
+                resourceImage.toBuffer(format.toUpperCase(), (bufferError, buffer) => {
+                    if (bufferError) {
+                        loaderCallback(bufferError);
+                        resizeReject(bufferError);
+                        return;
+                    }
+                    if (resizeCache) {
+                        resizeCache.setKey(cacheKey, buffer.toJSON());
+                    }
+                    if (options.verbose) {
+                        logger.info(`save cache '${relativePath}${thisLoader.resourceQuery}'`);
+                    }
+                    resizeResolve(buffer);
+                    thisLoader.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
+                    loaderCallback(null, nextLoader.call(thisLoader, buffer));
+                    if (resizeCache) resizeCache.save(true);
+                });
+            });
+            return resizePromise;
         });
     }
 };
