@@ -89,10 +89,15 @@ module.exports = async function ResizeLoader(content) {
 
     const resourceHash = md5File.sync(thisLoader.resourcePath);
     const formatConfig = imageminConfig[format] || {};
-    const cacheKey = `${relativePath}?${JSON.stringify(query)}&${JSON.stringify(formatConfig)}`;
+    const cacheKey = `${relativePath}?${JSON.stringify(query)}`;
     const cacheData = resizeCache ? resizeCache.getKey(cacheKey) : undefined;
 
-    if (cacheData !== undefined && cacheData.type === 'Buffer' && cacheData.data && cacheData.hash === resourceHash) {
+    if (cacheData !== undefined
+        && cacheData.type === 'Buffer'
+        && cacheData.data
+        && cacheData.hash === resourceHash
+        && cacheData.config === JSON.stringify(formatConfig)
+    ) {
         if (options.verbose) {
             logger.info(`load cache '${relativePath}${thisLoader.resourceQuery}'`);
         }
@@ -150,6 +155,7 @@ module.exports = async function ResizeLoader(content) {
                             type: 'Buffer',
                             data: buffer.toString('base64'),
                             hash: resourceHash,
+                            config: JSON.stringify(formatConfig),
                         });
                     }
                     if (options.verbose) {
