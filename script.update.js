@@ -7,7 +7,7 @@ const weblog = require('webpack-log');
 const logger = weblog({ name: 'update' });
 
 logger.info('npm outdate');
-const outdated = Object.entries(JSON.parse(childProcess.execSync('npm outdate --json' || '{}')));
+const outdated = Object.entries(JSON.parse(childProcess.execSync('npm outdate --json').toString() || '{}'));
 
 const missing = outdated.filter(([, version]) => !version.location || version.current !== version.wanted);
 logger.info(`missing ${missing.length} packages`);
