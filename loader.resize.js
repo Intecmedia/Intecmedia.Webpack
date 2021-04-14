@@ -90,16 +90,14 @@ module.exports = async function ResizeLoader(content) {
     const resourceHash = md5File.sync(thisLoader.resourcePath);
     const formatConfig = imageminConfig[format] || {};
     const cacheKey = `${relativePath}?${JSON.stringify(query)}&${JSON.stringify(formatConfig)}`;
+    const cacheData = resizeCache ? JSON.parse(resizeCache.getKey(cacheKey) || '{}') : undefined;
 
-    const cacheData = resizeCache ? resizeCache.getKey(cacheKey) : undefined;
-    const cacheHash = resizeCache ? resizeCache.getKey(`${relativePath}?resourceHash`) : undefined;
-
-    if (cacheData !== undefined && cacheData.type === 'Buffer' && cacheData.data && cacheHash !== resourceHash) {
+    if (cacheData !== undefined && cacheData.type === 'Buffer' && cacheData.data && cacheData.hash === resourceHash) {
         if (options.verbose) {
             logger.info(`load cache '${relativePath}${thisLoader.resourceQuery}'`);
         }
         thisLoader.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
-        loaderCallback(null, nextLoader.call(thisLoader, Buffer.from(cacheData.data)));
+        loaderCallback(null, nextLoader.call(thisLoader, Buffer.from(cacheData.data, 'base64')));
     } else {
         const resourceImage = imageMagick(content);
 
@@ -148,8 +146,11 @@ module.exports = async function ResizeLoader(content) {
                         return;
                     }
                     if (resizeCache) {
-                        resizeCache.setKey(`${relativePath}?resourceHash`, resourceHash);
-                        resizeCache.setKey(cacheKey, buffer.toJSON());
+                        resizeCache.setKey(cacheKey, JSON.stringify({
+                            type: 'Buffer',
+                            data: buffer.toString('base64'),
+                            hash: resourceHash,
+                        }));
                     }
                     if (options.verbose) {
                         logger.info(`save cache '${relativePath}${thisLoader.resourceQuery}'`);
