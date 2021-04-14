@@ -157,7 +157,9 @@ module.exports = async function ResizeLoader(content) {
                     resizeResolve(buffer);
                     thisLoader.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
                     loaderCallback(null, nextLoader.call(thisLoader, buffer));
-                    if (resizeCache) resizeCache.save(true);
+                    if (resizeCache) {
+                        resizeCache.save(true);
+                    }
                 });
             });
             return resizePromise;
