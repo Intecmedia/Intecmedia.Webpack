@@ -132,9 +132,18 @@
 .test { background-image:url('test.png'); }
 html.webp .test { background-image:url('test.webp'); }
 ```
+### Avif
+* Автоматический Avif для всех изображений(png, jpg, jpeg) внутри стилей, пример:
+```css
+/* before */
+.test { background-image:url('test.png'); }
+/* after */
+.test { background-image:url('test.png'); }
+html.avif .test { background-image:url('test.avif'); }
+```
 
 ### Favicons и App Icons
-* Мы используем [webapp-webpack-plugin](https://github.com/brunocodutra/webapp-webpack-plugin).
+* Мы используем [favicons-webpack-plugin](https://github.com/jantimon/favicons-webpack-plugin).
 * Файл `.favicons-source-64x64.png` исходник favicons.
 * Файл `.favicons-source-1024x1024.png` исходник app icons.
 * `THEME_COLOR` редактируется в `app.config.js`.
