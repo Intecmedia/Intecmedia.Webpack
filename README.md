@@ -9,14 +9,12 @@
 или [Pull requests](https://github.com/intecmedia/Intecmedia.Webpack/pulls).
 
 ## Особености
-* Webpack 4.
+* Webpack 5.
 * Bootstrap 4.
 * Babel и [babel-preset-env](https://babeljs.io/docs/en/babel-preset-env).
 * Линтер с автофиксом [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) ([перевод](https://github.com/leonidlebedev/javascript-airbnb)).
 * Шаблонизатор [Nunjucks](https://mozilla.github.io/nunjucks/) для сборки HTML.
-* SCSS, autoprefixer, PostCSS: [postcss-input-style](https://github.com/seaneking/postcss-input-style),
-[postcss-image-set-polyfill](https://github.com/SuperOl3g/postcss-image-set-polyfill), 
-[autoprefixer](https://github.com/postcss/autoprefixer), 
+* SCSS, autoprefixer, PostCSS: [autoprefixer](https://github.com/postcss/autoprefixer), 
 [cssnano](http://cssnano.co/).
 * Базовая WYSIWYG-типографика текста, форм, таблиц, списков, заголовков: 
 [wysiwyg.scss](https://github.com/Intecmedia/Intecmedia.Webpack/blob/master/source/css/pages/_wysiwyg.scss).
@@ -28,9 +26,9 @@
 * Активное использование формат изображений WebP.
 
 ## Системные требования
-* Node.js версии 11.7.0 или выше
-* NPM версии 7 или выше 
-* [ImageMagick](https://www.imagemagick.org/) или [GraphicsMagick](http://www.graphicsmagick.org/).
+* Node.js >= 11.7.0
+* NPM >= 7.0.0
+* [ImageMagick](https://www.imagemagick.org/) >= 7.0.10-25.
 * python2.7 и выше, для `fonttools`.
 
 ## Начало работы
