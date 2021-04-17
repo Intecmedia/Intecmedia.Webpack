@@ -9,7 +9,7 @@ const postcssUrl = require('postcss-url');
 const IMAGE_PATTERN = /.(png|jpg|jpeg)(\?.*)?$/i;
 const FORMAT_IGNORE = /^(webp|avif)$/i;
 
-module.exports = () => {
+module.exports = (extension) => {
     const plugin = postcssUrl({
         url(asset, dir, options, decl) {
             const { originUrl } = asset;
@@ -24,16 +24,17 @@ module.exports = () => {
             const originRule = decl.parent;
 
             let ignoreRule = false;
+            const ignoreText = `postcss.resize: ignore=${extension}`;
             originRule.walkComments((i) => {
-                if (i.text === 'postcss.avif: ignore') {
+                if (i.text === ignoreText) {
                     ignoreRule = true;
                 }
             });
             if (ignoreRule) return originUrl;
-            originRule.append(postcss.comment({ text: 'postcss.avif: ignore' }));
+            originRule.append(postcss.comment({ text: ignoreText }));
 
             originParams.set('resize', '');
-            originParams.set('format', 'avif');
+            originParams.set('format', extension);
 
             const originName = path.basename(originRequest, path.extname(originRequest));
             originParams.set('name', `${originName}@postcss`);
@@ -41,7 +42,7 @@ module.exports = () => {
             const newUrl = [originRequest, originParams].join('?');
             const newRule = originRule.cloneAfter();
 
-            newRule.selectors = newRule.selectors.map((i) => `html.avif ${i}`);
+            newRule.selectors = newRule.selectors.map((i) => `html.${extension} ${i}`);
             newRule.each((i) => {
                 if (i.prop !== decl.prop && i.value !== decl.value) {
                     i.remove();
@@ -57,6 +58,6 @@ module.exports = () => {
             return originUrl;
         },
     });
-    plugin.postcssPlugin = 'postcss.avif.js';
+    plugin.postcssPlugin = `postcss.resize.${extension}.js`;
     return plugin;
 };

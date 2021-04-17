@@ -6,12 +6,12 @@ $resize-breakpoints: $grid-breakpoints !default;
     background-image: url("#{$url}");
 
     @if $NODE_ENV == "production" or $DEBUG {
-        /* postcss.webp: ignore */
+        /* postcss.resize: ignore=webp */
         html.webp & {
             background-image: url("#{$url}?resize=x&format=webp");
         }
 
-        /* postcss.avif: ignore */
+        /* postcss.resize: ignore=avif */
         html.avif & {
             background-image: url("#{$url}?resize=x&format=avif");
         }
@@ -29,7 +29,7 @@ $resize-breakpoints: $grid-breakpoints !default;
 
 
     @if $NODE_ENV == "production" or $DEBUG {
-        /* postcss.webp: ignore */
+        /* postcss.resize: ignore=webp */
         html.webp & {
             @each $breakpoint in map-keys($breakpoints) {
                 $infix: breakpoint-infix($breakpoint, $breakpoints);
@@ -39,7 +39,7 @@ $resize-breakpoints: $grid-breakpoints !default;
             }
         }
 
-        /* postcss.avif: ignore */
+        /* postcss.resize: ignore=avif */
         html.avif & {
             @each $breakpoint in map-keys($breakpoints) {
                 $infix: breakpoint-infix($breakpoint, $breakpoints);

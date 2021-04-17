@@ -16,8 +16,8 @@ module.exports = {
             ]),
             require('postcss-flexbugs-fixes')(),
             require('./postcss.stylelint.js')(),
-            require('./postcss.avif.js')(),
-            require('./postcss.webp.js')(),
+            require('./postcss.resize.js')('avif'),
+            require('./postcss.resize.js')('webp'),
             require('autoprefixer')({ overrideBrowserslist: ENV.BROWSERS }), // this always last
             ...(!ENV.DEBUG ? [require('cssnano')({
                 preset: ['default', {
