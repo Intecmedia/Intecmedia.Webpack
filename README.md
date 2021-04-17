@@ -12,14 +12,14 @@
 * Webpack 5.
 * Bootstrap 4.
 * Babel и [babel-preset-env](https://babeljs.io/docs/en/babel-preset-env).
+* TypeScript через [babel-preset-typescript](https://babeljs.io/docs/en/babel-preset-typescript)
 * Линтер с автофиксом [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) ([перевод](https://github.com/leonidlebedev/javascript-airbnb)).
 * Шаблонизатор [Nunjucks](https://mozilla.github.io/nunjucks/) для сборки HTML.
 * SCSS, autoprefixer, PostCSS: [autoprefixer](https://github.com/postcss/autoprefixer), 
 [cssnano](http://cssnano.co/).
 * Базовая WYSIWYG-типографика текста, форм, таблиц, списков, заголовков: 
 [wysiwyg.scss](https://github.com/Intecmedia/Intecmedia.Webpack/blob/master/source/css/pages/_wysiwyg.scss).
-* Ресайз изображений через [ImageMagick](https://www.imagemagick.org/) / [GraphicsMagick](http://www.graphicsmagick.org/).
-* Responsive images polyfill через [Picturefill](http://scottjehl.github.io/picturefill).
+* Ресайз изображений через [ImageMagick](https://www.imagemagick.org/).
 * Множество линтеров: eslint, html-validate, stylelint с возможностью autofix кода.
 * Imagemin для сжатия гарфики: svg, png, jpeg, gif.
 * Генерация множества app-иконок и manifest.json.
@@ -47,11 +47,14 @@
 * **npm run watch-debug** – watch в development-режиме и debug=on, медленный способ.
 * **npm run js-lint** – линтер js через [eslint](https://eslint.org/).
 * **npm run js-lint-config** – печатает конфиг [eslint](https://eslint.org/).
+* **npm run ts-lint** – линтер TypeScript через [eslint](https://eslint.org/).
+* **npm run ts-lint-config** – печатает конфиг [eslint](https://eslint.org/).
 * **npm run css-lint** – линтер scss через [stylelint](https://stylelint.io/).
 * **npm run css-lint-config** – печатает конфиг [stylelint](https://stylelint.io/).
 * **npm run html-validate** – линтер html через [html-validate](https://html-validate.org/).
 * **npm run html-validator** – линтер html через [validator.w3.org](https://validator.w3.org/).
 * **npm run app-lint** – линтер конфигурации приложения.
+* **npm run image-lint** – линтер изображений
 * **npm run lint** – запуск всех линтеров (app, eslint, stylelint, html-validate, validator.w3.org).
 * **npm run server** – сервер в production-режиме и debug=off, самый медленный способ.
 * **npm run server-dev** – сервер в development-режиме и debug=off, самый быстрый способ.
