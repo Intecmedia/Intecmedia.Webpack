@@ -90,10 +90,7 @@
 * [focus-visible](https://github.com/WICG/focus-visible)
 * [focus-within](https://github.com/jonathantneal/focus-within)
 * [intersection-observer](https://github.com/w3c/IntersectionObserver#readme)
-* [object-assign](https://github.com/sindresorhus/object-assign#readme)
-* [object-fit-images](https://github.com/bfred-it/object-fit-images#readme)
-* [picturefill](https://scottjehl.github.io/picturefill/)
-* [promise](https://github.com/then/promise#readme)
+* [resize-observer-polyfill](https://github.com/que-etc/resize-observer-polyfill)
 
 ## Типографика
 ### Responstive type
