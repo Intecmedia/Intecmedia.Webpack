@@ -11,7 +11,6 @@ module.exports = {
             require('postcss-focus')(),
             require('postcss-focus-visible')(),
             require('postcss-focus-within')(),
-            require('postcss-custom-properties')(),
             require('postcss-font-display')([
                 { display: 'swap' },
                 { test: 'FontAwesome', display: 'block' },
