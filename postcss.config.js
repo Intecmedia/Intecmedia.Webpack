@@ -6,7 +6,6 @@ const ENV = require('./app.env.js');
 module.exports = {
     plugins: [
         require('postcss-devtools')({ precise: true }),
-        require('postcss-input-style')(),
         ...(ENV.PROD || ENV.DEBUG ? [
             require('postcss-focus')(),
             require('postcss-focus-visible')(),

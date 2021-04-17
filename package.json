@@ -158,7 +158,6 @@
         "postcss-focus-visible": "latest",
         "postcss-focus-within": "latest",
         "postcss-font-display": "latest",
-        "postcss-input-style": "latest",
         "postcss-loader": "latest",
         "postcss-reporter": "latest",
         "postcss-url": "latest",
