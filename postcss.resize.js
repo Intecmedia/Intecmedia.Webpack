@@ -24,7 +24,7 @@ module.exports = (extension) => {
             const originRule = decl.parent;
 
             let ignoreRule = false;
-            const ignoreText = `postcss.resize: ignore=${extension}`;
+            const ignoreText = `postcss.resize.${extension}: ignore`;
             originRule.walkComments((i) => {
                 if (i.text === ignoreText) {
                     ignoreRule = true;
