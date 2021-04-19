@@ -1,7 +1,7 @@
 /* stylelint-disable selector-max-type, plugin/selector-bem-pattern -- all <picture> are responsive component */
 picture {
-    display: inline-block;
     @include img-fluid();
+    display: inline-block;
 
     > img {
         @include img-fluid();

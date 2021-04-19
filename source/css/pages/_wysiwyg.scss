@@ -66,14 +66,15 @@
 
     // colored bulls
     ul:not([class]) > li {
-        position: relative;
-
-        list-style: none;
 
         $ul-bull-symbol: "•" !default;
         $ul-bull-color: $body-color !default;
         $ul-bull-font-size: $font-size-base !default;
         $ul-bull-line-height: $line-height-base !default;
+
+        position: relative;
+
+        list-style: none;
 
         &::before {
             position: absolute;

@@ -168,7 +168,6 @@
         "semver": "latest",
         "slash": "latest",
         "stylelint": "latest",
-        "stylelint-config-rational-order": "latest",
         "stylelint-config-sass-guidelines": "latest",
         "stylelint-config-twbs-bootstrap": "latest",
         "stylelint-csstree-validator": "latest",

@@ -8,7 +8,6 @@ const sharedConfig = require('./.stylelintrc.shared.js');
 
 module.exports = deepMerge({}, sharedConfig, {
     'extends': [
-        'stylelint-config-rational-order',
         'stylelint-config-sass-guidelines',
         'stylelint-config-twbs-bootstrap/scss',
         ...sharedConfig.extends,
@@ -46,7 +45,6 @@ module.exports = deepMerge({}, sharedConfig, {
             'custom-properties',
             'dollar-variables',
         ],
-        'order/properties-alphabetical-order': null,
         'pitcher/max-lines': 300,
         'pitcher/max-root-rules': 12,
         'plugin/no-low-performance-animation-properties': [true, {
@@ -57,10 +55,6 @@ module.exports = deepMerge({}, sharedConfig, {
                 'text-decoration-color',
             ],
             'severity': 'warning',
-        }],
-        'plugin/rational-order': [true, {
-            'border-in-box-model': false,
-            'empty-line-between-groups': true,
         }],
         'plugin/selector-bem-pattern': {
             'ignoreSelectors': [
@@ -94,10 +88,9 @@ module.exports = deepMerge({}, sharedConfig, {
                 'property',
             ],
         }],
-        'scss/dollar-variable-default': [true,
-            {
-                'ignore': 'local',
-            }],
+        'scss/dollar-variable-default': [true, {
+            'ignore': 'local',
+        }],
         'scss/dollar-variable-pattern': [
             '^[a-zA-Z][a-zA-Z-\\d]*$',
         ],
@@ -130,12 +123,6 @@ module.exports = deepMerge({}, sharedConfig, {
             'ignore': [
                 'attribute',
                 'class',
-            ],
-        }],
-        'selector-pseudo-element-no-unknown': [true, {
-            'ignorePseudoElements': [
-                'thumb',
-                'track',
             ],
         }],
         'value-list-comma-newline-after': 'always-multi-line',
