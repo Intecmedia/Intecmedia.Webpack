@@ -64,6 +64,7 @@ module.exports = deepMerge({}, sharedConfig, {
                 '\\.(js|is|no|has|not)\\-(.+)',
                 '^\\.(js|no\\-js)(\\s+)',
                 '^(html|body)\\.(.+)',
+                '^(svg|picture|img)\\.?',
             ],
             'implicitComponents': [
                 'source/css/components/**/*.scss',
