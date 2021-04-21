@@ -64,34 +64,21 @@
         }
     }
 
+    // numeric list
+    ol:not([class]) > li {
+        counter-increment: ol;
+
+        &::marker {
+            color: $ol-marker-color;
+            content: counter(ol) ".";
+        }
+    }
+
     // colored bulls
     ul:not([class]) > li {
-
-        $ul-bull-symbol: "•" !default;
-        $ul-bull-color: $body-color !default;
-        $ul-bull-font-size: $font-size-base !default;
-        $ul-bull-line-height: $line-height-base !default;
-
-        position: relative;
-
-        list-style: none;
-
-        &::before {
-            position: absolute;
-
-            width: $ul-bull-font-size;
-            margin-left: -$ul-bull-font-size;
-            font-family: inherit;
-
-            font-size: $ul-bull-font-size;
-            line-height: $ul-bull-line-height;
-
-            color: $ul-bull-color;
-
-            text-align: center;
-            vertical-align: middle;
-
-            content: $ul-bull-symbol;
+        &::marker {
+            color: $ul-marker-color;
+            content: "•";
         }
     }
 

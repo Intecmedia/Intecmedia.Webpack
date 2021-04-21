@@ -23,6 +23,9 @@ $overflows: () !default;
 $positions: () !default;
 $user-selects: () !default;
 
+$ul-marker-color: $body-color !default;
+$ol-marker-color: $body-color !default;
+
 @import "bootstrap-variables";
 
 // Common variables (Not bootstrap)
