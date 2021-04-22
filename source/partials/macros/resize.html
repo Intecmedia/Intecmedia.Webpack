@@ -17,11 +17,11 @@
         {% endfor %}
 
         {% set dimensions = image_size(url) %}
-        <img 
+        <img
             src="{{ require(url) }}"
             loading="lazy"
             width="{{ dimensions.width }}"
-            height="{{ dimensions.height }}" 
+            height="{{ dimensions.height }}"
             intrinsicsize="{{ dimensions.width }}x{{ dimensions.height }}"
             {%if attrs.img %}{% for k, v in attrs.img %} {{ k }}="{{ v }}"{% endfor %}{% endif %}
             alt="{{ alt }}"
@@ -37,11 +37,11 @@
         {% endif %}
 
         {% set dimensions = image_size(url) %}
-        <img 
+        <img
             src="{{ require(url) }}"
             loading="lazy"
             width="{{ dimensions.width }}"
-            height="{{ dimensions.height }}" 
+            height="{{ dimensions.height }}"
             intrinsicsize="{{ dimensions.width }}x{{ dimensions.height }}"
             {%if attrs.img %}{% for k, v in attrs.img %} {{ k }}="{{ v }}"{% endfor %}{% endif %}
             alt="{{ alt }}"

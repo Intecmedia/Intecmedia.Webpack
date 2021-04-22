@@ -3,7 +3,6 @@
 
 const fs = require('fs');
 const path = require('path');
-const glob = require('glob');
 const slash = require('slash');
 const weblog = require('webpack-log');
 const ignore = require('ignore');
@@ -13,22 +12,18 @@ const { SvgoCreateConfig } = require('./svgo.config.js');
 
 const logger = weblog({ name: 'svgo' });
 const ENV = require('./app.env.js');
+const UTILS = require('./webpack.utils.js');
 
 const ImageminIgnore = ignore().add(fs.readFileSync('./.imageminignore').toString());
 
 const statMessages = { fixed: 0, skipped: 0 };
 
-function globPromise(pattern, options) {
-    return new Promise((resolve, reject) => {
-        glob(pattern, options, (err, files) => (err === null ? resolve(files) : reject(err)));
-    });
-}
-
-const promises = [
+UTILS.globArray([
     `${ENV.SOURCE_PATH}/**/*.svg`,
     '../include/template/**/*.svg',
-].map((i) => globPromise(i, {
+], {
     ignore: [],
+    nodir: true,
 }).then((files) => {
     files.forEach((resourcePath) => {
         const svg = fs.readFileSync(resourcePath, 'utf8').toString();
@@ -56,9 +51,7 @@ const promises = [
             logger.info(`skipped ${relativePath}`);
         }
     });
-}));
 
-Promise.all(promises).then(() => {
     console.log('');
     logger.info('stats:', statMessages);
 });

@@ -15,9 +15,9 @@
 * TypeScript через [babel-preset-typescript](https://babeljs.io/docs/en/babel-preset-typescript)
 * Линтер с автофиксом [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) ([перевод](https://github.com/leonidlebedev/javascript-airbnb)).
 * Шаблонизатор [Nunjucks](https://mozilla.github.io/nunjucks/) для сборки HTML.
-* SCSS, autoprefixer, PostCSS: [autoprefixer](https://github.com/postcss/autoprefixer), 
+* SCSS, autoprefixer, PostCSS: [autoprefixer](https://github.com/postcss/autoprefixer),
 [cssnano](http://cssnano.co/).
-* Базовая WYSIWYG-типографика текста, форм, таблиц, списков, заголовков: 
+* Базовая WYSIWYG-типографика текста, форм, таблиц, списков, заголовков:
 [wysiwyg.scss](https://github.com/Intecmedia/Intecmedia.Webpack/blob/master/source/css/pages/_wysiwyg.scss).
 * Ресайз изображений через [ImageMagick](https://www.imagemagick.org/).
 * Множество линтеров: eslint, html-validate, stylelint с возможностью autofix кода.
@@ -96,7 +96,7 @@
 ## Типографика
 ### Responstive type
 Для резиновой типографики мы используем [scss-mixins](https://github.com/Intecmedia/Intecmedia.Webpack/blob/master/source/css/utils/_fluid.scss), пример кода:
-```scss 
+```scss
 .foobar {
     @include fluid-font-size(12px, 21px, 420px, 1280px)
 }

@@ -80,6 +80,7 @@ const pathSuffix = argv.pathSuffix && typeof (argv.pathSuffix) === 'string' ? ar
 
 glob(ENV.SOURCE_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.{jpg,jpeg,png,svg,gif}'), {
     ignore: [],
+    nodir: true,
 }, async (error, files) => {
     if (error) throw error;
 

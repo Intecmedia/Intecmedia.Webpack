@@ -30,6 +30,7 @@ const pathSuffix = argv.pathSuffix && typeof (argv.pathSuffix) === 'string' ? ar
 
 glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'), {
     ignore: [],
+    nodir: true,
 }, (error, files) => {
     if (error) throw error;
 

@@ -20,6 +20,7 @@ if (process.platform === 'win32') {
 
 glob(`${FONTS_SRC}/**/*.ttf`, {
     ignore: [],
+    nodir: true,
 }, (error, files) => {
     if (error) throw error;
 

@@ -3,6 +3,7 @@
 
 const path = require('path');
 const slash = require('slash');
+const glob = require('glob');
 const findCacheDir = require('find-cache-dir');
 
 function castScssVar(obj) {
@@ -58,3 +59,17 @@ function cacheDir(name, skipEnv = false) {
 }
 
 module.exports.cacheDir = cacheDir;
+
+function globArray(patterns, options) {
+    return Promise.all(patterns.map((pattern) => (new Promise((resolve, reject) => {
+        glob(pattern, options, (error, files) => (error === null ? resolve(files) : reject(error)));
+    })))).then((files) => files.flat());
+}
+
+module.exports.globArray = globArray;
+
+function globArraySync(patterns, options) {
+    return patterns.map((pattern) => glob.sync(pattern, options)).flat();
+}
+
+module.exports.globArraySync = globArraySync;
