@@ -14,7 +14,7 @@ const ARGV = Object.fromEntries(argv.env.map((i) => {
 }));
 
 const DEBUG = ('DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0);
-const DEV_SERVER = path.basename(require.main.filename, '.js') === 'webpack-dev-server';
+const DEV_SERVER = ('WEBPACK_DEV_SERVER' in process.env && process.env.WEBPACK_DEV_SERVER === 'true');
 const STANDALONE = ['webpack', 'webpack-dev-server'].includes(path.basename(require.main.filename, '.js'));
 const WATCH = (process.argv.includes('--watch')) || (process.argv.includes('-w'));
 const PROD = (process.env.NODE_ENV === 'production');
