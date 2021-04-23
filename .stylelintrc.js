@@ -45,6 +45,7 @@ module.exports = deepMerge({}, sharedConfig, {
             'custom-properties',
             'dollar-variables',
         ],
+        'order/properties-alphabetical-order': null,
         'pitcher/max-lines': 300,
         'pitcher/max-root-rules': 12,
         'plugin/no-low-performance-animation-properties': [true, {
