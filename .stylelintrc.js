@@ -6,7 +6,10 @@
 const deepMerge = require('lodash.merge');
 const sharedConfig = require('./.stylelintrc.shared.js');
 
+const ENV = require('./app.env.js');
+
 module.exports = deepMerge({}, sharedConfig, {
+    'defaultSeverity': (ENV.PROD || ENV.DEBUG ? 'error' : 'warning'),
     'extends': [
         'stylelint-config-sass-guidelines',
         'stylelint-config-twbs-bootstrap/scss',
