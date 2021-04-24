@@ -23,6 +23,7 @@ module.exports = {
         whitelistUrls: [],
     },
     USE_JQUERY: true,
+    LINT_FIX: true,
 };
 
 module.exports.ENV = ENV;
