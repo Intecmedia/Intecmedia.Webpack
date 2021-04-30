@@ -65,7 +65,7 @@ const LINT_RULES = [
     },
     {
         name: 'colorspace',
-        allowed: ['sRGB'],
+        allowed: ['sRGB', 'Gray'],
         fn(identifyData) {
             if (!this.allowed.includes(identifyData.colorspace)) {
                 return `The color space of this image is ${identifyData.colorspace}. It must be ${JSON.stringify(this.allowed)}.`;
