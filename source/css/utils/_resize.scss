@@ -23,7 +23,7 @@ $resize-breakpoints: $grid-breakpoints !default;
     @each $breakpoint in map-keys($breakpoints) {
         $infix: breakpoint-infix($breakpoint, $breakpoints);
         @include media-breakpoint-only($infix) {
-            background-image: url("#{$url}?resize=#{breakpoint}x&format=jpg&suffix=#{$infix}");
+            background-image: url("#{$url}?resize=#{$breakpoint}x&format=jpg&suffix=#{$infix}");
         }
     }
 
@@ -34,7 +34,7 @@ $resize-breakpoints: $grid-breakpoints !default;
             @each $breakpoint in map-keys($breakpoints) {
                 $infix: breakpoint-infix($breakpoint, $breakpoints);
                 @include media-breakpoint-only($infix) {
-                    background-image: url("#{$url}?resize=#{breakpoint}x&format=webp&suffix=#{$infix}");
+                    background-image: url("#{$url}?resize=#{$breakpoint}x&format=webp&suffix=#{$infix}");
                 }
             }
         }
@@ -44,7 +44,7 @@ $resize-breakpoints: $grid-breakpoints !default;
             @each $breakpoint in map-keys($breakpoints) {
                 $infix: breakpoint-infix($breakpoint, $breakpoints);
                 @include media-breakpoint-only($infix) {
-                    background-image: url("#{$url}?resize=#{breakpoint}x&format=avif&suffix=#{$infix}");
+                    background-image: url("#{$url}?resize=#{$breakpoint}x&format=avif&suffix=#{$infix}");
                 }
             }
         }
