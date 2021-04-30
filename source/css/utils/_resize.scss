@@ -3,7 +3,7 @@
 $resize-breakpoints: $grid-breakpoints !default;
 
 @function resize-prefix($name, $breakpoints: $resize-breakpoints) {
-    @return if(breakpoint-min($name, $breakpoints) == null, "", name);
+    @return if(breakpoint-min($name, $breakpoints) == null, "", $name);
 }
 
 @mixin background-image($url) {
@@ -25,7 +25,7 @@ $resize-breakpoints: $grid-breakpoints !default;
 @mixin breakpoints-background-image($url, $breakpoints: $resize-breakpoints) {
 
     @each $breakpoint in map-keys($breakpoints) {
-        $size: map-get($breakpoints, $breakpoint);
+        $size: strip-unit(map-get($breakpoints, $breakpoint));
         $prefix: resize-prefix($breakpoint, $breakpoints);
         @include media-breakpoint-only($prefix) {
             background-image: url("#{$url}?resize=#{$size}x&format=jpg&suffix=#{$prefix}");
@@ -37,7 +37,7 @@ $resize-breakpoints: $grid-breakpoints !default;
         /* postcss.resize.webp: ignore */
         html.webp & {
             @each $breakpoint in map-keys($breakpoints) {
-                $size: map-get($breakpoints, $breakpoint);
+                $size: strip-unit(map-get($breakpoints, $breakpoint));
                 $prefix: resize-prefix($breakpoint, $breakpoints);
                 @include media-breakpoint-only($prefix) {
                     background-image: url("#{$url}?resize=#{$size}x&format=webp&suffix=#{$prefix}");
@@ -48,7 +48,7 @@ $resize-breakpoints: $grid-breakpoints !default;
         /* postcss.resize.avif: ignore */
         html.avif & {
             @each $breakpoint in map-keys($breakpoints) {
-                $size: map-get($breakpoints, $breakpoint);
+                $size: strip-unit(map-get($breakpoints, $breakpoint));
                 $prefix: resize-prefix($breakpoint, $breakpoints);
                 @include media-breakpoint-only($prefix) {
                     background-image: url("#{$url}?resize=#{$size}x&format=avif&suffix=#{$prefix}");
