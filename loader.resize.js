@@ -69,7 +69,7 @@ module.exports = async function ResizeLoader(content) {
     const imageMagick = gm.subClass({ imageMagick: options.imageMagick });
     delete options.imageMagick;
 
-    let [, resizeWidth,, resizeHeight, resizeFlag] = query.resize.trim().match(/^(\d*)(x(\d*))?([!<>^])?$/);
+    let [, resizeWidth,, resizeHeight, resizeFlag] = (String(query.resize).trim().match(/^(\d*)(x(\d*))?([!<>^])?$/)) || [];
     resizeWidth = parseInt(resizeWidth, 10);
     resizeHeight = parseInt(resizeHeight, 10);
     resizeFlag = (resizeFlag || '').trim();
