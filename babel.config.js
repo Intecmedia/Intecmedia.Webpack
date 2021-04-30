@@ -5,10 +5,10 @@ const ENV = require('./app.env.js');
 
 module.exports = {
     plugins: [
-        ['@babel/plugin-proposal-optional-chaining', { loose: false }],
+        ['@babel/plugin-proposal-optional-chaining', {}],
         ['@babel/plugin-proposal-pipeline-operator', { proposal: 'minimal' }],
         ['@babel/plugin-proposal-decorators', { legacy: true }],
-        ['@babel/plugin-proposal-class-properties', { loose: true }],
+        ['@babel/plugin-proposal-class-properties', {}],
         ['@babel/plugin-proposal-logical-assignment-operators', {}],
     ],
     presets: [
