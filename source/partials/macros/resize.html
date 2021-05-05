@@ -28,7 +28,7 @@
             width="{{ dimensions.width }}"
             height="{{ dimensions.height }}"
             intrinsicsize="{{ dimensions.width }}x{{ dimensions.height }}"
-            {%if attrs.img %}{% for k, v in attrs.img %} {{ k }}="{{ v }}"{% endfor %}{% endif %}
+            {% if attrs.img %}{% for k, v in attrs.img %} {{ k }}="{{ v }}"{% endfor %}{% endif %}
             alt="{{ alt }}"
         >
     </picture>
@@ -48,7 +48,7 @@
             width="{{ dimensions.width }}"
             height="{{ dimensions.height }}"
             intrinsicsize="{{ dimensions.width }}x{{ dimensions.height }}"
-            {%if attrs.img %}{% for k, v in attrs.img %} {{ k }}="{{ v }}"{% endfor %}{% endif %}
+            {% if attrs.img %}{% for k, v in attrs.img %} {{ k }}="{{ v }}"{% endfor %}{% endif %}
             alt="{{ alt }}"
         >
     </picture>
