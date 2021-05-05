@@ -38,7 +38,7 @@ module.exports = deepMerge({}, sharedConfig, {
             ],
             'ignorePattern': '/\\$(.+?):/',
         }],
-        'max-nesting-depth': [4, {
+        'max-nesting-depth': [5, {
             'ignore': [
                 'blockless-at-rules',
                 'pseudo-classes',
@@ -69,6 +69,7 @@ module.exports = deepMerge({}, sharedConfig, {
                 '^\\.(js|no\\-js)(\\s+)',
                 '^(html|body)\\.(.+)',
                 '^(svg|picture|img)\\.?',
+                '#\\{\\$[a-zA-Z][a-zA-Z-\\d]*\\}',
             ],
             'implicitComponents': [
                 'source/css/components/**/*.scss',
@@ -117,7 +118,8 @@ module.exports = deepMerge({}, sharedConfig, {
             '^[a-zA-Z0-9\\-_]+$',
         ],
         'selector-list-comma-newline-after': 'always-multi-line',
-        'selector-max-compound-selectors': 4,
+        'selector-max-class': 5,
+        'selector-max-compound-selectors': 5,
         'selector-max-empty-lines': 0,
         'selector-max-type': [0, {
             'ignore': [
