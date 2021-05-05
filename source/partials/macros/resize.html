@@ -1,19 +1,24 @@
 {% set DEFAULT_BREAKPOINTS = ['xs', 'sm', 'md', 'lg', 'xl'] %}
 {% set DEFAULT_SIZES = {xs: 576, sm: 768, md: 992, lg: 1200, xl: 1900} %}
+{% set DEFAULT_THUMBS = {xs: '576x', sm: '768x', md: '992x', lg: '1200x', xl: '1900x'} %}
 
-{% macro breakpoints (url, alt, attrs={}, breakpoints=DEFAULT_BREAKPOINTS, sizes=DEFAULT_SIZES) %}
+{% macro breakpoints (url, alt, attrs={}, breakpoints=DEFAULT_BREAKPOINTS, sizes=DEFAULT_SIZES, thumbs=DEFAULT_THUMBS) %}
     <picture{% for k, v in attrs %}{% if k != 'img' %} {{ k }}="{{ v }}"{% endif %}{% endfor %}>
+
         {% if APP.ENV.PROD or APP.ENV.DEBUG %}
         {% for breakpoint, media in breakpoints_media(breakpoints, sizes) %}
-        <source media="{{ media }}" srcset="{{ require(url + '?resize=' + sizes[breakpoint] + 'x&format=avif&suffix=' + breakpoint) }}" type="image/avif">
+        {% set command %}{% if thumbs.hasOwnProperty(breakpoint) and thumbs[breakpoint] %}{{ thumbs[breakpoint] }}{% else %}{{ sizes[breakpoint] }}{% endif %}{% endset %}
+        <source media="{{ media }}" srcset="{{ require(url + '?resize=' + command + '&format=avif&suffix=' + breakpoint) }}" type="image/avif">
         {% endfor %}
         {% for breakpoint, media in breakpoints_media(breakpoints, sizes) %}
-        <source media="{{ media }}" srcset="{{ require(url + '?resize=' + sizes[breakpoint] + 'x&format=webp&suffix=' + breakpoint) }}" type="image/webp">
+        {% set command %}{% if thumbs.hasOwnProperty(breakpoint) and thumbs[breakpoint] %}{{ thumbs[breakpoint] }}{% else %}{{ sizes[breakpoint] }}{% endif %}{% endset %}
+        <source media="{{ media }}" srcset="{{ require(url + '?resize=' + command + '&format=webp&suffix=' + breakpoint) }}" type="image/webp">
         {% endfor %}
         {% endif %}
 
         {% for breakpoint, media in breakpoints_media(breakpoints, sizes) %}
-        <source media="{{ media }}" srcset="{{ require(url + '?resize=' + sizes[breakpoint] + 'x&format=jpg&suffix=' + breakpoint) }}" type="image/jpeg">
+        {% set command %}{% if thumbs.hasOwnProperty(breakpoint) and thumbs[breakpoint] %}{{ thumbs[breakpoint] }}{% else %}{{ sizes[breakpoint] }}{% endif %}{% endset %}
+        <source media="{{ media }}" srcset="{{ require(url + '?resize=' + command + '&format=jpg&suffix=' + breakpoint) }}" type="image/jpeg">
         {% endfor %}
 
         {% set dimensions = image_size(url) %}
