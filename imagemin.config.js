@@ -23,11 +23,11 @@ module.exports = {
 };
 
 module.exports.webp = {
-    quality: 95, // 0 - 100, or 100 for lossless
+    quality: 85, // 0 - 100, or 100 for lossless
     define: [],
 };
 
 module.exports.avif = {
-    quality: 95, // 0 - 100, or 100 for lossless
+    quality: 85, // 0 - 100, or 100 for lossless
     define: [],
 };
