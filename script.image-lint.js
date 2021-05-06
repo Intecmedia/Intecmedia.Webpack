@@ -46,7 +46,7 @@ const LINT_RULES = [
     {
         name: 'size',
         maxwidth: 1920,
-        maxheight: 1080,
+        maxheight: 1440,
         fn(identifyData) {
             if (identifyData.width > this.maxwidth || identifyData.height > this.maxheight) {
                 return `Image size ${identifyData.width}x${identifyData.height} is not less than ${this.maxwidth}x${this.maxheight}.`;
