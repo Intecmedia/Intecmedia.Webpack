@@ -1,24 +1,60 @@
+{% set DEFAULT_SOURCES = [
+    ['(max-width: 575.98px)', '576x', 'xs'],
+    ['(max-width: 767.98px)', '768x', 'sm'],
+    ['(max-width: 991.98px)', '992x', 'md'],
+    ['(max-width: 1199.98px)', '1200x', 'lg'],
+    ['(min-width: 1200px)', '1900x', 'xl']
+] %}
+
+{% macro sources (url, alt, attrs={}, sources=DEFAULT_SOURCES) %}
+    <picture{% for k, v in attrs %}{% if k != 'img' %} {{ k }}="{{ v }}"{% endif %}{% endfor %}>
+        <!-- sources = {{ sources | dump(4) | safe }} -->
+
+        {% if APP.ENV.PROD or APP.ENV.DEBUG %}
+        {% for source in sources %}
+        <source media="{{ source[0] | empty('all') }}" srcset="{{ require(url + '?resize=' + source[1] + '&format=avif&suffix=' + source[2]) }}" type="image/avif">
+        {% endfor %}
+        {% for source in sources %}
+        <source media="{{ source[0] | empty('all') }}" srcset="{{ require(url + '?resize=' + source[1] + '&format=webp&suffix=' + source[2]) }}" type="image/webp">
+        {% endfor %}
+        {% endif %}
+
+        {% for source in sources %}
+        <source media="{{ source[0] | empty('all') }}" srcset="{{ require(url + '?resize=' + source[1] + '&format=jpg&suffix=' + source[2]) }}" type="image/jpeg">
+        {% endfor %}
+
+        {% set dimensions = image_size(url) %}
+        <img
+            src="{{ require(url) }}"
+            loading="lazy"
+            width="{{ dimensions.width }}"
+            height="{{ dimensions.height }}"
+            intrinsicsize="{{ dimensions.width }}x{{ dimensions.height }}"
+            {%if attrs.img %}{% for k, v in attrs.img %} {{ k }}="{{ v }}"{% endfor %}{% endif %}
+            alt="{{ alt }}"
+        >
+    </picture>
+{% endmacro %}
+
 {% set DEFAULT_BREAKPOINTS = ['xs', 'sm', 'md', 'lg', 'xl'] %}
 {% set DEFAULT_SIZES = {xs: 576, sm: 768, md: 992, lg: 1200, xl: 1900} %}
-{% set DEFAULT_THUMBS = {xs: '576x', sm: '768x', md: '992x', lg: '1200x', xl: '1900x'} %}
 
-{% macro breakpoints (url, alt, attrs={}, breakpoints=DEFAULT_BREAKPOINTS, sizes=DEFAULT_SIZES, thumbs=DEFAULT_THUMBS) %}
+{% macro breakpoints (url, alt, attrs={}, breakpoints=DEFAULT_BREAKPOINTS, sizes=DEFAULT_SIZES) %}
     <picture{% for k, v in attrs %}{% if k != 'img' %} {{ k }}="{{ v }}"{% endif %}{% endfor %}>
+        <!-- breakpoints = {{ breakpoints | dump(4) | safe }} -->
+        <!-- sizes = {{ sizes | dump(4) | safe }} -->
 
         {% if APP.ENV.PROD or APP.ENV.DEBUG %}
         {% for breakpoint, media in breakpoints_media(breakpoints, sizes) %}
-        {% set command %}{% if thumbs.hasOwnProperty(breakpoint) and thumbs[breakpoint] %}{{ thumbs[breakpoint] }}{% else %}{{ sizes[breakpoint] }}{% endif %}{% endset %}
-        <source media="{{ media }}" srcset="{{ require(url + '?resize=' + command + '&format=avif&suffix=' + breakpoint) }}" type="image/avif">
+        <source media="{{ media }}" srcset="{{ require(url + '?resize=' + sizes[breakpoint] + '&format=avif&suffix=' + breakpoint) }}" type="image/avif">
         {% endfor %}
         {% for breakpoint, media in breakpoints_media(breakpoints, sizes) %}
-        {% set command %}{% if thumbs.hasOwnProperty(breakpoint) and thumbs[breakpoint] %}{{ thumbs[breakpoint] }}{% else %}{{ sizes[breakpoint] }}{% endif %}{% endset %}
-        <source media="{{ media }}" srcset="{{ require(url + '?resize=' + command + '&format=webp&suffix=' + breakpoint) }}" type="image/webp">
+        <source media="{{ media }}" srcset="{{ require(url + '?resize=' + sizes[breakpoint] + '&format=webp&suffix=' + breakpoint) }}" type="image/webp">
         {% endfor %}
         {% endif %}
 
         {% for breakpoint, media in breakpoints_media(breakpoints, sizes) %}
-        {% set command %}{% if thumbs.hasOwnProperty(breakpoint) and thumbs[breakpoint] %}{{ thumbs[breakpoint] }}{% else %}{{ sizes[breakpoint] }}{% endif %}{% endset %}
-        <source media="{{ media }}" srcset="{{ require(url + '?resize=' + command + '&format=jpg&suffix=' + breakpoint) }}" type="image/jpeg">
+        <source media="{{ media }}" srcset="{{ require(url + '?resize=' + sizes[breakpoint] + '&format=jpg&suffix=' + breakpoint) }}" type="image/jpeg">
         {% endfor %}
 
         {% set dimensions = image_size(url) %}
@@ -48,7 +84,7 @@
             width="{{ dimensions.width }}"
             height="{{ dimensions.height }}"
             intrinsicsize="{{ dimensions.width }}x{{ dimensions.height }}"
-            {% if attrs.img %}{% for k, v in attrs.img %} {{ k }}="{{ v }}"{% endfor %}{% endif %}
+            {%if attrs.img %}{% for k, v in attrs.img %} {{ k }}="{{ v }}"{% endfor %}{% endif %}
             alt="{{ alt }}"
         >
     </picture>
