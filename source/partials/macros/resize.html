@@ -19,11 +19,12 @@
         {% endfor %}
         {% endif %}
 
+        {% set dimensions = image_size(url) %}
+
         {% for source in sources %}
-        <source media="{{ source[0] | empty('all') }}" srcset="{{ require(url + '?resize=' + source[1] + '&format=jpg&suffix=' + source[2]) }}" type="image/jpeg">
+        <source media="{{ source[0] | empty('all') }}" srcset="{{ require(url + '?resize=' + source[1] + '&suffix=' + source[2]) }}" type="image/{{ dimensions.type }}">
         {% endfor %}
 
-        {% set dimensions = image_size(url) %}
         <img
             src="{{ require(url) }}"
             loading="lazy"
@@ -53,11 +54,12 @@
         {% endfor %}
         {% endif %}
 
+        {% set dimensions = image_size(url) %}
+
         {% for breakpoint, media in breakpoints_media(breakpoints, sizes) %}
-        <source media="{{ media }}" srcset="{{ require(url + '?resize=' + sizes[breakpoint] + '&format=jpg&suffix=' + breakpoint) }}" type="image/jpeg">
+        <source media="{{ media }}" srcset="{{ require(url + '?resize=' + sizes[breakpoint] + '&suffix=' + breakpoint) }}" type="image/{{ dimensions.type }}">
         {% endfor %}
 
-        {% set dimensions = image_size(url) %}
         <img
             src="{{ require(url) }}"
             loading="lazy"
