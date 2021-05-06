@@ -8,7 +8,7 @@
 
 {% macro sources (url, alt, attrs={}, sources=DEFAULT_SOURCES) %}
     <picture{% for k, v in attrs %}{% if k != 'img' %} {{ k }}="{{ v }}"{% endif %}{% endfor %}>
-        <!-- sources = {{ sources | dump(4) | safe }} -->
+        <!-- sources = {{ sources | dump | safe }} -->
 
         {% if APP.ENV.PROD or APP.ENV.DEBUG %}
         {% for source in sources %}
@@ -42,8 +42,8 @@
 
 {% macro breakpoints (url, alt, attrs={}, breakpoints=DEFAULT_BREAKPOINTS, sizes=DEFAULT_SIZES) %}
     <picture{% for k, v in attrs %}{% if k != 'img' %} {{ k }}="{{ v }}"{% endif %}{% endfor %}>
-        <!-- breakpoints = {{ breakpoints | dump(4) | safe }} -->
-        <!-- sizes = {{ sizes | dump(4) | safe }} -->
+        <!-- breakpoints = {{ breakpoints | dump | safe }} -->
+        <!-- sizes = {{ sizes | dump | safe }} -->
 
         {% if APP.ENV.PROD or APP.ENV.DEBUG %}
         {% for breakpoint, media in breakpoints_media(breakpoints, sizes) %}
