@@ -3,7 +3,7 @@
 const $makeNetworkClass = ($type) => ($type ? ` network-detected network-${$type}` : ' network-unknown');
 
 jQuery(($) => {
-    const $html = $(document.documentElement);
+    const $html = document.documentElement;
     // eslint-disable-next-line compat/compat -- we are detect vendor prefix
     const $conn = (navigator.connection || navigator.mozConnection || navigator.webkitConnection);
 
@@ -11,21 +11,21 @@ jQuery(($) => {
         if (VERBOSE) {
             console.log('[network-information] unknown');
         }
-        $html.addClass('network-unknown');
+        $html.classList.add('network-unknown');
         return;
     }
 
     // network information test: 'slow-2g', '2g', '3g', or '4g'
     let $effectiveType = $conn.effectiveType;
-    $html.addClass($makeNetworkClass($effectiveType));
+    $html.classList.add($makeNetworkClass($effectiveType));
     if (VERBOSE) {
         console.log(`[network-information] set effectiveType=${$effectiveType}`);
     }
 
     // network save-data test
     let $saveData = $conn.saveData;
-    $html.toggleClass('save-data', $saveData);
-    $html.toggleClass('no-save-data', !$saveData);
+    $html.classList.toggle('save-data', $saveData);
+    $html.classList.toggle('no-save-data', !$saveData);
     if (VERBOSE) {
         console.log(`[network-information] set saveData=${JSON.stringify($saveData)}`);
     }
@@ -39,8 +39,8 @@ jQuery(($) => {
                     to: $conn.effectiveType,
                 }));
             }
-            $html.removeClass($makeNetworkClass($effectiveType));
-            $html.addClass($makeNetworkClass($conn.effectiveType));
+            $html.classList.remove($makeNetworkClass($effectiveType));
+            $html.classList.add($makeNetworkClass($conn.effectiveType));
             $effectiveType = $conn.effectiveType;
         }
 
@@ -53,8 +53,8 @@ jQuery(($) => {
                 }));
             }
             $saveData = $conn.saveData;
-            $html.toggleClass('save-data', $conn.saveData);
-            $html.toggleClass('no-save-data', !$conn.saveData);
+            $html.classList.toggle('save-data', $conn.saveData);
+            $html.classList.toggle('no-save-data', !$conn.saveData);
         }
     };
 
