@@ -4,6 +4,9 @@
 /* postcss-bem-linter: ignore */
 html {
     scroll-behavior: smooth;
+
+   // https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
+   --viewport-height: calc(var(--vh, 1vh) * 100);
 }
 
 /* postcss-bem-linter: ignore */
