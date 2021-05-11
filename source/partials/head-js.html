@@ -21,6 +21,8 @@
             'AAAAEAAAAQcGl4aQAAAAADCAgIAAAAFmF2MUOBAAwACggYAAYICGgIIAAAABhpcG1hAAAAAAAAAAEAAQUBAoMDhAAAAB9tZGF0CggYAAYICGgIIBoFHiAAA',
             'EQiBACwDoA='
         ].join('');
+        // viewport sizes
+        $html.style.setProperty('--vh', (window.innerHeight * 0.01) + 'px');
         // save-data header test
         $html.className += ($conn && $conn.saveData ? ' save-data' : ' no-save-data');
         // network information test: 'slow-2g', '2g', '3g', or '4g'
