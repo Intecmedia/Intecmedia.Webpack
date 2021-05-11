@@ -2,6 +2,7 @@
 
 // import '~/components/aquilon-validator';
 import '~/components/bootstrap';
+import '~/components/viewport-height';
 import '~/components/network-information';
 
 jQuery(($) => {
