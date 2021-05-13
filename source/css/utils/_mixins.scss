@@ -1,11 +1,20 @@
-@import "map-get";
-@import "map-set";
-@import "map-to-string";
-
 @function strip-unit($number) {
     @if type-of($number) == "number" and not unitless($number) {
         @return $number / ($number * 0 + 1);
     }
 
     @return $number;
+}
+
+@function to-fixed($float, $digits: 2) {
+    $sass-precision: 5;
+
+    @if $digits > $sass-precision {
+        @warn "Sass sets default precision to #{$sass-precision} digits, and there is no way to change that for now."
+            + "The returned number will have #{$sass-precision} digits, even if you asked for `#{$digits}`."
+            + "See https://github.com/sass/sass/issues/1122 for further informations.";
+    }
+
+    $pow: pow(10, $digits);
+    @return round($float * $pow) / $pow;
 }
