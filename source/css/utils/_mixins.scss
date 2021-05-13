@@ -6,15 +6,23 @@
     @return $number;
 }
 
+@function pow($x, $n) {
+    $ret: 1;
+    @if $n >= 0 {
+        @for $i from 1 through $n {
+            $ret: $ret * $x;
+        }
+    } @else {
+        @for $i from $n to 0 {
+            $ret: $ret / $x;
+        }
+    }
+    @return $ret;
+}
+
 @function to-fixed($float, $digits: 2) {
     $sass-precision: 5;
-
-    @if $digits > $sass-precision {
-        @warn "Sass sets default precision to #{$sass-precision} digits, and there is no way to change that for now."
-            + "The returned number will have #{$sass-precision} digits, even if you asked for `#{$digits}`."
-            + "See https://github.com/sass/sass/issues/1122 for further informations.";
-    }
-
     $pow: pow(10, $digits);
     @return round($float * $pow) / $pow;
 }
+
