@@ -30,6 +30,7 @@
         "long-title": "off",
         "heading-level": "off",
         "no-inline-style": "off",
+        "no-trailing-whitespace": "off",
         "require-sri": "off",
         "svg-focusable": "off"
     }
