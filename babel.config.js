@@ -10,6 +10,7 @@ module.exports = {
         ['@babel/plugin-proposal-decorators', { legacy: true }],
         ['@babel/plugin-proposal-class-properties', {}],
         ['@babel/plugin-proposal-logical-assignment-operators', {}],
+        ['@babel/plugin-syntax-top-level-await', {}],
     ],
     presets: [
         ['@babel/preset-env', {

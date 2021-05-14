@@ -75,6 +75,10 @@ module.exports = {
         cacheDirectory: UTILS.cacheDir('webpack'),
     }),
 
+    experiments: {
+        topLevelAwait: true,
+    },
+
     watchOptions: {
         ignored: /node_modules/,
     },

@@ -82,6 +82,7 @@
         "@babel/plugin-proposal-logical-assignment-operators": "latest",
         "@babel/plugin-proposal-optional-chaining": "latest",
         "@babel/plugin-proposal-pipeline-operator": "latest",
+        "@babel/plugin-syntax-top-level-await": "latest",
         "@babel/preset-env": "latest",
         "@babel/preset-typescript": "latest",
         "@gfx/zopfli": "latest",
