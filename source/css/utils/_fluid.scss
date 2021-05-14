@@ -125,7 +125,7 @@ $fluid-max-height: 1024px !default;
     $min-width: strip-unit($min-width);
     $max-width: strip-unit($max-width);
 
-    $vw-coefficient: to-fixed((1600 * ($max-size - $min-size)) / ($max-width - $min-width), 2);
+    $vw-coefficient: to-fixed((16 * 100 * ($max-size - $min-size)) / ($max-width - $min-width), 2);
     $rem-coefficient: to-fixed(($min-size) - (($min-width) * ($max-size - $min-size)) / ($max-width - $min-width), 2);
 
     $rem-sign: "";
