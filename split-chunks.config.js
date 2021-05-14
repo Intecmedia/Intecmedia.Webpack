@@ -5,7 +5,7 @@ module.exports = {
     cacheGroups: {
         /*
         three: {
-            test: /[\\/]node_modules[\\/]three[\\/]/,
+            test: /[\\/]node_modules[\\/]three[\\/](.+)\.(js|mjs|cjs|ts)(\?.*)?$/,
             name: 'vendor.three',
             enforce: true,
             priority: 10,
