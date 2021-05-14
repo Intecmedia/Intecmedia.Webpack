@@ -271,7 +271,7 @@ module.exports = {
                 collapseBooleanAttributes: true,
                 collapseWhitespace: !APP.HTML_PRETTY,
                 removeComments: !APP.HTML_PRETTY,
-                decodeEntities: !APP.HTML_PRETTY,
+                decodeEntities: false,
                 minifyCSS: !APP.HTML_PRETTY,
                 minifyJS: !APP.HTML_PRETTY,
             }) : false),
