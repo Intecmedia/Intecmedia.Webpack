@@ -122,11 +122,13 @@ module.exports = {
         emitOnErrors: !(ENV.PROD && !ENV.DEBUG),
         splitChunks: {
             cacheGroups: {
+                ...(require('./split-chunks.config.js').cacheGroups),
                 vendor: {
                     chunks: 'initial',
                     enforce: true,
                     test: /(node_modules)(.+)\.(js|mjs|cjs|ts)(\?.*)?$/,
                     name: 'vendor',
+                    priority: 0,
                 },
             },
         },
