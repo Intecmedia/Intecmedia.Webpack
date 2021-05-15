@@ -107,7 +107,7 @@ module.exports = {
 
     output: {
         filename: 'js/[name].min.js',
-        chunkFilename: 'js/[name].min.js',
+        chunkFilename: 'js/[name].min.js?[chunkhash]',
         path: ENV.OUTPUT_PATH,
         publicPath: APP.PUBLIC_PATH,
         hashFunction: 'md5',
