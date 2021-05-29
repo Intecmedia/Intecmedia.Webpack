@@ -6,7 +6,7 @@ const childProcess = require('child_process');
 const weblog = require('webpack-log');
 
 const logger = weblog({ name: 'app-lint' });
-const APP = require('./app.config.js');
+const APP = require('./app.config');
 const PACKAGE = require('./package.json');
 
 const lintWarns = [];

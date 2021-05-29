@@ -1,7 +1,7 @@
 /* eslint-env node -- webpack is node env */
 /* eslint global-require: "off", "compat/compat": "off" -- webpack is node env */
 
-const ENV = require('./app.env.js');
+const ENV = require('./app.env');
 
 module.exports = {
     plugins: [
@@ -15,9 +15,9 @@ module.exports = {
                 { test: 'FontAwesome', display: 'block' },
             ]),
             require('postcss-flexbugs-fixes')(),
-            require('./postcss.stylelint.js')(),
-            require('./postcss.resize.js')('avif'),
-            require('./postcss.resize.js')('webp'),
+            require('./postcss.stylelint')(),
+            require('./postcss.resize')('avif'),
+            require('./postcss.resize')('webp'),
             require('autoprefixer')({ overrideBrowserslist: ENV.BROWSERS }), // this always last
             ...(!ENV.DEBUG ? [require('cssnano')({
                 preset: ['default', {
@@ -26,11 +26,11 @@ module.exports = {
                 }],
             })] : []), // this always last
         ] : []),
-        require('./postcss.resolve-absolute.js')({
+        require('./postcss.resolve-absolute')({
             silent: !(ENV.PROD || ENV.DEBUG),
         }),
         require('postcss-browser-reporter')(),
-        require('./postcss.reporter.js')(), // this always last
+        require('./postcss.reporter')(), // this always last
         ...(!(ENV.DEV_SERVER || ENV.WATCH) && !ENV.DEBUG ? [
             require('postcss-fail-on-warn')(),
         ] : []), // this always last

@@ -7,8 +7,8 @@ const slash = require('slash');
 const weblog = require('webpack-log');
 
 const logger = weblog({ name: 'utf-fix' });
-const ENV = require('./app.env.js');
-const UTILS = require('./webpack.utils.js');
+const ENV = require('./app.env');
+const UTILS = require('./webpack.utils');
 
 UTILS.globArray([
     path.join(__dirname, '*.{js,json}'),

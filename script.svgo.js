@@ -8,11 +8,11 @@ const weblog = require('webpack-log');
 const ignore = require('ignore');
 
 const SVGO = require('svgo');
-const { SvgoCreateConfig } = require('./svgo.config.js');
+const { SvgoCreateConfig } = require('./svgo.config');
 
 const logger = weblog({ name: 'svgo' });
-const ENV = require('./app.env.js');
-const UTILS = require('./webpack.utils.js');
+const ENV = require('./app.env');
+const UTILS = require('./webpack.utils');
 
 const ImageminIgnore = ignore().add(fs.readFileSync('./.imageminignore').toString());
 

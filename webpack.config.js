@@ -13,20 +13,20 @@ const webpack = require('webpack');
 const weblog = require('webpack-log');
 
 const logger = weblog({ name: 'webpack-config' });
-const imageminConfig = require('./imagemin.config.js');
+const imageminConfig = require('./imagemin.config');
 
 const imageminLogger = weblog({ name: 'imagemin' });
 
-const ENV = require('./app.env.js');
-const APP = require('./app.config.js');
-const UTILS = require('./webpack.utils.js');
+const ENV = require('./app.env');
+const APP = require('./app.config');
+const UTILS = require('./webpack.utils');
 
 ENV.SITEMAP = ENV.SITEMAP.map((i) => Object.assign(i, {
     path: path.posix.join(APP.PUBLIC_PATH, i.url, 'index.html'),
 }));
 
 if (ENV.PROD && ENV.STANDALONE) {
-    require('./script.app-lint.js');
+    require('./script.app-lint');
 }
 
 if (ENV.STANDALONE) {
@@ -52,9 +52,9 @@ const TerserPlugin = (ENV.PROD && !ENV.DEBUG ? require('terser-webpack-plugin') 
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 
 const ImageminIgnore = ignore().add(fs.readFileSync('./.imageminignore').toString());
-const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons.js') : () => {});
-const HtmlBeautifyPlugin = (APP.HTML_PRETTY ? require('./plugin.html-beautify.js') : () => {});
-const BabelOptions = require('./babel.options.js');
+const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons') : () => {});
+const HtmlBeautifyPlugin = (APP.HTML_PRETTY ? require('./plugin.html-beautify') : () => {});
+const BabelOptions = require('./babel.options');
 
 const BANNER_STRING = [
     `[${ENV.PACKAGE_NAME}]: ENV.NODE_ENV=${ENV.NODE_ENV} | ENV.DEBUG=${ENV.DEBUG}`,
@@ -122,7 +122,7 @@ module.exports = {
         emitOnErrors: !(ENV.PROD && !ENV.DEBUG),
         splitChunks: {
             cacheGroups: {
-                ...(require('./split-chunks.config.js').cacheGroups),
+                ...(require('./split-chunks.config').cacheGroups),
                 vendor: {
                     chunks: 'initial',
                     enforce: true,
@@ -373,7 +373,7 @@ module.exports = {
         devtool: false,
     }),
 
-    resolve: require('./resolve.config.js').resolve,
+    resolve: require('./resolve.config').resolve,
 
     module: {
         rules: [

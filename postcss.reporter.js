@@ -3,7 +3,7 @@
 
 const lineEllipsis = 80;
 const lineColumn = require('line-column');
-const reporterFormatter = require('postcss-reporter/lib/formatter.js')({});
+const reporterFormatter = require('postcss-reporter/lib/formatter')({});
 
 module.exports = () => {
     const plugin = require('postcss-reporter')({

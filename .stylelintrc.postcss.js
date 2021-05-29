@@ -4,7 +4,7 @@
 /* eslint "sort-keys": "error" -- more readability keys */
 
 const deepMerge = require('lodash.merge');
-const sharedConfig = require('./.stylelintrc.shared.js');
+const sharedConfig = require('./.stylelintrc.shared');
 
 module.exports = deepMerge({}, sharedConfig, {
     'extends': [

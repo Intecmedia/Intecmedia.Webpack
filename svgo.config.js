@@ -27,7 +27,7 @@ const SvgoCreateConfig = (config) => ({
         { name: 'removeDimensions', active: false },
         { name: 'removeViewBox', active: false },
         { name: 'removeUselessDefs', active: false },
-        { name: 'noDataURL', ...require('./svgo.no-data-url.js') },
+        { name: 'noDataURL', ...require('./svgo.no-data-url') },
     ]),
 });
 

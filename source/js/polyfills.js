@@ -1,21 +1,21 @@
 /* global NODE_ENV DEBUG */
 
 // for polyfill use only require
-require('~/polyfills/history-events.js');
+require('~/polyfills/history-events');
 
 // eslint-disable-next-line global-require -- conditinal polyfill
-require('~/polyfills/focus-visible.js');
+require('~/polyfills/focus-visible');
 
 if (NODE_ENV === 'production' || DEBUG) {
     // eslint-disable-next-line global-require -- conditinal polyfill
-    require('~/polyfills/fetch.js');
+    require('~/polyfills/fetch');
 
     // eslint-disable-next-line global-require -- conditinal polyfill
-    require('~/polyfills/intersection-observer.js');
+    require('~/polyfills/intersection-observer');
 
     // eslint-disable-next-line global-require -- conditinal polyfill
-    require('~/polyfills/resize-observer.js');
+    require('~/polyfills/resize-observer');
 
     // eslint-disable-next-line global-require -- conditinal polyfill
-    require('~/polyfills/focus-within.js');
+    require('~/polyfills/focus-within');
 }

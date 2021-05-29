@@ -16,9 +16,9 @@ const slash = require('slash');
 const pLimit = require('p-limit');
 
 const logger = weblog({ name: 'loader-resize' });
-const imageminConfig = require('./imagemin.config.js');
+const imageminConfig = require('./imagemin.config');
 
-const imageminConfigModule = require.resolve('./imagemin.config.js');
+const imageminConfigModule = require.resolve('./imagemin.config');
 
 const DEFAULT_OPTIONS = {
     imageMagick: true,

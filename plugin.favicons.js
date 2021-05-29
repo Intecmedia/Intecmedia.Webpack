@@ -6,7 +6,7 @@ const ImageSize = require('image-size');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPluginOriginal = require('favicons-webpack-plugin');
 
-const APP = require('./app.config.js');
+const APP = require('./app.config');
 
 const ICO_PATTERN = /<link rel="shortcut icon" href="[^"]+favicon.ico">/;
 

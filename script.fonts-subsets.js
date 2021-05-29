@@ -9,7 +9,7 @@ const childProcess = require('child_process');
 
 const logger = weblog({ name: 'fonts-subsets' });
 
-const ENV = require('./app.env.js');
+const ENV = require('./app.env');
 
 const FONTS_SRC = `${ENV.SOURCE_PATH}/fonts/src-ttf`;
 const FONTS_DST = `${ENV.SOURCE_PATH}/fonts`;

@@ -35,7 +35,7 @@ module.exports.toScssVars = toScssVars;
 function resourceName(prefix, hash = false) {
     const basename = path.basename(prefix);
     const suffix = (hash ? '?[md5:contenthash]' : '');
-    const { SOURCE_PATH } = require('./app.env.js');
+    const { SOURCE_PATH } = require('./app.env');
     return (resourcePath) => {
         const url = slash(path.relative(SOURCE_PATH, resourcePath)).replace(/^(\.\.\/)+/g, '');
         if (url.startsWith('partials/')) {
@@ -54,7 +54,7 @@ function resourceName(prefix, hash = false) {
 module.exports.resourceName = resourceName;
 
 function cacheDir(name, skipEnv = false) {
-    const { NODE_ENV } = require('./app.env.js');
+    const { NODE_ENV } = require('./app.env');
     return findCacheDir({ name: skipEnv ? name : `${name}-${NODE_ENV}` });
 }
 

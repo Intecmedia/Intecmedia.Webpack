@@ -1,7 +1,7 @@
 /* eslint-env node -- webpack is node env */
 /* eslint "compat/compat": "off" -- webpack is node env */
 
-const { SvgoNoPrefixConfig } = require('./svgo.config.js');
+const { SvgoNoPrefixConfig } = require('./svgo.config');
 
 // https://web.dev/use-imagemin-to-compress-images
 module.exports = {

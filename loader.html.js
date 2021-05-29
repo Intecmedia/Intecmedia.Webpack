@@ -12,7 +12,7 @@ const nunjucks = require('nunjucks');
 const frontMatter = require('front-matter');
 const deepMerge = require('lodash.merge');
 
-const attributeParser = require('./attr.parser.js');
+const attributeParser = require('./attr.parser');
 
 const helpers = require('./source/helpers');
 const IncludeWithExtension = require('./plugin.nunjucks-include-with');
@@ -20,7 +20,7 @@ const IncludeWithExtension = require('./plugin.nunjucks-include-with');
 const logger = weblog({ name: 'loader-html' });
 
 const helpersDir = path.join(__dirname, './source/helpers/');
-const htmlDataModule = require.resolve('./source/html.data.js');
+const htmlDataModule = require.resolve('./source/html.data');
 
 const DEFAULT_OPTIONS = {
     context: {},

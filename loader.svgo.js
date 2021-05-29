@@ -6,7 +6,7 @@ const slash = require('slash');
 const weblog = require('webpack-log');
 
 const SVGO = require('svgo');
-const { SvgoCreateConfig } = require('./svgo.config.js');
+const { SvgoCreateConfig } = require('./svgo.config');
 
 const logger = weblog({ name: 'loader-svgo' });
 

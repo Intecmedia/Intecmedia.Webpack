@@ -9,7 +9,7 @@ const weblog = require('webpack-log');
 const { HtmlValidate } = require('html-validate');
 const { argv } = require('yargs');
 
-const ENV = require('./app.env.js');
+const ENV = require('./app.env');
 
 const logger = weblog({ name: 'html-validate' });
 

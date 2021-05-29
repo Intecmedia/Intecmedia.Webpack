@@ -8,7 +8,7 @@ const slash = require('slash');
 const weblog = require('webpack-log');
 const { argv } = require('yargs');
 
-const ENV = require('./app.env.js');
+const ENV = require('./app.env');
 
 const logger = weblog({ name: 'image-lint' });
 const imageMagick = gm.subClass({ imageMagick: true });

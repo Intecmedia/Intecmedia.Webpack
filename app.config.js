@@ -1,9 +1,9 @@
 /* eslint-env node -- webpack is node env */
 /* eslint max-len: "off" -- webpack is node env */
 
-const ENV = require('./app.env.js');
-const BROWSERSYNC = require('./browsersync.config.js');
-const IMAGEMIN = require('./imagemin.config.js');
+const ENV = require('./app.env');
+const BROWSERSYNC = require('./browsersync.config');
+const IMAGEMIN = require('./imagemin.config');
 
 module.exports = {
     TITLE: '$APP.TITLE$',

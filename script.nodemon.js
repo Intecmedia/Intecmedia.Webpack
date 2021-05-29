@@ -6,7 +6,7 @@ const nodemonCli = require('nodemon/lib/cli');
 const deepMerge = require('lodash.merge');
 const weblog = require('webpack-log');
 
-const ENV = require('./app.env.js');
+const ENV = require('./app.env');
 
 const logger = weblog({ name: 'nodemon' });
 
