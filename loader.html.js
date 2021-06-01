@@ -176,7 +176,9 @@ module.exports = function HtmlLoader() {
     };
     nunjucksEnv.addGlobal('PAGE', PAGE);
 
-    const helperContext = { loaderContext, APP: options.context, PAGE };
+    const helperContext = {
+        loaderContext, loaderOptions: options, APP: options.context, PAGE,
+    };
     helpers.forEach((helper, name) => {
         nunjucksEnv.addFilter(name, helper.bind(helperContext));
         nunjucksEnv.addGlobal(name, helper.bind(helperContext));
