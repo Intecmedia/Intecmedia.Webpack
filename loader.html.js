@@ -174,12 +174,14 @@ module.exports = function HtmlLoader() {
         baseName === 'index' ? '' : path.posix.sep + baseName
     ) + path.posix.sep;
 
+    loaderContext.$APP = options.context;
     nunjucksEnv.addGlobal('APP', options.context);
     const PAGE = {
         URL: slash(path.normalize(path.join(publicPath, resourceUrl))),
         PATH: slash(path.normalize(resourcePath)),
     };
 
+    loaderContext.$PAGE = PAGE;
     nunjucksEnv.addGlobal('PAGE', PAGE);
 
     const nunjucksGetSource = nunjucksLoader.getSource;
