@@ -12,7 +12,6 @@ if (!$conn) {
     }
     $html.classList.add('network-unknown');
 } else {
-
     // network information test: 'slow-2g', '2g', '3g', or '4g'
     let $effectiveType = $conn.effectiveType;
     $html.classList.add($makeNetworkClass($effectiveType));

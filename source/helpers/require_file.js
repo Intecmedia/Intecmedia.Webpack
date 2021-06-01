@@ -6,6 +6,6 @@ const fs = require('fs');
 
 module.exports = function helper(filename) {
     const fullpath = path.join(process.cwd(), 'source', filename);
-    this.addDependency(fullpath);
+    this.loaderContext.addDependency(fullpath);
     return fs.readFileSync(fullpath);
 };

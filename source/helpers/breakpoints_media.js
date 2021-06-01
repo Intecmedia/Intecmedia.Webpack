@@ -19,6 +19,7 @@ module.exports = function helper(breakpoints = DEFAULT_BREAKPOINTS, sizes = DEFA
         .map((i) => i[0])
         .filter((i) => breakpoints.includes(i));
     const mergedSizes = {
+
         ...sortedBreakpoints.reduce((entries, [k, v]) => ({ ...entries, [k]: v })),
         ...sizes,
     };

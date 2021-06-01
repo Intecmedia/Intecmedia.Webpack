@@ -161,11 +161,6 @@ module.exports = function HtmlLoader() {
     nunjucksEnv.addFilter('require', options.requireIdent);
     nunjucksEnv.addGlobal('require', options.requireIdent);
 
-    helpers.forEach((helper, name) => {
-        nunjucksEnv.addFilter(name, helper.bind(loaderContext));
-        nunjucksEnv.addGlobal(name, helper.bind(loaderContext));
-    });
-
     const publicPath = ((options.context.APP || {}).PUBLIC_PATH || path.sep);
     const resourcePath = path.posix.sep + path.relative(options.searchPath, loaderContext.resourcePath);
     const baseName = path.basename(loaderContext.resourcePath, '.html');
@@ -174,15 +169,18 @@ module.exports = function HtmlLoader() {
         baseName === 'index' ? '' : path.posix.sep + baseName
     ) + path.posix.sep;
 
-    loaderContext.$APP = options.context;
     nunjucksEnv.addGlobal('APP', options.context);
     const PAGE = {
         URL: slash(path.normalize(path.join(publicPath, resourceUrl))),
         PATH: slash(path.normalize(resourcePath)),
     };
-
-    loaderContext.$PAGE = PAGE;
     nunjucksEnv.addGlobal('PAGE', PAGE);
+
+    const helperContext = { loaderContext, APP: options.context, PAGE };
+    helpers.forEach((helper, name) => {
+        nunjucksEnv.addFilter(name, helper.bind(helperContext));
+        nunjucksEnv.addGlobal(name, helper.bind(helperContext));
+    });
 
     const nunjucksGetSource = nunjucksLoader.getSource;
     nunjucksLoader.getSource = function getSource(filename) {
