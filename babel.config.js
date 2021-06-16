@@ -15,7 +15,7 @@ module.exports = {
     presets: [
         ['@babel/preset-env', {
             corejs: 3,
-            modules: false,
+            modules: 'auto',
             useBuiltIns: 'usage',
             forceAllTransforms: ENV.PROD, // UglifyJS support only es5
             debug: ENV.DEBUG || !ENV.PROD,
