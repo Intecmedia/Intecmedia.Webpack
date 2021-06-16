@@ -87,5 +87,5 @@ console.log('');
 logger.info(`errors: ${lintErrors.length} warnings: ${lintWarns.length}\n`);
 
 if (lintErrors.length > 0) {
-    // process.exit(1);
+    process.exit(1);
 }
