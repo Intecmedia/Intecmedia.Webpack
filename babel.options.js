@@ -11,6 +11,7 @@ module.exports = {
     includeTransform: [
         // enable babel transform
         /\.(ts|mjs|cjs)(\?.*)?$/i,
+        /\.module(\.min)?\.js(\?.*)?$/i,
         path.join(__dirname, 'source'),
         // path.join(__dirname, 'node_modules', 'example-package-name'),
     ],
