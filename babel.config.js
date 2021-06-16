@@ -4,6 +4,7 @@
 const ENV = require('./app.env');
 
 module.exports = {
+    sourceType: 'unambiguous',
     plugins: [
         ['@babel/plugin-proposal-optional-chaining', {}],
         ['@babel/plugin-proposal-pipeline-operator', { proposal: 'minimal' }],
@@ -15,7 +16,7 @@ module.exports = {
     presets: [
         ['@babel/preset-env', {
             corejs: 3,
-            modules: 'auto',
+            modules: false,
             useBuiltIns: 'usage',
             forceAllTransforms: ENV.PROD, // UglifyJS support only es5
             debug: ENV.DEBUG || !ENV.PROD,
