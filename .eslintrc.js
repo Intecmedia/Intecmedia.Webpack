@@ -4,6 +4,7 @@
 /* eslint "sort-keys": "error" -- more readability keys */
 
 const APP = require('./app.config');
+const ENV = require('./app.env');
 
 module.exports = {
     'env': {
@@ -56,6 +57,7 @@ module.exports = {
             'skipComments': true,
         }],
         'no-console': 'off',
+        'no-debugger': ENV.PROD ? ['error'] : 'off',
         'no-invalid-this': ['error', {
             'capIsConstructor': true,
         }],
