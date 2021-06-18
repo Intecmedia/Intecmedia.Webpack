@@ -6,3 +6,4 @@ source/js/external/*.min.js
 !/.stylelintrc.js
 !/.stylelintrc.postcss.js
 !/.stylelintrc.shared.js
+!/.htmlvalidate.js

@@ -8,7 +8,7 @@ const nodeIgnore = (node, ignores) => ignores && ignores.some((i) => nodeEqual(i
 
 class ImgPictureRequired extends Rule {
     constructor(options) {
-        super({ webp: true, ignore: '.wysiwyg img, img.ignore-html-validate', ...options });
+        super({ webp: true, avif: false, ignore: '.wysiwyg img, img.ignore-html-validate', ...options });
     }
 
     setup() {
@@ -35,6 +35,12 @@ class ImgPictureRequired extends Rule {
                 const sources = picture.querySelectorAll('> source[type="image/webp"]');
                 if (!(sources && sources.length > 0)) {
                     this.report(picture, '<picture> required <source type="image/webp"> element.');
+                }
+            }
+            if (this.options.avif) {
+                const sources = picture.querySelectorAll('> source[type="image/avif"]');
+                if (!(sources && sources.length > 0)) {
+                    this.report(picture, '<picture> required <source type="image/avif"> element.');
                 }
             }
         });
