@@ -7,7 +7,6 @@ module.exports = {
     excludeTransform: [
         // disable babel transform
         path.join(__dirname, 'node_modules', 'core-js'),
-        path.join(__dirname, 'node_modules', 'jquery'),
         // path.join(__dirname, 'node_modules', 'example-package-name'),
     ],
     includeTransform: [
