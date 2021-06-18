@@ -1,5 +1,5 @@
 /* global VERBOSE */
-const $makeNetworkClass = ($type) => ($type ? `network-detected network-${$type}` : 'network-unknown');
+const $makeNetworkClass = ($type) => ($type ? `network-${$type}` : 'network-unknown');
 
 const $html = document.documentElement;
 
@@ -14,7 +14,8 @@ if (!$conn) {
 } else {
     // network information test: 'slow-2g', '2g', '3g', or '4g'
     let $effectiveType = $conn.effectiveType;
-    $makeNetworkClass($effectiveType).split(' ').forEach((i) => $html.classList.add(i));
+    $html.classList.toggle('network-detected', !!$effectiveType);
+    $html.classList.add($makeNetworkClass($effectiveType));
     if (VERBOSE) {
         console.log(`[network-information] set effectiveType=${$effectiveType}`);
     }
@@ -36,8 +37,9 @@ if (!$conn) {
                     to: $conn.effectiveType,
                 }));
             }
-            $makeNetworkClass($effectiveType).split(' ').forEach((i) => $html.classList.remove(i));
-            $makeNetworkClass($conn.effectiveType).split(' ').forEach((i) => $html.classList.add(i));
+            $html.classList.toggle('network-detected', !!$conn.effectiveType);
+            $html.classList.remove($makeNetworkClass($effectiveType));
+            $html.classList.add($makeNetworkClass($conn.effectiveType));
             $effectiveType = $conn.effectiveType;
         }
 
