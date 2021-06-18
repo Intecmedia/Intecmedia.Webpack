@@ -92,7 +92,6 @@ module.exports = {
         injectClient: true,
         clientLogLevel: 'warn',
         publicPath: path.posix.resolve(APP.PUBLIC_PATH, '/'),
-        watchContentBase: true,
         port: 8888,
     },
 
@@ -548,7 +547,6 @@ module.exports = {
                         loader: 'css-loader',
                         options: {
                             esModule: false,
-                            importLoaders: 2,
                             sourceMap: true,
                         },
                     },
