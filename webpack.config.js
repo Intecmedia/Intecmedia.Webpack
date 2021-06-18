@@ -90,7 +90,7 @@ module.exports = {
         overlay: { warnings: false, errors: true },
         inline: true,
         injectClient: true,
-        clientLogLevel: 'error',
+        clientLogLevel: 'warn',
         publicPath: path.posix.resolve(APP.PUBLIC_PATH, '/'),
         watchContentBase: true,
         port: 8888,
