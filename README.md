@@ -26,7 +26,7 @@
 * Активное использование формат изображений WebP.
 
 ## Системные требования
-* Node.js >= 11.7.0
+* Node.js >= 12.0.0
 * NPM >= 7.0.0
 * [ImageMagick](https://www.imagemagick.org/) >= 7.0.10-25.
 * python2.7 и выше, для `fonttools`.
