@@ -69,6 +69,8 @@ module.exports = {
         children: true,
     },
 
+    target: 'browserslist',
+
     cache: (ENV.DEBUG ? false : {
         name: 'webpack',
         type: 'filesystem',
@@ -436,7 +438,7 @@ module.exports = {
                     configFile: './babel.config.js',
                     envName: ENV.NODE_ENV,
                     cacheCompression: false,
-                    cacheDirectory: ENV.DEBUG ? false : UTILS.cacheDir('babel-loader'),
+                    cacheDirectory: UTILS.cacheDir('babel-loader'),
                     highlightCode: false,
                 },
             },
