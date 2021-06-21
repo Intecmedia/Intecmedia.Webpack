@@ -68,10 +68,10 @@
         ]
     },
     "engines": {
-        "imagemagick": ">= 7.0.10-25",
+        "imagemagick": ">=7.0.10-25",
         "fonttools": "*.*.*",
-        "node": ">= 12.0.0",
-        "npm": ">= 7.0.0"
+        "node": ">=12",
+        "npm": ">=7"
     },
     "dependencies": {
         "@babel/cli": "latest",
