@@ -84,6 +84,7 @@ module.exports = {
     },
 
     devServer: {
+        allowedHosts: ['.localhost', 'localhost'],
         compress: false,
         contentBase: path.resolve(__dirname, 'source'),
         hot: true,
@@ -93,6 +94,8 @@ module.exports = {
         clientLogLevel: 'warn',
         publicPath: path.posix.resolve(APP.PUBLIC_PATH, '/'),
         port: 8888,
+        stats: (ENV.DEBUG ? 'detailed' : 'normal'),
+        writeToDisk: true,
     },
 
     entry: {
@@ -107,6 +110,8 @@ module.exports = {
     output: {
         filename: 'js/[name].min.js',
         chunkFilename: 'js/[name].min.js?[chunkhash]',
+        hotUpdateChunkFilename: 'js/[name].hot-update.js?[fullhash]',
+        hotUpdateMainFilename: 'js/[runtime].hot-update.json?[fullhash]',
         path: ENV.OUTPUT_PATH,
         publicPath: APP.PUBLIC_PATH,
         hashFunction: 'md5',
