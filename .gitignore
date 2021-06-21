@@ -1,6 +1,8 @@
 build/fonts
 build/img
 build/js
+build/*.js
+build/*.json
 build/css
 build/upload
 build/**/*.html
