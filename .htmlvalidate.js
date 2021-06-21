@@ -35,9 +35,9 @@ module.exports = {
             'intrinsicsize': true,
         }],
         'pitcher/img-picture-required': ['error', {
+            'avif': ENV.PROD || ENV.DEBUG,
             'ignore': '.wysiwyg img, .counters-body img, img.ignore-html-validate',
             'webp': ENV.PROD || ENV.DEBUG,
-            'avif': ENV.PROD || ENV.DEBUG,
         }],
         'require-sri': 'off',
         'svg-focusable': 'off',
