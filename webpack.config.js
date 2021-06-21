@@ -554,6 +554,7 @@ module.exports = {
                         loader: 'css-loader',
                         options: {
                             esModule: false,
+                            importLoaders: 2,
                             sourceMap: true,
                         },
                     },
