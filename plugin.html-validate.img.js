@@ -8,7 +8,9 @@ const nodeIgnore = (node, ignores) => ignores && ignores.some((i) => nodeEqual(i
 
 class ImgPictureRequired extends Rule {
     constructor(options) {
-        super({ webp: true, avif: false, ignore: '.wysiwyg img, img.ignore-html-validate', ...options });
+        super({
+            webp: true, avif: false, ignore: '.wysiwyg img, img.ignore-html-validate', ...options,
+        });
     }
 
     setup() {
