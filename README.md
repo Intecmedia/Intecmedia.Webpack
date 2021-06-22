@@ -18,7 +18,7 @@
 * SCSS, autoprefixer, PostCSS: [autoprefixer](https://github.com/postcss/autoprefixer),
 [cssnano](http://cssnano.co/).
 * Базовая WYSIWYG-типографика текста, форм, таблиц, списков, заголовков:
-[wysiwyg.scss](https://github.com/Intecmedia/Intecmedia.Webpack/blob/master/source/css/pages/_wysiwyg.scss).
+[wysiwyg.scss](https://github.com/Intecmedia/Intecmedia.Webpack/blob/master/source/css/base/_wysiwyg.scss).
 * Ресайз изображений через [ImageMagick](https://www.imagemagick.org/).
 * Множество линтеров: eslint, html-validate, stylelint с возможностью autofix кода.
 * Imagemin для сжатия гарфики: svg, png, jpeg, gif.

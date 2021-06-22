@@ -1,5 +1,19 @@
 /* stylelint-disable scss/selector-nest-combinators, selector-max-type, plugin/selector-bem-pattern -- wysiwyg is semantic tags */
 .wysiwyg {
+    p { @extend p; }
+
+    h1 { @extend .h1; }
+
+    h2 { @extend .h2; }
+
+    h3 { @extend .h3; }
+
+    h4 { @extend .h4; }
+
+    h5 { @extend .h5; }
+
+    h6 { @extend .h6; }
+
     // default image
     img:not([class]) {
         @extend .img-responsive;
