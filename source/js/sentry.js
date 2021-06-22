@@ -1,6 +1,4 @@
 /* global NODE_ENV APP DEBUG VERBOSE */
-import * as Sentry from '@sentry/browser';
-
 if ((NODE_ENV === 'production' || DEBUG) && APP.SENTRY.dsn) {
     const sentryCheckIgnore = (event) => {
         // Detect if we got a ReportingObserver event
@@ -13,20 +11,22 @@ if ((NODE_ENV === 'production' || DEBUG) && APP.SENTRY.dsn) {
         return false;
     };
 
-    Sentry.init({
-        debug: DEBUG || false,
-        dsn: APP.SENTRY.dsn,
-        beforeSend(event) {
-            if (sentryCheckIgnore(event)) {
-                if (VERBOSE) {
-                    console.log('[sentry]', event);
+    import(/* webpackChunkName: "vendor.sentry" */'@sentry/browser').then(({ init }) => {
+        init({
+            debug: DEBUG || false,
+            dsn: APP.SENTRY.dsn,
+            beforeSend(event) {
+                if (sentryCheckIgnore(event)) {
+                    if (VERBOSE) {
+                        console.log('[sentry]', event);
+                    }
+                    return null;
                 }
-                return null;
-            }
-            return event;
-        },
-        ignoreErrors: APP.SENTRY.ignoreErrors || [],
-        blacklistUrls: APP.SENTRY.blacklistUrls || [],
-        whitelistUrls: APP.SENTRY.whitelistUrls || [],
+                return event;
+            },
+            ignoreErrors: APP.SENTRY.ignoreErrors || [],
+            blacklistUrls: APP.SENTRY.blacklistUrls || [],
+            whitelistUrls: APP.SENTRY.whitelistUrls || [],
+        });
     });
 }

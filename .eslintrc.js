@@ -37,7 +37,7 @@ module.exports = {
         'func-names': ['error'],
         'import/dynamic-import-chunkname': [2, {
             'importFunctions': ['dynamicImport'],
-            'webpackChunknameFormat': '[a-zA-Z0-9\\-_]+',
+            'webpackChunknameFormat': '[a-zA-Z0-9\\-_\\.]+',
         }],
         'import/no-cycle': 'off',
         'import/order': 'off',
