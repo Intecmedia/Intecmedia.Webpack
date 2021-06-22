@@ -70,7 +70,7 @@
     "engines": {
         "imagemagick": ">=7.0.10-25",
         "fonttools": "*.*.*",
-        "node": ">=12",
+        "node": ">=12 <16",
         "npm": ">=7"
     },
     "dependencies": {
