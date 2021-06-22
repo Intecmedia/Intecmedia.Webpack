@@ -181,6 +181,7 @@ module.exports = {
         }),
         new MiniCssExtractPlugin({
             filename: 'css/app.min.css',
+            experimentalUseImportModule: true,
         }),
         new CopyWebpackPlugin({
             patterns: [
