@@ -129,10 +129,10 @@ module.exports = {
         splitChunks: {
             cacheGroups: {
                 ...(require('./split-chunks.config').cacheGroups),
-                vendor: {
+                defaultVendors: {
                     chunks: 'initial',
                     enforce: true,
-                    test: /(node_modules)(.+)\.(js|mjs|cjs|ts)(\?.*)?$/,
+                    test: /[\\/](node_modules)[\\/](.+)\.(js|mjs|cjs|ts)(\?.*)?$/,
                     name: 'vendor',
                     priority: 0,
                 },
