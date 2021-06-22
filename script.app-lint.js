@@ -51,11 +51,11 @@ if (APP.DESCRIPTION === APP.TITLE || APP.DESCRIPTION === APP.SHORT_NAME) {
 const npmVersion = JSON.parse(childProcess.execSync('npm version --json').toString() || '{}');
 
 if (!semver.satisfies(npmVersion.npm, PACKAGE.engines.npm)) {
-    lintErrors.push(`required npm@${PACKAGE.engines.npm} version (current is npm@${npmVersion.npm})`);
+    lintErrors.push(`required \`npm@${PACKAGE.engines.npm}\` version (current is \`npm@${npmVersion.npm}\`)`);
 }
 
 if (!semver.satisfies(process.version, PACKAGE.engines.node)) {
-    lintErrors.push(`required node@${PACKAGE.engines.npm} version (current is node@${process.version})`);
+    lintErrors.push(`required \`node@${PACKAGE.engines.node}\` version (current is \`node@${process.version}\`)`);
 }
 
 let imagemagickVersion = null;
