@@ -6,6 +6,7 @@ const ENV = require('./app.env');
 module.exports = {
     plugins: [
         require('postcss-devtools')({ precise: true }),
+        require('./postcss.stylelint')(),
         ...(ENV.PROD || ENV.DEBUG ? [
             require('postcss-focus')(),
             require('postcss-focus-visible')(),
@@ -15,7 +16,6 @@ module.exports = {
                 { test: 'FontAwesome', display: 'block' },
             ]),
             require('postcss-flexbugs-fixes')(),
-            require('./postcss.stylelint')(),
             require('./postcss.resize')('avif'),
             require('./postcss.resize')('webp'),
             require('autoprefixer')({ overrideBrowserslist: ENV.BROWSERS }), // this always last
