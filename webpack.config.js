@@ -47,7 +47,6 @@ const BrowserSyncPlugin = (ENV.WATCH ? require('browser-sync-webpack-plugin') : 
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const CompressionPlugin = (ENV.PROD && !ENV.DEBUG ? require('compression-webpack-plugin') : () => {});
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const TerserPlugin = (ENV.PROD && !ENV.DEBUG ? require('terser-webpack-plugin') : () => {});
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 
@@ -110,6 +109,7 @@ module.exports = {
     },
 
     output: {
+        clean: { keep: /\.gitkeep/ },
         filename: 'js/[name].min.js',
         chunkFilename: 'js/[name].min.js?[chunkhash]',
         hotUpdateChunkFilename: 'js/[name].hot-update.js?[fullhash]',
@@ -176,12 +176,6 @@ module.exports = {
                 ...APP.BROWSERSYNC,
             }),
         ] : []),
-        new CleanWebpackPlugin({
-            verbose: ENV.DEBUG || ENV.ARGV.verbose,
-            cleanStaleWebpackAssets: false,
-            cleanOnceBeforeBuildPatterns: ['**/*', '!.gitkeep', '!.htaccess'],
-            cleanAfterEveryBuildPatterns: (!ENV.PROD || ENV.DEBUG ? ['**/*.br', '**/*.gz'] : []),
-        }),
         new MiniCssExtractPlugin({
             filename: 'css/app.min.css',
             experimentalUseImportModule: true,
