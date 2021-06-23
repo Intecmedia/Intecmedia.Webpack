@@ -5,7 +5,8 @@ const path = require('path');
 const ENV = require('./app.env');
 
 const corejsDir = path.dirname(require.resolve('core-js'));
-const polyfillsDir = path.normalize(`${ENV.SOURCE_PATH}/js/polyfills`);
+const polyfillsDir = path.normalize(`${ENV.SOURCE_PATH}/js/polyfills/`);
+const polyfillsEntry = path.normalize(`${ENV.SOURCE_PATH}/js/polyfills.js`);
 
 module.exports = {
     cacheGroups: {
@@ -20,7 +21,11 @@ module.exports = {
                     && resourceResolveData.context.issuer.indexOf(polyfillsDir) === 0
                 ) || (
                     resource
-                    && resource.indexOf(corejsDir) === 0
+                    && (
+                        resource.indexOf(corejsDir) === 0
+                        || resource.indexOf(polyfillsEntry) === 0
+                        || resource.indexOf(polyfillsDir) === 0
+                    )
                 )) {
                     return true;
                 }
