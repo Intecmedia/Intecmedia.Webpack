@@ -4,6 +4,7 @@
 import '~/components/bootstrap';
 import '~/components/viewport-height';
 import '~/components/network-information';
+import '~/components/scrollbar-width';
 
 jQuery(($) => {
     console.log(`NODE_ENV=${NODE_ENV}; DEBUG=${DEBUG}; jQuery=${$.fn.jquery};`);
