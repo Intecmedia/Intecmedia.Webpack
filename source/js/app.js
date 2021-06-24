@@ -7,13 +7,13 @@ import '~/components/network-information';
 import '~/components/scrollbar-width';
 
 class App {
-   constructor() {
-       this.store = {};
-   }
+    constructor() {
+        this.store = {};
+    }
 
-   init() {
-       document.documentElement.classList.add('ready-js');
-   }
+    init() {
+        document.documentElement.classList.add('ready-js');
+    }
 }
 
 const app = new App();
