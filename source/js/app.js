@@ -12,7 +12,7 @@ class App {
    }
 
    init() {
-       document.documentElemnt.classList.add('ready-js');
+       document.documentElement.classList.add('ready-js');
    }
 }
 
