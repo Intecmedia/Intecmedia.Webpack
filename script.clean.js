@@ -23,7 +23,7 @@ glob(`${ENV.OUTPUT_PATH}/**/*`, {
 
         fs.unlink(file, (unlinkError) => {
             if (unlinkError) {
-                logger.info(unlinkError);
+                logger.error(unlinkError);
             }
         });
     });
