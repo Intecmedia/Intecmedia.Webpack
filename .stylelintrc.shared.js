@@ -30,6 +30,7 @@ module.exports = {
                 'css-touch-action',
                 'flexbox',
                 'font-unicode-range',
+                'multicolumn',
                 'object-fit',
                 'outline',
                 'pointer',
