@@ -24,4 +24,6 @@ missing.forEach(([pkg, version], index) => {
     console.log('');
 });
 
+childProcess.execSync('npm update', { stdio: 'inherit' });
+
 logger.info(`installed ${installed.length} packages`);
