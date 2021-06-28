@@ -1,7 +1,7 @@
 /* eslint-env node -- webpack is node env */
 /* eslint "compat/compat": "off", "max-classes-per-file": "off" -- webpack is node env */
 
-const { Rule } = require('html-validate/dist/rule');
+const { Rule } = require('html-validate');
 
 const nodeEqual = (a, b) => JSON.stringify(a.location) === JSON.stringify(b.location);
 const nodeIgnore = (node, ignores) => ignores && ignores.some((i) => nodeEqual(i, node));
