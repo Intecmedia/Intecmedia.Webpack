@@ -62,7 +62,6 @@ const OPTIONS_SCHEMA = {
         searchPath: { type: 'string' },
         verbose: { type: 'boolean' },
     },
-    replaceInclude: true,
 };
 
 const ABSOLUTE_PATTERN = /^\/([^/])/;
@@ -195,9 +194,6 @@ module.exports = function HtmlLoader() {
         }
         if (SVG_PATTERN.test(filename)) {
             return { ...templateSource, src: `{{ require(${JSON.stringify(slash(filename))}) }}` };
-        }
-        if (options.replaceInclude) {
-            templateSource.src = IncludeWithExtension.replaceInclude(templateSource.src);
         }
         if (!frontMatter.test(templateSource.src)) {
             return templateSource;

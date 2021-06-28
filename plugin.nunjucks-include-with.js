@@ -33,9 +33,4 @@ function IncludeWithExtension({ nunjucksEnv, tagName = 'includeWith' }) {
     };
 }
 
-const INCLUDE_PATTERN = /{% include(\s*['"])/g;
-const INCLUDE_REPLACE = '{% includeWith$1';
-
-IncludeWithExtension.replaceInclude = (src) => src.replace(INCLUDE_PATTERN, INCLUDE_REPLACE);
-
 module.exports = IncludeWithExtension;
