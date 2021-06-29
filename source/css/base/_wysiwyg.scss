@@ -80,8 +80,12 @@
 
     // numeric list
     ol:not([class]) > li {
+        counter-increment: ol;
+
         &::marker {
             color: $ol-marker-color;
+
+            // content: counter(ol) ".  ";
         }
     }
 
@@ -89,6 +93,8 @@
     ul:not([class]) > li {
         &::marker {
             color: $ul-marker-color;
+
+            // content: "●  ";
         }
     }
 
