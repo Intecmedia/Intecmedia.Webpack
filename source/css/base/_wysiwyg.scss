@@ -80,19 +80,15 @@
 
     // numeric list
     ol:not([class]) > li {
-        counter-increment: ol;
-
         &::marker {
-            color: inherit;
-            content: counter(ol) ".";
+            color: $ol-marker-color;
         }
     }
 
     // colored bulls
     ul:not([class]) > li {
         &::marker {
-            color: inherit;
-            content: "•";
+            color: $ul-marker-color;
         }
     }
 
