@@ -83,7 +83,7 @@
         counter-increment: ol;
 
         &::marker {
-            color: $ol-marker-color;
+            color: inherit;
             content: counter(ol) ".";
         }
     }
@@ -91,7 +91,7 @@
     // colored bulls
     ul:not([class]) > li {
         &::marker {
-            color: $ul-marker-color;
+            color: inherit;
             content: "•";
         }
     }
