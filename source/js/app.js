@@ -12,7 +12,10 @@ class App {
     }
 
     init() {
+        console.log(`NODE_ENV=${NODE_ENV}; DEBUG=${DEBUG}; jQuery=${$.fn && $.fn.jquery ? $.fn.jquery : 'undefined'};`);
         document.documentElement.classList.add('ready-js');
+
+        // !!! your code here !!!
     }
 }
 
@@ -22,9 +25,10 @@ if (VERBOSE) {
     console.log('[app]', app);
 }
 
-jQuery(($) => {
-    console.log(`NODE_ENV=${NODE_ENV}; DEBUG=${DEBUG}; jQuery=${$.fn.jquery};`);
+const domReady = () => {
+    document.removeEventListener('DOMContentLoaded', domReady);
     app.init();
-});
+};
+document.addEventListener('DOMContentLoaded', domReady);
 
 export default app;

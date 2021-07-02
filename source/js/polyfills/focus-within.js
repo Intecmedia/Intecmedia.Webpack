@@ -2,4 +2,3 @@
 const { default: focusWithin } = require('focus-within');
 
 focusWithin(document);
-
