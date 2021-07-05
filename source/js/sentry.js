@@ -11,22 +11,22 @@ if ((NODE_ENV === 'production' || DEBUG) && APP.SENTRY.dsn) {
         return false;
     };
 
-    import(/* webpackChunkName: "vendor.sentry" */'@sentry/browser').then(({ init }) => {
-        init({
-            debug: DEBUG || false,
-            dsn: APP.SENTRY.dsn,
-            beforeSend(event) {
-                if (sentryCheckIgnore(event)) {
-                    if (VERBOSE) {
-                        console.log('[sentry]', event);
-                    }
-                    return null;
+    const Sentry = await import(/* webpackChunkName: "vendor.sentry" */'@sentry/browser');
+
+    Sentry.init({
+        debug: DEBUG || false,
+        dsn: APP.SENTRY.dsn,
+        beforeSend(event) {
+            if (sentryCheckIgnore(event)) {
+                if (VERBOSE) {
+                    console.log('[sentry]', event);
                 }
-                return event;
-            },
-            ignoreErrors: APP.SENTRY.ignoreErrors || [],
-            blacklistUrls: APP.SENTRY.blacklistUrls || [],
-            whitelistUrls: APP.SENTRY.whitelistUrls || [],
-        });
+                return null;
+            }
+            return event;
+        },
+        ignoreErrors: APP.SENTRY.ignoreErrors || [],
+        blacklistUrls: APP.SENTRY.blacklistUrls || [],
+        whitelistUrls: APP.SENTRY.whitelistUrls || [],
     });
 }
