@@ -47,7 +47,7 @@ const SRCSET_SEPARATOR = /\s*,\s*/;
 const SRCSET_ATTRS = ['srcset', 'data-srcset'];
 const IGNORE_PATTERN = /^{{.*}}$/;
 const REQUIRE_PATTERN = /{{ require\([\d.\\]+\) }}/g;
-const RANDOM_REQUIRE = () => `{{ require(${Math.random()}${Math.random()}) }}`;
+const REQUIRE_IDENT = () => `{{ require(${Math.random()}${Math.random()}) }}`;
 const SVG_PATTERN = /\.(svg)(\?.*)?$/i;
 
 const OPTIONS_SCHEMA = {
@@ -136,7 +136,7 @@ module.exports = function HtmlLoader() {
 
     options.requireIdent = (url) => {
         let ident;
-        do ident = RANDOM_REQUIRE();
+        do ident = REQUIRE_IDENT();
         while (options.requireReplace[ident]);
         options.requireReplace[ident] = resolveAbsolute(url);
         return ident;
