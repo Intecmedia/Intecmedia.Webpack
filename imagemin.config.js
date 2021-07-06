@@ -24,10 +24,10 @@ module.exports = {
 
 module.exports.webp = {
     quality: 85, // 0 - 100, or 100 for lossless
-    define: [],
+    options: {},
 };
 
 module.exports.avif = {
     quality: 85, // 0 - 100, or 100 for lossless
-    define: [],
+    options: {},
 };

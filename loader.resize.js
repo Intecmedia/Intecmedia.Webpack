@@ -3,10 +3,10 @@
 /* eslint "no-invalid-this": "off" -- its ok for 3d-party */
 
 const os = require('os');
-const gm = require('gm');
+const fs = require('fs');
+const sharp = require('sharp');
 const path = require('path');
 const md5File = require('md5-file');
-const flatCache = require('flat-cache');
 const loaderUtils = require('loader-utils');
 const urlLoader = require('url-loader');
 const fileLoader = require('file-loader');
@@ -21,20 +21,12 @@ const imageminConfig = require('./imagemin.config');
 const imageminConfigModule = require.resolve('./imagemin.config');
 
 const DEFAULT_OPTIONS = {
-    imageMagick: true,
     cacheDirectory: false,
     verbose: false,
 };
+const DEFAULT_FIT = 'inside';
 
 const resizeLimit = pLimit(os.cpus().length - 1);
-const resizeCacheMap = new Map();
-
-function getResizeCache(cacheDirectory) {
-    if (!resizeCacheMap.has(cacheDirectory)) {
-        resizeCacheMap.set(cacheDirectory, cacheDirectory ? flatCache.load('loader-resize.json', cacheDirectory) : false);
-    }
-    return resizeCacheMap.get(cacheDirectory);
-}
 
 module.exports = async function ResizeLoader(content) {
     const thisLoader = this;
@@ -52,8 +44,14 @@ module.exports = async function ResizeLoader(content) {
         loaderUtils.getOptions(thisLoader),
     );
     const context = options.context || thisLoader.rootContext;
-    const resizeCache = getResizeCache(options.cacheDirectory);
+
+    const { cacheDirectory } = options;
     delete options.cacheDirectory;
+    if (cacheDirectory) {
+        if (!fs.existsSync(cacheDirectory)) {
+            fs.mkdirSync(cacheDirectory, { recursive: true });
+        }
+    }
 
     const nextLoader = (query.inline === 'inline' ? urlLoader : fileLoader);
     if (!('resize' in query)) {
@@ -66,32 +64,34 @@ module.exports = async function ResizeLoader(content) {
     const resourceInfo = path.parse(thisLoader.resourcePath);
     const resourceFormat = resourceInfo.ext.slice(1).toLowerCase();
     const relativePath = slash(path.relative(__dirname, thisLoader.resourcePath));
-    const imageMagick = gm.subClass({ imageMagick: options.imageMagick });
-    delete options.imageMagick;
 
-    let [, resizeWidth,, resizeHeight, resizeFlag] = (String(query.resize).trim().match(/^(\d*)(x(\d*))?([!<>^])?$/)) || [];
+    let [, resizeWidth,, resizeHeight, resizeFit] = (String(query.resize).trim().match(/^(\d*)(x(\d*))?(\w+)?$/)) || [];
     resizeWidth = parseInt(resizeWidth, 10);
     resizeHeight = parseInt(resizeHeight, 10);
-    resizeFlag = (resizeFlag || '').trim();
-    const resizeFlagNames = {
-        '': '', '!': '-ignore-aspect', '>': '-shrink-larger', '<': '-enlarge-smaller', '^': '-fill-area',
-    };
-    if (!(resizeFlag in resizeFlagNames)) {
-        return loaderCallback(`Unknow resize flag: '${query.resize}'`);
-    }
+    resizeFit = (resizeFit || DEFAULT_FIT).trim();
 
     const format = (query.format || resourceFormat).toLowerCase();
     const name = ((query.name ? loaderUtils.interpolateName(thisLoader, query.name, {
         context,
         content,
     }) : null) || (
-        `${resourceInfo.name}@resize-${resizeWidth || ''}x${resizeHeight || ''}${resizeFlagNames[resizeFlag]}`
+        `${resourceInfo.name}@resize-${resizeWidth || ''}x${resizeHeight || ''}${resizeFit && resizeFit !== DEFAULT_FIT ? `-${resizeFit}` : ''}`
     )) + (query.suffix ? `-${query.suffix}` : '');
 
     const resourceHash = md5File.sync(thisLoader.resourcePath);
     const formatConfig = imageminConfig[format] || {};
-    const cacheKey = `${relativePath}?${JSON.stringify(query)}`;
-    const cacheData = resizeCache ? resizeCache.getKey(cacheKey) : undefined;
+    const cacheFilename = `${encodeURIComponent(`${relativePath}?${JSON.stringify(query)}`)}.json`;
+    const cacheFilepath = cacheDirectory ? path.join(cacheDirectory, cacheFilename) : undefined;
+
+    let cacheData;
+    if (cacheFilepath && fs.existsSync(cacheFilepath)) {
+        try {
+            cacheData = JSON.parse(fs.readFileSync(cacheFilepath));
+        } catch (cacheError) {
+            logger.error(`error cache '${relativePath}${thisLoader.resourceQuery}'`, cacheError);
+            cacheData = undefined;
+        }
+    }
 
     if (cacheData !== undefined
         && cacheData.type === 'Buffer'
@@ -106,59 +106,55 @@ module.exports = async function ResizeLoader(content) {
         return loaderCallback(null, nextLoader.call(thisLoader, Buffer.from(cacheData.data, 'base64')));
     }
 
-    const resourceImage = imageMagick(content);
-
-    const resourceSize = await resourceImage.size();
-    if (resizeWidth || resizeHeight || resizeFlag) {
-        resourceImage.resize(resizeWidth || resourceSize.width, resizeHeight || resourceSize.height, resizeFlag);
+    const resourceImage = sharp(content);
+    const resourceMeta = await resourceImage.metadata();
+    const formatOptions = {};
+    if (resizeWidth || resizeHeight) {
+        resourceImage.resize(resizeWidth || resourceMeta.width, resizeHeight || resourceMeta.height, {
+            fit: resizeFit,
+            withoutEnlargement: true,
+        });
     }
 
     const quality = query.quality ? parseInt(query.quality, 10) : 0;
     if (quality > 0) {
-        resourceImage.quality(quality);
+        formatOptions.quality = quality;
     }
 
     const lossless = (typeof (query.lossless) !== 'undefined' ? !!query.lossless : resourceFormat === 'png');
 
     if (format === 'webp') {
         if (lossless || quality === 100) {
-            resourceImage.define('webp:lossless=true');
+            formatOptions.lossless = true;
         } else if (!quality) {
-            resourceImage.quality(imageminConfig.webp.quality);
+            formatOptions.quality = imageminConfig.webp.quality;
         }
-        const define = query.define || imageminConfig.webp.define;
-        if (define && define.length > 0) {
-            define.forEach((i) => resourceImage.define(i));
-        }
+        Object.entries(query.options || imageminConfig.webp.options).forEach(([k, v]) => {
+            formatOptions[k] = v;
+        });
     }
 
     if (format === 'avif') {
         if (lossless) {
-            resourceImage.quality(100);
+            formatOptions.lossless = true;
         } else if (!quality) {
-            resourceImage.quality(imageminConfig.avif.quality);
+            formatOptions.quality = imageminConfig.avif.quality;
         }
-        const define = query.define || imageminConfig.avif.define;
-        if (define && define.length > 0) {
-            define.forEach((i) => resourceImage.define(i));
-        }
+        Object.entries(query.options || imageminConfig.avif.options).forEach(([k, v]) => {
+            formatOptions[k] = v;
+        });
     }
 
     await resizeLimit(async () => {
         const resizePromise = await new Promise((resizeResolve, resizeReject) => {
-            resourceImage.toBuffer(format.toUpperCase(), (bufferError, buffer) => {
-                if (bufferError) {
-                    loaderCallback(bufferError);
-                    resizeReject(bufferError);
-                    return;
-                }
-                if (resizeCache) {
-                    resizeCache.setKey(cacheKey, {
+            resourceImage.toFormat(format.toLowerCase(), formatOptions).toBuffer().then((buffer) => {
+                if (cacheFilepath) {
+                    fs.writeFileSync(cacheFilepath, JSON.stringify({
                         type: 'Buffer',
                         data: buffer.toString('base64'),
                         hash: resourceHash,
                         config: JSON.stringify(formatConfig),
-                    });
+                    }));
                 }
                 if (options.verbose) {
                     logger.info(`save cache '${relativePath}${thisLoader.resourceQuery}'`);
@@ -166,9 +162,9 @@ module.exports = async function ResizeLoader(content) {
                 resizeResolve(buffer);
                 thisLoader.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
                 loaderCallback(null, nextLoader.call(thisLoader, buffer));
-                if (resizeCache) {
-                    resizeCache.save(true);
-                }
+            }).catch((bufferError) => {
+                loaderCallback(bufferError);
+                resizeReject(bufferError);
             });
         });
         return resizePromise;

@@ -58,17 +58,6 @@ if (!semver.satisfies(process.version, PACKAGE.engines.node)) {
     lintErrors.push(`required \`node@${PACKAGE.engines.node}\` version (current is \`node@${process.version}\`)`);
 }
 
-let imagemagickVersion = null;
-try {
-    [, imagemagickVersion] = childProcess.execSync('magick -version').toString().match(/Version: ImageMagick ([\d.]+)/);
-} catch (imagemagickError) {
-    imagemagickVersion = null;
-}
-
-if (!semver.satisfies(imagemagickVersion, PACKAGE.engines.imagemagick)) {
-    lintErrors.push(`required ImageMagick@${PACKAGE.engines.imagemagick} version (current is ImageMagick@${imagemagickVersion})`);
-}
-
 let fonttoolsVersion = null;
 try {
     [, fonttoolsVersion] = childProcess.execSync('pip show fonttools').toString().match(/Version: ([\d.-]+)/);

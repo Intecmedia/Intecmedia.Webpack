@@ -19,7 +19,7 @@
 [cssnano](http://cssnano.co/).
 * Базовая WYSIWYG-типографика текста, форм, таблиц, списков, заголовков:
 [wysiwyg.scss](https://github.com/Intecmedia/Intecmedia.Webpack/blob/master/source/css/base/_wysiwyg.scss).
-* Ресайз изображений через [ImageMagick](https://www.imagemagick.org/).
+* Ресайз изображений через [Sharp](https://sharp.pixelplumbing.com/).
 * Множество линтеров: eslint, html-validate, stylelint с возможностью autofix кода.
 * Imagemin для сжатия гарфики: svg, png, jpeg, gif.
 * Генерация множества app-иконок и manifest.json.
@@ -28,7 +28,6 @@
 ## Системные требования
 * Node.js >= 12.0.0
 * NPM >= 7.0.0
-* [ImageMagick](https://www.imagemagick.org/) >= 7.0.10-25.
 * python2.7 и выше, для `fonttools`.
 
 ## Начало работы

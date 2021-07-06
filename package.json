@@ -71,7 +71,6 @@
         ]
     },
     "engines": {
-        "imagemagick": ">=7.0.10-25",
         "fonttools": "*.*.*",
         "node": ">=12 <16",
         "npm": ">=7"
@@ -125,7 +124,6 @@
         "focus-within": "latest",
         "front-matter": "latest",
         "glob": "latest",
-        "gm": "latest",
         "html-validate": "latest",
         "html-validator": "latest",
         "html-webpack-plugin": "latest",
@@ -170,6 +168,7 @@
         "sass-loader": "latest",
         "schema-utils": "latest",
         "semver": "latest",
+        "sharp": "latest",
         "slash": "^3.0.0",
         "stylelint": "latest",
         "stylelint-config-sass-guidelines": "latest",
