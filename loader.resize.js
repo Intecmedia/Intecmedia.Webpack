@@ -86,7 +86,7 @@ module.exports = async function ResizeLoader(content) {
     let cacheData;
     if (cacheFilepath && fs.existsSync(cacheFilepath)) {
         try {
-            cacheData = JSON.parse(fs.readFileSync(cacheFilepath));
+            cacheData = JSON.parse(fs.readFileSync(cacheFilepath).toString());
         } catch (cacheError) {
             logger.error(`error cache '${relativePath}${thisLoader.resourceQuery}'`, cacheError);
             cacheData = undefined;

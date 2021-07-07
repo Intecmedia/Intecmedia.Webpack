@@ -6,10 +6,10 @@ const md5File = require('md5-file');
 
 const cacheMap = {};
 
-module.exports = function helper(filename) {
+module.exports = function helper(filename, nocache = false) {
     const fullpath = path.join(process.cwd(), 'source', filename);
     this.loaderContext.addDependency(fullpath);
-    if (!(fullpath in cacheMap)) {
+    if (!(fullpath in cacheMap) || nocache) {
         cacheMap[fullpath] = md5File.sync(fullpath);
     }
     return cacheMap[fullpath];
