@@ -129,7 +129,7 @@ module.exports = async function ResizeLoader(content) {
         } else if (!quality) {
             formatOptions.quality = imageminConfig.webp.quality;
         }
-        Object.entries(query.options || imageminConfig.webp.options).forEach(([k, v]) => {
+        Object.entries(query.options || imageminConfig.webp.options || {}).forEach(([k, v]) => {
             formatOptions[k] = v;
         });
     }
@@ -140,7 +140,7 @@ module.exports = async function ResizeLoader(content) {
         } else if (!quality) {
             formatOptions.quality = imageminConfig.avif.quality;
         }
-        Object.entries(query.options || imageminConfig.avif.options).forEach(([k, v]) => {
+        Object.entries(query.options || imageminConfig.avif.options || {}).forEach(([k, v]) => {
             formatOptions[k] = v;
         });
     }
