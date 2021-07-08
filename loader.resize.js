@@ -129,9 +129,12 @@ module.exports = async function ResizeLoader(content) {
         } else if (!quality) {
             formatOptions.quality = imageminConfig.webp.quality;
         }
-        Object.entries(query.options || imageminConfig.webp.options || {}).forEach(([k, v]) => {
-            formatOptions[k] = v;
-        });
+        if (imageminConfig.webp.options) {
+            Object.assign(formatOptions, imageminConfig.webp.options);
+        }
+        if (query.options) {
+            Object.assign(formatOptions, query.options);
+        }
     }
 
     if (format === 'avif') {
@@ -140,9 +143,12 @@ module.exports = async function ResizeLoader(content) {
         } else if (!quality) {
             formatOptions.quality = imageminConfig.avif.quality;
         }
-        Object.entries(query.options || imageminConfig.avif.options || {}).forEach(([k, v]) => {
-            formatOptions[k] = v;
-        });
+        if (imageminConfig.avif.options) {
+            Object.assign(formatOptions, imageminConfig.avif.options);
+        }
+        if (query.options) {
+            Object.assign(formatOptions, query.options);
+        }
     }
 
     await resizeLimit(async () => {
