@@ -108,14 +108,15 @@ module.exports = async function ResizeLoader(content) {
 
     const resourceImage = sharp(content);
     const resourceMeta = await resourceImage.metadata();
-    const formatOptions = {};
-    if (resizeWidth || resizeHeight) {
-        resourceImage.resize(resizeWidth || resourceMeta.width, resizeHeight || resourceMeta.height, {
-            fit: resizeFit,
-            withoutEnlargement: true,
-        });
+    const resizeOptions = {
+        fit: resizeFit,
+        withoutEnlargement: true,
+    };
+    if (query.resizeOptions) {
+        Object.assign(resizeOptions, query.resizeOptions);
     }
 
+    const formatOptions = {};
     const quality = query.quality ? parseInt(query.quality, 10) : 0;
     if (quality > 0) {
         formatOptions.quality = quality;
@@ -151,9 +152,15 @@ module.exports = async function ResizeLoader(content) {
         }
     }
 
+    if (resizeWidth || resizeHeight) {
+        resourceImage.resize(resizeWidth || resourceMeta.width, resizeHeight || resourceMeta.height, resizeOptions);
+    }
+
+    resourceImage.toFormat(format.toLowerCase(), formatOptions);
+
     await resizeLimit(async () => {
         const resizePromise = await (new Promise((resizeResolve, resizeReject) => {
-            resourceImage.toFormat(format.toLowerCase(), formatOptions).toBuffer().then((buffer) => {
+            resourceImage.toBuffer().then((buffer) => {
                 if (cacheFilepath) {
                     fs.writeFileSync(cacheFilepath, JSON.stringify({
                         type: 'Buffer',
