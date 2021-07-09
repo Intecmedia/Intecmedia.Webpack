@@ -152,7 +152,7 @@ module.exports = async function ResizeLoader(content) {
     }
 
     await resizeLimit(async () => {
-        const resizePromise = await new Promise((resizeResolve, resizeReject) => {
+        const resizePromise = await (new Promise((resizeResolve, resizeReject) => {
             resourceImage.toFormat(format.toLowerCase(), formatOptions).toBuffer().then((buffer) => {
                 if (cacheFilepath) {
                     fs.writeFileSync(cacheFilepath, JSON.stringify({
@@ -169,9 +169,13 @@ module.exports = async function ResizeLoader(content) {
                 thisLoader.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
                 loaderCallback(null, nextLoader.call(thisLoader, buffer));
             }).catch((bufferError) => {
+                thisLoader.emitError(bufferError);
                 loaderCallback(bufferError);
                 resizeReject(bufferError);
             });
+        })).catch((promiseError) => {
+            thisLoader.emitError(promiseError);
+            loaderCallback(promiseError);
         });
         return resizePromise;
     });
