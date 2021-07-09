@@ -9,3 +9,4 @@ The “border” attribute on the “table” element is obsolete. Use CSS inste
 Attribute "align" is deprecated on <img> element
 Attribute "align" is deprecated on <td> element
 Attribute "align" is deprecated on <th> element
+The autoplay attribute is not allowed on <video>
