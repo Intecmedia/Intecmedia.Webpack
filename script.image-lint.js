@@ -21,6 +21,7 @@ async function metadataAsync(filename) {
     if (result.format === 'jpeg') {
         result.format = 'jpg';
     }
+    delete result.xmp;
     return result;
 }
 
