@@ -32,6 +32,7 @@ const DEFAULT_OPTIONS = {
     },
     requireTags: {
         img: ['src', 'data-src', 'lowsrc', 'srcset', 'data-srcset'],
+        video: ['src', 'poster'],
         source: ['srcset', 'data-srcset'],
         image: ['href', 'xlink:href'],
         object: ['data'],
