@@ -442,6 +442,26 @@ module.exports = {
             },
             // file loaders
             {
+                test: /\.(lottie|mpeg|mpg|mp3|mp4|webm|wav|m4a|m4v|aac|oga|ogg|rar|zip|7z|gz)(\?.*)?$/i,
+                include: [
+                    path.join(ENV.SOURCE_PATH, 'upload'),
+                ],
+                loader: 'file-loader',
+                options: {
+                    name: UTILS.resourceName('upload'), esModule: false, hashType: 'md5',
+                },
+            },
+            {
+                test: /\.(lottie|mpeg|mpg|mp3|mp4|webm|wav|m4a|m4v|aac|oga|ogg|rar|zip|7z|gz)(\?.*)?$/i,
+                include: [
+                    path.join(ENV.SOURCE_PATH, 'img'),
+                ],
+                loader: 'file-loader',
+                options: {
+                    name: UTILS.resourceName('img'), esModule: false, hashType: 'md5',
+                },
+            },
+            {
                 include: [
                     path.join(ENV.SOURCE_PATH, 'upload'),
                 ],
