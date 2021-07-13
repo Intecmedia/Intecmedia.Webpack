@@ -442,7 +442,7 @@ module.exports = {
             },
             // file loaders
             {
-                test: /\.(lottie|mpeg|mpg|mp3|mp4|webm|wav|m4a|m4v|aac|oga|ogg|rar|zip|7z|gz)(\?.*)?$/i,
+                test: /\.(lottie|json|mpeg|mpg|mp3|mp4|webm|weba|wav|m4a|m4v|aac|oga|ogg|ogm|ogv|rar|zip|7z|gz)(\?.*)?$/i,
                 include: [
                     path.join(ENV.SOURCE_PATH, 'upload'),
                 ],
@@ -452,7 +452,7 @@ module.exports = {
                 },
             },
             {
-                test: /\.(lottie|mpeg|mpg|mp3|mp4|webm|wav|m4a|m4v|aac|oga|ogg|rar|zip|7z|gz)(\?.*)?$/i,
+                test: /\.(lottie|json|mpeg|mpg|mp3|mp4|webm|weba|wav|m4a|m4v|aac|oga|ogg|ogm|ogv|rar|zip|7z|gz)(\?.*)?$/i,
                 include: [
                     path.join(ENV.SOURCE_PATH, 'img'),
                 ],
