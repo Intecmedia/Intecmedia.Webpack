@@ -26,12 +26,13 @@ class ImgPictureRequired extends Rule {
             }
             const picture = img.parent;
             const [src] = img.getAttributeValue('src').split('?', 2);
+            const sourcesWebp = picture ? picture.querySelectorAll('> source[type="image/webp"]') : [];
+            const sourcesAvif = picture ? picture.querySelectorAll('> source[type="image/avif"]') : [];
+
             if (src.endsWith('.svg')) {
-                const sourcesWebp = picture.querySelectorAll('> source[type="image/webp"]');
                 if (!(sourcesWebp && sourcesWebp.length > 0)) {
                     this.report(picture, `<img src="${src}">: <picture> contains useless <source type="image/webp"> element.`);
                 }
-                const sourcesAvif = picture.querySelectorAll('> source[type="image/avif"]');
                 if (!(sourcesAvif && sourcesAvif.length > 0)) {
                     this.report(picture, `<img src="${src}">: <picture> contains useless <source type="image/avif"> element.`);
                 }
@@ -42,13 +43,11 @@ class ImgPictureRequired extends Rule {
                 return;
             }
             if (this.options.webp) {
-                const sourcesWebp = picture.querySelectorAll('> source[type="image/webp"]');
                 if (!(sourcesWebp && sourcesWebp.length > 0)) {
                     this.report(picture, `<img src="${src}">: <picture> required <source type="image/webp"> element.`);
                 }
             }
             if (this.options.avif) {
-                const sourcesAvif = picture.querySelectorAll('> source[type="image/avif"]');
                 if (!(sourcesAvif && sourcesAvif.length > 0)) {
                     this.report(picture, `<img src="${src}">: <picture> required <source type="image/avif"> element.`);
                 }
