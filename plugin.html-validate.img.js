@@ -29,11 +29,11 @@ class ImgPictureRequired extends Rule {
             if (src.endsWith('.svg')) {
                 const sourcesWebp = picture.querySelectorAll('> source[type="image/webp"]');
                 if (!(sourcesWebp && sourcesWebp.length > 0)) {
-                    this.report(picture, `<img src="${src}">: <picture> useless <source type="image/webp"> element.`);
+                    this.report(picture, `<img src="${src}">: <picture> contains useless <source type="image/webp"> element.`);
                 }
                 const sourcesAvif = picture.querySelectorAll('> source[type="image/avif"]');
                 if (!(sourcesAvif && sourcesAvif.length > 0)) {
-                    this.report(picture, `<img src="${src}">: <picture> useless <source type="image/avif"> element.`);
+                    this.report(picture, `<img src="${src}">: <picture> contains useless <source type="image/avif"> element.`);
                 }
                 return;
             }
