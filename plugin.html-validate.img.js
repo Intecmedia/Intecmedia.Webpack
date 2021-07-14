@@ -27,22 +27,30 @@ class ImgPictureRequired extends Rule {
             const picture = img.parent;
             const [src] = img.getAttributeValue('src').split('?', 2);
             if (src.endsWith('.svg')) {
+                const sourcesWebp = picture.querySelectorAll('> source[type="image/webp"]');
+                if (!(sourcesWebp && sourcesWebp.length > 0)) {
+                    this.report(picture, `<img src="${src}">: <picture> useless <source type="image/webp"> element.`);
+                }
+                const sourcesAvif = picture.querySelectorAll('> source[type="image/avif"]');
+                if (!(sourcesAvif && sourcesAvif.length > 0)) {
+                    this.report(picture, `<img src="${src}">: <picture> useless <source type="image/avif"> element.`);
+                }
                 return;
             }
             if (!(picture && picture.nodeName.toLowerCase() === 'picture')) {
-                this.report(img, '<img> required <picture> element.');
+                this.report(img, `<img src="${src}">: <img> required <picture> element.`);
                 return;
             }
             if (this.options.webp) {
-                const sources = picture.querySelectorAll('> source[type="image/webp"]');
-                if (!(sources && sources.length > 0)) {
-                    this.report(picture, '<picture> required <source type="image/webp"> element.');
+                const sourcesWebp = picture.querySelectorAll('> source[type="image/webp"]');
+                if (!(sourcesWebp && sourcesWebp.length > 0)) {
+                    this.report(picture, `<img src="${src}">: <picture> required <source type="image/webp"> element.`);
                 }
             }
             if (this.options.avif) {
-                const sources = picture.querySelectorAll('> source[type="image/avif"]');
-                if (!(sources && sources.length > 0)) {
-                    this.report(picture, '<picture> required <source type="image/avif"> element.');
+                const sourcesAvif = picture.querySelectorAll('> source[type="image/avif"]');
+                if (!(sourcesAvif && sourcesAvif.length > 0)) {
+                    this.report(picture, `<img src="${src}">: <picture> required <source type="image/avif"> element.`);
                 }
             }
         });
