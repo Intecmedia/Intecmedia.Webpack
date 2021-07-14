@@ -1,0 +1,62 @@
+<IfModule mod_headers.c>
+    # Enable rewrite
+    RewriteEngine On
+
+    # Serve brotli compressed lottie files if they exist and the client accepts gzip.
+    RewriteCond %{REQUEST_FILENAME} \.lottie$ [NC]
+    RewriteCond %{HTTP:Accept-encoding} br
+    RewriteCond %{REQUEST_FILENAME}\.br -s
+    RewriteRule ^(.*)\.lottie $1\.lottie\.br [QSA]
+    # Brotli not accepted
+    RewriteCond %{REQUEST_FILENAME} \.lottie\.br$ [NC]
+    RewriteCond %{HTTP:Accept-encoding} !br
+    RewriteCond %{REQUEST_FILENAME} -s
+    RewriteRule ^(.*)\.lottie\.br $1\.lottie [L,QSA]
+
+    # Serve gzip compressed lottie files if they exist and the client accepts gzip.
+    RewriteCond %{REQUEST_FILENAME} \.lottie$ [NC]
+    RewriteCond %{HTTP:Accept-encoding} gzip
+    RewriteCond %{REQUEST_FILENAME}\.gz -s
+    RewriteRule ^(.*)\.lottie $1\.lottie\.gz [QSA]
+    # Gzip not accepted
+    RewriteCond %{REQUEST_FILENAME} \.lottie\.gz$ [NC]
+    RewriteCond %{HTTP:Accept-encoding} !gzip
+    RewriteCond %{REQUEST_FILENAME} -s
+    RewriteRule ^(.*)\.lottie\.gz $1\.lottie [L,QSA]
+
+    # Serve correct content types, and prevent mod_deflate double gzip.
+    RewriteRule \.lottie\.gz$ - [T=application/json,E=no-gzip:1]
+    RewriteRule \.lottie\.br$ - [T=application/json,E=no-gzip:1]
+
+    <Files *.lottie>
+        # add content type
+        Header set Content-Type "application/json; charset=UTF-8"
+        AddType "application/json" .lottie
+    </Files>
+    <Files *.lottie.gz>
+        # fix content type
+        Header set Content-Type "application/json; charset=UTF-8"
+        AddType "application/json" .gz
+        AddEncoding gzip .gz
+        RemoveLanguage .gz
+    </Files>
+    <Files *.lottie.br>
+        # fix content type
+        Header set Content-Type "application/json; charset=UTF-8"
+        AddType "application/json" .br
+        AddEncoding br .br
+        RemoveLanguage .br
+    </Files>
+    <FilesMatch "(\.lottie\.gz)$">
+        # Serve correct encoding type.
+        Header set Content-Encoding gzip
+        # Force proxies to cache gzipped & non-gzipped js files separately.
+        Header append Vary Accept-Encoding
+    </FilesMatch>
+    <FilesMatch "(\.lottie\.br)$">
+        # Serve correct encoding type.
+        Header set Content-Encoding br
+        # Force proxies to cache gzipped & non-gzipped js files separately.
+        Header append Vary Accept-Encoding
+    </FilesMatch>
+</IfModule>
