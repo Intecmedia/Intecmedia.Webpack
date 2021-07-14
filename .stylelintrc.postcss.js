@@ -12,7 +12,7 @@ module.exports = deepMerge({}, sharedConfig, {
     ],
     'plugins': [
         'stylelint-csstree-validator',
-        'stylelint-no-nested-media',
+        // 'stylelint-no-nested-media',
         ...sharedConfig.plugins,
     ],
     'rules': {
@@ -24,6 +24,6 @@ module.exports = deepMerge({}, sharedConfig, {
             },
             'severity': 'warning',
         },
-        'pitcher/no-nested-media': true,
+        // 'pitcher/no-nested-media': true,
     },
 });
