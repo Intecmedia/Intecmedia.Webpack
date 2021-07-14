@@ -11,6 +11,7 @@
         "update": "cross-env NODE_ENV=production node script.update.js",
         "development": "cross-env NODE_ENV=development DEBUG=0 webpack --mode=development --profile --progress=profile",
         "debug": "cross-env NODE_ENV=development DEBUG=1 webpack --mode=development --profile --progress=profile",
+        "preproduction": "npm run app-lint",
         "production": "cross-env NODE_ENV=production DEBUG=0 webpack --mode=production --profile --progress=profile",
         "preprod": "npm run pre-build",
         "prod": "cross-env NODE_ENV=production DEBUG=0 webpack --mode=production --profile --progress=profile",

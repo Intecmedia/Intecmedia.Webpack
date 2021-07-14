@@ -25,10 +25,6 @@ ENV.SITEMAP = ENV.SITEMAP.map((i) => Object.assign(i, {
     path: path.posix.join(APP.PUBLIC_PATH, i.url, 'index.html'),
 }));
 
-if (ENV.PROD && ENV.STANDALONE) {
-    require('./script.app-lint');
-}
-
 if (ENV.STANDALONE) {
     logger.info('Argv:', ENV.ARGV);
     logger.info('Name:', ENV.PACKAGE_NAME);
