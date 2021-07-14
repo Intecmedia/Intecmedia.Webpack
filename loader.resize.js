@@ -25,6 +25,7 @@ const DEFAULT_OPTIONS = {
     verbose: false,
 };
 const DEFAULT_FIT = 'inside';
+const ALLOWED_PATTERN = /\.(jpeg|jpg|png|gif)(\?.*)?$/i;
 
 const resizeLimit = pLimit(os.cpus().length - 1);
 
@@ -51,6 +52,10 @@ module.exports = async function ResizeLoader(content) {
         if (!fs.existsSync(cacheDirectory)) {
             fs.mkdirSync(cacheDirectory, { recursive: true });
         }
+    }
+
+    if (!ALLOWED_PATTERN.test(thisLoader.resourcePath)) {
+        throw new Error(`Resize not allowed for: ${JSON.encode(thisLoader.resourcePath)}.`);
     }
 
     const nextLoader = (query.inline === 'inline' ? urlLoader : fileLoader);
