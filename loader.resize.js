@@ -54,14 +54,15 @@ module.exports = async function ResizeLoader(content) {
         }
     }
 
-    if (!ALLOWED_PATTERN.test(thisLoader.resourcePath)) {
-        throw new Error(`Resize not allowed for: ${JSON.encode(thisLoader.resourcePath)}.`);
-    }
-
     const nextLoader = (query.inline === 'inline' ? urlLoader : fileLoader);
     if (!('resize' in query)) {
         return loaderCallback(null, nextLoader.call(thisLoader, content));
     }
+
+    if (!ALLOWED_PATTERN.test(thisLoader.resourcePath)) {
+        throw new Error(`Resize not allowed for: ${JSON.stringify(thisLoader.resourcePath)}.`);
+    }
+
     if ('inline' in query) {
         delete query.inline;
     }
