@@ -202,18 +202,12 @@ module.exports = {
                 test: /\.(js|css|svg|json|lottie)(\?.*)?$/i,
                 exclude: ['assets-manifest.json'],
                 filename: '[path][base].br[query]',
-                compressionOptions: {
-                    level: 11,
-                },
                 algorithm: 'brotliCompress',
             }),
             new CompressionPlugin({
                 test: /\.(js|css|svg|json|lottie)(\?.*)?$/i,
                 exclude: ['assets-manifest.json'],
                 filename: '[path][base].gz[query]',
-                compressionOptions: {
-                    numiterations: 15,
-                },
                 algorithm(input, compressionOptions, callback) {
                     const zopfli = require('@gfx/zopfli');
                     return zopfli.gzip(input, compressionOptions, callback);
@@ -443,36 +437,21 @@ module.exports = {
                     path.join(ENV.SOURCE_PATH, 'upload'),
                 ],
                 loader: 'file-loader',
-                options: {
-                    name: UTILS.resourceName('upload'), esModule: false, hashType: 'md5',
-                },
+                options: { name: UTILS.resourceName('upload'), esModule: false },
             },
             {
+                test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
                 include: [
                     path.join(ENV.SOURCE_PATH, 'upload'),
                 ],
-                oneOf: [
-                    {
-                        include: /\.(jpeg|jpg|png|gif)(\?.*)?$/i,
-                        exclude: /\.(svg)$/i,
-                        resourceQuery: /[&?]resize=.+/,
-                        loader: './loader.resize.js',
-                        options: {
-                            cacheDirectory: UTILS.cacheDir('loader-resize', true),
-                            name: UTILS.resourceName('upload'),
-                            limit: 32 * 1024,
-                            esModule: false,
-                            hashType: 'md5',
-                            verbose: ENV.DEBUG || ENV.ARGV.verbose,
-                        },
-                    },
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: UTILS.resourceName('upload'), esModule: false, hashType: 'md5',
-                        },
-                    },
-                ],
+                loader: './loader.resize.js',
+                options: {
+                    cacheDirectory: UTILS.cacheDir('loader-resize', true),
+                    name: UTILS.resourceName('upload'),
+                    limit: 32 * 1024,
+                    esModule: false,
+                    verbose: ENV.DEBUG || ENV.ARGV.verbose,
+                },
             },
             // image loaders
             {
@@ -487,9 +466,7 @@ module.exports = {
                     path.join(ENV.SOURCE_PATH, 'upload'),
                 ],
                 loader: './loader.svgo.js',
-                options: {
-                    verbose: ENV.DEBUG || ENV.ARGV.verbose,
-                },
+                options: { verbose: ENV.DEBUG || ENV.ARGV.verbose },
             },
             {
                 test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
@@ -499,34 +476,14 @@ module.exports = {
                     path.join(ENV.SOURCE_PATH, 'upload'),
                     path.join(ENV.SOURCE_PATH, 'partials'),
                 ],
-                oneOf: [
-                    {
-                        exclude: /\.(svg)$/i,
-                        resourceQuery: /[&?]resize=.+/,
-                        loader: './loader.resize.js',
-                        options: {
-                            cacheDirectory: UTILS.cacheDir('loader-resize', true),
-                            name: UTILS.resourceName('img'),
-                            limit: 32 * 1024,
-                            esModule: false,
-                            hashType: 'md5',
-                            verbose: ENV.DEBUG || ENV.ARGV.verbose,
-                        },
-                    },
-                    {
-                        resourceQuery: /[&?]inline=inline/,
-                        loader: 'url-loader',
-                        options: {
-                            name: UTILS.resourceName('img'), limit: 32 * 1024, esModule: false, hashType: 'md5',
-                        },
-                    },
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: UTILS.resourceName('img'), esModule: false, hashType: 'md5',
-                        },
-                    },
-                ],
+                loader: './loader.resize.js',
+                options: {
+                    cacheDirectory: UTILS.cacheDir('loader-resize', true),
+                    name: UTILS.resourceName('img'),
+                    limit: 32 * 1024,
+                    esModule: false,
+                    verbose: ENV.DEBUG || ENV.ARGV.verbose,
+                },
             },
             // font loaders
             {
@@ -538,7 +495,7 @@ module.exports = {
                     path.join(ENV.SOURCE_PATH, 'partials'),
                 ],
                 loader: 'file-loader',
-                options: { name: UTILS.resourceName('fonts'), esModule: false, hashType: 'md5' },
+                options: { name: UTILS.resourceName('fonts'), esModule: false },
             },
             // css loaders
             {
@@ -551,7 +508,7 @@ module.exports = {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
                             esModule: false,
-                            publicPath: '../',
+                            publicPath: 'auto',
                         },
                     },
                     {
