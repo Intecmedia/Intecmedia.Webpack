@@ -1,6 +1,7 @@
 /* eslint-env node -- webpack is node env */
 /* eslint "compat/compat": "off" -- webpack is node env */
 
+const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
 const slash = require('slash');
@@ -58,6 +59,11 @@ const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.html`, {
     };
 });
 
+const BANNER_STRING = [
+    `[${PACKAGE_NAME}]: ENV.NODE_ENV=${NODE_ENV} | ENV.DEBUG=${DEBUG}`,
+    fs.readFileSync(path.join(SOURCE_PATH, 'humans.txt')),
+].join('\n\n');
+
 module.exports = {
     ARGV,
     DEBUG,
@@ -74,4 +80,5 @@ module.exports = {
     BROWSERS: DEBUG ? browserslist.production : browserslist[NODE_ENV],
     SITEMAP,
     VERBOSE,
+    BANNER_STRING,
 };

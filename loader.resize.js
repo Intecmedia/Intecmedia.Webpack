@@ -60,10 +60,10 @@ module.exports = async function ResizeLoader(content) {
     }
 
     if (!ALLOWED_PATTERN.test(thisLoader.resourcePath)) {
-        const errorMessage = `Resize not allowed for: ${JSON.stringify(thisLoader.resourcePath)}.`; 
+        const errorMessage = `Resize not allowed for: ${JSON.stringify(thisLoader.resourcePath)}.`;
         thisLoader.emitError(errorMessage);
         loaderCallback(errorMessage);
-        return;
+        throw new Error(errorMessage);
     }
 
     if ('inline' in query) {

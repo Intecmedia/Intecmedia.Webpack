@@ -1,4 +1,4 @@
-/* global NODE_ENV DEBUG VERBOSE */
+/* global VERBOSE BANNER_STRING */
 
 // import '~/components/aquilon-validator';
 import '~/components/bootstrap';
@@ -12,7 +12,7 @@ class App {
     }
 
     init() {
-        console.log(`NODE_ENV=${NODE_ENV}; DEBUG=${DEBUG}; jQuery=${$.fn && $.fn.jquery ? $.fn.jquery : 'undefined'};`);
+        console.log(BANNER_STRING);
         document.documentElement.classList.add('ready-js');
 
         // !!! your code here !!!

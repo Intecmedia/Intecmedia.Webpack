@@ -51,11 +51,6 @@ const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons') : () => 
 const HtmlBeautifyPlugin = (APP.HTML_PRETTY ? require('./plugin.html-beautify') : () => {});
 const BabelOptions = require('./babel.options');
 
-const BANNER_STRING = [
-    `[${ENV.PACKAGE_NAME}]: ENV.NODE_ENV=${ENV.NODE_ENV} | ENV.DEBUG=${ENV.DEBUG}`,
-    fs.readFileSync(path.join(ENV.SOURCE_PATH, 'humans.txt')),
-].join('\n');
-
 module.exports = {
     mode: ENV.PROD ? 'production' : 'development',
 
@@ -141,7 +136,7 @@ module.exports = {
                 extractComments: {
                     condition: 'some',
                     filename: (fileData) => `${fileData.filename}.LICENSE`,
-                    banner: (licenseFile) => [`License information can be found in ${licenseFile}`, BANNER_STRING].join('\n'),
+                    banner: (licenseFile) => [`License information can be found in ${licenseFile}`, ENV.BANNER_STRING].join('\n'),
                 },
                 terserOptions: {
                     ecma: 2015,
@@ -215,7 +210,7 @@ module.exports = {
             }),
         ] : []),
         new webpack.BannerPlugin({
-            banner: BANNER_STRING,
+            banner: ENV.BANNER_STRING,
             include: /\.(css|js)(\?.*)?$/i,
         }),
         new webpack.ProvidePlugin({
@@ -234,6 +229,7 @@ module.exports = {
             ...Object.assign({}, ...Object.entries(APP).map(([k, v]) => ({
                 [`APP.${k}`]: JSON.stringify(v),
             }))),
+            BANNER_STRING: JSON.stringify(ENV.BANNER_STRING),
         }),
         new WebpackNotifierPlugin({
             alwaysNotify: true,
