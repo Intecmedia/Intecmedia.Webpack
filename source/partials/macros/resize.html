@@ -9,6 +9,7 @@
 {% macro sources (url, alt, attrs={}, sources=DEFAULT_SOURCES) %}
     <picture{% for k, v in attrs %}{% if k != 'img' %} {{ k }}="{{ v }}"{% endif %}{% endfor %}>
         <!-- sources = {{ sources | dump | safe }} -->
+        {% if url.endsWith('.svg') %}{{ throw('Useless <picture> for SVG: ' + url|dump + '.') }}{% endif %}
 
         {% if APP.ENV.PROD or APP.ENV.DEBUG %}
         {% for source in sources %}
@@ -44,6 +45,7 @@
     <picture{% for k, v in attrs %}{% if k != 'img' %} {{ k }}="{{ v }}"{% endif %}{% endfor %}>
         <!-- breakpoints = {{ breakpoints | dump | safe }} -->
         <!-- sizes = {{ sizes | dump | safe }} -->
+        {% if url.endsWith('.svg') %}{{ throw('Useless <picture> for SVG: ' + url|dump + '.') }}{% endif %}
 
         {% if APP.ENV.PROD or APP.ENV.DEBUG %}
         {% for breakpoint, media in breakpoints_media(breakpoints, sizes) %}
@@ -74,6 +76,8 @@
 
 {% macro picture (url, alt, attrs={}) %}
     <picture{% for k, v in attrs %}{% if k != 'img' %} {{ k }}="{{ v }}"{% endif %}{% endfor %}>
+        {% if url.endsWith('.svg') %}{{ throw('Useless <picture> for SVG: ' + url|dump + '.') }}{% endif %}
+
         {% if APP.ENV.PROD or APP.ENV.DEBUG %}
         <source srcset="{{ require(url + '?resize=&format=avif') }}" type="image/avif">
         <source srcset="{{ require(url + '?resize=&format=webp') }}" type="image/webp">
