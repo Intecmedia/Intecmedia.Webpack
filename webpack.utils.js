@@ -55,7 +55,8 @@ module.exports.resourceName = resourceName;
 
 function cacheDir(name, skipEnv = false) {
     const { NODE_ENV } = require('./app.env');
-    return findCacheDir({ name: skipEnv ? name : `${name}-${NODE_ENV}` });
+    const prefixed = (skipEnv ? name : `${name}-${NODE_ENV}`);
+    return findCacheDir({ name: prefixed, create: true });
 }
 
 module.exports.cacheDir = cacheDir;
