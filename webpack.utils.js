@@ -1,6 +1,7 @@
 /* eslint-env node -- webpack is node env */
 /* eslint global-require: "off", "compat/compat": "off" -- webpack is node env */
 
+const fs = require('fs');
 const path = require('path');
 const slash = require('slash');
 const glob = require('glob');
@@ -55,8 +56,17 @@ module.exports.resourceName = resourceName;
 
 function cacheDir(name, skipEnv = false) {
     const { NODE_ENV } = require('./app.env');
-    const prefixed = (skipEnv ? name : `${name}-${NODE_ENV}`);
-    return findCacheDir({ name: prefixed, create: true });
+    const prefixedName = (skipEnv ? name : `${name}-${NODE_ENV}`);
+    const orgEnvDir = process.env.CACHE_DIR || null;
+    const envDir = path.join(__dirname, 'cache', prefixedName);
+    if (fs.existsSync(envDir)) {
+        process.env.CACHE_DIR = envDir;
+    }
+    const result = findCacheDir({ name: prefixedName, create: true }).replace('find-cache-dir', '');
+    if (orgEnvDir) {
+        process.env.CACHE_DIR = orgEnvDir;
+    }
+    return result;
 }
 
 module.exports.cacheDir = cacheDir;
