@@ -157,7 +157,7 @@ html.avif .test { background-image:url('test.avif'); }
 * файл с `/example1.html` будут доступны по ссылке `/example1/index.html`.
 * файл с `/example2/index.html` будут доступны по ссылке `/example2/index.html`.  
 * файл с `/_ajax-example.html` будут доступны по ссылке `/_ajax-example.html`.
-* `head` теги не будут добавлены для файлом с `_` в начале имени.
+* `head` теги не будут добавлены для файлов с `_` в начале имени.
 
 
 
