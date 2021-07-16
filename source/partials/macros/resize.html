@@ -28,7 +28,7 @@
 
         <img
             src="{{ require(url) }}"
-            loading="lazy"
+            loading="{%if attrs.img and attrs.img.loading %}{{ attrs.img.loading }}{% else %}lazy{% endif %}"
             width="{{ dimensions.width }}"
             height="{{ dimensions.height }}"
             intrinsicsize="{{ dimensions.width }}x{{ dimensions.height }}"
@@ -64,7 +64,7 @@
 
         <img
             src="{{ require(url) }}"
-            loading="lazy"
+            loading="{%if attrs.img and attrs.img.loading %}{{ attrs.img.loading }}{% else %}lazy{% endif %}"
             width="{{ dimensions.width }}"
             height="{{ dimensions.height }}"
             intrinsicsize="{{ dimensions.width }}x{{ dimensions.height }}"
@@ -85,7 +85,7 @@
         {% set dimensions = image_size(url) %}
         <img
             src="{{ require(url) }}"
-            loading="lazy"
+            loading="{%if attrs.img and attrs.img.loading %}{{ attrs.img.loading }}{% else %}lazy{% endif %}"
             width="{{ dimensions.width }}"
             height="{{ dimensions.height }}"
             intrinsicsize="{{ dimensions.width }}x{{ dimensions.height }}"

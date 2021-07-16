@@ -1,0 +1,27 @@
+{% macro lazy (url, alt, attrs = {}) %}
+    {% set dimensions = image_size(url) %}
+    <img
+        src="{{ require(url) }}"
+        loading="{%if attr.loading %}{{ attr.loading }}{% else %}lazy{% endif %}"
+        width="{{ dimensions.width }}"
+        height="{{ dimensions.height }}"
+        intrinsicsize="{{ dimensions.width }}x{{ dimensions.height }}"
+        alt="{{ alt }}"
+        {% for k, v in attrs %} {{ k }}="{{ v }}"{% endfor %}
+    >
+{% endmacro %}
+
+{% macro picture (url, alt, attrs={}) %}
+    <picture{% for k, v in attrs %}{% if k != 'img' %} {{ k }}="{{ v }}"{% endif %}{% endfor %}>
+        {% set dimensions = image_size(url) %}
+        <img
+            src="{{ require(url) }}"
+            loading="{%if attrs.img and attrs.img.loading %}{{ attrs.img.loading }}{% else %}lazy{% endif %}"
+            width="{{ dimensions.width }}"
+            height="{{ dimensions.height }}"
+            intrinsicsize="{{ dimensions.width }}x{{ dimensions.height }}"
+            {%if attrs.img %}{% for k, v in attrs.img %} {{ k }}="{{ v }}"{% endfor %}{% endif %}
+            alt="{{ alt }}"
+        >
+    </picture>
+{% endmacro %}
