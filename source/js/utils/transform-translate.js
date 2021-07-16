@@ -1,6 +1,7 @@
 export default function getTransformTranslate(element) {
     const translate = { x: 0, y: 0 };
     const style = window.getComputedStyle(element);
+    if (!style.transform || style.transform === 'none') return translate;
     const [, matrixType, matrixValue] = style.transform.match(/^(matrix|matrix3d)\((.+)\)$/);
     const matrixArray = matrixValue.split(', ');
     if (matrixType === 'matrix3d') {
