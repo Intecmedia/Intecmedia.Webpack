@@ -150,5 +150,18 @@ html.avif .test { background-image:url('test.avif'); }
 * Иконки герерируются автоматически: смотрите директорию `build/img/favicon`.
 
 # Bootstrap
-* Переопредление переременных в `css/base/_variables.scss`
-* Переопредление миксинов в `css/base/_bootstrap-mixins.scss`
+* Переопредление переременных в `css/base/_variables.scss`.
+* Переопредление миксинов в `css/base/_bootstrap-mixins.scss`.
+    
+# HTML
+* файл с `/example1.html` будут доступны по ссылке `/example1/index.html`.
+* файл с `/example2/index.html` будут доступны по ссылке `/example2/index.html`.  
+* файл с `/_ajax-example.html` будут доступны по ссылке `/_ajax-example.html`.
+* `head` теги не будут добавлены для файлом с `_` в начале имени.
+
+
+
+
+    
+    
+    
