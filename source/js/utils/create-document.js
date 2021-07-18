@@ -1,4 +1,4 @@
-function createDocument(html) {
+export default function createDocument(html) {
     const context = document.implementation.createHTMLDocument('');
     context.open();
     context.write(html);
@@ -10,5 +10,3 @@ function createDocument(html) {
 
     return context;
 }
-
-export default createDocument;
