@@ -30,6 +30,9 @@ module.exports = {
         'long-title': 'off',
         'no-inline-style': 'off',
         'no-trailing-whitespace': 'off',
+        'pitcher/iframe-loading-required': ['error', {
+            'ignore': '.wysiwyg iframe, .counters-body iframe, iframe.ignore-html-validate',
+        }],
         'pitcher/img-loading-required': ['error', {
             'ignore': '.wysiwyg img, .counters-body img, img.ignore-html-validate',
             'intrinsicsize': true,
