@@ -10,6 +10,7 @@ class ScrollbarWidth {
 
     init() {
         this.domOuter = document.createElement('div');
+        this.domOuter.className = 'scrollbar-width';
         this.domOuter.id = 'scrollbar-width--outer';
         this.domOuter.style.zIndex = '-9999';
         this.domOuter.style.position = 'absolute';
@@ -20,6 +21,7 @@ class ScrollbarWidth {
         document.body.appendChild(this.domOuter);
 
         this.domInner = document.createElement('div');
+        this.domInner.className = 'scrollbar-width__inner';
         this.domInner.id = 'scrollbar-width--inner';
         this.domInner.style.width = '100%';
         this.domOuter.appendChild(this.domInner);
