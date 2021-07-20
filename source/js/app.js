@@ -3,23 +3,22 @@
 // import '~/components/aquilon-validator';
 import '~/components/bootstrap';
 import '~/components/viewport-height';
-import '~/components/network-information';
 import '~/components/scrollbar-width';
 
-class App {
-    constructor() {
-        this.store = {};
-    }
+import components from '~/components/index';
+import AbstractApp from '~/components/app';
 
+class App extends AbstractApp {
     init() {
         console.log(BANNER_STRING);
         document.documentElement.classList.add('ready-js');
+        super.init();
 
-        // !!! your code here !!!
+        /* !!! your code here !!! */
     }
 }
 
-const app = new App();
+const app = new App({ components });
 if (VERBOSE) {
     window.$app = app;
     console.log('[app]', app);

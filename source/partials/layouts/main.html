@@ -1,0 +1,13 @@
+{% extends "partials/layout.html" %}
+
+{% block body %}
+
+{% includeWith 'partials/header.html' %}
+
+<main class="main" data-component="Scroll">
+    {% block content %}{% endblock %}
+
+    {% includeWith 'partials/footer.html' %}
+</main>
+
+{% endblock %}

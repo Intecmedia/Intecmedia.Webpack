@@ -1,6 +1,6 @@
 <!-- head-js -->
 <script>
-    (document.documentElement && document.documentElement.className && (function ($html, $conn) {
+    (document.documentElement && document.documentElement.className && (function ($html) {
         // js test
         $html.className = $html.className.replace('no-js', 'js');
         // webp support test
@@ -24,10 +24,6 @@
         // viewport sizes
         var viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
         $html.style.setProperty('--vh', (viewportHeight * 0.01) + 'px');
-        // save-data header test
-        $html.className += ($conn && $conn.saveData ? ' save-data' : ' no-save-data');
-        // network information test: 'slow-2g', '2g', '3g', or '4g'
-        $html.className += ($conn && $conn.effectiveType ? ' network-detected network-' + $conn.effectiveType : ' network-unknown');
-    })(document.documentElement, navigator.connection || navigator.mozConnection || navigator.webkitConnection));
+    })(document.documentElement));
 </script>
 <!-- /head-js -->

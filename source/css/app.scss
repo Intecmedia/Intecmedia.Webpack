@@ -15,7 +15,6 @@
 @import "utils/focus-visible";
 @import "utils/rem";
 @import "utils/resize";
-@import "utils/save-data";
 
 // Components
 @import "components/";
@@ -24,9 +23,6 @@
 @import "layout/header";
 @import "layout/layout";
 @import "layout/footer";
-
-// Pages
-@import "pages/";
 
 // Vendor
 @import "external/";
