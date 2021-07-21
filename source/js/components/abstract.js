@@ -25,9 +25,9 @@ export default class AbstractComponent {
         return this.options.element.removeEventListener(name, listener, options);
     }
 
-    trigger(type, options = {}) {
+    trigger(type, detail = {}) {
         const name = `${type}.${this.options.name}`;
-        const event = new CustomEvent(name, options);
+        const event = new CustomEvent(name, { detail });
         return this.options.element.dispatchEvent(event);
     }
 
