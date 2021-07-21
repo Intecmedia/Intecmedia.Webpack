@@ -15,6 +15,10 @@ export default class AbstractComponent {
         return this.options.element;
     }
 
+    get app() {
+        return this.options.app;
+    }
+
     on(type, listener, options = {}) {
         const name = `${type}.${this.options.name}`;
         return this.options.element.addEventListener(name, listener, options);

@@ -36,7 +36,9 @@ export default class AbstractApp {
         scope.querySelectorAll('[data-component]').forEach((element) => {
             const id = ++this.lastId;
             const name = element.getAttribute('data-component');
-            const options = { element, name, id };
+            const options = {
+                element, name, id, app: this,
+            };
             const ClassName = this.options.components[name];
             if (!ClassName) {
                 console.error(`[app] Unknown component name: ${name}`, element);
