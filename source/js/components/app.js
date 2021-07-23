@@ -49,7 +49,7 @@ export default class AbstractApp {
             if (!(name in this.components)) {
                 this.components[name] = {};
             }
-            this.components[name] = { [id]: component };
+            this.components[name][id] = component;
             newComponents.push(component);
         });
         newComponents.forEach((component) => {
