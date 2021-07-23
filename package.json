@@ -194,7 +194,6 @@
         "webpack-cli": "latest",
         "webpack-dev-server": "latest",
         "webpack-log": "latest",
-        "webpack-notifier": "latest",
         "webpack-sources": "latest",
         "whatwg-fetch": "latest",
         "yargs": "latest"

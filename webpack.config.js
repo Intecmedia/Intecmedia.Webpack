@@ -34,7 +34,6 @@ if (ENV.STANDALONE) {
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const WebpackNotifierPlugin = require('webpack-notifier');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -230,11 +229,6 @@ module.exports = {
                 [`APP.${k}`]: JSON.stringify(v),
             }))),
             BANNER_STRING: JSON.stringify(ENV.BANNER_STRING),
-        }),
-        new WebpackNotifierPlugin({
-            alwaysNotify: true,
-            contentImage: path.resolve('./.favicons-source-1024x1024.png'),
-            title: APP.TITLE,
         }),
         new StyleLintPlugin({
             syntax: 'scss',
