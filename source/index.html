@@ -7,7 +7,7 @@ og_image:
 
 {% extends "partials/layouts/main.html" %}
 
-{% import "partials/macros/resize.html" as resize %}
+{% import "partials/macros/resize.html" as $resize %}
 
 {% block content %}
 <div class="container-fluid">
@@ -16,7 +16,7 @@ og_image:
             <h1>Example Title</h1>
             <div class="wysiwyg">
                 <p><a href="/wysiwyg">Content from WYSIWYG-editor</a></p>
-                {{ resize.picture('upload/intecmedia-banner.jpg', 'IntecMedia') }}
+                {{ $resize.picture('upload/intecmedia-banner.jpg', 'IntecMedia') }}
             </div>
         </div>
     </div>
