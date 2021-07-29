@@ -64,6 +64,7 @@
 * **npm run browserslist** – список поддерживаемых браузеров.
 * **npm run fonts-subsets** – запуск fonts subseting.
 * **npm run svgo** – минимизая svg-файлов.
+* **npm run production -- --env=verbose** – verbose режим
 
 ### Часто используемые команды
 * **npm run js-lint** – линтер js через [eslint](https://eslint.org/).
