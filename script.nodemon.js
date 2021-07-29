@@ -32,3 +32,11 @@ nodemon.on('start', () => {
 }).on('restart', (files) => {
     logger.info('App restarted due to: ', files);
 });
+
+process.on('exit', (code) => { // Handle normal exits
+    nodemon.emit('quit');
+    process.exit(code);
+}).on('SIGINT', () => { // Handle CTRL+C
+    nodemon.emit('quit');
+    process.exit(0);
+});
