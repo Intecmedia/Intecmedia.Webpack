@@ -33,7 +33,7 @@ export default class AbstractApp {
 
     initScope(scope) {
         const newComponents = [];
-        scope.querySelectorAll('[data-component]').forEach((element) => {
+        scope.querySelectorAll('[data-component]:not(.js-component)').forEach((element) => {
             const id = ++this.lastId;
             const name = element.getAttribute('data-component');
             const options = {
@@ -52,14 +52,32 @@ export default class AbstractApp {
             this.components[name][id] = component;
             newComponents.push(component);
         });
+
         newComponents.forEach((component) => {
             component.init();
         });
+
+        let closest = scope.closest('.js-component[data-component-id]');
+        while (closest) {
+            const id = closest.getAttribute('data-component-id');
+            const name = closest.getAttribute('data-component');
+            const component = this.get(name, id);
+            if (component) {
+                component.trigger('update', {
+                    target: scope,
+                });
+            } else {
+                console.warn('[app] Unknown component instance:', closest);
+            }
+            const next = closest.closest('.js-component[data-component-id]');
+            closest = (next && closest !== next ? next : null);
+        }
+
         return newComponents;
     }
 
     destroyScope(scope) {
-        scope.querySelectorAll('.js-component').forEach((element) => {
+        scope.querySelectorAll('.js-component[data-component-id]').forEach((element) => {
             const id = element.getAttribute('data-component-id');
             const name = element.getAttribute('data-component');
             const component = this.get(name, id);
