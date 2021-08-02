@@ -83,6 +83,8 @@ export default class AbstractApp {
             const component = this.get(name, id);
             if (component) {
                 delete this.components[name][id];
+                element.classList.remove('js-component');
+                element.removeAttribute('data-component-id');
                 component.destroy();
             } else {
                 console.warn('[app] Unknown component instance:', element);
