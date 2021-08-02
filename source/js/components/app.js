@@ -60,14 +60,16 @@ export default class AbstractApp {
         let closest = scope.closest('.js-component[data-component-id]');
         while (closest) {
             const id = closest.getAttribute('data-component-id');
-            const name = closest.getAttribute('data-component');
-            const component = this.get(name, id);
-            if (component) {
-                component.trigger('update', {
-                    target: scope,
-                });
-            } else {
-                console.warn('[app] Unknown component instance:', closest);
+            if (id) {
+                const name = closest.getAttribute('data-component');
+                const component = this.get(name, id);
+                if (component) {
+                    component.trigger('update', {
+                        target: scope,
+                    });
+                } else {
+                    console.warn('[app] Unknown component instance:', closest);
+                }
             }
             const next = closest.closest('.js-component[data-component-id]');
             closest = (next && closest !== next ? next : null);
