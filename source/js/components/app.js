@@ -1,3 +1,5 @@
+const SEPARATOR_PATTERN = /\s*,\s*/;
+
 export default class AbstractApp {
     constructor(options) {
         if (new.target === AbstractApp) {
@@ -40,23 +42,26 @@ export default class AbstractApp {
         const newComponents = [];
         scope.querySelectorAll('[data-component]:not(.js-component)').forEach((element) => {
             const id = ++this.lastId;
-            const name = element.getAttribute('data-component');
-            const options = {
-                element, name, id, app: this,
-            };
-            const ClassName = this.options.components[name];
-            if (!ClassName) {
-                console.error(`[app] Unknown component name: ${name}`, element);
-                return;
+            const names = element.getAttribute('data-component').split(SEPARATOR_PATTERN);
+            for (let i = 0, n = names.length; i < n; i++) {
+                const name = names[i];
+                const options = {
+                    element, name, id, app: this,
+                };
+                const ClassName = this.options.components[name];
+                if (!ClassName) {
+                    console.error(`[app] Unknown component name: ${name}`, element);
+                    return;
+                }
+                element.classList.add('js-component');
+                element.setAttribute('data-component-id', id);
+                const component = new ClassName(options);
+                if (!(name in this.components)) {
+                    this.components[name] = {};
+                }
+                this.components[name][id] = component;
+                newComponents.push(component);
             }
-            element.classList.add('js-component');
-            element.setAttribute('data-component-id', id);
-            const component = new ClassName(options);
-            if (!(name in this.components)) {
-                this.components[name] = {};
-            }
-            this.components[name][id] = component;
-            newComponents.push(component);
         });
 
         newComponents.forEach((component) => {
@@ -67,14 +72,17 @@ export default class AbstractApp {
         while (closest) {
             const id = closest.getAttribute('data-component-id');
             if (id) {
-                const name = closest.getAttribute('data-component');
-                const component = this.get(name, id);
-                if (component) {
-                    component.trigger('update', {
-                        target: scope,
-                    });
-                } else {
-                    console.warn('[app] Unknown component instance:', closest);
+                const names = closest.getAttribute('data-component').split(SEPARATOR_PATTERN);
+                for (let i = 0, n = names.length; i < n; i++) {
+                    const name = names[i];
+                    const component = this.get(name, id);
+                    if (component) {
+                        component.trigger('update', {
+                            target: scope,
+                        });
+                    } else {
+                        console.warn('[app] Unknown component instance:', closest);
+                    }
                 }
             }
             const next = closest.closest('.js-component[data-component-id]');
@@ -92,15 +100,18 @@ export default class AbstractApp {
                 element.removeAttribute('data-component-id');
                 return;
             }
-            const name = element.getAttribute('data-component');
-            const component = this.get(name, id);
-            if (component) {
-                delete this.components[name][id];
-                element.classList.remove('js-component');
-                element.removeAttribute('data-component-id');
-                component.destroy();
-            } else {
-                console.warn('[app] Unknown component instance:', element);
+            const names = element.getAttribute('data-component').split(SEPARATOR_PATTERN);
+            for (let i = 0, n = names.length; i < n; i++) {
+                const name = names[i];
+                const component = this.get(name, id);
+                if (component) {
+                    delete this.components[name][id];
+                    element.classList.remove('js-component');
+                    element.removeAttribute('data-component-id');
+                    component.destroy();
+                } else {
+                    console.warn('[app] Unknown component instance:', element);
+                }
             }
         });
     }
