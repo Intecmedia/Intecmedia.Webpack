@@ -45,6 +45,7 @@ export default class AbstractApp {
             const ClassName = this.options.components[name];
             if (!ClassName) {
                 console.error(`[app] Unknown component name: ${name}`, element);
+                return;
             }
             element.classList.add('js-component');
             element.setAttribute('data-component-id', id);
