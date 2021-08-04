@@ -7,7 +7,7 @@ export default class AbstractApp {
 
     get(name, id = null) {
         if (name in this.components) {
-            if (!id) {
+            if (arguments.length === 1) {
                 const values = Object.values(this.components[name]);
                 return values[0] || false;
             }
