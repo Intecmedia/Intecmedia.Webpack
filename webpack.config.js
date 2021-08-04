@@ -91,6 +91,7 @@ module.exports = {
 
     entry: {
         app: [
+            `${ENV.SOURCE_PATH}/js/public-path.js`, // this always first
             `${ENV.SOURCE_PATH}/js/polyfills.js`, // this always first
             ...(APP.SENTRY.dsn ? [`${ENV.SOURCE_PATH}/js/sentry.js`] : []),
             `${ENV.SOURCE_PATH}/css/app.scss`,
