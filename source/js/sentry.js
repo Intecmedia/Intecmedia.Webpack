@@ -1,19 +1,19 @@
 /* global NODE_ENV APP DEBUG VERBOSE */
-
-const sentryCheckIgnore = (event) => {
-    // Detect if we got a ReportingObserver event
-    if (event?.message?.indexOf('ReportingObserver') === 0) {
-        // And check whether sourceFile points to chrome-extension.
-        if (event?.extra?.body?.sourceFile?.indexOf('chrome-extension') === 0) {
-            return true;
-        }
-    }
-    return false;
-};
-
 if ((NODE_ENV === 'production' || DEBUG) && APP.SENTRY.dsn) {
-    import(/* webpackChunkName: "vendor.sentry" */'@sentry/browser').then(({ init }) => {
-        init({
+    const sentryCheckIgnore = (event) => {
+        // Detect if we got a ReportingObserver event
+        if (event?.message?.indexOf('ReportingObserver') === 0) {
+            // And check whether sourceFile points to chrome-extension.
+            if (event?.extra?.body?.sourceFile?.indexOf('chrome-extension') === 0) {
+                return true;
+            }
+        }
+        return false;
+    };
+
+    const sentryImport = async () => {
+        const Sentry = await import(/* webpackChunkName: "vendor.sentry" */'@sentry/browser');
+        Sentry.init({
             debug: DEBUG || false,
             dsn: APP.SENTRY.dsn,
             beforeSend(event) {
@@ -29,5 +29,6 @@ if ((NODE_ENV === 'production' || DEBUG) && APP.SENTRY.dsn) {
             blacklistUrls: APP.SENTRY.blacklistUrls || [],
             whitelistUrls: APP.SENTRY.whitelistUrls || [],
         });
-    });
+    };
+    sentryImport();
 }

@@ -67,7 +67,7 @@ module.exports = {
     }),
 
     experiments: {
-        topLevelAwait: true,
+        topLevelAwait: false,
     },
 
     watchOptions: {
