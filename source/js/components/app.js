@@ -30,8 +30,10 @@ export default class AbstractApp {
     }
 
     init() {
-        this.components.app = { app: this };
         this.initScope(document.body);
+        const detail = { target: this };
+        const event = new CustomEvent('init.App', { detail });
+        window.dispatchEvent(event);
     }
 
     initScope(scope) {
