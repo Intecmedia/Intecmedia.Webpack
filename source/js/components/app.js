@@ -1,5 +1,8 @@
 export default class AbstractApp {
     constructor(options) {
+        if (new.target === AbstractApp) {
+            throw new TypeError('Cannot construct AbstractApp instances directly');
+        }
         this.options = options;
         this.components = {};
         this.lastId = 0;

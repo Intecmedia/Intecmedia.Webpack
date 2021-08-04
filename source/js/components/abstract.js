@@ -1,5 +1,8 @@
 export default class AbstractComponent {
     constructor(options) {
+        if (new.target === AbstractComponent) {
+            throw new TypeError('Cannot construct AbstractComponent instances directly');
+        }
         this.options = options;
     }
 
