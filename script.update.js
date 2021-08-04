@@ -14,10 +14,10 @@ logger.info(`missing ${missing.length} packages`);
 
 const installed = [];
 missing.forEach(([pkg, version], index) => {
-    logger.info(`#${index + 1} ${pkg}`, version);
+    logger.info(`#${index + 1}/${missing.length} ${pkg}`, version);
 
     const command = (version.location ? `npm update ${pkg}` : `npm install ${pkg}@${version.wanted}`);
-    logger.info(`#${index + 1} ${command}`);
+    logger.info(`#${index + 1}/${missing.length} ${command}`);
     childProcess.execSync(command, { stdio: 'inherit' });
 
     installed.push([pkg, version]);
