@@ -3,6 +3,7 @@
 // Bootstrap Options
 
 $theme-colors: () !default;
+$variable-prefix: "" !default;
 $form-validation-states: () !default;
 
 $enable-caret:                true !default;
@@ -11,7 +12,7 @@ $enable-shadows:              false !default;
 $enable-gradients:            false !default;
 $enable-transitions:          false !default;
 $enable-reduced-motion:       false !default;
-$enable-smooth-scroll:        true !default;
+$enable-smooth-scroll:        false !default;
 $enable-grid-classes:         true !default;
 $enable-cssgrid:              false !default;
 $enable-button-pointers:      true !default;
