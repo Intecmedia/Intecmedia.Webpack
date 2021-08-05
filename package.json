@@ -95,7 +95,7 @@
         "@typescript-eslint/parser": "latest",
         "autoprefixer": "latest",
         "babel-loader": "latest",
-        "bootstrap": "^4.6.0",
+        "bootstrap": "^5.1.0",
         "browser-sync": "latest",
         "browser-sync-webpack-plugin": "latest",
         "browserslist": "latest",

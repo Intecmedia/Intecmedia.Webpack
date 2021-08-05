@@ -19,7 +19,7 @@ $pitcher-logo-hover-color: $link-hover-color !default;
 }
 
 .pitcher-logo__text {
-    @include sr-only();
+    @include visually-hidden();
 }
 
 .pitcher-logo__icon {

@@ -2,26 +2,24 @@
 
 // Bootstrap Options
 
-$link-decoration:                         underline !default;
+$theme-colors: () !default;
+$form-validation-states: () !default;
 
-$enable-caret:                                true !default;
-$enable-rounded:                              true !default;
-$enable-shadows:                              false !default;
-$enable-gradients:                            false !default;
-$enable-transitions:                          false !default;
-$enable-prefers-reduced-motion-media-query:   false !default;
-$enable-grid-classes:                         true !default;
-$enable-pointer-cursor-for-buttons:           true !default;
-$enable-print-styles:                         true !default;
-$enable-responsive-font-sizes:                true !default;
-$enable-validation-icons:                     false !default;
-$enable-deprecation-messages:                 true !default;
-
-// Disable Utilities selectors
-$displays: () !default;
-$overflows: () !default;
-$positions: () !default;
-$user-selects: () !default;
+$enable-caret:                true !default;
+$enable-rounded:              true !default;
+$enable-shadows:              false !default;
+$enable-gradients:            false !default;
+$enable-transitions:          false !default;
+$enable-reduced-motion:       false !default;
+$enable-smooth-scroll:        true !default;
+$enable-grid-classes:         true !default;
+$enable-cssgrid:              false !default;
+$enable-button-pointers:      true !default;
+$enable-rfs:                  true !default;
+$enable-validation-icons:     true !default;
+$enable-negative-margins:     false !default;
+$enable-deprecation-messages: true !default;
+$enable-important-utilities:  true !default;
 
 @import "bootstrap-variables";
 

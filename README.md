@@ -10,7 +10,7 @@
 
 ## Особености
 * Webpack 5.
-* Bootstrap 4.
+* Bootstrap 5.
 * Babel и [babel-preset-env](https://babeljs.io/docs/en/babel-preset-env).
 * TypeScript через [babel-preset-typescript](https://babeljs.io/docs/en/babel-preset-typescript)
 * Линтер с автофиксом [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) ([перевод](https://github.com/leonidlebedev/javascript-airbnb)).
@@ -153,6 +153,7 @@ html.avif .test { background-image:url('test.avif'); }
 # Bootstrap
 * Переопредление переременных в `css/base/_variables.scss`.
 * Переопредление миксинов в `css/base/_bootstrap-mixins.scss`.
+* Типографика в `css/base/_bootstrap-type.scss`.
     
 # HTML
 * файл с `/example1.html` будут доступны по ссылке `/example1/index.html`.

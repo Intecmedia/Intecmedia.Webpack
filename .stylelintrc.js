@@ -49,8 +49,8 @@ module.exports = deepMerge({}, sharedConfig, {
             'dollar-variables',
         ],
         'order/properties-alphabetical-order': null,
-        'pitcher/max-lines': 300,
-        'pitcher/max-root-rules': 12,
+        'pitcher/max-lines': 1024,
+        'pitcher/max-root-rules': 16,
         'plugin/no-low-performance-animation-properties': [true, {
             'ignore': 'paint-properties',
             'ignoreProperties': [

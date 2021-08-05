@@ -23,6 +23,16 @@
     figure {
         @extend .figure;
 
+        &.pull-left {
+            float: left;
+            margin-right: $font-size-base;
+        }
+
+        &.pull-right {
+            float: right;
+            margin-left: $font-size-base;
+        }
+
         img {
             @extend .figure-img;
         }
@@ -56,6 +66,8 @@
         > tfoot {
             /* stylelint-disable-next-line selector-max-compound-selectors -- its ok for tables */
             > tr {
+                border: 0;
+
                 /* stylelint-disable-next-line selector-max-compound-selectors, max-nesting-depth -- its ok for tables */
                 > th,
                 > td {
