@@ -1,10 +1,7 @@
 @import "node_modules/bootstrap/scss/functions";
 
-// Bootstrap Options
-
-$theme-colors: () !default;
-$variable-prefix: "" !default;
-$form-validation-states: () !default;
+// Bootstrap Options https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss
+$theme-colors:                () !default;
 
 $enable-caret:                true !default;
 $enable-rounded:              true !default;
@@ -22,7 +19,40 @@ $enable-negative-margins:     false !default;
 $enable-deprecation-messages: true !default;
 $enable-important-utilities:  true !default;
 
-@import "bootstrap-variables";
+$variable-prefix:             "" !default;
+
+$body-bg:                     #fff !default;
+$body-color:                  #000 !default;
+
+$border-width:                1px !default;
+$border-color:                #dee2e6 !default;
+$border-radius:               .25rem !default;
+
+$font-family-base:            system-ui, -apple-system, "Segoe UI", roboto, "Helvetica Neue", arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+
+$font-size-root:              null !default;
+$font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
+
+$line-height-base:            1.5 !default;
+
+$h1-font-size:                $font-size-base * 2.5 !default;
+$h2-font-size:                $font-size-base * 2 !default;
+$h3-font-size:                $font-size-base * 1.75 !default;
+$h4-font-size:                $font-size-base * 1.5 !default;
+$h5-font-size:                $font-size-base * 1.25 !default;
+$h6-font-size:                $font-size-base !default;
+
+$link-color:                  #0d6efd !default;
+$link-decoration:             underline !default;
+$link-shade-percentage:       20% !default;
+$link-hover-color:            shift-color($link-color, $link-shade-percentage) !default;
+$link-hover-decoration:       null !default;
+
+$paragraph-margin-bottom:     1rem !default;
+
+$form-validation-states:      () !default;
+
+@import "node_modules/bootstrap/scss/variables";
 
 $ol-marker-color: inherit !default;
 $ul-marker-color: inherit !default
