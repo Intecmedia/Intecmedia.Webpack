@@ -22,7 +22,7 @@ module.exports = {
         blacklistUrls: [],
         whitelistUrls: [],
     },
-    USE_JQUERY: true,
+    USE_JQUERY: false,
     LINT_FIX: true,
 };
 
