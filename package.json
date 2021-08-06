@@ -55,7 +55,6 @@
     "license": "MIT",
     "browserslist": {
         "production": [
-            "not Explorer <= 11",
             "iOS >= 12",
             "Safari >= 12",
             "Chrome >= 60",

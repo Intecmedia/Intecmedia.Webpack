@@ -1,6 +1,8 @@
+@use "sass:math";
+
 @function strip-unit($number) {
     @if type-of($number) == "number" and not unitless($number) {
-        @return $number / ($number * 0 + 1);
+        @return math.div($number, ($number * 0 + 1));
     }
 
     @return $number;
@@ -14,7 +16,7 @@
         }
     } @else {
         @for $i from $n to 0 {
-            $ret: $ret / $x;
+            $ret: math.div($ret, $x);
         }
     }
     @return $ret;
@@ -23,6 +25,6 @@
 @function to-fixed($float, $digits: 2) {
     $sass-precision: 5;
     $pow: pow(10, $digits);
-    @return round($float * $pow) / $pow;
+    @return math.div(round($float * $pow), $pow);
 }
 
