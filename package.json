@@ -1,6 +1,6 @@
 {
     "name": "Intecmedia.Webpack",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "Intecmedia Webpack bootstrap",
     "repository": {
         "type": "git",
@@ -93,7 +93,7 @@
         "@typescript-eslint/parser": "latest",
         "autoprefixer": "latest",
         "babel-loader": "latest",
-        "bootstrap": "^5.1.0",
+        "bootstrap": "latest",
         "browser-sync": "latest",
         "browser-sync-webpack-plugin": "latest",
         "browserslist": "latest",
