@@ -108,6 +108,14 @@ module.exports = {
         path: ENV.OUTPUT_PATH,
         publicPath: APP.PUBLIC_PATH,
         hashFunction: 'md5',
+        devtoolModuleFilenameTemplate: (info) => {
+            const relativePath = slash(path.relative(__dirname, info.absoluteResourcePath));
+            return `webpack://${info.namespace}/${relativePath}?${info.query}`;
+        },
+        devtoolFallbackModuleFilenameTemplate: (info) => {
+            const relativePath = slash(path.relative(__dirname, info.absoluteResourcePath));
+            return `webpack://${info.namespace}/${relativePath}?${info.query}`;
+        },
     },
 
     optimization: {
