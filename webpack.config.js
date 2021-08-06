@@ -6,7 +6,6 @@ const fs = require('fs');
 const realcwd = fs.realpathSync(process.cwd());
 if (process.cwd() !== realcwd) process.chdir(realcwd);
 
-const ignore = require('ignore');
 const path = require('path');
 const slash = require('slash');
 const webpack = require('webpack');
@@ -14,8 +13,6 @@ const weblog = require('webpack-log');
 
 const logger = weblog({ name: 'webpack-config' });
 const imageminConfig = require('./imagemin.config');
-
-const imageminLogger = weblog({ name: 'imagemin' });
 
 const ENV = require('./app.env');
 const APP = require('./app.config');
@@ -45,7 +42,6 @@ const CompressionPlugin = (ENV.PROD && !ENV.DEBUG ? require('compression-webpack
 const TerserPlugin = (ENV.PROD && !ENV.DEBUG ? require('terser-webpack-plugin') : () => {});
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 
-const ImageminIgnore = ignore().add(fs.readFileSync('./.imageminignore').toString());
 const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons') : () => {});
 const HtmlBeautifyPlugin = (APP.HTML_PRETTY ? require('./plugin.html-beautify') : () => {});
 const BabelOptions = require('./babel.options');
@@ -325,14 +321,7 @@ module.exports = {
                 exclude: [
                     /(fonts|font)/i,
                 ],
-                filter: (input, name) => {
-                    const relativePath = slash(path.relative(__dirname, path.normalize(name)));
-                    const ignores = ImageminIgnore.ignores(relativePath);
-                    if (ENV.DEBUG) {
-                        imageminLogger.info(`${JSON.stringify(relativePath)} ${ignores ? 'ignores' : 'minified'}`);
-                    }
-                    return !ignores;
-                },
+                filter: (input, name) => !imageminConfig.testIgnore(name),
                 minimizerOptions: { plugins: imageminConfig.plugins },
                 loader: false,
             }),
