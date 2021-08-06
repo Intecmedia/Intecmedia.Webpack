@@ -5,7 +5,7 @@ import '~/components/bootstrap';
 import '~/components/viewport-height';
 import '~/components/scrollbar-width';
 
-import components from '~/components/index';
+import components from '~/components/';
 import AbstractApp from '~/components/app';
 
 class App extends AbstractApp {

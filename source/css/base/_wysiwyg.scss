@@ -1,6 +1,13 @@
 /* stylelint-disable scss/selector-nest-combinators, selector-max-type, plugin/selector-bem-pattern -- wysiwyg is semantic tags */
 .wysiwyg {
-    p { @extend p; }
+    a {
+        //
+    }
+
+    p {
+        margin-top: 0;
+        margin-bottom: $paragraph-margin-bottom;
+    }
 
     h1 { @extend .h1; }
 
