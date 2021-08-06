@@ -108,14 +108,8 @@ module.exports = {
         path: ENV.OUTPUT_PATH,
         publicPath: APP.PUBLIC_PATH,
         hashFunction: 'md5',
-        devtoolModuleFilenameTemplate: (info) => {
-            const relativePath = slash(path.relative(__dirname, info.absoluteResourcePath));
-            return `webpack://${info.namespace}/${relativePath}?${info.query}`;
-        },
-        devtoolFallbackModuleFilenameTemplate: (info) => {
-            const relativePath = slash(path.relative(__dirname, info.absoluteResourcePath));
-            return `webpack://${info.namespace}/${relativePath}?${info.query}`;
-        },
+        devtoolModuleFilenameTemplate: UTILS.moduleFilenameTemplate,
+        devtoolFallbackModuleFilenameTemplate: UTILS.moduleFilenameTemplate,
     },
 
     optimization: {
@@ -353,6 +347,8 @@ module.exports = {
         ...(ENV.USE_SOURCE_MAP ? [
             new webpack.SourceMapDevToolPlugin({
                 test: /\.(js|mjs|cjs|ts|css|scss)(\?.*)?$/i,
+                moduleFilenameTemplate: UTILS.moduleFilenameTemplate,
+                fallbackModuleFilenameTemplate: UTILS.moduleFilenameTemplate,
             }),
         ] : []),
     ],

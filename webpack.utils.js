@@ -84,3 +84,10 @@ function globArraySync(patterns, options) {
 }
 
 module.exports.globArraySync = globArraySync;
+
+function moduleFilenameTemplate(info) {
+    const relativePath = slash(path.relative(__dirname, info.absoluteResourcePath));
+    return `webpack://${info.namespace}/${relativePath}?${info.query}`;
+}
+
+module.exports.moduleFilenameTemplate = moduleFilenameTemplate;
