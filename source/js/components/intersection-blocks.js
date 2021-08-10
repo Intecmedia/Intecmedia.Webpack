@@ -4,7 +4,7 @@ const CLASS_NAME_BLOCK = 'js-intersection-block';
 const CLASS_NAME_INIT = 'is-intersection';
 const CLASS_NAME_VISIBLE = 'is-intersecting';
 
-const INTERSECTION_EVENT = 'intersection';
+const EVENT_NAME_INTERSECTION = 'intersection';
 
 const SELECTOR_BLOCKS = `.${CLASS_NAME_BLOCK}:not(.${CLASS_NAME_INIT})`;
 
@@ -48,7 +48,7 @@ class IntersectionBlocks extends AbstractComponent {
     onIntersection(entries) {
         entries.forEach((entry) => {
             const detail = { entry };
-            const event = new CustomEvent(INTERSECTION_EVENT, { detail });
+            const event = new CustomEvent(EVENT_NAME_INTERSECTION, { detail });
             entry.target.dispatchEvent(event);
 
             if (entry.target.dataset.intersectionToggle) {
