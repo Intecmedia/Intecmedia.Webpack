@@ -6,6 +6,8 @@ const CLASS_NAME_VISIBLE = 'is-intersecting';
 
 const INTERSECTION_EVENT = 'intersection';
 
+const SELECTOR_BLOCKS = `.${CLASS_NAME_BLOCK}:not(.${CLASS_NAME_INIT})`;
+
 class IntersectionBlocks extends AbstractComponent {
     constructor(options = {}) {
         super(options);
@@ -19,7 +21,7 @@ class IntersectionBlocks extends AbstractComponent {
 
     init() {
         this.observer = new IntersectionObserver(this.onIntersection);
-        this.items = [...this.element.querySelectorAll(`.${CLASS_NAME_BLOCK}:not(.${CLASS_NAME_INIT})`)];
+        this.items = [...this.element.querySelectorAll(SELECTOR_BLOCKS)];
         setTimeout(() => this.run(), 0);
     }
 
@@ -32,7 +34,7 @@ class IntersectionBlocks extends AbstractComponent {
     }
 
     onUpdate({ detail }) {
-        const items = [...detail.target.querySelectorAll(`.${CLASS_NAME_BLOCK}:not(.${CLASS_NAME_INIT})`)];
+        const items = [...detail.target.querySelectorAll(SELECTOR_BLOCKS)];
         if (items.length > 0) {
             this.items = this.items.concat(items);
             items.forEach((target) => {
