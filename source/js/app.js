@@ -10,7 +10,6 @@ import AbstractApp from '~/components/app';
 
 class App extends AbstractApp {
     init() {
-        console.log(BANNER_STRING);
         document.documentElement.classList.add('ready-js');
         super.init();
 
@@ -29,5 +28,7 @@ const domReady = () => {
     app.init();
 };
 document.addEventListener('DOMContentLoaded', domReady);
+
+console.log(`%c${BANNER_STRING}`, 'font-size:140%;font-weight:700;');
 
 export default app;
