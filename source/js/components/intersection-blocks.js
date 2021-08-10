@@ -1,5 +1,11 @@
 import AbstractComponent from '~/components/abstract';
 
+const CLASS_NAME_BLOCK = 'js-intersection-block';
+const CLASS_NAME_INIT = 'is-intersection';
+const CLASS_NAME_VISIBLE = 'is-intersecting';
+
+const INTERSECTION_EVENT = 'intersection';
+
 class IntersectionBlocks extends AbstractComponent {
     constructor(options = {}) {
         super(options);
@@ -13,24 +19,24 @@ class IntersectionBlocks extends AbstractComponent {
 
     init() {
         this.observer = new IntersectionObserver(this.onIntersection);
-        this.items = [...this.element.querySelectorAll('.js-intersection-block:not(.js-intersection-block--init)')];
+        this.items = [...this.element.querySelectorAll(`.${CLASS_NAME_BLOCK}:not(.${CLASS_NAME_INIT})`)];
         setTimeout(() => this.run(), 0);
     }
 
     run() {
         this.items.forEach((target) => {
-            target.classList.add('js-intersection-block--init');
+            target.classList.add(CLASS_NAME_INIT);
             this.observer.observe(target);
         });
         this.on('update', this.onUpdate);
     }
 
     onUpdate({ detail }) {
-        const items = [...detail.target.querySelectorAll('.js-intersection-block:not(.js-intersection-block--init)')];
+        const items = [...detail.target.querySelectorAll(`.${CLASS_NAME_BLOCK}:not(.${CLASS_NAME_INIT})`)];
         if (items.length > 0) {
             this.items = this.items.concat(items);
             items.forEach((target) => {
-                target.classList.add('js-intersection-block--init');
+                target.classList.add(CLASS_NAME_INIT);
                 this.observer.observe(target);
             });
         }
@@ -39,10 +45,14 @@ class IntersectionBlocks extends AbstractComponent {
 
     onIntersection(entries) {
         entries.forEach((entry) => {
+            const detail = { entry };
+            const event = new CustomEvent(INTERSECTION_EVENT, { detail });
+            entry.target.dispatchEvent(event);
+
             if (entry.target.dataset.intersectionToggle) {
-                entry.target.classList.toggle('is-intersecting', entry.isIntersecting);
+                entry.target.classList.toggle(CLASS_NAME_VISIBLE, entry.isIntersecting);
             } else if (entry.isIntersecting) {
-                entry.target.classList.add('is-intersecting');
+                entry.target.classList.add(CLASS_NAME_VISIBLE);
                 this.observer.unobserve(entry.target);
             }
         });
