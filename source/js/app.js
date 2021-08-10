@@ -17,6 +17,8 @@ class App extends AbstractApp {
     }
 }
 
+console.log(`%c${BANNER_STRING}`, 'font-size:140%;font-weight:700;');
+
 const app = new App({ components });
 if (VERBOSE) {
     window.$app = app;
@@ -28,7 +30,5 @@ const domReady = () => {
     app.init();
 };
 document.addEventListener('DOMContentLoaded', domReady);
-
-console.log(`%c${BANNER_STRING}`, 'font-size:140%;font-weight:700;');
 
 export default app;
