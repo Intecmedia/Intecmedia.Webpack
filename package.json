@@ -146,7 +146,7 @@
         "mini-css-extract-plugin": "latest",
         "nodemon": "latest",
         "nunjucks": "latest",
-        "p-limit": "latest",
+        "p-limit": "^3.1.0",
         "popper.js": "latest",
         "postcss": "latest",
         "postcss-bem-linter": "latest",
