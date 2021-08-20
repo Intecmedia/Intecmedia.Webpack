@@ -72,17 +72,21 @@ module.exports = {
 
     devServer: {
         allowedHosts: ['.localhost', 'localhost'],
-        compress: false,
-        contentBase: path.resolve(__dirname, 'source'),
-        hot: true,
-        overlay: { warnings: false, errors: true },
-        inline: true,
-        injectClient: true,
-        clientLogLevel: 'warn',
-        publicPath: path.posix.resolve(APP.PUBLIC_PATH, '/'),
         port: 8888,
-        stats: (ENV.DEBUG ? 'detailed' : 'normal'),
-        writeToDisk: true,
+        static: {
+            directory: path.resolve(__dirname, 'source'),
+            publicPath: path.posix.resolve(APP.PUBLIC_PATH, '/'),
+        },
+        client: {
+            logging: 'info',
+            overlay: true,
+            progress: true,
+        },
+        devMiddleware: {
+            stats: (ENV.DEBUG ? 'detailed' : 'normal'),
+            publicPath: path.posix.resolve(APP.PUBLIC_PATH, '/'),
+            writeToDisk: true,
+        },
     },
 
     entry: {
