@@ -35,7 +35,6 @@ const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const BrowserSyncPlugin = (ENV.WATCH ? require('browser-sync-webpack-plugin') : () => {});
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const CompressionPlugin = (ENV.PROD && !ENV.DEBUG ? require('compression-webpack-plugin') : () => {});
@@ -87,6 +86,7 @@ module.exports = {
             publicPath: path.posix.resolve(APP.PUBLIC_PATH, '/'),
             writeToDisk: true,
         },
+        ...require('./devserver.config'),
     },
 
     entry: {
@@ -164,11 +164,6 @@ module.exports = {
     } : false),
 
     plugins: [
-        ...(ENV.WATCH ? [
-            new BrowserSyncPlugin({
-                ...APP.BROWSERSYNC,
-            }),
-        ] : []),
         new MiniCssExtractPlugin({
             filename: 'css/app.min.css',
             experimentalUseImportModule: true,

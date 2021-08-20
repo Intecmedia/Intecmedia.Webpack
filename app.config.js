@@ -2,7 +2,6 @@
 /* eslint max-len: "off" -- webpack is node env */
 
 const ENV = require('./app.env');
-const BROWSERSYNC = require('./browsersync.config');
 const IMAGEMIN = require('./imagemin.config');
 
 module.exports = {
@@ -27,5 +26,4 @@ module.exports = {
 };
 
 module.exports.ENV = ENV;
-module.exports.BROWSERSYNC = BROWSERSYNC;
 module.exports.IMAGEMIN = IMAGEMIN;
