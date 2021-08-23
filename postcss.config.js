@@ -18,7 +18,6 @@ module.exports = {
             require('postcss-flexbugs-fixes')(),
             require('./postcss.resize')('avif'),
             require('./postcss.resize')('webp'),
-            require('autoprefixer')({ overrideBrowserslist: ENV.BROWSERS }), // this always last
             ...(!ENV.DEBUG ? [require('cssnano')({
                 preset: ['default', {
                     minifyFontValues: { removeQuotes: false },
@@ -26,6 +25,9 @@ module.exports = {
                 }],
             })] : []), // this always last
         ] : []),
+        require('autoprefixer')({
+            overrideBrowserslist: ENV.BROWSERS,
+        }), // this always last
         require('./postcss.resolve-absolute')({
             silent: !(ENV.PROD || ENV.DEBUG),
         }),
