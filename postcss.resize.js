@@ -1,7 +1,6 @@
 /* eslint-env node -- webpack is node env */
 /* eslint "compat/compat": "off" -- webpack is node env */
 
-const path = require('path');
 const { URLSearchParams } = require('url');
 const postcss = require('postcss');
 const postcssUrl = require('postcss-url');
@@ -35,9 +34,6 @@ module.exports = (extension) => {
 
             originParams.set('resize', '');
             originParams.set('format', extension);
-
-            const originName = path.basename(originRequest, path.extname(originRequest));
-            originParams.set('name', `${originName}@postcss`);
 
             const newUrl = [originRequest, originParams].join('?');
             const newRule = originRule.cloneAfter();

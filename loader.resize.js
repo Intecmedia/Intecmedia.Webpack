@@ -79,6 +79,10 @@ module.exports = async function ResizeLoader(content) {
     resizeHeight = parseInt(resizeHeight, 10);
     resizeFit = (resizeFit || DEFAULT_FIT).trim();
 
+    if (!query.resize && !query.name) {
+        query.name = path.basename(thisLoader.resourcePath, path.extname(thisLoader.resourcePath));
+    }
+
     const format = (query.format || resourceFormat).toLowerCase();
     const name = ((query.name ? loaderUtils.interpolateName(thisLoader, query.name, {
         context,
