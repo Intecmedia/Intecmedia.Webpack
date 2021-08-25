@@ -97,6 +97,7 @@ module.exports = {
             `${ENV.SOURCE_PATH}/css/app.scss`,
             `${ENV.SOURCE_PATH}/js/app.js`,
         ],
+        ...(ENV.PROD || ENV.DEBUG ? { 'webpack-resize': `${ENV.SOURCE_PATH}/js/webpack-resize.js` } : {}),
     },
 
     output: {
@@ -249,6 +250,7 @@ module.exports = {
             filename,
             template,
             inject: path.basename(template).startsWith('_') ? false : 'body',
+            excludeChunks: ['webpack-resize'],
             scriptLoading: 'blocking',
             minify: (ENV.PROD || ENV.DEBUG ? ({
                 html5: true,
