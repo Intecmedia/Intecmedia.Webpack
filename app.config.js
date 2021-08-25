@@ -9,7 +9,7 @@ module.exports = {
     SHORT_NAME: '$APP.SHORT_NAME$',
     DESCRIPTION: '$APP.DESCRIPTION$',
     PUBLIC_PATH: '/', // for relative use './'
-    USE_FAVICONS: true,
+    FAVICONS: true,
     LANGUAGE: 'ru',
     START_URL: '/?utm_source=app_manifest',
     THEME_COLOR: '#fff',
@@ -21,7 +21,7 @@ module.exports = {
         blacklistUrls: [],
         whitelistUrls: [],
     },
-    USE_JQUERY: false,
+    JQUERY: false,
     LINT_FIX: true,
 };
 

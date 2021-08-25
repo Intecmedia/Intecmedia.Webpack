@@ -41,7 +41,7 @@ const CompressionPlugin = (ENV.PROD && !ENV.DEBUG ? require('compression-webpack
 const TerserPlugin = (ENV.PROD && !ENV.DEBUG ? require('terser-webpack-plugin') : () => {});
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 
-const FaviconsPlugin = (APP.USE_FAVICONS ? require('./plugin.favicons') : () => {});
+const FaviconsPlugin = (APP.FAVICONS ? require('./plugin.favicons') : () => {});
 const HtmlBeautifyPlugin = (APP.HTML_PRETTY ? require('./plugin.html-beautify') : () => {});
 const BabelOptions = require('./babel.options');
 
@@ -211,7 +211,7 @@ module.exports = {
             include: /\.(css|js)(\?.*)?$/i,
         }),
         new webpack.ProvidePlugin({
-            ...(APP.USE_JQUERY ? {
+            ...(APP.JQUERY ? {
                 $: 'jquery',
                 jQuery: 'jquery',
                 'window.$': 'jquery',
@@ -263,7 +263,7 @@ module.exports = {
             cache: !ENV.DEBUG,
             title: APP.TITLE,
         }))),
-        ...(APP.USE_FAVICONS ? [
+        ...(APP.FAVICONS ? [
             new FaviconsPlugin.AppIcon({
                 logo: path.join(__dirname, '.favicons-source-1024x1024.png'),
                 publicPath: APP.PUBLIC_PATH,
@@ -332,7 +332,7 @@ module.exports = {
                 reportFilename: path.join(UTILS.cacheDir('bundle-analyzer'), 'bundle-analyzer.html'),
             }),
         ] : []),
-        ...(ENV.USE_SOURCE_MAP ? [
+        ...(ENV.SOURCE_MAP ? [
             new webpack.SourceMapDevToolPlugin({
                 test: /\.(js|mjs|cjs|ts|css|scss)(\?.*)?$/i,
                 moduleFilenameTemplate: UTILS.moduleFilenameTemplate,
@@ -341,7 +341,7 @@ module.exports = {
         ] : []),
     ],
 
-    ...(!ENV.USE_SOURCE_MAP ? {
+    ...(!ENV.SOURCE_MAP ? {
         devtool: 'nosources-source-map',
     } : {
         devtool: false,
@@ -365,14 +365,14 @@ module.exports = {
                 },
             },
             // javascript loaders
-            ...(APP.USE_JQUERY ? [{
+            ...(APP.JQUERY ? [{
                 test: require.resolve('jquery'),
                 loader: 'expose-loader',
                 options: {
                     exposes: ['$', 'jQuery'],
                 },
             }] : []),
-            ...(APP.USE_JQUERY ? [{
+            ...(APP.JQUERY ? [{
                 test: /\.(js|mjs|cjs)(\?.*)?$/i,
                 include: [
                     // enable jquery global

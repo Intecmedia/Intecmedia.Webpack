@@ -10,7 +10,7 @@ module.exports = {
     'env': {
         'amd': true,
         'browser': true,
-        'jquery': APP.USE_JQUERY,
+        'jquery': APP.JQUERY,
         'node': false,
     },
     'extends': [
