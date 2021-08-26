@@ -4,15 +4,46 @@
 const fs = require('fs');
 const path = require('path');
 const slash = require('slash');
+const svg2js = require('svgo/lib/svgo/svg2js');
+
+/*
+
+SVG sprite not support external content.
+
+Chromium issue: https://code.google.com/p/chromium/issues/detail?id=109212
+Safari issue:https://bugs.webkit.org/show_bug.cgi?id=105904
+
+*/
 
 const URL_PATTERN = /url\((.+)\)/i;
 
+const walkNodes = (root, callback) => {
+    if (!root.children) return;
+    root.children.forEach((node) => {
+        callback(node);
+        walkNodes(node, callback);
+    });
+};
+
+const walkAttributes = (root, callback) => {
+    if (root.attributes) {
+        Object.entries(root.attributes).forEach(([name, value]) => {
+            callback(root, name, value);
+        });
+    }
+    walkNodes(root, (node) => {
+        walkAttributes(node, callback);
+    });
+};
+
 module.exports = function noSpriteURL(filename) {
     const content = fs.readFileSync(filename).toString();
+    const root = svg2js(content);
 
-    if (URL_PATTERN.test(content)) {
-        const [url] = content.match(URL_PATTERN);
-        const relativePath = slash(path.relative(__dirname, path.normalize(filename)));
-        throw new Error(`[svg-sprite] external content (${url}) not allowed in: ${relativePath}`);
-    }
+    walkAttributes(root, (node, name, value) => {
+        if (URL_PATTERN.test(value)) {
+            const relativePath = slash(path.relative(__dirname, path.normalize(filename)));
+            throw new Error(`[svg-sprite] external content <${node.name} ${name}="${value}"> not allowed in: ${relativePath}`);
+        }
+    });
 };
