@@ -3,6 +3,10 @@
 
 const fs = require('fs');
 const path = require('path');
+
+const realcwd = fs.realpathSync(process.cwd());
+if (process.cwd() !== realcwd) process.chdir(realcwd);
+
 const glob = require('glob');
 const slash = require('slash');
 

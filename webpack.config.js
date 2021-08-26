@@ -1,13 +1,7 @@
 /* eslint-env node -- webpack is node env */
 /* eslint global-require: "off", max-lines: "off", import/no-dynamic-require: "off", max-len: "off", "compat/compat": "off" -- webpack is node env */
 
-const fs = require('fs');
-
-const realcwd = fs.realpathSync(process.cwd());
-if (process.cwd() !== realcwd) process.chdir(realcwd);
-
 const path = require('path');
-const slash = require('slash');
 const webpack = require('webpack');
 const weblog = require('webpack-log');
 
@@ -40,6 +34,7 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const CompressionPlugin = (ENV.PROD && !ENV.DEBUG ? require('compression-webpack-plugin') : () => {});
 const TerserPlugin = (ENV.PROD && !ENV.DEBUG ? require('terser-webpack-plugin') : () => {});
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
+const SVGNoSpriteUrl = require('./svg.no-sprite-url');
 
 const FaviconsPlugin = (APP.FAVICONS ? require('./plugin.favicons') : () => {});
 const HtmlBeautifyPlugin = (APP.HTML_PRETTY ? require('./plugin.html-beautify') : () => {});
@@ -305,13 +300,7 @@ module.exports = {
             },
             sprite: {
                 prefix: (filename) => {
-                    const svgContent = fs.readFileSync(filename).toString();
-                    const URL_PATTERN = /url\((.+)\)/i;
-                    if (URL_PATTERN.test(svgContent)) {
-                        const [svgUrl] = svgContent.match(URL_PATTERN);
-                        const relativePath = slash(path.relative(__dirname, path.normalize(filename)));
-                        throw new Error(`[svg-sprite] external content (${svgUrl}) not allowed in: ${relativePath}`);
-                    }
+                    SVGNoSpriteUrl(filename);
                     return 'icon-';
                 },
                 generate: {
