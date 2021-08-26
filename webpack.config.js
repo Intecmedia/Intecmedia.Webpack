@@ -43,6 +43,7 @@ const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 
 const FaviconsPlugin = (APP.FAVICONS ? require('./plugin.favicons') : () => {});
 const HtmlBeautifyPlugin = (APP.HTML_PRETTY ? require('./plugin.html-beautify') : () => {});
+const RemoveAssetsPlugin = require('./plugin.remove-assets');
 const BabelOptions = require('./babel.options');
 
 module.exports = {
@@ -133,6 +134,9 @@ module.exports = {
             },
         },
         minimizer: (ENV.PROD && !ENV.DEBUG ? [
+            new RemoveAssetsPlugin({
+                test: /webpack-resize\.min\.js/i,
+            }),
             new TerserPlugin({
                 test: /\.(js)(\?.*)?$/i,
                 parallel: true,
