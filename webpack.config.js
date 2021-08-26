@@ -135,7 +135,7 @@ module.exports = {
         },
         minimizer: (ENV.PROD && !ENV.DEBUG ? [
             new RemoveAssetsPlugin({
-                test: /webpack-resize\.min\.js/i,
+                test: /webpack-\w+\.min\.js/i,
             }),
             new TerserPlugin({
                 test: /\.(js)(\?.*)?$/i,
@@ -254,7 +254,6 @@ module.exports = {
             filename,
             template,
             inject: path.basename(template).startsWith('_') ? false : 'body',
-            excludeChunks: ['webpack-resize'],
             scriptLoading: 'blocking',
             minify: (ENV.PROD || ENV.DEBUG ? ({
                 html5: true,
