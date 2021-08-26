@@ -3,6 +3,7 @@
 /* eslint "quote-props": ["error", "always"] -- more readability keys */
 /* eslint "sort-keys": "error" -- more readability keys */
 
+const APP = require('./app.config');
 const ENV = require('./app.env');
 
 module.exports = {
@@ -38,9 +39,9 @@ module.exports = {
             'intrinsicsize': true,
         }],
         'pitcher/img-picture-required': ['error', {
-            'avif': ENV.PROD || ENV.DEBUG,
+            'avif': (ENV.PROD || ENV.DEBUG) && APP.AVIF,
             'ignore': '.wysiwyg img, .counters-body img, img.ignore-html-validate',
-            'webp': ENV.PROD || ENV.DEBUG,
+            'webp': (ENV.PROD || ENV.DEBUG) && APP.WEBP,
         }],
         'require-sri': 'off',
         'svg-focusable': 'off',

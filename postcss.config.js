@@ -1,6 +1,7 @@
 /* eslint-env node -- webpack is node env */
 /* eslint global-require: "off", "compat/compat": "off" -- webpack is node env */
 
+const APP = require('./app.config');
 const ENV = require('./app.env');
 
 module.exports = {
@@ -16,8 +17,8 @@ module.exports = {
                 { test: 'FontAwesome', display: 'block' },
             ]),
             require('postcss-flexbugs-fixes')(),
-            require('./postcss.resize')('avif'),
-            require('./postcss.resize')('webp'),
+            ...(APP.AVIF ? [require('./postcss.resize')('avif')] : []),
+            ...(APP.WEBP ? [require('./postcss.resize')('webp')] : []),
             ...(!ENV.DEBUG ? [require('cssnano')({
                 preset: ['default', {
                     minifyFontValues: { removeQuotes: false },

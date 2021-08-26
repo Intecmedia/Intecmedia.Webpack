@@ -14,14 +14,18 @@ $resize-breakpoints: $grid-breakpoints !default;
     /* postcss.resize.avif: ignore */
 
     @if $NODE_ENV == "production" or $DEBUG {
-        html.webp & {
-            /* postcss.resize.webp: ignore */
-            background-image: url("#{$url}?resize=x&format=webp");
+        @if $APP-WEBP {
+            html.webp & {
+                /* postcss.resize.webp: ignore */
+                background-image: url("#{$url}?resize=x&format=webp");
+            }
         }
 
-        html.avif & {
-            /* postcss.resize.avif: ignore */
-            background-image: url("#{$url}?resize=x&format=avif");
+        @if $APP-AVIF {
+            html.avif & {
+                /* postcss.resize.avif: ignore */
+                background-image: url("#{$url}?resize=x&format=avif");
+            }
         }
     }
 }
@@ -44,24 +48,28 @@ $resize-breakpoints: $grid-breakpoints !default;
     }
 
     @if $NODE_ENV == "production" or $DEBUG {
-        html.webp & {
-            @each $breakpoint in map-keys($breakpoints) {
-                $size: strip-unit(map-get($breakpoints, $breakpoint));
-                $prefix: resize-prefix($breakpoint, $breakpoints);
-                @include media-breakpoint-only($prefix) {
-                    /* postcss.resize.webp: ignore */
-                    background-image: url("#{$url}?resize=#{$size}x&format=webp&suffix=#{$prefix}");
+        @if $APP-WEBP {
+            html.webp & {
+                @each $breakpoint in map-keys($breakpoints) {
+                    $size: strip-unit(map-get($breakpoints, $breakpoint));
+                    $prefix: resize-prefix($breakpoint, $breakpoints);
+                    @include media-breakpoint-only($prefix) {
+                        /* postcss.resize.webp: ignore */
+                        background-image: url("#{$url}?resize=#{$size}x&format=webp&suffix=#{$prefix}");
+                    }
                 }
             }
         }
 
-        html.avif & {
-            @each $breakpoint in map-keys($breakpoints) {
-                $size: strip-unit(map-get($breakpoints, $breakpoint));
-                $prefix: resize-prefix($breakpoint, $breakpoints);
-                @include media-breakpoint-only($prefix) {
-                    /* postcss.resize.avif: ignore */
-                    background-image: url("#{$url}?resize=#{$size}x&format=avif&suffix=#{$prefix}");
+        @if $APP-AVIF {
+            html.avif & {
+                @each $breakpoint in map-keys($breakpoints) {
+                    $size: strip-unit(map-get($breakpoints, $breakpoint));
+                    $prefix: resize-prefix($breakpoint, $breakpoints);
+                    @include media-breakpoint-only($prefix) {
+                        /* postcss.resize.avif: ignore */
+                        background-image: url("#{$url}?resize=#{$size}x&format=avif&suffix=#{$prefix}");
+                    }
                 }
             }
         }

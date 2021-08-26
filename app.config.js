@@ -2,7 +2,6 @@
 /* eslint max-len: "off" -- webpack is node env */
 
 const ENV = require('./app.env');
-const IMAGEMIN = require('./imagemin.config');
 
 module.exports = {
     TITLE: '$APP.TITLE$',
@@ -23,7 +22,8 @@ module.exports = {
     },
     JQUERY: false,
     LINT_FIX: true,
+    WEBP: true,
+    AVIF: true,
 };
 
 module.exports.ENV = ENV;
-module.exports.IMAGEMIN = IMAGEMIN;
