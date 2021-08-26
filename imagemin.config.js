@@ -43,10 +43,10 @@ module.exports.avif = {
 };
 
 module.exports.testIgnore = (filepath) => {
-    const relativePath = slash(path.relative(__dirname, path.normalize(filepath)));
-    const ignores = imageminIgnore.ignores(relativePath);
+    const relpath = slash(path.relative(__dirname, path.normalize(filepath)));
+    const ignores = imageminIgnore.ignores(relpath);
     if (ENV.DEBUG) {
-        imageminLogger.info(`${JSON.stringify(relativePath)} ${ignores ? 'ignores' : 'minified'}`);
+        imageminLogger.info(`${JSON.stringify(relpath)} ${ignores ? 'ignores' : 'minified'}`);
     }
     return ignores;
 };

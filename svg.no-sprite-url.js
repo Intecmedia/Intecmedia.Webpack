@@ -36,14 +36,14 @@ const walkAttributes = (root, callback) => {
     });
 };
 
-module.exports = function noSpriteURL(filename) {
-    const content = fs.readFileSync(filename).toString();
+module.exports = function noSpriteURL(filepath) {
+    const relpath = slash(path.relative(__dirname, path.normalize(filepath)));
+    const content = fs.readFileSync(filepath).toString();
     const root = svg2js(content);
 
     walkAttributes(root, (node, name, value) => {
         if (URL_PATTERN.test(value)) {
-            const relativePath = slash(path.relative(__dirname, path.normalize(filename)));
-            throw new Error(`[svg-sprite] external content <${node.name} ${name}="${value}"> not allowed in: ${relativePath}`);
+            throw new Error(`[svg-sprite] external content <${node.name} ${name}="${value}"> not allowed in: ${relpath}`);
         }
     });
 };
