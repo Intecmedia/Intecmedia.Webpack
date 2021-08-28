@@ -176,6 +176,10 @@ module.exports = function HtmlLoader() {
     };
     nunjucksEnv.addGlobal('PAGE', PAGE);
 
+    nunjucksEnv.addGlobal('LOADER', loaderContext);
+    nunjucksEnv.addGlobal('COMPILER', loaderContext._compiler);
+    nunjucksEnv.addGlobal('COMPILATION', loaderContext._compilation);
+
     const helperContext = {
         loaderContext, loaderOptions: options, APP: options.context, PAGE,
     };
