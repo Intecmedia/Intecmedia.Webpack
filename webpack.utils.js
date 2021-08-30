@@ -58,11 +58,11 @@ function cacheDir(name, skipEnv = false) {
     const { NODE_ENV } = require('./app.env');
     const prefixedName = (skipEnv ? name : `${name}-${NODE_ENV}`);
     const orgEnvDir = process.env.CACHE_DIR || null;
-    const envDir = path.join(__dirname, 'cache', prefixedName);
+    const envDir = slash(path.join(__dirname, 'cache', prefixedName));
     if (fs.existsSync(envDir)) {
         process.env.CACHE_DIR = envDir;
     }
-    const result = findCacheDir({ name: prefixedName, create: true }).replace('find-cache-dir', '');
+    const result = slash(findCacheDir({ name: prefixedName, create: true })).replace(/[^/]+$/, '');
     if (orgEnvDir) {
         process.env.CACHE_DIR = orgEnvDir;
     }
