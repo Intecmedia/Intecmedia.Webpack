@@ -62,7 +62,9 @@ function cacheDir(name, skipEnv = false) {
     if (fs.existsSync(envDir)) {
         process.env.CACHE_DIR = envDir;
     }
-    const result = slash(findCacheDir({ name: prefixedName, create: true })).replace(/[^/]+$/, '');
+    const result = slash(findCacheDir({ name: prefixedName, create: true }))
+        .replace(`${prefixedName}/${prefixedName}`, prefixedName)
+        .replace('find-cache-dir', '');
     if (orgEnvDir) {
         process.env.CACHE_DIR = orgEnvDir;
     }
