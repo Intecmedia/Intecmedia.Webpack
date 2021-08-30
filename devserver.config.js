@@ -2,7 +2,6 @@
 
 module.exports = {
     watchFiles: [
-        '../include/module/**/*.{php,phtml}',
-        '../include/template/**/*.{php,phtml,svg}',
+        // '../include/template/**/*.{php,phtml,svg}',
     ],
 };
