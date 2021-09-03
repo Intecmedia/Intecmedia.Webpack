@@ -1,3 +1,4 @@
+# build dir
 build/fonts
 build/img
 build/js
@@ -9,4 +10,26 @@ build/**/*.html
 build/partials/svg/**/*.svg
 build/humans.txt
 build/assets-manifest.json
+
+# VisualStudioCode
+.vscode
+
+# Node.js modules
 node_modules
+
+# WebStorm project files
+.idea
+
+# NetBeans project files
+nbproject
+
+# Zend Studio for eclipse project files
+.buildpath
+.project
+.settings
+
+# Windows thumbnail cache
+Thumbs.db
+
+# Mac DS_Store Files
+.DS_Store
