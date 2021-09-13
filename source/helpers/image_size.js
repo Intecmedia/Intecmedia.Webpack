@@ -12,5 +12,8 @@ module.exports = function helper(filename, nocache = false) {
     if (!(fullpath in cacheMap) || nocache) {
         cacheMap[fullpath] = ImageSize(fullpath);
     }
+    if (cacheMap[fullpath].type === 'jpg') {
+        cacheMap[fullpath].type = 'jpeg';
+    }
     return cacheMap[fullpath];
 };
