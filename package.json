@@ -141,7 +141,7 @@
         "lodash.uniqueid": "latest",
         "md5-file": "latest",
         "mini-css-extract-plugin": "latest",
-        "nodemon": "latest",
+        "nodemon": "2.0.7",
         "nunjucks": "latest",
         "p-limit": "^3.1.0",
         "popper.js": "latest",
