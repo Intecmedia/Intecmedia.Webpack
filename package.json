@@ -129,7 +129,7 @@
         "imagemin-gifsicle": "latest",
         "imagemin-mozjpeg": "latest",
         "imagemin-optipng": "latest",
-        "imagemin-svgo": "latest",
+        "imagemin-svgo": "^9.0.0",
         "imagemin-webp": "latest",
         "imports-loader": "latest",
         "intersection-observer": "latest",
