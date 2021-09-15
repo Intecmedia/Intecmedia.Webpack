@@ -196,13 +196,13 @@ module.exports = {
         ...(ENV.PROD && !ENV.DEBUG ? [
             new CaseSensitivePathsPlugin(),
             new CompressionPlugin({
-                test: /\.(js|css|svg|json|lottie)(\?.*)?$/i,
+                test: /\.(js|css|svg|json|lottie|gltf|glb|hdr)(\?.*)?$/i,
                 exclude: ['assets-manifest.json'],
                 filename: '[path][base].br[query]',
                 algorithm: 'brotliCompress',
             }),
             new CompressionPlugin({
-                test: /\.(js|css|svg|json|lottie)(\?.*)?$/i,
+                test: /\.(js|css|svg|json|lottie|gltf|glb|hdr)(\?.*)?$/i,
                 exclude: ['assets-manifest.json'],
                 filename: '[path][base].gz[query]',
                 algorithm(input, compressionOptions, callback) {
@@ -414,7 +414,7 @@ module.exports = {
             },
             // file loaders
             {
-                test: /\.(lottie|json|mpeg|mpg|mp3|mp4|webm|weba|wav|m4a|m4v|aac|oga|ogg|ogm|ogv|rar|zip|7z|gz)(\?.*)?$/i,
+                test: /\.(lottie|gltf|glb|hdr|json|mpeg|mpg|mp3|mp4|webm|weba|wav|m4a|m4v|aac|oga|ogg|ogm|ogv|rar|zip|7z|gz)(\?.*)?$/i,
                 include: [
                     path.join(ENV.SOURCE_PATH, 'upload'),
                 ],
