@@ -159,7 +159,7 @@
         "postcss-reporter": "latest",
         "postcss-url": "latest",
         "resize-observer-polyfill": "latest",
-        "sass": "1.32.13",
+        "sass": "latest",
         "sass-loader": "latest",
         "schema-utils": "latest",
         "semver": "latest",
