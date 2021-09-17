@@ -16,6 +16,13 @@ export default class AbstractApp {
                 const values = Object.values(this.components[name]);
                 return values[0] || false;
             }
+            if (id instanceof Element) {
+                const dataComponentId = id.getAttribute('data-component-id');
+                if (dataComponentId && (dataComponentId in this.components[name])) {
+                    return this.components[name][dataComponentId];
+                }
+                return false;
+            }
             if (id in this.components[name]) {
                 return this.components[name][id];
             }
