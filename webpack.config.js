@@ -161,7 +161,8 @@ module.exports = {
         assetFilter: (asset) => {
             const [filename] = asset.split('?', 2);
             const assetFilter = /\.(css|js)(\?.*)?$/;
-            return assetFilter.test(filename);
+            const webpackFilter = /webpack-\w+\.min\.js/i;
+            return assetFilter.test(filename) && !webpackFilter.test(filename);
         },
         hints: 'warning',
         maxAssetSize: Number.MAX_SAFE_INTEGER,
