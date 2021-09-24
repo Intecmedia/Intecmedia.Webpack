@@ -103,8 +103,8 @@ function processHtml(html, options, loaderCallback) {
     });
     content = content.reverse().join('');
 
-    let exportString = `export default ${JSON.stringify(content)};`;
-    exportString = options.requireExport(exportString);
+    const contentString = options.requireExport(JSON.stringify(content));
+    const exportString = `export default function () { return ${contentString}; };`;
 
     loaderCallback(null, exportString);
 }
