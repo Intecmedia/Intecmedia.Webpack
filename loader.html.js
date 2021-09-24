@@ -11,6 +11,7 @@ const weblog = require('webpack-log');
 const nunjucks = require('nunjucks');
 const frontMatter = require('front-matter');
 const deepMerge = require('lodash.merge');
+const lodashTemplate = require('lodash.template');
 
 const attributeParser = require('./attr.parser');
 
@@ -103,8 +104,12 @@ function processHtml(html, options, loaderCallback) {
     });
     content = content.reverse().join('');
 
-    const contentString = options.requireExport(JSON.stringify(content));
-    const exportString = `export default function () { return ${contentString}; };`;
+    const template = options.requireExport(lodashTemplate(content, {
+        interpolate: /<%=([\s\S]+?)%>/g,
+        variable: 'data',
+    }).source);
+
+    const exportString = `module.exports = function (params) { with (params) { return (${template})(); }; };`;
 
     loaderCallback(null, exportString);
 }
@@ -155,7 +160,7 @@ module.exports = function HtmlLoader() {
         const urlPrefix = path.relative(resourceDirectory, options.searchPath);
 
         const request = loaderUtils.urlToRequest(slash(path.join(urlPrefix, url)), resourceDirectory);
-        return `" + require(${JSON.stringify(request)}) + "`;
+        return `' + require(${JSON.stringify(request)}) + '`;
     });
 
     nunjucksEnv.addFilter('require', options.requireIdent);
