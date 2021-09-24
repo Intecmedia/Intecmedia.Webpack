@@ -4,7 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 const slash = require('slash');
-const svg2js = require('svgo/lib/svgo/svg2js');
+const { parseSvg } = require('svgo/lib/parser');
 
 /*
 
@@ -39,7 +39,7 @@ const walkAttributes = (root, callback) => {
 module.exports = function noSpriteURL(filepath) {
     const relpath = slash(path.relative(__dirname, path.normalize(filepath)));
     const content = fs.readFileSync(filepath).toString();
-    const root = svg2js(content);
+    const root = parseSvg(content);
 
     walkAttributes(root, (node, name, value) => {
         if (URL_PATTERN.test(value)) {
