@@ -119,7 +119,7 @@
         "focus-within": "latest",
         "front-matter": "latest",
         "glob": "latest",
-        "html-validate": "latest",
+        "html-validate": "^5.5.0",
         "html-validator": "latest",
         "html-webpack-plugin": "latest",
         "ignore": "latest",
