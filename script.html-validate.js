@@ -23,7 +23,9 @@ const ignoreTest = (message) => {
 };
 
 const lineEllipsis = 80;
-const htmlvalidate = new HtmlValidate();
+const config = require('./.htmlvalidate');
+
+const htmlvalidate = new HtmlValidate({ ...config });
 
 const verbose = 'verbose' in argv && argv.verbose;
 const pathSuffix = argv.pathSuffix && typeof (argv.pathSuffix) === 'string' ? argv.pathSuffix : '';

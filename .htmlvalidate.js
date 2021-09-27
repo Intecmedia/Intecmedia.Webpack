@@ -12,7 +12,7 @@ module.exports = {
         'htmlvalidate:document',
     ],
     'plugins': [
-        './plugin.html-validate.js',
+        '<rootDir>/plugin.html-validate.js',
     ],
     'rules': {
         'bootstrap/col-no-row': ['error', {
