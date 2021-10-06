@@ -6,16 +6,18 @@
     ['(min-width: 1200px)', '1900x', 'xl']
 ] %}
 
-{% macro sources (url, alt, attrs={}, sources=DEFAULT_SOURCES) %}
+{% set DEFAULT_OPTIONS = {} %}
+
+{% macro sources (url, alt, attrs={}, sources=DEFAULT_SOURCES, options = DEFAULT_OPTIONS) %}
     {% if url.toLowerCase().endsWith('.svg') %}{{ throw('Useless <picture> for SVG: ' + url|dump + '.') }}{% endif %}
     <picture{% for k, v in attrs %}{% if k != 'img' %} {{ k }}="{{ v }}"{% endif %}{% endfor %}>
         <!-- sources = {{ sources | dump | safe }} -->
 
         {% if APP.ENV.PROD or APP.ENV.DEBUG %}
-        {% if APP.AVIF %}{% for source in sources %}
+        {% if APP.AVIF and not options.noavif %}{% for source in sources %}
         <source{% if source[0] %} media="{{ source[0] }}"{% endif %} srcset="{{ require(url + '?resize=' + source[1] + '&format=avif&suffix=' + source[2]) }}" type="image/avif">
         {% endfor %}{% endif %}
-        {% if APP.WEBP %}{% for source in sources %}
+        {% if APP.WEBP and not options.nowebp %}{% for source in sources %}
         <source{% if source[0] %} media="{{ source[0] }}"{% endif %} srcset="{{ require(url + '?resize=' + source[1] + '&format=webp&suffix=' + source[2]) }}" type="image/webp">
         {% endfor %}{% endif %}
         {% endif %}
@@ -41,17 +43,17 @@
 {% set DEFAULT_BREAKPOINTS = ['xs', 'sm', 'md', 'lg', 'xl'] %}
 {% set DEFAULT_SIZES = {xs: 576, sm: 768, md: 992, lg: 1200, xl: 1900} %}
 
-{% macro breakpoints (url, alt, attrs={}, breakpoints=DEFAULT_BREAKPOINTS, sizes=DEFAULT_SIZES) %}
+{% macro breakpoints (url, alt, attrs={}, breakpoints=DEFAULT_BREAKPOINTS, sizes=DEFAULT_SIZES, options = DEFAULT_OPTIONS) %}
     {% if url.toLowerCase().endsWith('.svg') %}{{ throw('Useless <picture> for SVG: ' + url|dump + '.') }}{% endif %}
     <picture{% for k, v in attrs %}{% if k != 'img' %} {{ k }}="{{ v }}"{% endif %}{% endfor %}>
         <!-- breakpoints = {{ breakpoints | dump | safe }} -->
         <!-- sizes = {{ sizes | dump | safe }} -->
 
         {% if APP.ENV.PROD or APP.ENV.DEBUG %}
-        {% if APP.AVIF %}{% for breakpoint, media in breakpoints_media(breakpoints, sizes) %}
+        {% if APP.AVIF and not options.noavif %}{% for breakpoint, media in breakpoints_media(breakpoints, sizes) %}
         <source{% if media %} media="{{ media }}"{% endif %} srcset="{{ require(url + '?resize=' + sizes[breakpoint] + '&format=avif&suffix=' + breakpoint) }}" type="image/avif">
         {% endfor %}{% endif %}
-        {% if APP.WEBP %}{% for breakpoint, media in breakpoints_media(breakpoints, sizes) %}
+        {% if APP.WEBP and not options.nowebp %}{% for breakpoint, media in breakpoints_media(breakpoints, sizes) %}
         <source{% if media %} media="{{ media }}"{% endif %} srcset="{{ require(url + '?resize=' + sizes[breakpoint] + '&format=webp&suffix=' + breakpoint) }}" type="image/webp">
         {% endfor %}{% endif %}
         {% endif %}
@@ -74,12 +76,12 @@
     </picture>
 {% endmacro %}
 
-{% macro picture (url, alt, attrs={}) %}
+{% macro picture (url, alt, attrs={}, options = DEFAULT_OPTIONS) %}
     {% if url.toLowerCase().endsWith('.svg') %}{{ throw('Useless <picture> for SVG: ' + url|dump + '.') }}{% endif %}
     <picture{% for k, v in attrs %}{% if k != 'img' %} {{ k }}="{{ v }}"{% endif %}{% endfor %}>
         {% if APP.ENV.PROD or APP.ENV.DEBUG %}
-        {% if APP.AVIF %}<source srcset="{{ require(url + '?resize=&format=avif') }}" type="image/avif">{% endif %}
-        {% if APP.WEBP %}<source srcset="{{ require(url + '?resize=&format=webp') }}" type="image/webp">{% endif %}
+        {% if APP.AVIF and not options.noavif %}<source srcset="{{ require(url + '?resize=&format=avif') }}" type="image/avif">{% endif %}
+        {% if APP.WEBP and not options.nowebp %}<source srcset="{{ require(url + '?resize=&format=webp') }}" type="image/webp">{% endif %}
         {% endif %}
 
         {% set dimensions = image_size(url) %}
