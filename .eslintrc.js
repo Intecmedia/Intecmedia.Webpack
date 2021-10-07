@@ -56,6 +56,7 @@ module.exports = {
             'skipBlankLines': true,
             'skipComments': true,
         }],
+        'no-alert': ENV.PROD ? ['error'] : 'off',
         'no-console': 'off',
         'no-debugger': ENV.PROD ? ['error'] : 'off',
         'no-invalid-this': ['error', {
@@ -66,7 +67,8 @@ module.exports = {
         }],
         'no-plusplus': 'off',
         'no-underscore-dangle': 'off',
-        'no-unused-expressions': 'off',
+        'no-unreachable': ENV.PROD ? ['error'] : 'off',
+        'no-unused-expressions': ENV.PROD ? ['error'] : 'off',
         'require-await': ['error'],
         'sort-requires/sort-requires': 'off',
         'unicode-bom': ['error', 'never'],
