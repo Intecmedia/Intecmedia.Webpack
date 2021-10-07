@@ -121,6 +121,9 @@ $fluid-max-height: 1024px !default;
 }
 
 @function fluid-clamp($min-size, $max-size, $min-width: $fluid-min-width, $max-width: $fluid-max-width) {
+    $min-size: rem($min-size);
+    $max-size: rem($max-size);
+
     $min-size: strip-unit($min-size);
     $max-size: strip-unit($max-size);
 
