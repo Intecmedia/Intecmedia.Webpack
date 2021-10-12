@@ -17,6 +17,7 @@ const pLimit = require('p-limit');
 
 const logger = weblog({ name: 'loader-resize' });
 const imageminConfig = require('./imagemin.config');
+const ENV = require('./app.env');
 
 const imageminConfigModule = require.resolve('./imagemin.config');
 
@@ -27,7 +28,7 @@ const DEFAULT_OPTIONS = {
 const DEFAULT_FIT = 'inside';
 const ALLOWED_PATTERN = /\.(jpeg|jpg|png|gif)(\?.*)?$/i;
 
-const resizeLimit = pLimit(os.cpus().length - 1);
+const resizeLimit = (ENV.PROD && !ENV.DEBUG ? pLimit(os.cpus().length - 1) : (callback) => callback());
 
 module.exports = async function ResizeLoader(content) {
     const thisLoader = this;
