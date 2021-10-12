@@ -4,7 +4,7 @@
 const uniqueId = require('lodash.uniqueid');
 
 const SvgoCreateConfig = (config) => ({
-    js2svg: { pretty: (!!config.pretty), eol: '\n' },
+    js2svg: { pretty: (!!config.pretty), eol: '\n', indent: 4 },
     plugins: [
         {
             name: 'preset-default',
