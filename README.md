@@ -107,7 +107,7 @@
 ### Оптимизация шрифтов
 * Мы используем только 3 формата: `ttf`, `woff`, `woff2`. Устаревшими считаются: `eot` и `svg`.
 * Мы используем [fonttools](https://github.com/fonttools/fonttools).
-* Для fonttools требуется python в системе: `pip install fonttools`.
+* Для fonttools требуется python в системе: `pip install fonttools` и возможно `pip install brotli`.
 * Исходники шрифтов только формате `ttf`, должны лежать в директории `source/fonts/src-ttf`.
 * `npm run fonts-subsets` – запуск fonts subseting.
 * Автоматически добавляется `font-display: swap;` плагин [`postcss-font-display`](https://github.com/dkrnl/postcss-font-display).
