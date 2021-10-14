@@ -68,6 +68,11 @@
         background: transparent;
         border: 0;
 
+        /* stylelint-disable-next-line selector-max-compound-selectors -- its ok for tables */
+        > :not(:first-child) {
+            border-top: 0;
+        }
+
         > thead,
         > tbody,
         > tfoot {
