@@ -85,8 +85,8 @@ function processHtml(html, options, loaderCallback) {
     let content = [html];
     links.reverse().forEach((link) => {
         let value;
+        if (IGNORE_PATTERN.test(link.value) || options.requireIgnore.test(link.value)) return;
         if (SRCSET_ATTRS.includes(link.attr)) {
-            if (IGNORE_PATTERN.test(link.value) || options.requireIgnore.test(link.value)) return;
             value = link.value.split(SRCSET_SEPARATOR).map((source) => {
                 const [url, size = ''] = source.split(SRC_SEPARATOR, 2);
                 if (IGNORE_PATTERN.test(url) || options.requireIgnore.test(url)) return source;
@@ -94,7 +94,6 @@ function processHtml(html, options, loaderCallback) {
                 return options.requireIdent(url) + (size ? ` ${size}` : '');
             }).join(', ');
         } else {
-            if (IGNORE_PATTERN.test(link.value) || options.requireIgnore.test(link.value)) return;
             if (!loaderUtils.isUrlRequest(link.value, options.searchPath)) return;
             value = options.requireIdent(link.value);
         }
