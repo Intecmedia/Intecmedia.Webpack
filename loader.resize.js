@@ -31,21 +31,23 @@ const ALLOWED_PATTERN = /\.(jpeg|jpg|png|gif)(\?.*)?$/i;
 const resizeLimit = (ENV.PROD && !ENV.DEBUG ? pLimit(os.cpus().length - 1) : (callback) => callback());
 
 module.exports = async function ResizeLoader(content) {
-    const thisLoader = this;
+    const loaderContext = this;
 
-    if (thisLoader.cacheable) thisLoader.cacheable();
-    const loaderCallback = thisLoader.async();
+    if (loaderContext.cacheable) loaderContext.cacheable();
+    const loaderCallback = loaderContext.async();
 
-    thisLoader.addDependency(thisLoader.resourcePath);
-    thisLoader.addDependency(imageminConfigModule);
+    loaderContext.addDependency(loaderContext.resourcePath);
+    loaderContext.addDependency(imageminConfigModule);
 
-    const query = thisLoader.resourceQuery ? loaderUtils.parseQuery(thisLoader.resourceQuery) : {};
+    const query = loaderContext.resourceQuery ? Object.fromEntries(
+        (new URLSearchParams(loaderContext.resourceQuery.slice(1))).entries(),
+    ) : {};
     const options = deepMerge(
         {},
         DEFAULT_OPTIONS,
-        loaderUtils.getOptions(thisLoader),
+        loaderContext.getOptions(),
     );
-    const context = options.context || thisLoader.rootContext;
+    const context = options.context || loaderContext.rootContext;
 
     const { cacheDirectory } = options;
     delete options.cacheDirectory;
@@ -57,12 +59,12 @@ module.exports = async function ResizeLoader(content) {
 
     const nextLoader = (query.inline === 'inline' ? urlLoader : fileLoader);
     if (!('resize' in query)) {
-        return loaderCallback(null, nextLoader.call(thisLoader, content));
+        return loaderCallback(null, nextLoader.call(loaderContext, content));
     }
 
-    if (!ALLOWED_PATTERN.test(thisLoader.resourcePath)) {
-        const errorMessage = `Resize not allowed for: ${JSON.stringify(thisLoader.resourcePath)}.`;
-        thisLoader.emitError(errorMessage);
+    if (!ALLOWED_PATTERN.test(loaderContext.resourcePath)) {
+        const errorMessage = `Resize not allowed for: ${JSON.stringify(loaderContext.resourcePath)}.`;
+        loaderContext.emitError(errorMessage);
         loaderCallback(errorMessage);
         throw new Error(errorMessage);
     }
@@ -71,9 +73,9 @@ module.exports = async function ResizeLoader(content) {
         delete query.inline;
     }
 
-    const resourceInfo = path.parse(thisLoader.resourcePath);
+    const resourceInfo = path.parse(loaderContext.resourcePath);
     const resourceFormat = resourceInfo.ext.slice(1).toLowerCase();
-    const relativePath = slash(path.relative(__dirname, thisLoader.resourcePath));
+    const relativePath = slash(path.relative(__dirname, loaderContext.resourcePath));
 
     let [, resizeWidth,, resizeHeight, resizeFit] = (String(query.resize).trim().match(/^(\d*)(x(\d*))?(\w+)?$/)) || [];
     resizeWidth = parseInt(resizeWidth, 10);
@@ -81,18 +83,18 @@ module.exports = async function ResizeLoader(content) {
     resizeFit = (resizeFit || DEFAULT_FIT).trim();
 
     if (!query.resize && !query.name) {
-        query.name = path.basename(thisLoader.resourcePath, path.extname(thisLoader.resourcePath));
+        query.name = path.basename(loaderContext.resourcePath, path.extname(loaderContext.resourcePath));
     }
 
     const format = (query.format || resourceFormat).toLowerCase();
-    const name = ((query.name ? loaderUtils.interpolateName(thisLoader, query.name, {
+    const name = ((query.name ? loaderUtils.interpolateName(loaderContext, query.name, {
         context,
         content,
     }) : null) || (
         `${resourceInfo.name}@resize-${resizeWidth || ''}x${resizeHeight || ''}${resizeFit && resizeFit !== DEFAULT_FIT ? `-${resizeFit}` : ''}`
     )) + (query.suffix ? `-${query.suffix}` : '');
 
-    const resourceHash = md5File.sync(thisLoader.resourcePath);
+    const resourceHash = md5File.sync(loaderContext.resourcePath);
     const formatConfig = imageminConfig[format] || {};
     const cacheFilename = `${encodeURIComponent(`${relativePath}?${JSON.stringify(query)}`)}.json`;
     const cacheFilepath = cacheDirectory ? path.join(cacheDirectory, cacheFilename) : undefined;
@@ -102,7 +104,7 @@ module.exports = async function ResizeLoader(content) {
         try {
             cacheData = JSON.parse(fs.readFileSync(cacheFilepath).toString());
         } catch (cacheError) {
-            logger.error(`error cache '${relativePath}${thisLoader.resourceQuery}'`, cacheError);
+            logger.error(`error cache '${relativePath}${loaderContext.resourceQuery}'`, cacheError);
             cacheData = undefined;
         }
     }
@@ -114,10 +116,10 @@ module.exports = async function ResizeLoader(content) {
         && cacheData.config === JSON.stringify(formatConfig)
     ) {
         if (options.verbose) {
-            logger.info(`load cache '${relativePath}${thisLoader.resourceQuery}'`);
+            logger.info(`load cache '${relativePath}${loaderContext.resourceQuery}'`);
         }
-        thisLoader.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
-        return loaderCallback(null, nextLoader.call(thisLoader, Buffer.from(cacheData.data, 'base64')));
+        loaderContext.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
+        return loaderCallback(null, nextLoader.call(loaderContext, Buffer.from(cacheData.data, 'base64')));
     }
 
     const resourceImage = sharp(content);
@@ -184,18 +186,18 @@ module.exports = async function ResizeLoader(content) {
                     }));
                 }
                 if (options.verbose) {
-                    logger.info(`save cache '${relativePath}${thisLoader.resourceQuery}'`);
+                    logger.info(`save cache '${relativePath}${loaderContext.resourceQuery}'`);
                 }
                 resizeResolve(buffer);
-                thisLoader.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
-                loaderCallback(null, nextLoader.call(thisLoader, buffer));
+                loaderContext.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
+                loaderCallback(null, nextLoader.call(loaderContext, buffer));
             }).catch((bufferError) => {
-                thisLoader.emitError(bufferError);
+                loaderContext.emitError(bufferError);
                 loaderCallback(bufferError);
                 resizeReject(bufferError);
             });
         })).catch((promiseError) => {
-            thisLoader.emitError(promiseError);
+            loaderContext.emitError(promiseError);
             loaderCallback(promiseError);
         });
         return resizePromise;
