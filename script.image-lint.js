@@ -48,7 +48,7 @@ const LINT_RULES = [
     },
     {
         name: 'space',
-        allowed: ['srgb', 'gray'],
+        allowed: ['srgb', 'gray', 'b-w'],
         fn(metadata) {
             if (!this.allowed.includes(metadata.space)) {
                 return `The color space of this image is ${metadata.space}. It must be ${JSON.stringify(this.allowed)}.`;
