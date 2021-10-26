@@ -1,0 +1,39 @@
+# Handle line endings automatically for files detected as text
+# and leave all files detected as binary untouched.
+* text=auto
+
+# Force the following filetypes to have unix eols, so Windows does not break them
+*.* text eol=lf
+
+# These files are binary and should be left untouched
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.ttf binary
+*.eot binary
+*.woff binary
+*.woff2 binary
+*.lottie binary
+*.gltf binary
+*.glb binary
+*.hdr binary
+*.mpeg binary
+*.mpg binary
+*.mp3 binary
+*.mp4 binary
+*.webm binary
+*.weba binary
+*.wav binary
+*.m4a binary
+*.m4v binary
+*.aac binary
+*.oga binary
+*.ogg binary
+*.ogm binary
+*.ogv binary
+*.rar binary
+*.zip binary
+*.7z binary
+*.gz binary
