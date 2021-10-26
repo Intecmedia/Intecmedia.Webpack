@@ -9,6 +9,7 @@ const weblog = require('webpack-log');
 const { argv } = require('yargs');
 
 const ENV = require('./app.env');
+const config = require('./.imagelint');
 
 const logger = weblog({ name: 'image-lint' });
 
@@ -28,8 +29,8 @@ async function metadataAsync(filename) {
 const LINT_RULES = [
     {
         name: 'size',
-        maxwidth: 1920,
-        maxheight: 1920,
+        maxwidth: config.maxwidth,
+        maxheight: config.maxheight,
         fn(metadata) {
             if (metadata.width > this.maxwidth || metadata.height > this.maxheight) {
                 return `Image size ${metadata.width}x${metadata.height} is not less than ${this.maxwidth}x${this.maxheight}.`;
@@ -48,7 +49,7 @@ const LINT_RULES = [
     },
     {
         name: 'space',
-        allowed: ['srgb', 'gray', 'b-w'],
+        allowed: config.colorspace,
         fn(metadata) {
             if (!this.allowed.includes(metadata.space)) {
                 return `The color space of this image is ${metadata.space}. It must be ${JSON.stringify(this.allowed)}.`;
