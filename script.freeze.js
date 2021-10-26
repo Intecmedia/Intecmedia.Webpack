@@ -1,5 +1,6 @@
 /* eslint-env node -- webpack is node env */
 /* eslint "compat/compat": "off" -- webpack is node env */
+const semver = require('semver');
 const childProcess = require('child_process');
 
 const weblog = require('webpack-log');
@@ -11,7 +12,10 @@ logger.info('npm ls');
 const silent = (process.platform === 'win32' ? '|| exit 0' : '|| true');
 const packages = Object.entries(JSON.parse(
     childProcess.execSync(`npm ls --json ${silent}`).toString() || '{}',
-).dependencies || {}).filter(([pkg, meta]) => dependencies[pkg] && dependencies[pkg] === 'latest');
+).dependencies || {}).filter(([pkg, meta]) => (
+    dependencies[pkg]
+    && (dependencies[pkg] === 'latest' || !semver.satisfies(meta.version, dependencies[pkg]))
+));
 
 logger.info(`${packages.length} packages`);
 
