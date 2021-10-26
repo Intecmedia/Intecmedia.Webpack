@@ -8,7 +8,9 @@ const logger = weblog({ name: 'update' });
 
 logger.info('npm outdate');
 const silent = (process.platform === 'win32' ? '|| exit 0' : '|| true');
-const outdated = Object.entries(JSON.parse(childProcess.execSync(`npm outdate --json ${silent}`).toString() || '{}'));
+const outdated = Object.entries(JSON.parse(childProcess.execSync(
+    `npm outdate --json ${silent}`,
+).toString() || '{}'));
 
 const missing = outdated.filter(([, version]) => !version.location || version.current !== version.wanted);
 logger.info(`missing ${missing.length} packages`);
