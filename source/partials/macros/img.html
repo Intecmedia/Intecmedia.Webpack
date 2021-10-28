@@ -3,9 +3,11 @@
     <img
         src="{{ require(url) }}"
         loading="{%if attr.loading %}{{ attr.loading }}{% else %}lazy{% endif %}"
+        {% if dimensions.width and dimensions.height %}
         width="{{ dimensions.width }}"
         height="{{ dimensions.height }}"
         intrinsicsize="{{ dimensions.width }}x{{ dimensions.height }}"
+        {% endif %}
         alt="{{ alt }}"
         {% for k, v in attrs %} {{ k }}="{{ v }}"{% endfor %}
     >
@@ -17,9 +19,11 @@
         <img
             src="{{ require(url) }}"
             loading="{%if attrs.img and attrs.img.loading %}{{ attrs.img.loading }}{% else %}lazy{% endif %}"
+            {% if dimensions.width and dimensions.height %}
             width="{{ dimensions.width }}"
             height="{{ dimensions.height }}"
             intrinsicsize="{{ dimensions.width }}x{{ dimensions.height }}"
+            {% endif %}
             {%if attrs.img %}{% for k, v in attrs.img %} {{ k }}="{{ v }}"{% endfor %}{% endif %}
             alt="{{ alt }}"
         >
