@@ -28,6 +28,7 @@ module.exports = {
                 'css-filters',
                 'css-gradients',
                 'css-touch-action',
+                'css3-cursors-newer',
                 'flexbox',
                 'font-unicode-range',
                 'multicolumn',
