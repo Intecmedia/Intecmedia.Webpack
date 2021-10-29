@@ -71,7 +71,7 @@
     },
     "engines": {
         "fonttools": "*.*.*",
-        "node": ">=14 <16",
+        "node": ">=16",
         "npm": ">=7"
     },
     "dependencies": {
@@ -113,7 +113,6 @@
         "expose-loader": "^3.1.0",
         "fastparse": "^1.1.2",
         "favicons-webpack-plugin": "^5.0.2",
-        "fibers": "^5.0.0",
         "file-loader": "^6.2.0",
         "find-cache-dir": "^3.3.2",
         "focus-visible": "^5.2.0",

@@ -525,7 +525,6 @@ module.exports = {
                             sassOptions: {
                                 indentWidth: 4,
                                 outputStyle: 'expanded',
-                                fiber: require('fibers'),
                             },
                             webpackImporter: false,
                         },
