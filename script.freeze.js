@@ -13,8 +13,7 @@ const silent = (process.platform === 'win32' ? '|| exit 0' : '|| true');
 const packages = Object.entries(JSON.parse(
     childProcess.execSync(`npm ls --json ${silent}`).toString() || '{}',
 ).dependencies || {}).filter(([pkg, meta]) => (
-    dependencies[pkg]
-    && (dependencies[pkg] === 'latest' || !semver.satisfies(meta.version, dependencies[pkg]))
+    dependencies[pkg] && semver.minVersion(dependencies[pkg]).version !== meta.version
 ));
 
 logger.info(`${packages.length} packages`);
