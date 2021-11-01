@@ -32,6 +32,7 @@ console.log('');
 
 logger.info('npm ls...');
 const { dependencies } = require('./package.json');
+
 const packages = Object.entries(JSON.parse(
     childProcess.execSync(`npm ls --json ${silent}`).toString() || '{}',
 ).dependencies || {}).filter(([pkg, meta]) => (

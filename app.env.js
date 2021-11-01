@@ -40,6 +40,7 @@ if (!['production', 'development'].includes(NODE_ENV)) {
     throw new Error(`Unknow NODE_ENV=${JSON.stringify(NODE_ENV)}`);
 }
 
+const IGNORE_PATTERN = /\/_/;
 const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.html`, {
     ignore: [
         `${slash(SOURCE_PATH)}/partials/**/*.html`,
@@ -47,8 +48,8 @@ const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.html`, {
     ],
 }).map((i) => {
     const basename = path.basename(i, '.html');
-    const underscored = basename.startsWith('_');
     const template = slash(path.relative(__dirname, i));
+    const underscored = basename.startsWith('_') || IGNORE_PATTERN.test(template);
     const filename = slash(basename === 'index' ? path.join(
         path.relative(SOURCE_PATH, i),
     ) : path.join(
