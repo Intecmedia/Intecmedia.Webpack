@@ -22,7 +22,7 @@ logger.info(`${packages.length} packages`);
 
 const freezed = [];
 packages.forEach(([pkg, meta], index) => {
-    logger.info(`#${index + 1}/${packages.length} ${pkg}`, meta.version);
+    logger.info(`#${index + 1}/${packages.length} ${pkg}@${meta.version} (${dependencies[pkg]})`);
 
     const command = `npm install ${pkg}@${meta.version}`;
     logger.info(`#${index + 1}/${packages.length} ${command}`);
