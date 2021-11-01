@@ -1,13 +1,14 @@
 /* eslint-env node -- webpack is node env */
 /* eslint "compat/compat": "off" -- webpack is node env */
+const semver = require('semver');
 const childProcess = require('child_process');
 
 const weblog = require('webpack-log');
 
 const logger = weblog({ name: 'update' });
-
-logger.info('npm outdate');
 const silent = (process.platform === 'win32' ? '|| exit 0' : '|| true');
+
+logger.info('npm outdate...');
 const outdated = Object.entries(JSON.parse(childProcess.execSync(
     `npm outdate --json ${silent}`,
 ).toString() || '{}'));
@@ -26,7 +27,31 @@ missing.forEach(([pkg, version], index) => {
     installed.push([pkg, version]);
     console.log('');
 });
+logger.info(`installed ${installed.length} packages`);
+
+console.log('');
+
+logger.info('npm ls...');
+const { dependencies } = require('./package.json');
+const packages = Object.entries(JSON.parse(
+    childProcess.execSync(`npm ls --json ${silent}`).toString() || '{}',
+).dependencies || {}).filter(([pkg, meta]) => (
+    dependencies[pkg]
+    && !dependencies[pkg].startsWith('file:')
+    && semver.minVersion(dependencies[pkg]).version !== meta.version
+));
+
+const updated = [];
+packages.forEach(([pkg, meta], index) => {
+    logger.info(`#${index + 1}/${packages.length} ${pkg}@${meta.version} (${dependencies[pkg]})`);
+
+    const command = `npm install ${pkg}@${meta.version}`;
+    logger.info(`#${index + 1}/${packages.length} ${command}`);
+    childProcess.execSync(command, { stdio: 'inherit' });
+
+    updated.push([pkg, meta.version]);
+    console.log('');
+});
+logger.info(`updated ${updated.length} packages`);
 
 childProcess.execSync('npm update', { stdio: 'inherit' });
-
-logger.info(`installed ${installed.length} packages`);
