@@ -28,7 +28,6 @@ missing.forEach(([pkg, version], index) => {
     console.log('');
 });
 logger.info(`installed ${installed.length} packages`);
-
 console.log('');
 
 logger.info('npm ls...');
@@ -53,5 +52,6 @@ packages.forEach(([pkg, meta], index) => {
     console.log('');
 });
 logger.info(`updated ${updated.length} packages`);
+console.log('');
 
 childProcess.execSync('npm update', { stdio: 'inherit' });
