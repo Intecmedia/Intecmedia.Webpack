@@ -155,7 +155,7 @@
         "postcss-focus": "^5.0.1",
         "postcss-focus-visible": "^6.0.1",
         "postcss-focus-within": "^5.0.1",
-        "postcss-font-display": "^0.2.1",
+        "postcss-font-display": "^0.3.0",
         "postcss-loader": "^6.2.0",
         "postcss-reporter": "^7.0.4",
         "postcss-url": "^10.1.3",
