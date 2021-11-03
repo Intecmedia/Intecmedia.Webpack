@@ -121,13 +121,26 @@ $fluid-max-height: 1024px !default;
 }
 
 @function fluid-clamp($min-size, $max-size, $min-width: $fluid-min-width, $max-width: $fluid-max-width) {
+    @if unit($min-size) != "px" and unit($min-size) != "rem" {
+        @error "$min-size #{$min-size} must be either px or rem.";
+    }
     $min-size: rem($min-size);
-    $max-size: rem($max-size);
-
     $min-size: strip-unit($min-size);
+
+    @if unit($max-size) != "px" and ($max-size) != "rem" {
+        @error "$max-size #{$max-size} must be either px or rem.";
+    }
+    $max-size: rem($max-size);
     $max-size: strip-unit($max-size);
 
+    @if unit($max-width) != "px" {
+        @error "$max-width #{$max-width} must be px.";
+    }
     $min-width: strip-unit($min-width);
+
+    @if unit($max-width) != "px" {
+        @error "$max-width #{$max-width} must be px.";
+    }
     $max-width: strip-unit($max-width);
 
     $vw-coefficient: math.div(1600 * ($max-size - $min-size), $max-width - $min-width);
