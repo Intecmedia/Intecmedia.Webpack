@@ -38,7 +38,7 @@ const packages = Object.entries(JSON.parse(
 ).dependencies || {}).filter(([pkg, meta]) => (
     dependencies[pkg]
     && !dependencies[pkg].startsWith('file:')
-    && semver.minVersion(dependencies[pkg]).version !== meta.version
+    && (dependencies[pkg] === 'latest' || semver.minVersion(dependencies[pkg]).version !== meta.version)
 ));
 
 const updated = [];
