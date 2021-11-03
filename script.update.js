@@ -37,7 +37,7 @@ const packages = Object.entries(JSON.parse(
     childProcess.execSync(`npm ls --json ${silent}`).toString() || '{}',
 ).dependencies || {}).filter(([pkg, meta]) => (
     dependencies[pkg]
-    && !dependencies[pkg].startsWith('file:')
+    && !(/^\w+:/.test(dependencies[pkg]))
     && (dependencies[pkg] === 'latest' || semver.minVersion(dependencies[pkg]).version !== meta.version)
 ));
 
