@@ -82,10 +82,7 @@ module.exports = {
         },
         'polyfills': [
             'fetch',
-            'Array.from',
             'IntersectionObserver',
-            'Object.assign',
-            'Object.values',
             'Promise',
             'ResizeObserver',
             'Symbol',
