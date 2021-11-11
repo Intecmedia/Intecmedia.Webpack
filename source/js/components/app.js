@@ -123,6 +123,13 @@ export default class AbstractApp {
         });
     }
 
+    clearScope(scope) {
+        scope.querySelectorAll('.js-component[data-component-id]').forEach((element) => {
+            element.classList.remove('js-component');
+            element.removeAttribute('data-component-id');
+        });
+    }
+
     destroy() {
         this.destroyScope(document.body);
     }
