@@ -22,19 +22,22 @@ if (PACKAGE.name === 'Intecmedia.Webpack') {
 
 if (APP.TITLE === '$APP.TITLE$' || APP.TITLE.trim() === '') {
     lintErrors.push('rename `TITLE` in `app.config.js`');
-} else if (APP.TITLE.trim() === '') {
+}
+if (APP.TITLE.trim() === '') {
     lintErrors.push('empty `TITLE` in `app.config.js`');
 }
 
 if (APP.SHORT_NAME === '$APP.SHORT_NAME$' || APP.SHORT_NAME.trim() === '') {
     lintErrors.push('rename `SHORT_NAME` in `app.config.js`');
-} else if (APP.SHORT_NAME.trim() === '') {
+}
+if (APP.SHORT_NAME.trim() === '') {
     lintErrors.push('empty `SHORT_NAME` in `app.config.js`');
 }
 
 if (APP.DESCRIPTION === '$APP.DESCRIPTION$') {
     lintErrors.push('rename `DESCRIPTION in `app.config.js`');
-} else if (APP.DESCRIPTION.trim() === '') {
+}
+if (APP.DESCRIPTION.trim() === '') {
     lintErrors.push('empty `DESCRIPTION` in `app.config.js`');
 }
 
