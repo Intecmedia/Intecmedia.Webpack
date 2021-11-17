@@ -97,7 +97,7 @@
         "browserslist": "^4.18.1",
         "case-sensitive-paths-webpack-plugin": "^2.4.0",
         "compression-webpack-plugin": "^9.0.0",
-        "copy-webpack-plugin": "^9.1.0",
+        "copy-webpack-plugin": "^10.0.0",
         "core-js": "^3.19.1",
         "cross-env": "^7.0.3",
         "css-loader": "^6.5.1",
