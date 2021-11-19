@@ -32,6 +32,9 @@ const LINT_RULES = [
         maxwidth: config.maxwidth,
         maxheight: config.maxheight,
         fn(metadata) {
+            if (metadata.format === 'svg') {
+                return false;
+            }
             if (metadata.width > this.maxwidth || metadata.height > this.maxheight) {
                 return `Image size ${metadata.width}x${metadata.height} is not less than ${this.maxwidth}x${this.maxheight}.`;
             }
