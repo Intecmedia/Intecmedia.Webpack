@@ -27,6 +27,7 @@ module.exports = {
                 'css-featurequeries',
                 'css-filters',
                 'css-gradients',
+                'css-resize',
                 'css-touch-action',
                 'css3-cursors-newer',
                 'flexbox',
