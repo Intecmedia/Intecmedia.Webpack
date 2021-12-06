@@ -35,7 +35,7 @@ UTILS.globArray([
             return;
         }
 
-        const name = path.basename(resourcePath, '.svg');
+        const name = path.basename(resourcePath, path.extname(resourcePath));
         const options = SvgoCreateConfig({ prefix: `svgo-${name.toLowerCase()}-`, pretty: true });
         options.path = relativePath;
 
