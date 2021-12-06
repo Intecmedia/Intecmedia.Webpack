@@ -320,8 +320,11 @@ module.exports = {
                 exclude: [
                     /(fonts|font)/i,
                 ],
-                filter: (input, name) => !imageminConfig.testIgnore(name),
-                minimizerOptions: { plugins: imageminConfig.plugins },
+                minimizer: {
+                    implementation: ImageMinimizerPlugin.imageminMinify,
+                    options: { plugins: imageminConfig.plugins },
+                    filter: (input, name) => !imageminConfig.testIgnore(name),
+                },
                 loader: false,
             }),
         ] : []),
