@@ -106,5 +106,5 @@ glob(ENV.SOURCE_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.{jpg,jp
     await Promise.all(promises);
 
     console.log('');
-    logger.info('stats:', statMessages);
+    logger.info('stats:', JSON.stringify(statMessages));
 });

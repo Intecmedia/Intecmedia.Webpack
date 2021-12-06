@@ -38,7 +38,7 @@ glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'),
 
     logger.info(`${files.length} files\n`);
 
-    const statMessages = { ignored: 0, skipped: 0 };
+    const statMessages = { skipped: 0 };
     const increaseStat = (type) => {
         if (type in statMessages) statMessages[type] += 1;
         else statMessages[type] = 1;
@@ -64,12 +64,11 @@ glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'),
 
         report.results.forEach((result) => {
             result.messages.forEach((message) => {
+                const messageType = (message.severity === 2 ? 'error' : 'warning');
                 if (message.message && ignoreTest(message.message)) {
-                    increaseStat('ignored');
+                    increaseStat(`${messageType}-ignored`);
                     return;
                 }
-
-                const messageType = (message.severity === 2 ? 'error' : 'warning');
                 if (messageType === 'error') {
                     process.exitCode = 1;
                 }
@@ -86,5 +85,5 @@ glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'),
     });
 
     console.log('');
-    logger.info('stats:', statMessages);
+    logger.info('stats:', JSON.stringify(statMessages));
 });

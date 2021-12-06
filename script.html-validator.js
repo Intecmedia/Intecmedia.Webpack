@@ -45,7 +45,7 @@ glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'),
 
     logger.info(`${files.length} files\n`);
 
-    const statMessages = { ignored: 0, skipped: 0 };
+    const statMessages = { skipped: 0 };
     const increaseStat = (type) => {
         if (type in statMessages) statMessages[type] += 1;
         else statMessages[type] = 1;
@@ -66,7 +66,7 @@ glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'),
             skipped = false;
             result.messages.forEach((message) => {
                 if (message.message && ignoreTest(message.message)) {
-                    increaseStat('ignored');
+                    increaseStat(`${message.type}-ignored`);
                     return;
                 }
                 if (message.type === 'error') {
@@ -95,5 +95,5 @@ glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'),
     await Promise.all(promises);
 
     console.log('');
-    logger.info('stats:', statMessages);
+    logger.info('stats:', JSON.stringify(statMessages));
 });
