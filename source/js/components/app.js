@@ -100,6 +100,7 @@ export default class AbstractApp {
     }
 
     destroyScope(scope) {
+        if (!scope) return;
         scope.querySelectorAll('.js-component[data-component-id]').forEach((element) => {
             const id = element.getAttribute('data-component-id');
             if (!id) {
