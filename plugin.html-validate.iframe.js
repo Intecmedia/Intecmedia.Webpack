@@ -8,7 +8,7 @@ const nodeIgnore = (node, ignores) => ignores && ignores.some((i) => nodeEqual(i
 
 class IframeLoadingRequired extends Rule {
     constructor(options) {
-        super({ ignore: '.wysiwyg iframe, iframe.ignore-html-validate', ...options });
+        super({ ignore: '.wysiwyg iframe', ...options });
     }
 
     setup() {

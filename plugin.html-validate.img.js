@@ -58,7 +58,7 @@ class ImgPictureRequired extends Rule {
 
 class ImgLoadingRequired extends Rule {
     constructor(options) {
-        super({ intrinsicsize: true, ignore: '.wysiwyg img, img.ignore-html-validate', ...options });
+        super({ intrinsicsize: true, ignore: '.wysiwyg img', ...options });
     }
 
     setup() {
