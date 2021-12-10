@@ -42,6 +42,11 @@ const DEFAULT_OPTIONS = {
     requireReplace: {},
     searchPath: './source',
     verbose: false,
+    macrosWhitelist: {
+        'source/partials/macros/img.html': ['lazy', 'picture'],
+        'source/partials/macros/resize.html': ['sources', 'breakpoints', 'picture'],
+        'source/partials/macros/sprite.html': ['svg'],
+    },
 };
 
 const SRC_SEPARATOR = /\s+/;
@@ -63,11 +68,13 @@ const OPTIONS_SCHEMA = {
         requireReplace: { type: 'object' },
         searchPath: { type: 'string' },
         verbose: { type: 'boolean' },
+        macrosWhitelist: { type: 'object' },
     },
 };
 
 const ABSOLUTE_PATTERN = /^\/([^/])/;
 const ABSOLUTE_REPLACE = '../$1';
+const MACROS_PATTERN = /\{%\s+macro\s+([\w_]+).+%\}/gi;
 
 function resolveAbsolute(originUrl) {
     const url = slash(originUrl);
@@ -205,6 +212,20 @@ module.exports = function HtmlLoader() {
         if (SVG_PATTERN.test(filename)) {
             return { ...templateSource, src: `{{ require(${JSON.stringify(slash(filename))}) }}` };
         }
+
+        [...templateSource.src.matchAll(MACROS_PATTERN)].forEach(([macrosDef, macrosName]) => {
+            if (!(
+                relativePath in options.macrosWhitelist
+                && options.macrosWhitelist[relativePath].includes(macrosName)
+            )) {
+                const macrosError = [
+                    `Macros: ${JSON.stringify(macrosDef)} not allowed in ${JSON.stringify(relativePath)}.`,
+                    'Please replace to {% includeWith "partials/example.html", { varname: \'value\' } %} instead.',
+                ].join('\n');
+                throw new Error(macrosError);
+            }
+        });
+
         if (!frontMatter.test(templateSource.src)) {
             return templateSource;
         }
