@@ -68,7 +68,12 @@ const OPTIONS_SCHEMA = {
         requireReplace: { type: 'object' },
         searchPath: { type: 'string' },
         verbose: { type: 'boolean' },
-        macrosWhitelist: { type: 'object' },
+        macrosWhitelist: { 
+            anyOf: [
+                { type: 'boolean' },
+                { type: 'object' },
+            ],
+        },
     },
 };
 
@@ -218,7 +223,7 @@ module.exports = function HtmlLoader() {
             if (!(
                 templateRelative in options.macrosWhitelist
                 && options.macrosWhitelist[templateRelative].includes(macrosName)
-            )) {
+            ) || !options.macrosWhitelist) {
                 const macrosError = [
                     `Macros: ${JSON.stringify(macrosDef)} not allowed in ${JSON.stringify(templateRelative)}.`,
                     'Please replace to {% includeWith "partials/example.html", { varname: \'value\' } %} instead.',

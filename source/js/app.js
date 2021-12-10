@@ -1,4 +1,4 @@
-/* global VERBOSE BANNER_STRING */
+/* global NODE_ENV VERBOSE BANNER_STRING  */
 
 // import '~/components/aquilon-validator';
 import '~/components/bootstrap';
@@ -17,7 +17,9 @@ class App extends AbstractApp {
     }
 }
 
-console.log(`%c${BANNER_STRING}`, 'font-size:140%;font-weight:700;');
+if (NODE_ENV === 'production') {
+    console.log(`%c${BANNER_STRING}`, 'font-size:140%;font-weight:700;');
+}
 
 const app = new App({ components });
 if (VERBOSE) {
