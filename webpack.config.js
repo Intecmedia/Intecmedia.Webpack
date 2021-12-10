@@ -72,6 +72,8 @@ module.exports = {
 
     devServer: {
         allowedHosts: ['.localhost', 'localhost'],
+        hot: 'only',
+        liveReload: true,
         port: 8888,
         static: {
             directory: path.resolve(__dirname, 'source'),
@@ -265,7 +267,7 @@ module.exports = {
                 minifyCSS: !APP.HTML_PRETTY,
                 minifyJS: !APP.HTML_PRETTY,
             }) : false),
-            hash: true,
+            hash: ENV.PROD,
             cache: !ENV.DEBUG,
             title: APP.TITLE,
         }))),
