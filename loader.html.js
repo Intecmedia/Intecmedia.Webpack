@@ -228,6 +228,7 @@ module.exports = function HtmlLoader() {
                     `Macros: ${JSON.stringify(macrosDef)} not allowed in ${JSON.stringify(templateRelative)}.`,
                     'Please replace to {% includeWith "partials/example.html", { varname: \'value\' } %} instead.',
                 ].join('\n');
+                loaderContext.emitError(macrosError);
                 throw new Error(macrosError);
             }
         });
