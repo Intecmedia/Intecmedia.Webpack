@@ -43,9 +43,9 @@ const DEFAULT_OPTIONS = {
     searchPath: './source',
     verbose: false,
     macrosWhitelist: {
-        'source/partials/macros/img.html': ['lazy', 'picture'],
-        'source/partials/macros/resize.html': ['sources', 'breakpoints', 'picture'],
-        'source/partials/macros/sprite.html': ['svg'],
+        'partials/macros/img.html': ['lazy', 'picture'],
+        'partials/macros/resize.html': ['sources', 'breakpoints', 'picture'],
+        'partials/macros/sprite.html': ['svg'],
     },
 };
 
@@ -201,25 +201,26 @@ module.exports = function HtmlLoader() {
     });
 
     const nunjucksGetSource = nunjucksLoader.getSource;
-    nunjucksLoader.getSource = function getSource(filename) {
-        const filepath = path.isAbsolute(filename) ? filename : path.join(options.searchPath, filename);
-        loaderContext.addDependency(filepath);
+    nunjucksLoader.getSource = function getSource(templateFilename) {
+        const templateFilepath = path.isAbsolute(templateFilename) ? templateFilename : path.join(options.searchPath, templateFilename);
+        const templateRelative = slash(path.relative(__dirname, templateFilename));
+        loaderContext.addDependency(templateFilepath);
 
-        const templateSource = nunjucksGetSource.call(this, filename);
+        const templateSource = nunjucksGetSource.call(this, templateFilename);
         if (!(templateSource && templateSource.src)) {
             return templateSource;
         }
-        if (SVG_PATTERN.test(filename)) {
-            return { ...templateSource, src: `{{ require(${JSON.stringify(slash(filename))}) }}` };
+        if (SVG_PATTERN.test(templateFilename)) {
+            return { ...templateSource, src: `{{ require(${JSON.stringify(slash(templateFilename))}) }}` };
         }
 
         [...templateSource.src.matchAll(MACROS_PATTERN)].forEach(([macrosDef, macrosName]) => {
             if (!(
-                relativePath in options.macrosWhitelist
-                && options.macrosWhitelist[relativePath].includes(macrosName)
+                templateRelative in options.macrosWhitelist
+                && options.macrosWhitelist[templateRelative].includes(macrosName)
             )) {
                 const macrosError = [
-                    `Macros: ${JSON.stringify(macrosDef)} not allowed in ${JSON.stringify(relativePath)}.`,
+                    `Macros: ${JSON.stringify(macrosDef)} not allowed in ${JSON.stringify(templateRelative)}.`,
                     'Please replace to {% includeWith "partials/example.html", { varname: \'value\' } %} instead.',
                 ].join('\n');
                 throw new Error(macrosError);
