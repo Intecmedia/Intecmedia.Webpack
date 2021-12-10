@@ -1,8 +1,8 @@
+{% import "partials/macros/sprite.html" as $sprite %}
+
 <a href="https://pitcher.agency" class="pitcher-logo" title="Разработка сайта Pitcher.agency">
     <span class="pitcher-logo__text">Разработка сайта</span>
     <span class="pitcher-logo__image" role="img" aria-label="Pitcher.agency">
-        <svg class="pitcher-logo__icon">
-            <use xlink:href="{{ APP.PUBLIC_PATH }}img/svg-sprite.svg#icon-pitcher-logo" />
-        </svg>
+        {{ $sprite.svg('pitcher-logo', { class: 'pitcher-logo__icon' }) }}
     </span>
 </a>
