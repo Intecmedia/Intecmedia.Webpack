@@ -168,7 +168,7 @@
         "stylelint": "^13.13.1",
         "stylelint-config-sass-guidelines": "^8.0.0",
         "stylelint-config-twbs-bootstrap": "^2.2.4",
-        "stylelint-csstree-validator": "^1.9.0",
+        "stylelint-csstree-validator": "^2.0.0",
         "stylelint-high-performance-animation": "^1.6.0",
         "stylelint-max-lines": "^0.1.0",
         "stylelint-max-root-rules": "^0.1.0",
