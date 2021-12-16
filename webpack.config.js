@@ -237,7 +237,7 @@ module.exports = {
             BANNER_STRING: JSON.stringify(ENV.BANNER_STRING),
         }),
         new StyleLintPlugin({
-            syntax: 'scss',
+            customSyntax: 'postcss-scss',
             files: '**/*.scss',
             configFile: './.stylelintrc.js',
             ignorePath: './.stylelintignore',
