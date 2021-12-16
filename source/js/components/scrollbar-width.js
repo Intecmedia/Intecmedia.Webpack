@@ -1,5 +1,3 @@
-import nextTick from '~/utils/next-tick';
-
 const CLASS_NAME_OUTER = 'scrollbar-width';
 const CLASS_NAME_INNER = 'scrollbar-width__inner';
 
@@ -32,20 +30,14 @@ class ScrollbarWidth {
         window.addEventListener('popstate', this.onUpdate, false);
 
         this.updateWidth();
-        this.updateVisible();
     }
 
     onResize() {
         this.updateWidth();
-        this.updateVisible();
     }
 
-    async onUpdate() {
-        // wait side effects changes
-        await nextTick();
-
+    onUpdate() {
         this.updateWidth();
-        this.updateVisible();
     }
 
     updateWidth() {
@@ -53,14 +45,6 @@ class ScrollbarWidth {
         if (this.widthLast !== this.width && document.documentElement.style.setProperty) {
             document.documentElement.style.setProperty('--scrollbar-width', `${this.width}px`);
             this.widthLast = this.width;
-        }
-    }
-
-    updateVisible() {
-        this.visible = document.documentElement.scrollHeight > document.documentElement.clientHeight;
-        if (document.documentElement.style.setProperty) {
-            document.documentElement.style.setProperty('--scrollbar-visible', this.visible ? 1 : 0);
-            document.documentElement.style.setProperty('--scrollbar-hidden', this.visible ? 0 : 1);
         }
     }
 }
