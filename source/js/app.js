@@ -1,4 +1,4 @@
-/* global NODE_ENV VERBOSE BANNER_STRING  */
+/* global NODE_ENV VERBOSE BANNER_STRING __webpack_hash__ */
 
 // import '~/components/aquilon-validator';
 import '~/components/bootstrap';
@@ -18,6 +18,7 @@ class App extends AbstractApp {
 }
 
 if (NODE_ENV === 'production') {
+    console.log('__webpack_hash__', __webpack_hash__);
     console.log(`%c${BANNER_STRING}`, 'font-size:140%;font-weight:700;');
 }
 
