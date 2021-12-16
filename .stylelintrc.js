@@ -9,10 +9,11 @@ const sharedConfig = require('./.stylelintrc.shared');
 const ENV = require('./app.env');
 
 module.exports = deepMerge({}, sharedConfig, {
+    'customSyntax': 'postcss-scss',
     'defaultSeverity': (ENV.PROD || ENV.DEBUG ? 'error' : 'warning'),
     'extends': [
         'stylelint-config-sass-guidelines',
-        'stylelint-config-twbs-bootstrap/scss',
+        'stylelint-config-twbs-bootstrap',
         ...sharedConfig.extends,
     ],
     'plugins': [
@@ -21,12 +22,10 @@ module.exports = deepMerge({}, sharedConfig, {
         'stylelint-max-root-rules',
         'stylelint-scss',
         'stylelint-selector-bem-pattern',
-        'stylelint-use-nesting',
         ...sharedConfig.plugins,
     ],
     'reportDescriptionlessDisables': true,
     'rules': {
-        'csstools/use-nesting': true,
         'declaration-empty-line-before': null,
         'function-max-empty-lines': 0,
         'indentation': 4,
