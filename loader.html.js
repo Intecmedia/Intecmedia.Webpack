@@ -68,7 +68,7 @@ const OPTIONS_SCHEMA = {
         requireReplace: { type: 'object' },
         searchPath: { type: 'string' },
         verbose: { type: 'boolean' },
-        macrosWhitelist: { 
+        macrosWhitelist: {
             anyOf: [
                 { type: 'boolean' },
                 { type: 'object' },
@@ -207,7 +207,9 @@ module.exports = function HtmlLoader() {
 
     const nunjucksGetSource = nunjucksLoader.getSource;
     nunjucksLoader.getSource = function getSource(templateFilename) {
-        const templateFilepath = path.isAbsolute(templateFilename) ? templateFilename : path.join(options.searchPath, templateFilename);
+        const templateFilepath = path.isAbsolute(templateFilename)
+            ? templateFilename
+            : path.join(options.searchPath, templateFilename);
         const templateRelative = slash(path.relative(__dirname, templateFilename));
         loaderContext.addDependency(templateFilepath);
 
