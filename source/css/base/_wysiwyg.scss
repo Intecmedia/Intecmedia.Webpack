@@ -23,7 +23,7 @@
 
     // default image
     img:not([class]) {
-        @extend .img-responsive;
+        @extend .img-fluid;
     }
 
     // image with caption
