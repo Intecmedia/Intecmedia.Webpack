@@ -121,25 +121,25 @@ $fluid-max-height: 1024px !default;
 }
 
 @function fluid-clamp($min-size, $max-size, $min-width: $fluid-min-width, $max-width: $fluid-max-width) {
-    @if unit($min-size) != "px" and unit($min-size) != "rem" {
-        @error "$min-size #{$min-size} must be either px or rem.";
+    @if unit($min-size) != px and unit($min-size) != rem {
+        @error "$min-size #{$min-size} must be either px or rem (now is #{unit($min-size)}).";
     }
     $min-size: rem($min-size);
     $min-size: strip-unit($min-size);
 
-    @if unit($max-size) != "px" and ($max-size) != "rem" {
-        @error "$max-size #{$max-size} must be either px or rem.";
+    @if unit($max-size) != px and unit($max-size) != rem {
+        @error "$max-size #{$max-size} must be either px or rem (now is #{unit($max-size)}).";
     }
     $max-size: rem($max-size);
     $max-size: strip-unit($max-size);
 
-    @if unit($max-width) != "px" {
-        @error "$max-width #{$max-width} must be px.";
+    @if unit($max-width) != px {
+        @error "$max-width #{$max-width} must be px (now is #{unit($min-width)}).";
     }
     $min-width: strip-unit($min-width);
 
-    @if unit($max-width) != "px" {
-        @error "$max-width #{$max-width} must be px.";
+    @if unit($max-width) != px {
+        @error "$max-width #{$max-width} must be px (now is #{unit($max-width)}).";
     }
     $max-width: strip-unit($max-width);
 
