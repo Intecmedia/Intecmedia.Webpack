@@ -38,3 +38,7 @@
 
     @return $string;
 }
+
+@function grid-percentage($column, $count) {
+    @return percentage(math.div($column, $count));
+}
