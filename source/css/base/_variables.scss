@@ -1,6 +1,27 @@
 @import "node_modules/bootstrap/scss/functions";
 
 // Bootstrap Options https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss
+
+$grid-breakpoints: (
+    xs: 0,
+    ss: 375px,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+    hd: 1920px
+) !default;
+
+$container-max-widths: (
+    sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xl: 1140px,
+    xxl: 1320px,
+    hd: 1800px
+) !default;
+
 $theme-colors:                () !default;
 
 $enable-caret:                true !default;
@@ -14,10 +35,10 @@ $enable-grid-classes:         true !default;
 $enable-cssgrid:              false !default;
 $enable-button-pointers:      true !default;
 $enable-rfs:                  true !default;
-$enable-validation-icons:     true !default;
+$enable-validation-icons:     false !default;
 $enable-negative-margins:     false !default;
 $enable-deprecation-messages: true !default;
-$enable-important-utilities:  true !default;
+$enable-important-utilities:  false !default;
 
 $variable-prefix:             "" !default;
 
