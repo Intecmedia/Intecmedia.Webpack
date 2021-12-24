@@ -64,6 +64,7 @@ if (!semver.satisfies(process.version, PACKAGE.engines.node)) {
 let fonttoolsVersion = null;
 try {
     [, fonttoolsVersion] = childProcess.execSync('pip show fonttools').toString().match(/Version: (.+)/);
+    childProcess.execSync('pyftsubset --help');
 } catch (fonttoolsError) {
     fonttoolsVersion = null;
 }
