@@ -24,7 +24,7 @@ glob(`${FONTS_SRC}/**/*.ttf`, {
 }, (error, files) => {
     if (error) throw error;
 
-    const subsetsCommandSuffix = ' --unicodes-file=.fonts-subsets';
+    const subsetsCommandSuffix = ' --unicodes-file=.fonts-subsets --drop-tables+=FFTM';
 
     logger.info(`${files.length} files`);
 
