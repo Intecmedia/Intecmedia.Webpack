@@ -23,7 +23,7 @@ const ignoreTest = (message) => {
 };
 
 const lineEllipsis = 80;
-const config = require('./.htmlvalidate');
+const config = require('./.htmlvalidaterc');
 
 const htmlvalidate = new HtmlValidate({ ...config });
 

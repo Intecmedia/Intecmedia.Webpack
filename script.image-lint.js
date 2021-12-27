@@ -9,7 +9,7 @@ const weblog = require('webpack-log');
 const { argv } = require('yargs');
 
 const ENV = require('./app.env');
-const config = require('./.imagelint');
+const config = require('./.imagelintrc');
 
 const logger = weblog({ name: 'image-lint' });
 
