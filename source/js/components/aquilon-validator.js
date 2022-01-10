@@ -12,6 +12,6 @@ async function updateValidator() {
 
 if (window.$.aquilonValidator) {
     // SPA events
-    window.addEventListener('pushstate', updateValidator, false);
-    window.addEventListener('popstate', updateValidator, false);
+    window.addEventListener('pushstate', updateValidator);
+    window.addEventListener('popstate', updateValidator);
 }

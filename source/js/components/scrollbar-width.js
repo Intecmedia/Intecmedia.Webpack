@@ -25,9 +25,9 @@ class ScrollbarWidth {
         this.domInner.style.width = '100%';
         this.domOuter.appendChild(this.domInner);
 
-        window.addEventListener('resize', this.onResize, false);
-        window.addEventListener('pushstate', this.onUpdate, false);
-        window.addEventListener('popstate', this.onUpdate, false);
+        window.addEventListener('resize', this.onResize);
+        window.addEventListener('pushstate', this.onUpdate);
+        window.addEventListener('popstate', this.onUpdate);
 
         this.updateWidth();
     }
