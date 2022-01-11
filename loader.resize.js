@@ -168,6 +168,18 @@ module.exports = async function ResizeLoader(content) {
         }
     }
 
+    if (format === 'jpg' || format === 'jpeg') {
+        if (!quality) {
+            formatOptions.quality = imageminConfig.jpeg.quality;
+        }
+        if (imageminConfig.jpeg.options) {
+            Object.assign(formatOptions, imageminConfig.jpeg.options);
+        }
+        if (query.options) {
+            Object.assign(formatOptions, query.options);
+        }
+    }
+
     if (resizeWidth || resizeHeight) {
         resourceImage.resize(resizeWidth || resourceMeta.width, resizeHeight || resourceMeta.height, resizeOptions);
     }

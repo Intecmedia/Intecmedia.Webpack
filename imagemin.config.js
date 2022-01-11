@@ -42,6 +42,11 @@ module.exports.avif = {
     options: {},
 };
 
+module.exports.jpeg = {
+    quality: 90, // 0 - 100
+    options: {},
+};
+
 module.exports.testIgnore = (filepath) => {
     const relpath = slash(path.relative(__dirname, path.normalize(filepath)));
     const ignores = imageminIgnore.ignores(relpath);
