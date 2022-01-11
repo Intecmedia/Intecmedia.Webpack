@@ -34,17 +34,22 @@ module.exports = {
 
 module.exports.webp = {
     quality: 90, // 0 - 100, or 100 for lossless
-    options: {},
+    options: {}, // https://sharp.pixelplumbing.com/api-output#webp
 };
 
 module.exports.avif = {
     quality: 90, // 0 - 100, or 100 for lossless
-    options: {},
+    options: {}, // https://sharp.pixelplumbing.com/api-output#avif
 };
 
 module.exports.jpeg = {
     quality: 90, // 0 - 100
-    options: {},
+    options: {}, // https://sharp.pixelplumbing.com/api-output#jpeg
+};
+
+module.exports.png = {
+    quality: 100, // 0 - 100, or 100 for lossless
+    options: {}, // https://sharp.pixelplumbing.com/api-output#png
 };
 
 module.exports.testIgnore = (filepath) => {
