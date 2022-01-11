@@ -46,6 +46,7 @@ module.exports.jpeg = {
     quality: 90, // 0 - 100
     options: {}, // https://sharp.pixelplumbing.com/api-output#jpeg
 };
+module.exports.jpg = module.exports.jpeg;
 
 module.exports.png = {
     quality: 100, // 0 - 100, or 100 for lossless
