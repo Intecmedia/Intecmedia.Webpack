@@ -187,9 +187,9 @@
         "webpack": "^5.65.0",
         "webpack-bundle-analyzer": "^4.5.0",
         "webpack-cli": "^4.9.1",
-        "webpack-dev-server": "^4.7.2",
+        "webpack-dev-server": "^4.7.3",
         "webpack-log": "^3.0.2",
-        "webpack-sources": "^3.2.2",
+        "webpack-sources": "^3.2.3",
         "whatwg-fetch": "^3.6.2",
         "yargs": "^17.3.1"
     }
