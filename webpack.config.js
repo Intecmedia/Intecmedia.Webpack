@@ -288,13 +288,7 @@ module.exports = {
             }),
         ] : []),
         ...(APP.HTML_PRETTY ? [new HtmlBeautifyPlugin({
-            indent_char: ' ',
-            indent_size: 4,
-            html: {
-                unformatted: ['code', 'pre', 'textarea'],
-                wrap_line_length: 120,
-                max_preserve_newlines: 1,
-            },
+            ...require('./.beautifyrc'),
         })] : []),
         new SVGSpritemapPlugin([
             'source/img/svg-sprite/*.svg',

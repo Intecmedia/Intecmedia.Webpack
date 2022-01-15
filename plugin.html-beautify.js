@@ -6,20 +6,9 @@ const deepMerge = require('lodash.merge');
 const beautify = require('js-beautify');
 
 class HtmlBeautifyPlugin {
-    constructor(userOptions = {}) {
+    constructor(options = {}) {
         this.pluginName = 'BeautifyPlugin';
-
-        const defaultOptions = {
-            indent_char: ' ',
-            indent_size: 4,
-            html: {
-                unformatted: ['code', 'pre', 'textarea'],
-                wrap_line_length: 120,
-                max_preserve_newlines: 1,
-            },
-        };
-
-        this.options = deepMerge({}, defaultOptions, userOptions);
+        this.options = deepMerge({}, options);
     }
 
     apply(compiler) {

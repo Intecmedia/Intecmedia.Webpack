@@ -8,3 +8,4 @@ source/js/external/*.min.js
 !/.stylelintrc.shared.js
 !/.htmlvalidaterc.js
 !/.imagelintrc.js
+!/.beautifyrc.js
