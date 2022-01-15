@@ -23,6 +23,7 @@ const options = {
             unformatted: ['code', 'pre', 'textarea'],
             wrap_line_length: 120,
             max_preserve_newlines: 1,
+            templating: 'django',
         },
     },
 };
