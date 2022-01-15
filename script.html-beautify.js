@@ -16,15 +16,13 @@ const logger = weblog({ name: 'html-beautify' });
 const statMessages = { fixed: 0, skipped: 0 };
 
 const options = {
-    config: {
-        indent_char: ' ',
-        indent_size: 4,
-        html: {
-            unformatted: ['code', 'pre', 'textarea'],
-            wrap_line_length: 120,
-            max_preserve_newlines: 1,
-            templating: 'django',
-        },
+    indent_char: ' ',
+    indent_size: 4,
+    html: {
+        unformatted: ['code', 'pre', 'textarea'],
+        wrap_line_length: 120,
+        max_preserve_newlines: 1,
+        templating: 'django',
     },
 };
 
