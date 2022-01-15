@@ -1,17 +1,14 @@
 <!-- head-js -->
 <script>
-    (document.documentElement && document.documentElement.className && (function ($html) {
+    (document.documentElement && document.documentElement.className && (function($html) {
         // js test
         $html.className = $html.className.replace('no-js', 'js');
-        {% if APP.WEBP or APP.ENV.NODE_ENV == 'development' %}
         // webp support test
         var webp = new Image();
-        webp.onload = webp.onerror = function () {
-            $html.className += (webp.width == 1 &&  webp.height == 1 ? ' webp' : ' no-webp');
+        webp.onload = webp.onerror = function() {
+            $html.className += (webp.width == 1 && webp.height == 1 ? ' webp' : ' no-webp');
         };
         webp.src = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuUAAA=';
-        {% endif %}
-        {% if APP.AVIF or APP.ENV.NODE_ENV == 'development' %}
         // avif support test
         var avif = new Image();
         avif.onload = avif.onerror = function() {
@@ -24,7 +21,6 @@
             'AAAAEAAAAQcGl4aQAAAAADCAgIAAAAFmF2MUOBAAwACggYAAYICGgIIAAAABhpcG1hAAAAAAAAAAEAAQUBAoMDhAAAAB9tZGF0CggYAAYICGgIIBoFHiAAA',
             'EQiBACwDoA='
         ].join('');
-        {% endif %}
         // viewport sizes
         var viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
         $html.style.setProperty('--vh', (viewportHeight * 0.01) + 'px');
