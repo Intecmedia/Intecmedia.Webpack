@@ -1,0 +1,10 @@
+{% if not APP.ENV.PROD or APP.ENV.DEBUG %}
+<!-- debug-vars -->
+<script id="debug-vars" data-debug-vars="{{ PAGE|dump }}">
+    (function() {
+        var debugVars = document.getElementById('debug-vars').getAttribute('data-debug-vars');
+        console.log('[debug-vars] PAGE', JSON.parse(debugVars));
+    })();
+</script>
+<!-- /debug-vars -->
+{% endif %}
