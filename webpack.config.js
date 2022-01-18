@@ -1,11 +1,6 @@
 /* eslint-env node -- webpack is node env */
 /* eslint global-require: "off", max-lines: "off", import/no-dynamic-require: "off", max-len: "off", "compat/compat": "off" -- webpack is node env */
 
-const fs = require('fs');
-
-const realcwd = fs.realpathSync(process.cwd());
-if (process.cwd() !== realcwd) process.chdir(realcwd);
-
 const path = require('path');
 const webpack = require('webpack');
 const weblog = require('webpack-log');

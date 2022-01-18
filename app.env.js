@@ -6,6 +6,11 @@ const path = require('path');
 const glob = require('glob');
 const slash = require('slash');
 
+const realcwd = fs.realpathSync(process.cwd());
+if (process.cwd() !== realcwd) {
+    throw new Error(`Use real path "${realcwd}" instead "${process.cwd()}".`);
+}
+
 const argv = require('yargs/yargs')(process.argv.slice(2))
     .option('env', { default: [], type: 'array' }).parse();
 
