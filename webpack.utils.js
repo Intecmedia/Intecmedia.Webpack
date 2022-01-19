@@ -7,6 +7,16 @@ const slash = require('slash');
 const glob = require('glob');
 const findCacheDir = require('find-cache-dir');
 
+const FILENAME_PATTERN = /^[a-zA-Z0-9-/._]+$/;
+
+function lintFilename(filename) {
+    filename.split('/').forEach((part) => {
+        if (!FILENAME_PATTERN.test(part)) {
+            throw new Error(`Filename ${JSON.stringify(filename)} does not match the naming convention pattern: ${JSON.stringify(FILENAME_PATTERN.toString())}`);
+        }
+    });
+}
+
 function castScssVar(obj) {
     if (Array.isArray(obj)) {
         return [
@@ -34,11 +44,14 @@ function toScssVars(obj) {
 module.exports.toScssVars = toScssVars;
 
 function resourceName(prefix, hash = false) {
+    const ENV = require('./app.env');
     const basename = path.basename(prefix);
     const suffix = (hash ? '?[md5:contenthash]' : '');
-    const { SOURCE_PATH } = require('./app.env');
     return (resourcePath) => {
-        const url = slash(path.relative(SOURCE_PATH, resourcePath)).replace(/^(\.\.\/)+/g, '');
+        const url = slash(path.relative(ENV.SOURCE_PATH, resourcePath)).replace(/^(\.\.\/)+/g, '');
+        if (ENV.PROD || ENV.DEBUG) {
+            lintFilename(url);
+        }
         if (url.startsWith('partials/')) {
             return slash(url + suffix);
         }
@@ -55,8 +68,8 @@ function resourceName(prefix, hash = false) {
 module.exports.resourceName = resourceName;
 
 function cacheDir(name, skipEnv = false) {
-    const { NODE_ENV } = require('./app.env');
-    const prefixedName = (skipEnv ? name : `${name}-${NODE_ENV}`);
+    const ENV = require('./app.env');
+    const prefixedName = (skipEnv ? name : `${name}-${ENV.NODE_ENV}`);
     const orgEnvDir = process.env.CACHE_DIR || null;
     const envDir = slash(path.join(__dirname, 'cache', prefixedName));
     if (fs.existsSync(envDir)) {
