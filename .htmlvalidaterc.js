@@ -3,8 +3,8 @@
 /* eslint "quote-props": ["error", "always"] -- more readability keys */
 /* eslint "sort-keys": "error" -- more readability keys */
 
-const APP = require('./app.config');
-const ENV = require('./app.env');
+// const APP = require('./app.config');
+// const ENV = require('./app.env');
 
 module.exports = {
     'extends': [
