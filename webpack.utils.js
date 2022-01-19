@@ -10,12 +10,12 @@ const findCacheDir = require('find-cache-dir');
 const FILENAME_PATTERN = /^[a-zA-Z0-9-/._]+$/;
 
 function lintFilename(filename) {
-    filename.split('/').forEach((part) => {
-        if (!FILENAME_PATTERN.test(part)) {
-            throw new Error(`Filename ${JSON.stringify(filename)} does not match the naming convention pattern: ${JSON.stringify(FILENAME_PATTERN.toString())}`);
-        }
-    });
+    if (!FILENAME_PATTERN.test(filename)) {
+        throw new Error(`Filename ${JSON.stringify(filename)} does not match the naming convention pattern: ${JSON.stringify(FILENAME_PATTERN.toString())}`);
+    }
 }
+
+module.exports.lintFilename = lintFilename;
 
 function castScssVar(obj) {
     if (Array.isArray(obj)) {
