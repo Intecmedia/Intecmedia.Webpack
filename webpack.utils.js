@@ -7,7 +7,7 @@ const slash = require('slash');
 const glob = require('glob');
 const findCacheDir = require('find-cache-dir');
 
-const FILENAME_PATTERN = /^[a-zA-Z0-9-/._]+$/;
+const FILENAME_PATTERN = /^[a-zA-Z0-9-/._@]+$/;
 
 function lintFilename(filename) {
     if (!FILENAME_PATTERN.test(filename)) {
