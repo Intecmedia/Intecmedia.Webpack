@@ -8,7 +8,7 @@ const slash = require('slash');
 
 const realcwd = fs.realpathSync(process.cwd());
 if (process.cwd() !== realcwd) {
-    throw new Error(`Use real path "${realcwd}" instead "${process.cwd()}".`);
+    throw new Error(`Use real path ${JSON.stringify(realcwd)} instead symlink ${JSON.stringify(process.cwd())}.`);
 }
 
 const argv = require('yargs/yargs')(process.argv.slice(2))
