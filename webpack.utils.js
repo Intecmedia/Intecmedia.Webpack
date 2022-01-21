@@ -28,9 +28,9 @@ function castScssVar(obj) {
     if (typeof obj === 'object') {
         return [
             '(',
-            Object.entries(obj).map((i) => (
-                (k, v) => `${JSON.stringify(k)}: ${castScssVar(v)}`
-            )(...i)).join(', '),
+            Object.entries(obj).map((item) => (
+                (name, value) => `${JSON.stringify(name)}: ${castScssVar(value)}`
+            )(...item)).join(', '),
             ')',
         ].join('');
     }
@@ -38,7 +38,8 @@ function castScssVar(obj) {
 }
 
 function toScssVars(obj) {
-    return Object.entries(obj).map((i) => ((k, v) => `$${k}: ${castScssVar(v)};`)(...i)).join('\n');
+    return Object.entries(obj)
+        .map((item) => ((name, value) => `$${name}: ${castScssVar(value)};`)(...item)).join('\n');
 }
 
 module.exports.toScssVars = toScssVars;
@@ -48,18 +49,18 @@ function resourceName(prefix, hash = false) {
     const basename = path.basename(prefix);
     const suffix = (hash ? '?[md5:contenthash]' : '');
     return (resourcePath) => {
-        const url = slash(path.relative(ENV.SOURCE_PATH, resourcePath)).replace(/^(\.\.\/)+/g, '');
+        const resourceUrl = slash(path.relative(ENV.SOURCE_PATH, resourcePath)).replace(/^(\.\.\/)+/g, '');
         if (ENV.PROD || ENV.DEBUG) {
-            lintFilename(url);
+            lintFilename(resourceUrl);
         }
-        if (url.startsWith('partials/')) {
-            return slash(url + suffix);
+        if (resourceUrl.startsWith('partials/')) {
+            return slash(resourceUrl + suffix);
         }
-        if (url.startsWith(`${basename}/`)) {
-            return slash(url + suffix);
+        if (resourceUrl.startsWith(`${basename}/`)) {
+            return slash(resourceUrl + suffix);
         }
-        if (url.startsWith('node_modules/')) {
-            return slash(path.join(basename, url + suffix));
+        if (resourceUrl.startsWith('node_modules/')) {
+            return slash(path.join(basename, resourceUrl + suffix));
         }
         return slash(path.join(basename, `[name].[ext]${suffix}`));
     };

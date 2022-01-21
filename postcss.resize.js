@@ -24,8 +24,8 @@ module.exports = (extension) => {
 
             let ignoreRule = false;
             const ignoreText = `postcss.resize.${extension}: ignore`;
-            originRule.walkComments((i) => {
-                if (i.text === ignoreText) {
+            originRule.walkComments((item) => {
+                if (item.text === ignoreText) {
                     ignoreRule = true;
                 }
             });
@@ -38,17 +38,17 @@ module.exports = (extension) => {
             const newUrl = [originRequest, originParams].join('?');
             const newRule = originRule.cloneAfter();
 
-            newRule.selectors = newRule.selectors.map((i) => `html.${extension} ${i}`);
-            newRule.each((i) => {
-                if (i.prop !== decl.prop && i.value !== decl.value) {
-                    i.remove();
+            newRule.selectors = newRule.selectors.map((item) => `html.${extension} ${item}`);
+            newRule.each((item) => {
+                if (item.prop !== decl.prop && item.value !== decl.value) {
+                    item.remove();
                 }
             });
             newRule.raws.semicolon = true;
             newRule.raws.before = '\n';
 
-            newRule.each((i) => {
-                i.value = i.value.replace(originUrl, newUrl);
+            newRule.each((item) => {
+                item.value = item.value.replace(originUrl, newUrl);
             });
 
             return originUrl;

@@ -18,10 +18,10 @@ glob(`${ENV.OUTPUT_PATH}/**/*`, {
         logger.error(globError);
     }
 
-    files.forEach((file) => {
-        if (path.basename(file) === '.gitkeep') return;
+    files.forEach((filepath) => {
+        if (path.basename(filepath) === '.gitkeep') return;
 
-        fs.unlink(file, (unlinkError) => {
+        fs.unlink(filepath, (unlinkError) => {
             if (unlinkError) {
                 logger.error(unlinkError);
             }

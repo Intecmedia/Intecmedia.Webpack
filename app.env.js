@@ -11,12 +11,12 @@ if (process.cwd() !== realcwd) {
     throw new Error(`Use real path ${JSON.stringify(realcwd)} instead symlink ${JSON.stringify(process.cwd())}.`);
 }
 
-const argv = require('yargs/yargs')(process.argv.slice(2))
+const parsedArgs = require('yargs/yargs')(process.argv.slice(2))
     .option('env', { default: [], type: 'array' }).parse();
 
-const ARGV = Object.fromEntries(argv.env.map((i) => {
-    const [k, v = true] = i.split('=', 2);
-    return [k, v];
+const ARGV = Object.fromEntries(parsedArgs.env.map((arg) => {
+    const [name, value = true] = arg.split('=', 2);
+    return [name, value];
 }));
 
 const DEBUG = ('DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0);
@@ -47,14 +47,14 @@ const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.html`, {
         `${slash(SOURCE_PATH)}/partials/**/*.html`,
         `${slash(SOURCE_PATH)}/upload/**/*.html`,
     ],
-}).map((i) => {
-    const basename = path.basename(i, '.html');
-    const template = slash(path.relative(__dirname, i));
+}).map((item) => {
+    const basename = path.basename(item, '.html');
+    const template = slash(path.relative(__dirname, item));
     const underscored = basename.startsWith('_') || IGNORE_PATTERN.test(template);
     const filename = slash(basename === 'index' ? path.join(
-        path.relative(SOURCE_PATH, i),
+        path.relative(SOURCE_PATH, item),
     ) : path.join(
-        path.relative(SOURCE_PATH, path.dirname(i)),
+        path.relative(SOURCE_PATH, path.dirname(item)),
         ...(underscored ? [`${basename}.html`] : [basename, 'index.html']),
     ));
     const url = slash(path.dirname(filename)) + (underscored ? '' : path.posix.sep);

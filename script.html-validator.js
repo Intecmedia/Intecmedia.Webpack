@@ -15,11 +15,11 @@ const logger = weblog({ name: 'html-validator' });
 
 const ignoreLines = fs.readFileSync('./.htmlignore')
     .toString().trim().split('\n')
-    .map((i) => i.toLowerCase().trim());
+    .map((line) => line.toLowerCase().trim());
 
 const ignoreTest = (message) => {
     const lowerMessage = message.toLowerCase().trim();
-    return ignoreLines.some((i) => i.includes(lowerMessage));
+    return ignoreLines.some((line) => line.includes(lowerMessage));
 };
 
 const errorsLogger = {

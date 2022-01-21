@@ -12,8 +12,8 @@ const ENV = require('./app.env');
 const APP = require('./app.config');
 const UTILS = require('./webpack.utils');
 
-ENV.SITEMAP = ENV.SITEMAP.map((i) => Object.assign(i, {
-    path: path.posix.join(APP.PUBLIC_PATH, i.url, 'index.html'),
+ENV.SITEMAP = ENV.SITEMAP.map((item) => Object.assign(item, {
+    path: path.posix.join(APP.PUBLIC_PATH, item.url, 'index.html'),
 }));
 
 if (ENV.STANDALONE) {

@@ -4,7 +4,7 @@
 const { Rule } = require('html-validate');
 
 const nodeEqual = (a, b) => JSON.stringify(a.location) === JSON.stringify(b.location);
-const nodeIgnore = (node, ignores) => ignores && ignores.some((i) => nodeEqual(i, node));
+const nodeIgnore = (node, ignores) => ignores && ignores.some((ignore) => nodeEqual(ignore, node));
 
 class ImgPictureRequired extends Rule {
     constructor(options) {
