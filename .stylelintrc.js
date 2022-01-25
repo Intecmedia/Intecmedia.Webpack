@@ -70,6 +70,7 @@ module.exports = deepMerge({}, sharedConfig, {
                 '^(html|body)',
                 '^(svg|picture|img|iframe|video)\\.?',
                 '#\\{\\$[a-zA-Z][a-zA-Z-\\d]*\\}',
+                '\\.(active|fade|show)',
             ],
             'implicitComponents': [
                 'source/css/components/**/*.scss',
