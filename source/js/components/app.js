@@ -32,10 +32,7 @@ export default class AbstractApp {
     }
 
     all(name) {
-        if (name in this.components) {
-            return Object.values(this.components[name]);
-        }
-        return [];
+        return (name in this.components ? Object.values(this.components[name]) : []);
     }
 
     init() {
@@ -48,18 +45,28 @@ export default class AbstractApp {
     initScope(scope) {
         const newComponents = [];
         scope.querySelectorAll('[data-component]:not(.js-component)').forEach((element) => {
-            const id = ++this.lastId;
-            const names = element.getAttribute('data-component').split(SEPARATOR_PATTERN);
-            for (let i = 0, n = names.length; i < n; i++) {
-                const name = names[i];
-                const options = {
-                    element, name, id, app: this,
-                };
-                const ClassName = this.options.components[name];
-                if (!ClassName) {
-                    console.error(`[app] Unknown component name: ${name}`, element);
-                    return;
-                }
+            newComponents.push(...this.createElement(element));
+        });
+        newComponents.forEach((component) => {
+            component.init();
+        });
+        this.updateScope(scope);
+        return newComponents;
+    }
+
+    createElement(element) {
+        const newComponents = [];
+        const id = ++this.lastId;
+        const names = element.getAttribute('data-component').split(SEPARATOR_PATTERN);
+        for (let index = 0; index < names.length; index++) {
+            const name = names[index];
+            const options = {
+                element, name, id, app: this,
+            };
+            const ClassName = this.options.components[name];
+            if (!ClassName) {
+                console.error(`[app] Unknown component name: ${name}`, element);
+            } else {
                 element.classList.add('js-component');
                 element.setAttribute('data-component-id', id);
                 const component = new ClassName(options);
@@ -69,19 +76,18 @@ export default class AbstractApp {
                 this.components[name][id] = component;
                 newComponents.push(component);
             }
-        });
+        }
+        return newComponents;
+    }
 
-        newComponents.forEach((component) => {
-            component.init();
-        });
-
+    updateScope(scope) {
         let closest = scope.closest('.js-component[data-component-id]');
         while (closest) {
             const id = closest.getAttribute('data-component-id');
             if (id) {
                 const names = closest.getAttribute('data-component').split(SEPARATOR_PATTERN);
-                for (let i = 0, n = names.length; i < n; i++) {
-                    const name = names[i];
+                for (let index = 0; index < names.length; index++) {
+                    const name = names[index];
                     const component = this.get(name, id);
                     if (component) {
                         component.trigger('update', {
@@ -95,33 +101,35 @@ export default class AbstractApp {
             const next = closest.closest('.js-component[data-component-id]');
             closest = (next && closest !== next ? next : null);
         }
-
-        return newComponents;
     }
 
     destroyScope(scope) {
         if (!scope) return;
         scope.querySelectorAll('.js-component[data-component-id]').forEach((element) => {
-            const id = element.getAttribute('data-component-id');
-            if (!id) {
+            this.destroyElement(element);
+        });
+    }
+
+    destroyElement(element) {
+        const id = element.getAttribute('data-component-id');
+        if (!id) {
+            element.classList.remove('js-component');
+            element.removeAttribute('data-component-id');
+            return;
+        }
+        const names = element.getAttribute('data-component').split(SEPARATOR_PATTERN);
+        for (let index = 0; index < names.length; index++) {
+            const name = names[index];
+            const component = this.get(name, id);
+            if (component) {
+                delete this.components[name][id];
                 element.classList.remove('js-component');
                 element.removeAttribute('data-component-id');
-                return;
+                component.destroy();
+            } else {
+                console.warn('[app] Unknown component instance:', element);
             }
-            const names = element.getAttribute('data-component').split(SEPARATOR_PATTERN);
-            for (let i = 0, n = names.length; i < n; i++) {
-                const name = names[i];
-                const component = this.get(name, id);
-                if (component) {
-                    delete this.components[name][id];
-                    element.classList.remove('js-component');
-                    element.removeAttribute('data-component-id');
-                    component.destroy();
-                } else {
-                    console.warn('[app] Unknown component instance:', element);
-                }
-            }
-        });
+        }
     }
 
     clearScope(scope) {
