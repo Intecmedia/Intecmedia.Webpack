@@ -17,7 +17,7 @@ html {
 body {
     min-height: 100vh;
 
-    text-rendering: optimizeSpeed;
+    text-rendering: optimizespeed;
 
     @supports (-webkit-touch-callout: none) {
         /* stylelint-disable-next-line value-no-vendor-prefix, plugin/no-unsupported-browser-features, csstree/validator -- iOS problem with 100vh */
