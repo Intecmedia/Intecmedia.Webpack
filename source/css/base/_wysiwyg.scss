@@ -50,13 +50,14 @@
     }
 
     caption {
-        caption-side: top;
+        //
     }
 
     // default tables
     table:not([class]) {
         @extend .table;
         @extend .table-bordered;
+        @extend .caption-top;
 
         width: 100%;
     }
