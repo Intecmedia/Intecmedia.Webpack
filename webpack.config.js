@@ -519,7 +519,7 @@ module.exports = {
                                 indentWidth: 4,
                                 outputStyle: 'expanded',
                             },
-                            webpackImporter: false,
+                            webpackImporter: true,
                         },
                     },
                 ],
