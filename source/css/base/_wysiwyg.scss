@@ -56,10 +56,16 @@
     // default tables
     table:not([class]) {
         @extend .table;
-        @extend .table-bordered;
+        @extend .table-bordered; // or @extend .table-striped;
         @extend .caption-top;
 
         width: 100%;
+
+        > caption ~ tr:not(:first-child),
+        > caption ~ thead:not(:first-child) {
+            border-top-color: $table-border-color;
+            border-top-width: $table-border-width; // or 0 if .table-striped
+        }
     }
 
     // disabled table
