@@ -56,15 +56,28 @@
     // default tables
     table:not([class]) {
         @extend .table;
-        @extend .table-bordered; // or @extend .table-striped;
         @extend .caption-top;
+
+        @if $table-border-type == "bordered" {
+            @extend .table-bordered; // or @extend .table-striped;
+        }
+        @if $table-border-type == "striped" {
+            @extend .table-striped;
+        }
 
         width: 100%;
 
         > caption ~ tr:not(:first-child),
         > caption ~ thead:not(:first-child) {
             border-top-color: $table-border-color;
-            border-top-width: $table-border-width; // or 0 if .table-striped
+
+            @if $table-border-type == "bordered" {
+                border-top-width: $table-border-width;
+            }
+
+            @if $table-border-type == "striped" {
+                border-top-width: 0;
+            }
         }
     }
 
