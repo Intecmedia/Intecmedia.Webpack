@@ -59,7 +59,7 @@
         @extend .caption-top;
 
         @if $table-border-type == "bordered" {
-            @extend .table-bordered; // or @extend .table-striped;
+            @extend .table-bordered;
         }
         @if $table-border-type == "striped" {
             @extend .table-striped;
