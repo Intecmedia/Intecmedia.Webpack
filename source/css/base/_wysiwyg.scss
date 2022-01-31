@@ -58,10 +58,10 @@
         @extend .table;
         @extend .caption-top;
 
-        @if $table-border-type == "bordered" {
+        @if $table-border-bordered {
             @extend .table-bordered;
         }
-        @if $table-border-type == "striped" {
+        @if $table-border-striped {
             @extend .table-striped;
         }
 
@@ -70,13 +70,10 @@
         > caption ~ tr:not(:first-child),
         > caption ~ thead:not(:first-child) {
             border-top-color: $table-border-color;
+            border-top-width: 0;
 
-            @if $table-border-type == "bordered" {
+            @if $table-border-bordered {
                 border-top-width: $table-border-width;
-            }
-
-            @if $table-border-type == "striped" {
-                border-top-width: 0;
             }
         }
     }
