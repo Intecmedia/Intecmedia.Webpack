@@ -27,6 +27,7 @@
         "css-lint": "cross-env NODE_ENV=production stylelint source/**/*.scss --fix --ignore-path .stylelintignore --config .stylelintrc.js --cache --cache-location ./node_modules/.cache/stylelint/",
         "css-lint-config": "cross-env NODE_ENV=production stylelint --ignore-path .stylelintignore --print-config .stylelintrc.js",
         "html-validate": "cross-env NODE_ENV=production node ./script.html-validate.js --path-suffix",
+        "html-validate-prod": "cross-env NODE_ENV=production node ./script.html-validate.js --path-suffix",
         "html-validate-dev": "cross-env NODE_ENV=development node ./script.html-validate.js --path-suffix",
         "html-validator": "cross-env NODE_ENV=production node ./script.html-validator.js --path-suffix",
         "html-beautify": "cross-env NODE_ENV=production node ./script.html-beautify.js",

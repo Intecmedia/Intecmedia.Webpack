@@ -31,6 +31,9 @@ module.exports = {
         'long-title': 'off',
         'no-inline-style': 'off',
         'no-trailing-whitespace': 'off',
+        'pitcher/check-node-env': ['error', {
+            'NODE_ENV': ENV.NODE_ENV,
+        }],
         'pitcher/iframe-loading-required': ['error', {
             'ignore': '.wysiwyg iframe, .counters-body iframe, iframe.ignore-html-validate',
         }],

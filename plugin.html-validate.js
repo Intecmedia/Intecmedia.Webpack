@@ -4,10 +4,12 @@
 const { rules: imgRules } = require('./plugin.html-validate.img');
 const { rules: bootstrapRules } = require('./plugin.html-validate.bootstrap');
 const { rules: iframeRules } = require('./plugin.html-validate.iframe');
+const { rules: commonRules } = require('./plugin.html-validate.common');
 
 module.exports = {
     name: 'pitcher',
     rules: {
+        ...commonRules,
         ...imgRules,
         ...bootstrapRules,
         ...iframeRules,
