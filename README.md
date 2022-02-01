@@ -50,7 +50,8 @@
 * **npm run ts-lint-config** – печатает конфиг [eslint](https://eslint.org/).
 * **npm run css-lint** – линтер scss через [stylelint](https://stylelint.io/).
 * **npm run css-lint-config** – печатает конфиг [stylelint](https://stylelint.io/).
-* **npm run html-validate** – линтер html через [html-validate](https://html-validate.org/).
+* **npm run html-validate** – линтер html(prod) через [html-validate](https://html-validate.org/).
+* **npm run html-validate-dev** – линтер html (dev) через [html-validate](https://html-validate.org/).
 * **npm run html-validator** – линтер html через [validator.w3.org](https://validator.w3.org/).
 * **npm run html-beautify** – форматер html через [https://beautifier.io](https://beautifier.io/).
 * **npm run app-lint** – линтер конфигурации приложения.
