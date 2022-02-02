@@ -6,7 +6,7 @@ const { Rule } = require('html-validate');
 class CheckNodeEnv extends Rule {
     constructor(options) {
         super({
-            NODE_ENV: '', ...options,
+            NODE_ENV: 'development', ...options,
         });
     }
 
@@ -15,14 +15,20 @@ class CheckNodeEnv extends Rule {
     }
 
     domReady(event) {
-        const html = event.document.querySelector('html');
-        const dataNodeEnv = html.getAttributeValue('data-node-env');
-        if (dataNodeEnv !== this.options.NODE_ENV) {
-            if (this.options.NODE_ENV === 'development') {
-                this.report(html, `Document using NODE_ENV=${JSON.stringify(dataNodeEnv)}. Please run: \`npm run html-validate-prod\`.`);
-            } else {
-                this.report(html, `Document using NODE_ENV=${JSON.stringify(dataNodeEnv)}. Please run: \`npm run html-validate-dev\`.`);
-            }
+        const currentEnv = this.options.NODE_ENV;
+        const documentElement = event.document.querySelector('html');
+        const documentEnv = documentElement.getAttributeValue('data-node-env');
+        if (documentEnv !== currentEnv) {
+            const reportCommand = currentEnv === 'development'
+                ? 'npm run html-validate-prod'
+                : 'npm run html-validate-dev';
+            const reportError = [
+                `Linter NODE_ENV=${JSON.stringify(currentEnv)}.`,
+                `Html document using NODE_ENV=${JSON.stringify(documentEnv)}.`,
+                `Please run: ${JSON.stringify(reportCommand)}.`,
+            ].join(' ');
+            this.report(documentElement, reportError);
+            throw new Error(reportError);
         }
     }
 }
