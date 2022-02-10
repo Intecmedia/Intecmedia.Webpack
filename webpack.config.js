@@ -57,6 +57,10 @@ module.exports = {
         cacheDirectory: UTILS.cacheDir('webpack'),
     }),
 
+    infrastructureLogging: {
+        stream: process.stdout,
+    },
+
     experiments: {
         topLevelAwait: false,
         backCompat: false,
