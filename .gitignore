@@ -9,7 +9,6 @@ build/upload
 build/**/*.html
 build/partials/svg/**/*.svg
 build/humans.txt
-build/assets-manifest.json
 
 .stylelintcache
 .eslintcache
