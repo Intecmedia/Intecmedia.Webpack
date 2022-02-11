@@ -58,6 +58,8 @@ module.exports = {
     }),
 
     infrastructureLogging: {
+        level: ENV.DEBUG || ENV.ARGV.verbose ? 'verbose' : 'info',
+        debug: ENV.DEBUG || ENV.ARGV.verbose,
         stream: process.stdout,
     },
 
