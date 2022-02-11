@@ -6,20 +6,17 @@ const path = require('path');
 module.exports = {
     excludeTransform: [
         // disable babel transform
-        path.join(__dirname, 'node_modules', 'core-js'),
+        path.join(__dirname, 'node_modules'),
         // path.join(__dirname, 'node_modules', 'example-package-name'),
     ],
     includeTransform: [
         // enable babel transform
-        /\.(ts|mjs|cjs)(\?.*)?$/i,
-        /\.(module|modern|es6|es5)(\.min)?\.js(\?.*)?$/i,
         path.join(__dirname, 'source'),
         // path.join(__dirname, 'node_modules', 'example-package-name'),
     ],
     excludeJquery: [
         // disable jquery global
-        path.join(__dirname, 'node_modules', 'core-js'),
-        path.join(__dirname, 'node_modules', '@babel'),
+        path.join(__dirname, 'node_modules'),
         // path.join(__dirname, 'node_modules', 'example-package-name'),
     ],
     includeJquery: [
