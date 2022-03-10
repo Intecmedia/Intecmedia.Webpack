@@ -92,7 +92,7 @@ class RowNoChilds extends AbsRule {
 
 class FormSelectNoFormControl extends Rule {
     constructor(options) {
-        super({ ignore: '.wysiwyg iframe', ...options });
+        super({ ignore: '', ...options });
     }
 
     setup() {
@@ -113,13 +113,37 @@ class FormSelectNoFormControl extends Rule {
     }
 }
 
+class FormControlInputOnly extends Rule {
+    constructor(options) {
+        super({ ignore: '', ...options });
+    }
+
+    setup() {
+        this.on('dom:ready', this.domReady.bind(this));
+    }
+
+    domReady(event) {
+        const controls = event.document.querySelectorAll('.form-control');
+        const ignores = this.options.ignore ? event.document.querySelectorAll(this.options.ignore) : [];
+        controls.forEach((control) => {
+            if (nodeIgnore(control, ignores)) {
+                return;
+            }
+            if (control.nodeName.toLowerCase() !== 'input') {
+                this.report(control, 'Class `form-control` allowed only for input`s.');
+            }
+        });
+    }
+}
+
 module.exports = {
-    ColNoRow, RowNoChilds, ContainerNoNested, FormSelectNoFormControl,
+    ColNoRow, RowNoChilds, ContainerNoNested, FormSelectNoFormControl, FormControlInputOnly,
 };
 
 module.exports.rules = {
     'bootstrap/col-no-row': ColNoRow,
     'bootstrap/row-no-childs': RowNoChilds,
     'bootstrap/container-no-nested': ContainerNoNested,
+    'bootstrap/form-control-input-only': FormControlInputOnly,
     'bootstrap/form-select-no-form-control': FormSelectNoFormControl,
 };

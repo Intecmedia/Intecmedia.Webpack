@@ -21,6 +21,9 @@ module.exports = {
         'bootstrap/container-no-nested': ['error', {
             'ignore': '',
         }],
+        'bootstrap/form-control-input-only': ['error', {
+            'ignore': '',
+        }],
         'bootstrap/form-select-no-form-control': ['error', {
             'ignore': '',
         }],
