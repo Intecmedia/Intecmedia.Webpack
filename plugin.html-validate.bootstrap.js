@@ -2,9 +2,7 @@
 /* eslint "compat/compat": "off", "max-classes-per-file": "off" -- webpack is node env */
 
 const { Rule } = require('html-validate');
-
-const nodeEqual = (a, b) => JSON.stringify(a.location) === JSON.stringify(b.location);
-const nodeIgnore = (node, ignores) => ignores && ignores.some((ignore) => nodeEqual(ignore, node));
+const { nodeIgnore } = require('./plugin.html-validate.utils');
 
 const COLS_COUNT = 12;
 const COLS_BREAKPOINTS = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
