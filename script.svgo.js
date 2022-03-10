@@ -20,7 +20,6 @@ const statMessages = { fixed: 0, skipped: 0 };
 
 UTILS.globArray([
     `${ENV.SOURCE_PATH}/**/*.svg`,
-    `${ENV.SOURCE_PATH}/partials/svg/**/*.*`,
 ], {
     ignore: [],
     nodir: true,
