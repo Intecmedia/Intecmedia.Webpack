@@ -90,10 +90,36 @@ class RowNoChilds extends AbsRule {
     }
 }
 
-module.exports = { ColNoRow, RowNoChilds, ContainerNoNested };
+class FormSelectNoFormControl extends Rule {
+    constructor(options) {
+        super({ ignore: '.wysiwyg iframe', ...options });
+    }
+
+    setup() {
+        this.on('dom:ready', this.domReady.bind(this));
+    }
+
+    domReady(event) {
+        const selects = event.document.querySelectorAll('select');
+        const ignores = this.options.ignore ? event.document.querySelectorAll(this.options.ignore) : [];
+        selects.forEach((select) => {
+            if (nodeIgnore(select, ignores)) {
+                return;
+            }
+            if (select.classList.contains('form-control')) {
+                this.report(select, 'For <select> not allowed `form-control` class, use `form-select` instead.');
+            }
+        });
+    }
+}
+
+module.exports = {
+    ColNoRow, RowNoChilds, ContainerNoNested, FormSelectNoFormControl,
+};
 
 module.exports.rules = {
     'bootstrap/col-no-row': ColNoRow,
     'bootstrap/row-no-childs': RowNoChilds,
     'bootstrap/container-no-nested': ContainerNoNested,
+    'bootstrap/form-select-no-form-control': FormSelectNoFormControl,
 };
