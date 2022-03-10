@@ -48,6 +48,9 @@ module.exports = {
             'ignore': '.wysiwyg img, .counters-body img, img.ignore-html-validate',
             'webp': (ENV.PROD || ENV.DEBUG) && APP.WEBP,
         }],
+        'pitcher/video-playsinline-required': ['error', {
+            'ignore': '.wysiwyg video, video.ignore-html-validate',
+        }],
         'require-sri': 'off',
         'svg-focusable': 'off',
     },
