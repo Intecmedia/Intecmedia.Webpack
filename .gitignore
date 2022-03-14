@@ -7,11 +7,7 @@ build/*.json
 build/css
 build/upload
 build/**/*.html
-build/partials/svg/**/*.svg
 build/humans.txt
-
-.stylelintcache
-.eslintcache
 
 # VisualStudioCode
 .vscode
