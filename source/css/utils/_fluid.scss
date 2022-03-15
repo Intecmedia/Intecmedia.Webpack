@@ -107,6 +107,19 @@ $fluid-max-height: 1024px !default;
     );
 }
 
+@mixin fluid-font-size-rem(
+    $min-value, $max-value,
+    $min-width: $fluid-min-width, $max-width: $fluid-max-width,
+    $min-width-calc: $min-width, $max-width-calc: $max-width,
+) {
+    @include fluid-property(
+        font-size,
+        rem($min-value), rem($max-value),
+        $min-width, $max-width,
+        rem($min-width-calc), rem($max-width-calc),
+    );
+}
+
 @mixin fluid-font-size-vertical(
     $min-value, $max-value,
     $min-height: $fluid-min-height, $max-height: $fluid-max-height,
@@ -117,6 +130,19 @@ $fluid-max-height: 1024px !default;
         $min-value, $max-value,
         $min-height, $max-height,
         $min-height-calc, $max-height-calc,
+    );
+}
+
+@mixin fluid-font-size-vertical-rem(
+    $min-value, $max-value,
+    $min-height: $fluid-min-height, $max-height: $fluid-max-height,
+    $min-height-calc: $min-height, $max-height-calc: $max-height,
+) {
+    @include fluid-property-vertical(
+        font-size,
+        rem($min-value), rem($max-value),
+        $min-height, $max-height,
+        rem($min-height-calc), rem($max-height-calc),
     );
 }
 
