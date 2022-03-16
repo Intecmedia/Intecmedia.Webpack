@@ -30,25 +30,33 @@ module.exports = (extension) => {
                 }
             });
             if (ignoreRule) return originUrl;
-            originRule.append(postcss.comment({ text: ignoreText }));
 
             originParams.set('resize', '');
             originParams.set('format', extension);
 
             const newUrl = [originRequest, originParams].join('?');
-            const newRule = originRule.cloneAfter();
 
-            newRule.selectors = newRule.selectors.map((item) => `html.${extension} ${item}`);
+            let newRule = originRule[`postcss.resize.${extension}`];
+            if (!newRule) {
+                newRule = originRule.cloneAfter();
+                originRule[`postcss.resize.${extension}`] = newRule;
+
+                newRule.selectors = newRule.selectors.map((item) => `html.${extension} ${item}`);
+                newRule.each((item) => {
+                    if (item.prop !== decl.prop && item.value !== decl.value) {
+                        item.remove();
+                    }
+                });
+                newRule.raws.semicolon = true;
+                newRule.raws.before = '\n';
+
+                newRule.prepend(postcss.comment({ text: ignoreText }));
+            }
+
             newRule.each((item) => {
-                if (item.prop !== decl.prop && item.value !== decl.value) {
-                    item.remove();
+                if (item.value) {
+                    item.value = item.value.replace(originUrl, newUrl);
                 }
-            });
-            newRule.raws.semicolon = true;
-            newRule.raws.before = '\n';
-
-            newRule.each((item) => {
-                item.value = item.value.replace(originUrl, newUrl);
             });
 
             return originUrl;
