@@ -51,7 +51,7 @@ class IntersectionBlocks extends AbstractComponent {
         if (this.items.length > 0) {
             const items = [...detail.target.querySelectorAll(SELECTOR_BLOCKS_OLD)];
             this.items = this.items.filter((target) => {
-                if (items.contains(target)) {
+                if (items.includes(target)) {
                     this.observer.unobserve(target);
                     return false;
                 }
