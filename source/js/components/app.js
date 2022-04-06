@@ -80,7 +80,7 @@ export default class AbstractApp {
         return newComponents;
     }
 
-    updateScope(scope) {
+    triggerScope(scope, trigger) {
         let closest = scope.closest('.js-component[data-component-id]');
         while (closest) {
             const id = closest.getAttribute('data-component-id');
@@ -90,7 +90,7 @@ export default class AbstractApp {
                     const name = names[index];
                     const component = this.get(name, id);
                     if (component) {
-                        component.trigger('update', {
+                        component.trigger(trigger, {
                             target: scope,
                         });
                     } else {
@@ -103,11 +103,15 @@ export default class AbstractApp {
         }
     }
 
+    updateScope(scope) {
+        return this.triggerScope(scope, 'update');
+    }
+
     destroyScope(scope) {
-        if (!scope) return;
         scope.querySelectorAll('.js-component[data-component-id]').forEach((element) => {
             this.destroyElement(element);
         });
+        this.triggerScope(scope, 'destroy');
     }
 
     destroyElement(element) {
