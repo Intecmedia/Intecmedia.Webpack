@@ -38,7 +38,7 @@ const SvgoCreateConfig = (config) => ({
 module.exports.SvgoCreateConfig = SvgoCreateConfig;
 
 const SvgoDefaultConfig = SvgoCreateConfig({ prefix: 'svgo-' });
-const SvgoNoPrefixConfig = SvgoCreateConfig(false);
+const SvgoNoPrefixConfig = SvgoCreateConfig({ prefix: false });
 
 module.exports.SvgoDefaultConfig = SvgoDefaultConfig;
 module.exports.SvgoNoPrefixConfig = SvgoNoPrefixConfig;
