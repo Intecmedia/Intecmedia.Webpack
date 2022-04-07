@@ -56,7 +56,7 @@ module.exports.png = {
 module.exports.testIgnore = (filepath) => {
     const relpath = slash(path.relative(__dirname, path.normalize(filepath)));
     const ignores = imageminIgnore.ignores(relpath);
-    if (ENV.DEBUG) {
+    if (ENV.DEBUG || ENV.ARGV.verbose) {
         imageminLogger.info(`${JSON.stringify(relpath)} ${ignores ? 'ignores' : 'minified'}`);
     }
     return ignores;
