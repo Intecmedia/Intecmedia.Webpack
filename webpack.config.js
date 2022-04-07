@@ -138,6 +138,18 @@ module.exports = {
             },
         },
         minimizer: (ENV.PROD && !ENV.DEBUG ? [
+            new ImageMinimizerPlugin({
+                test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
+                exclude: [
+                    /(fonts|font)/i,
+                ],
+                minimizer: {
+                    implementation: ImageMinimizerPlugin.imageminMinify,
+                    options: { plugins: imageminConfig.plugins },
+                    filter: (input, name) => !imageminConfig.testIgnore(name),
+                },
+                loader: false,
+            }),
             new RemoveAssetsPlugin({
                 test: /webpack-\w+\.min\.js/i,
             }),
@@ -310,20 +322,6 @@ module.exports = {
                 },
             },
         }),
-        ...(ENV.PROD || ENV.DEBUG ? [
-            new ImageMinimizerPlugin({
-                test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
-                exclude: [
-                    /(fonts|font)/i,
-                ],
-                minimizer: {
-                    implementation: ImageMinimizerPlugin.imageminMinify,
-                    options: { plugins: imageminConfig.plugins },
-                    filter: (input, name) => !imageminConfig.testIgnore(name),
-                },
-                loader: false,
-            }),
-        ] : []),
         ...(ENV.PROD || ENV.DEBUG ? [
             new BundleAnalyzerPlugin({
                 analyzerMode: (ENV.DEV_SERVER ? 'server' : 'static'),
