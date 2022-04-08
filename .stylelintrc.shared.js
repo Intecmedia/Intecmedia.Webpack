@@ -51,6 +51,9 @@ module.exports = {
             'ignorePartialSupport': true,
             'severity': 'warning',
         }],
+        'property-disallowed-list': [
+            'gap', 'row-gap', 'column-gap',
+        ],
         'property-no-unknown': [true, {
             'ignoreProperties': [
                 'content-visibility',
