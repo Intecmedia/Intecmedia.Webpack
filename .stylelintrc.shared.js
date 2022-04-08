@@ -17,6 +17,12 @@ module.exports = {
                 'consecutive-duplicates-with-different-values',
             ],
         }],
+        'declaration-property-unit-allowed-list': [{
+            'font-size': ['rem'], // only rem unit
+            'line-height': [], // only unit less
+        }, {
+            'ignore': ['inside-function'],
+        }],
         'no-duplicate-selectors': [true, {
             'disallowInList': false,
         }],
@@ -50,9 +56,5 @@ module.exports = {
                 'content-visibility',
             ],
         }],
-        'declaration-property-unit-allowed-list': {
-            'line-height': [], // only unit less
-            'font-size': ['rem'], // only rem unit
-        },
     },
 };
