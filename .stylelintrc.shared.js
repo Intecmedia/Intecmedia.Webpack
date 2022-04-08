@@ -50,5 +50,9 @@ module.exports = {
                 'content-visibility',
             ],
         }],
+        'declaration-property-unit-allowed-list': {
+            'line-height': [], // only unit less
+            'font-size': ['rem'], // only rem unit
+        },
     },
 };
