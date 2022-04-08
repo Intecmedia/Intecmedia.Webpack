@@ -29,30 +29,20 @@ module.exports = {
         'plugin/no-unsupported-browser-features': [true, {
             'browsers': ENV.BROWSERS,
             'ignore': [
-                'calc',
                 'css-featurequeries',
                 'css-filters',
                 'css-gradients',
                 'css-resize',
                 'css-touch-action',
                 'css3-cursors-newer',
-                'flexbox',
-                'font-unicode-range',
-                'multicolumn',
-                'object-fit',
-                'outline',
-                'pointer',
                 'pointer-events',
-                'rem',
-                'transforms3d',
-                'viewport-units',
                 'will-change',
             ],
             'ignorePartialSupport': true,
             'severity': 'warning',
         }],
         'property-disallowed-list': [
-            'gap', 'row-gap', 'column-gap',
+            'gap', 'row-gap', 'column-gap', // https://caniuse.com/?search=gap
         ],
         'property-no-unknown': [true, {
             'ignoreProperties': [
