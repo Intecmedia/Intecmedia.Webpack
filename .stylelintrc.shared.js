@@ -39,10 +39,10 @@ module.exports = {
                 'will-change',
             ],
             'ignorePartialSupport': true,
-            'severity': 'warning',
+            'severity': (ENV.PROD || ENV.DEBUG ? 'error' : 'warning'),
         }],
         'property-disallowed-list': [
-            'gap', 'row-gap', 'column-gap', // https://caniuse.com/?search=gap
+            (ENV.PROD || ENV.DEBUG ? ['gap', 'row-gap', 'column-gap'] : []), // https://caniuse.com/?search=gap
         ],
         'property-no-unknown': [true, {
             'ignoreProperties': [
