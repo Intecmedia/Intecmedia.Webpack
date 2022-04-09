@@ -19,10 +19,14 @@ module.exports = {
         }],
         'declaration-property-unit-allowed-list': [{
             'font-size': ['rem'], // only rem unit
+            'letter-spacing': ['em'], // only em unit
             'line-height': [], // only unit less
         }, {
             'ignore': ['inside-function'],
         }],
+        'declaration-property-value-disallowed-list': {
+            'display': ['grid', 'inline-grid'], // https://caniuse.com/?search=grid
+        },
         'no-duplicate-selectors': [true, {
             'disallowInList': false,
         }],
@@ -42,7 +46,7 @@ module.exports = {
             'severity': (ENV.PROD || ENV.DEBUG ? 'error' : 'warning'),
         }],
         'property-disallowed-list': [
-            (ENV.PROD || ENV.DEBUG ? ['gap', 'row-gap', 'column-gap'] : []), // https://caniuse.com/?search=gap
+            ['gap', 'row-gap', 'column-gap'], // https://caniuse.com/?search=gap
         ],
         'property-no-unknown': [true, {
             'ignoreProperties': [
