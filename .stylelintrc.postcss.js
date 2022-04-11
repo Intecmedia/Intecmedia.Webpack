@@ -9,6 +9,7 @@ const sharedConfig = require('./.stylelintrc.shared');
 const ENV = require('./app.env');
 
 module.exports = deepMerge({}, sharedConfig, {
+    'defaultSeverity': (ENV.PROD || ENV.DEBUG ? 'error' : 'warning'),
     'extends': [
         ...sharedConfig.extends,
     ],
@@ -24,7 +25,6 @@ module.exports = deepMerge({}, sharedConfig, {
                 'content-visibility': 'visible | hidden | auto | initial | unset',
                 'font-display': 'auto | block | swap | fallback | optional',
             },
-            'severity': (ENV.PROD || ENV.DEBUG ? 'error' : 'warning'),
         },
         // 'pitcher/no-nested-media': true,
     },
