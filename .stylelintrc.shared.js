@@ -43,7 +43,6 @@ module.exports = {
                 'will-change',
             ],
             'ignorePartialSupport': true,
-            'severity': (ENV.PROD || ENV.DEBUG ? 'error' : 'warning'),
         }],
         'property-disallowed-list': [
             ['gap', 'row-gap', 'column-gap'], // https://caniuse.com/?search=gap
