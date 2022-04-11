@@ -59,5 +59,6 @@ module.exports = {
         }],
         'require-sri': 'off',
         'svg-focusable': 'off',
+        'tel-non-breaking': 'off',
     },
 };
