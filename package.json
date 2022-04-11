@@ -106,7 +106,7 @@
         "css-loader": "^6.7.1",
         "cssnano": "^5.1.7",
         "date-fns": "^2.28.0",
-        "eslint": "^8.12.0",
+        "eslint": "^8.13.0",
         "eslint-config-airbnb-base": "^15.0.0",
         "eslint-import-resolver-webpack": "^0.13.2",
         "eslint-plugin-compat": "^4.0.2",
@@ -122,7 +122,7 @@
         "focus-within": "^3.0.2",
         "front-matter": "^4.0.2",
         "glob": "^7.2.0",
-        "html-validate": "^6.7.0",
+        "html-validate": "^6.7.1",
         "html-validator": "^6.0.0",
         "html-webpack-plugin": "^5.5.0",
         "ignore": "^5.2.0",
@@ -136,7 +136,7 @@
         "imports-loader": "^3.1.1",
         "intersection-observer": "^0.12.0",
         "jquery": "^3.6.0",
-        "js-beautify": "^1.14.2",
+        "js-beautify": "^1.14.3",
         "line-column": "^1.0.2",
         "loader-utils": "^3.2.0",
         "lodash.merge": "^4.6.2",
@@ -193,6 +193,6 @@
         "webpack-log": "^3.0.2",
         "webpack-sources": "^3.2.3",
         "whatwg-fetch": "^3.6.2",
-        "yargs": "^17.4.0"
+        "yargs": "^17.4.1"
     }
 }
