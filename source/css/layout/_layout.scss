@@ -12,21 +12,21 @@ html {
     }
 
     @include media-breakpoint-up(hd) {
-        $font-size-min: 16px;
-        $font-size-max: 20px;
-        $font-size-clamp: fluid-clamp(
-            $font-size-min,
-            $font-size-max,
+        $hd-font-size-min: 16px;
+        $hd-font-size-max: 20px;
+        $hd-font-size-clamp: fluid-clamp(
+            $hd-font-size-min,
+            $hd-font-size-max,
             map-get($grid-breakpoints, "hd"),
             map-get($grid-breakpoints, "qhd")
         );
 
         /* stylelint-disable-next-line declaration-property-unit-allowed-list -- for root not allowed px */
-        font-size: (($font-size-max - $font-size-min) * .5);
+        font-size: (($hd-font-size-max + $hd-font-size-min) * .5);
 
-        @supports (font-size: $font-size-clamp) {
+        @supports (font-size: $hd-font-size-clamp) {
             /* stylelint-disable-next-line plugin/no-unsupported-browser-features, csstree/validator -- not standart feature */
-            font-size: $font-size-clamp;
+            font-size: $hd-font-size-clamp;
         }
     }
 }
