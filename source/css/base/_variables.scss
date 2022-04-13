@@ -10,7 +10,8 @@ $grid-breakpoints: (
     lg: 992px,
     xl: 1200px,
     xxl: 1400px,
-    hd: 1920px
+    hd: 1920px,
+    qhd: 2560px
 ) !default;
 
 $container-max-widths: (
@@ -19,7 +20,8 @@ $container-max-widths: (
     lg: 960px,
     xl: 1140px,
     xxl: 1320px,
-    hd: 1800px
+    hd: 1800px,
+    hd: 2440px
 ) !default;
 
 $theme-colors:                () !default;
