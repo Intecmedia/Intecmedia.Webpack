@@ -10,6 +10,25 @@ html {
         /* stylelint-disable-next-line declaration-property-unit-allowed-list -- foor root not allowed px */
         font-size: 14px;
     }
+
+    @include media-breakpoint-up(hd) {
+        $font-size-min: 16px;
+        $font-size-max: 20px;
+        $font-size-clamp: fluid-clamp(
+            $font-size-min,
+            $font-size-max,
+            map-get($grid-breakpoints, "hd") - 1,
+            map-get($grid-breakpoints, "qhd")
+        );
+
+        /* stylelint-disable-next-line declaration-property-unit-allowed-list -- for root not allowed px */
+        font-size: (($font-size-max - $font-size-min) * .5);
+
+        @supports (font-size: $font-size-clamp) {
+            /* stylelint-disable-next-line plugin/no-unsupported-browser-features, csstree/validator -- not standart feature */
+            font-size: $font-size-clamp;
+        }
+    }
 }
 
 /* postcss-bem-linter: ignore */
