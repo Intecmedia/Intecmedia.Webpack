@@ -174,10 +174,13 @@ $fluid-max-height: 1024px !default;
     }
     $max-width: strip-unit($max-width);
 
-    $vw-value: math.div(1600 * ($max-size - $min-size), $max-width - $min-width);
+    $sub-size: ($max-size - $min-size);
+    $sub-width: ($max-width - $min-width);
+
+    $vw-value: math.div(16 * 100 * $sub-size, $sub-width);
     $vw-value: to-fixed($vw-value, 4);
 
-    $value: $min-size - math.div($min-width * ($max-size - $min-size), $max-width - $min-width);
+    $value: $min-size - math.div($min-width * $sub-size, $sub-width);
     $value: to-fixed($value, 4);
 
     $sign: "";
