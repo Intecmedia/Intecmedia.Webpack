@@ -17,7 +17,7 @@ html {
         $font-size-clamp: fluid-clamp(
             $font-size-min,
             $font-size-max,
-            map-get($grid-breakpoints, "hd") - 1,
+            map-get($grid-breakpoints, "hd"),
             map-get($grid-breakpoints, "qhd")
         );
 
