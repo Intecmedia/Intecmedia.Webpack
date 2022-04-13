@@ -146,15 +146,20 @@ $fluid-max-height: 1024px !default;
     );
 }
 
-@function fluid-clamp($min-size, $max-size, $min-width: $fluid-min-width, $max-width: $fluid-max-width) {
-    @if unit($min-size) != px and unit($min-size) != rem {
-        @error "$min-size #{$min-size} must be either px or rem (now is #{unit($min-size)}).";
+@function fluid-clamp(
+    $min-size, $max-size,
+    $min-width: $fluid-min-width, $max-width: $fluid-max-width,
+) {
+    $min-unit: unit($min-size);
+    @if $min-unit != px and $min-unit != rem {
+        @error "$min-size #{$min-size} must be either px or rem (now is #{$min-unit}).";
     }
     $min-size: rem($min-size);
     $min-size: strip-unit($min-size);
 
-    @if unit($max-size) != px and unit($max-size) != rem {
-        @error "$max-size #{$max-size} must be either px or rem (now is #{unit($max-size)}).";
+    $max-unit: unit($max-size);
+    @if $max-unit != px and $max-unit != rem {
+        @error "$max-size #{$max-size} must be either px or rem (now is #{$max-unit}).";
     }
     $max-size: rem($max-size);
     $max-size: strip-unit($max-size);
@@ -169,20 +174,28 @@ $fluid-max-height: 1024px !default;
     }
     $max-width: strip-unit($max-width);
 
-    $vw-coefficient: math.div(1600 * ($max-size - $min-size), $max-width - $min-width);
-    $vw-coefficient: to-fixed($vw-coefficient, 2);
+    $vw-value: math.div(1600 * ($max-size - $min-size), $max-width - $min-width);
+    $vw-value: to-fixed($vw-value, 2);
 
-    $rem-coefficient: $min-size - math.div($min-width * ($max-size - $min-size), $max-width - $min-width);
-    $rem-coefficient: to-fixed($rem-coefficient, 2);
+    $value: $min-size - math.div($min-width * ($max-size - $min-size), $max-width - $min-width);
+    $value: to-fixed($value, 2);
 
-    $rem-sign: "";
-    @if ($rem-coefficient >= 0) {
-        $rem-sign: "+";
+    $sign: "";
+    @if ($value >= 0) {
+        $sign: "+";
     } @else {
-        $rem-sign: "-";
+        $sign: "-";
     }
 
-    $abs-rem-coefficient: abs($rem-coefficient);
+    $abs-value: abs($value);
 
-    @return clamp(#{$min-size}rem, #{$vw-coefficient}vw #{$rem-sign} #{$abs-rem-coefficient}rem, #{$max-size}rem);
+    @if $min-unit == rem and $max-unit == rem {
+        @return clamp(#{$min-size}rem, #{$vw-value}vw #{$sign} #{$abs-value}rem, #{$max-size}rem);
+    }
+
+    @if $min-unit == px and $max-unit == px {
+        @return clamp(#{$min-size * 16}px, #{$vw-value}vw #{$sign} #{$abs-value * 16}px, #{$max-size * 16}px);
+    }
+
+    @error "Cant calc $min-size=#{$min-size} and $max-size=#{$max-size} with different units.";
 }
