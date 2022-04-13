@@ -22,7 +22,7 @@
     @return $ret;
 }
 
-@function to-fixed($float, $digits: 2) {
+@function to-fixed($float, $digits: 4) {
     $sass-precision: 5;
     $pow: pow(10, $digits);
     @return math.div(round($float * $pow), $pow);
