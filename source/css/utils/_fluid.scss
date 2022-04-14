@@ -146,9 +146,10 @@ $fluid-max-height: 1024px !default;
     );
 }
 
-@function fluid-clamp(
+@function fluid-clamp-base(
     $min-size, $max-size,
-    $min-width: $fluid-min-width, $max-width: $fluid-max-width,
+    $min-clamp, $max-clamp,
+    $vertical: false,
 ) {
     $min-unit: unit($min-size);
     @if $min-unit != px and $min-unit != rem {
@@ -164,23 +165,23 @@ $fluid-max-height: 1024px !default;
     $max-size: rem($max-size);
     $max-size: strip-unit($max-size);
 
-    @if unit($max-width) != px {
-        @error "$max-width #{$max-width} must be px (now is #{unit($min-width)}).";
+    @if unit($max-clamp) != px {
+        @error "$max-clamp #{$max-clamp} must be px (now is #{unit($min-clamp)}).";
     }
-    $min-width: strip-unit($min-width);
+    $min-clamp: strip-unit($min-clamp);
 
-    @if unit($max-width) != px {
-        @error "$max-width #{$max-width} must be px (now is #{unit($max-width)}).";
+    @if unit($max-clamp) != px {
+        @error "$max-clamp #{$max-clamp} must be px (now is #{unit($max-clamp)}).";
     }
-    $max-width: strip-unit($max-width);
+    $max-clamp: strip-unit($max-clamp);
 
     $sub-size: ($max-size - $min-size);
-    $sub-width: ($max-width - $min-width);
+    $sub-clamp: ($max-clamp - $min-clamp);
 
-    $vw-value: math.div(16 * 100 * $sub-size, $sub-width);
-    $vw-value: to-fixed($vw-value, 4);
+    $vp-value: math.div(16 * 100 * $sub-size, $sub-clamp);
+    $vp-value: to-fixed($vp-value, 4);
 
-    $value: $min-size - math.div($min-width * $sub-size, $sub-width);
+    $value: $min-size - math.div($min-clamp * $sub-size, $sub-clamp);
     $value: to-fixed($value, 4);
 
     $sign: "";
@@ -192,15 +193,44 @@ $fluid-max-height: 1024px !default;
 
     $abs-value: abs($value);
 
+    $vp-unit: "";
+    @if ($vertical) {
+        $vp-unit: "vh";
+    } @else {
+        $vp-unit: "vw";
+    }
+
     @if $min-unit == rem and $max-unit == rem {
-        @return clamp(#{$min-size}rem, #{$vw-value}vw #{$sign} #{$abs-value}rem, #{$max-size}rem);
+        @return clamp(#{$min-size}rem, #{$vp-value}#{$vp-unit} #{$sign} #{$abs-value}rem, #{$max-size}rem);
     }
 
     @if $min-unit == px and $max-unit == px {
-        @return clamp(#{$min-size * 16}px, #{$vw-value}vw #{$sign} #{$abs-value * 16}px, #{$max-size * 16}px);
+        @return clamp(#{$min-size * 16}px, #{$vp-value}#{$vp-unit} #{$sign} #{$abs-value * 16}px, #{$max-size * 16}px);
     }
 
     @error "Cant calc $min-size=#{$min-size} and $max-size=#{$max-size} with different units.";
+}
+
+@function fluid-clamp(
+    $min-size, $max-size,
+    $min-width: $fluid-min-width, $max-width: $fluid-max-width,
+) {
+    @return fluid-clamp-base(
+        $min-size, $max-size,
+        $min-width, $max-width,
+        false,
+    );
+}
+
+@function fluid-clamp-vertical(
+    $min-size, $max-size,
+    $min-width: $fluid-min-width, $max-width: $fluid-max-width,
+) {
+    @return fluid-clamp-base(
+        $min-size, $max-size,
+        $min-width, $max-width,
+        true,
+    );
 }
 
 @mixin fluid-clamp-font-size(
@@ -212,6 +242,25 @@ $fluid-max-height: 1024px !default;
         $max-size,
         $min-width,
         $max-width,
+    );
+
+    font-size: $min-size;
+
+    @supports (font-size: $font-size-clamp) {
+        /* stylelint-disable-next-line plugin/no-unsupported-browser-features, csstree/validator -- not standart feature */
+        font-size: $font-size-clamp;
+    }
+}
+
+@mixin fluid-clamp-font-size-vertical(
+    $min-size, $max-size,
+    $min-height: $fluid-min-height, $max-height: $fluid-max-height,
+) {
+    $font-size-clamp: fluid-clamp-vertical(
+        $min-size,
+        $max-size,
+        $min-height,
+        $max-height,
     );
 
     font-size: $min-size;
