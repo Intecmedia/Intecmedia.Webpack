@@ -202,3 +202,22 @@ $fluid-max-height: 1024px !default;
 
     @error "Cant calc $min-size=#{$min-size} and $max-size=#{$max-size} with different units.";
 }
+
+@mixin fluid-clamp-font-size(
+    $min-size, $max-size,
+    $min-width: $fluid-min-width, $max-width: $fluid-max-width,
+) {
+    $font-size-clamp: fluid-clamp(
+        $min-size,
+        $max-size,
+        $min-width,
+        $max-width,
+    );
+
+    font-size: $min-size;
+
+    @supports (font-size: $font-size-clamp) {
+        /* stylelint-disable-next-line plugin/no-unsupported-browser-features, csstree/validator -- not standart feature */
+        font-size: $font-size-clamp;
+    }
+}
