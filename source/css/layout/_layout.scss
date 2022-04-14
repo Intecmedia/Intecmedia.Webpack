@@ -7,7 +7,7 @@ html {
     --viewport-height: calc(var(--vh, 1vh) * 100);
 
     @include media-breakpoint-down(ss) {
-        /* stylelint-disable-next-line declaration-property-unit-allowed-list -- foor root not allowed px */
+        /* stylelint-disable-next-line declaration-property-unit-allowed-list -- foor root allowed only px */
         font-size: 14px;
     }
 
@@ -21,7 +21,7 @@ html {
             map-get($grid-breakpoints, "qhd")
         );
 
-        /* stylelint-disable-next-line declaration-property-unit-allowed-list -- for root not allowed px */
+        /* stylelint-disable-next-line declaration-property-unit-allowed-list -- foor root allowed only px */
         font-size: (($hd-font-size-max + $hd-font-size-min) * .5);
 
         @supports (font-size: $hd-font-size-clamp) {
