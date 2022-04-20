@@ -1,5 +1,13 @@
 @use "sass:math";
 
+@function str-repeat($str, $n){
+    $result: "";
+    @for $i from 1 through $n {
+        $result: $result + $str;
+    }
+    @return $result;
+}
+
 @function strip-unit($number) {
     @if type-of($number) == "number" and not unitless($number) {
         @return math.div($number, ($number * 0 + 1));
