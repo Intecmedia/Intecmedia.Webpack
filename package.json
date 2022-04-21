@@ -121,7 +121,7 @@
         "focus-visible": "^5.2.0",
         "focus-within": "^3.0.2",
         "front-matter": "^4.0.2",
-        "glob": "^7.2.0",
+        "glob": "^8.0.1",
         "html-validate": "^6.7.1",
         "html-validator": "^6.0.0",
         "html-webpack-plugin": "^5.5.0",
