@@ -3,13 +3,13 @@
 
 const fs = require('fs');
 const path = require('path');
-const glob = require('glob');
 const slash = require('slash');
 const weblog = require('webpack-log');
 const { HtmlValidate } = require('html-validate');
 const { argv } = require('yargs');
 
 const ENV = require('./app.env');
+const UTILS = require('./webpack.utils');
 
 const logger = weblog({ name: 'html-validate' });
 
@@ -30,12 +30,10 @@ const htmlvalidate = new HtmlValidate({ ...config });
 const verbose = 'verbose' in argv && argv.verbose;
 const pathSuffix = argv.pathSuffix && typeof (argv.pathSuffix) === 'string' ? argv.pathSuffix : '';
 
-glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'), {
+UTILS.glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'), {
     ignore: [],
     nodir: true,
-}, (error, files) => {
-    if (error) throw error;
-
+}).then((files) => {
     logger.info(`${files.length} files\n`);
 
     const statMessages = { skipped: 0 };

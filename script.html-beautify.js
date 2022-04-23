@@ -3,13 +3,13 @@
 
 const fs = require('fs');
 const path = require('path');
-const glob = require('glob');
 const slash = require('slash');
 const weblog = require('webpack-log');
 const frontMatter = require('front-matter');
 const beautify = require('js-beautify');
 
 const ENV = require('./app.env');
+const UTILS = require('./webpack.utils');
 
 const logger = weblog({ name: 'html-beautify' });
 
@@ -22,12 +22,10 @@ const options = {
     templating: 'django',
 };
 
-glob(`${ENV.SOURCE_PATH}/**/*.html`, {
+UTILS.glob(`${ENV.SOURCE_PATH}/**/*.html`, {
     ignore: [`${ENV.SOURCE_PATH}/partials/macros/**/*.html`],
     nodir: true,
-}, (error, files) => {
-    if (error) throw error;
-
+}).then((files) => {
     logger.info(`${files.length} files\n`);
 
     files.forEach((resourcePath) => {

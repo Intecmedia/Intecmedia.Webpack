@@ -87,19 +87,36 @@ function cacheDir(name, skipEnv = false) {
 
 module.exports.cacheDir = cacheDir;
 
+function globOptions(options) {
+    if (options && 'ignore' in options) {
+        options.ignore = options.ignore.map(slash);
+    }
+    return options;
+}
+
+module.exports.globOptions = globOptions;
+
 function globArray(patterns, options) {
     return Promise.all(patterns.map((pattern) => (new Promise((resolve, reject) => {
-        glob(pattern, options, (error, files) => (error === null ? resolve(files) : reject(error)));
+        glob(slash(pattern), globOptions(options), (error, files) => (error === null ? resolve(files) : reject(error)));
     })))).then((files) => files.flat());
 }
 
 module.exports.globArray = globArray;
 
 function globArraySync(patterns, options) {
-    return patterns.map((pattern) => glob.sync(pattern, options)).flat();
+    return patterns.map((pattern) => glob.sync(slash(pattern), globOptions(options))).flat();
 }
 
 module.exports.globArraySync = globArraySync;
+
+function globPatched(pattern, options) {
+    return new Promise((resolve, reject) => {
+        glob(slash(pattern), globOptions(options), (error, files) => (error === null ? resolve(files) : reject(error)));
+    });
+}
+
+module.exports.glob = globPatched;
 
 function moduleFilenameTemplate(info) {
     const relativePath = slash(path.relative(__dirname, info.absoluteResourcePath));

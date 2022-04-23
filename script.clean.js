@@ -3,21 +3,17 @@
 
 const fs = require('fs');
 const path = require('path');
-const glob = require('glob');
 const weblog = require('webpack-log');
 
 const logger = weblog({ name: 'clean' });
 
 const ENV = require('./app.env');
+const UTILS = require('./webpack.utils');
 
-glob(`${ENV.OUTPUT_PATH}/**/*`, {
+UTILS.glob(`${ENV.OUTPUT_PATH}/**/*`, {
     nodir: true,
     dot: true,
-}, (globError, files) => {
-    if (globError) {
-        logger.error(globError);
-    }
-
+}).then((files) => {
     files.forEach((filepath) => {
         if (path.basename(filepath) === '.gitkeep') return;
 

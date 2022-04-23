@@ -2,7 +2,6 @@
 /* eslint max-len: "off", "compat/compat": "off" -- webpack is node env */
 
 const path = require('path');
-const glob = require('glob');
 const slash = require('slash');
 const weblog = require('webpack-log');
 const childProcess = require('child_process');
@@ -10,6 +9,7 @@ const childProcess = require('child_process');
 const logger = weblog({ name: 'fonts-subsets' });
 
 const ENV = require('./app.env');
+const UTILS = require('./webpack.utils');
 
 const FONTS_SRC = `${ENV.SOURCE_PATH}/fonts/src-ttf`;
 const FONTS_DST = `${ENV.SOURCE_PATH}/fonts`;
@@ -18,15 +18,13 @@ if (process.platform === 'win32') {
     childProcess.execSync('chcp 65001');
 }
 
-glob(`${FONTS_SRC}/**/*.ttf`, {
+UTILS.glob(`${FONTS_SRC}/**/*.ttf`, {
     ignore: [],
     nodir: true,
-}, (error, files) => {
-    if (error) throw error;
+}).then((files) => {
+    logger.info(`${files.length} files`);
 
     const subsetsCommandSuffix = ' --unicodes-file=.fonts-subsets --drop-tables+=FFTM';
-
-    logger.info(`${files.length} files`);
 
     files.forEach((resourcePath) => {
         const source = slash(path.relative(__dirname, resourcePath));

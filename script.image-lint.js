@@ -2,13 +2,13 @@
 /* eslint max-len: "off", "compat/compat": "off" -- webpack is node env */
 
 const path = require('path');
-const glob = require('glob');
 const slash = require('slash');
 const sharp = require('sharp');
 const weblog = require('webpack-log');
 const { argv } = require('yargs');
 
 const ENV = require('./app.env');
+const UTILS = require('./webpack.utils');
 const config = require('./.imagelintrc');
 
 const logger = weblog({ name: 'image-lint' });
@@ -65,12 +65,10 @@ const LINT_RULES = [
 const verbose = 'verbose' in argv && argv.verbose;
 const pathSuffix = argv.pathSuffix && typeof (argv.pathSuffix) === 'string' ? argv.pathSuffix : '';
 
-glob(ENV.SOURCE_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.{jpg,jpeg,png,svg,gif}'), {
+UTILS.glob(ENV.SOURCE_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.{jpg,jpeg,png,svg,gif}'), {
     ignore: [],
     nodir: true,
-}, async (error, files) => {
-    if (error) throw error;
-
+}).then(async (files) => {
     logger.info(`${files.length} files\n`);
 
     const statMessages = { ignored: 0, skipped: 0 };
