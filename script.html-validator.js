@@ -74,7 +74,7 @@ UTILS.glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.h
 
                 const log = errorsLogger[message.type] || logger.error;
                 log(`${relativePath}: line ${message.lastLine || 0} col [${message.firstColumn || 0}-${message.lastColumn || 0}]`);
-                log(`${message.type}: ${JSON.stringify(message.message)}`);
+                log(`${message.type}: ${message.message}`);
 
                 const ellipsis = message.extract.trim();
                 console.log(`...${ellipsis}...`);

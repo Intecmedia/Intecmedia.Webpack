@@ -73,7 +73,7 @@ UTILS.glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.h
                 increaseStat(messageType);
 
                 logger.error(`${relativePath}: line ${message.line || 0} col [${message.column || 0}]`);
-                logger.warn(`${messageType}[${message.ruleId}]: ${JSON.stringify(message.message)}`);
+                logger.warn(`${messageType}[${message.ruleId}]: ${message.message}`);
 
                 const ellipsis = html.substring(message.offset - lineEllipsis, message.offset + lineEllipsis).trim();
                 console.log(`...${ellipsis}...`);
