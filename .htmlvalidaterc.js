@@ -37,6 +37,9 @@ module.exports = {
         'long-title': 'off',
         'no-inline-style': 'off',
         'no-trailing-whitespace': 'off',
+        'pitcher/bem-missing-block': ['error', {
+            'ignore': '.wysiwyg *[class]',
+        }],
         'pitcher/check-node-env': ['error', {
             'NODE_ENV': ENV.NODE_ENV,
         }],
