@@ -37,6 +37,9 @@ module.exports = {
         'long-title': 'off',
         'no-inline-style': 'off',
         'no-trailing-whitespace': 'off',
+        'pitcher/bem-no-missing-element': ['error', {
+            'ignore': '',
+        }],
         'pitcher/bem-no-missing-modifier': ['error', {
             'ignore': '',
         }],
