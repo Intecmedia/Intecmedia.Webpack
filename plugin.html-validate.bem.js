@@ -29,7 +29,7 @@ class MissingBlock extends Rule {
                 if (!PATTERN_MODIFIER.test(className)) return;
                 const [, modifierMatch] = className.match(PATTERN_MODIFIER);
                 const blockName = className.substring(0, className.length - modifierMatch.length);
-                if (classList.includes(blockName)) {
+                if (!classList.includes(blockName)) {
                     this.report(node, `Class-modifer ${JSON.stringify(className)} required block-element ${JSON.stringify(blockName)} class.`);
                 }
             });
