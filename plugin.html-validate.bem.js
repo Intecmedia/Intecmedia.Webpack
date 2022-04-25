@@ -7,7 +7,7 @@ const { nodeIgnore } = require('./plugin.html-validate.utils');
 const PATTERN_MODIFIER = /(--([a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*))$/;
 const CLASS_SEPARATOR = /[\s]/;
 
-class MissingBlock extends Rule {
+class NoMissingModifier extends Rule {
     constructor(options) {
         super({ ignore: '', ...options });
     }
@@ -30,15 +30,15 @@ class MissingBlock extends Rule {
                 const [, modifierMatch] = className.match(PATTERN_MODIFIER);
                 const blockName = className.substring(0, className.length - modifierMatch.length);
                 if (!classList.includes(blockName)) {
-                    this.report(node, `Class-modifer ${JSON.stringify(className)} required block-element ${JSON.stringify(blockName)} class.`);
+                    this.report(node, `Class-modifier references missing block ${JSON.stringify(blockName)} (modifier is ${JSON.stringify(className)}).`);
                 }
             });
         });
     }
 }
 
-module.exports = { MissingBlock };
+module.exports = { NoMissingModifier };
 
 module.exports.rules = {
-    'pitcher/bem-missing-block': MissingBlock,
+    'pitcher/bem-no-missing-modifier': NoMissingModifier,
 };
