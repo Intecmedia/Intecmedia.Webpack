@@ -15,7 +15,7 @@ const parsedArgs = require('yargs/yargs')(process.argv.slice(2))
     .option('env', { default: [], type: 'array' }).parse();
 
 const ARGV = Object.fromEntries(parsedArgs.env.map((arg) => {
-    const [name, value = true] = arg.split('=', 2);
+    const [name, value = true] = arg && arg.split ? arg.split('=', 2) : [arg];
     return [name, value];
 }));
 
