@@ -68,7 +68,7 @@ module.exports = deepMerge({}, sharedConfig, {
                 '\\.(js|is|no|has|not)\\-(.+)',
                 '^\\.(js|no\\-js)(\\s+)',
                 '^(html|body)',
-                '^(svg|picture|img|iframe|video)\\.?',
+                '^(svg|picture|img|iframe|video|label)\\.?',
                 '#\\{\\$[a-zA-Z][a-zA-Z-\\d]*\\}',
                 '\\.(active|fade|show)',
             ],
@@ -127,7 +127,7 @@ module.exports = deepMerge({}, sharedConfig, {
                 'child',
             ],
             'ignoreTypes': [
-                '/^(html|body|svg|picture|img|iframe|video)\\.?/',
+                '/^(html|body|svg|picture|img|iframe|video|label)\\.?/',
             ],
         }],
         'selector-no-qualifying-type': [true, {
