@@ -269,6 +269,7 @@ module.exports = {
         ...(ENV.SITEMAP.map(({ template, filename }) => new HtmlWebpackPlugin({
             filename,
             template,
+            chunks: ['app', 'vendor'],
             inject: path.basename(template).startsWith('_') ? false : 'body',
             scriptLoading: 'blocking',
             minify: (ENV.PROD || ENV.DEBUG ? ({
