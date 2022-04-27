@@ -102,6 +102,11 @@ module.exports = {
             `${ENV.SOURCE_PATH}/css/app.scss`,
             `${ENV.SOURCE_PATH}/js/app.js`,
         ],
+        /*
+        example: [
+            `${ENV.SOURCE_PATH}/css/example.scss`,
+        ],
+        */
         ...(ENV.PROD || ENV.DEBUG ? { 'webpack-resize': `${ENV.SOURCE_PATH}/js/webpack-resize.js` } : {}),
     },
 
