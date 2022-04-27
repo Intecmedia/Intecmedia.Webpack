@@ -187,7 +187,7 @@ module.exports = {
 
     plugins: [
         new MiniCssExtractPlugin({
-            filename: 'css/app.min.css',
+            filename: 'css/[name].min.css',
             experimentalUseImportModule: true,
         }),
         new CopyWebpackPlugin({
