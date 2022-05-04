@@ -5,6 +5,11 @@
 html {
     // https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
     --viewport-height: calc(var(--vh, 1vh) * 100);
+    --section-height: 100vh;
+
+    @include vertical-breakpoint-down(sm) {
+        --section-height: #{map-get($vertical-breakpoints, "sm")};
+    }
 
     @include media-breakpoint-down(ss) {
         /* stylelint-disable-next-line declaration-property-unit-allowed-list -- for root allowed only px */
