@@ -11,6 +11,7 @@ module.exports = {
         'stylelint-no-unsupported-browser-features',
     ],
     'rules': {
+        'color-hex-alpha': 'never',
         'declaration-block-no-duplicate-custom-properties': true,
         'declaration-block-no-duplicate-properties': [true, {
             'ignore': [
