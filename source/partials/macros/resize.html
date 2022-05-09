@@ -28,6 +28,11 @@
         <source{% if source[0] %} media="{{ source[0] }}"{% endif %} srcset="{{ require(url + '?resize=' + source[1] + '&suffix=' + source[2]) }}" type="image/{{ dimensions.type }}">
         {% endfor %}
 
+        {% if APP.ENV.PROD or APP.ENV.DEBUG %}
+        {% if APP.AVIF and not options.noavif %}<source srcset="{{ require(url + '?resize=&format=avif') }}" type="image/avif">{% endif %}
+        {% if APP.WEBP and not options.nowebp %}<source srcset="{{ require(url + '?resize=&format=webp') }}" type="image/webp">{% endif %}
+        {% endif %}
+
         <img
             src="{{ require(url) }}"
             loading="{%if attrs.img and attrs.img.loading %}{{ attrs.img.loading }}{% else %}lazy{% endif %}"
@@ -65,6 +70,11 @@
         {% for breakpoint, media in breakpoints_media(breakpoints, sizes) %}
         <source{% if media %} media="{{ media }}"{% endif %} srcset="{{ require(url + '?resize=' + sizes[breakpoint] + '&suffix=' + breakpoint) }}" type="image/{{ dimensions.type }}">
         {% endfor %}
+
+        {% if APP.ENV.PROD or APP.ENV.DEBUG %}
+        {% if APP.AVIF and not options.noavif %}<source srcset="{{ require(url + '?resize=&format=avif') }}" type="image/avif">{% endif %}
+        {% if APP.WEBP and not options.nowebp %}<source srcset="{{ require(url + '?resize=&format=webp') }}" type="image/webp">{% endif %}
+        {% endif %}
 
         <img
             src="{{ require(url) }}"
