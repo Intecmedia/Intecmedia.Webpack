@@ -44,8 +44,8 @@ module.exports = deepMerge({}, sharedConfig, {
             ],
         }],
         'order/order': [
-            'custom-properties',
             'dollar-variables',
+            'custom-properties',
         ],
         'order/properties-alphabetical-order': null,
         'pitcher/max-lines': 1024,
