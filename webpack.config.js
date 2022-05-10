@@ -78,7 +78,7 @@ module.exports = {
         liveReload: true,
         port: 8888,
         static: {
-            directory: path.resolve(__dirname, 'source'),
+            directory: ENV.OUTPUT_PATH,
             publicPath: path.posix.resolve(APP.PUBLIC_PATH, '/'),
         },
         client: {
