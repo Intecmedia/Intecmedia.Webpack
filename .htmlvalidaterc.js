@@ -35,6 +35,7 @@ module.exports = {
             'pattern': 'kebabcase',
         }],
         'long-title': 'off',
+        'meta-refresh': 'off',
         'no-inline-style': 'off',
         'no-trailing-whitespace': 'off',
         'pitcher/bem-no-missing-element': ['error', {
