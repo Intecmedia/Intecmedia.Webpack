@@ -58,8 +58,10 @@
 * **npm run image-lint** – линтер изображений
 * **npm run lint** – запуск всех линтеров (app, eslint, stylelint, html-validate, validator.w3.org).
 * **npm run server** – сервер в production-режиме и debug=off, самый медленный способ.
+* **npm run server-https** – https-сервер в production-режиме и debug=off, самый медленный способ.
 * **npm run server-dev** – сервер в development-режиме и debug=off, самый быстрый способ.
 * **npm run server-debug** – сервер в development-режиме и debug=on, медленный способ.
+* **npm run server-debug-https** – https-сервер в development-режиме и debug=on, медленный способ.
 * **npm run build** – релизный билд, запускается в production-режиме и debug=off, включая все линтеры, очень медленный способ.
 * **npm run browserslist-dev** – список поддерживаемых браузеров для NODE_ENV=development.
 * **npm run browserslist-prod** – список поддерживаемых браузеров для NODE_ENV=production.
@@ -72,7 +74,8 @@
 * **npm run js-lint** – линтер js через [eslint](https://eslint.org/).
 * **npm run css-lint** – линтер scss через [stylelint](https://stylelint.io/).
 * **npm run watch-dev** – watch в development-режиме и debug=off, самый быстрый способ.
-* **npm run server-dev** – сервер в development-режиме и debug=off, самый быстрый способ.
+* **npm run server** – сервер в development-режиме и debug=off, самый быстрый способ.
+* **npm run server-https** – https-сервер в development-режиме и debug=off, самый быстрый способ.
 * **npm run build** – релизный билд, запускается в production-режиме и debug=off, включая все линтеры, очень медленный способ.
 
 ## Стилистика кода
