@@ -47,6 +47,7 @@ module.exports = deepMerge({}, sharedConfig, {
             'dollar-variables',
             'custom-properties',
             {
+                'hasBlock': false,
                 'name': 'extend',
                 'type': 'at-rule',
             },
@@ -57,10 +58,22 @@ module.exports = deepMerge({}, sharedConfig, {
             },
             'declarations',
             {
-                'selector': '^&:',
+                'hasBlock': true,
+                'selector': '^&\\:',
                 'type': 'rule',
             },
             {
+                'hasBlock': true,
+                'selector': '^(\\>|\\+|~)\\s+',
+                'type': 'rule',
+            },
+            {
+                'hasBlock': true,
+                'selector': '^([a-zA-Z])?\\.',
+                'type': 'rule',
+            },
+            {
+                'hasBlock': true,
                 'name': 'supports',
                 'type': 'at-rule',
             },
@@ -70,10 +83,20 @@ module.exports = deepMerge({}, sharedConfig, {
                 'type': 'at-rule',
             },
             {
+                'hasBlock': true,
                 'name': 'media',
                 'type': 'at-rule',
             },
-            'rules',
+            {
+                'hasBlock': true,
+                'selector': '^&--',
+                'type': 'rule',
+            },
+            {
+                'hasBlock': true,
+                'selector': '^&__',
+                'type': 'rule',
+            },
         ],
         'order/properties-alphabetical-order': null,
         'pitcher/max-lines': 1024,
@@ -96,7 +119,7 @@ module.exports = deepMerge({}, sharedConfig, {
                 '\\.(js|is|no|has|not)\\-(.+)',
                 '^\\.(js|no\\-js)(\\s+)',
                 '^(html|body)',
-                '^(svg|picture|img|iframe|video|option|optgroup)\\.?',
+                '^(svg|picture|img|iframe|video|option|optgroup|canvas)\\.?',
                 '#\\{\\$[a-zA-Z][a-zA-Z-\\d]*\\}',
                 '\\.(active|fade|show)',
             ],
@@ -155,7 +178,7 @@ module.exports = deepMerge({}, sharedConfig, {
                 'child',
             ],
             'ignoreTypes': [
-                '/^(html|body|svg|picture|img|iframe|video|option|optgroup)\\.?/',
+                '/^(html|body|svg|picture|img|iframe|video|option|optgroup|canvas)\\.?/',
             ],
         }],
         'selector-no-qualifying-type': [true, {
