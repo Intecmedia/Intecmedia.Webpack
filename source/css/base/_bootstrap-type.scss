@@ -87,8 +87,8 @@
 
 // Blockquotes
 .blockquote {
-    margin-bottom: $blockquote-margin-y;
     @include font-size($blockquote-font-size);
+    margin-bottom: $blockquote-margin-y;
 
     > :last-child {
         margin-bottom: 0;
@@ -96,9 +96,9 @@
 }
 
 .blockquote-footer {
+    @include font-size($blockquote-footer-font-size);
     margin-top: -$blockquote-margin-y;
     margin-bottom: $blockquote-margin-y;
-    @include font-size($blockquote-footer-font-size);
     color: $blockquote-footer-color;
 
     &::before {

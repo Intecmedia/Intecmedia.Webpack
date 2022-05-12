@@ -46,6 +46,20 @@ module.exports = deepMerge({}, sharedConfig, {
         'order/order': [
             'dollar-variables',
             'custom-properties',
+            {
+                'name': 'extend',
+                'type': 'at-rule',
+            },
+            {
+                'name': 'include',
+                'type': 'at-rule',
+            },
+            'declarations',
+            'rules',
+            {
+                'name': 'media',
+                'type': 'at-rule',
+            },
         ],
         'order/properties-alphabetical-order': null,
         'pitcher/max-lines': 1024,
