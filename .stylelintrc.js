@@ -51,10 +51,16 @@ module.exports = deepMerge({}, sharedConfig, {
                 'type': 'at-rule',
             },
             {
+                'hasBlock': false,
                 'name': 'include',
                 'type': 'at-rule',
             },
             'declarations',
+            {
+                'hasBlock': true,
+                'name': 'include',
+                'type': 'at-rule',
+            },
             'rules',
             {
                 'name': 'media',
