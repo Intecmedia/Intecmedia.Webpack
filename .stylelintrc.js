@@ -57,6 +57,10 @@ module.exports = deepMerge({}, sharedConfig, {
             },
             'declarations',
             {
+                'selector': '^&:',
+                'type': 'rule',
+            },
+            {
                 'name': 'supports',
                 'type': 'at-rule',
             },
@@ -65,11 +69,11 @@ module.exports = deepMerge({}, sharedConfig, {
                 'name': 'include',
                 'type': 'at-rule',
             },
-            'rules',
             {
                 'name': 'media',
                 'type': 'at-rule',
             },
+            'rules',
         ],
         'order/properties-alphabetical-order': null,
         'pitcher/max-lines': 1024,
