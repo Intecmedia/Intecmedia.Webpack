@@ -57,6 +57,10 @@ module.exports = deepMerge({}, sharedConfig, {
             },
             'declarations',
             {
+                'name': 'supports',
+                'type': 'at-rule',
+            },
+            {
                 'hasBlock': true,
                 'name': 'include',
                 'type': 'at-rule',
