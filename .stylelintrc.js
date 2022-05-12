@@ -69,7 +69,7 @@ module.exports = deepMerge({}, sharedConfig, {
             },
             {
                 'hasBlock': true,
-                'selector': '^([a-zA-Z])?\\.',
+                'selector': '^([a-zA-Z]+)?\\.',
                 'type': 'rule',
             },
             {
