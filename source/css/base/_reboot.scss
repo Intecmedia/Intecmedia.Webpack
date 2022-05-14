@@ -1,0 +1,16 @@
+/* stylelint-disable no-duplicate-selectors -- already in 'node_modules/bootstrap/scss/reboot.scss', but we need it */
+/* stylelint-disable selector-max-type -- already in 'node_modules/bootstrap/scss/reboot.scss', but we need it */
+
+button,
+select,
+[type="button"],
+[type="submit"],
+[type="reset"],
+::file-selector-button {
+    // Safari 15 renders some components with `color: -apple-system-blue;`.
+    // So we needed to add the following reset declarations:
+    color: inherit;
+}
+
+/* stylelint-enable selector-max-type */
+/* stylelint-enable no-duplicate-selectors */
