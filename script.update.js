@@ -56,3 +56,4 @@ logger.info(`updated ${updated.length} packages`);
 console.log('');
 
 childProcess.execSync('npm update', { stdio: 'inherit' });
+childProcess.execSync('npm dedupe', { stdio: 'inherit' });
