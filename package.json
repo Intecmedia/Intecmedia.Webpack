@@ -80,6 +80,9 @@
         "node": ">=16",
         "npm": ">=8.3"
     },
+    "overrides": {
+        "glob": "7.2.0"
+    },
     "dependencies": {
         "@babel/cli": "^7.17.10",
         "@babel/core": "^7.17.10",
@@ -126,7 +129,7 @@
         "focus-visible": "^5.2.0",
         "focus-within": "^3.0.2",
         "front-matter": "^4.0.2",
-        "glob": "^8.0.3",
+        "glob": "7.2.0",
         "html-validate": "^7.1.0",
         "html-validator": "^6.0.1",
         "html-webpack-plugin": "^5.5.0",
