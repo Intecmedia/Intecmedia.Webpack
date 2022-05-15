@@ -21,11 +21,6 @@
 
     h6, .h6, .display-6 { @extend .h6; }
 
-    // default image
-    img:not([class]) {
-        @extend .img-fluid;
-    }
-
     // image with caption
     figure {
         @extend .figure;
@@ -141,6 +136,11 @@
     }
 
     img {
+        // default image
+        &:not([class]) {
+            @extend .img-fluid;
+        }
+
         // responsive images
         &.img-responsive {
             @extend .img-fluid;
