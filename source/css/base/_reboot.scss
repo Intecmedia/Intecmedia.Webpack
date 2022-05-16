@@ -12,5 +12,11 @@ select,
     color: inherit;
 }
 
+html {
+    // Mobile Safari renders some shadows around interactive elements.
+    // So we needed to add the following reset declarations:
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 /* stylelint-enable selector-max-type */
 /* stylelint-enable no-duplicate-selectors */
