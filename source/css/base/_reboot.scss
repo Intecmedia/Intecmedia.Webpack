@@ -1,5 +1,5 @@
 /* stylelint-disable no-duplicate-selectors -- already in 'node_modules/bootstrap/scss/reboot.scss', but we need it */
-/* stylelint-disable selector-max-type -- already in 'node_modules/bootstrap/scss/reboot.scss', but we need it */
+/* stylelint-disable scss/selector-nest-combinators, selector-max-type, plugin/selector-bem-pattern -- its ok for reboot */
 
 button,
 select,
@@ -13,14 +13,16 @@ select,
 }
 
 a,
-input,
-select,
-textarea,
+[type="button"],
+[type="submit"],
+[type="reset"],
 button {
     // Mobile Safari renders some shadows around interactive elements.
     // So we needed to add the following reset declarations:
-    -webkit-tap-highlight-color: transparent;
+    &, &:hover {
+        -webkit-tap-highlight-color: transparent;
+    }
 }
 
-/* stylelint-enable selector-max-type */
+/* stylelint-enable scss/selector-nest-combinators, selector-max-type, plugin/selector-bem-pattern -- its ok for reboot */
 /* stylelint-enable no-duplicate-selectors */
