@@ -1,28 +1,27 @@
 /* stylelint-disable no-duplicate-selectors -- already in 'node_modules/bootstrap/scss/reboot.scss', but we need it */
-/* stylelint-disable scss/selector-nest-combinators, selector-max-type, plugin/selector-bem-pattern -- its ok for reboot */
+/* stylelint-disable scss/selector-nest-combinators, selector-max-type -- its ok for reboot */
 
 button,
 select,
-[type="button"],
-[type="submit"],
-[type="reset"],
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
 ::file-selector-button {
     // Safari 15 renders some components with `color: -apple-system-blue;`.
     // So we needed to add the following reset declarations:
     color: inherit;
 }
 
-a,
-[type="button"],
-[type="submit"],
-[type="reset"],
-button {
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
     // Mobile Safari renders some shadows around interactive elements.
     // So we needed to add the following reset declarations:
-    &, &:hover {
-        -webkit-tap-highlight-color: transparent;
-    }
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
 }
 
-/* stylelint-enable scss/selector-nest-combinators, selector-max-type, plugin/selector-bem-pattern -- its ok for reboot */
+/* stylelint-enable scss/selector-nest-combinators, selector-max-type */
 /* stylelint-enable no-duplicate-selectors */
