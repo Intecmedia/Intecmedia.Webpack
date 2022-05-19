@@ -19,7 +19,7 @@ class NoMissingElement extends Rule {
     }
 
     domReady(event) {
-        const nodes = event.document.querySelectorAll('body *[class]');
+        const nodes = event.document.querySelectorAll('body [class]');
         const ignores = this.options.ignore ? event.document.querySelectorAll(this.options.ignore) : [];
         nodes.forEach((node) => {
             if (nodeIgnore(node, ignores)) {
@@ -30,11 +30,8 @@ class NoMissingElement extends Rule {
                 if (!ELEMENT_PATTERN.test(className)) return;
                 const [, elementMatch] = className.match(ELEMENT_PATTERN);
                 const blockName = className.substring(0, className.length - elementMatch.length);
-                const closest = node.closest(`.${blockName}`);
-                if (!closest) {
+                if (!node.parentNode?.closest(`.${blockName}`)) {
                     this.report(node, `Class-element references missing block ${JSON.stringify(blockName)} (element is ${JSON.stringify(className)}).`);
-                } if (closest && closest === node) {
-                    this.report(node, `Class-element references self block ${JSON.stringify(blockName)} (element is ${JSON.stringify(className)}).`);
                 }
             });
         });
@@ -51,7 +48,7 @@ class NoMissingModifier extends Rule {
     }
 
     domReady(event) {
-        const nodes = event.document.querySelectorAll('body *[class]');
+        const nodes = event.document.querySelectorAll('body [class]');
         const ignores = this.options.ignore ? event.document.querySelectorAll(this.options.ignore) : [];
         nodes.forEach((node) => {
             if (nodeIgnore(node, ignores)) {
