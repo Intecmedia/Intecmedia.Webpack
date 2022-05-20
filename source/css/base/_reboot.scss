@@ -1,5 +1,5 @@
 /* stylelint-disable no-duplicate-selectors -- already in 'node_modules/bootstrap/scss/reboot.scss', but we need it */
-/* stylelint-disable scss/selector-nest-combinators, selector-max-type, property-no-vendor-prefix -- its ok for reboot */
+/* stylelint-disable scss/selector-nest-combinators, selector-max-type, property-no-vendor-prefix, order/properties-order -- its ok for reboot */
 
 button,
 select,
@@ -30,5 +30,5 @@ select {
     -webkit-appearance: none;
 }
 
-/* stylelint-enable scss/selector-nest-combinators, selector-max-type, property-no-vendor-prefix */
+/* stylelint-enable scss/selector-nest-combinators, selector-max-type, property-no-vendor-prefix, order/properties-order */
 /* stylelint-enable no-duplicate-selectors */
