@@ -174,7 +174,7 @@
         "sass-loader": "^13.0.0",
         "schema-utils": "^4.0.0",
         "semver": "^7.3.7",
-        "sharp": "0.28.3",
+        "sharp": "0.30.5",
         "slash": "^3.0.0",
         "stylelint": "^14.8.2",
         "stylelint-config-sass-guidelines": "^9.0.1",
