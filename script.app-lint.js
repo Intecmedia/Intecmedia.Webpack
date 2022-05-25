@@ -69,8 +69,10 @@ try {
     fonttoolsVersion = null;
 }
 
-if (!semver.satisfies(fonttoolsVersion, PACKAGE.engines.fonttools)) {
-    lintErrors.push(`required fonttools@${PACKAGE.engines.fonttools} version (current is fonttools@${fonttoolsVersion})`);
+if (!fonttoolsVersion) {
+    lintErrors.push(`required python fonttools@${PACKAGE.engines['@pip/fonttools']} version (please run \`pip install fonttools\`)`);
+} else if (!semver.satisfies(fonttoolsVersion, PACKAGE.engines['@pip/fonttools'])) {
+    lintErrors.push(`required python fonttools@${PACKAGE.engines['@pip/fonttools']} version (current is \`${fonttoolsVersion}\`)`);
 }
 
 lintWarns.forEach((i) => logger.warn(i));

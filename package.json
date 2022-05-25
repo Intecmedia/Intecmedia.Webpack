@@ -76,7 +76,7 @@
         ]
     },
     "engines": {
-        "fonttools": "*.*.*",
+        "@pip/fonttools": "*.*.*",
         "node": ">=16",
         "npm": ">=8.3"
     },
