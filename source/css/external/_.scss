@@ -1,5 +1,5 @@
 /* stylelint-disable -- we not control third party code */
 
-// @import "~external-package/path/to/foobar.min.css";
+// @import "~external-package/path/to/foobar.min"; !!!dont use extension -- only base file name!!!
 
 /* stylelint-enable */
