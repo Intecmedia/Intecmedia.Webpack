@@ -3,6 +3,8 @@ import AbstractComponent from '~/components/abstract';
 const CLASS_NAME_BLOCK = 'js-intersection-block';
 const CLASS_NAME_INIT = 'is-intersection';
 const CLASS_NAME_VISIBLE = 'is-intersecting';
+const CLASS_NAME_UPWARD = 'is-intersection-upward';
+const CLASS_NAME_DOWNWARD = 'is-intersection-downward';
 
 const EVENT_NAME_INTERSECTION = 'intersection';
 
@@ -62,9 +64,15 @@ class IntersectionBlocks extends AbstractComponent {
 
     onIntersection(entries) {
         entries.forEach((entry) => {
+            entry.isUpward = entry.boundingClientRect.y < entry.rootBounds.y;
+            entry.isDownward = !entry.isUpward;
+
             const detail = { entry };
             const event = new CustomEvent(EVENT_NAME_INTERSECTION, { detail });
             entry.target.dispatchEvent(event);
+
+            entry.target.classList.toggle(CLASS_NAME_UPWARD, entry.isUpward);
+            entry.target.classList.toggle(CLASS_NAME_DOWNWARD, entry.isDownward);
 
             if (
                 ('intersectionToggle' in entry.target.dataset)
