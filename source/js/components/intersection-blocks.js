@@ -24,7 +24,9 @@ class IntersectionBlocks extends AbstractComponent {
     }
 
     init() {
-        this.observer = new IntersectionObserver(this.onIntersection);
+        this.observer = new IntersectionObserver(this.onIntersection, {
+            rootMargin: '0px 0px 0px 0px',
+        });
         this.items = [...this.element.querySelectorAll(SELECTOR_BLOCKS_NEW)];
         setTimeout(() => this.run(), 0);
     }
@@ -62,7 +64,7 @@ class IntersectionBlocks extends AbstractComponent {
         }
     }
 
-    onIntersection(entries) {
+    onIntersection(entries, observer) {
         entries.forEach((entry) => {
             entry.isUpward = entry.boundingClientRect.y < entry.rootBounds.y;
             entry.isDownward = !entry.isUpward;
@@ -81,7 +83,7 @@ class IntersectionBlocks extends AbstractComponent {
                 entry.target.classList.toggle(CLASS_NAME_VISIBLE, entry.isIntersecting);
             } else if (entry.isIntersecting) {
                 entry.target.classList.add(CLASS_NAME_VISIBLE);
-                this.observer.unobserve(entry.target);
+                observer.unobserve(entry.target);
             }
         });
     }
