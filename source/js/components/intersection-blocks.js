@@ -66,7 +66,10 @@ class IntersectionBlocks extends AbstractComponent {
             const event = new CustomEvent(EVENT_NAME_INTERSECTION, { detail });
             entry.target.dispatchEvent(event);
 
-            if (entry.target.dataset.intersectionToggle) {
+            if (
+                ('intersectionToggle' in entry.target.dataset)
+                && parseInt(entry.target.dataset.intersectionToggle, 10)
+            ) {
                 entry.target.classList.toggle(CLASS_NAME_VISIBLE, entry.isIntersecting);
             } else if (entry.isIntersecting) {
                 entry.target.classList.add(CLASS_NAME_VISIBLE);
