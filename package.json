@@ -149,6 +149,7 @@
         "line-column": "^1.0.2",
         "loader-utils": "^3.2.0",
         "lodash.merge": "^4.6.2",
+        "lodash.range": "^3.2.0",
         "lodash.template": "^4.5.0",
         "lodash.uniqueid": "^4.0.1",
         "md5-file": "^5.0.0",
