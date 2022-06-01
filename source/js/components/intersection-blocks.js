@@ -1,3 +1,4 @@
+/* global VERBOSE */
 import AbstractComponent from '~/components/abstract';
 
 const CLASS_NAME_BLOCK = 'js-intersection-block';
@@ -26,6 +27,7 @@ class IntersectionBlocks extends AbstractComponent {
     init() {
         this.observer = new IntersectionObserver(this.onIntersection, {
             rootMargin: '0px 0px 0px 0px',
+            threshold: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
         });
         this.items = [...this.element.querySelectorAll(SELECTOR_BLOCKS_NEW)];
         setTimeout(() => this.run(), 0);
@@ -66,22 +68,36 @@ class IntersectionBlocks extends AbstractComponent {
 
     onIntersection(entries, observer) {
         entries.forEach((entry) => {
-            entry.isUpward = entry.boundingClientRect.y < entry.rootBounds.y;
-            entry.isDownward = !entry.isUpward;
+            const intersectionRatio = ('intersectionRatio' in entry.target.dataset)
+                && (parseInt(entry.target.dataset.intersectionRatio, 10) || 0);
+
+            const isUpward = entry.boundingClientRect.y < entry.rootBounds.y;
+            const isDownward = !entry.isUpward;
+            entry.target.setAttribute('data-intersection-is-upward', isUpward + 0);
+            entry.target.setAttribute('data-intersection-is-downward', isDownward + 0);
+
+            const isVisible = intersectionRatio ? entry.intersectionRatio >= intersectionRatio : entry.isIntersecting;
+            if (entry.target.getAttribute('data-intersection-is-visible') === (isVisible ? '1' : '0')) {
+                return;
+            }
+            entry.target.setAttribute('data-intersection-is-visible', isVisible + 0);
+            entry.extra = { isVisible, isUpward, isDownward };
 
             const detail = { entry };
             const event = new CustomEvent(EVENT_NAME_INTERSECTION, { detail });
             entry.target.dispatchEvent(event);
+            if (VERBOSE) {
+                console.log(`[intersection-blocks] ${EVENT_NAME_INTERSECTION}`, entry.extra, entry);
+            }
+            entry.target.classList.toggle(CLASS_NAME_UPWARD, isUpward);
+            entry.target.classList.toggle(CLASS_NAME_DOWNWARD, isDownward);
 
-            entry.target.classList.toggle(CLASS_NAME_UPWARD, entry.isUpward);
-            entry.target.classList.toggle(CLASS_NAME_DOWNWARD, entry.isDownward);
+            const intersectionToggle = ('intersectionToggle' in entry.target.dataset)
+                && !!parseInt(entry.target.dataset.intersectionToggle, 10);
 
-            if (
-                ('intersectionToggle' in entry.target.dataset)
-                && parseInt(entry.target.dataset.intersectionToggle, 10)
-            ) {
-                entry.target.classList.toggle(CLASS_NAME_VISIBLE, entry.isIntersecting);
-            } else if (entry.isIntersecting) {
+            if (intersectionToggle) {
+                entry.target.classList.toggle(CLASS_NAME_VISIBLE, isVisible);
+            } else if (isVisible) {
                 entry.target.classList.add(CLASS_NAME_VISIBLE);
                 observer.unobserve(entry.target);
             }
