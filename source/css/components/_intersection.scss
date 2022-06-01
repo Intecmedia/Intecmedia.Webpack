@@ -24,26 +24,26 @@
         }
     }
 
-    &__duration-slow {
+    &--duration-slow {
         --intersection-duration-fade: #{$duration-slow};
         --intersection-duration-translate: #{$duration-slow};
     }
 
-    &__duration-normal {
+    &--duration-normal {
         --intersection-duration-fade: #{$duration-normal};
         --intersection-duration-translate: #{$duration-normal};
     }
 
-    &__duration-fast {
+    &--duration-fast {
         --intersection-duration-fade: #{$duration-fast};
         --intersection-duration-translate: #{$duration-fast};
     }
 
-    &__fade {
+    &--fade {
         --intersection-fade: 0;
     }
 
-    &__up {
+    &--up {
         --intersection-translate-y-up: 0;
         --intersection-translate-y: var(--intersection-translate-y-up, 0);
 
@@ -56,7 +56,7 @@
         }
     }
 
-    &__down {
+    &--down {
         --intersection-translate-y-down: 0;
         --intersection-translate-y: var(--intersection-translate-y-down, 0);
 
@@ -69,41 +69,41 @@
         }
     }
 
-    &__scale {
+    &--scale {
         --intersection-scale: 1.15;
     }
 
-    &__scale-in {
+    &--scale-in {
         --intersection-scale-in: .85;
         --intersection-scale: var(--intersection-scale-in, 0);
     }
 
-    &__fade-up {
+    &--fade-up {
         @extend .intersection__fade;
         @extend .intersection__up;
     }
 
-    &__fade-down {
+    &--fade-down {
         @extend .intersection__fade;
         @extend .intersection__down;
     }
 
-    &__scale-up {
+    &--scale-up {
         @extend .intersection__scale;
         @extend .intersection__up;
     }
 
-    &__scale-down {
+    &--scale-down {
         @extend .intersection__scale;
         @extend .intersection__down;
     }
 
-    &__scale-in-up {
+    &--scale-in-up {
         @extend .intersection__scale-in;
         @extend .intersection__up;
     }
 
-    &__scale-in-down {
+    &--scale-in-down {
         @extend .intersection__scale-in;
         @extend .intersection__down;
     }
