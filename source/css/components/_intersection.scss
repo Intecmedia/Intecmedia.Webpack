@@ -97,8 +97,21 @@
         --intersection-scale: 1.1;
     }
 
+    &__scale-up {
+        --intersection-scale: 1.1;
+    }
+
+    &__scale-in {
+        --intersection-scale: .5;
+    }
+
     &__scale-fade {
         --intersection-scale: 1.1;
+        --intersection-fade: 0;
+    }
+
+    &__scale-in-fade {
+        --intersection-scale: .5;
         --intersection-fade: 0;
     }
 }
