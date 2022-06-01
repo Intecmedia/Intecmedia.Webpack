@@ -11,6 +11,7 @@ import AbstractApp from '~/components/app';
 class App extends AbstractApp {
     init() {
         document.documentElement.classList.add('ready-js');
+        document.documentElement.classList.add('is-page-transition-ready');
         super.init();
 
         /* !!! your code here !!! */
