@@ -1,6 +1,7 @@
 .intersection {
     html.js & {
-        .intersection__inner {
+        &--block,
+        > .intersection__block {
             opacity: var(--intersection-fade, 1);
 
             transition:
@@ -19,7 +20,8 @@
     }
 
     &.is-intersecting {
-        .intersection__inner {
+        &.intersection--block,
+        > .intersection__block {
             html.js.is-page-transition-ready & {
                 opacity: 1;
 
