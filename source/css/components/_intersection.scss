@@ -79,32 +79,32 @@
     }
 
     &--fade-up {
-        @extend .intersection__fade;
-        @extend .intersection__up;
+        @extend .intersection--fade;
+        @extend .intersection--up;
     }
 
     &--fade-down {
-        @extend .intersection__fade;
-        @extend .intersection__down;
+        @extend .intersection--fade;
+        @extend .intersection--down;
     }
 
     &--scale-up {
-        @extend .intersection__scale;
-        @extend .intersection__up;
+        @extend .intersection--scale;
+        @extend .intersection--up;
     }
 
     &--scale-down {
-        @extend .intersection__scale;
-        @extend .intersection__down;
+        @extend .intersection--scale;
+        @extend .intersection--down;
     }
 
     &--scale-in-up {
-        @extend .intersection__scale-in;
-        @extend .intersection__up;
+        @extend .intersection--scale-in;
+        @extend .intersection--up;
     }
 
     &--scale-in-down {
-        @extend .intersection__scale-in;
-        @extend .intersection__down;
+        @extend .intersection--scale-in;
+        @extend .intersection--down;
     }
 }
