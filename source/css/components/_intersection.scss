@@ -44,37 +44,38 @@
     }
 
     &__up {
-        --intersection-translate-y-value: 0;
-        --intersection-translate-y: var(--intersection-translate-y-value, 0);
+        --intersection-translate-y-up: 0;
+        --intersection-translate-y: var(--intersection-translate-y-up, 0);
 
         &.is-intersection-downward {
-            --intersection-translate-y-value: 100%;
+            --intersection-translate-y-up: 100%;
         }
 
         &.is-intersection-upward {
-            --intersection-translate-y-value: -100%;
+            --intersection-translate-y-up: -100%;
         }
     }
 
     &__down {
-        --intersection-translate-y-value: 0;
-        --intersection-translate-y: var(--intersection-translate-y-value, 0);
+        --intersection-translate-y-down: 0;
+        --intersection-translate-y: var(--intersection-translate-y-down, 0);
 
         &.is-intersection-downward {
-            --intersection-translate-y-value: -100%;
+            --intersection-translate-y-down: -100%;
         }
 
         &.is-intersection-upward {
-            --intersection-translate-y-value: 100%;
+            --intersection-translate-y-down: 100%;
         }
     }
 
     &__scale {
-        --intersection-scale: 1.1;
+        --intersection-scale: 1.15;
     }
 
     &__scale-in {
-        --intersection-scale: .5;
+        --intersection-scale-in: .85;
+        --intersection-scale: var(--intersection-scale-in, 0);
     }
 
     &__fade-up {
@@ -84,6 +85,26 @@
 
     &__fade-down {
         @extend .intersection__fade;
+        @extend .intersection__down;
+    }
+
+    &__scale-up {
+        @extend .intersection__scale;
+        @extend .intersection__up;
+    }
+
+    &__scale-down {
+        @extend .intersection__scale;
+        @extend .intersection__down;
+    }
+
+    &__scale-in-up {
+        @extend .intersection__scale-in;
+        @extend .intersection__up;
+    }
+
+    &__scale-in-down {
+        @extend .intersection__scale-in;
         @extend .intersection__down;
     }
 }
