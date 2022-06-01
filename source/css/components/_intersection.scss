@@ -2,22 +2,25 @@
     html.js & {
         opacity: var(--intersection-fade, 1);
 
-        transition: opacity $duration-default, transform $duration-default;
+        transition:
+            opacity var(--intersection-duration-fade, $duration-default),
+            transform var(--intersection-duration-translate, $duration-default);
         transition-delay: $intersection-transition-delay;
         transition-timing-function: $ease-default;
 
         transform:
-            translate(
+            translate3d(
                 var(--intersection-translate-x, 0),
-                var(--intersection-translate-y, 0)
-            ) scale(var(--intersection-scale, 1));
+                var(--intersection-translate-y, 0),
+                var(--intersection-translate-z, 0)
+            ) scale(var(--intersection-scale, 1)) rotate(var(--intersection-rotate, 0));
     }
 
     &.is-intersecting {
         html.js.is-page-transition-ready & {
             opacity: 1;
 
-            transform: translate(0, 0) scale(1);
+            transform: none;
         }
     }
 
@@ -27,7 +30,7 @@
 
     &__fade-up {
         --intersection-fade: 0;
-        --intersection-translate-y: 100%;
+        --intersection-translate-y: 0;
 
         &.is-intersection-downward {
             --intersection-translate-y: 100%;
@@ -40,7 +43,31 @@
 
     &__fade-down {
         --intersection-fade: 0;
-        --intersection-translate-y: -100%;
+        --intersection-translate-y: 0;
+
+        &.is-intersection-downward {
+            --intersection-translate-y: -100%;
+        }
+
+        &.is-intersection-upward {
+            --intersection-translate-y: 100%;
+        }
+    }
+
+    &__up {
+        --intersection-translate-y: 0;
+
+        &.is-intersection-downward {
+            --intersection-translate-y: 100%;
+        }
+
+        &.is-intersection-upward {
+            --intersection-translate-y: -100%;
+        }
+    }
+
+    &__down {
+        --intersection-translate-y: 0;
 
         &.is-intersection-downward {
             --intersection-translate-y: -100%;
