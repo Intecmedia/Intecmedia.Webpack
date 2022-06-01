@@ -1,26 +1,30 @@
 .intersection {
     html.js & {
-        opacity: var(--intersection-fade, 1);
+        .intersection__inner {
+            opacity: var(--intersection-fade, 1);
 
-        transition:
-            opacity var(--intersection-duration-fade, $duration-default),
-            transform var(--intersection-duration-translate, $duration-default);
-        transition-delay: $intersection-transition-delay;
-        transition-timing-function: $ease-default;
+            transition:
+                opacity var(--intersection-duration-fade, $duration-default),
+                transform var(--intersection-duration-translate, $duration-default);
+            transition-delay: $intersection-transition-delay;
+            transition-timing-function: $ease-default;
 
-        transform:
-            translate3d(
-                var(--intersection-translate-x, 0),
-                var(--intersection-translate-y, 0),
-                var(--intersection-translate-z, 0)
-            ) scale(var(--intersection-scale, 1)) rotate(var(--intersection-rotate, 0));
+            transform:
+                translate3d(
+                    var(--intersection-translate-x, 0),
+                    var(--intersection-translate-y, 0),
+                    var(--intersection-translate-z, 0)
+                ) scale(var(--intersection-scale, 1)) rotate(var(--intersection-rotate, 0));
+        }
     }
 
     &.is-intersecting {
-        html.js.is-page-transition-ready & {
-            opacity: 1;
+        .intersection__inner {
+            html.js.is-page-transition-ready & {
+                opacity: 1;
 
-            transform: none;
+                transform: none;
+            }
         }
     }
 
