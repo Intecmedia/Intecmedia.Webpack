@@ -43,53 +43,29 @@
         --intersection-fade: 0;
     }
 
-    &__fade-up {
-        --intersection-fade: 0;
-        --intersection-translate-y: 0;
-
-        &.is-intersection-downward {
-            --intersection-translate-y: 100%;
-        }
-
-        &.is-intersection-upward {
-            --intersection-translate-y: -100%;
-        }
-    }
-
-    &__fade-down {
-        --intersection-fade: 0;
-        --intersection-translate-y: 0;
-
-        &.is-intersection-downward {
-            --intersection-translate-y: -100%;
-        }
-
-        &.is-intersection-upward {
-            --intersection-translate-y: 100%;
-        }
-    }
-
     &__up {
-        --intersection-translate-y: 0;
+        --intersection-translate-y-value: 0;
+        --intersection-translate-y: var(--intersection-translate-y-value, 0);
 
         &.is-intersection-downward {
-            --intersection-translate-y: 100%;
+            --intersection-translate-y-value: 100%;
         }
 
         &.is-intersection-upward {
-            --intersection-translate-y: -100%;
+            --intersection-translate-y-value: -100%;
         }
     }
 
     &__down {
-        --intersection-translate-y: 0;
+        --intersection-translate-y-value: 0;
+        --intersection-translate-y: var(--intersection-translate-y-value, 0);
 
         &.is-intersection-downward {
-            --intersection-translate-y: -100%;
+            --intersection-translate-y-value: -100%;
         }
 
         &.is-intersection-upward {
-            --intersection-translate-y: 100%;
+            --intersection-translate-y-value: 100%;
         }
     }
 
@@ -97,21 +73,17 @@
         --intersection-scale: 1.1;
     }
 
-    &__scale-up {
-        --intersection-scale: 1.1;
-    }
-
     &__scale-in {
         --intersection-scale: .5;
     }
 
-    &__scale-fade {
-        --intersection-scale: 1.1;
-        --intersection-fade: 0;
+    &__fade-up {
+        @extend .intersection__fade;
+        @extend .intersection__up;
     }
 
-    &__scale-in-fade {
-        --intersection-scale: .5;
-        --intersection-fade: 0;
+    &__fade-down {
+        @extend .intersection__fade;
+        @extend .intersection__down;
     }
 }
