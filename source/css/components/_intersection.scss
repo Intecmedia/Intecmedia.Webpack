@@ -24,6 +24,21 @@
         }
     }
 
+    &__duration-slow {
+        --intersection-duration-fade: #{$duration-slow};
+        --intersection-duration-translate: #{$duration-slow};
+    }
+
+    &__duration-normal {
+        --intersection-duration-fade: #{$duration-normal};
+        --intersection-duration-translate: #{$duration-normal};
+    }
+
+    &__duration-fast {
+        --intersection-duration-fade: #{$duration-fast};
+        --intersection-duration-translate: #{$duration-fast};
+    }
+
     &__fade {
         --intersection-fade: 0;
     }
