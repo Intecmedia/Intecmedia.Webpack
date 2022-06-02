@@ -2,7 +2,7 @@
 <meta property="og:locale" content="{{ APP.LANGUAGE }}">
 <meta property="og:type" content="website">
 <meta property="og:title"
-      content="{% if PAGE.homepage %}{{ PAGE.title or APP.TITLE }}{% else %}{{ PAGE.title }} — {{ APP.SHORT_NAME }}{% endif %}">
+      content="{% if PAGE.homepage %}{{ PAGE.title or APP.TITLE }}{% else %}{{ PAGE.title }} | {{ APP.SHORT_NAME }}{% endif %}">
 <meta property="og:description" content="{{ PAGE.description or APP.DESCRIPTION }}">
 <meta property="og:image" content="{{ APP.PUBLIC_PATH }}{{ PAGE.og_image or 'img/og-image.png' }}">
 <meta property="og:site_name" content="{{ APP.SHORT_NAME }}">
