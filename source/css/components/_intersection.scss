@@ -16,6 +16,8 @@
                     var(--intersection-translate-y, 0),
                     var(--intersection-translate-z, 0)
                 ) scale(var(--intersection-scale, 1)) rotate(var(--intersection-rotate, 0));
+
+            will-change: transform, opacity;
         }
     }
 
