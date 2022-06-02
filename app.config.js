@@ -24,6 +24,8 @@ module.exports = {
     LINT_FIX: true,
     WEBP: true,
     AVIF: true,
+    BROTLI: true,
+    GZIP: true,
 };
 
 module.exports.ENV = ENV;

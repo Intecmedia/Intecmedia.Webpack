@@ -217,13 +217,13 @@ module.exports = {
         }),
         ...(ENV.PROD && !ENV.DEBUG ? [
             new CaseSensitivePathsPlugin(),
-            new CompressionPlugin({
+            ...(APP.BROLI ? [new CompressionPlugin({
                 test: /\.(js|css|svg|json|lottie|gltf|glb|hdr)(\?.*)?$/i,
                 exclude: ['assets-manifest.json'],
                 filename: '[path][base].br[query]',
                 algorithm: 'brotliCompress',
-            }),
-            new CompressionPlugin({
+            })] : []),
+            ...(APP.GZIP ? [new CompressionPlugin({
                 test: /\.(js|css|svg|json|lottie|gltf|glb|hdr)(\?.*)?$/i,
                 exclude: ['assets-manifest.json'],
                 filename: '[path][base].gz[query]',
@@ -231,7 +231,7 @@ module.exports = {
                     const zopfli = require('@gfx/zopfli');
                     return zopfli.gzip(input, compressionOptions, callback);
                 },
-            }),
+            })] : []),
         ] : []),
         new webpack.BannerPlugin({
             banner: ENV.BANNER_STRING,
