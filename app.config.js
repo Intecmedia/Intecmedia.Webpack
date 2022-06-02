@@ -26,6 +26,8 @@ module.exports = {
     AVIF: true,
     BROTLI: true,
     GZIP: true,
+    STYLELINT: true,
+    ESLINT: true,
 };
 
 module.exports.ENV = ENV;

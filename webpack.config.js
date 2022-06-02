@@ -255,7 +255,7 @@ module.exports = {
             }))),
             BANNER_STRING: JSON.stringify(ENV.BANNER_STRING),
         }),
-        new StyleLintPlugin({
+        ...(APP.STYLELINT ? [new StyleLintPlugin({
             customSyntax: 'postcss-scss',
             files: '**/*.scss',
             configFile: './.stylelintrc.js',
@@ -263,15 +263,15 @@ module.exports = {
             lintDirtyModulesOnly: ENV.DEV_SERVER || ENV.WATCH,
             quiet: ENV.PROD || ENV.DEBUG,
             fix: APP.LINT_FIX,
-        }),
-        new ESLintPlugin({
+        })] : []),
+        ...(APP.ESLINT ? [new ESLintPlugin({
             files: '**/*.js',
             overrideConfigFile: './.eslintrc.js',
             ignorePath: './.eslintignore',
             lintDirtyModulesOnly: ENV.DEV_SERVER || ENV.WATCH,
             quiet: ENV.PROD || ENV.DEBUG,
             fix: APP.LINT_FIX,
-        }),
+        })] : []),
         ...(ENV.SITEMAP.map(({ template, filename }) => new HtmlWebpackPlugin({
             filename,
             template,
