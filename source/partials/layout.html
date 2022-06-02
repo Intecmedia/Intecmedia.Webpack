@@ -11,7 +11,7 @@
         {% if PAGE.meta_title %}
         {{ PAGE.meta_title }}
         {% else %}
-        {% if PAGE.homepage %}{{ PAGE.title or APP.TITLE }}{% else %}{{ PAGE.title }} &mdash; {{ APP.SHORT_NAME }}{% endif %}
+        {% if PAGE.homepage %}{{ PAGE.title or APP.TITLE }}{% else %}{{ PAGE.title }} — {{ APP.SHORT_NAME }}{% endif %}
         {% endif %}
     </title>
     <meta name="description" content="{{ PAGE.description or APP.DESCRIPTION }}">
