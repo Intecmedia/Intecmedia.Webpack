@@ -71,7 +71,7 @@ class IntersectionBlocks extends AbstractComponent {
             const intersectionRatio = ('intersectionRatio' in entry.target.dataset)
                 && (parseInt(entry.target.dataset.intersectionRatio, 10) || 0);
 
-            const isUpward = entry.boundingClientRect.y < entry.rootBounds.y;
+            const isUpward = entry.boundingClientRect?.y < entry.rootBounds?.y;
             const isDownward = !entry.isUpward;
             entry.target.setAttribute('data-intersection-is-upward', isUpward + 0);
             entry.target.setAttribute('data-intersection-is-downward', isDownward + 0);
