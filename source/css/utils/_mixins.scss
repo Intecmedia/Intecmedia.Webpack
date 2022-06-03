@@ -1,3 +1,4 @@
+/* stylelint-disable max-line-length -- sass does not support multiline expressions */
 @use "sass:math";
 
 @function str-repeat($str, $n){
@@ -40,7 +41,6 @@
     $index: str-index($string, $search);
 
     @if $index {
-        /* stylelint-disable-next-line max-line-length -- sass does not support multiline expressions */
         @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
     }
 
@@ -50,3 +50,4 @@
 @function grid-percentage($column, $count) {
     @return percentage(math.div($column, $count));
 }
+/* stylelint-enable max-line-length -- sass does not support multiline expressions */
