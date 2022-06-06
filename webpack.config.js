@@ -217,7 +217,7 @@ module.exports = {
         }),
         ...(ENV.PROD && !ENV.DEBUG ? [
             new CaseSensitivePathsPlugin(),
-            ...(APP.BROLI ? [new CompressionPlugin({
+            ...(APP.BROTLI ? [new CompressionPlugin({
                 test: /\.(js|css|svg|json|lottie|gltf|glb|hdr)(\?.*)?$/i,
                 exclude: ['assets-manifest.json'],
                 filename: '[path][base].br[query]',
