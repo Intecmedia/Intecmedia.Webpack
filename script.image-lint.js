@@ -14,15 +14,14 @@ const config = require('./.imagelintrc');
 const logger = weblog({ name: 'image-lint' });
 
 async function metadataAsync(filename) {
-    const result = await sharp(filename).metadata();
+    const result = {};
+    const metadata = await sharp(filename).metadata();
     result.extension = path.extname(filename).replace('.', '');
-    result.width = parseInt(result.width, 10);
-    result.height = parseInt(result.height, 10);
-    result.quality = parseInt(result.quality, 10);
-    if (result.format === 'jpeg') {
-        result.format = 'jpg';
-    }
-    delete result.xmp;
+    result.width = parseInt(metadata.width, 10);
+    result.height = parseInt(metadata.height, 10);
+    result.quality = parseInt(metadata.quality, 10);
+    result.format = (metadata.format === 'jpeg' ? 'jpg' : metadata.format);
+    result.space = metadata.space;
     return result;
 }
 
