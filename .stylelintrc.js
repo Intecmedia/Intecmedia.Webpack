@@ -124,6 +124,8 @@ module.exports = deepMerge({}, sharedConfig, {
                 'stylelint-commands',
             ],
         }],
+        'scss/operator-no-newline-after': null,
+        'scss/operator-no-newline-before': null,
         'scss/selector-nest-combinators': 'always',
         'scss/selector-no-redundant-nesting-selector': true,
         'selector-class-pattern': [
