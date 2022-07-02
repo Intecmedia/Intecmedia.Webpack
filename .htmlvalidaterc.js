@@ -35,7 +35,6 @@ module.exports = {
             'pattern': 'kebabcase',
         }],
         'long-title': 'off',
-        'meta-refresh': 'off',
         'no-inline-style': 'off',
         'no-trailing-whitespace': 'off',
         'pitcher/bem-no-missing-element': ['error', {
@@ -65,6 +64,7 @@ module.exports = {
             'ignore': '.wysiwyg video, video.ignore-html-validate',
         }],
         'require-sri': 'off',
+        'script-type': 'off',
         'svg-focusable': 'off',
         'tel-non-breaking': 'off',
     },
