@@ -30,7 +30,8 @@ class NoMissingElement extends Rule {
                 if (!ELEMENT_PATTERN.test(className)) return;
                 const [, elementMatch] = className.match(ELEMENT_PATTERN);
                 const blockName = className.substring(0, className.length - elementMatch.length);
-                if (!node.parentNode?.closest(`.${blockName}`)) {
+                const closest = node.closest(`.${blockName}`);
+                if (!(closest && closest !== node)) {
                     this.report(node, `Class-element references missing block ${JSON.stringify(blockName)} (element is ${JSON.stringify(className)}).`);
                 }
             });
