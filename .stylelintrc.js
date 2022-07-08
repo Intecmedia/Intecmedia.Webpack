@@ -5,6 +5,7 @@
 
 const deepMerge = require('lodash.merge');
 const sharedConfig = require('./.stylelintrc.shared');
+const { propertyOrdering } = require('stylelint-semantic-groups');
 
 const ENV = require('./app.env');
 
@@ -59,6 +60,7 @@ module.exports = deepMerge({}, sharedConfig, {
             { 'hasBlock': true, 'selector': '^&__', 'type': 'rule' },
         ],
         'order/properties-alphabetical-order': null,
+        'order/properties-order': propertyOrdering,
         'pitcher/max-lines': 1024,
         'pitcher/max-root-rules': 16,
         'plugin/no-low-performance-animation-properties': [true, {

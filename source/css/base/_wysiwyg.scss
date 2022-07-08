@@ -27,11 +27,13 @@
 
         &.pull-left {
             float: left;
+
             margin-right: $font-size-base;
         }
 
         &.pull-right {
             float: right;
+
             margin-left: $font-size-base;
         }
 
@@ -77,8 +79,9 @@
     table[border="0"] {
         width: inherit;
 
-        background: transparent;
         border: 0;
+
+        background: transparent;
 
         /* stylelint-disable-next-line selector-max-compound-selectors -- its ok for tables */
         > :not(:first-child) {
@@ -95,8 +98,10 @@
                 /* stylelint-disable-next-line selector-max-compound-selectors, max-nesting-depth -- its ok for tables */
                 > th,
                 > td {
-                    background: transparent;
                     border: 0;
+
+                    background: transparent;
+
                     box-shadow: none;
                 }
             }
@@ -161,12 +166,14 @@
         &[align="left"],
         &.pull-left {
             float: left;
+
             margin-right: $font-size-base;
         }
 
         &[align="right"],
         &.pull-right {
             float: right;
+
             margin-left: $font-size-base;
         }
 
@@ -174,6 +181,7 @@
         .text-center &,
         &.text-center {
             display: block;
+
             margin-right: auto;
             margin-left: auto;
         }
