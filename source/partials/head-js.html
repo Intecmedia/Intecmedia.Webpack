@@ -24,6 +24,8 @@
         // viewport sizes
         var viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
         $html.style.setProperty('--vh', (viewportHeight * 0.01) + 'px');
+        // js cookie
+        document.cookie = '_js=1; path=/';
     })(document.documentElement));
 </script>
 <!-- /head-js -->
