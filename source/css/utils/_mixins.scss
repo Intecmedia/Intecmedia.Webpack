@@ -1,7 +1,7 @@
 /* stylelint-disable max-line-length -- sass does not support multiline expressions */
 @use "sass:math";
 
-@function str-repeat($str, $n){
+@function str-repeat($str, $n) {
     $result: "";
     @for $i from 1 through $n {
         $result: $result + $str;

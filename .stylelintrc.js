@@ -27,6 +27,7 @@ module.exports = deepMerge({}, sharedConfig, {
     ],
     'reportDescriptionlessDisables': true,
     'rules': {
+        'block-opening-brace-space-before': 'always',
         'declaration-empty-line-before': null,
         'function-max-empty-lines': 0,
         'indentation': 4,

@@ -18,8 +18,8 @@
 
     transition: transform .3s;
 
-    @each $breakpoint in map-keys($grid-breakpoints){
-        @include media-breakpoint-up($breakpoint){
+    @each $breakpoint in map-keys($grid-breakpoints) {
+        @include media-breakpoint-up($breakpoint) {
             content: "Breakpoint=" + to-upper-case("#{$breakpoint} ") + $content;
         }
     }
