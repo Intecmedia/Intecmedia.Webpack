@@ -164,7 +164,7 @@
         "postcss-fail-on-warn": "^0.2.1",
         "postcss-flexbugs-fixes": "^5.0.2",
         "postcss-focus": "^5.0.1",
-        "postcss-focus-visible": "^6.0.4",
+        "postcss-focus-visible": "^7.0.0",
         "postcss-focus-within": "^5.0.4",
         "postcss-font-display": "^0.3.0",
         "postcss-loader": "^7.0.0",
