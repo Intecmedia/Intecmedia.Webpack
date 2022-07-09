@@ -67,12 +67,12 @@ export default class AbstractApp {
             if (!ClassName) {
                 console.error(`[app] Unknown component name: ${name}`, element);
             } else {
+                if (ClassName.singleton && (name in this.components)) {
+                    console.error(`[app] Cant create component singleton: ${name}`, element);
+                }
                 element.classList.add('js-component');
                 element.setAttribute('data-component-id', id);
                 const component = new ClassName(options);
-                if (component.singleton && (name in this.components)) {
-                    console.error(`[app] Cant create component singleton: ${name}`, element);
-                }
                 if (!(name in this.components)) {
                     this.components[name] = {};
                 }

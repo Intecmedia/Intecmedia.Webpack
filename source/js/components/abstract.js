@@ -1,5 +1,5 @@
 export default class AbstractComponent {
-    singleton = false;
+    static singleton = false;
 
     constructor(options) {
         if (new.target === AbstractComponent) {
