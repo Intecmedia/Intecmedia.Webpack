@@ -1,4 +1,6 @@
 export default class AbstractComponent {
+    singleton = false;
+
     constructor(options) {
         if (new.target === AbstractComponent) {
             throw new TypeError('Cannot construct AbstractComponent instances directly');
