@@ -10,6 +10,8 @@ const logger = weblog({ name: 'utf-fix' });
 const ENV = require('./app.env');
 const UTILS = require('./webpack.utils');
 
+const statMessages = { fixed: 0, skipped: 0 };
+
 function stripBom(string) {
     if (string.charCodeAt(0) === 0xFEFF) {
         return string.slice(1);
@@ -37,10 +39,15 @@ UTILS.globArray([
             .replace(/[ \t]+\n/g, '\n');
 
         if (fixedSource === source) {
+            statMessages.skipped += 1;
             logger.info(`skiped ${relativePath}`);
         } else {
+            statMessages.fixed += 1;
             fs.writeFileSync(resourcePath, fixedSource);
             logger.info(`fixed ${relativePath}`);
         }
     });
+
+    console.log('');
+    logger.info('stats:', JSON.stringify(statMessages));
 });
