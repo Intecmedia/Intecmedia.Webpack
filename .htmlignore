@@ -12,3 +12,4 @@ Attribute "align" is deprecated on <img> element
 Attribute "align" is deprecated on <td> element
 Attribute "align" is deprecated on <th> element
 The autoplay attribute is not allowed on <video>
+The “type” attribute is unnecessary for JavaScript resources.
