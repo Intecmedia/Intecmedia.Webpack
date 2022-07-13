@@ -25,7 +25,6 @@ html {
             map-get($grid-breakpoints, "hd"),
             map-get($grid-breakpoints, "qhd")
         );
-
         /* stylelint-disable-next-line declaration-property-unit-allowed-list -- for root allowed only px */
         font-size: (($root-font-size-max + $root-font-size-min) * .5);
 

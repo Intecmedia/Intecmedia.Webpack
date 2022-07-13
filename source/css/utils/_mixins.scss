@@ -3,6 +3,7 @@
 
 @function str-repeat($str, $n) {
     $result: "";
+
     @for $i from 1 through $n {
         $result: $result + $str;
     }
@@ -19,6 +20,7 @@
 
 @function pow($x, $n) {
     $ret: 1;
+
     @if $n >= 0 {
         @for $i from 1 through $n {
             $ret: $ret * $x;
@@ -34,6 +36,7 @@
 @function to-fixed($float, $digits: 4) {
     $sass-precision: 5;
     $pow: pow(10, $digits);
+
     @return math.div(round($float * $pow), $pow);
 }
 

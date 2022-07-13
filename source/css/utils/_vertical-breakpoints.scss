@@ -2,6 +2,7 @@
 // Makes the @content apply to the given breakpoint and wider.
 @mixin vertical-breakpoint-up($name, $breakpoints: $vertical-breakpoints) {
     $min: breakpoint-min($name, $breakpoints);
+
     @if $min {
         @media (min-height: $min) {
             @content;
@@ -15,6 +16,7 @@
 // Makes the @content apply to the given breakpoint and narrower.
 @mixin vertical-breakpoint-down($name, $breakpoints: $vertical-breakpoints) {
     $max: breakpoint-max($name, $breakpoints);
+
     @if $max {
         @media (max-height: $max) {
             @content;

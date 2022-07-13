@@ -152,6 +152,7 @@ $fluid-max-height: 1024px !default;
     $vertical: false,
 ) {
     $min-unit: unit($min-size);
+
     @if $min-unit != px and $min-unit != rem {
         @error "$min-size #{$min-size} must be either px or rem (now is #{$min-unit}).";
     }
@@ -159,6 +160,7 @@ $fluid-max-height: 1024px !default;
     $min-size: strip-unit($min-size);
 
     $max-unit: unit($max-size);
+
     @if $max-unit != px and $max-unit != rem {
         @error "$max-size #{$max-size} must be either px or rem (now is #{$max-unit}).";
     }
@@ -185,6 +187,7 @@ $fluid-max-height: 1024px !default;
     $value: to-fixed($value, 4);
 
     $sign: "";
+
     @if ($value >= 0) {
         $sign: "+";
     } @else {
@@ -194,6 +197,7 @@ $fluid-max-height: 1024px !default;
     $abs-value: abs($value);
 
     $vp-unit: "";
+
     @if ($vertical) {
         $vp-unit: "vh";
     } @else {
