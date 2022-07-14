@@ -29,12 +29,42 @@
             float: left;
 
             margin-right: $font-size-base;
+
+            @include media-breakpoint-down(sm) {
+                display: block;
+                float: none;
+
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: $font-size-base;
+
+                img {
+                    display: block;
+
+                    width: 100%;
+                }
+            }
         }
 
         &.pull-right {
             float: right;
 
             margin-left: $font-size-base;
+
+            @include media-breakpoint-down(sm) {
+                display: block;
+                float: none;
+
+                width: 100%;
+                margin-bottom: $font-size-base;
+                margin-left: 0;
+
+                img {
+                    display: block;
+
+                    width: 100%;
+                }
+            }
         }
 
         img {
@@ -147,8 +177,17 @@
         }
 
         // responsive images
-        &.img-responsive {
+        &.img-fluid,
+        &.img-responsive,
+        &.img-thumbnail {
             @extend .img-fluid;
+
+            @include media-breakpoint-down(sm) {
+                display: block;
+
+                width: 100%;
+                margin-bottom: $font-size-base;
+            }
         }
 
         &.img-rounded {
@@ -168,6 +207,15 @@
             float: left;
 
             margin-right: $font-size-base;
+
+            @include media-breakpoint-down(sm) {
+                display: block;
+                float: none;
+
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: $font-size-base;
+            }
         }
 
         &[align="right"],
@@ -175,15 +223,31 @@
             float: right;
 
             margin-left: $font-size-base;
+
+            @include media-breakpoint-down(sm) {
+                display: block;
+                float: none;
+
+                width: 100%;
+                margin-bottom: $font-size-base;
+                margin-left: 0;
+            }
         }
 
         &[align="center"],
         .text-center &,
         &.text-center {
-            display: block;
-
             margin-right: auto;
             margin-left: auto;
+
+            @include media-breakpoint-down(sm) {
+                display: block;
+
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: $font-size-base;
+                margin-left: 0;
+            }
         }
     }
 
