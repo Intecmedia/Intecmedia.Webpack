@@ -25,11 +25,13 @@
     figure {
         @extend .figure;
 
+        margin-bottom: $img-spacer;
+
         @include media-breakpoint-down(sm) {
             display: block;
 
             width: 100%;
-            margin-bottom: ($font-size-base * .5);
+            margin-bottom: $img-spacer;
         }
 
         &.pull-left {
@@ -60,7 +62,7 @@
             @extend .figure-img;
 
             @include media-breakpoint-down(sm) {
-                margin-bottom: ($font-size-base * .5);
+                margin-bottom: $img-spacer;
             }
         }
 
@@ -179,7 +181,7 @@
                 display: block;
 
                 width: 100%;
-                margin-bottom: ($font-size-base * .5);
+                margin-bottom: $img-spacer;
             }
         }
 
