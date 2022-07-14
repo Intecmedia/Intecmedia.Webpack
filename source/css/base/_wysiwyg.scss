@@ -25,24 +25,22 @@
     figure {
         @extend .figure;
 
+        @include media-breakpoint-down(sm) {
+            display: block;
+
+            width: 100%;
+            margin-bottom: ($font-size-base * .5);
+        }
+
         &.pull-left {
             float: left;
 
             margin-right: $font-size-base;
 
             @include media-breakpoint-down(sm) {
-                display: block;
                 float: none;
 
-                width: 100%;
                 margin-right: 0;
-                margin-bottom: $font-size-base;
-
-                img {
-                    display: block;
-
-                    width: 100%;
-                }
             }
         }
 
@@ -52,23 +50,18 @@
             margin-left: $font-size-base;
 
             @include media-breakpoint-down(sm) {
-                display: block;
                 float: none;
 
-                width: 100%;
-                margin-bottom: $font-size-base;
                 margin-left: 0;
-
-                img {
-                    display: block;
-
-                    width: 100%;
-                }
             }
         }
 
         img {
             @extend .figure-img;
+
+            @include media-breakpoint-down(sm) {
+                margin-bottom: ($font-size-base * .5);
+            }
         }
 
         figcaption {
@@ -186,7 +179,7 @@
                 display: block;
 
                 width: 100%;
-                margin-bottom: $font-size-base;
+                margin-bottom: ($font-size-base * .5);
             }
         }
 
@@ -209,12 +202,9 @@
             margin-right: $font-size-base;
 
             @include media-breakpoint-down(sm) {
-                display: block;
                 float: none;
 
-                width: 100%;
                 margin-right: 0;
-                margin-bottom: $font-size-base;
             }
         }
 
@@ -225,11 +215,8 @@
             margin-left: $font-size-base;
 
             @include media-breakpoint-down(sm) {
-                display: block;
                 float: none;
 
-                width: 100%;
-                margin-bottom: $font-size-base;
                 margin-left: 0;
             }
         }
@@ -241,11 +228,7 @@
             margin-left: auto;
 
             @include media-breakpoint-down(sm) {
-                display: block;
-
-                width: 100%;
                 margin-right: 0;
-                margin-bottom: $font-size-base;
                 margin-left: 0;
             }
         }
