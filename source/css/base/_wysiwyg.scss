@@ -162,9 +162,9 @@
 
             // numeric list
             &::marker {
-                color: $ol-marker-color;
+                content: counter(ol) "#{$ol-marker-symbol + $list-marker-space}";
 
-                // content: counter(ol) ".  ";
+                color: $ol-marker-color;
             }
         }
     }
@@ -182,9 +182,9 @@
         > li {
             // colored bulls
             &::marker {
-                color: $ul-marker-color;
+                content: "#{$ul-marker-symbol + $list-marker-space}";
 
-                // content: "●  ";
+                color: $ul-marker-color;
             }
         }
     }
