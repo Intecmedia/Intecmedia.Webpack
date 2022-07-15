@@ -91,7 +91,7 @@ $ol-marker-color:             inherit !default;
 $ol-marker-symbol:            "." !default;
 $ul-marker-color:             inherit !default;
 $ul-marker-symbol:            "●" !default;
-$list-marker-space:           str-repeat("\2003", 1) !default;
+$list-marker-space:           str-repeat(" ", 3) !default;
 $img-spacer:                  1rem !default;
 
 $table-border-bordered:       false !default;
