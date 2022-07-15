@@ -105,4 +105,12 @@ $duration-default:            1.6s !default;
 $duration-normal:             .8s !default;
 $duration-fast:               .4s !default;
 
+$subheadings-display:          inline-block !default;
+$subheadings-color:            $headings-color !default;
+$subheadings-font-size:        80% !default;
+$subheadings-font-family:      null !default;
+$subheadings-font-style:       null !default;
+$subheadings-font-weight:      500 !default;
+$subheadings-line-height:      1.2 !default;
+
 $intersection-transition-delay: calc((var(--intersection-delay-offset, 0) * var(--intersection-delay-offset-step, .1s)) + (var(--intersection-delay-index, 0) * var(--intersection-delay-step, .1s))) !default;
