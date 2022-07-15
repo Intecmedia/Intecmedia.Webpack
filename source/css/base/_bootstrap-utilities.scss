@@ -6,7 +6,6 @@ $utilities: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default -- we not control third party code
 $utilities: map-merge(
     (
-    /*
         // scss-docs-start utils-vertical-align
         "align": (
             property: vertical-align,
@@ -626,7 +625,6 @@ $utilities: map-merge(
             )
         )
         // scss-docs-end utils-visibility
-    */
     ),
     $utilities
 );
