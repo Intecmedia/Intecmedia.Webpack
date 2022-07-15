@@ -188,21 +188,13 @@
 
     img {
         // default image
-        &:not([class]) {
-            @extend .img-fluid;
-        }
+        @extend .img-fluid;
 
-        // responsive images
-        &.img-fluid,
-        &.img-thumbnail {
-            @extend .img-fluid;
+        @include media-breakpoint-down(sm) {
+            display: block;
 
-            @include media-breakpoint-down(sm) {
-                display: block;
-
-                width: 100%;
-                margin-bottom: $img-spacer;
-            }
+            width: 100%;
+            margin-bottom: $img-spacer;
         }
 
         &.img-rounded {
