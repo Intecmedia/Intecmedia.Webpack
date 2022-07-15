@@ -260,6 +260,49 @@
         }
     }
 
+    picture {
+        margin-bottom: $img-spacer;
+
+        @include media-breakpoint-down(sm) {
+            display: block;
+
+            width: 100%;
+            margin-bottom: $img-spacer;
+        }
+
+        // image aligment left
+        &.pull-left {
+            float: left;
+
+            margin-right: $font-size-base;
+
+            @include media-breakpoint-down(sm) {
+                float: none;
+
+                margin-right: 0;
+            }
+        }
+
+        // image aligment right
+        &.pull-right {
+            float: right;
+
+            margin-left: $font-size-base;
+
+            @include media-breakpoint-down(sm) {
+                float: none;
+
+                margin-left: 0;
+            }
+        }
+
+        img {
+            @include media-breakpoint-down(sm) {
+                margin-bottom: ($img-spacer * .5);
+            }
+        }
+    }
+
     // blockquotes
     blockquote {
         @extend .blockquote;
