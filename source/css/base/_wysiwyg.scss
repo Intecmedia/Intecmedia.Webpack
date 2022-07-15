@@ -34,6 +34,7 @@
             margin-bottom: $img-spacer;
         }
 
+        // image aligment left
         &.pull-left {
             float: left;
 
@@ -46,6 +47,7 @@
             }
         }
 
+        // image aligment right
         &.pull-right {
             float: right;
 
@@ -66,6 +68,7 @@
             }
         }
 
+        // image text caption
         figcaption {
             @extend .figure-caption;
         }
@@ -133,7 +136,7 @@
         }
     }
 
-    // cells: collapse childs
+    // table cells: collapse childs
     td,
     th {
         > *:first-child {
@@ -145,7 +148,7 @@
         }
     }
 
-
+    // ordered list
     ol:not(.list-unstyled) {
         margin-bottom: $paragraph-margin-bottom;
 
@@ -166,6 +169,7 @@
         }
     }
 
+    // unordered list
     ul:not(.list-unstyled) {
         margin-bottom: $paragraph-margin-bottom;
 
@@ -190,6 +194,7 @@
         // default image
         @extend .img-fluid;
 
+        // images fit width for SM-breakpoint
         @include media-breakpoint-down(sm) {
             display: block;
 
@@ -197,18 +202,20 @@
             margin-bottom: $img-spacer;
         }
 
+        // image with rounded border
         &.img-rounded {
             /* stylelint-disable-next-line declaration-no-important -- force set border radius */
             border-radius: $border-radius !important;
         }
 
+        // image with circle border
         &.img-circle {
             /* stylelint-disable-next-line declaration-no-important -- force set border radius */
             border-radius: $border-radius !important;
             border-radius: 50%;
         }
 
-        // image aligment
+        // image aligment left
         &[align="left"],
         &.pull-left {
             float: left;
@@ -222,6 +229,7 @@
             }
         }
 
+        // image aligment right
         &[align="right"],
         &.pull-right {
             float: right;
@@ -235,6 +243,7 @@
             }
         }
 
+        // image aligment center
         &[align="center"],
         .text-center &,
         &.text-center {
