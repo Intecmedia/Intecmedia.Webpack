@@ -89,9 +89,10 @@ $form-validation-states:      () !default;
 $list-indent:                 2rem !default;
 $ol-marker-color:             inherit !default;
 $ol-marker-symbol:            "." !default;
+$ol-marker-list-style-type:   decimal !default; // decimal-leading-zero
 $ul-marker-color:             inherit !default;
 $ul-marker-symbol:            "●" !default;
-$list-marker-space:           str-repeat(" ", 3) !default;
+$list-marker-space:           str-repeat(" ", 2) !default;
 $img-spacer:                  1rem !default;
 
 $table-border-bordered:       false !default;

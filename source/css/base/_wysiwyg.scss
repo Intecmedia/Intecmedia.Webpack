@@ -162,7 +162,7 @@
 
             // numeric list
             &::marker {
-                content: counter(ol) "#{$ol-marker-symbol + $list-marker-space}";
+                content: counter(ol, $ol-marker-list-style-type) "#{$ol-marker-symbol + $list-marker-space}";
 
                 color: $ol-marker-color;
             }
