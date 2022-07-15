@@ -150,6 +150,7 @@
     // ordered list
     ol:not(.list-unstyled) {
         margin-bottom: $paragraph-margin-bottom;
+        padding-left: $list-indent;
 
         ol, ul {
             // nested without margin-bottom
@@ -171,6 +172,7 @@
     // unordered list
     ul:not(.list-unstyled) {
         margin-bottom: $paragraph-margin-bottom;
+        padding-left: $list-indent;
 
         ol, ul {
             // nested without margin-bottom
