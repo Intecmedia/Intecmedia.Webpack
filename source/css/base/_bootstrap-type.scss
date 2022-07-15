@@ -27,6 +27,16 @@
     @extend h6;
 }
 
+.subheading {
+    display: $subheadings-display;
+
+    color: $subheadings-color;
+    font-weight: $subheadings-font-weight;
+    font-size: $subheadings-font-size;
+    font-family: $subheadings-font-family;
+    font-style: $subheadings-font-style;
+    line-height: $subheadings-line-height;
+}
 
 .lead {
     @include font-size($lead-font-size);
