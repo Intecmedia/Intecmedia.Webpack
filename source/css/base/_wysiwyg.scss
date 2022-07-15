@@ -64,7 +64,7 @@
             @extend .figure-img;
 
             @include media-breakpoint-down(sm) {
-                margin-bottom: $img-spacer;
+                margin-bottom: ($img-spacer * .5);
             }
         }
 
