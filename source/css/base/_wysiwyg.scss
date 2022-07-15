@@ -188,6 +188,11 @@
         }
     }
 
+    // nested without margin-bottom
+    ol ol, ul ul, ol ul, ul ol {
+        margin-bottom: 0;
+    }
+
     img {
         // default image
         @extend .img-fluid;
