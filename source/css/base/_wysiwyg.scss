@@ -194,7 +194,6 @@
 
         // responsive images
         &.img-fluid,
-        &.img-responsive,
         &.img-thumbnail {
             @extend .img-fluid;
 
