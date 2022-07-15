@@ -76,7 +76,7 @@
     }
 
     // default tables
-    table:not([class]) {
+    table:not(.table) {
         @extend .table;
         @extend .caption-top;
 
@@ -101,7 +101,7 @@
     }
 
     // disabled table
-    table[border="0"] {
+    table:not(.table)[border="0"] {
         width: inherit;
 
         border: 0;
@@ -146,7 +146,7 @@
     }
 
 
-    ol:not([class]) {
+    ol:not(.list-unstyled) {
         margin-bottom: $paragraph-margin-bottom;
 
         ol, ul {
@@ -166,7 +166,7 @@
         }
     }
 
-    ul:not([class]) {
+    ul:not(.list-unstyled) {
         margin-bottom: $paragraph-margin-bottom;
 
         ol, ul {
