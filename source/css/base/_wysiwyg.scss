@@ -174,7 +174,7 @@
     // ordered list
     ol:not(.list-unstyled) {
         margin-bottom: $paragraph-margin-bottom;
-        padding-left: $list-indent;
+        padding-left: $lists-indent;
 
         ol, ul {
             // nested without margin-bottom
@@ -182,11 +182,17 @@
         }
 
         > li {
+            margin-bottom: $lists-margin-bottom;
+
             counter-increment: ol;
+
+            &:last-of-type {
+                margin-bottom: 0;
+            }
 
             // numeric list
             &::marker {
-                content: counter(ol, $ol-marker-list-style-type) "#{$ol-marker-symbol + $list-marker-space}";
+                content: counter(ol, $ol-marker-list-style-type) "#{$ol-marker-symbol + $lists-marker-space}";
 
                 color: $ol-marker-color;
             }
@@ -196,7 +202,7 @@
     // unordered list
     ul:not(.list-unstyled) {
         margin-bottom: $paragraph-margin-bottom;
-        padding-left: $list-indent;
+        padding-left: $lists-indent;
 
         ol, ul {
             // nested without margin-bottom
@@ -204,9 +210,15 @@
         }
 
         > li {
+            margin-bottom: $lists-margin-bottom;
+
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+
             // colored bulls
             &::marker {
-                content: "#{$ul-marker-symbol + $list-marker-space}";
+                content: "#{$ul-marker-symbol + $lists-marker-space}";
 
                 color: $ul-marker-color;
             }
