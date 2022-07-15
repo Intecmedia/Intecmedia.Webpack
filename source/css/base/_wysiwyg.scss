@@ -72,7 +72,7 @@
     }
 
     caption {
-        //
+        font-size: $table-caption-font-size;
     }
 
     // default tables
@@ -145,23 +145,44 @@
         }
     }
 
-    // numeric list
-    ol:not([class]) > li {
-        counter-increment: ol;
 
-        &::marker {
-            color: $ol-marker-color;
+    ol:not([class]) {
+        margin-bottom: $paragraph-margin-bottom;
 
-            // content: counter(ol) ".  ";
+        ol, ul {
+            // nested without margin-bottom
+            margin-bottom: 0;
+        }
+
+        > li {
+            counter-increment: ol;
+
+            // numeric list
+            &::marker {
+                color: $ol-marker-color;
+
+                // content: counter(ol) ".  ";
+            }
         }
     }
 
-    // colored bulls
-    ul:not([class]) > li {
-        &::marker {
-            color: $ul-marker-color;
+    ul:not([class]) {
+        margin-bottom: $paragraph-margin-bottom;
 
-            // content: "●  ";
+        ol, ul {
+            // nested without margin-bottom
+            margin-bottom: 0;
+        }
+
+        > li {
+            margin-bottom: $paragraph-margin-bottom;
+
+            // colored bulls
+            &::marker {
+                color: $ul-marker-color;
+
+                // content: "●  ";
+            }
         }
     }
 
