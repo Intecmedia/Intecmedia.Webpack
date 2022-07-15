@@ -311,6 +311,10 @@
     // blockquotes
     blockquote {
         @extend .blockquote;
+
+        footer {
+            @extend .blockquote-footer;
+        }
     }
 }
 /* stylelint-enable scss/selector-nest-combinators, selector-max-type, plugin/selector-bem-pattern */
