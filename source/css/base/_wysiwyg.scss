@@ -1,7 +1,13 @@
 /* stylelint-disable scss/selector-nest-combinators, selector-max-type, plugin/selector-bem-pattern -- wysiwyg is semantic tags */
 .wysiwyg {
     a {
-        //
+        color: $link-color;
+        text-decoration: $link-decoration;
+
+        &:hover, &:focus, &:active {
+            color: $link-hover-color;
+            text-decoration: $link-hover-decoration;
+        }
     }
 
     p {
@@ -53,8 +59,10 @@
         @include media-breakpoint-down(sm) {
             display: block;
 
-            width: 100%;
+            width: auto;
+            margin-right: auto;
             margin-bottom: $img-spacer;
+            margin-left: auto;
         }
 
         // image aligment left
@@ -253,8 +261,10 @@
         @include media-breakpoint-down(sm) {
             display: block;
 
-            width: 100%;
+            width: auto;
+            margin-right: auto;
             margin-bottom: $img-spacer;
+            margin-left: auto;
         }
 
         // image with rounded border
@@ -323,8 +333,10 @@
         @include media-breakpoint-down(sm) {
             display: block;
 
-            width: 100%;
+            width: auto;
+            margin-right: auto;
             margin-bottom: $img-spacer;
+            margin-left: auto;
         }
 
         // image aligment left
