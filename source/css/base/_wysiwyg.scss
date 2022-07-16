@@ -291,7 +291,8 @@
             @include media-breakpoint-down(sm) {
                 float: none;
 
-                margin-right: 0;
+                margin-right: auto;
+                margin-left: auto;
             }
         }
 
@@ -306,7 +307,8 @@
             @include media-breakpoint-down(sm) {
                 float: none;
 
-                margin-left: 0;
+                margin-right: auto;
+                margin-left: auto;
             }
         }
 
@@ -321,8 +323,8 @@
             margin-left: auto;
 
             @include media-breakpoint-down(sm) {
-                margin-right: 0;
-                margin-left: 0;
+                margin-right: auto;
+                margin-left: auto;
             }
         }
     }
