@@ -83,6 +83,14 @@
             }
         }
 
+        // image aligment center
+        &.text-center {
+            display: block;
+
+            margin-right: auto;
+            margin-left: auto;
+        }
+
         img {
             @extend .figure-img;
 
@@ -291,6 +299,8 @@
         &[align="center"],
         .text-center &,
         &.text-center {
+            display: block;
+
             margin-right: auto;
             margin-left: auto;
 
@@ -335,6 +345,14 @@
 
                 margin-left: 0;
             }
+        }
+
+        // image aligment center
+        &.text-center {
+            display: block;
+
+            margin-right: auto;
+            margin-left: auto;
         }
 
         img {
