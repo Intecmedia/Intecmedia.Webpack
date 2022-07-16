@@ -62,6 +62,7 @@
             float: left;
 
             margin-right: $img-spacer;
+            margin-bottom: $img-spacer;
 
             @include media-breakpoint-down(sm) {
                 float: none;
@@ -74,6 +75,7 @@
         &.pull-right {
             float: right;
 
+            margin-bottom: $img-spacer;
             margin-left: $img-spacer;
 
             @include media-breakpoint-down(sm) {
@@ -274,6 +276,7 @@
             float: left;
 
             margin-right: $img-spacer;
+            margin-bottom: $img-spacer;
 
             @include media-breakpoint-down(sm) {
                 float: none;
@@ -287,6 +290,7 @@
         &.pull-right {
             float: right;
 
+            margin-bottom: $img-spacer;
             margin-left: $img-spacer;
 
             @include media-breakpoint-down(sm) {
@@ -328,6 +332,7 @@
             float: left;
 
             margin-right: $img-spacer;
+            margin-bottom: $img-spacer;
 
             @include media-breakpoint-down(sm) {
                 float: none;
@@ -340,6 +345,7 @@
         &.pull-right {
             float: right;
 
+            margin-bottom: $img-spacer;
             margin-left: $img-spacer;
 
             @include media-breakpoint-down(sm) {
