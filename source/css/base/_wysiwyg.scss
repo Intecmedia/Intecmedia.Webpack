@@ -61,7 +61,7 @@
         &.pull-left {
             float: left;
 
-            margin-right: $font-size-base;
+            margin-right: $img-spacer;
 
             @include media-breakpoint-down(sm) {
                 float: none;
@@ -74,7 +74,7 @@
         &.pull-right {
             float: right;
 
-            margin-left: $font-size-base;
+            margin-left: $img-spacer;
 
             @include media-breakpoint-down(sm) {
                 float: none;
@@ -86,6 +86,7 @@
         // image aligment center
         &.text-center {
             display: block;
+            clear: both;
 
             margin-right: auto;
             margin-left: auto;
@@ -272,7 +273,7 @@
         &.pull-left {
             float: left;
 
-            margin-right: $font-size-base;
+            margin-right: $img-spacer;
 
             @include media-breakpoint-down(sm) {
                 float: none;
@@ -286,7 +287,7 @@
         &.pull-right {
             float: right;
 
-            margin-left: $font-size-base;
+            margin-left: $img-spacer;
 
             @include media-breakpoint-down(sm) {
                 float: none;
@@ -300,6 +301,7 @@
         .text-center &,
         &.text-center {
             display: block;
+            clear: both;
 
             margin-right: auto;
             margin-left: auto;
@@ -325,7 +327,7 @@
         &.pull-left {
             float: left;
 
-            margin-right: $font-size-base;
+            margin-right: $img-spacer;
 
             @include media-breakpoint-down(sm) {
                 float: none;
@@ -338,7 +340,7 @@
         &.pull-right {
             float: right;
 
-            margin-left: $font-size-base;
+            margin-left: $img-spacer;
 
             @include media-breakpoint-down(sm) {
                 float: none;
@@ -350,6 +352,7 @@
         // image aligment center
         &.text-center {
             display: block;
+            clear: both;
 
             margin-right: auto;
             margin-left: auto;
