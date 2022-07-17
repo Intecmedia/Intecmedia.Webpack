@@ -7,7 +7,7 @@ $utilities: () !default;
 $utilities: map-merge(
     (
         "text-align": (
-            responsive: true,
+            responsive: false,
             property: text-align,
             class: text,
             values: (
@@ -40,13 +40,13 @@ $utilities: map-merge(
             rtl: false
         ),
         "margin-top": (
-            responsive: true,
+            responsive: false,
             property: margin-top,
             class: mt,
             values: map-merge($spacers, (auto: auto))
         ),
         "margin-bottom": (
-            responsive: true,
+            responsive: false,
             property: margin-bottom,
             class: mb,
             values: map-merge($spacers, (auto: auto))
