@@ -289,6 +289,7 @@
             margin-bottom: $img-spacer;
 
             @include media-breakpoint-down(sm) {
+                display: block;
                 float: none;
 
                 margin-right: auto;
@@ -305,6 +306,7 @@
             margin-left: $img-spacer;
 
             @include media-breakpoint-down(sm) {
+                display: block;
                 float: none;
 
                 margin-right: auto;
@@ -321,11 +323,6 @@
 
             margin-right: auto;
             margin-left: auto;
-
-            @include media-breakpoint-down(sm) {
-                margin-right: auto;
-                margin-left: auto;
-            }
         }
     }
 
