@@ -112,7 +112,7 @@ module.exports = {
     },
 
     output: {
-        clean: { keep: /\.gitkeep/ },
+        clean: { keep: /(\.gitkeep|thumbs)/ },
         filename: 'js/[name].min.js',
         chunkFilename: 'js/[name].min.js?[chunkhash]',
         hotUpdateChunkFilename: 'js/[name].hot-update.js?[fullhash]',
