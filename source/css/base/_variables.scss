@@ -31,7 +31,19 @@ $container-max-widths: (
     qhd: 2440px
 ) !default;
 
-$theme-colors:                () !default;
+$theme-colors:     () !default;
+$theme-colors-rgb: () !default;
+
+$spacer:  1rem !default;
+$spacers: (
+    0: 0,
+    1: $spacer * .25,
+    2: $spacer * .5,
+    3: $spacer,
+    4: $spacer * 1.5,
+    5: $spacer * 3,
+) !default;
+$gutters: $spacers !default;
 
 $enable-caret:                true !default;
 $enable-rounded:              true !default;
