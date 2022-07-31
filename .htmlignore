@@ -15,3 +15,5 @@ The autoplay attribute is not allowed on <video>
 The “type” attribute is unnecessary for JavaScript resources.
 Attribute "width" is deprecated on <td> element
 Attribute "width" is deprecated on <th> element
+The “width” attribute on the “td” element is obsolete. Use CSS instead.
+The “width” attribute on the “th” element is obsolete. Use CSS instead.
