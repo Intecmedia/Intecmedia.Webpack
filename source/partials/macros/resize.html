@@ -8,7 +8,7 @@
 
 {% set DEFAULT_OPTIONS = {} %}
 
-{% macro sources (url, alt, attrs={}, sources=DEFAULT_SOURCES, options = DEFAULT_OPTIONS) %}
+{% macro sources (url, alt, attrs={}, sources=DEFAULT_SOURCES, options=DEFAULT_OPTIONS) %}
     {% if url.toLowerCase().endsWith('.svg') %}{{ throw('Useless <picture> for SVG: ' + url|dump + '.') }}{% endif %}
     <picture{% for k, v in attrs %}{% if k != 'img' %} {{ k }}="{{ v }}"{% endif %}{% endfor %}>
         <!-- sources = {{ sources | dump | safe }} -->
@@ -50,7 +50,7 @@
 {% set DEFAULT_BREAKPOINTS = ['xs', 'sm', 'md', 'lg', 'xl'] %}
 {% set DEFAULT_SIZES = {xs: 576, sm: 768, md: 992, lg: 1200, xl: 1920} %}
 
-{% macro breakpoints (url, alt, attrs={}, breakpoints=DEFAULT_BREAKPOINTS, sizes=DEFAULT_SIZES, options = DEFAULT_OPTIONS) %}
+{% macro breakpoints (url, alt, attrs={}, breakpoints=DEFAULT_BREAKPOINTS, sizes=DEFAULT_SIZES, options=DEFAULT_OPTIONS) %}
     {% if url.toLowerCase().endsWith('.svg') %}{{ throw('Useless <picture> for SVG: ' + url|dump + '.') }}{% endif %}
     <picture{% for k, v in attrs %}{% if k != 'img' %} {{ k }}="{{ v }}"{% endif %}{% endfor %}>
         <!-- breakpoints = {{ breakpoints | dump | safe }} -->
@@ -90,7 +90,7 @@
     </picture>
 {% endmacro %}
 
-{% macro picture (url, alt, attrs={}, options = DEFAULT_OPTIONS) %}
+{% macro picture (url, alt, attrs={}, options=DEFAULT_OPTIONS) %}
     {% if url.toLowerCase().endsWith('.svg') %}{{ throw('Useless <picture> for SVG: ' + url|dump + '.') }}{% endif %}
     <picture{% for k, v in attrs %}{% if k != 'img' %} {{ k }}="{{ v }}"{% endif %}{% endfor %}>
         {% if APP.ENV.PROD or APP.ENV.DEBUG %}
