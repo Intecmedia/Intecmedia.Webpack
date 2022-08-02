@@ -94,8 +94,6 @@ $paragraph-margin-bottom:     1rem !default;
 
 $form-validation-states:      () !default;
 
-$table-caption-font-size:     .875rem !default;
-
 @import "node_modules/bootstrap/scss/variables";
 
 // Common variables (Not bootstrap)
@@ -112,6 +110,7 @@ $img-spacer:                  1rem !default;
 
 $table-border-bordered:       false !default;
 $table-border-striped:        false !default;
+$table-caption-font-size:     .875rem !default;
 
 $duration-slow:               2.4s !default;
 $duration-default:            1.6s !default;
