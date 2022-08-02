@@ -2,7 +2,6 @@
 /* eslint max-len: "off", "compat/compat": "off" -- webpack is node env */
 
 const fs = require('fs');
-const path = require('path');
 const weblog = require('webpack-log');
 
 const logger = weblog({ name: 'clean' });
