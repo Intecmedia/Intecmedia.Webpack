@@ -35,6 +35,7 @@ const CompressionPlugin = (ENV.PROD && !ENV.DEBUG ? require('compression-webpack
 const TerserPlugin = (ENV.PROD && !ENV.DEBUG ? require('terser-webpack-plugin') : () => {});
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 const SVGNoSpriteUrl = require('./svg.no-sprite-url');
+const WebpackAssetsManifest = require('webpack-assets-manifest');
 
 const FaviconsPlugin = (APP.FAVICONS ? require('./plugin.favicons') : () => {});
 const HtmlBeautifyPlugin = (APP.HTML_PRETTY ? require('./plugin.html-beautify') : () => {});
@@ -342,6 +343,17 @@ module.exports = {
                 fallbackModuleFilenameTemplate: UTILS.moduleFilenameTemplate,
             }),
         ] : []),
+        new WebpackAssetsManifest({
+            entrypoints: true,
+            entrypointsUseAssets: true,
+            writeToDisk: true,
+            output: 'assets-manifest.json',
+            customize: (entry) => (entry.key.match(/\.(js|css)$/) ? entry : false),
+            publicPath: true,
+            integrity: true,
+            integrityHashes: ['md5'],
+            integrityPropertyName: 'md5',
+        }),
     ],
 
     ...(!ENV.SOURCE_MAP ? {
