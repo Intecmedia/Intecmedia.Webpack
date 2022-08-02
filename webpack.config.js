@@ -360,6 +360,7 @@ module.exports = {
                 }
                 return value;
             },
+            transform: (assets) => ({ public_path: APP.PUBLIC_PATH, entrypoints: assets.entrypoints }),
             space: 4,
             publicPath: true,
             integrity: true,
