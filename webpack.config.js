@@ -360,6 +360,7 @@ module.exports = {
                 }
                 return value;
             },
+            space: 4,
             publicPath: true,
             integrity: true,
             integrityHashes: ['md5'],
