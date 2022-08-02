@@ -363,8 +363,7 @@ module.exports = {
             space: 4,
             publicPath: true,
             integrity: true,
-            integrityHashes: ['md5'],
-            integrityPropertyName: 'md5',
+            integrityHashes: ['sha256'],
         }),
     ],
 
