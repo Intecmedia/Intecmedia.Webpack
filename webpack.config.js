@@ -345,21 +345,12 @@ module.exports = {
         ] : []),
         new WebpackAssetsManifest({
             entrypoints: true,
+            entrypointsKey: 'entrypoints',
             entrypointsUseAssets: true,
             writeToDisk: true,
             output: 'assets-manifest.json',
-            customize: (entry) => {
-                if (!entry.key.match(/\.(js|css)$/)) {
-                    return false;
-                }
-                return entry;
-            },
-            replacer: (key, value) => {
-                if (key.match(/webpack-\w+/i)) {
-                    return undefined;
-                }
-                return value;
-            },
+            customize: (entry) => (!entry.key.match(/\.(js|css)$/) ? false : entry),
+            replacer: (key, value) => (key.match(/webpack-\w+/i) ? undefined : value),
             transform: (assets) => ({ public_path: APP.PUBLIC_PATH, entrypoints: assets.entrypoints }),
             space: 4,
             publicPath: true,
