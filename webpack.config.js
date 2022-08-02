@@ -348,7 +348,18 @@ module.exports = {
             entrypointsUseAssets: true,
             writeToDisk: true,
             output: 'assets-manifest.json',
-            customize: (entry) => (entry.key.match(/\.(js|css)$/) ? entry : false),
+            customize: (entry) => {
+                if (!entry.key.match(/\.(js|css)$/)) {
+                    return false;
+                }
+                return entry;
+            },
+            replacer: (key, value) => {
+                if (key.match(/webpack-\w+/i)) {
+                    return undefined;
+                }
+                return value;
+            },
             publicPath: true,
             integrity: true,
             integrityHashes: ['md5'],
