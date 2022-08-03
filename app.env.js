@@ -29,10 +29,10 @@ const NODE_ENV = PROD ? 'production' : 'development';
 const VERBOSE = (NODE_ENV === 'development' || DEBUG);
 const SOURCE_MAP = DEBUG || !PROD || DEV_SERVER;
 
-const { name: PACKAGE_NAME, browserslist } = require('./package.json');
+const { name: PACKAGE_NAME, browserslist, config } = require('./package.json');
 
 const SOURCE_PATH = path.resolve(__dirname, 'source');
-const OUTPUT_PATH = path.resolve(__dirname, 'build');
+const OUTPUT_PATH = path.resolve(__dirname, config && config.OUTPUT_PATH ? config.OUTPUT_PATH : 'build');
 
 process.env.DEBUG = DEBUG;
 process.env.NODE_ENV = NODE_ENV;
