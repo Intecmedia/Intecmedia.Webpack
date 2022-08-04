@@ -351,7 +351,7 @@ module.exports = {
             output: 'assets-manifest.json',
             customize: (entry) => (!entry.key.match(/\.(js|css)$/) ? false : entry),
             replacer: (key, value) => (key.match(/webpack-\w+/i) ? undefined : value),
-            transform: (assets) => ({ public_path: APP.PUBLIC_PATH, entrypoints: assets.entrypoints }),
+            transform: (assets) => ({ publicPath: APP.PUBLIC_PATH, entrypoints: assets.entrypoints }),
             space: 4,
             publicPath: true,
             integrity: true,
