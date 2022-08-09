@@ -1,8 +1,6 @@
 /* eslint-env node -- webpack is node env */
 /* eslint max-len: "off" -- webpack is node env */
 
-const ENV = require('./app.env');
-
 module.exports = {
     TITLE: '$APP.TITLE$',
     SHORT_NAME: '$APP.SHORT_NAME$',
