@@ -532,7 +532,7 @@ module.exports = {
                                 DEBUG: ENV.DEBUG,
                                 NODE_ENV: ENV.NODE_ENV,
                                 PACKAGE_NAME: ENV.PACKAGE_NAME,
-                                ...Object.assign({}, ...Object.entries(APP).map(([k, v]) => ({
+                                ...Object.assign({}, ...Object.entries({ ...APP, ENV: {} }).map(([k, v]) => ({
                                     [`APP-${k}`]: v,
                                 }))),
                             }),
