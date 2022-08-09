@@ -369,7 +369,7 @@ module.exports = {
         rules: [
             // html loaders
             {
-                test: /\.(html)(\?.*)?$/i,
+                test: /\.(html|njk)(\?.*)?$/i,
                 loader: './loader.html.js',
                 exclude: [
                     path.join(ENV.SOURCE_PATH, 'upload'),
