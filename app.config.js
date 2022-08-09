@@ -29,5 +29,3 @@ module.exports = {
     STYLELINT: true,
     ESLINT: true,
 };
-
-module.exports.ENV = ENV;
