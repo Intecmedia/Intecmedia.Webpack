@@ -24,7 +24,7 @@ module.exports = function helper(dirname, orderKey = null, orderAsc = true) {
             baseName === 'index' ? '' : path.posix.sep + baseName
         ) + path.posix.sep;
 
-        const stat = fs.statSync(resourcePath);
+        const stat = fs.statSync(filename);
         const URL = slash(path.normalize(path.join(this.APP.PUBLIC_PATH, resourceUrl)));
         const PATH = slash(path.normalize(resourcePath));
 
