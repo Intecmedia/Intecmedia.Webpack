@@ -1,6 +1,7 @@
 /* eslint-env node -- webpack is node env */
 /* eslint "compat/compat": "off" -- webpack is node env */
 
+const fs = require('fs');
 const path = require('path');
 const slash = require('slash');
 
@@ -185,11 +186,13 @@ module.exports = function HtmlLoader() {
     const resourceUrl = path.dirname(resourcePath) + (
         baseName === 'index' ? '' : path.posix.sep + baseName
     ) + path.posix.sep;
+    const resourceStat = fs.statSync(loaderContext.resourcePath);
 
     nunjucksEnv.addGlobal('APP', options.context);
     const PAGE = {
         URL: slash(path.normalize(path.join(publicPath, resourceUrl))),
         PATH: slash(path.normalize(resourcePath)),
+        STAT: resourceStat,
     };
     nunjucksEnv.addGlobal('PAGE', PAGE);
 
