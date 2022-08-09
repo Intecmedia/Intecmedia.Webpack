@@ -21,7 +21,7 @@ function stripBom(string) {
 
 UTILS.globArray([
     path.join(__dirname, '*.{js,json}'),
-    `${ENV.SOURCE_PATH}/**/*.{html,svg,js,json,css,scss}`,
+    `${ENV.SOURCE_PATH}/**/*.{html,svg,js,json,css,scss,njk}`,
 ], {
     ignore: [],
     dot: true,
