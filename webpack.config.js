@@ -12,10 +12,6 @@ const ENV = require('./app.env');
 const APP = require('./app.config');
 const UTILS = require('./webpack.utils');
 
-ENV.SITEMAP = ENV.SITEMAP.map((item) => Object.assign(item, {
-    path: path.posix.join(APP.PUBLIC_PATH, item.url, 'index.html'),
-}));
-
 if (ENV.STANDALONE) {
     logger.info('Argv:', ENV.ARGV);
     logger.info('Name:', ENV.PACKAGE_NAME);
@@ -273,13 +269,15 @@ module.exports = {
             quiet: ENV.PROD || ENV.DEBUG,
             fix: APP.LINT_FIX,
         })] : []),
-        ...(ENV.SITEMAP.map(({ template, filename }) => new HtmlWebpackPlugin({
+        ...(ENV.SITEMAP.map(({
+            template, filename, underscored, extname,
+        }) => new HtmlWebpackPlugin({
             filename,
             template,
             chunks: ['app', 'vendor'],
-            inject: path.basename(template).startsWith('_') ? false : 'body',
+            inject: underscored || extname !== 'html' ? false : 'body',
             scriptLoading: 'blocking',
-            minify: (ENV.PROD || ENV.DEBUG ? ({
+            minify: ((ENV.PROD || ENV.DEBUG) && extname !== 'html' ? ({
                 html5: true,
                 collapseBooleanAttributes: true,
                 collapseWhitespace: !APP.HTML_PRETTY,

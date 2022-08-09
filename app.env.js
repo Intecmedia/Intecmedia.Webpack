@@ -41,7 +41,7 @@ if (!['production', 'development'].includes(NODE_ENV)) {
     throw new Error(`Unknow NODE_ENV=${JSON.stringify(NODE_ENV)}`);
 }
 
-const IGNORE_PATTERN = /\/_/;
+const UNDERSCORED_PATTERN = /\/_/;
 const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.html`, {
     ignore: [
         `${slash(SOURCE_PATH)}/partials/**/*.html`,
@@ -50,17 +50,23 @@ const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.html`, {
 }).map((item) => {
     const basename = path.basename(item, '.html');
     const template = slash(path.relative(__dirname, item));
-    const underscored = basename.startsWith('_') || IGNORE_PATTERN.test(template);
+    const underscored = basename.startsWith('_') || UNDERSCORED_PATTERN.test(template);
+    const extname = (path.extname(basename) || '.html').substring(1);
+    const noindex = (underscored || extname !== 'html');
+
     const filename = slash(basename === 'index' ? path.join(
         path.relative(SOURCE_PATH, item),
     ) : path.join(
         path.relative(SOURCE_PATH, path.dirname(item)),
-        ...(underscored ? [`${basename}.html`] : [basename, 'index.html']),
+        ...(noindex ? [extname !== 'html' ? basename : `${basename}.${extname}`] : [basename, 'index.html']),
     ));
-    const url = slash(path.dirname(filename)) + (underscored ? '' : path.posix.sep);
+    const url = slash(path.dirname(filename)) + (noindex ? '' : path.posix.sep);
+
     return {
         template,
         filename,
+        extname,
+        underscored,
         url: (url === './' ? '' : url),
     };
 });
