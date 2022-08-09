@@ -1,6 +1,7 @@
 /* eslint-env node -- webpack is node env */
 /* eslint "compat/compat": "off" -- webpack is node env */
 
+const fs = require('fs');
 const path = require('path');
 const slash = require('slash');
 
