@@ -15,7 +15,7 @@ module.exports = function helper(dirname, orderKey = null, orderAsc = true) {
         ignore: 'index.html',
     }).map((filename) => {
         const template = fs.readFileSync(filename, 'utf8').toString();
-        const { attributes } = frontMatter(template);
+        const templateData = frontMatter(template);
 
         const resourcePath = path.posix.sep + path.relative(this.loaderOptions.searchPath, filename);
         const baseName = path.basename(filename, '.html');
@@ -29,7 +29,7 @@ module.exports = function helper(dirname, orderKey = null, orderAsc = true) {
         const PATH = slash(path.normalize(resourcePath));
 
         return {
-            ...attributes,
+            ...templateData.attributes,
             URL,
             PATH,
             BASENAME: baseName,
