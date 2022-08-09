@@ -5,7 +5,6 @@ const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
 const slash = require('slash');
-const deepMerge = require('lodash.merge');
 const frontMatter = require('front-matter');
 
 const realcwd = fs.realpathSync(process.cwd());
@@ -69,16 +68,13 @@ const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.{html,njk}`, {
     const stat = fs.statSync(item);
     const templateSource = fs.readFileSync(item, 'utf8').toString();
     const templateData = frontMatter.test(templateSource) ? frontMatter(templateSource) : {};
-    const PAGE = deepMerge(
-        {},
-        templateData.attributes,
-        {
-            URL: `/${url}`,
-            PATH: slash(path.normalize(item)),
-            BASENAME: basename,
-            STAT: stat,
-        },
-    );
+    const PAGE = {
+        ...templateData.attributes,
+        URL: `/${url}`,
+        PATH: slash(path.normalize(item)),
+        BASENAME: basename,
+        STAT: stat,
+    };
 
     return {
         template,
