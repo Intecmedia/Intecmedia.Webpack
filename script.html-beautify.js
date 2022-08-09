@@ -23,7 +23,10 @@ const options = {
 };
 
 UTILS.glob(`${ENV.SOURCE_PATH}/**/*.html`, {
-    ignore: [`${ENV.SOURCE_PATH}/partials/macros/**/*.html`],
+    ignore: [
+        `${ENV.SOURCE_PATH}/**/*.*.html`,
+        `${ENV.SOURCE_PATH}/partials/macros/**/*.html`,
+    ],
     nodir: true,
 }).then((files) => {
     logger.info(`${files.length} files\n`);
