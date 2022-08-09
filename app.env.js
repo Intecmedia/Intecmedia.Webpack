@@ -72,7 +72,12 @@ const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.{html,njk}`, {
     const PAGE = deepMerge(
         {},
         templateData.attributes,
-        { URL: `/${url}`, PATH: slash(path.normalize(item)), BASENAME: basename, STAT: stat },
+        {
+            URL: `/${url}`,
+            PATH: slash(path.normalize(item)),
+            BASENAME: basename, 
+            STAT: stat,
+        },
     );
 
     return {
