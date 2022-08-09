@@ -6,5 +6,5 @@ const nunjucksRuntime = require('nunjucks/src/runtime');
 const SPACELESS_PATTERN = />\s+</g;
 
 module.exports = function helper(str) {
-    return nunjucksRuntime.copySafeness(str, str.replace(SPACELESS_PATTERN, '><').trim());
+    return nunjucksRuntime.markSafe(str.replace(SPACELESS_PATTERN, '><').trim());
 };

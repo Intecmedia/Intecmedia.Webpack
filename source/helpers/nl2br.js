@@ -7,5 +7,5 @@ module.exports = function helper(str) {
     if (str === null || str === undefined) {
         return '';
     }
-    return nunjucksRuntime.copySafeness(str, str.replace(/\r\n|\n/g, '<br>\n'));
+    return nunjucksRuntime.markSafe(str.replace(/\r\n|\n/g, '<br>\n'));
 };
