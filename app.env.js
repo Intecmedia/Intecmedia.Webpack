@@ -75,7 +75,7 @@ const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.{html,njk}`, {
         {
             URL: `/${url}`,
             PATH: slash(path.normalize(item)),
-            BASENAME: basename, 
+            BASENAME: basename,
             STAT: stat,
         },
     );

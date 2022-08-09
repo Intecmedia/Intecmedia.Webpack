@@ -29,7 +29,11 @@ module.exports = function helper(dirname, orderKey = null, orderAsc = true) {
         const PATH = slash(path.normalize(resourcePath));
 
         return {
-            URL, PATH, BASENAME: baseName, STAT: stat, ...attributes,
+            URL,
+            PATH,
+            BASENAME: baseName,
+            STAT: stat,
+            ...attributes,
         };
     }).sort((a, b) => {
         if (!orderKey) return 0;
