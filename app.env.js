@@ -42,7 +42,7 @@ if (!['production', 'development'].includes(NODE_ENV)) {
 }
 
 const UNDERSCORED_PATTERN = /\/_/;
-const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.(html|rss|xml)`, {
+const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.(html|njk)`, {
     ignore: [
         `${slash(SOURCE_PATH)}/partials/**/*.html`,
         `${slash(SOURCE_PATH)}/upload/**/*.html`,
