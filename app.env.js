@@ -51,21 +51,21 @@ const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.{html,njk}`, {
     const basename = path.basename(item, path.extname(item));
     const template = slash(path.relative(__dirname, item));
     const underscored = basename.startsWith('_') || UNDERSCORED_PATTERN.test(template);
-    const extname = (path.extname(basename) || path.extname(item)).substring(1);
+    const extension = (path.extname(basename) || path.extname(item)).substring(1);
     const noindex = (underscored || extname !== 'html');
 
     const filename = slash(basename === 'index' ? path.join(
         path.relative(SOURCE_PATH, item),
     ) : path.join(
         path.relative(SOURCE_PATH, path.dirname(item)),
-        ...(noindex ? [extname !== 'html' ? basename : `${basename}.${extname}`] : [basename, 'index.html']),
+        ...(noindex ? [extension !== 'html' ? basename : `${basename}.${extension}`] : [basename, 'index.html']),
     ));
     const url = slash(path.dirname(filename)) + (noindex ? '' : path.posix.sep);
 
     return {
         template,
         filename,
-        extname,
+        extension,
         underscored,
         url: (url === './' ? '' : url),
     };
