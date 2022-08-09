@@ -5,6 +5,8 @@ const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
 const slash = require('slash');
+const deepMerge = require('lodash.merge');
+const frontMatter = require('front-matter');
 
 const realcwd = fs.realpathSync(process.cwd());
 if (process.cwd() !== realcwd) {
@@ -41,7 +43,7 @@ if (!['production', 'development'].includes(NODE_ENV)) {
     throw new Error(`Unknow NODE_ENV=${JSON.stringify(NODE_ENV)}`);
 }
 
-const UNDERSCORED_PATTERN = /\/_/;
+const IGNORE_PATTERN = /\/_/;
 const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.{html,njk}`, {
     ignore: [
         `${slash(SOURCE_PATH)}/partials/**/*.html`,
@@ -50,7 +52,7 @@ const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.{html,njk}`, {
 }).map((item) => {
     const basename = path.basename(item, path.extname(item));
     const template = slash(path.relative(__dirname, item));
-    const ignored = basename.startsWith('_') || UNDERSCORED_PATTERN.test(template);
+    const ignored = basename.startsWith('_') || IGNORE_PATTERN.test(template);
     const extension = (path.extname(basename) || path.extname(item)).substring(1);
     const noindex = (ignored || extension !== 'html');
 
@@ -64,12 +66,21 @@ const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.{html,njk}`, {
         ? filename.substring(0, filename.length - 'index.html'.length)
         : filename);
 
+    const templateSource = fs.readFileSync(item, 'utf8').toString();
+    const templateData = frontMatter.test(templateSource) ? frontMatter(templateSource) : {};
+     const PAGE = deepMerge(
+        {},
+        templateData.attributes,
+        { URL: `/${url}`, PATH: slash(path.normalize(item)) },
+    );
+
     return {
         template,
         filename,
         extension,
         ignored,
         url,
+        PAGE,
     };
 });
 
