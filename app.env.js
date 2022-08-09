@@ -42,16 +42,16 @@ if (!['production', 'development'].includes(NODE_ENV)) {
 }
 
 const UNDERSCORED_PATTERN = /\/_/;
-const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.html`, {
+const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.(html|rss|xml)`, {
     ignore: [
         `${slash(SOURCE_PATH)}/partials/**/*.html`,
         `${slash(SOURCE_PATH)}/upload/**/*.html`,
     ],
 }).map((item) => {
-    const basename = path.basename(item, '.html');
+    const basename = path.basename(item, path.extname(item));
     const template = slash(path.relative(__dirname, item));
     const underscored = basename.startsWith('_') || UNDERSCORED_PATTERN.test(template);
-    const extname = (path.extname(basename) || '.html').substring(1);
+    const extname = (path.extname(basename) || path.extname(item)).substring(1);
     const noindex = (underscored || extname !== 'html');
 
     const filename = slash(basename === 'index' ? path.join(
