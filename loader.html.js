@@ -183,7 +183,7 @@ module.exports = function HtmlLoader() {
     const resourcePath = path.posix.sep + path.relative(options.searchPath, loaderContext.resourcePath);
     const baseName = path.basename(loaderContext.resourcePath, '.html');
 
-    const stat = fs.statSync(resourcePath);
+    const stat = fs.statSync(loaderContext.resourcePath);
     const resourceUrl = path.dirname(resourcePath) + (
         baseName === 'index' ? '' : path.posix.sep + baseName
     ) + path.posix.sep;
