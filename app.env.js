@@ -52,7 +52,7 @@ const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.{html,njk}`, {
     const template = slash(path.relative(__dirname, item));
     const underscored = basename.startsWith('_') || UNDERSCORED_PATTERN.test(template);
     const extension = (path.extname(basename) || path.extname(item)).substring(1);
-    const noindex = (underscored || extname !== 'html');
+    const noindex = (underscored || extension !== 'html');
 
     const filename = slash(basename === 'index' ? path.join(
         path.relative(SOURCE_PATH, item),
