@@ -66,12 +66,13 @@ const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.{html,njk}`, {
         ? filename.substring(0, filename.length - 'index.html'.length)
         : filename);
 
+    const stat = fs.statSync(item);
     const templateSource = fs.readFileSync(item, 'utf8').toString();
     const templateData = frontMatter.test(templateSource) ? frontMatter(templateSource) : {};
-     const PAGE = deepMerge(
+    const PAGE = deepMerge(
         {},
         templateData.attributes,
-        { URL: `/${url}`, PATH: slash(path.normalize(item)) },
+        { URL: `/${url}`, PATH: slash(path.normalize(item)), BASENAME: basename, STAT: stat },
     );
 
     return {

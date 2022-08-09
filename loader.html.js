@@ -182,6 +182,7 @@ module.exports = function HtmlLoader() {
     const resourcePath = path.posix.sep + path.relative(options.searchPath, loaderContext.resourcePath);
     const baseName = path.basename(loaderContext.resourcePath, '.html');
 
+    const stat = fs.statSync(resourcePath);
     const resourceUrl = path.dirname(resourcePath) + (
         baseName === 'index' ? '' : path.posix.sep + baseName
     ) + path.posix.sep;
@@ -190,6 +191,7 @@ module.exports = function HtmlLoader() {
     const PAGE = {
         URL: slash(path.normalize(path.join(publicPath, resourceUrl))),
         PATH: slash(path.normalize(resourcePath)),
+        STAT: stat,
     };
     nunjucksEnv.addGlobal('PAGE', PAGE);
 
