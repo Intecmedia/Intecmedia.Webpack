@@ -12,7 +12,10 @@ module.exports = function helper(dirname, orderKey = null, orderAsc = true) {
     const fullpath = path.join(process.cwd(), 'source', dirname);
     this.loaderContext.addContextDependency(fullpath);
     return glob.sync(slash(path.join(fullpath, '*.html')), {
-        ignore: 'index.html',
+        ignore: [
+            '_*.html',
+            'index.html',
+        ],
     }).map((filename) => {
         const template = fs.readFileSync(filename, 'utf8').toString();
         const templateData = frontMatter(template);
