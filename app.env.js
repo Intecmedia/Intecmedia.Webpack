@@ -50,9 +50,9 @@ const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.{html,njk}`, {
 }).map((item) => {
     const basename = path.basename(item, path.extname(item));
     const template = slash(path.relative(__dirname, item));
-    const underscored = basename.startsWith('_') || UNDERSCORED_PATTERN.test(template);
+    const ignored = basename.startsWith('_') || UNDERSCORED_PATTERN.test(template);
     const extension = (path.extname(basename) || path.extname(item)).substring(1);
-    const noindex = (underscored || extension !== 'html');
+    const noindex = (ignored || extension !== 'html');
 
     const filename = slash(basename === 'index' ? path.join(
         path.relative(SOURCE_PATH, item),
@@ -60,14 +60,16 @@ const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.{html,njk}`, {
         path.relative(SOURCE_PATH, path.dirname(item)),
         ...(noindex ? [extension !== 'html' ? basename : `${basename}.${extension}`] : [basename, 'index.html']),
     ));
-    const url = slash(path.dirname(filename)) + (noindex ? '' : path.posix.sep);
+    const url = slash(filename.endsWith('index.html')
+        ? filename.substring(0, filename.length - 'index.html'.length)
+        : filename);
 
     return {
         template,
         filename,
         extension,
-        underscored,
-        url: (url === './' ? '' : url),
+        ignored,
+        url,
     };
 });
 

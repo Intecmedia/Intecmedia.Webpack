@@ -270,12 +270,12 @@ module.exports = {
             fix: APP.LINT_FIX,
         })] : []),
         ...(ENV.SITEMAP.map(({
-            template, filename, underscored, extension,
+            template, filename, ignored, extension,
         }) => new HtmlWebpackPlugin({
             filename,
             template,
             chunks: ['app', 'vendor'],
-            inject: underscored || extension !== 'html' ? false : 'body',
+            inject: ignored || extension !== 'html' ? false : 'body',
             scriptLoading: 'blocking',
             minify: ((ENV.PROD || ENV.DEBUG) && extension === 'html' ? ({
                 html5: true,
