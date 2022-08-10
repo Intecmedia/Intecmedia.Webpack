@@ -1,5 +1,5 @@
 /* eslint-env node -- webpack is node env */
-/* eslint max-len: "off" -- webpack is node env */
+/* eslint global-require: "off", max-len: "off" -- webpack is node env */
 
 module.exports = {
     TITLE: '$APP.TITLE$',
@@ -26,4 +26,7 @@ module.exports = {
     GZIP: true,
     STYLELINT: true,
     ESLINT: true,
+    get ENV() {
+        return require('./app.env');
+    },
 };
