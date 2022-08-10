@@ -7,6 +7,8 @@ const glob = require('glob');
 const slash = require('slash');
 const frontMatter = require('front-matter');
 
+const APP = require('./app.config');
+
 const realcwd = fs.realpathSync(process.cwd());
 if (process.cwd() !== realcwd) {
     throw new Error(`Use real path ${JSON.stringify(realcwd)} instead symlink ${JSON.stringify(process.cwd())}.`);
@@ -30,10 +32,10 @@ const NODE_ENV = PROD ? 'production' : 'development';
 const VERBOSE = (NODE_ENV === 'development' || DEBUG);
 const SOURCE_MAP = DEBUG || !PROD || DEV_SERVER;
 
-const { name: PACKAGE_NAME, browserslist, config } = require('./package.json');
+const { name: PACKAGE_NAME, browserslist } = require('./package.json');
 
 const SOURCE_PATH = path.resolve(__dirname, 'source');
-const OUTPUT_PATH = path.resolve(__dirname, config && config.OUTPUT_PATH ? config.OUTPUT_PATH : 'build');
+const OUTPUT_PATH = path.resolve(__dirname, APP.OUTPUT_PATH ? APP.OUTPUT_PATH : 'build');
 
 process.env.DEBUG = DEBUG;
 process.env.NODE_ENV = NODE_ENV;
@@ -70,7 +72,7 @@ const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.{html,njk}`, {
     const templateData = frontMatter.test(templateSource) ? frontMatter(templateSource) : {};
     const PAGE = {
         ...templateData.attributes,
-        URL: `/${url}`,
+        URL: slash(path.normalize(path.join(APP.PUBLIC_PATH, url))),
         PATH: slash(path.normalize(item)),
         BASENAME: basename,
         STAT: stat,
