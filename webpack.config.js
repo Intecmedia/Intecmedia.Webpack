@@ -375,7 +375,7 @@ module.exports = {
                     path.join(ENV.SOURCE_PATH, 'upload'),
                 ],
                 options: {
-                    context: APP,
+                    context: { ...APP, ENV },
                     searchPath: ENV.SOURCE_PATH,
                     verbose: ENV.DEBUG || ENV.ARGV.verbose,
                 },
