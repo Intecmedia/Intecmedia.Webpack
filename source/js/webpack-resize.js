@@ -2,6 +2,7 @@
 const requireCache = {};
 
 function requireAll(r) {
+    /* eslint-disable-next-line no-return-assign -- https://webpack.js.org/guides/dependency-management/#requirecontext */
     r.keys().forEach((key) => (requireCache[key] = r(key)));
 }
 
