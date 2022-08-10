@@ -1,5 +1,9 @@
 /* globals APP */
-const requireAll = (modules) => modules.keys().map(modules);
+const requireCache = {};
+
+function requireAll(r) {
+    r.keys().forEach((key) => (requireCache[key] = r(key)));
+}
 
 if (APP.WEBP) {
     requireAll(require.context('../img/?resize=&format=webp', true, /\.(png|jpg|jpeg)$/));
