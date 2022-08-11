@@ -6,6 +6,7 @@ module.exports = {
     SHORT_NAME: '$APP.SHORT_NAME$',
     DESCRIPTION: '$APP.DESCRIPTION$',
     PUBLIC_PATH: '/', // for relative use './'
+    OUTPUT_PATH : './build',
     FAVICONS: true,
     LANGUAGE: 'ru',
     START_URL: '/?utm_source=app_manifest',
