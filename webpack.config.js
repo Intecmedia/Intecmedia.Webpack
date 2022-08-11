@@ -54,6 +54,10 @@ module.exports = {
         cacheDirectory: UTILS.cacheDir('webpack'),
         memoryCacheUnaffected: true,
         hashAlgorithm: 'xxhash64',
+        buildDependencies: {
+            config: [__filename],
+            defaultWebpack: ['webpack/lib/'],
+        },
     }),
 
     infrastructureLogging: {
