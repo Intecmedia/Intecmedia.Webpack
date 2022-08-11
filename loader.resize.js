@@ -6,7 +6,7 @@ const os = require('os');
 const fs = require('fs');
 const sharp = require('sharp');
 const path = require('path');
-const md5File = require('md5-file');
+const crypto = require('crypto');
 const loaderUtils = require('loader-utils');
 const urlLoader = require('url-loader');
 const fileLoader = require('file-loader');
@@ -94,7 +94,7 @@ module.exports = async function ResizeLoader(content) {
         `${resourceInfo.name}@resize-${resizeWidth || ''}x${resizeHeight || ''}${resizeFit && resizeFit !== DEFAULT_FIT ? `-${resizeFit}` : ''}`
     )) + (query.suffix ? `-${query.suffix}` : '');
 
-    const resourceHash = md5File.sync(loaderContext.resourcePath);
+    const resourceHash = crypto.createHash('md5').update(content).digest('hex');
     const formatConfig = imageminConfig[format] || {};
     const cacheFilename = `${encodeURIComponent(`${relativePath}?${JSON.stringify(query)}`)}.json`;
     const cacheFilepath = cacheDirectory ? path.join(cacheDirectory, cacheFilename) : undefined;

@@ -1,8 +1,9 @@
 /* eslint-env node -- webpack is node env */
 /* eslint "compat/compat": "off" -- webpack is node env */
 
+const fs = require('fs');
 const path = require('path');
-const md5File = require('md5-file');
+const crypto = require('crypto');
 
 const cacheMap = {};
 
@@ -10,7 +11,7 @@ module.exports = function helper(filename, nocache = false) {
     const fullpath = path.join(process.cwd(), 'source', filename);
     this.loaderContext.addDependency(fullpath);
     if (!(fullpath in cacheMap) || nocache) {
-        cacheMap[fullpath] = md5File.sync(fullpath);
+        cacheMap[fullpath] = crypto.createHash('md5').update(fs.readFileSync(fullpath)).digest('hex');
     }
     return cacheMap[fullpath];
 };
