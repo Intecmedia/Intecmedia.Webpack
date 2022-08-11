@@ -29,7 +29,6 @@ const DEFAULT_FIT = 'inside';
 const ALLOWED_PATTERN = /\.(jpeg|jpg|png|gif)(\?.*)?$/i;
 
 const resizeLimit = (ENV.PROD && !ENV.DEBUG ? pLimit(os.cpus().length - 1) : (callback) => callback());
-const imageHasher = crypto.createHash('md5');
 
 module.exports = async function ResizeLoader(content) {
     const loaderContext = this;
@@ -95,7 +94,7 @@ module.exports = async function ResizeLoader(content) {
         `${resourceInfo.name}@resize-${resizeWidth || ''}x${resizeHeight || ''}${resizeFit && resizeFit !== DEFAULT_FIT ? `-${resizeFit}` : ''}`
     )) + (query.suffix ? `-${query.suffix}` : '');
 
-    const resourceHash = imageHasher.update(content).digest('hex');
+    const resourceHash = crypto.createHash('xxhash64').update(content).digest('hex');
     const formatConfig = imageminConfig[format] || {};
     const cacheFilename = `${encodeURIComponent(`${relativePath}?${JSON.stringify(query)}`)}.json`;
     const cacheFilepath = cacheDirectory ? path.join(cacheDirectory, cacheFilename) : undefined;
