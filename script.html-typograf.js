@@ -22,6 +22,7 @@ instance.addSafeTag('{{', '}}');
 instance.addSafeTag('{%', '%}');
 instance.addSafeTag('{#', '#}');
 instance.addSafeTag('<%', '%>');
+instance.addSafeTag('<!-- typograf ignore:start -->', '<!-- typograf ignore:end -->');
 
 UTILS.glob(`${ENV.SOURCE_PATH}/**/*.html`, {
     ignore: [

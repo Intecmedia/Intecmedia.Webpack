@@ -12,6 +12,7 @@ module.exports = function helper(str) {
     instance.addSafeTag('{%', '%}');
     instance.addSafeTag('{#', '#}');
     instance.addSafeTag('<%', '%>');
+    instance.addSafeTag('<!-- typograf ignore:start -->', '<!-- typograf ignore:end -->');
 
     return nunjucksRuntime.markSafe(instance.execute(str));
 };
