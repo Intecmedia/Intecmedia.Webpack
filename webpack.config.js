@@ -146,7 +146,7 @@ module.exports = {
             },
         },
         minimizer: (ENV.PROD && !ENV.DEBUG ? [
-            new ImageMinimizerPlugin({
+            ...(APP.IMAGEMIN ? [new ImageMinimizerPlugin({
                 test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
                 exclude: [
                     /(fonts|font)/i,
@@ -157,7 +157,7 @@ module.exports = {
                     filter: (input, name) => !imageminConfig.testIgnore(name),
                 },
                 loader: false,
-            }),
+            })] : []),
             new RemoveAssetsPlugin({
                 test: /webpack-\w+\.min\.js/i,
             }),
