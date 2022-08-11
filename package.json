@@ -59,9 +59,6 @@
     },
     "author": "Dmitry Pyatkov",
     "license": "MIT",
-    "config": {
-        "OUTPUT_PATH": "build"
-    },
     "browserslist": {
         "production": [
             "iOS >= 12",
