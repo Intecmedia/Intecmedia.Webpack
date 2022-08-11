@@ -54,6 +54,7 @@
 * **npm run html-validate-dev** – линтер html (dev) через [html-validate](https://html-validate.org/).
 * **npm run html-validator** – линтер html через [validator.w3.org](https://validator.w3.org/).
 * **npm run html-beautify** – форматер html через [https://beautifier.io](https://beautifier.io/).
+* **npm run html-typograf** – форматер html через [https://typograf.github.io/](https://typograf.github.io/).
 * **npm run app-lint** – линтер конфигурации приложения.
 * **npm run image-lint** – линтер изображений
 * **npm run lint** – запуск всех линтеров (app, eslint, stylelint, html-validate, validator.w3.org).
