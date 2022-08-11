@@ -116,7 +116,7 @@ module.exports = {
         hotUpdateMainFilename: 'js/[runtime].hot-update.json?[fullhash]',
         path: ENV.OUTPUT_PATH,
         publicPath: APP.PUBLIC_PATH,
-        hashFunction: 'md5',
+        hashFunction: 'xxhash64',
         devtoolModuleFilenameTemplate: UTILS.moduleFilenameTemplate,
         devtoolFallbackModuleFilenameTemplate: UTILS.moduleFilenameTemplate,
     },

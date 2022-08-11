@@ -6,7 +6,6 @@ const os = require('os');
 const fs = require('fs');
 const sharp = require('sharp');
 const path = require('path');
-const crypto = require('crypto');
 const loaderUtils = require('loader-utils');
 const urlLoader = require('url-loader');
 const fileLoader = require('file-loader');
@@ -14,6 +13,7 @@ const deepMerge = require('lodash.merge');
 const weblog = require('webpack-log');
 const slash = require('slash');
 const pLimit = require('p-limit');
+const createHash = require('webpack/lib/util/createHash');
 
 const logger = weblog({ name: 'loader-resize' });
 const imageminConfig = require('./imagemin.config');
@@ -94,7 +94,7 @@ module.exports = async function ResizeLoader(content) {
         `${resourceInfo.name}@resize-${resizeWidth || ''}x${resizeHeight || ''}${resizeFit && resizeFit !== DEFAULT_FIT ? `-${resizeFit}` : ''}`
     )) + (query.suffix ? `-${query.suffix}` : '');
 
-    const resourceHash = crypto.createHash('md5').update(content).digest('hex');
+    const resourceHash = createHash('xxhash64').update(content).digest('hex');
     const formatConfig = imageminConfig[format] || {};
     const cacheFilename = `${encodeURIComponent(`${relativePath}?${JSON.stringify(query)}`)}.json`;
     const cacheFilepath = cacheDirectory ? path.join(cacheDirectory, cacheFilename) : undefined;
