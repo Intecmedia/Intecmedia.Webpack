@@ -94,7 +94,7 @@ module.exports = async function ResizeLoader(content) {
         `${resourceInfo.name}@resize-${resizeWidth || ''}x${resizeHeight || ''}${resizeFit && resizeFit !== DEFAULT_FIT ? `-${resizeFit}` : ''}`
     )) + (query.suffix ? `-${query.suffix}` : '');
 
-    const resourceHash = crypto.createHash('xxhash64').update(content).digest('hex');
+    const resourceHash = crypto.createHash('md5').update(content).digest('hex');
     const formatConfig = imageminConfig[format] || {};
     const cacheFilename = `${encodeURIComponent(`${relativePath}?${JSON.stringify(query)}`)}.json`;
     const cacheFilepath = cacheDirectory ? path.join(cacheDirectory, cacheFilename) : undefined;
