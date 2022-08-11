@@ -22,7 +22,7 @@ module.exports = {
     JQUERY: false,
     LINT_FIX: true,
     WEBP: true,
-    AVIF: true,
+    AVIF: false,
     BROTLI: true,
     GZIP: true,
     STYLELINT: true,
