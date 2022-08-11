@@ -113,6 +113,7 @@
         "core-js": "^3.24.1",
         "cross-env": "^7.0.3",
         "css-loader": "^6.7.1",
+        "css-tree": "2.1.0",
         "cssnano": "^5.1.12",
         "date-fns": "^2.29.1",
         "eslint": "^8.21.0",
