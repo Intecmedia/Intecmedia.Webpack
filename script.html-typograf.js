@@ -15,7 +15,7 @@ const logger = weblog({ name: 'html-typograf' });
 
 const statMessages = { fixed: 0, skipped: 0 };
 
-const options = require('./.typograf.json');
+const options = require('./.typografrc.json');
 
 const instance = new Typograf(options);
 instance.addSafeTag('{{', '}}');

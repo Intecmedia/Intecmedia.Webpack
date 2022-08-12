@@ -4,7 +4,7 @@
 const Typograf = require('typograf');
 const nunjucksRuntime = require('nunjucks/src/runtime');
 
-const options = require('../../.typograf.json');
+const options = require('../../.typografrc.json');
 
 module.exports = function helper(str) {
     const instance = new Typograf(options);
