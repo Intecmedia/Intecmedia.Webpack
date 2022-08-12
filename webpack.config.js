@@ -42,7 +42,7 @@ module.exports = {
     mode: ENV.PROD ? 'production' : 'development',
 
     stats: {
-        preset: (ENV.DEBUG ? 'detailed' : 'normal'),
+        preset: (ENV.DEBUG || ENV.ARGV.verbose ? 'verbose' : 'normal'),
         children: true,
     },
 
