@@ -16,7 +16,7 @@ const UTILS = require('./webpack.utils');
 
 const ImageminIgnore = ignore().add(fs.readFileSync('./.imageminignore').toString());
 
-const statMessages = { fixed: 0, skipped: 0 };
+const statMessages = { fixed: 0, skipped: 0, ignored: 0 };
 
 UTILS.glob(`${ENV.SOURCE_PATH}/**/*.svg`, {
     ignore: [],
@@ -28,6 +28,7 @@ UTILS.glob(`${ENV.SOURCE_PATH}/**/*.svg`, {
 
         const ignores = ImageminIgnore.ignores(relativePath);
         if (ignores) {
+            statMessages.ignored += 1;
             logger.info(`ignored ${relativePath}`);
             return;
         }
