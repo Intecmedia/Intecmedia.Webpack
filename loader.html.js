@@ -204,8 +204,13 @@ module.exports = function HtmlLoader() {
         loaderContext, loaderOptions: options, APP: options.context, PAGE,
     };
     helpers.forEach((helper, name) => {
-        nunjucksEnv.addFilter(name, helper.bind(helperContext));
-        nunjucksEnv.addGlobal(name, helper.bind(helperContext));
+        const filterFn = helper.bind(helperContext);
+        filterFn.helperType = 'filter';
+        nunjucksEnv.addFilter(name, filterFn);
+
+        const globalFn = helper.bind(helperContext);
+        globalFn.helperType = 'global';
+        nunjucksEnv.addGlobal(name, globalFn);
     });
 
     const nunjucksGetSource = nunjucksLoader.getSource;
