@@ -7,13 +7,15 @@ const slash = require('slash');
 const weblog = require('webpack-log');
 const frontMatter = require('front-matter');
 const Typograf = require('typograf');
+const ignore = require('ignore');
 
 const ENV = require('./app.env');
 const UTILS = require('./webpack.utils');
 
 const logger = weblog({ name: 'html-typograf' });
+const typografIgnore = ignore().add(fs.readFileSync('./.typografignore').toString());
 
-const statMessages = { fixed: 0, skipped: 0 };
+const statMessages = { fixed: 0, skipped: 0, ignored: 0 };
 
 const options = require('./.typografrc.json');
 
@@ -35,6 +37,12 @@ UTILS.glob(`${ENV.SOURCE_PATH}/**/*.html`, {
 
     files.forEach((resourcePath) => {
         const relativePath = slash(path.relative(__dirname, resourcePath));
+        if (typografIgnore.ignores(relativePath)) {
+            statMessages.ignored += 1;
+            logger.info(`ignored ${relativePath}`);
+            return;
+        }
+
         const html = fs.readFileSync(resourcePath).toString('utf-8');
         const templateData = frontMatter(html);
 
