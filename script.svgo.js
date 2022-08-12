@@ -50,5 +50,5 @@ UTILS.glob(`${ENV.SOURCE_PATH}/**/*.svg`, {
     });
 
     console.log('');
-    logger.info('stats:', JSON.stringify(statMessages));
+    logger.info('stats:', statMessages);
 });

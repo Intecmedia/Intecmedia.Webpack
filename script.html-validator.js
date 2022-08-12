@@ -93,5 +93,5 @@ UTILS.glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.h
     await Promise.all(promises);
 
     console.log('');
-    logger.info('stats:', JSON.stringify(statMessages));
+    logger.info('stats:', statMessages);
 });

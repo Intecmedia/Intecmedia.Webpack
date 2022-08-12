@@ -49,5 +49,5 @@ UTILS.globArray([
     });
 
     console.log('');
-    logger.info('stats:', JSON.stringify(statMessages));
+    logger.info('stats:', statMessages);
 });
