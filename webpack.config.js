@@ -150,6 +150,8 @@ module.exports = {
             ...(APP.IMAGEMIN ? [new ImageMinimizerPlugin({
                 test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
                 exclude: [
+                    /@resize-/,
+                    /(\?|&)resize=/,
                     /(fonts|font)/i,
                 ],
                 minimizer: {
