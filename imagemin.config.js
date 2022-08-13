@@ -6,6 +6,7 @@ const ignore = require('ignore');
 const path = require('path');
 const slash = require('slash');
 const weblog = require('webpack-log');
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 const ENV = require('./app.env');
 const { SvgoNoPrefixConfig } = require('./svgo.config');
@@ -13,20 +14,16 @@ const { SvgoNoPrefixConfig } = require('./svgo.config');
 const imageminIgnore = ignore().add(fs.readFileSync('./.imageminignore').toString());
 const imageminLogger = weblog({ name: 'imagemin' });
 
-// https://web.dev/use-imagemin-to-compress-images
+// https://sharp.pixelplumbing.com/api-output#gif
 module.exports = {
+    implementation: ImageMinimizerPlugin.sharpMinify,
+    encodeOptions: {
+        jpg: { quality: 90 },
+        png: { quality: 90 },
+        gif: { quality: 90 },
+    },
     plugins: [
-        ['mozjpeg', { // lossy
-            quality: 90,
-            progressive: true,
-        }],
-        ['optipng', { // lossless
-            optimizationLevel: 1,
-        }],
-        ['gifsicle', { // lossless
-            optimizationLevel: 1,
-        }],
-        ['svgo', { // lossy
+        ['svgo', {
             ...SvgoNoPrefixConfig,
         }],
     ],
