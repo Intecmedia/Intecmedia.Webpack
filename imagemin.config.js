@@ -18,9 +18,9 @@ const imageminLogger = weblog({ name: 'imagemin' });
 module.exports = {
     implementation: ImageMinimizerPlugin.sharpMinify,
     encodeOptions: {
-        jpg: { quality: 90 },
-        png: { quality: 90 },
-        gif: { quality: 90 },
+        jpg: { quality: 90, effort: 1 },
+        png: { quality: 90, effort: 1 },
+        gif: { quality: 90, effort: 1 },
     },
     plugins: [
         ['svgo', {
@@ -31,23 +31,23 @@ module.exports = {
 
 module.exports.webp = {
     quality: 90, // 0 - 100, or 100 for lossless
-    options: {}, // https://sharp.pixelplumbing.com/api-output#webp
+    options: { effort: 1 }, // https://sharp.pixelplumbing.com/api-output#webp
 };
 
 module.exports.avif = {
     quality: 90, // 0 - 100, or 100 for lossless
-    options: {}, // https://sharp.pixelplumbing.com/api-output#avif
+    options: { effort: 1 }, // https://sharp.pixelplumbing.com/api-output#avif
 };
 
 module.exports.jpeg = {
     quality: 90, // 0 - 100
-    options: {}, // https://sharp.pixelplumbing.com/api-output#jpeg
+    options: { effort: 1 }, // https://sharp.pixelplumbing.com/api-output#jpeg
 };
 module.exports.jpg = module.exports.jpeg;
 
 module.exports.png = {
     quality: 100, // 0 - 100, or 100 for lossless
-    options: {}, // https://sharp.pixelplumbing.com/api-output#png
+    options: { effort: 1 }, // https://sharp.pixelplumbing.com/api-output#png
 };
 
 module.exports.testIgnore = (filepath) => {
