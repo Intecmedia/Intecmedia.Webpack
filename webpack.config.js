@@ -217,6 +217,7 @@ module.exports = {
                     ],
                 },
                 noErrorOnMissing: true,
+                force: true,
             })),
         }),
         ...(ENV.PROD && !ENV.DEBUG ? [
