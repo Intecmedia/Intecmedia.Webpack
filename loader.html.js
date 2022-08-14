@@ -117,7 +117,7 @@ function processHtml(html, options, loaderCallback) {
     });
     content = content.reverse().join('');
 
-    const template = options.requireExport(lodashTemplate(content, {
+    const template = options.requireExport(!content.includes('<%') ? content : lodashTemplate(content, {
         interpolate: /<%=([\s\S]+?)%>/g,
         variable: 'data',
     }).source);
