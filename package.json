@@ -63,6 +63,7 @@
         "*.js": "npm run js-lint",
         "*.ts": "npm run ts-lint",
         "*.scss": "npm run css-lint",
+        "*.html": "mpm run html-beautify",
         "*.svg": "npm run svgo"
     },
     "author": "Dmitry Pyatkov",
