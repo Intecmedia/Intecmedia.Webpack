@@ -62,7 +62,8 @@
     "lint-staged": {
         "*.js": "npm run js-lint",
         "*.ts": "npm run ts-lint",
-        "*.scss": "npm run css-lint"
+        "*.scss": "npm run css-lint",
+        "*.svg": "npm run svgo"
     },
     "author": "Dmitry Pyatkov",
     "license": "MIT",
