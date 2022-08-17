@@ -1,6 +1,6 @@
 /* eslint-env node -- webpack is node env */
 /* eslint "compat/compat": "off" -- webpack is node env */
-
+const fs = require('fs');
 const semver = require('semver');
 const childProcess = require('child_process');
 const weblog = require('webpack-log');
@@ -90,13 +90,7 @@ if (!bashVersion) {
     }
 }
 
-let yarnLock = null;
-try {
-    yarnLock = childProcess.execSync('ls yarn.lock').toString();
-} catch (fonttoolsError) {
-    yarnLock = null;
-}
-
+const yarnLock = fs.existsSync('./yarn.lock');
 if (yarnLock) {
     lintErrors.push([
         '`yarn.lock` found.',
