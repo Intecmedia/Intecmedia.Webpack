@@ -26,9 +26,9 @@
 * Активное использование формат изображений WebP.
 
 ## Системные требования
-* `Node.js` >= 16.0.0
+* `Node.js` >= 16.0.0 c включеным [Chocolatey](https://user-images.githubusercontent.com/3109072/68096791-82350c00-fe89-11e9-8cfa-b4619ce96162.jpg)
 * `NPM` >= 8.3.0
-* `python` >= 2.7 для `fonttools` и `brotli`
+* `python` >= 2.7 и `pip` (автоматически ставятся вместе с `Chocolatey`)
 * Если у вас `Windows` – установите любой `bash`: `Git Bash` или `MinGW` или `Cygwin`
 
 ## Начало работы
