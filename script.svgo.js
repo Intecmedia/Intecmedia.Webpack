@@ -15,10 +15,12 @@ const ENV = require('./app.env');
 const UTILS = require('./webpack.utils');
 
 const ImageminIgnore = ignore().add(fs.readFileSync('./.imageminignore').toString());
-
+const patterns = process.argv.slice(2);
 const statMessages = { fixed: 0, skipped: 0, ignored: 0 };
 
-UTILS.glob(`${ENV.SOURCE_PATH}/**/*.svg`, {
+UTILS.globArray(patterns && patterns.length ? patterns : [
+    `${ENV.SOURCE_PATH}/**/*.svg`,
+], {
     ignore: [],
     nodir: true,
 }).then((files) => {

@@ -14,9 +14,8 @@ const UTILS = require('./webpack.utils');
 
 const logger = weblog({ name: 'html-typograf' });
 const typografIgnore = ignore().add(fs.readFileSync('./.typografignore').toString());
-
 const statMessages = { fixed: 0, skipped: 0, ignored: 0 };
-
+const patterns = process.argv.slice(2);
 const options = require('./.typografrc.json');
 
 const instance = new Typograf(options);
@@ -26,7 +25,9 @@ instance.addSafeTag('{#', '#}');
 instance.addSafeTag('<%', '%>');
 instance.addSafeTag('<!-- typograf ignore:start -->', '<!-- typograf ignore:end -->');
 
-UTILS.glob(`${ENV.SOURCE_PATH}/**/*.html`, {
+UTILS.globArray(patterns && patterns.length ? patterns : [
+    `${ENV.SOURCE_PATH}/**/*.html`,
+], {
     ignore: [
         `${ENV.SOURCE_PATH}/**/*.*.html`,
         `${ENV.SOURCE_PATH}/partials/macros/**/*.html`,

@@ -14,9 +14,8 @@ const UTILS = require('./webpack.utils');
 
 const logger = weblog({ name: 'html-beautify' });
 const beautifyfIgnore = ignore().add(fs.readFileSync('./.beautifyignore').toString());
-
 const statMessages = { fixed: 0, skipped: 0, ignored: 0 };
-
+const patterns = process.argv.slice(2);
 const config = require('./.beautifyrc');
 
 const options = {
@@ -24,7 +23,9 @@ const options = {
     templating: 'django',
 };
 
-UTILS.glob(`${ENV.SOURCE_PATH}/**/*.html`, {
+UTILS.globArray(patterns && patterns.length ? patterns : [
+    `${ENV.SOURCE_PATH}/**/*.html`,
+], {
     ignore: [
         `${ENV.SOURCE_PATH}/**/*.*.html`,
         `${ENV.SOURCE_PATH}/partials/macros/**/*.html`,
