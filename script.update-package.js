@@ -12,15 +12,15 @@ const hashFilepath = path.resolve('./package-lock.hash');
 const lockFilepath = path.resolve('./package-lock.json');
 
 const currentFilehash = fs.existsSync(hashFilepath) ? fs.readFileSync(hashFilepath).toString() : null;
-const lockFilehash = () => createHash('xxhash64').update(fs.readFileSync(lockFilepath).toString()).digest('hex');
+const makeFilehash = () => createHash('xxhash64').update(fs.readFileSync(lockFilepath).toString()).digest('hex');
 const hashOnly = process.argv.slice(2).includes('--hash-only');
 
-if (!currentFilehash || currentFilehash !== lockFilehash()) {
+if (!currentFilehash || currentFilehash !== makeFilehash()) {
     if (!hashOnly) {
         logger.info('npm install...');
         childProcess.execSync('npm install', { stdio: 'inherit' });
     }
-    fs.writeFileSync(hashFilepath, lockFilehash());
+    fs.writeFileSync(hashFilepath, makeFilehash());
     logger.info('updated package-lock.hash');
     console.log('');
 }

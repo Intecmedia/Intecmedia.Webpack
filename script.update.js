@@ -62,8 +62,8 @@ childProcess.execSync('npm dedupe', { stdio: 'inherit' });
 const hashFilepath = path.resolve('./package-lock.hash');
 const lockFilepath = path.resolve('./package-lock.json');
 
-const lockFilehash = () => createHash('xxhash64').update(fs.readFileSync(lockFilepath).toString()).digest('hex');
-fs.writeFileSync(hashFilepath, lockFilehash());
+const makeFilehash = () => createHash('xxhash64').update(fs.readFileSync(lockFilepath).toString()).digest('hex');
+fs.writeFileSync(hashFilepath, makeFilehash());
 logger.info('updated package-lock.hash');
 
 console.log('');
