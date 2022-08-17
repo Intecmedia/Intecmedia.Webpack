@@ -1,8 +1,10 @@
 /* eslint-env node -- webpack is node env */
 /* eslint "compat/compat": "off" -- webpack is node env */
+const fs = require('fs');
+const path = require('path');
 const semver = require('semver');
 const childProcess = require('child_process');
-
+const createHash = require('webpack/lib/util/createHash');
 const weblog = require('webpack-log');
 
 const logger = weblog({ name: 'update' });
@@ -57,3 +59,9 @@ console.log('');
 
 childProcess.execSync('npm update', { stdio: 'inherit' });
 childProcess.execSync('npm dedupe', { stdio: 'inherit' });
+
+const hashFilepath = path.resolve('./package-lock.hash');
+const lockFilepath = path.resolve('./package-lock.json');
+
+const lockFilehash = () => createHash('xxhash64').update(fs.readFileSync(lockFilepath).toString()).digest('hex');
+fs.writeFileSync(hashFilepath, lockFilehash());

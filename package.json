@@ -9,6 +9,8 @@
     "scripts": {
         "clean": "cross-env NODE_ENV=production node script.clean.js",
         "update": "cross-env NODE_ENV=production node script.update.js",
+        "update-package": "node ./script.update-package.js",
+        "update-package-hash": "node ./script.update-package.js --hash-only",
         "development": "cross-env NODE_ENV=development DEBUG=0 NODE_OPTIONS=\"--inspect\" webpack --mode=development --progress=profile",
         "debug": "cross-env NODE_ENV=development DEBUG=1 NODE_OPTIONS=\"--inspect\" webpack --mode=development --progress=profile",
         "preproduction": "npm run app-lint",
@@ -60,8 +62,9 @@
         "utf-fix": "cross-env NODE_ENV=production node ./script.utf-fix.js",
         "svgo": "cross-env NODE_ENV=production node ./script.svgo.js",
         "start": "npm run build",
-        "lint-staged": "npx lint-staged  --concurrent=false --diff=\".\"",
-        "prepare": "husky install"
+        "lint-staged": "npx lint-staged --concurrent=false --diff=\".\"",
+        "husky-install": "npx husky install",
+        "prepare": "npm run husky-install && npm run update-package-hash"
     },
     "lint-staged": {
         "*.js": "npm run js-lint-cmd",
