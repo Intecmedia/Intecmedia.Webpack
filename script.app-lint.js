@@ -75,6 +75,21 @@ if (!fonttoolsVersion) {
     lintErrors.push(`required python fonttools@${PACKAGE.engines['@pip/fonttools']} version (current is \`${fonttoolsVersion}\`)`);
 }
 
+let bashVersion = null;
+try {
+    bashVersion = childProcess.execSync('bash --version').toString();
+} catch (fonttoolsError) {
+    bashVersion = null;
+}
+
+if (!bashVersion) {
+    if (process.platform === 'win32') {
+        lintErrors.push('required bash (please install: Git Bash or MinGW or Cygwin)');
+    } else {
+        lintErrors.push('required bash');
+    }
+}
+
 lintWarns.forEach((i) => logger.warn(i));
 lintErrors.forEach((i) => logger.error(i));
 
