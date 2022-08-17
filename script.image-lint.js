@@ -5,7 +5,6 @@ const path = require('path');
 const slash = require('slash');
 const sharp = require('sharp');
 const weblog = require('webpack-log');
-const { argv } = require('yargs');
 
 const ENV = require('./app.env');
 const UTILS = require('./webpack.utils');
@@ -61,10 +60,11 @@ const LINT_RULES = [
     },
 ];
 
-const verbose = 'verbose' in argv && argv.verbose;
-const pathSuffix = argv.pathSuffix && typeof (argv.pathSuffix) === 'string' ? argv.pathSuffix : '';
+const patterns = process.argv.slice(2).map((i) => i.trim()).filter((i) => i.length > 0);
 
-UTILS.glob(ENV.SOURCE_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.{jpg,jpeg,png,svg,gif}'), {
+UTILS.globArray(patterns && patterns.length ? patterns : [
+    `${ENV.SOURCE_PATH}/**/*.{jpg,jpeg,png,svg,gif}`,
+], {
     ignore: [],
     nodir: true,
 }).then(async (files) => {
@@ -95,7 +95,7 @@ UTILS.glob(ENV.SOURCE_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.{
             process.exitCode = 1;
         } else {
             increaseStat('skipped');
-            if (verbose) logger.info(`skipped ${relativePath}`);
+            logger.info(`skipped ${relativePath}`);
         }
 
         return metadata;

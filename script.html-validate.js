@@ -6,7 +6,6 @@ const path = require('path');
 const slash = require('slash');
 const weblog = require('webpack-log');
 const { HtmlValidate } = require('html-validate');
-const { argv } = require('yargs');
 
 const ENV = require('./app.env');
 const UTILS = require('./webpack.utils');
@@ -26,11 +25,11 @@ const lineEllipsis = 80;
 const config = require('./.htmlvalidaterc');
 
 const htmlvalidate = new HtmlValidate({ ...config });
+const patterns = process.argv.slice(2).map((i) => i.trim()).filter((i) => i.length > 0);
 
-const verbose = 'verbose' in argv && argv.verbose;
-const pathSuffix = argv.pathSuffix && typeof (argv.pathSuffix) === 'string' ? argv.pathSuffix : '';
-
-UTILS.glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.html'), {
+UTILS.globArray(patterns && patterns.length ? patterns : [
+    `${ENV.OUTPUT_PATH}/**/*.html`,
+], {
     ignore: [],
     nodir: true,
 }).then((files) => {
@@ -46,7 +45,7 @@ UTILS.glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.h
         const relativePath = slash(path.relative(__dirname, resourcePath));
 
         if (path.basename(resourcePath).startsWith('_')) {
-            if (verbose) logger.info(`skipped ${relativePath}`);
+            logger.info(`skipped ${relativePath}`);
             increaseStat('skipped');
             return;
         }
@@ -55,7 +54,7 @@ UTILS.glob(ENV.OUTPUT_PATH + (pathSuffix ? `/${pathSuffix.trim('/')}` : '/**/*.h
         const report = htmlvalidate.validateFile(resourcePath);
 
         if (report.results.length === 0) {
-            if (verbose) logger.info(`skipped ${relativePath}`);
+            logger.info(`skipped ${relativePath}`);
             increaseStat('skipped');
             return;
         }
