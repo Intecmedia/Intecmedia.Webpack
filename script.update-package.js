@@ -5,7 +5,9 @@ const fs = require('fs');
 const path = require('path');
 const childProcess = require('child_process');
 const createHash = require('webpack/lib/util/createHash');
+const weblog = require('webpack-log');
 
+const logger = weblog({ name: 'update-package' });
 const hashFilepath = path.resolve('./package-lock.hash');
 const lockFilepath = path.resolve('./package-lock.json');
 
@@ -14,6 +16,11 @@ const lockFilehash = () => createHash('xxhash64').update(fs.readFileSync(lockFil
 const hashOnly = process.argv.slice(2).includes('--hash-only');
 
 if (!currentFilehash || currentFilehash !== lockFilehash()) {
-    if (!hashOnly) childProcess.execSync('npm install', { stdio: 'inherit' });
+    if (!hashOnly) {
+        logger.info('npm install...');
+        childProcess.execSync('npm install', { stdio: 'inherit' });
+    }
     fs.writeFileSync(hashFilepath, lockFilehash());
+    logger.info('updated package-lock.hash');
+    console.log('');
 }

@@ -55,7 +55,6 @@ packages.forEach(([pkg, meta], index) => {
     console.log('');
 });
 logger.info(`updated ${updated.length} packages`);
-console.log('');
 
 childProcess.execSync('npm update', { stdio: 'inherit' });
 childProcess.execSync('npm dedupe', { stdio: 'inherit' });
@@ -65,3 +64,6 @@ const lockFilepath = path.resolve('./package-lock.json');
 
 const lockFilehash = () => createHash('xxhash64').update(fs.readFileSync(lockFilepath).toString()).digest('hex');
 fs.writeFileSync(hashFilepath, lockFilehash());
+logger.info('updated package-lock.hash');
+
+console.log('');
