@@ -26,9 +26,10 @@
 * Активное использование формат изображений WebP.
 
 ## Системные требования
-* Node.js >= 16.0.0
-* NPM >= 8.3.0
-* python2.7 и выше, для `fonttools`.
+* `Node.js` >= 16.0.0
+* `NPM` >= 8.3.0
+* `python` >= 2.7 для `fonttools` и `brotli`
+* Если у вас `Windows` – установите любой `bash`: `Git Bash` или `MinGW` или `Cygwin`
 
 ## Начало работы
 * Отредактируйте файл `app.config.js`, разделы `TITLE`, `SHORT_NAME` и `DESCRIPTION`.
