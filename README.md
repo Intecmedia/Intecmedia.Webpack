@@ -30,6 +30,7 @@
 * `NPM` >= 8.3.0 (обновляется командой `npm install -g npm`)
 * `python` >= 2.7 и `pip` (автоматически ставятся вместе с `Chocolatey`)
 * Если у вас `Windows` – установите любой `bash`: `Git Bash` или `MinGW` или `Cygwin`
+* ВНИМАНИЕ! `Yarn` – запрещен, все скрипты расчитаны только на `NPM`.
 
 ## Начало работы
 * Отредактируйте файл `app.config.js`, разделы `TITLE`, `SHORT_NAME` и `DESCRIPTION`.
