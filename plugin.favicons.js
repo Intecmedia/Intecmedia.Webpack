@@ -57,6 +57,7 @@ const DEFAULT_FAVICON = {
             windows: false,
         },
     },
+    manifest: false,
 };
 
 module.exports.FavIcon = function FavIcon(options) {
