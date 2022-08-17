@@ -15,7 +15,7 @@ const ENV = require('./app.env');
 const UTILS = require('./webpack.utils');
 
 const ImageminIgnore = ignore().add(fs.readFileSync('./.imageminignore').toString());
-const patterns = process.argv.slice(2);
+const patterns = process.argv.slice(2).map((i) => i.trim()).filter((i) => i.length > 0);
 const statMessages = { fixed: 0, skipped: 0, ignored: 0 };
 
 UTILS.globArray(patterns && patterns.length ? patterns : [
