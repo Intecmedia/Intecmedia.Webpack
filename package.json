@@ -9,8 +9,8 @@
     "scripts": {
         "clean": "cross-env NODE_ENV=production node script.clean.js",
         "update": "cross-env NODE_ENV=production node script.update.js",
-        "update-package": "node ./script.update-package.js",
-        "update-package-hash": "node ./script.update-package.js --hash-only",
+        "update-package": "cross-env NODE_ENV=production node ./script.update-package.js",
+        "update-package-hash": "cross-env NODE_ENV=production node ./script.update-package.js --hash-only",
         "development": "cross-env NODE_ENV=development DEBUG=0 NODE_OPTIONS=\"--inspect\" webpack --mode=development --progress=profile",
         "debug": "cross-env NODE_ENV=development DEBUG=1 NODE_OPTIONS=\"--inspect\" webpack --mode=development --progress=profile",
         "preproduction": "npm run app-lint",
