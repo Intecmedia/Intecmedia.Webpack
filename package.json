@@ -13,7 +13,7 @@
         "update-package-hash": "cross-env NODE_ENV=production node ./script.update-package.js --hash-only",
         "development": "cross-env NODE_ENV=development DEBUG=0 NODE_OPTIONS=\"--inspect\" webpack --mode=development --progress=profile",
         "debug": "cross-env NODE_ENV=development DEBUG=1 NODE_OPTIONS=\"--inspect\" webpack --mode=development --progress=profile",
-        "preproduction": "npm run app-lint",
+        "preproduction": "npm run app-lint && npm run update-package-hash",
         "production": "cross-env NODE_ENV=production DEBUG=0 webpack --mode=production --progress=profile",
         "preprod": "npm run pre-build",
         "prod": "cross-env NODE_ENV=production DEBUG=0 webpack --mode=production --progress=profile",
