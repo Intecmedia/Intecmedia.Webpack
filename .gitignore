@@ -33,7 +33,7 @@ Thumbs.db
 .DS_Store
 
 # yii2 thumbs
-build/*/thumbs/*
+build/**/*/thumbs/*
 
 # package hash
 package-lock.hash
