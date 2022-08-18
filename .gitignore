@@ -32,4 +32,8 @@ Thumbs.db
 # Mac DS_Store Files
 .DS_Store
 
+# yii2 thumbs
+build/*/thumbs/*
+
+# package hash
 package-lock.hash
