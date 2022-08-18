@@ -12,11 +12,19 @@ const UTILS = require('./webpack.utils');
 
 const statMessages = { fixed: 0, skipped: 0 };
 
-function stripBom(string) {
-    if (string.charCodeAt(0) === 0xFEFF) {
-        return string.slice(1);
+function stripWhitespaces(string) {
+    let result = string;
+
+    if (result.charCodeAt(0) === 0xFEFF) {
+        result = result.slice(1);
     }
-    return string;
+
+    result = result
+        .replace(/\r\n/g, '\n')
+        .replace(/\t/g, '    ')
+        .replace(/[ \t]+\n/g, '\n');
+
+    return result;
 }
 
 UTILS.globArray([
@@ -34,10 +42,7 @@ UTILS.globArray([
 
         const relativePath = slash(path.relative(__dirname, resourcePath));
         const source = fs.readFileSync(resourcePath, 'utf8').toString();
-        const fixedSource = stripBom(source.normalize('NFC'))
-            .replace(/\r\n/g, '\n')
-            .replace(/\t/g, '    ')
-            .replace(/[ \t]+\n/g, '\n');
+        const fixedSource = stripWhitespaces(source.normalize('NFC'));
 
         if (fixedSource === source) {
             statMessages.skipped += 1;

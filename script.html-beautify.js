@@ -23,15 +23,30 @@ const options = {
     templating: 'django',
 };
 
-const beautifyHtml = (html) => {
+function stripWhitespaces(string) {
+    let result = string;
+
+    if (result.charCodeAt(0) === 0xFEFF) {
+        result = result.slice(1);
+    }
+
+    result = result
+        .replace(/\r\n/g, '\n')
+        .replace(/\t/g, '    ')
+        .replace(/[ \t]+\n/g, '\n');
+
+    return result;
+}
+
+function beautifyHtml(html) {
     let result = beautify.html(html, options);
 
+    result = stripWhitespaces(result);
     result = result.replace(/{{\s*/g, '{{ ').replace(/\s*}}/g, ' }}');
-
     result = result.replace(/{%\s*/g, '{% ').replace(/\s*%}/g, ' %}');
 
     return result;
-};
+}
 
 UTILS.globArray(patterns && patterns.length ? patterns : [
     `${ENV.SOURCE_PATH}/**/*.html`,
@@ -60,7 +75,7 @@ UTILS.globArray(patterns && patterns.length ? patterns : [
             templateData.frontmatter,
             '---',
             '',
-        ].join('\n') : '') + beautifyHtml(templateData.body);
+        ].join('\n') : '') + beautifyHtml(templateData.body.normalize('NFC'));
 
         if (html !== output) {
             fs.writeFileSync(resourcePath, output);
