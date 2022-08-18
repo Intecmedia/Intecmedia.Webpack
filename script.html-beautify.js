@@ -23,6 +23,16 @@ const options = {
     templating: 'django',
 };
 
+const beautifyHtml = (html) => {
+    let result = beautify.html(html, options);
+
+    result = result.replace(/{{\s*/g, '{{ ').replace(/\s*}}/g, ' }}');
+
+    result = result.replace(/{%\s*/g, '{% ').replace(/\s*%}/g, ' %}');
+
+    return result;
+};
+
 UTILS.globArray(patterns && patterns.length ? patterns : [
     `${ENV.SOURCE_PATH}/**/*.html`,
 ], {
@@ -50,7 +60,7 @@ UTILS.globArray(patterns && patterns.length ? patterns : [
             templateData.frontmatter,
             '---',
             '',
-        ].join('\n') : '') + beautify.html(templateData.body, options);
+        ].join('\n') : '') + beautifyHtml(templateData.body);
 
         if (html !== output) {
             fs.writeFileSync(resourcePath, output);
