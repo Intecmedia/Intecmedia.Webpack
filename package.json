@@ -69,7 +69,7 @@
         "prepare": "npm run update-package-hash && npm run husky-install"
     },
     "lint-staged": {
-        "*.js": "npm run js-lint-cmd",
+        "*!(.min).js": "npm run js-lint-cmd",
         "*.ts": "npm run ts-lint-cmd",
         "*.scss": "npm run css-lint-cmd",
         "*.html": "npm run html-beautify",
