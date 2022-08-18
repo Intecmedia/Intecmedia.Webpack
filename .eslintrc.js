@@ -69,6 +69,8 @@ module.exports = {
         'sort-requires/sort-requires': 'off',
         'unicode-bom': ['error', 'never'],
         ...(ENV.PROD ? {} : {
+            'compat/compat': 'off',
+            'import/no-unresolved': 'off',
             'no-alert': 'off',
             'no-debugger': 'off',
             'no-unreachable': 'off',
