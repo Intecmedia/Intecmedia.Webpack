@@ -70,6 +70,7 @@ module.exports = {
         'unicode-bom': ['error', 'never'],
         ...(ENV.PROD ? {} : {
             'compat/compat': 'off',
+            'import/no-extraneous-dependencies': 'off',
             'import/no-unresolved': 'off',
             'no-alert': 'off',
             'no-debugger': 'off',
