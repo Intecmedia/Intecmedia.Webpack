@@ -66,7 +66,7 @@
         "husky-install": "npx husky install",
         "pre-commit-hook": "npm run lint-staged",
         "post-merge-hook": "npm run update-package",
-        "prepare": "npm run husky-install && npm run update-package-hash"
+        "prepare": "npm run update-package-hash && npm run husky-install"
     },
     "lint-staged": {
         "*.js": "npm run js-lint-cmd",
