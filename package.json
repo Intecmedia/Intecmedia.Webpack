@@ -99,7 +99,7 @@
         "npm": ">=8.3"
     },
     "overrides": {
-        "glob": "7.2.0",
+        "glob": "7.2.3",
         "sharp": "0.28.3"
     },
     "dependencies": {
@@ -149,7 +149,7 @@
         "focus-visible": "^5.2.0",
         "focus-within": "^3.0.2",
         "front-matter": "^4.0.2",
-        "glob": "7.2.0",
+        "glob": "7.2.3",
         "html-validate": "^7.3.1",
         "html-validator": "^6.0.1",
         "html-webpack-plugin": "^5.5.0",
