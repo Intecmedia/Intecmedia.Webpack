@@ -62,7 +62,7 @@
         "utf-fix": "cross-env NODE_ENV=production node ./script.utf-fix.js",
         "svgo": "cross-env NODE_ENV=production node ./script.svgo.js",
         "start": "npm run build",
-        "lint-staged": "npx lint-staged --concurrent=false --diff=\".\"",
+        "lint-staged": "npx lint-staged --quiet --concurrent=false --diff=\".\"",
         "husky-install": "npx husky install",
         "pre-commit-hook": "npm run lint-staged",
         "post-merge-hook": "npm run update-package",
