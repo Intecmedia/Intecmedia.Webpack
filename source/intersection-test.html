@@ -1,0 +1,156 @@
+---
+title: Intersection Blocks test page
+homepage: false
+description:
+og_image:
+---
+{% extends "partials/layouts/main.html" %}
+
+{% import "partials/macros/resize.html" as $resize %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h1>Intersection Blocks test page</h1>
+
+            <div style="background:rgba(0,0,255,0.5);height:100vh;text-align:center;padding:5rem;">100vh spacer</div>
+
+            <h2 id="intersection-fade">Intersection fade</h2>
+            <div class="row">
+                <div class="col-4">
+                    <div class="intersection intersection--fade js-intersection-block"
+                         data-intersection-ratio="0"
+                         data-intersection-toggle="0">
+                        <div style="background:rgba(255,0,0,0.5);text-align:center;padding:5rem;"
+                             class="intersection__block">
+                            <kbd style="white-space:nowrap;">.js-intersection-block</kbd>
+                            <kbd style="white-space:nowrap;">.intersection .intersection--fade</kbd>
+                            <kbd style="white-space:nowrap;">data-intersection-toggle="0"</kbd>
+                            <kbd style="white-space:nowrap;">data-intersection-ratio="0"</kbd>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="intersection intersection--fade js-intersection-block"
+                         data-intersection-ratio="0"
+                         data-intersection-toggle="1">
+                        <div style="background:rgba(255,0,0,0.5);text-align:center;padding:5rem;"
+                             class="intersection__block">
+                            <kbd style="white-space:nowrap;">.js-intersection-block</kbd>
+                            <kbd style="white-space:nowrap;">.intersection .intersection--fade</kbd>
+                            <kbd style="white-space:nowrap;">data-intersection-toggle="1"</kbd>
+                            <kbd style="white-space:nowrap;">data-intersection-ratio="0"</kbd>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="intersection intersection--fade js-intersection-block"
+                         data-intersection-ratio="1"
+                         data-intersection-toggle="1">
+                        <div style="background:rgba(255,0,0,0.5);text-align:center;padding:5rem;"
+                             class="intersection__block">
+                            <kbd style="white-space:nowrap;">.js-intersection-block</kbd>
+                            <kbd style="white-space:nowrap;">.intersection .intersection--fade</kbd>
+                            <kbd style="white-space:nowrap;">data-intersection-toggle="1"</kbd>
+                            <kbd style="white-space:nowrap;">data-intersection-ratio="1"</kbd>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+
+            <h2 id="intersection-fade">Intersection fade up</h2>
+            <div class="row">
+                <div class="col-4">
+                    <div class="intersection intersection--fade-up js-intersection-block"
+                         data-intersection-ratio="0"
+                         data-intersection-toggle="0">
+                        <div style="background:rgba(255,0,0,0.5);text-align:center;padding:5rem;"
+                             class="intersection__block">
+                            <kbd style="white-space:nowrap;">.js-intersection-block</kbd>
+                            <kbd style="white-space:nowrap;">.intersection .intersection--fade-up</kbd>
+                            <kbd style="white-space:nowrap;">data-intersection-toggle="0"</kbd>
+                            <kbd style="white-space:nowrap;">data-intersection-ratio="0"</kbd>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="intersection intersection--fade-up js-intersection-block"
+                         data-intersection-ratio="0"
+                         data-intersection-toggle="1">
+                        <div style="background:rgba(255,0,0,0.5);text-align:center;padding:5rem;"
+                             class="intersection__block">
+                            <kbd style="white-space:nowrap;">.js-intersection-block</kbd>
+                            <kbd style="white-space:nowrap;">.intersection .intersection--fade-up</kbd>
+                            <kbd style="white-space:nowrap;">data-intersection-toggle="1"</kbd>
+                            <kbd style="white-space:nowrap;">data-intersection-ratio="0"</kbd>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="intersection intersection--fade-up js-intersection-block"
+                         data-intersection-ratio="1"
+                         data-intersection-toggle="1">
+                        <div style="background:rgba(255,0,0,0.5);text-align:center;padding:5rem;"
+                             class="intersection__block">
+                            <kbd style="white-space:nowrap;">.js-intersection-block</kbd>
+                            <kbd style="white-space:nowrap;">.intersection .intersection--fade-up</kbd>
+                            <kbd style="white-space:nowrap;">data-intersection-toggle="1"</kbd>
+                            <kbd style="white-space:nowrap;">data-intersection-ratio="1"</kbd>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+
+            <h2 id="intersection-fade">Intersection fade down</h2>
+            <div class="row">
+                <div class="col-4">
+                    <div class="intersection intersection--fade-down js-intersection-block"
+                         data-intersection-ratio="0"
+                         data-intersection-toggle="0">
+                        <div style="background:rgba(255,0,0,0.5);text-align:center;padding:5rem;"
+                             class="intersection__block">
+                            <kbd style="white-space:nowrap;">.js-intersection-block</kbd>
+                            <kbd style="white-space:nowrap;">.intersection .intersection--fade-down</kbd>
+                            <kbd style="white-space:nowrap;">data-intersection-toggle="0"</kbd>
+                            <kbd style="white-space:nowrap;">data-intersection-ratio="0"</kbd>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="intersection intersection--fade-down js-intersection-block"
+                         data-intersection-ratio="0"
+                         data-intersection-toggle="1">
+                        <div style="background:rgba(255,0,0,0.5);text-align:center;padding:5rem;"
+                             class="intersection__block">
+                            <kbd style="white-space:nowrap;">.js-intersection-block</kbd>
+                            <kbd style="white-space:nowrap;">.intersection .intersection--fade-down</kbd>
+                            <kbd style="white-space:nowrap;">data-intersection-toggle="1"</kbd>
+                            <kbd style="white-space:nowrap;">data-intersection-ratio="0"</kbd>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="intersection intersection--fade-down js-intersection-block"
+                         data-intersection-ratio="1"
+                         data-intersection-toggle="1">
+                        <div style="background:rgba(255,0,0,0.5);text-align:center;padding:5rem;"
+                             class="intersection__block">
+                            <kbd style="white-space:nowrap;">.js-intersection-block</kbd>
+                            <kbd style="white-space:nowrap;">.intersection .intersection--fade-down</kbd>
+                            <kbd style="white-space:nowrap;">data-intersection-toggle="1"</kbd>
+                            <kbd style="white-space:nowrap;">data-intersection-ratio="1"</kbd>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+
+            <div style="background:rgba(0,0,255,0.5);height:100vh;text-align:center;padding:5rem;">100vh spacer
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
