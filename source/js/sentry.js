@@ -1,6 +1,10 @@
 /* global NODE_ENV APP DEBUG VERBOSE */
 if ((NODE_ENV === 'production' || DEBUG) && APP.SENTRY.dsn) {
     const sentryCheckIgnore = (event) => {
+        // ignore dev host
+        if (document.location.hostname.endsWith('.localhost')) {
+            return true;
+        }
         // Detect if we got a ReportingObserver event
         if (event?.message?.indexOf('ReportingObserver') === 0) {
             // And check whether sourceFile points to chrome-extension.
