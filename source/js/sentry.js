@@ -1,8 +1,10 @@
 /* global NODE_ENV APP DEBUG VERBOSE */
 if ((NODE_ENV === 'production' || DEBUG) && APP.SENTRY.dsn) {
+    const IGNORE_HOSTS = /\.localhost$/i;
+
     const sentryCheckIgnore = (event) => {
         // ignore dev host
-        if (document.location.hostname.endsWith('.localhost')) {
+        if (document.location.hostname.match(IGNORE_HOSTS)) {
             return true;
         }
         // Detect if we got a ReportingObserver event
