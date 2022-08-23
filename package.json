@@ -99,8 +99,8 @@
         "npm": ">=8.3"
     },
     "overrides": {
-        "glob": "7.2.0",
-        "sharp": "0.28.3"
+        "glob": "7.2.3",
+        "sharp": "0.30.7"
     },
     "dependencies": {
         "@babel/cli": "^7.18.10",
@@ -149,7 +149,7 @@
         "focus-visible": "^5.2.0",
         "focus-within": "^3.0.2",
         "front-matter": "^4.0.2",
-        "glob": "7.2.0",
+        "glob": "7.2.3",
         "html-validate": "^7.3.1",
         "html-validator": "^6.0.1",
         "html-webpack-plugin": "^5.5.0",
@@ -192,7 +192,7 @@
         "sass-loader": "^13.0.2",
         "schema-utils": "^4.0.0",
         "semver": "^7.3.7",
-        "sharp": "0.28.3",
+        "sharp": "0.30.7",
         "slash": "^3.0.0",
         "stylelint": "^14.11.0",
         "stylelint-config-sass-guidelines": "^9.0.1",
