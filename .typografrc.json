@@ -6,8 +6,5 @@
     ],
     "enableRule": [],
     "onlyJsonKeys": [],
-    "ignoreJsonKeys": [],
-    "htmlEntity": {
-        "type": "name"
-    }
+    "ignoreJsonKeys": []
 }
