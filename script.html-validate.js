@@ -63,13 +63,13 @@ UTILS.globArray(patterns.length > 0 ? patterns : [
             result.messages.forEach((message) => {
                 const messageType = (message.severity === 2 ? 'error' : 'warning');
                 if (message.message && ignoreTest(message.message)) {
-                    increaseStat(`${messageType}-ignored`);
+                    increaseStat(`${messageType}s-ignored`);
                     return;
                 }
                 if (messageType === 'error') {
                     process.exitCode = 1;
                 }
-                increaseStat(messageType);
+                increaseStat(`${messageType}s`);
 
                 logger.error(`${relativePath}: line ${message.line || 0} col [${message.column || 0}]`);
                 logger.warn(`${messageType}[${message.ruleId}]: ${message.message}`);

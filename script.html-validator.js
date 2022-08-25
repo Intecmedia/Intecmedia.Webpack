@@ -64,13 +64,13 @@ UTILS.globArray(patterns.length > 0 ? patterns : [
             skipped = false;
             result.messages.forEach((message) => {
                 if (message.message && ignoreTest(message.message)) {
-                    increaseStat(`${message.type}-ignored`);
+                    increaseStat(`${message.type}s-ignored`);
                     return;
                 }
                 if (message.type === 'error') {
                     process.exitCode = 1;
                 }
-                increaseStat(message.type);
+                increaseStat(`${message.type}s`);
 
                 const log = errorsLogger[message.type] || logger.error;
                 log(`${relativePath}: line ${message.lastLine || 0} col [${message.firstColumn || 0}-${message.lastColumn || 0}]`);

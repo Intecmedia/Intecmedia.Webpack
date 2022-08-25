@@ -10,7 +10,7 @@ const UTILS = require('./webpack.utils');
 const config = require('./.filenamelintrc.json');
 
 const logger = weblog({ name: 'filename-lint' });
-const statMessages = { skipped: 0, failed: 0 };
+const statMessages = { skipped: 0, errors: 0 };
 
 const patterns = process.argv.slice(2).map((i) => i.trim()).filter((i) => i.length > 0);
 
@@ -35,7 +35,7 @@ config.rules.filter((rule) => (
             statMessages.skipped += 1;
         } else {
             logger.error(`${relativePath}: expected to match ${rule.convention} convention`, ruleTest);
-            statMessages.failed += 1;
+            statMessages.errors += 1;
             process.exitCode = 1;
         }
     });
