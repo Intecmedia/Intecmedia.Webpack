@@ -2,22 +2,22 @@
     "rules": [{
         "pattern": "source/css/**/*.scss",
         "test": "^_?([a-z0-9]+)(-[a-z0-9]+)*.scss$",
-        "message": "kebab-case",
+        "convention": "kebab-case",
         "ignore": ["source/css/external/*.*", "**/*/_.scss"]
     }, {
         "pattern": "source/js/**/*.js",
         "test": "^([a-z0-9]+)(-[a-z0-9]+)*.js$",
-        "message": "kebab-case",
+        "convention": "kebab-case",
         "ignore": ["source/js/external/*.*"]
     }, {
         "pattern": "source/**/*.html",
         "test": "^([a-z0-9]+)(-[a-z0-9]+)*.html$",
-        "message": "kebab-case",
+        "convention": "kebab-case",
         "ignore": []
     }, {
         "pattern": "source/**/*.{jpg,jpeg,png,svg,gif}",
         "test": "^([a-z0-9]+)(-[a-z0-9]+)*.(jpg|jpeg|png|svg|gif)$",
-        "message": "kebab-case",
+        "convention": "kebab-case",
         "ignore": []
     }]
 }
