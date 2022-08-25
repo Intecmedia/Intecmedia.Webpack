@@ -1,0 +1,7 @@
+{
+    "rules": [{
+        "glob": "source/css/**/*.scss",
+        "pattern": "^_?([a-z][a-z0-9]*)(-[a-z0-9]+)*.scss$",
+        "ignore": ["source/css/external/*.*", "**/*/_.scss"]
+    }]
+}
