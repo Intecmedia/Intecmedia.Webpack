@@ -1,7 +1,15 @@
 {
     "rules": [{
-        "glob": "source/css/**/*.scss",
-        "pattern": "^_?([a-z][a-z0-9]*)(-[a-z0-9]+)*.scss$",
+        "pattern": "source/css/**/*.scss",
+        "test": "^_?([a-z][a-z0-9]*)(-[a-z0-9]+)*.scss$",
         "ignore": ["source/css/external/*.*", "**/*/_.scss"]
+    }, {
+        "pattern": "source/js/**/*.js",
+        "test": "^([a-z][a-z0-9]*)(-[a-z0-9]+)*.js$",
+        "ignore": ["source/js/external/*.*"]
+    }, {
+        "pattern": "source/**/*.html",
+        "test": "^([a-z][a-z0-9]*)(-[a-z0-9]+)*.html$",
+        "ignore": []
     }]
 }

@@ -12,11 +12,11 @@ const logger = weblog({ name: 'filename-lint' });
 const statMessages = { skipped: 0, failed: 0 };
 
 config.rules.forEach((rule) => {
-    const files = UTILS.globSync(rule.glob, {
+    const files = UTILS.globSync(rule.pattern, {
         ignore: rule.ignore,
         nodir: true,
     });
-    const pattern = new RegExp(rule.pattern);
+    const pattern = new RegExp(rule.test);
 
     files.forEach((resourcePath) => {
         const relativePath = slash(path.relative(__dirname, resourcePath));
@@ -25,7 +25,7 @@ config.rules.forEach((rule) => {
         if (pattern.test(filename)) {
             statMessages.skipped += 1;
         } else {
-            logger.error(`Expected file name "${relativePath}" to match pattern "${rule.pattern}"`);
+            logger.error(`Expected file name "${relativePath}" to match pattern "${rule.test}"`);
             statMessages.failed += 1;
         }
     });
