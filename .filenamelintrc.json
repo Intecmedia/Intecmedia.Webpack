@@ -11,5 +11,13 @@
         "pattern": "source/**/*.html",
         "test": "^([a-z0-9]+)(-[a-z0-9]+)*.html$",
         "ignore": []
+    }, {
+        "pattern": "source/**/*.{svg,png,jpg,gif}",
+        "test": "^([a-z0-9]+)(-[a-z0-9]+)*.(svg|png|jpg|gif)$",
+        "ignore": []
+    }, {
+        "pattern": "source/**/*.{woff,woff2,ttf}",
+        "test": "^([a-z0-9]+)(-[a-z0-9]+)*.(woff|woff2|ttf)$",
+        "ignore": []
     }]
 }
