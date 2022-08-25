@@ -118,6 +118,12 @@ function globPatched(pattern, options) {
 
 module.exports.glob = globPatched;
 
+function globSyncPatched(pattern, options) {
+    return glob.sync(slash(pattern), globOptions(options));
+}
+
+module.exports.globSync = globSyncPatched;
+
 function moduleFilenameTemplate(info) {
     const relativePath = slash(path.relative(__dirname, info.absoluteResourcePath));
     return `webpack://${info.namespace}/${relativePath}?${info.query}`;
