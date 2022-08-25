@@ -34,7 +34,7 @@ config.rules.filter((rule) => (
         if (ruleTest.test(filename)) {
             statMessages.skipped += 1;
         } else {
-            logger.error(`Expected file name "${relativePath}" to match pattern "${rule.test}"`);
+            logger.error(`Expected "${relativePath}" to match pattern "${rule.test}"`);
             statMessages.failed += 1;
             process.exitCode = 1;
         }
