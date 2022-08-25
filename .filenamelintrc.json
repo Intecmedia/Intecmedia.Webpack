@@ -15,9 +15,5 @@
         "pattern": "source/**/*.{jpg,jpeg,png,svg,gif}",
         "test": "^([a-z0-9]+)(-[a-z0-9]+)*.(jpg|jpeg|png|svg|gif)$",
         "ignore": []
-    }, {
-        "pattern": "source/**/*.{woff,woff2,ttf}",
-        "test": "^([a-z0-9]+)(-[a-z0-9]+)*.(woff|woff2|ttf)$",
-        "ignore": []
     }]
 }

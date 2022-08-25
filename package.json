@@ -70,11 +70,11 @@
         "prepare": "npm run update-package-hash && npm run husky-install"
     },
     "lint-staged": {
-        "*!(.min).js": "npm run js-lint-cmd",
-        "*.ts": "npm run ts-lint-cmd",
-        "*.scss": "npm run css-lint-cmd",
-        "*.html": "npm run html-beautify",
-        "*.{jpg,jpeg,png,svg,gif}": "npm run image-lint",
+        "*!(.min).js": ["npm run filename-lint", "npm run js-lint-cmd"],
+        "*.ts": ["npm run filename-lint", "npm run ts-lint-cmd"],
+        "*.scss": ["npm run filename-lint", "npm run css-lint-cmd"],
+        "*.html": ["npm run filename-lint", "npm run html-beautify"],
+        "*.{jpg,jpeg,png,svg,gif}": ["npm run filename-lint", "npm run image-lint"],
         "*.svg": "npm run svgo"
     },
     "author": "Dmitry Pyatkov",
