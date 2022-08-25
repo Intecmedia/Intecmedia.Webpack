@@ -71,6 +71,7 @@
 * **npm run browserslist** – список поддерживаемых браузеров.
 * **npm run fonts-subsets** – запуск fonts subseting.
 * **npm run svgo** – минимизая svg-файлов.
+* **npm run filename-lint** – линтер имён файлов.
 * **npm run production -- --env=verbose** – verbose режим
 * **npm run lint-staged** – запуск lint-staged
 * **npm run prepare** – установка git-хуков
