@@ -19,7 +19,7 @@ if (process.platform === 'win32') {
     childProcess.execSync('chcp 65001');
 }
 
-UTILS.globArray(patterns && patterns.length ? patterns : [
+UTILS.globArray(patterns.length > 0 ? patterns : [
     `${FONTS_SRC}/**/*.ttf`,
 ], {
     ignore: [],

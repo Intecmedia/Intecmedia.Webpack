@@ -48,7 +48,7 @@ function beautifyHtml(html) {
     return result;
 }
 
-UTILS.globArray(patterns && patterns.length ? patterns : [
+UTILS.globArray(patterns.length > 0 ? patterns : [
     `${ENV.SOURCE_PATH}/**/*.html`,
 ], {
     ignore: [

@@ -27,7 +27,7 @@ const config = require('./.htmlvalidaterc');
 const htmlvalidate = new HtmlValidate({ ...config });
 const patterns = process.argv.slice(2).map((i) => i.trim()).filter((i) => i.length > 0);
 
-UTILS.globArray(patterns && patterns.length ? patterns : [
+UTILS.globArray(patterns.length > 0 ? patterns : [
     `${ENV.OUTPUT_PATH}/**/*.html`,
 ], {
     ignore: [],
