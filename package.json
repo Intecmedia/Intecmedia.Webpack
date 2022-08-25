@@ -74,6 +74,7 @@
         "*.ts": "npm run ts-lint-cmd",
         "*.scss": "npm run css-lint-cmd",
         "*.html": "npm run html-beautify",
+        "*.{jpg,jpeg,png,svg,gif}": "npm run image-lint",
         "*.svg": "npm run svgo"
     },
     "author": "Dmitry Pyatkov",
