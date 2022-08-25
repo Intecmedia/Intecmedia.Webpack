@@ -27,6 +27,7 @@ config.rules.forEach((rule) => {
         } else {
             logger.error(`Expected file name "${relativePath}" to match pattern "${rule.test}"`);
             statMessages.failed += 1;
+            process.exitCode = 1;
         }
     });
 });
