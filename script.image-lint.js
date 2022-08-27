@@ -1,9 +1,11 @@
 /* eslint-env node -- webpack is node env */
 /* eslint max-len: "off", "compat/compat": "off" -- webpack is node env */
 
+const fs = require('fs');
 const path = require('path');
 const slash = require('slash');
 const sharp = require('sharp');
+const ignore = require('ignore');
 const weblog = require('webpack-log');
 
 const ENV = require('./app.env');
@@ -11,6 +13,7 @@ const UTILS = require('./webpack.utils');
 const config = require('./.imagelintrc');
 
 const logger = weblog({ name: 'image-lint' });
+const lintIgnore = ignore().add(fs.readFileSync('./.imagelintignore').toString());
 
 async function metadataAsync(filename) {
     const result = {};
@@ -79,6 +82,12 @@ UTILS.globArray(patterns.length > 0 ? patterns : [
     const promises = files.map(async (resourcePath) => {
         const relativePath = slash(path.relative(__dirname, resourcePath));
         const metadata = await metadataAsync(resourcePath);
+
+        if (lintIgnore.ignores(relativePath)) {
+            increaseStat('ignored');
+            logger.info(`${relativePath}: ignored`);
+            return metadata;
+        }
 
         const lintErrors = LINT_RULES.map((rule) => {
             const lintError = rule.fn(metadata);
