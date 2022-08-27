@@ -70,11 +70,26 @@
         "prepare": "npm run update-package-hash && npm run husky-install"
     },
     "lint-staged": {
-        "*!(.min).js": ["npm run filename-lint", "npm run js-lint-cmd"],
-        "*.ts": ["npm run filename-lint", "npm run ts-lint-cmd"],
-        "*.scss": ["npm run filename-lint", "npm run css-lint-cmd"],
-        "*.html": ["npm run filename-lint", "npm run html-beautify"],
-        "*.{jpg,jpeg,png,svg,gif}": ["npm run filename-lint", "npm run image-lint"],
+        "*!(.min).js": [
+            "npm run filename-lint",
+            "npm run js-lint-cmd"
+        ],
+        "*.ts": [
+            "npm run filename-lint",
+            "npm run ts-lint-cmd"
+        ],
+        "*.scss": [
+            "npm run filename-lint",
+            "npm run css-lint-cmd"
+        ],
+        "*.html": [
+            "npm run filename-lint",
+            "npm run html-beautify"
+        ],
+        "*.{jpg,jpeg,png,svg,gif}": [
+            "npm run filename-lint",
+            "npm run image-lint"
+        ],
         "*.svg": "npm run svgo"
     },
     "author": "Dmitry Pyatkov",
@@ -121,8 +136,8 @@
         "@popperjs/core": "^2.11.6",
         "@sentry/browser": "^7.11.1",
         "@sentry/tracing": "^7.11.1",
-        "@typescript-eslint/eslint-plugin": "^5.34.0",
-        "@typescript-eslint/parser": "^5.34.0",
+        "@typescript-eslint/eslint-plugin": "^5.35.1",
+        "@typescript-eslint/parser": "^5.35.1",
         "autoprefixer": "^10.4.8",
         "babel-loader": "^8.2.5",
         "bootstrap": "^5.2.0",
@@ -130,13 +145,13 @@
         "case-sensitive-paths-webpack-plugin": "^2.4.0",
         "compression-webpack-plugin": "^10.0.0",
         "copy-webpack-plugin": "^11.0.0",
-        "core-js": "^3.24.1",
+        "core-js": "^3.25.0",
         "cross-env": "^7.0.3",
         "css-loader": "^6.7.1",
         "css-tree": "^2.2.1",
         "cssnano": "^5.1.13",
         "date-fns": "^2.29.2",
-        "eslint": "^8.22.0",
+        "eslint": "^8.23.0",
         "eslint-config-airbnb-base": "^15.0.0",
         "eslint-import-resolver-webpack": "^0.13.2",
         "eslint-plugin-compat": "^4.0.2",
@@ -152,7 +167,7 @@
         "focus-within": "^3.0.2",
         "front-matter": "^4.0.2",
         "glob": "7.2.3",
-        "html-validate": "^7.3.2",
+        "html-validate": "^7.3.3",
         "html-validator": "^6.0.1",
         "html-webpack-plugin": "^5.5.0",
         "husky": "^8.0.1",
@@ -163,7 +178,7 @@
         "imagemin-svgo": "^10.0.1",
         "imports-loader": "^4.0.1",
         "intersection-observer": "^0.12.2",
-        "jquery": "^3.6.0",
+        "jquery": "^3.6.1",
         "js-beautify": "^1.14.6",
         "line-column": "^1.0.2",
         "lint-staged": "^13.0.3",
@@ -214,7 +229,7 @@
         "svg-spritemap-webpack-plugin": "^4.5.0",
         "svgo": "^2.8.0",
         "terser-webpack-plugin": "^5.3.5",
-        "typescript": "^4.7.4",
+        "typescript": "^4.8.2",
         "typograf": "^6.14.1",
         "url-loader": "^4.1.1",
         "webpack": "^5.74.0",
