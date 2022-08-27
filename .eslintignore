@@ -1,11 +1,4 @@
 build/*
 node_modules/*
 source/js/external/*.min.js
-!/.eslintrc.js
-!/.eslintrc.typescript.js
-!/.stylelintrc.js
-!/.stylelintrc.postcss.js
-!/.stylelintrc.shared.js
-!/.htmlvalidaterc.js
-!/.imagelintrc.js
-!/.beautifyrc.js
+!/.*.js
