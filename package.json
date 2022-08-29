@@ -63,7 +63,7 @@
         "svgo": "cross-env NODE_ENV=production node ./script.svgo.js",
         "filename-lint": "cross-env NODE_ENV=production node ./script.filename-lint.js",
         "start": "npm run build",
-        "lint-staged": "npx lint-staged --quiet --concurrent=false --diff=\".\"",
+        "lint-staged": "npx lint-staged --quiet --allow-empty --concurrent=false --diff=\".\"",
         "husky-install": "npx husky install",
         "pre-commit-hook": "npm run lint-staged",
         "post-merge-hook": "npm run update-package",
