@@ -5,6 +5,9 @@ const fs = require('fs');
 const path = require('path');
 const slash = require('slash');
 const glob = require('glob');
+const processArgs = require('yargs/yargs')(process.argv.slice(2)).parserConfiguration({
+    'parse-positional-numbers': false,
+});
 const findCacheDir = require('find-cache-dir');
 
 const FILENAME_PATTERN = /^[a-zA-Z0-9-/._@]+$/;
@@ -130,3 +133,5 @@ function moduleFilenameTemplate(info) {
 }
 
 module.exports.moduleFilenameTemplate = moduleFilenameTemplate;
+
+module.exports.processArgs = processArgs;

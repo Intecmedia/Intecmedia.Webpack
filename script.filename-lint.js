@@ -15,7 +15,7 @@ const logger = weblog({ name: 'filename-lint' });
 const lintIgnore = ignore().add(fs.readFileSync('./.filenamelintignore').toString());
 const statMessages = { skipped: 0, errors: 0, ignored: 0 };
 
-const patterns = process.argv.slice(2).map((i) => i.trim()).filter((i) => i.length > 0);
+const patterns = [...UTILS.processArgs.argv._];
 
 config.rules.filter((rule) => (
     (patterns.length > 0 ? patterns.some((i) => minimatch(i, rule.pattern)) : true)

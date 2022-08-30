@@ -13,7 +13,7 @@ const UTILS = require('./webpack.utils');
 
 const FONTS_SRC = `${ENV.SOURCE_PATH}/fonts/src-ttf`;
 const FONTS_DST = `${ENV.SOURCE_PATH}/fonts`;
-const patterns = process.argv.slice(2).map((i) => i.trim()).filter((i) => i.length > 0);
+const patterns = [...UTILS.processArgs.argv._];
 
 if (process.platform === 'win32') {
     childProcess.execSync('chcp 65001');

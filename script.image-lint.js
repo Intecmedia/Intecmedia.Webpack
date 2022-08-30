@@ -63,7 +63,7 @@ const LINT_RULES = [
     },
 ];
 
-const patterns = process.argv.slice(2).map((i) => i.trim()).filter((i) => i.length > 0);
+const patterns = [...UTILS.processArgs.argv._];
 
 UTILS.globArray(patterns.length > 0 ? patterns : [
     `${ENV.SOURCE_PATH}/**/*.{jpg,jpeg,png,svg,gif}`,
