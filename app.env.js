@@ -5,7 +5,6 @@ const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
 const slash = require('slash');
-const yargs = require('yargs/yargs');
 const frontMatter = require('front-matter');
 
 const APP = require('./app.config');
@@ -16,7 +15,7 @@ if (process.cwd() !== realcwd) {
     throw new Error(`Use real path ${JSON.stringify(realcwd)} instead symlink ${JSON.stringify(process.cwd())}.`);
 }
 
-const ARGV = UTILS.processArgs.env.length > 0 ? yargs(UTILS.processArgs.env.map((i) => `--env.${i}`)).argv.env : {};
+const ARGV = { ...UTILS.processArgs.env };
 const DEBUG = ('DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0);
 const DEV_SERVER = ('WEBPACK_DEV_SERVER' in process.env && process.env.WEBPACK_DEV_SERVER === 'true');
 const STANDALONE = ['webpack', 'webpack-dev-server'].includes(path.basename(require.main.filename, '.js'));

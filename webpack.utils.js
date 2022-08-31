@@ -132,11 +132,19 @@ function moduleFilenameTemplate(info) {
 
 module.exports.moduleFilenameTemplate = moduleFilenameTemplate;
 
+const yargsOptions = {
+    'parse-positional-numbers': false,
+};
+
 const processArgs = yargs(process.argv.slice(2))
-    .parserConfiguration({
-        'parse-positional-numbers': false,
-    })
+    .parserConfiguration(yargsOptions)
     .option('env', { default: [], type: 'array' })
     .parse();
+
+processArgs.env = processArgs.env.length > 0 ? yargs(processArgs.env.map((i) => `--env.${i}`))
+    .parserConfiguration(yargsOptions)
+    .option('env', { default: {}, type: 'object' })
+    .parse()
+    .env : {};
 
 module.exports.processArgs = processArgs;
