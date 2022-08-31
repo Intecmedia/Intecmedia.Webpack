@@ -1,4 +1,5 @@
 @use "sass:math";
+@use "sass:meta";
 
 $fluid-min-width: 420px !default;
 $fluid-max-width: 1280px !default;
@@ -12,6 +13,13 @@ $fluid-max-height: 1024px !default;
     $min-width: $fluid-min-width, $max-width: $fluid-max-width,
     $min-width-calc: $min-width, $max-width-calc: $max-width,
 ) {
+    @if meta.type-of($min-width) == "string" {
+        $min-width: map-get($grid-breakpoints, $min-width);
+    }
+    @if meta.type-of($max-width) == "string" {
+        $max-width: map-get($grid-breakpoints, $max-width);
+    }
+
     @each $property in $properties {
         #{$property}: $min-value;
     }
@@ -56,6 +64,13 @@ $fluid-max-height: 1024px !default;
     $min-height: $fluid-min-height, $max-height: $fluid-max-height,
     $min-height-calc: $min-height, $max-height-calc: $max-height,
 ) {
+    @if meta.type-of($min-height) == "string" {
+        $min-height: map-get($vertical-breakpoints, $min-height);
+    }
+    @if meta.type-of($max-height) == "string" {
+        $max-height: map-get($vertical-breakpoints, $max-height);
+    }
+
     @each $property in $properties {
         #{$property}: $min-value;
     }
@@ -219,6 +234,13 @@ $fluid-max-height: 1024px !default;
     $min-size, $max-size,
     $min-width: $fluid-min-width, $max-width: $fluid-max-width,
 ) {
+    @if meta.type-of($min-width) == "string" {
+        $min-width: map-get($grid-breakpoints, $min-width);
+    }
+    @if meta.type-of($max-width) == "string" {
+        $max-width: map-get($grid-breakpoints, $max-width);
+    }
+
     @return fluid-clamp-base(
         $min-size, $max-size,
         $min-width, $max-width,
@@ -228,11 +250,18 @@ $fluid-max-height: 1024px !default;
 
 @function fluid-clamp-vertical(
     $min-size, $max-size,
-    $min-width: $fluid-min-width, $max-width: $fluid-max-width,
+    $min-height: $fluid-min-height, $max-height: $fluid-max-height,
 ) {
+    @if meta.type-of($min-height) == "string" {
+        $min-height: map-get($vertical-breakpoints, $min-height);
+    }
+    @if meta.type-of($max-height) == "string" {
+        $max-height: map-get($vertical-breakpoints, $max-height);
+    }
+
     @return fluid-clamp-base(
         $min-size, $max-size,
-        $min-width, $max-width,
+        $min-height, $max-height,
         true,
     );
 }
