@@ -132,8 +132,11 @@ function moduleFilenameTemplate(info) {
 
 module.exports.moduleFilenameTemplate = moduleFilenameTemplate;
 
-const processArgs = yargs(process.argv.slice(2)).parserConfiguration({
-    'parse-positional-numbers': false,
-});
+const processArgs = yargs(process.argv.slice(2))
+    .parserConfiguration({
+        'parse-positional-numbers': false,
+    })
+    .option('env', { default: [], type: 'array' })
+    .parse();
 
 module.exports.processArgs = processArgs;

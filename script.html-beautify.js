@@ -15,7 +15,7 @@ const UTILS = require('./webpack.utils');
 const logger = weblog({ name: 'html-beautify' });
 const beautifyfIgnore = ignore().add(fs.readFileSync('./.beautifyignore').toString());
 const statMessages = { fixed: 0, skipped: 0, ignored: 0 };
-const patterns = [...UTILS.processArgs.argv._];
+const patterns = [...UTILS.processArgs._];
 const config = require('./.beautifyrc');
 
 const options = {

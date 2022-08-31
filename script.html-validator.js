@@ -33,7 +33,7 @@ async function validatorAsync(options) {
     return result;
 }
 
-const patterns = [...UTILS.processArgs.argv._];
+const patterns = [...UTILS.processArgs._];
 
 UTILS.globArray(patterns.length > 0 ? patterns : [
     `${ENV.OUTPUT_PATH}/**/*.html`,

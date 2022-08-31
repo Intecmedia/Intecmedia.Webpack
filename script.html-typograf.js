@@ -15,7 +15,7 @@ const UTILS = require('./webpack.utils');
 const logger = weblog({ name: 'html-typograf' });
 const typografIgnore = ignore().add(fs.readFileSync('./.typografignore').toString());
 const statMessages = { fixed: 0, skipped: 0, ignored: 0 };
-const patterns = [...UTILS.processArgs.argv._];
+const patterns = [...UTILS.processArgs._];
 const options = require('./.typografrc.json');
 
 const instance = new Typograf(options);

@@ -25,7 +25,7 @@ const lineEllipsis = 80;
 const config = require('./.htmlvalidaterc');
 
 const htmlvalidate = new HtmlValidate({ ...config });
-const patterns = [...UTILS.processArgs.argv._];
+const patterns = [...UTILS.processArgs._];
 
 UTILS.globArray(patterns.length > 0 ? patterns : [
     `${ENV.OUTPUT_PATH}/**/*.html`,

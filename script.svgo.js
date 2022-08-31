@@ -16,7 +16,7 @@ const UTILS = require('./webpack.utils');
 
 const ImageminIgnore = ignore().add(fs.readFileSync('./.imageminignore').toString());
 const statMessages = { fixed: 0, skipped: 0, ignored: 0 };
-const patterns = [...UTILS.processArgs.argv._];
+const patterns = [...UTILS.processArgs._];
 
 UTILS.globArray(patterns.length > 0 ? patterns : [
     `${ENV.SOURCE_PATH}/**/*.svg`,
