@@ -230,6 +230,21 @@ $fluid-max-height: 1024px !default;
     $min-clamp, $max-clamp,
     $vertical: false,
 ) {
+    @if meta.type-of($min-clamp) == "string" {
+        @if ($vertical) {
+            $min-clamp: map-get($vertical-breakpoints, $min-clamp);
+        } @else {
+            $min-clamp: map-get($grid-breakpoints, $min-clamp);
+        }
+    }
+    @if meta.type-of($max-clamp) == "string" {
+        @if ($vertical) {
+            $max-clamp: map-get($vertical-breakpoints, $max-clamp);
+        } @else {
+            $max-clamp: map-get($grid-breakpoints, $max-clamp);
+        }
+    }
+
     $min-unit: unit($min-size);
 
     @if $min-unit != px and $min-unit != rem {
