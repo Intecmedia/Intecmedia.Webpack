@@ -19,6 +19,12 @@ $fluid-max-height: 1024px !default;
     @if meta.type-of($max-width) == "string" {
         $max-width: map-get($grid-breakpoints, $max-width);
     }
+    @if meta.type-of($min-width-calc) == "string" {
+        $min-width-calc: map-get($grid-breakpoints, $min-width-calc);
+    }
+    @if meta.type-of($max-width-calc) == "string" {
+        $max-width-calc: map-get($grid-breakpoints, $max-width-calc);
+    }
 
     @each $property in $properties {
         #{$property}: $min-value;
@@ -70,6 +76,12 @@ $fluid-max-height: 1024px !default;
     @if meta.type-of($max-height) == "string" {
         $max-height: map-get($vertical-breakpoints, $max-height);
     }
+    @if meta.type-of($min-height-calc) == "string" {
+        $min-height-calc: map-get($vertical-breakpoints, $min-height-calc);
+    }
+    @if meta.type-of($max-height-calc) == "string" {
+        $max-height-calc: map-get($vertical-breakpoints, $max-height-calc);
+    }
 
     @each $property in $properties {
         #{$property}: $min-value;
@@ -114,6 +126,19 @@ $fluid-max-height: 1024px !default;
     $min-width: $fluid-min-width, $max-width: $fluid-max-width,
     $min-width-calc: $min-width, $max-width-calc: $max-width,
 ) {
+    @if meta.type-of($min-width) == "string" {
+        $min-width: map-get($grid-breakpoints, $min-width);
+    }
+    @if meta.type-of($max-width) == "string" {
+        $max-width: map-get($grid-breakpoints, $max-width);
+    }
+    @if meta.type-of($min-width-calc) == "string" {
+        $min-width-calc: map-get($grid-breakpoints, $min-width-calc);
+    }
+    @if meta.type-of($max-width-calc) == "string" {
+        $max-width-calc: map-get($grid-breakpoints, $max-width-calc);
+    }
+
     @include fluid-property(
         font-size,
         $min-value, $max-value,
@@ -127,6 +152,19 @@ $fluid-max-height: 1024px !default;
     $min-width: $fluid-min-width, $max-width: $fluid-max-width,
     $min-width-calc: $min-width, $max-width-calc: $max-width,
 ) {
+    @if meta.type-of($min-width) == "string" {
+        $min-width: map-get($grid-breakpoints, $min-width);
+    }
+    @if meta.type-of($max-width) == "string" {
+        $max-width: map-get($grid-breakpoints, $max-width);
+    }
+    @if meta.type-of($min-width-calc) == "string" {
+        $min-width-calc: map-get($grid-breakpoints, $min-width-calc);
+    }
+    @if meta.type-of($max-width-calc) == "string" {
+        $max-width-calc: map-get($grid-breakpoints, $max-width-calc);
+    }
+
     @include fluid-property(
         font-size,
         rem($min-value), rem($max-value),
@@ -140,6 +178,19 @@ $fluid-max-height: 1024px !default;
     $min-height: $fluid-min-height, $max-height: $fluid-max-height,
     $min-height-calc: $min-height, $max-height-calc: $max-height,
 ) {
+    @if meta.type-of($min-height) == "string" {
+        $min-height: map-get($vertical-breakpoints, $min-height);
+    }
+    @if meta.type-of($max-height) == "string" {
+        $max-height: map-get($vertical-breakpoints, $max-height);
+    }
+    @if meta.type-of($min-height-calc) == "string" {
+        $min-height-calc: map-get($vertical-breakpoints, $min-height-calc);
+    }
+    @if meta.type-of($max-height-calc) == "string" {
+        $max-height-calc: map-get($vertical-breakpoints, $max-height-calc);
+    }
+
     @include fluid-property-vertical(
         font-size,
         $min-value, $max-value,
@@ -153,6 +204,19 @@ $fluid-max-height: 1024px !default;
     $min-height: $fluid-min-height, $max-height: $fluid-max-height,
     $min-height-calc: $min-height, $max-height-calc: $max-height,
 ) {
+    @if meta.type-of($min-height) == "string" {
+        $min-height: map-get($vertical-breakpoints, $min-height);
+    }
+    @if meta.type-of($max-height) == "string" {
+        $max-height: map-get($vertical-breakpoints, $max-height);
+    }
+    @if meta.type-of($min-height-calc) == "string" {
+        $min-height-calc: map-get($vertical-breakpoints, $min-height-calc);
+    }
+    @if meta.type-of($max-height-calc) == "string" {
+        $max-height-calc: map-get($vertical-breakpoints, $max-height-calc);
+    }
+
     @include fluid-property-vertical(
         font-size,
         rem($min-value), rem($max-value),
