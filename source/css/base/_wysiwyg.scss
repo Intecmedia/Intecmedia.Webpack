@@ -134,8 +134,8 @@
 
         width: 100%;
 
-        > caption ~ tr:not(:first-child),
-        > caption ~ thead:not(:first-child) {
+        >caption ~ tr:not(:first-child),
+        >caption ~ thead:not(:first-child) {
             border-top-color: $table-border-color;
             border-top-width: 0;
 
