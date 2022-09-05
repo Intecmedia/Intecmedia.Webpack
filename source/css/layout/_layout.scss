@@ -19,12 +19,7 @@ html {
     @include media-breakpoint-up(hd) {
         $root-font-size-min: 16px;
         $root-font-size-max: 20px;
-        $root-font-size-clamp: fluid-clamp(
-            $root-font-size-min,
-            $root-font-size-max,
-            map-get($grid-breakpoints, "hd"),
-            map-get($grid-breakpoints, "qhd")
-        );
+        $root-font-size-clamp: fluid-clamp($root-font-size-min, $root-font-size-max, "hd", "qhd");
         /* stylelint-disable-next-line declaration-property-unit-allowed-list -- for root allowed only px */
         font-size: (($root-font-size-max + $root-font-size-min) * .5);
 
