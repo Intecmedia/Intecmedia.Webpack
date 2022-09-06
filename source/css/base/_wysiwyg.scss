@@ -4,7 +4,9 @@
         color: $link-color;
         text-decoration: $link-decoration;
 
-        &:hover, &:focus, &:active {
+        &:hover,
+        &:focus,
+        &:active {
             color: $link-hover-color;
             text-decoration: $link-hover-decoration;
         }
@@ -14,40 +16,64 @@
         margin-bottom: $paragraph-margin-bottom;
     }
 
-    h1, .h1, .display-1 {
+    h1,
+    .h1,
+    .display-1 {
         @extend .h1;
 
-        small { @extend .subheading; }
+        small {
+            @extend .subheading;
+        }
     }
 
-    h2, .h2, .display-2 {
+    h2,
+    .h2,
+    .display-2 {
         @extend .h2;
 
-        small { @extend .subheading; }
+        small {
+            @extend .subheading;
+        }
     }
 
-    h3, .h3, .display-3 {
+    h3,
+    .h3,
+    .display-3 {
         @extend .h3;
 
-        small { @extend .subheading; }
+        small {
+            @extend .subheading;
+        }
     }
 
-    h4, .h4, .display-4 {
+    h4,
+    .h4,
+    .display-4 {
         @extend .h4;
 
-        small { @extend .subheading; }
+        small {
+            @extend .subheading;
+        }
     }
 
-    h5, .h5, .display-5 {
+    h5,
+    .h5,
+    .display-5 {
         @extend .h5;
 
-        small { @extend .subheading; }
+        small {
+            @extend .subheading;
+        }
     }
 
-    h6, .h6, .display-6 {
+    h6,
+    .h6,
+    .display-6 {
         @extend .h6;
 
-        small { @extend .subheading; }
+        small {
+            @extend .subheading;
+        }
     }
 
     // image with caption
@@ -106,7 +132,7 @@
             @extend .figure-img;
 
             @include media-breakpoint-down(sm) {
-                margin-bottom: ($img-spacer * .5);
+                margin-bottom: ($img-spacer * 0.5);
             }
         }
 
@@ -134,8 +160,8 @@
 
         width: 100%;
 
-        >caption ~ tr:not(:first-child),
-        >caption ~ thead:not(:first-child) {
+        > caption ~ tr:not(:first-child),
+        > caption ~ thead:not(:first-child) {
             border-top-color: $table-border-color;
             border-top-width: 0;
 
@@ -195,7 +221,8 @@
         margin-bottom: $paragraph-margin-bottom;
         padding-left: $lists-indent;
 
-        ol, ul {
+        ol,
+        ul {
             // nested without margin-bottom
             margin-bottom: 0;
         }
@@ -223,7 +250,8 @@
         margin-bottom: $paragraph-margin-bottom;
         padding-left: $lists-indent;
 
-        ol, ul {
+        ol,
+        ul {
             // nested without margin-bottom
             margin-bottom: 0;
         }
@@ -245,7 +273,10 @@
     }
 
     // nested without margin-bottom
-    ol ol, ul ul, ol ul, ul ol {
+    ol ol,
+    ul ul,
+    ol ul,
+    ul ol {
         margin-bottom: 0;
 
         &:not(.list-unstyled) {
@@ -377,7 +408,7 @@
 
         img {
             @include media-breakpoint-down(sm) {
-                margin-bottom: ($img-spacer * .5);
+                margin-bottom: ($img-spacer * 0.5);
             }
         }
     }

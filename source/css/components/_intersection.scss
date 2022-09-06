@@ -2,18 +2,20 @@
     html.js & {
         &--block,
         > .intersection__block {
+            $intersection-translate: translate3d(
+                var(--intersection-translate-x, 0),
+                var(--intersection-translate-y, 0),
+                var(--intersection-translate-z, 0)
+            );
+            $intersection-scale: scale(var(--intersection-scale, 1));
+            $intersection-rotate: rotate(var(--intersection-rotate, 0));
+
             opacity: var(--intersection-fade, 1);
-            transform:
-                translate3d(
-                    var(--intersection-translate-x, 0),
-                    var(--intersection-translate-y, 0),
-                    var(--intersection-translate-z, 0)
-                ) scale(var(--intersection-scale, 1)) rotate(var(--intersection-rotate, 0));
+            transform: $intersection-translate $intersection-scale $intersection-rotate;
 
             will-change: transform, opacity;
 
-            transition:
-                opacity var(--intersection-duration-fade, $duration-default),
+            transition: opacity var(--intersection-duration-fade, $duration-default),
                 transform var(--intersection-duration-translate, $duration-default);
             transition-delay: $intersection-transition-delay;
             transition-timing-function: $ease-default;
@@ -80,7 +82,7 @@
     }
 
     &--scale-in {
-        --intersection-scale-in: .85;
+        --intersection-scale-in: 0.85;
         --intersection-scale: var(--intersection-scale-in, 0);
     }
 

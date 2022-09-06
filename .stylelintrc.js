@@ -15,6 +15,7 @@ module.exports = deepMerge({}, sharedConfig, {
     'extends': [
         'stylelint-config-sass-guidelines',
         'stylelint-config-twbs-bootstrap',
+        'stylelint-prettier/recommended',
         ...sharedConfig.extends,
     ],
     'plugins': [

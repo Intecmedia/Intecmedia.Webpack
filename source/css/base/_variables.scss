@@ -6,7 +6,7 @@ $vertical-breakpoints: (
     ss: 375px,
     sm: 576px,
     md: 768px,
-    lg: 992px
+    lg: 992px,
 ) !default;
 
 $grid-breakpoints: (
@@ -18,7 +18,7 @@ $grid-breakpoints: (
     xl: 1200px,
     xxl: 1400px,
     hd: 1920px,
-    qhd: 2560px
+    qhd: 2560px,
 ) !default;
 
 $container-max-widths: (
@@ -28,101 +28,105 @@ $container-max-widths: (
     xl: 1140px,
     xxl: 1320px,
     hd: 1800px,
-    qhd: 2440px
+    qhd: 2440px,
 ) !default;
 
-$theme-colors:     () !default;
+$theme-colors: () !default;
 $theme-colors-rgb: () !default;
 
-$spacer:  1rem !default;
+$spacer: 1rem !default;
 $spacers: (
     0: 0,
-    1: $spacer * .25,
-    2: $spacer * .5,
+    1: $spacer * 0.25,
+    2: $spacer * 0.5,
     3: $spacer,
     4: $spacer * 1.5,
     5: $spacer * 3,
 ) !default;
 $gutters: $spacers !default;
 
-$enable-caret:                true !default;
-$enable-rounded:              true !default;
-$enable-shadows:              false !default;
-$enable-gradients:            false !default;
-$enable-transitions:          false !default;
-$enable-reduced-motion:       false !default;
-$enable-smooth-scroll:        true !default;
-$enable-grid-classes:         true !default;
-$enable-cssgrid:              false !default;
-$enable-button-pointers:      true !default;
-$enable-rfs:                  true !default;
-$enable-validation-icons:     false !default;
-$enable-negative-margins:     false !default;
+$enable-caret: true !default;
+$enable-rounded: true !default;
+$enable-shadows: false !default;
+$enable-gradients: false !default;
+$enable-transitions: false !default;
+$enable-reduced-motion: false !default;
+$enable-smooth-scroll: true !default;
+$enable-grid-classes: true !default;
+$enable-cssgrid: false !default;
+$enable-button-pointers: true !default;
+$enable-rfs: true !default;
+$enable-validation-icons: false !default;
+$enable-negative-margins: false !default;
 $enable-deprecation-messages: true !default;
-$enable-important-utilities:  true !default;
+$enable-important-utilities: true !default;
 
-$variable-prefix:             "" !default;
+$variable-prefix: "" !default;
 
-$body-bg:                     #fff !default;
-$body-color:                  #000 !default;
+$body-bg: #fff !default;
+$body-color: #000 !default;
 
-$border-width:                1px !default;
-$border-color:                #dee2e6 !default;
-$border-radius:               .25rem !default;
+$border-width: 1px !default;
+$border-color: #dee2e6 !default;
+$border-radius: 0.25rem !default;
 
-$font-family-base:            system-ui, -apple-system, "Segoe UI", roboto, "Helvetica Neue", arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-family-base: system-ui, -apple-system, "Segoe UI", roboto, "Helvetica Neue", arial, "Noto Sans", "Liberation Sans",
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 
-$font-size-root:              null !default;
-$font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
+$font-size-root: null !default;
+$font-size-base: 1rem !default; // Assumes the browser default, typically `16px`
 
-$line-height-base:            1.5 !default;
+$line-height-base: 1.5 !default;
 
-$h1-font-size:                $font-size-base * 2.5 !default;
-$h2-font-size:                $font-size-base * 2 !default;
-$h3-font-size:                $font-size-base * 1.75 !default;
-$h4-font-size:                $font-size-base * 1.5 !default;
-$h5-font-size:                $font-size-base * 1.25 !default;
-$h6-font-size:                $font-size-base !default;
+$h1-font-size: $font-size-base * 2.5 !default;
+$h2-font-size: $font-size-base * 2 !default;
+$h3-font-size: $font-size-base * 1.75 !default;
+$h4-font-size: $font-size-base * 1.5 !default;
+$h5-font-size: $font-size-base * 1.25 !default;
+$h6-font-size: $font-size-base !default;
 
-$link-color:                  #0d6efd !default;
-$link-decoration:             underline !default;
-$link-shade-percentage:       20% !default;
-$link-hover-color:            shift-color($link-color, $link-shade-percentage) !default;
-$link-hover-decoration:       null !default;
+$link-color: #0d6efd !default;
+$link-decoration: underline !default;
+$link-shade-percentage: 20% !default;
+$link-hover-color: shift-color($link-color, $link-shade-percentage) !default;
+$link-hover-decoration: null !default;
 
-$paragraph-margin-bottom:     1rem !default;
+$paragraph-margin-bottom: 1rem !default;
 
-$form-validation-states:      () !default;
+$form-validation-states: () !default;
 
 @import "node_modules/bootstrap/scss/variables";
 
 // Common variables (Not bootstrap)
 
-$lists-indent:                 2rem !default;
-$lists-margin-bottom:          .25rem !default;
-$ol-marker-color:             inherit !default;
-$ol-marker-symbol:            "." !default;
-$ol-marker-list-style-type:   decimal !default; // decimal-leading-zero
-$ul-marker-color:             inherit !default;
-$ul-marker-symbol:            "●" !default;
-$lists-marker-space:           str-repeat(" ", 2) !default;
-$img-spacer:                  1rem !default;
+$lists-indent: 2rem !default;
+$lists-margin-bottom: 0.25rem !default;
+$ol-marker-color: inherit !default;
+$ol-marker-symbol: "." !default;
+$ol-marker-list-style-type: decimal !default; // decimal-leading-zero
+$ul-marker-color: inherit !default;
+$ul-marker-symbol: "●" !default;
+$lists-marker-space: str-repeat(" ", 2) !default;
+$img-spacer: 1rem !default;
 
-$table-border-bordered:       false !default;
-$table-border-striped:        false !default;
-$table-caption-font-size:     .875rem !default;
+$table-border-bordered: false !default;
+$table-border-striped: false !default;
+$table-caption-font-size: 0.875rem !default;
 
-$duration-slow:               2.4s !default;
-$duration-default:            1.6s !default;
-$duration-normal:             .8s !default;
-$duration-fast:               .4s !default;
+$duration-slow: 2.4s !default;
+$duration-default: 1.6s !default;
+$duration-normal: 0.8s !default;
+$duration-fast: 0.4s !default;
 
-$subheadings-display:          inline-block !default;
-$subheadings-color:            $headings-color !default;
-$subheadings-font-size:        80% !default;
-$subheadings-font-family:      null !default;
-$subheadings-font-style:       null !default;
-$subheadings-font-weight:      500 !default;
-$subheadings-line-height:      1.2 !default;
+$subheadings-display: inline-block !default;
+$subheadings-color: $headings-color !default;
+$subheadings-font-size: 80% !default;
+$subheadings-font-family: null !default;
+$subheadings-font-style: null !default;
+$subheadings-font-weight: 500 !default;
+$subheadings-line-height: 1.2 !default;
 
-$intersection-transition-delay: calc((var(--intersection-delay-offset, 0) * var(--intersection-delay-offset-step, .1s)) + (var(--intersection-delay-index, 0) * var(--intersection-delay-step, .1s))) !default;
+$intersection-transition-delay: calc(
+    (var(--intersection-delay-offset, 0) * var(--intersection-delay-offset-step, 0.1s)) +
+    (var(--intersection-delay-index, 0) * var(--intersection-delay-step, 0.1s))
+) !default;

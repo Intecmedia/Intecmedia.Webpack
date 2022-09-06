@@ -21,7 +21,7 @@ html {
         $root-font-size-max: 20px;
         $root-font-size-clamp: fluid-clamp($root-font-size-min, $root-font-size-max, "hd", "qhd");
         /* stylelint-disable-next-line declaration-property-unit-allowed-list -- for root allowed only px */
-        font-size: (($root-font-size-max + $root-font-size-min) * .5);
+        font-size: (($root-font-size-max + $root-font-size-min) * 0.5);
 
         @supports (font-size: $root-font-size-clamp) {
             /* stylelint-disable-next-line plugin/no-unsupported-browser-features, csstree/validator -- not standart feature */

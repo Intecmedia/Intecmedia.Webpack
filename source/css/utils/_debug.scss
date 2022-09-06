@@ -13,10 +13,10 @@
 
     background-color: $danger;
 
-    opacity: .5;
+    opacity: 0.5;
     transform: translateY(100%);
 
-    transition: transform .3s;
+    transition: transform 0.3s;
 
     @each $breakpoint in map-keys($grid-breakpoints) {
         @include media-breakpoint-up($breakpoint) {
