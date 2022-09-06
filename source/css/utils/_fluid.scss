@@ -9,9 +9,12 @@ $fluid-max-height: 1024px !default;
 
 @mixin fluid-property(
     $properties,
-    $min-value, $max-value,
-    $min-width: $fluid-min-width, $max-width: $fluid-max-width,
-    $min-width-calc: $min-width, $max-width-calc: $max-width,
+    $min-value,
+    $max-value,
+    $min-width: $fluid-min-width,
+    $max-width: $fluid-max-width,
+    $min-width-calc: $min-width,
+    $max-width-calc: $max-width,
 ) {
     @if meta.type-of($min-width) == "string" {
         $min-width: map-get($grid-breakpoints, $min-width);
@@ -66,9 +69,12 @@ $fluid-max-height: 1024px !default;
 
 @mixin fluid-property-vertical(
     $properties,
-    $min-value, $max-value,
-    $min-height: $fluid-min-height, $max-height: $fluid-max-height,
-    $min-height-calc: $min-height, $max-height-calc: $max-height,
+    $min-value,
+    $max-value,
+    $min-height: $fluid-min-height,
+    $max-height: $fluid-max-height,
+    $min-height-calc: $min-height,
+    $max-height-calc: $max-height,
 ) {
     @if meta.type-of($min-height) == "string" {
         $min-height: map-get($vertical-breakpoints, $min-height);
@@ -122,9 +128,12 @@ $fluid-max-height: 1024px !default;
 }
 
 @mixin fluid-font-size(
-    $min-value, $max-value,
-    $min-width: $fluid-min-width, $max-width: $fluid-max-width,
-    $min-width-calc: $min-width, $max-width-calc: $max-width,
+    $min-value,
+    $max-value,
+    $min-width: $fluid-min-width,
+    $max-width: $fluid-max-width,
+    $min-width-calc: $min-width,
+    $max-width-calc: $max-width,
 ) {
     @if meta.type-of($min-width) == "string" {
         $min-width: map-get($grid-breakpoints, $min-width);
@@ -148,9 +157,12 @@ $fluid-max-height: 1024px !default;
 }
 
 @mixin fluid-font-size-rem(
-    $min-value, $max-value,
-    $min-width: $fluid-min-width, $max-width: $fluid-max-width,
-    $min-width-calc: $min-width, $max-width-calc: $max-width,
+    $min-value,
+    $max-value,
+    $min-width: $fluid-min-width,
+    $max-width: $fluid-max-width,
+    $min-width-calc: $min-width,
+    $max-width-calc: $max-width,
 ) {
     @if meta.type-of($min-width) == "string" {
         $min-width: map-get($grid-breakpoints, $min-width);
@@ -174,9 +186,12 @@ $fluid-max-height: 1024px !default;
 }
 
 @mixin fluid-font-size-vertical(
-    $min-value, $max-value,
-    $min-height: $fluid-min-height, $max-height: $fluid-max-height,
-    $min-height-calc: $min-height, $max-height-calc: $max-height,
+    $min-value,
+    $max-value,
+    $min-height: $fluid-min-height,
+    $max-height: $fluid-max-height,
+    $min-height-calc: $min-height,
+    $max-height-calc: $max-height,
 ) {
     @if meta.type-of($min-height) == "string" {
         $min-height: map-get($vertical-breakpoints, $min-height);
@@ -200,9 +215,12 @@ $fluid-max-height: 1024px !default;
 }
 
 @mixin fluid-font-size-vertical-rem(
-    $min-value, $max-value,
-    $min-height: $fluid-min-height, $max-height: $fluid-max-height,
-    $min-height-calc: $min-height, $max-height-calc: $max-height,
+    $min-value,
+    $max-value,
+    $min-height: $fluid-min-height,
+    $max-height: $fluid-max-height,
+    $min-height-calc: $min-height,
+    $max-height-calc: $max-height,
 ) {
     @if meta.type-of($min-height) == "string" {
         $min-height: map-get($vertical-breakpoints, $min-height);
@@ -226,8 +244,10 @@ $fluid-max-height: 1024px !default;
 }
 
 @function fluid-clamp-base(
-    $min-size, $max-size,
-    $min-clamp, $max-clamp,
+    $min-size,
+    $max-size,
+    $min-clamp,
+    $max-clamp,
     $vertical: false,
 ) {
     @if meta.type-of($min-clamp) == "string" {
@@ -310,8 +330,10 @@ $fluid-max-height: 1024px !default;
 }
 
 @function fluid-clamp(
-    $min-size, $max-size,
-    $min-width: $fluid-min-width, $max-width: $fluid-max-width,
+    $min-size,
+    $max-size,
+    $min-width: $fluid-min-width,
+    $max-width: $fluid-max-width,
 ) {
     @if meta.type-of($min-width) == "string" {
         $min-width: map-get($grid-breakpoints, $min-width);
@@ -328,8 +350,10 @@ $fluid-max-height: 1024px !default;
 }
 
 @function fluid-clamp-vertical(
-    $min-size, $max-size,
-    $min-height: $fluid-min-height, $max-height: $fluid-max-height,
+    $min-size,
+    $max-size,
+    $min-height: $fluid-min-height,
+    $max-height: $fluid-max-height,
 ) {
     @if meta.type-of($min-height) == "string" {
         $min-height: map-get($vertical-breakpoints, $min-height);
@@ -346,8 +370,10 @@ $fluid-max-height: 1024px !default;
 }
 
 @mixin fluid-clamp-font-size(
-    $min-size, $max-size,
-    $min-width: $fluid-min-width, $max-width: $fluid-max-width,
+    $min-size,
+    $max-size,
+    $min-width: $fluid-min-width,
+    $max-width: $fluid-max-width,
 ) {
     $font-size-clamp: fluid-clamp(
         $min-size,
@@ -365,8 +391,10 @@ $fluid-max-height: 1024px !default;
 }
 
 @mixin fluid-clamp-font-size-vertical(
-    $min-size, $max-size,
-    $min-height: $fluid-min-height, $max-height: $fluid-max-height,
+    $min-size,
+    $max-size,
+    $min-height: $fluid-min-height,
+    $max-height: $fluid-max-height,
 ) {
     $font-size-clamp: fluid-clamp-vertical(
         $min-size,
