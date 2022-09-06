@@ -51,9 +51,9 @@
 // No minimum for the smallest breakpoint, and no maximum for the largest one.
 // Makes the @content apply only to the given breakpoint, not viewports any wider or narrower.
 @mixin vertical-breakpoint-only($name, $breakpoints: $vertical-breakpoints) {
-    $min:  breakpoint-min($name, $breakpoints);
+    $min: breakpoint-min($name, $breakpoints);
     $next: breakpoint-next($name, $breakpoints);
-    $max:  breakpoint-max($next);
+    $max: breakpoint-max($next);
 
     @if $min != null and $max != null {
         @media (min-height: $min) and (max-height: $max) {
