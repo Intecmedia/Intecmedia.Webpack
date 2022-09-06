@@ -45,6 +45,7 @@ module.exports = deepMerge({}, sharedConfig, {
                 'pseudo-classes',
             ],
         }],
+        'no-missing-end-of-source-newline': true,
         'order/order': [
             'dollar-variables',
             'custom-properties',
