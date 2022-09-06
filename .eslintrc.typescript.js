@@ -12,6 +12,7 @@ module.exports = {
     'parser': '@typescript-eslint/parser',
     'plugins': ['@typescript-eslint'],
     'rules': {
+        'eol-last': ['error', 'always'],
         'indent': ['error', 4],
     },
 };

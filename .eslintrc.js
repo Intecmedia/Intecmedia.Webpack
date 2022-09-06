@@ -31,6 +31,7 @@ module.exports = {
     'root': true,
     'rules': {
         'class-methods-use-this': 'off',
+        'eol-last': ['error', 'always'],
         'eslint-comments/require-description': ['error', {
             'ignore': ['global', 'globals'],
         }],
