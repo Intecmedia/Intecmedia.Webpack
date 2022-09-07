@@ -1,9 +1,14 @@
 {
     "rules": [{
-        "pattern": "source/css/**/*.scss",
-        "test": "^_?([a-z0-9]+)(-[a-z0-9]+)*.scss$",
+        "pattern": "source/css/*.scss",
+        "test": "^([a-z0-9]+)(-[a-z0-9]+)*.scss$",
         "convention": "kebab-case",
         "ignore": ["source/css/external/*.*", "**/*/_.scss"]
+    }, {
+        "pattern": "source/css/**/*.scss",
+        "test": "^_([a-z0-9]+)(-[a-z0-9]+)*.scss$",
+        "convention": "kebab-case",
+        "ignore": ["source/css/*.scss", "**/*/_.scss"]
     }, {
         "pattern": "source/js/**/*.{js,ts}",
         "test": "^([a-z0-9]+)(-[a-z0-9]+)*.(js|ts)$",
