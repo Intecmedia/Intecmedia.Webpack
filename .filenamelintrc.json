@@ -3,7 +3,7 @@
         "pattern": "source/css/*.scss",
         "test": "^([a-z0-9]+)(-[a-z0-9]+)*.scss$",
         "convention": "kebab-case",
-        "ignore": ["source/css/external/*.*", "**/*/_.scss"]
+        "ignore": []
     }, {
         "pattern": "source/css/**/*.scss",
         "test": "^_([a-z0-9]+)(-[a-z0-9]+)*.scss$",
@@ -16,7 +16,7 @@
         "ignore": ["source/js/external/*.*"]
     }, {
         "pattern": "source/**/*.html",
-        "test": "^([a-z0-9]+)(-[a-z0-9]+)*.html$",
+        "test": "^_?([a-z0-9]+)(-[a-z0-9]+)*.html$",
         "convention": "kebab-case",
         "ignore": []
     }, {
