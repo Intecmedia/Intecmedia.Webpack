@@ -1,5 +1,5 @@
 export default function nextTick() {
-    return new Promise(((resolve) => {
+    return new Promise((resolve) => {
         requestAnimationFrame(resolve);
-    }));
+    });
 }

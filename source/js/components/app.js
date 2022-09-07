@@ -18,7 +18,7 @@ export default class AbstractApp {
             }
             if (id instanceof Element) {
                 const dataComponentId = id.getAttribute('data-component-id');
-                if (dataComponentId && (dataComponentId in this.components[name])) {
+                if (dataComponentId && dataComponentId in this.components[name]) {
                     return this.components[name][dataComponentId];
                 }
                 return false;
@@ -32,7 +32,7 @@ export default class AbstractApp {
     }
 
     all(name) {
-        return (name in this.components ? Object.values(this.components[name]) : []);
+        return name in this.components ? Object.values(this.components[name]) : [];
     }
 
     init() {
@@ -61,14 +61,19 @@ export default class AbstractApp {
         for (let index = 0; index < names.length; index++) {
             const name = names[index];
             const options = {
-                element, name, id, app: this,
+                element,
+                name,
+                id,
+                app: this,
             };
             const ClassName = this.options.components[name];
             if (!ClassName) {
                 console.error(`[app] Unknown component name: ${name}`, element);
-            } else if (ClassName.singleton && (
-                (name in this.components) && Object.keys(this.components[name]).length !== 0
-            )) {
+            } else if (
+                ClassName.singleton &&
+                name in this.components &&
+                Object.keys(this.components[name]).length !== 0
+            ) {
                 console.error(`[app] Cannot create already existing component: ${name}`, element);
             } else {
                 element.classList.add('js-component');

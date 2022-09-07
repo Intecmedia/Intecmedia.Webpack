@@ -1,7 +1,7 @@
 export default function fluidValue(value, minValue, maxValue, minRange, maxRange) {
     let result = minValue;
     if (value <= minRange) {
-        result = minValue + (((maxValue - minValue) * (value - minRange)) / (maxRange - minRange));
+        result = minValue + ((maxValue - minValue) * (value - minRange)) / (maxRange - minRange);
     }
     if (value >= maxRange) {
         result = maxValue;

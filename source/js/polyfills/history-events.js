@@ -15,7 +15,7 @@ function historyEventDecorator(type) {
         }
         const result = Reflect.apply(origHandler, this, arguments);
         let event;
-        if (typeof (Event) === 'function') {
+        if (typeof Event === 'function') {
             event = new Event(type.toLowerCase());
         } else {
             event = document.createEvent('Event');

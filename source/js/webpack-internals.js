@@ -10,14 +10,14 @@ __webpack_get_script_filename__ = (chunkId) => {
     const filename = org_get_script_filename(chunkId);
     const [filebase, filequery] = filename.split('?', 2);
 
-    const useBrotli = ((NODE_ENV === 'production' || DEBUG) && APP.BROTLI)
-        && document.currentScript?.src?.match(/\.min\.js\.br/);
+    const useBrotli =
+        (NODE_ENV === 'production' || DEBUG) && APP.BROTLI && document.currentScript?.src?.match(/\.min\.js\.br/);
     if (useBrotli) {
         return `${filebase}.br?${filequery}`;
     }
 
-    const useGzip = ((NODE_ENV === 'production' || DEBUG) && APP.GZIP)
-        && document.currentScript?.src?.match(/\.min\.js\.gz/);
+    const useGzip =
+        (NODE_ENV === 'production' || DEBUG) && APP.GZIP && document.currentScript?.src?.match(/\.min\.js\.gz/);
     if (useGzip) {
         return `${filebase}.gz?${filequery}`;
     }

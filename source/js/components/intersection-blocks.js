@@ -68,8 +68,9 @@ class IntersectionBlocks extends AbstractComponent {
 
     onIntersection(entries, observer) {
         entries.forEach((entry) => {
-            const intersectionRatio = ('intersectionRatio' in entry.target.dataset)
-                && (parseInt(entry.target.dataset.intersectionRatio, 10) || 0);
+            const intersectionRatio =
+                'intersectionRatio' in entry.target.dataset &&
+                (parseInt(entry.target.dataset.intersectionRatio, 10) || 0);
 
             const isUpward = entry.boundingClientRect?.y < entry.rootBounds?.y;
             const isDownward = !entry.isUpward;
@@ -92,8 +93,8 @@ class IntersectionBlocks extends AbstractComponent {
             entry.target.classList.toggle(CLASS_NAME_UPWARD, isUpward);
             entry.target.classList.toggle(CLASS_NAME_DOWNWARD, isDownward);
 
-            const intersectionToggle = ('intersectionToggle' in entry.target.dataset)
-                && !!parseInt(entry.target.dataset.intersectionToggle, 10);
+            const intersectionToggle =
+                'intersectionToggle' in entry.target.dataset && !!parseInt(entry.target.dataset.intersectionToggle, 10);
 
             if (intersectionToggle) {
                 entry.target.classList.toggle(CLASS_NAME_VISIBLE, isVisible);

@@ -2,5 +2,5 @@
 /* eslint "compat/compat": "off" -- webpack is node env */
 
 module.exports = function helper(params) {
-    return (new URLSearchParams(params)).toString();
+    return new URLSearchParams(params).toString();
 };
