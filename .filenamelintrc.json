@@ -7,7 +7,7 @@
     }, {
         "pattern": "source/css/**/*.scss",
         "test": "^_([a-z0-9]+)(-[a-z0-9]+)*.scss$",
-        "convention": "kebab-case",
+        "convention": "kebab-case leading-underscore",
         "ignore": ["source/css/*.scss", "**/*/_.scss"]
     }, {
         "pattern": "source/js/**/*.{js,ts}",
