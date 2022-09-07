@@ -29,7 +29,6 @@ module.exports = {
     'root': true,
     'rules': {
         'class-methods-use-this': 'off',
-        'eol-last': ['error', 'always'],
         'eslint-comments/require-description': [
             'error',
             {
@@ -46,20 +45,6 @@ module.exports = {
         ],
         'import/no-cycle': 'off',
         'import/order': 'off',
-        // 'indent': ['error', 4], // https://github.com/eslint/eslint/issues/10930
-        'linebreak-style': ['error', 'unix'],
-        'max-len': [
-            'error',
-            120,
-            {
-                'ignoreComments': true,
-                'ignoreRegExpLiterals': true,
-                'ignoreStrings': true,
-                'ignoreTemplateLiterals': true,
-                'ignoreTrailingComments': true,
-                'ignoreUrls': true,
-            },
-        ],
         'max-lines': [
             'error',
             {
@@ -86,7 +71,6 @@ module.exports = {
         'prettier/prettier': ['error'],
         'require-await': ['error'],
         'sort-requires/sort-requires': 'off',
-        'unicode-bom': ['error', 'never'],
         ...(ENV.PROD
             ? {}
             : {

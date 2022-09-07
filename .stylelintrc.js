@@ -16,6 +16,7 @@ module.exports = deepMerge({}, sharedConfig, {
         'stylelint-config-sass-guidelines',
         'stylelint-config-twbs-bootstrap',
         'stylelint-prettier/recommended',
+        'stylelint-config-prettier-scss',
         ...sharedConfig.extends,
     ],
     'plugins': [
@@ -28,26 +29,13 @@ module.exports = deepMerge({}, sharedConfig, {
     ],
     'reportDescriptionlessDisables': true,
     'rules': {
-        'block-opening-brace-space-before': 'always',
         'declaration-empty-line-before': null,
-        'function-max-empty-lines': 0,
-        'indentation': 4,
-        'linebreaks': 'unix',
-        'max-empty-lines': 2,
-        'max-line-length': [
-            120,
-            {
-                'ignore': ['comments'],
-                'ignorePattern': '/\\$(.+?):/',
-            },
-        ],
         'max-nesting-depth': [
             5,
             {
                 'ignore': ['blockless-at-rules', 'pseudo-classes'],
             },
         ],
-        'no-missing-end-of-source-newline': true,
         'order/order': [
             'dollar-variables',
             'custom-properties',
@@ -98,12 +86,7 @@ module.exports = deepMerge({}, sharedConfig, {
                 'ignore': ['after-comment', 'first-nested'],
             },
         ],
-        'scss/at-else-closing-brace-newline-after': 'always-last-in-chain',
-        'scss/at-else-closing-brace-space-after': 'always-intermediate',
-        'scss/at-else-empty-line-before': 'never',
         'scss/at-extend-no-missing-placeholder': null,
-        'scss/at-if-closing-brace-newline-after': 'always-last-in-chain',
-        'scss/at-if-closing-brace-space-after': 'always-intermediate',
         'scss/at-import-no-partial-leading-underscore': true,
         'scss/at-import-partial-extension': 'never',
         'scss/at-import-partial-extension-blacklist': ['scss', 'css'],
@@ -134,15 +117,11 @@ module.exports = deepMerge({}, sharedConfig, {
                 'ignore': ['between-comments', 'stylelint-commands'],
             },
         ],
-        'scss/operator-no-newline-after': null,
-        'scss/operator-no-newline-before': null,
         'scss/selector-nest-combinators': 'always',
         'scss/selector-no-redundant-nesting-selector': true,
         'selector-class-pattern': ['^[a-zA-Z0-9\\-_]+$'],
-        'selector-list-comma-newline-after': 'always-multi-line',
         'selector-max-class': 5,
         'selector-max-compound-selectors': 5,
-        'selector-max-empty-lines': 0,
         'selector-max-type': [
             0,
             {
@@ -156,9 +135,5 @@ module.exports = deepMerge({}, sharedConfig, {
                 'ignore': ['attribute', 'class'],
             },
         ],
-        'value-list-comma-newline-after': 'always-multi-line',
-        'value-list-comma-newline-before': 'never-multi-line',
-        'value-list-comma-space-after': 'always-single-line',
-        'value-list-max-empty-lines': 1,
     },
 });
