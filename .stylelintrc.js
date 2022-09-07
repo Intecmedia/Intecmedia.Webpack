@@ -105,7 +105,7 @@ module.exports = deepMerge({}, sharedConfig, {
         'scss/at-if-closing-brace-newline-after': 'always-last-in-chain',
         'scss/at-if-closing-brace-space-after': 'always-intermediate',
         'scss/at-import-no-partial-leading-underscore': true,
-        'scss/at-import-partial-extension': 'newer',
+        'scss/at-import-partial-extension': 'never',
         'scss/at-import-partial-extension-blacklist': ['scss', 'css'],
         'scss/at-mixin-argumentless-call-parentheses': 'always',
         'scss/at-rule-no-unknown': [
