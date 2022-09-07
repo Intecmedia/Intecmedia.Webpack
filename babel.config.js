@@ -14,16 +14,18 @@ module.exports = {
         ['@babel/plugin-syntax-top-level-await', {}],
     ],
     presets: [
-        ['@babel/preset-env', {
-            corejs: 3,
-            modules: false,
-            useBuiltIns: 'usage',
-            forceAllTransforms: ENV.PROD, // UglifyJS support only es5
-            debug: ENV.DEBUG || !ENV.PROD || ENV.ARGV.verbose,
-            targets: { browsers: ENV.BROWSERS },
-            ignoreBrowserslistConfig: true,
-        }],
-        ['@babel/preset-typescript', {
-        }],
+        [
+            '@babel/preset-env',
+            {
+                corejs: 3,
+                modules: false,
+                useBuiltIns: 'usage',
+                forceAllTransforms: ENV.PROD, // UglifyJS support only es5
+                debug: ENV.DEBUG || !ENV.PROD || ENV.ARGV.verbose,
+                targets: { browsers: ENV.BROWSERS },
+                ignoreBrowserslistConfig: true,
+            },
+        ],
+        ['@babel/preset-typescript', {}],
     ],
 };

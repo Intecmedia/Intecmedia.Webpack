@@ -70,10 +70,7 @@ const OPTIONS_SCHEMA = {
         searchPath: { type: 'string' },
         verbose: { type: 'boolean' },
         macrosWhitelist: {
-            anyOf: [
-                { type: 'boolean' },
-                { type: 'object' },
-            ],
+            anyOf: [{ type: 'boolean' }, { type: 'object' }],
         },
     },
 };
@@ -100,12 +97,15 @@ function processHtml(html, options, loaderCallback) {
         let value;
         if (IGNORE_PATTERN.test(link.value) || options.requireIgnore.test(link.value)) return;
         if (SRCSET_ATTRS.includes(link.attr)) {
-            value = link.value.split(SRCSET_SEPARATOR).map((source) => {
-                const [url, size = ''] = source.split(SRC_SEPARATOR, 2);
-                if (IGNORE_PATTERN.test(url) || options.requireIgnore.test(url)) return source;
-                if (!loaderUtils.isUrlRequest(link.value, options.searchPath)) return source;
-                return options.requireIdent(url) + (size ? ` ${size}` : '');
-            }).join(', ');
+            value = link.value
+                .split(SRCSET_SEPARATOR)
+                .map((source) => {
+                    const [url, size = ''] = source.split(SRC_SEPARATOR, 2);
+                    if (IGNORE_PATTERN.test(url) || options.requireIgnore.test(url)) return source;
+                    if (!loaderUtils.isUrlRequest(link.value, options.searchPath)) return source;
+                    return options.requireIdent(url) + (size ? ` ${size}` : '');
+                })
+                .join(', ');
         } else {
             if (!loaderUtils.isUrlRequest(link.value, options.searchPath)) return;
             value = options.requireIdent(link.value);
@@ -117,10 +117,12 @@ function processHtml(html, options, loaderCallback) {
     });
     content = content.reverse().join('');
 
-    const template = options.requireExport(lodashTemplate(content, {
-        interpolate: /<%=([\s\S]+?)%>/g,
-        variable: 'data',
-    }).source);
+    const template = options.requireExport(
+        lodashTemplate(content, {
+            interpolate: /<%=([\s\S]+?)%>/g,
+            variable: 'data',
+        }).source
+    );
 
     const exportString = `module.exports = function (params) { with (params) { return (${template})(); }; };`;
 
@@ -149,9 +151,12 @@ module.exports = function HtmlLoader() {
     const nunjucksEnv = new nunjucks.Environment(nunjucksLoader, options.environment);
     const relativePath = slash(path.relative(__dirname, loaderContext.resourcePath));
 
-    nunjucksEnv.addExtension('includeWith', new IncludeWithExtension({
-        nunjucksEnv,
-    }));
+    nunjucksEnv.addExtension(
+        'includeWith',
+        new IncludeWithExtension({
+            nunjucksEnv,
+        })
+    );
 
     options.requireIdent = (url) => {
         let ident;
@@ -160,32 +165,32 @@ module.exports = function HtmlLoader() {
         options.requireReplace[ident] = resolveAbsolute(url);
         return ident;
     };
-    options.requireExport = (exportString) => exportString.replace(REQUIRE_PATTERN, (match) => {
-        if (!options.requireReplace[match]) return match;
-        const url = options.requireReplace[match];
+    options.requireExport = (exportString) =>
+        exportString.replace(REQUIRE_PATTERN, (match) => {
+            if (!options.requireReplace[match]) return match;
+            const url = options.requireReplace[match];
 
-        if (options.verbose) {
-            const relativeUrl = slash(path.relative(__dirname, url));
-            logger.info(`require(${JSON.stringify(relativeUrl)}) from ${JSON.stringify(relativePath)}`);
-        }
+            if (options.verbose) {
+                const relativeUrl = slash(path.relative(__dirname, url));
+                logger.info(`require(${JSON.stringify(relativeUrl)}) from ${JSON.stringify(relativePath)}`);
+            }
 
-        const resourceDirectory = path.dirname(loaderContext.resourcePath);
-        const urlPrefix = path.relative(resourceDirectory, options.searchPath);
+            const resourceDirectory = path.dirname(loaderContext.resourcePath);
+            const urlPrefix = path.relative(resourceDirectory, options.searchPath);
 
-        const request = loaderUtils.urlToRequest(slash(path.join(urlPrefix, url)), resourceDirectory);
-        return `' + require(${JSON.stringify(request)}) + '`;
-    });
+            const request = loaderUtils.urlToRequest(slash(path.join(urlPrefix, url)), resourceDirectory);
+            return `' + require(${JSON.stringify(request)}) + '`;
+        });
 
     nunjucksEnv.addFilter('require', options.requireIdent);
     nunjucksEnv.addGlobal('require', options.requireIdent);
 
-    const publicPath = ((options.context.APP || {}).PUBLIC_PATH || path.sep);
+    const publicPath = (options.context.APP || {}).PUBLIC_PATH || path.sep;
     const resourcePath = path.posix.sep + path.relative(options.searchPath, loaderContext.resourcePath);
     const baseName = path.basename(loaderContext.resourcePath, '.html');
 
-    const resourceUrl = path.dirname(resourcePath) + (
-        baseName === 'index' ? '' : path.posix.sep + baseName
-    ) + path.posix.sep;
+    const resourceUrl =
+        path.dirname(resourcePath) + (baseName === 'index' ? '' : path.posix.sep + baseName) + path.posix.sep;
     const resourceStat = fs.statSync(loaderContext.resourcePath);
 
     nunjucksEnv.addGlobal('APP', options.context);
@@ -201,7 +206,10 @@ module.exports = function HtmlLoader() {
     nunjucksEnv.addGlobal('COMPILATION', loaderContext._compilation);
 
     const helperContext = {
-        loaderContext, loaderOptions: options, APP: options.context, PAGE,
+        loaderContext,
+        loaderOptions: options,
+        APP: options.context,
+        PAGE,
     };
     helpers.forEach((helper, name) => {
         const filterFn = helper.bind(helperContext);
@@ -230,10 +238,13 @@ module.exports = function HtmlLoader() {
         }
 
         [...templateSource.src.matchAll(MACROS_PATTERN)].forEach(([macrosDef, macrosName]) => {
-            if (!(
-                templateRelative in options.macrosWhitelist
-                && options.macrosWhitelist[templateRelative].includes(macrosName)
-            ) || !options.macrosWhitelist) {
+            if (
+                !(
+                    templateRelative in options.macrosWhitelist &&
+                    options.macrosWhitelist[templateRelative].includes(macrosName)
+                ) ||
+                !options.macrosWhitelist
+            ) {
                 const macrosError = [
                     `Macros: ${JSON.stringify(macrosDef)} not allowed in ${JSON.stringify(templateRelative)}.`,
                     'Please replace to {% includeWith "partials/example.html", { varname: \'value\' } %} instead.',
@@ -247,18 +258,12 @@ module.exports = function HtmlLoader() {
             return templateSource;
         }
         const templateData = frontMatter(templateSource.src);
-        nunjucksEnv.addGlobal('PAGE', deepMerge(
-            nunjucksEnv.getGlobal('PAGE') || {},
-            templateData.attributes,
-            PAGE,
-        ));
+        nunjucksEnv.addGlobal('PAGE', deepMerge(nunjucksEnv.getGlobal('PAGE') || {}, templateData.attributes, PAGE));
         return {
             ...templateSource,
             src: [
                 '{#---',
-                templateData.frontmatter
-                    .replace('#}', escape('#}'))
-                    .replace('{#', escape('{#')),
+                templateData.frontmatter.replace('#}', escape('#}')).replace('{#', escape('{#')),
                 '---#}',
                 templateData.body,
             ].join('\n'),

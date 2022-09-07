@@ -6,7 +6,8 @@ const { Rule } = require('html-validate');
 class CheckNodeEnv extends Rule {
     constructor(options) {
         super({
-            NODE_ENV: 'development', ...options,
+            NODE_ENV: 'development',
+            ...options,
         });
     }
 
@@ -19,9 +20,8 @@ class CheckNodeEnv extends Rule {
         const documentElement = event.document.querySelector('html');
         const documentEnv = documentElement.getAttributeValue('data-node-env');
         if (documentEnv !== currentEnv) {
-            const reportCommand = currentEnv === 'development'
-                ? 'npm run html-validate-prod'
-                : 'npm run html-validate-dev';
+            const reportCommand =
+                currentEnv === 'development' ? 'npm run html-validate-prod' : 'npm run html-validate-dev';
             const reportError = [
                 `Linter NODE_ENV=${JSON.stringify(currentEnv)}.`,
                 `Html document using NODE_ENV=${JSON.stringify(documentEnv)}.`,

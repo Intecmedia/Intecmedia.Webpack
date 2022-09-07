@@ -18,9 +18,7 @@ const ImageminIgnore = ignore().add(fs.readFileSync('./.imageminignore').toStrin
 const statMessages = { fixed: 0, skipped: 0, ignored: 0 };
 const patterns = [...UTILS.processArgs._];
 
-UTILS.globArray(patterns.length > 0 ? patterns : [
-    `${ENV.SOURCE_PATH}/**/*.svg`,
-], {
+UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.SOURCE_PATH}/**/*.svg`], {
     ignore: [],
     nodir: true,
 }).then((files) => {

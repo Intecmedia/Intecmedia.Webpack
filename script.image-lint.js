@@ -22,7 +22,7 @@ async function metadataAsync(filename) {
     result.width = parseInt(metadata.width, 10);
     result.height = parseInt(metadata.height, 10);
     result.quality = parseInt(metadata.quality, 10);
-    result.format = (metadata.format === 'jpeg' ? 'jpg' : metadata.format);
+    result.format = metadata.format === 'jpeg' ? 'jpg' : metadata.format;
     result.space = metadata.space;
     return result;
 }
@@ -56,7 +56,9 @@ const LINT_RULES = [
         allowed: config.colorspace,
         fn(metadata) {
             if (!this.allowed.includes(metadata.space)) {
-                return `The color space of this image is ${metadata.space}. It must be ${JSON.stringify(this.allowed)}.`;
+                return `The color space of this image is ${metadata.space}. It must be ${JSON.stringify(
+                    this.allowed
+                )}.`;
             }
             return false;
         },
@@ -65,9 +67,7 @@ const LINT_RULES = [
 
 const patterns = [...UTILS.processArgs._];
 
-UTILS.globArray(patterns.length > 0 ? patterns : [
-    `${ENV.SOURCE_PATH}/**/*.{jpg,jpeg,png,svg,gif}`,
-], {
+UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.SOURCE_PATH}/**/*.{jpg,jpeg,png,svg,gif}`], {
     ignore: [],
     nodir: true,
 }).then(async (files) => {

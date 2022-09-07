@@ -8,12 +8,10 @@ const createHash = require('webpack/lib/util/createHash');
 const weblog = require('webpack-log');
 
 const logger = weblog({ name: 'update' });
-const silent = (process.platform === 'win32' ? '|| exit 0' : '|| true');
+const silent = process.platform === 'win32' ? '|| exit 0' : '|| true';
 
 logger.info('npm outdate...');
-const outdated = Object.entries(JSON.parse(childProcess.execSync(
-    `npm outdate --json ${silent}`,
-).toString() || '{}'));
+const outdated = Object.entries(JSON.parse(childProcess.execSync(`npm outdate --json ${silent}`).toString() || '{}'));
 
 const missing = outdated.filter(([, version]) => !version.location || version.current !== version.wanted);
 logger.info(`missing ${missing.length} packages`);
@@ -35,13 +33,14 @@ console.log('');
 logger.info('npm ls...');
 const { dependencies } = require('./package.json');
 
-const packages = Object.entries(JSON.parse(
-    childProcess.execSync(`npm ls --json ${silent}`).toString() || '{}',
-).dependencies || {}).filter(([pkg, meta]) => (
-    dependencies[pkg]
-    && !(/^\w+:/.test(dependencies[pkg]))
-    && (dependencies[pkg] === 'latest' || semver.minVersion(dependencies[pkg]).version !== meta.version)
-));
+const packages = Object.entries(
+    JSON.parse(childProcess.execSync(`npm ls --json ${silent}`).toString() || '{}').dependencies || {}
+).filter(
+    ([pkg, meta]) =>
+        dependencies[pkg] &&
+        !/^\w+:/.test(dependencies[pkg]) &&
+        (dependencies[pkg] === 'latest' || semver.minVersion(dependencies[pkg]).version !== meta.version)
+);
 
 const updated = [];
 packages.forEach(([pkg, meta], index) => {

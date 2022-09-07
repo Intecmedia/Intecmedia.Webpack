@@ -28,7 +28,7 @@ const DEFAULT_OPTIONS = {
 const DEFAULT_FIT = 'inside';
 const ALLOWED_PATTERN = /\.(jpeg|jpg|png|gif)(\?.*)?$/i;
 
-const resizeLimit = (ENV.PROD && !ENV.DEBUG ? pLimit(os.cpus().length - 1) : (callback) => callback());
+const resizeLimit = ENV.PROD && !ENV.DEBUG ? pLimit(os.cpus().length - 1) : (callback) => callback();
 
 module.exports = async function ResizeLoader(content) {
     const loaderContext = this;
@@ -39,14 +39,10 @@ module.exports = async function ResizeLoader(content) {
     loaderContext.addDependency(loaderContext.resourcePath);
     loaderContext.addDependency(imageminConfigModule);
 
-    const query = loaderContext.resourceQuery ? Object.fromEntries(
-        (new URLSearchParams(loaderContext.resourceQuery.slice(1))).entries(),
-    ) : {};
-    const options = deepMerge(
-        {},
-        DEFAULT_OPTIONS,
-        loaderContext.getOptions(),
-    );
+    const query = loaderContext.resourceQuery
+        ? Object.fromEntries(new URLSearchParams(loaderContext.resourceQuery.slice(1)).entries())
+        : {};
+    const options = deepMerge({}, DEFAULT_OPTIONS, loaderContext.getOptions());
     const context = options.context || loaderContext.rootContext;
 
     const { cacheDirectory } = options;
@@ -57,7 +53,7 @@ module.exports = async function ResizeLoader(content) {
         }
     }
 
-    const nextLoader = (query.inline === 'inline' ? urlLoader : fileLoader);
+    const nextLoader = query.inline === 'inline' ? urlLoader : fileLoader;
     if (!('resize' in query)) {
         return loaderCallback(null, nextLoader.call(loaderContext, content));
     }
@@ -77,7 +73,10 @@ module.exports = async function ResizeLoader(content) {
     const resourceFormat = resourceInfo.ext.slice(1).toLowerCase();
     const relativePath = slash(path.relative(__dirname, loaderContext.resourcePath));
 
-    let [, resizeWidth,, resizeHeight, resizeFit] = (String(query.resize).trim().match(/^(\d*)(x(\d*))?(\w+)?$/)) || [];
+    let [, resizeWidth, , resizeHeight, resizeFit] =
+        String(query.resize)
+            .trim()
+            .match(/^(\d*)(x(\d*))?(\w+)?$/) || [];
     resizeWidth = parseInt(resizeWidth, 10);
     resizeHeight = parseInt(resizeHeight, 10);
     resizeFit = (resizeFit || DEFAULT_FIT).trim();
@@ -87,12 +86,16 @@ module.exports = async function ResizeLoader(content) {
     }
 
     const format = (query.format || resourceFormat).toLowerCase();
-    const name = ((query.name ? loaderUtils.interpolateName(loaderContext, query.name, {
-        context,
-        content,
-    }) : null) || (
-        `${resourceInfo.name}@resize-${resizeWidth || ''}x${resizeHeight || ''}${resizeFit && resizeFit !== DEFAULT_FIT ? `-${resizeFit}` : ''}`
-    )) + (query.suffix ? `-${query.suffix}` : '');
+    const name =
+        ((query.name
+            ? loaderUtils.interpolateName(loaderContext, query.name, {
+                  context,
+                  content,
+              })
+            : null) ||
+            `${resourceInfo.name}@resize-${resizeWidth || ''}x${resizeHeight || ''}${
+                resizeFit && resizeFit !== DEFAULT_FIT ? `-${resizeFit}` : ''
+            }`) + (query.suffix ? `-${query.suffix}` : '');
 
     const resourceHash = createHash('xxhash64').update(content).digest('hex');
     const formatConfig = imageminConfig[format] || {};
@@ -109,11 +112,12 @@ module.exports = async function ResizeLoader(content) {
         }
     }
 
-    if (cacheData !== undefined
-        && cacheData.type === 'Buffer'
-        && cacheData.data
-        && cacheData.hash === resourceHash
-        && cacheData.config === JSON.stringify(formatConfig)
+    if (
+        cacheData !== undefined &&
+        cacheData.type === 'Buffer' &&
+        cacheData.data &&
+        cacheData.hash === resourceHash &&
+        cacheData.config === JSON.stringify(formatConfig)
     ) {
         if (options.verbose) {
             logger.info(`load cache '${relativePath}${loaderContext.resourceQuery}'`);
@@ -138,7 +142,7 @@ module.exports = async function ResizeLoader(content) {
         formatOptions.quality = quality;
     }
 
-    const lossless = (typeof (query.lossless) !== 'undefined' ? !!query.lossless : resourceFormat === 'png');
+    const lossless = typeof query.lossless !== 'undefined' ? !!query.lossless : resourceFormat === 'png';
 
     if (format === 'webp') {
         if (lossless || quality === 100) {
@@ -199,28 +203,34 @@ module.exports = async function ResizeLoader(content) {
     resourceImage.toFormat(format.toLowerCase(), formatOptions);
 
     await resizeLimit(async () => {
-        const resizePromise = await (new Promise((resizeResolve, resizeReject) => {
-            resourceImage.toBuffer().then((buffer) => {
-                if (cacheFilepath) {
-                    fs.writeFileSync(cacheFilepath, JSON.stringify({
-                        type: 'Buffer',
-                        data: buffer.toString('base64'),
-                        hash: resourceHash,
-                        config: JSON.stringify(formatConfig),
-                    }));
-                }
-                if (options.verbose) {
-                    logger.info(`save cache '${relativePath}${loaderContext.resourceQuery}'`);
-                }
-                resizeResolve(buffer);
-                loaderContext.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
-                loaderCallback(null, nextLoader.call(loaderContext, buffer));
-            }).catch((bufferError) => {
-                loaderContext.emitError(bufferError);
-                loaderCallback(bufferError);
-                resizeReject(bufferError);
-            });
-        })).catch((promiseError) => {
+        const resizePromise = await new Promise((resizeResolve, resizeReject) => {
+            resourceImage
+                .toBuffer()
+                .then((buffer) => {
+                    if (cacheFilepath) {
+                        fs.writeFileSync(
+                            cacheFilepath,
+                            JSON.stringify({
+                                type: 'Buffer',
+                                data: buffer.toString('base64'),
+                                hash: resourceHash,
+                                config: JSON.stringify(formatConfig),
+                            })
+                        );
+                    }
+                    if (options.verbose) {
+                        logger.info(`save cache '${relativePath}${loaderContext.resourceQuery}'`);
+                    }
+                    resizeResolve(buffer);
+                    loaderContext.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
+                    loaderCallback(null, nextLoader.call(loaderContext, buffer));
+                })
+                .catch((bufferError) => {
+                    loaderContext.emitError(bufferError);
+                    loaderCallback(bufferError);
+                    resizeReject(bufferError);
+                });
+        }).catch((promiseError) => {
             loaderContext.emitError(promiseError);
             loaderCallback(promiseError);
         });

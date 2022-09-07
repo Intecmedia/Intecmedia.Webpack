@@ -26,7 +26,7 @@ const options = {
 function stripWhitespaces(string) {
     let result = string;
 
-    if (result.charCodeAt(0) === 0xFEFF) {
+    if (result.charCodeAt(0) === 0xfeff) {
         result = result.slice(1);
     }
 
@@ -48,13 +48,8 @@ function beautifyHtml(html) {
     return result;
 }
 
-UTILS.globArray(patterns.length > 0 ? patterns : [
-    `${ENV.SOURCE_PATH}/**/*.html`,
-], {
-    ignore: [
-        `${ENV.SOURCE_PATH}/**/*.*.html`,
-        `${ENV.SOURCE_PATH}/partials/macros/**/*.html`,
-    ],
+UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.SOURCE_PATH}/**/*.html`], {
+    ignore: [`${ENV.SOURCE_PATH}/**/*.*.html`, `${ENV.SOURCE_PATH}/partials/macros/**/*.html`],
     nodir: true,
 }).then((files) => {
     logger.info(`${files.length} files\n`);
@@ -70,12 +65,9 @@ UTILS.globArray(patterns.length > 0 ? patterns : [
         const html = fs.readFileSync(resourcePath).toString('utf-8');
         const templateData = frontMatter(html);
 
-        const output = (templateData.frontmatter ? [
-            '---',
-            templateData.frontmatter,
-            '---',
-            '',
-        ].join('\n') : '') + beautifyHtml(templateData.body.normalize('NFC'));
+        const output =
+            (templateData.frontmatter ? ['---', templateData.frontmatter, '---', ''].join('\n') : '') +
+            beautifyHtml(templateData.body.normalize('NFC'));
 
         if (html !== output) {
             fs.writeFileSync(resourcePath, output);

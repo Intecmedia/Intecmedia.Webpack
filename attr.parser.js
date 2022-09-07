@@ -30,7 +30,7 @@ const parser = new Parser({
         '\\s+': true, // eat up whitespace
         '>': 'outside', // end of attributes
         '(([0-9a-zA-Z\\-:]+)\\s*=\\s*")([^"]*)"': processMatch,
-        '(([0-9a-zA-Z\\-:]+)\\s*=\\s*\')([^\']*)\'': processMatch,
+        "(([0-9a-zA-Z\\-:]+)\\s*=\\s*')([^']*)'": processMatch,
         '(([0-9a-zA-Z\\-:]+)\\s*=\\s*)([^\\s>]+)': processMatch,
     },
 });

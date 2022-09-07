@@ -12,13 +12,13 @@ class HtmlBeautifyPlugin {
     }
 
     apply(compiler) {
-        compiler.hooks.compilation.tap(this.pluginName, (compilation) => HtmlWebpackPlugin.getHooks(
-            compilation,
-        ).beforeEmit.tapPromise(this.pluginName, async (htmlPluginData) => {
-            if (htmlPluginData.outputName && htmlPluginData.outputName.endsWith('.html')) {
-                htmlPluginData.html = beautify.html(htmlPluginData.html, this.options);
-            }
-        }));
+        compiler.hooks.compilation.tap(this.pluginName, (compilation) =>
+            HtmlWebpackPlugin.getHooks(compilation).beforeEmit.tapPromise(this.pluginName, async (htmlPluginData) => {
+                if (htmlPluginData.outputName && htmlPluginData.outputName.endsWith('.html')) {
+                    htmlPluginData.html = beautify.html(htmlPluginData.html, this.options);
+                }
+            })
+        );
     }
 }
 module.exports = HtmlBeautifyPlugin;

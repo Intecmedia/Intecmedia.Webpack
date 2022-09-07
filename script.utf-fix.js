@@ -15,7 +15,7 @@ const statMessages = { fixed: 0, skipped: 0 };
 function stripWhitespaces(string) {
     let result = string;
 
-    if (result.charCodeAt(0) === 0xFEFF) {
+    if (result.charCodeAt(0) === 0xfeff) {
         result = result.slice(1);
     }
 
@@ -27,15 +27,18 @@ function stripWhitespaces(string) {
     return result;
 }
 
-UTILS.globArray([
-    path.join(__dirname, '.*ignore'),
-    path.join(__dirname, '*.{js,json}'),
-    `${ENV.SOURCE_PATH}/**/*.{html,svg,js,json,css,scss,njk}`,
-], {
-    ignore: [],
-    dot: true,
-    nodir: true,
-}).then((files) => {
+UTILS.globArray(
+    [
+        path.join(__dirname, '.*ignore'),
+        path.join(__dirname, '*.{js,json}'),
+        `${ENV.SOURCE_PATH}/**/*.{html,svg,js,json,css,scss,njk}`,
+    ],
+    {
+        ignore: [],
+        dot: true,
+        nodir: true,
+    }
+).then((files) => {
     files.forEach((resourcePath) => {
         const resourceStat = fs.lstatSync(resourcePath);
         if (!resourceStat.isFile()) return;

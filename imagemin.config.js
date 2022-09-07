@@ -23,9 +23,12 @@ module.exports = {
         gif: { quality: 90, effort: 1 },
     },
     plugins: [
-        ['svgo', {
-            ...SvgoNoPrefixConfig,
-        }],
+        [
+            'svgo',
+            {
+                ...SvgoNoPrefixConfig,
+            },
+        ],
     ],
 };
 

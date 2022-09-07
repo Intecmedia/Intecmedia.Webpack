@@ -27,7 +27,7 @@ function IncludeWithExtension({ nunjucksEnv, tagName = 'includeWith' }) {
 
     this.run = (context, partialPath, data = {}, { useContext = true } = {}) => {
         const fullPath = RELATIVE_PATTERN.test(partialPath) ? path.resolve(this.cwd, partialPath) : partialPath;
-        const mergedContext = useContext ? ({ ...context.ctx, ...data }) : data;
+        const mergedContext = useContext ? { ...context.ctx, ...data } : data;
         const renderResult = this.nunjucksEnv.render(fullPath, mergedContext);
         return new nunjucksRuntime.SafeString(renderResult);
     };

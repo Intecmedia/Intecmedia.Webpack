@@ -14,20 +14,30 @@ class FaviconsWebpackPlugin extends FaviconsWebpackPluginOriginal {
     apply(compiler) {
         super.apply(compiler);
 
-        compiler.hooks.compilation.tap('FaviconsWebpackPlugin', (compilation) => HtmlWebpackPlugin.getHooks(
-            compilation,
-        ).beforeEmit.tapPromise('FaviconsWebpackPlugin', async (htmlPluginData) => {
-            htmlPluginData.html = htmlPluginData.html.replace(ICO_PATTERN, '');
-        }));
+        compiler.hooks.compilation.tap('FaviconsWebpackPlugin', (compilation) =>
+            HtmlWebpackPlugin.getHooks(compilation).beforeEmit.tapPromise(
+                'FaviconsWebpackPlugin',
+                async (htmlPluginData) => {
+                    htmlPluginData.html = htmlPluginData.html.replace(ICO_PATTERN, '');
+                }
+            )
+        );
     }
 }
 
 // https://github.com/jantimon/favicons-webpack-plugin/issues/46
-const fixWebpackConfig = (obj) => Object.fromEntries(Object.entries(obj).map(([k, v]) => {
-    if (typeof v === 'string') { return [k, v.replace('!', 'ǃ')]; }
-    if (typeof v === 'object') { return [k, fixWebpackConfig(v)]; }
-    return [k, v];
-}));
+const fixWebpackConfig = (obj) =>
+    Object.fromEntries(
+        Object.entries(obj).map(([k, v]) => {
+            if (typeof v === 'string') {
+                return [k, v.replace('!', 'ǃ')];
+            }
+            if (typeof v === 'object') {
+                return [k, fixWebpackConfig(v)];
+            }
+            return [k, v];
+        })
+    );
 
 const DEFAULT_FAVICON = {
     mode: 'webapp',
@@ -66,7 +76,9 @@ module.exports.FavIcon = function FavIcon(options) {
     if (!(logoSize && logoSize.type === 'png')) {
         throw new Error(`FavIcon '${mergedOptions.logo}': the file is not a valid image (allowed only png).`);
     } else if (!(logoSize.width === 64 && logoSize.height === 64)) {
-        throw new Error(`FavIcon '${mergedOptions.logo}': image size (${logoSize.width}x${logoSize.height}) is not than (64x64).`);
+        throw new Error(
+            `FavIcon '${mergedOptions.logo}': image size (${logoSize.width}x${logoSize.height}) is not than (64x64).`
+        );
     }
     return new FaviconsWebpackPlugin(fixWebpackConfig(mergedOptions));
 };
@@ -107,7 +119,9 @@ module.exports.AppIcon = function AppIcon(options) {
     if (!(logoSize && logoSize.type === 'png')) {
         throw new Error(`AppIcon '${mergedOptions.logo}': the file is not a valid image (allowed only png).`);
     } else if (!(logoSize.width === 1024 && logoSize.height === 1024)) {
-        throw new Error(`AppIcon '${mergedOptions.logo}': image size (${logoSize.width}x${logoSize.height}) is not than (1024x1024).`);
+        throw new Error(
+            `AppIcon '${mergedOptions.logo}': image size (${logoSize.width}x${logoSize.height}) is not than (1024x1024).`
+        );
     }
     return new FaviconsWebpackPluginOriginal(fixWebpackConfig(mergedOptions));
 };

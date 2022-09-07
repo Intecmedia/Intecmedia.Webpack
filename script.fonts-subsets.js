@@ -19,9 +19,7 @@ if (process.platform === 'win32') {
     childProcess.execSync('chcp 65001');
 }
 
-UTILS.globArray(patterns.length > 0 ? patterns : [
-    `${FONTS_SRC}/**/*.ttf`,
-], {
+UTILS.globArray(patterns.length > 0 ? patterns : [`${FONTS_SRC}/**/*.ttf`], {
     ignore: [],
     nodir: true,
 }).then((files) => {
@@ -37,12 +35,20 @@ UTILS.globArray(patterns.length > 0 ? patterns : [
         const dirname = slash(path.dirname(target));
 
         logger.info(`${source} --> ${dirname}/${basename}.ttf`);
-        childProcess.execSync(`pyftsubset ${source} --output-file=${dirname}/${basename}.ttf ${subsetsCommandSuffix}`, { stdio: 'inherit' });
+        childProcess.execSync(`pyftsubset ${source} --output-file=${dirname}/${basename}.ttf ${subsetsCommandSuffix}`, {
+            stdio: 'inherit',
+        });
 
         logger.info(`${source} --> ${dirname}/${basename}.woff`);
-        childProcess.execSync(`pyftsubset ${source} --output-file=${dirname}/${basename}.woff --flavor=woff ${subsetsCommandSuffix}`, { stdio: 'inherit' });
+        childProcess.execSync(
+            `pyftsubset ${source} --output-file=${dirname}/${basename}.woff --flavor=woff ${subsetsCommandSuffix}`,
+            { stdio: 'inherit' }
+        );
 
         logger.info(`${source} --> ${dirname}/${basename}.woff2`);
-        childProcess.execSync(`pyftsubset ${source} --output-file=${dirname}/${basename}.woff2 --flavor=woff2 ${subsetsCommandSuffix}`, { stdio: 'inherit' });
+        childProcess.execSync(
+            `pyftsubset ${source} --output-file=${dirname}/${basename}.woff2 --flavor=woff2 ${subsetsCommandSuffix}`,
+            { stdio: 'inherit' }
+        );
     });
 });

@@ -8,16 +8,18 @@ const COLS_COUNT = 12;
 const COLS_BREAKPOINTS = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
 
 const makeColsClassList = (cols = COLS_COUNT, breakpoints = COLS_BREAKPOINTS) => {
-    const colsNumbers = Array.from({ length: cols }, (value, index) => (index + 1));
+    const colsNumbers = Array.from({ length: cols }, (value, index) => index + 1);
     return [
-        ...(colsNumbers.map((col) => `col-${col}`)),
+        ...colsNumbers.map((col) => `col-${col}`),
         'col',
         'col-auto',
-        ...(breakpoints.map((breakpoint) => [
-            ...(colsNumbers.map((col) => `col-${breakpoint}-${col}`)),
-            `col-${breakpoint}`,
-            `col-${breakpoint}-auto`,
-        ]).flat()),
+        ...breakpoints
+            .map((breakpoint) => [
+                ...colsNumbers.map((col) => `col-${breakpoint}-${col}`),
+                `col-${breakpoint}`,
+                `col-${breakpoint}-auto`,
+            ])
+            .flat(),
     ];
 };
 
@@ -29,7 +31,10 @@ const colSelector = (cols = COLS_COUNT, breakpoints = COLS_BREAKPOINTS) => {
 class AbsRule extends Rule {
     constructor(options) {
         super({
-            ignore: '', cols: COLS_COUNT, breakpoints: COLS_BREAKPOINTS, ...options,
+            ignore: '',
+            cols: COLS_COUNT,
+            breakpoints: COLS_BREAKPOINTS,
+            ...options,
         });
     }
 
@@ -137,7 +142,11 @@ class FormControlInputOnly extends Rule {
 }
 
 module.exports = {
-    ColNoRow, RowNoChilds, ContainerNoNested, FormSelectNoFormControl, FormControlInputOnly,
+    ColNoRow,
+    RowNoChilds,
+    ContainerNoNested,
+    FormSelectNoFormControl,
+    FormControlInputOnly,
 };
 
 module.exports.rules = {

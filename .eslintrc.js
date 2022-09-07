@@ -17,6 +17,7 @@ module.exports = {
         'plugin:compat/recommended',
         'plugin:eslint-comments/recommended',
         'airbnb-base',
+        'plugin:prettier/recommended',
     ],
     'parser': '@babel/eslint-parser',
     'parserOptions': {
@@ -24,61 +25,80 @@ module.exports = {
             'configFile': './babel.config.js',
         },
     },
-    'plugins': [
-        '@babel',
-        'import',
-    ],
+    'plugins': ['@babel', 'import'],
     'root': true,
     'rules': {
         'class-methods-use-this': 'off',
         'eol-last': ['error', 'always'],
-        'eslint-comments/require-description': ['error', {
-            'ignore': ['global', 'globals'],
-        }],
+        'eslint-comments/require-description': [
+            'error',
+            {
+                'ignore': ['global', 'globals'],
+            },
+        ],
         'func-names': ['error'],
-        'import/dynamic-import-chunkname': [2, {
-            'importFunctions': ['dynamicImport'],
-            'webpackChunknameFormat': '[a-zA-Z0-9\\-_\\.]+',
-        }],
+        'import/dynamic-import-chunkname': [
+            2,
+            {
+                'importFunctions': ['dynamicImport'],
+                'webpackChunknameFormat': '[a-zA-Z0-9\\-_\\.]+',
+            },
+        ],
         'import/no-cycle': 'off',
         'import/order': 'off',
-        'indent': ['error', 4],
+        // 'indent': ['error', 4], // https://github.com/eslint/eslint/issues/10930
         'linebreak-style': ['error', 'unix'],
-        'max-len': ['error', 120, {
-            'ignoreComments': true,
-            'ignoreRegExpLiterals': true,
-            'ignoreStrings': true,
-            'ignoreTemplateLiterals': true,
-            'ignoreTrailingComments': true,
-            'ignoreUrls': true,
-        }],
-        'max-lines': ['error', {
-            'max': 300,
-            'skipBlankLines': true,
-            'skipComments': true,
-        }],
+        'max-len': [
+            'error',
+            120,
+            {
+                'ignoreComments': true,
+                'ignoreRegExpLiterals': true,
+                'ignoreStrings': true,
+                'ignoreTemplateLiterals': true,
+                'ignoreTrailingComments': true,
+                'ignoreUrls': true,
+            },
+        ],
+        'max-lines': [
+            'error',
+            {
+                'max': 300,
+                'skipBlankLines': true,
+                'skipComments': true,
+            },
+        ],
         'no-console': 'off',
-        'no-invalid-this': ['error', {
-            'capIsConstructor': true,
-        }],
-        'no-param-reassign': ['error', {
-            'props': false,
-        }],
+        'no-invalid-this': [
+            'error',
+            {
+                'capIsConstructor': true,
+            },
+        ],
+        'no-param-reassign': [
+            'error',
+            {
+                'props': false,
+            },
+        ],
         'no-plusplus': 'off',
         'no-underscore-dangle': 'off',
+        'prettier/prettier': ['error'],
         'require-await': ['error'],
         'sort-requires/sort-requires': 'off',
         'unicode-bom': ['error', 'never'],
-        ...(ENV.PROD ? {} : {
-            'compat/compat': 'off',
-            'import/no-extraneous-dependencies': 'off',
-            'import/no-unresolved': 'off',
-            'no-alert': 'off',
-            'no-debugger': 'off',
-            'no-unreachable': 'off',
-            'no-unused-expressions': 'off',
-            'no-unused-vars': 'off',
-        }),
+        ...(ENV.PROD
+            ? {}
+            : {
+                  'compat/compat': 'off',
+                  'import/no-extraneous-dependencies': 'off',
+                  'import/no-unresolved': 'off',
+                  'no-alert': 'off',
+                  'no-debugger': 'off',
+                  'no-unreachable': 'off',
+                  'no-unused-expressions': 'off',
+                  'no-unused-vars': 'off',
+              }),
     },
     'settings': {
         'import/resolver': {
@@ -87,12 +107,6 @@ module.exports = {
                 'config': './resolve.config.js',
             },
         },
-        'polyfills': [
-            'fetch',
-            'IntersectionObserver',
-            'Promise',
-            'ResizeObserver',
-            'Symbol',
-        ],
+        'polyfills': ['fetch', 'IntersectionObserver', 'Promise', 'ResizeObserver', 'Symbol'],
     },
 };

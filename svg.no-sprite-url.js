@@ -41,11 +41,13 @@ module.exports = function noSpriteURL(filepath) {
 
     walkAttributes(root, (node, name, value) => {
         if (URL_PATTERN.test(value)) {
-            throw new Error([
-                `[svg-sprite] external content <${node.name} ${name}="${value}"> not allowed in: ${relpath}.`,
-                'Chrome issue: https://code.google.com/p/chromium/issues/detail?id=109212',
-                'Safari issue: https://bugs.webkit.org/show_bug.cgi?id=105904',
-            ].join('\n'));
+            throw new Error(
+                [
+                    `[svg-sprite] external content <${node.name} ${name}="${value}"> not allowed in: ${relpath}.`,
+                    'Chrome issue: https://code.google.com/p/chromium/issues/detail?id=109212',
+                    'Safari issue: https://bugs.webkit.org/show_bug.cgi?id=105904',
+                ].join('\n')
+            );
         }
     });
 };

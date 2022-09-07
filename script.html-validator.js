@@ -12,8 +12,11 @@ const UTILS = require('./webpack.utils');
 
 const logger = weblog({ name: 'html-validator' });
 
-const ignoreLines = fs.readFileSync('./.htmlignore')
-    .toString().trim().split('\n')
+const ignoreLines = fs
+    .readFileSync('./.htmlignore')
+    .toString()
+    .trim()
+    .split('\n')
     .map((line) => line.toLowerCase().trim());
 
 const ignoreTest = (message) => {
@@ -35,9 +38,7 @@ async function validatorAsync(options) {
 
 const patterns = [...UTILS.processArgs._];
 
-UTILS.globArray(patterns.length > 0 ? patterns : [
-    `${ENV.OUTPUT_PATH}/**/*.html`,
-], {
+UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.OUTPUT_PATH}/**/*.html`], {
     ignore: [],
     nodir: true,
 }).then(async (files) => {
@@ -73,7 +74,11 @@ UTILS.globArray(patterns.length > 0 ? patterns : [
                 increaseStat(`${message.type}s`);
 
                 const log = errorsLogger[message.type] || logger.error;
-                log(`${relativePath}: line ${message.lastLine || 0} col [${message.firstColumn || 0}-${message.lastColumn || 0}]`);
+                log(
+                    `${relativePath}: line ${message.lastLine || 0} col [${message.firstColumn || 0}-${
+                        message.lastColumn || 0
+                    }]`
+                );
                 log(`${message.type}: ${message.message}`);
 
                 const ellipsis = message.extract.trim();

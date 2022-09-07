@@ -12,7 +12,11 @@ const FILENAME_PATTERN = /^[a-zA-Z0-9-/._@]+$/;
 
 function lintFilename(filename) {
     if (!FILENAME_PATTERN.test(filename)) {
-        throw new Error(`Filename ${JSON.stringify(filename)} does not match the naming convention pattern: ${JSON.stringify(FILENAME_PATTERN.toString())}`);
+        throw new Error(
+            `Filename ${JSON.stringify(filename)} does not match the naming convention pattern: ${JSON.stringify(
+                FILENAME_PATTERN.toString()
+            )}`
+        );
     }
 }
 
@@ -20,18 +24,14 @@ module.exports.lintFilename = lintFilename;
 
 function castScssVar(obj) {
     if (Array.isArray(obj)) {
-        return [
-            '(',
-            obj.map((v) => castScssVar(v)).join(', '),
-            ')',
-        ].join('');
+        return ['(', obj.map((v) => castScssVar(v)).join(', '), ')'].join('');
     }
     if (typeof obj === 'object') {
         return [
             '(',
-            Object.entries(obj).map((item) => (
-                (name, value) => `${JSON.stringify(name)}: ${castScssVar(value)}`
-            )(...item)).join(', '),
+            Object.entries(obj)
+                .map((item) => ((name, value) => `${JSON.stringify(name)}: ${castScssVar(value)}`)(...item))
+                .join(', '),
             ')',
         ].join('');
     }
@@ -40,7 +40,8 @@ function castScssVar(obj) {
 
 function toScssVars(obj) {
     return Object.entries(obj)
-        .map((item) => ((name, value) => `$${name}: ${castScssVar(value)};`)(...item)).join('\n');
+        .map((item) => ((name, value) => `$${name}: ${castScssVar(value)};`)(...item))
+        .join('\n');
 }
 
 module.exports.toScssVars = toScssVars;
@@ -48,7 +49,7 @@ module.exports.toScssVars = toScssVars;
 function resourceName(prefix, hash = false) {
     const ENV = require('./app.env');
     const basename = path.basename(prefix);
-    const suffix = (hash ? '?[md5:contenthash]' : '');
+    const suffix = hash ? '?[md5:contenthash]' : '';
     return (resourcePath) => {
         const resourceUrl = slash(path.relative(ENV.SOURCE_PATH, resourcePath)).replace(/^(\.\.\/)+/g, '');
         if (ENV.PROD || ENV.DEBUG) {
@@ -71,7 +72,7 @@ module.exports.resourceName = resourceName;
 
 function cacheDir(name, skipEnv = false) {
     const ENV = require('./app.env');
-    const prefixedName = (skipEnv ? name : `${name}-${ENV.NODE_ENV}`);
+    const prefixedName = skipEnv ? name : `${name}-${ENV.NODE_ENV}`;
     const orgEnvDir = process.env.CACHE_DIR || null;
     const envDir = slash(path.join(__dirname, 'cache', prefixedName));
     if (fs.existsSync(envDir)) {
@@ -98,9 +99,16 @@ function globOptions(options) {
 module.exports.globOptions = globOptions;
 
 function globArray(patterns, options) {
-    return Promise.all(patterns.map((pattern) => (new Promise((resolve, reject) => {
-        glob(slash(pattern), globOptions(options), (error, files) => (error === null ? resolve(files) : reject(error)));
-    })))).then((files) => files.flat());
+    return Promise.all(
+        patterns.map(
+            (pattern) =>
+                new Promise((resolve, reject) => {
+                    glob(slash(pattern), globOptions(options), (error, files) =>
+                        error === null ? resolve(files) : reject(error)
+                    );
+                })
+        )
+    ).then((files) => files.flat());
 }
 
 module.exports.globArray = globArray;
@@ -141,10 +149,12 @@ const processArgs = yargs(process.argv.slice(2))
     .option('env', { default: [], type: 'array' })
     .parse();
 
-processArgs.env = processArgs.env.length > 0 ? yargs(processArgs.env.map((i) => `--env.${i}`))
-    .parserConfiguration(yargsOptions)
-    .option('env', { default: {}, type: 'object' })
-    .parse()
-    .env : {};
+processArgs.env =
+    processArgs.env.length > 0
+        ? yargs(processArgs.env.map((i) => `--env.${i}`))
+              .parserConfiguration(yargsOptions)
+              .option('env', { default: {}, type: 'object' })
+              .parse().env
+        : {};
 
 module.exports.processArgs = processArgs;

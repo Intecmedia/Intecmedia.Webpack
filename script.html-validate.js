@@ -12,8 +12,11 @@ const UTILS = require('./webpack.utils');
 
 const logger = weblog({ name: 'html-validate' });
 
-const ignoreLines = fs.readFileSync('./.htmlignore')
-    .toString().trim().split('\n')
+const ignoreLines = fs
+    .readFileSync('./.htmlignore')
+    .toString()
+    .trim()
+    .split('\n')
     .map((line) => line.toLowerCase().trim());
 
 const ignoreTest = (message) => {
@@ -27,9 +30,7 @@ const config = require('./.htmlvalidaterc');
 const htmlvalidate = new HtmlValidate({ ...config });
 const patterns = [...UTILS.processArgs._];
 
-UTILS.globArray(patterns.length > 0 ? patterns : [
-    `${ENV.OUTPUT_PATH}/**/*.html`,
-], {
+UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.OUTPUT_PATH}/**/*.html`], {
     ignore: [],
     nodir: true,
 }).then((files) => {
@@ -61,7 +62,7 @@ UTILS.globArray(patterns.length > 0 ? patterns : [
 
         report.results.forEach((result) => {
             result.messages.forEach((message) => {
-                const messageType = (message.severity === 2 ? 'error' : 'warning');
+                const messageType = message.severity === 2 ? 'error' : 'warning';
                 if (message.message && ignoreTest(message.message)) {
                     increaseStat(`${messageType}s-ignored`);
                     return;

@@ -16,14 +16,14 @@ if (process.cwd() !== realcwd) {
 }
 
 const ARGV = { ...UTILS.processArgs.env };
-const DEBUG = ('DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0);
-const DEV_SERVER = ('WEBPACK_DEV_SERVER' in process.env && process.env.WEBPACK_DEV_SERVER === 'true');
+const DEBUG = 'DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0;
+const DEV_SERVER = 'WEBPACK_DEV_SERVER' in process.env && process.env.WEBPACK_DEV_SERVER === 'true';
 const STANDALONE = ['webpack', 'webpack-dev-server'].includes(path.basename(require.main.filename, '.js'));
-const WATCH = (process.argv.includes('--watch')) || (process.argv.includes('-w'));
-const PROD = (process.env.NODE_ENV === 'production');
+const WATCH = process.argv.includes('--watch') || process.argv.includes('-w');
+const PROD = process.env.NODE_ENV === 'production';
 const NODE_ENV = PROD ? 'production' : 'development';
 
-const VERBOSE = (NODE_ENV === 'development' || DEBUG);
+const VERBOSE = NODE_ENV === 'development' || DEBUG;
 const SOURCE_MAP = DEBUG || !PROD || DEV_SERVER;
 
 const { name: PACKAGE_NAME, browserslist } = require('./package.json');
@@ -39,48 +39,51 @@ if (!['production', 'development'].includes(NODE_ENV)) {
 }
 
 const IGNORE_PATTERN = /\/_/;
-const SITEMAP = glob.sync(`${slash(SOURCE_PATH)}/**/*.{html,njk}`, {
-    ignore: [
-        `${slash(SOURCE_PATH)}/partials/**/*.html`,
-        `${slash(SOURCE_PATH)}/upload/**/*.html`,
-    ],
-}).map((item) => {
-    const basename = path.basename(item, path.extname(item));
-    const template = slash(path.relative(__dirname, item));
-    const ignored = basename.startsWith('_') || IGNORE_PATTERN.test(template);
-    const extension = (path.extname(basename) || path.extname(item)).substring(1);
-    const noindex = (ignored || extension !== 'html');
+const SITEMAP = glob
+    .sync(`${slash(SOURCE_PATH)}/**/*.{html,njk}`, {
+        ignore: [`${slash(SOURCE_PATH)}/partials/**/*.html`, `${slash(SOURCE_PATH)}/upload/**/*.html`],
+    })
+    .map((item) => {
+        const basename = path.basename(item, path.extname(item));
+        const template = slash(path.relative(__dirname, item));
+        const ignored = basename.startsWith('_') || IGNORE_PATTERN.test(template);
+        const extension = (path.extname(basename) || path.extname(item)).substring(1);
+        const noindex = ignored || extension !== 'html';
 
-    const filename = slash(basename === 'index' ? path.join(
-        path.relative(SOURCE_PATH, item),
-    ) : path.join(
-        path.relative(SOURCE_PATH, path.dirname(item)),
-        ...(noindex ? [extension !== 'html' ? basename : `${basename}.${extension}`] : [basename, 'index.html']),
-    ));
-    const url = slash(filename.endsWith('index.html')
-        ? filename.substring(0, filename.length - 'index.html'.length)
-        : filename);
+        const filename = slash(
+            basename === 'index'
+                ? path.join(path.relative(SOURCE_PATH, item))
+                : path.join(
+                      path.relative(SOURCE_PATH, path.dirname(item)),
+                      ...(noindex
+                          ? [extension !== 'html' ? basename : `${basename}.${extension}`]
+                          : [basename, 'index.html'])
+                  )
+        );
+        const url = slash(
+            filename.endsWith('index.html') ? filename.substring(0, filename.length - 'index.html'.length) : filename
+        );
 
-    const stat = fs.statSync(item);
-    const templateSource = fs.readFileSync(item, 'utf8').toString();
-    const templateData = frontMatter.test(templateSource) ? frontMatter(templateSource) : {};
-    const PAGE = {
-        ...templateData.attributes,
-        URL: slash(path.normalize(path.join(APP.PUBLIC_PATH, url))),
-        PATH: slash(path.normalize(item)),
-        BASENAME: basename,
-        STAT: stat,
-    };
+        const stat = fs.statSync(item);
+        const templateSource = fs.readFileSync(item, 'utf8').toString();
+        const templateData = frontMatter.test(templateSource) ? frontMatter(templateSource) : {};
+        const PAGE = {
+            ...templateData.attributes,
+            URL: slash(path.normalize(path.join(APP.PUBLIC_PATH, url))),
+            PATH: slash(path.normalize(item)),
+            BASENAME: basename,
+            STAT: stat,
+        };
 
-    return {
-        template,
-        filename,
-        extension,
-        ignored,
-        url,
-        PAGE,
-    };
-});
+        return {
+            template,
+            filename,
+            extension,
+            ignored,
+            url,
+            PAGE,
+        };
+    });
 
 const BANNER_STRING = [
     `[${PACKAGE_NAME}]: ENV.NODE_ENV=${NODE_ENV} | ENV.DEBUG=${DEBUG}`,

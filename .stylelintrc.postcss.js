@@ -9,10 +9,8 @@ const sharedConfig = require('./.stylelintrc.shared');
 const ENV = require('./app.env');
 
 module.exports = deepMerge({}, sharedConfig, {
-    'defaultSeverity': (ENV.PROD || ENV.DEBUG ? 'error' : 'warning'),
-    'extends': [
-        ...sharedConfig.extends,
-    ],
+    'defaultSeverity': ENV.PROD || ENV.DEBUG ? 'error' : 'warning',
+    'extends': [...sharedConfig.extends],
     'plugins': [
         'stylelint-csstree-validator',
         // 'stylelint-no-nested-media',
