@@ -25,9 +25,8 @@ module.exports = {
     AVIF: false,
     BROTLI: true,
     GZIP: true,
-    STYLELINT: false,
-    ESLINT: false,
-    PRETTIER: true,
+    STYLELINT: true,
+    ESLINT: true,
     IMAGEMIN: true,
     get ENV() {
         return require('./app.env');

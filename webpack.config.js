@@ -428,18 +428,6 @@ module.exports = {
                     verbose: ENV.DEBUG || ENV.ARGV.verbose,
                 },
             },
-            ...(APP.PRETTIER
-                ? [
-                      {
-                          enforce: 'pre',
-                          test: /\.(js|scss)(\?.*)?$/i,
-                          include: ENV.SOURCE_PATH,
-                          exclude: [/node_modules/],
-                          loader: 'prettier-loader',
-                          options: {},
-                      },
-                  ]
-                : []),
             // javascript loaders
             ...(APP.JQUERY
                 ? [

@@ -208,7 +208,6 @@
         "postcss-scss": "^4.0.4",
         "postcss-url": "^10.1.3",
         "prettier": "^2.7.1",
-        "prettier-loader": "^3.3.0",
         "resize-observer-polyfill": "^1.5.1",
         "sass": "^1.54.8",
         "sass-loader": "^13.0.2",
