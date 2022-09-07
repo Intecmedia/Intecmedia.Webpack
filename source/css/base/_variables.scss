@@ -128,5 +128,5 @@ $subheadings-line-height: 1.2 !default;
 
 $intersection-transition-delay: calc(
     (var(--intersection-delay-offset, 0) * var(--intersection-delay-offset-step, 0.1s)) +
-    (var(--intersection-delay-index, 0) * var(--intersection-delay-step, 0.1s))
+        (var(--intersection-delay-index, 0) * var(--intersection-delay-step, 0.1s))
 ) !default;

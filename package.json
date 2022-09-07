@@ -22,12 +22,9 @@
         "watch-dev": "node ./script.nodemon.js --exec \"npx cross-env NODE_ENV=development DEBUG=0 NODE_OPTIONS=\\\"--max-old-space-size=4096\\\" webpack --watch --mode=development\"",
         "watch-debug": "node ./script.nodemon.js --exec \"npx cross-env NODE_ENV=development DEBUG=1 NODE_OPTIONS=\\\"--max-old-space-size=4096\\\" webpack --watch --mode=development\"",
         "watch-prod": "node ./script.nodemon.js --exec \"npx cross-env NODE_ENV=production DEBUG=0 NODE_OPTIONS=\\\"--max-old-space-size=4096\\\" webpack --watch --mode=production\"",
-        "js-lint-cmd": "cross-env NODE_ENV=production eslint --config .eslintrc.js --ignore-path .eslintignore --fix --no-error-on-unmatched-pattern --cache --cache-location ./node_modules/.cache/eslint-js/",
-        "js-lint": "npm run js-lint-cmd *.js source/**/*.js",
+        "js-lint-cmd": "cross-env NODE_ENV=production eslint --config .eslintrc.js --ignore-path .eslintignore --fix --no-error-on-unmatched-pattern --cache --cache-location ./node_modules/.cache/eslint/",
+        "js-lint": "npm run js-lint-cmd *.{js,ts} source/**/*.{js,ts}",
         "js-lint-config": "cross-env NODE_ENV=production eslint --print-config .eslintrc.js --ignore-path .eslintignore",
-        "ts-lint-cmd": "cross-env NODE_ENV=production eslint  --fix --config .eslintrc.typescript.js --ignore-path .eslintignore --no-error-on-unmatched-pattern --cache --cache-location ./node_modules/.cache/eslint-ts/",
-        "ts-lint": "npm run ts-lint-cmd source/**/*.ts",
-        "ts-lint-config": "cross-env NODE_ENV=production eslint --print-config .eslintrc.typescript.js --ignore-path .eslintignore",
         "css-lint-cmd": "cross-env NODE_ENV=production stylelint --fix --config .stylelintrc.js --ignore-path .stylelintignore --allow-empty-input --cache --cache-location ./node_modules/.cache/stylelint/",
         "css-lint": "npm run css-lint-cmd source/**/*.scss",
         "css-lint-config": "cross-env NODE_ENV=production stylelint --ignore-path .stylelintignore --print-config .stylelintrc.js",
@@ -39,7 +36,7 @@
         "html-typograf": "cross-env NODE_ENV=production node ./script.html-typograf.js",
         "app-lint": "cross-env NODE_ENV=production node ./script.app-lint.js",
         "image-lint": "cross-env NODE_ENV=production node ./script.image-lint.js",
-        "lint": "npm run app-lint && npm run js-lint && npm run ts-lint && npm run css-lint && npm run html-validate && npm run html-validator && npm run image-lint",
+        "lint": "npm run app-lint && npm run js-lint && npm run css-lint && npm run html-validate && npm run html-validator && npm run image-lint",
         "server": "npm run server-dev",
         "server-https": "npm run server-dev-https",
         "preserver-dev": "npm run clean",
@@ -64,8 +61,7 @@
         "filename-lint": "cross-env NODE_ENV=production node ./script.filename-lint.js",
         "start": "npm run build",
         "prettier": "cross-env NODE_ENV=production prettier --cache --write",
-        "prettier-js": "cross-env NODE_ENV=production prettier --cache --write *.js source/**/*.js",
-        "prettier-ts": "cross-env NODE_ENV=production prettier --cache --write source/**/*.ts",
+        "prettier-js": "cross-env NODE_ENV=production prettier --cache --write *.{js,ts} source/**/*.{js,ts}",
         "prettier-css": "cross-env NODE_ENV=production prettier --cache --write source/**/*.scss",
         "prettier-check-css": "npx stylelint-config-prettier-scss source/css/app.scss",
         "prettier-check-js": "npx eslint-config-prettier source/js/app.js",
@@ -76,15 +72,10 @@
         "prepare": "npm run update-package-hash && npm run husky-install"
     },
     "lint-staged": {
-        "*!(.min).js": [
+        "*!(.min).{js,ts}": [
             "npm run filename-lint",
             "npm run prettier",
             "npm run js-lint-cmd"
-        ],
-        "*.ts": [
-            "npm run filename-lint",
-            "npm run prettier",
-            "npm run ts-lint-cmd"
         ],
         "*.scss": [
             "npm run filename-lint",

@@ -19,6 +19,17 @@ module.exports = {
         'airbnb-base',
         'plugin:prettier/recommended',
     ],
+    'overrides': [
+        {
+            'extends': ['plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended'],
+            'files': '*.ts',
+            'parser': '@typescript-eslint/parser',
+            'plugins': ['@typescript-eslint'],
+            'rules': {
+                'prettier/prettier': ['error'],
+            },
+        },
+    ],
     'parser': '@babel/eslint-parser',
     'parserOptions': {
         'babelOptions': {
