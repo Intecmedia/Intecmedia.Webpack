@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "module": "es6",
+        "target": "exnest",
+        "baseUrl": ".",
+        "paths": {
+            "~/*": ["./*"]
+        }
+    },
+    "include": ["**/*.js"]
+    "exclude": ["external"]
+}
