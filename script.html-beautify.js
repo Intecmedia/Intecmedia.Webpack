@@ -49,7 +49,7 @@ function beautifyHtml(html) {
 }
 
 UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.SOURCE_PATH}/**/*.html`], {
-    ignore: [`${ENV.SOURCE_PATH}/**/*.*.html`, `${ENV.SOURCE_PATH}/partials/macros/**/*.html`],
+    ignore: [`${ENV.SOURCE_PATH}/**/*.*.html`],
     nodir: true,
 }).then((files) => {
     logger.info(`${files.length} files\n`);
