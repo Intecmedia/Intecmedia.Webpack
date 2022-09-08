@@ -73,9 +73,7 @@ module.exports = {
         'require-await': ['error'],
         ...(ENV.PROD
             ? // code style rules (slowest)
-              {
-                  'import/no-cycle': ['error'],
-              }
+              {}
             : // dev-only rules (better dev experience)
               {
                   'compat/compat': 'off',
