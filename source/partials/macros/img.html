@@ -1,3 +1,4 @@
+<!-- beautify ignore:start -->
 {% macro lazy (url, alt, attrs = {}) %}
     {% set dimensions = image_size(url) %}
     <img
@@ -29,3 +30,4 @@
         >
     </picture>
 {% endmacro %}
+<!-- beautify ignore:end -->
