@@ -29,6 +29,7 @@ module.exports = deepMerge({}, sharedConfig, {
     ],
     'reportDescriptionlessDisables': true,
     'rules': {
+        // code quality rules (fastest)
         'max-nesting-depth': [
             5,
             {
@@ -86,6 +87,7 @@ module.exports = deepMerge({}, sharedConfig, {
                 'ignore': ['attribute', 'class'],
             },
         ],
+        // code style rules (slowest)
         ...(ENV.PROD
             ? {
                   'order/order': [

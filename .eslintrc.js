@@ -28,6 +28,7 @@ module.exports = {
     'plugins': ['@babel', 'import'],
     'root': true,
     'rules': {
+        // code quality rules (fastest)
         'class-methods-use-this': 'off',
         'eslint-comments/require-description': [
             'error',
@@ -70,6 +71,7 @@ module.exports = {
         'no-underscore-dangle': 'off',
         'prettier/prettier': ['error'],
         'require-await': ['error'],
+        // code style rules (slowest)
         ...(ENV.PROD
             ? {}
             : {
