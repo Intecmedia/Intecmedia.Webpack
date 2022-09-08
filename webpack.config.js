@@ -283,6 +283,10 @@ module.exports = {
         ...(APP.STYLELINT
             ? [
                   new StyleLintPlugin({
+                      cache: !ENV.DEBUG,
+                      cacheLocation: ENV.PROD
+                          ? './node_modules/.cache/stylelint/'
+                          : './node_modules/.cache/stylelint-development/',
                       customSyntax: 'postcss-scss',
                       files: '**/*.scss',
                       configFile: './.stylelintrc.js',
@@ -296,6 +300,10 @@ module.exports = {
         ...(APP.ESLINT
             ? [
                   new ESLintPlugin({
+                      cache: !ENV.DEBUG,
+                      cacheLocation: ENV.PROD
+                          ? './node_modules/.cache/eslint/'
+                          : './node_modules/.cache/eslint-development/',
                       files: '**/*.js',
                       overrideConfigFile: './.eslintrc.js',
                       ignorePath: './.eslintignore',
