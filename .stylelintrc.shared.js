@@ -9,6 +9,7 @@ module.exports = {
     'extends': [],
     'plugins': ['stylelint-no-unsupported-browser-features'],
     'rules': {
+        // code quality rules (fastest)
         'color-hex-alpha': 'never',
         'declaration-block-no-duplicate-custom-properties': null,
         'declaration-block-no-duplicate-properties': [
@@ -56,11 +57,16 @@ module.exports = {
         'property-disallowed-list': [
             ['gap', 'row-gap', 'column-gap'], // https://caniuse.com/?search=gap
         ],
-        'property-no-unknown': [
-            true,
-            {
-                'ignoreProperties': ['content-visibility'],
-            },
-        ],
+        // code style rules (slowest)
+        ...(ENV.PROD
+            ? {
+                  'property-no-unknown': [
+                      true,
+                      {
+                          'ignoreProperties': ['content-visibility'],
+                      },
+                  ],
+              }
+            : {}),
     },
 };
