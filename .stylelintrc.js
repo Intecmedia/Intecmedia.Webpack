@@ -9,9 +9,6 @@ const { propertyOrdering } = require('stylelint-semantic-groups');
 
 const ENV = require('./app.env');
 
-console.log(ENV);
-process.exit(1);
-
 module.exports = deepMerge({}, sharedConfig, {
     'customSyntax': 'postcss-scss',
     'defaultSeverity': ENV.PROD || ENV.DEBUG ? 'error' : 'warning',
