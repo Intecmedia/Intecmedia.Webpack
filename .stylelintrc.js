@@ -9,6 +9,9 @@ const { propertyOrdering } = require('stylelint-semantic-groups');
 
 const ENV = require('./app.env');
 
+console.log(ENV);
+process.exit(1);
+
 module.exports = deepMerge({}, sharedConfig, {
     'customSyntax': 'postcss-scss',
     'defaultSeverity': ENV.PROD || ENV.DEBUG ? 'error' : 'warning',
@@ -35,23 +38,6 @@ module.exports = deepMerge({}, sharedConfig, {
                 'ignore': ['blockless-at-rules', 'pseudo-classes'],
             },
         ],
-        'order/order': [
-            'dollar-variables',
-            'custom-properties',
-            { 'hasBlock': false, 'name': 'extend', 'type': 'at-rule' },
-            { 'hasBlock': false, 'name': 'include', 'type': 'at-rule' },
-            'declarations',
-            { 'hasBlock': true, 'selector': '^&\\:', 'type': 'rule' },
-            { 'hasBlock': true, 'selector': '^(\\>|\\+|~)\\s+', 'type': 'rule' },
-            { 'hasBlock': true, 'selector': '^([a-zA-Z]+)?\\.', 'type': 'rule' },
-            { 'hasBlock': true, 'name': 'supports', 'type': 'at-rule' },
-            { 'hasBlock': true, 'name': 'include', 'type': 'at-rule' },
-            { 'hasBlock': true, 'name': 'media', 'type': 'at-rule' },
-            { 'hasBlock': true, 'selector': '^&--', 'type': 'rule' },
-            { 'hasBlock': true, 'selector': '^&__', 'type': 'rule' },
-        ],
-        'order/properties-alphabetical-order': null,
-        'order/properties-order': propertyOrdering,
         'pitcher/max-lines': 1024,
         'pitcher/max-root-rules': 16,
         'plugin/no-low-performance-animation-properties': [
@@ -79,41 +65,13 @@ module.exports = deepMerge({}, sharedConfig, {
             ],
             'preset': 'bem',
         },
-        'rule-empty-line-before': [
-            'always',
-            {
-                'ignore': ['after-comment', 'first-nested'],
-            },
-        ],
-        'scss/at-import-no-partial-leading-underscore': true,
-        'scss/at-import-partial-extension': 'never',
-        'scss/at-import-partial-extension-blacklist': ['scss', 'css'],
-        'scss/at-rule-no-unknown': [
-            true,
-            {
-                'ignoreAtRules': ['property'],
-            },
-        ],
         'scss/dollar-variable-default': [
             true,
             {
                 'ignore': 'local',
             },
         ],
-        'scss/dollar-variable-empty-line-after': [
-            'always',
-            {
-                'except': ['last-nested', 'before-comment', 'before-dollar-variable'],
-            },
-        ],
         'scss/dollar-variable-pattern': ['^[a-zA-Z][a-zA-Z-\\d]*$'],
-        'scss/double-slash-comment-empty-line-before': [
-            'always',
-            {
-                'except': ['first-nested'],
-                'ignore': ['between-comments', 'stylelint-commands'],
-            },
-        ],
         'scss/selector-nest-combinators': 'always',
         'selector-class-pattern': ['^[a-zA-Z0-9\\-_]+$'],
         'selector-max-class': 5,
@@ -131,5 +89,48 @@ module.exports = deepMerge({}, sharedConfig, {
                 'ignore': ['attribute', 'class'],
             },
         ],
+        ...(ENV.PROD
+            ? {
+                  'order/order': [
+                      'dollar-variables',
+                      'custom-properties',
+                      { 'hasBlock': false, 'name': 'extend', 'type': 'at-rule' },
+                      { 'hasBlock': false, 'name': 'include', 'type': 'at-rule' },
+                      'declarations',
+                      { 'hasBlock': true, 'selector': '^&\\:', 'type': 'rule' },
+                      { 'hasBlock': true, 'selector': '^(\\>|\\+|~)\\s+', 'type': 'rule' },
+                      { 'hasBlock': true, 'selector': '^([a-zA-Z]+)?\\.', 'type': 'rule' },
+                      { 'hasBlock': true, 'name': 'supports', 'type': 'at-rule' },
+                      { 'hasBlock': true, 'name': 'include', 'type': 'at-rule' },
+                      { 'hasBlock': true, 'name': 'media', 'type': 'at-rule' },
+                      { 'hasBlock': true, 'selector': '^&--', 'type': 'rule' },
+                      { 'hasBlock': true, 'selector': '^&__', 'type': 'rule' },
+                  ],
+                  'order/properties-alphabetical-order': null,
+                  'order/properties-order': propertyOrdering,
+                  'scss/at-import-no-partial-leading-underscore': true,
+                  'scss/at-import-partial-extension': 'never',
+                  'scss/at-import-partial-extension-blacklist': ['scss', 'css'],
+                  'scss/at-rule-no-unknown': [
+                      true,
+                      {
+                          'ignoreAtRules': ['property'],
+                      },
+                  ],
+                  'scss/dollar-variable-empty-line-after': [
+                      'always',
+                      {
+                          'except': ['last-nested', 'before-comment', 'before-dollar-variable'],
+                      },
+                  ],
+                  'scss/double-slash-comment-empty-line-before': [
+                      'always',
+                      {
+                          'except': ['first-nested'],
+                          'ignore': ['between-comments', 'stylelint-commands'],
+                      },
+                  ],
+              }
+            : {}),
     },
 });
