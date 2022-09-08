@@ -2,12 +2,12 @@
     "compilerOptions": {
         "module": "es6",
         "moduleResolution": "classic",
-        "target": "exnest",
+        "target": "esnext",
         "baseUrl": ".",
         "paths": {
             "~/*": ["./*"]
         }
     },
-    "include": ["**/*.js"]
+    "include": ["**/*.js"],
     "exclude": ["external"]
 }
