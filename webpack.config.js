@@ -220,7 +220,7 @@ module.exports = {
                 to: ENV.OUTPUT_PATH,
                 context: ENV.SOURCE_PATH,
                 globOptions: {
-                    ignore: ['**/img/svg-sprite/**'],
+                    ignore: ['**/img/svg-sprite/**', '**/jsconfig.json'],
                 },
                 noErrorOnMissing: true,
             })),
