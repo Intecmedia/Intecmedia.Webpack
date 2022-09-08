@@ -56,9 +56,9 @@ module.exports = {
         'property-disallowed-list': [
             ['gap', 'row-gap', 'column-gap'], // https://caniuse.com/?search=gap
         ],
-        // code style rules (slowest)
         ...(ENV.PROD
-            ? {
+            ? // code style rules (slowest)
+              {
                   'color-hex-alpha': 'never',
                   'property-no-unknown': [
                       true,
@@ -67,6 +67,11 @@ module.exports = {
                       },
                   ],
               }
-            : {}),
+            : // dev-only rules (better dev experience)
+              {
+                  'declaration-block-no-duplicate-custom-properties': null,
+                  'declaration-block-no-duplicate-properties': null,
+                  'no-duplicate-selectors': null,
+              }),
     },
 };
