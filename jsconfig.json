@@ -1,11 +1,12 @@
 {
     "compilerOptions": {
         "module": "commonjs",
+        "moduleResolution": "node",
         "target": "es6",
         "baseUrl": ".",
         "paths": {
         }
     },
     "include": ["./.*.js", "./*.js"],
-    "exclude": ["node_modules", "source/js/**/*"]
+    "exclude": ["node_modules", "source", "build"]
 }
