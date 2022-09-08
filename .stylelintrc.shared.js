@@ -10,7 +10,6 @@ module.exports = {
     'plugins': ['stylelint-no-unsupported-browser-features'],
     'rules': {
         // code quality rules (fastest)
-        'color-hex-alpha': 'never',
         'declaration-block-no-duplicate-custom-properties': null,
         'declaration-block-no-duplicate-properties': [
             true,
@@ -60,6 +59,7 @@ module.exports = {
         // code style rules (slowest)
         ...(ENV.PROD
             ? {
+                  'color-hex-alpha': 'never',
                   'property-no-unknown': [
                       true,
                       {
