@@ -24,13 +24,6 @@ module.exports = {
                 },
             },
         },
-        {
-            'files': '*.ts',
-            'options': {
-                'singleQuote': true,
-            },
-            'parser': '@typescript-eslint/parser',
-        },
     ],
     'printWidth': 120,
     'quoteProps': 'preserve',
