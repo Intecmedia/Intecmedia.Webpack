@@ -73,14 +73,20 @@ module.exports = {
         'require-await': ['error'],
         ...(ENV.PROD
             ? // code style rules (slowest)
-              {}
+              {
+                  'import/no-cycle': ['error'],
+              }
             : // dev-only rules (better dev experience)
               {
                   'compat/compat': 'off',
                   'import/no-extraneous-dependencies': 'off',
+                  'import/no-import-module-exports': 'off',
+                  'import/no-named-as-default': 'off',
                   'import/no-unresolved': 'off',
                   'no-alert': 'off',
                   'no-debugger': 'off',
+                  'no-misleading-character-class': 'off',
+                  'no-redeclare': 'off',
                   'no-unreachable': 'off',
                   'no-unused-expressions': 'off',
                   'no-unused-vars': 'off',
