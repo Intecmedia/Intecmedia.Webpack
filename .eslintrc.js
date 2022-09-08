@@ -70,7 +70,6 @@ module.exports = {
         'no-underscore-dangle': 'off',
         'prettier/prettier': ['error'],
         'require-await': ['error'],
-        'sort-requires/sort-requires': 'off',
         ...(ENV.PROD
             ? {}
             : {
