@@ -71,10 +71,11 @@ module.exports = {
         'no-underscore-dangle': 'off',
         'prettier/prettier': ['error'],
         'require-await': ['error'],
-        // code style rules (slowest)
         ...(ENV.PROD
-            ? {}
-            : {
+            ? // code style rules (slowest)
+              {}
+            : // dev-only rules (better dev experience)
+              {
                   'compat/compat': 'off',
                   'import/no-extraneous-dependencies': 'off',
                   'import/no-unresolved': 'off',

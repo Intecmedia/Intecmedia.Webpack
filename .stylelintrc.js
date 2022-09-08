@@ -87,9 +87,9 @@ module.exports = deepMerge({}, sharedConfig, {
                 'ignore': ['attribute', 'class'],
             },
         ],
-        // code style rules (slowest)
         ...(ENV.PROD
-            ? {
+            ? // code style rules (slowest)
+              {
                   'order/order': [
                       'dollar-variables',
                       'custom-properties',
@@ -130,6 +130,7 @@ module.exports = deepMerge({}, sharedConfig, {
                       },
                   ],
               }
-            : {}),
+            : // dev-only rules (better dev experience)
+              {}),
     },
 });
