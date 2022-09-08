@@ -10,7 +10,7 @@
         "convention": "kebab-case leading-underscore",
         "ignore": ["source/css/*.scss", "**/*/_.scss"]
     }, {
-        "pattern": "source/js/**/*.{js,ts}",
+        "pattern": "source/js/**/*.js",
         "test": "^([a-z0-9]+)(-[a-z0-9]+)*.(js|ts)$",
         "convention": "kebab-case",
         "ignore": ["source/js/external/*.*"]
