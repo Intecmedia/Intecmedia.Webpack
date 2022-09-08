@@ -131,6 +131,10 @@ module.exports = deepMerge({}, sharedConfig, {
                   ],
               }
             : // dev-only rules (better dev experience)
-              {}),
+              {
+                  'order/order': null,
+                  'order/properties-alphabetical-order': null,
+                  'order/properties-order': null,
+              }),
     },
 });
