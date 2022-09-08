@@ -29,7 +29,6 @@ module.exports = deepMerge({}, sharedConfig, {
     ],
     'reportDescriptionlessDisables': true,
     'rules': {
-        'declaration-empty-line-before': null,
         'max-nesting-depth': [
             5,
             {
@@ -86,11 +85,9 @@ module.exports = deepMerge({}, sharedConfig, {
                 'ignore': ['after-comment', 'first-nested'],
             },
         ],
-        'scss/at-extend-no-missing-placeholder': null,
         'scss/at-import-no-partial-leading-underscore': true,
         'scss/at-import-partial-extension': 'never',
         'scss/at-import-partial-extension-blacklist': ['scss', 'css'],
-        'scss/at-mixin-argumentless-call-parentheses': 'always',
         'scss/at-rule-no-unknown': [
             true,
             {
@@ -118,7 +115,6 @@ module.exports = deepMerge({}, sharedConfig, {
             },
         ],
         'scss/selector-nest-combinators': 'always',
-        'scss/selector-no-redundant-nesting-selector': true,
         'selector-class-pattern': ['^[a-zA-Z0-9\\-_]+$'],
         'selector-max-class': 5,
         'selector-max-compound-selectors': 5,
