@@ -1,4 +1,3 @@
-/* eslint "quote-props": ["error", "always"] -- more readability keys */
 /* eslint "sort-keys": "error" -- more readability keys */
 
 const APP = require('./app.config');
@@ -28,6 +27,12 @@ module.exports = {
                 'global-require': 'off',
                 'import/no-dynamic-require': 'off',
                 'max-classes-per-file': 'off',
+            },
+        },
+        {
+            'files': ['./.*rc.js', './.*rc.*.js'],
+            'rules': {
+                'quote-props': ['error', 'always'],
             },
         },
     ],

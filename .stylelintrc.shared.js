@@ -1,4 +1,3 @@
-/* eslint "quote-props": ["error", "always"] -- more readability keys */
 /* eslint "sort-keys": "error" -- more readability keys */
 
 const ENV = require('./app.env');

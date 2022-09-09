@@ -1,5 +1,3 @@
-/* eslint 'quote-props': ['error', 'always'] -- more readability keys */
-
 module.exports = {
     'indent_char': ' ',
     'indent_size': 4,
