@@ -1,15 +1,13 @@
-const fs = require('fs');
 const path = require('path');
 const slash = require('slash');
 const minimatch = require('minimatch');
-const ignore = require('ignore');
 const weblog = require('webpack-log');
 
 const UTILS = require('./webpack.utils');
 const config = require('./.filenamelintrc.json');
 
 const logger = weblog({ name: 'filename-lint' });
-const lintIgnore = ignore().add(fs.readFileSync('./.filenamelintignore').toString());
+const lintIgnore = UTILS.readIgnoreFile('./.filenamelintignore');
 const statMessages = { skipped: 0, errors: 0, ignored: 0 };
 
 const patterns = [...UTILS.processArgs._];

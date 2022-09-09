@@ -4,16 +4,15 @@ const slash = require('slash');
 const weblog = require('webpack-log');
 const frontMatter = require('front-matter');
 const Typograf = require('typograf');
-const ignore = require('ignore');
 
 const ENV = require('./app.env');
 const UTILS = require('./webpack.utils');
 
 const logger = weblog({ name: 'html-typograf' });
-const typografIgnore = ignore().add(fs.readFileSync('./.typografignore').toString());
+const typografIgnore = UTILS.readIgnoreFile('./.typografignore');
 const statMessages = { fixed: 0, skipped: 0, ignored: 0 };
 const patterns = [...UTILS.processArgs._];
-const options = require('./.typografrc.json');
+const options = UTILS.readJsonFile('./.typografrc.json');
 
 const instance = new Typograf(options);
 instance.addSafeTag('{{', '}}');

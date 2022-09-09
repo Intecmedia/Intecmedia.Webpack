@@ -4,16 +4,15 @@ const slash = require('slash');
 const weblog = require('webpack-log');
 const frontMatter = require('front-matter');
 const beautify = require('js-beautify');
-const ignore = require('ignore');
 
 const ENV = require('./app.env');
 const UTILS = require('./webpack.utils');
 
 const logger = weblog({ name: 'html-beautify' });
-const beautifyfIgnore = ignore().add(fs.readFileSync('./.jsbeautifyignore').toString());
+const beautifyfIgnore = UTILS.readIgnoreFile('./.jsbeautifyignore');
 const statMessages = { fixed: 0, skipped: 0, ignored: 0 };
 const patterns = [...UTILS.processArgs._];
-const config = JSON.parse(fs.readFileSync('./.jsbeautifyrc'));
+const config = UTILS.readJsonFile('./.jsbeautifyrc');
 
 function stripWhitespaces(string) {
     let result = string;

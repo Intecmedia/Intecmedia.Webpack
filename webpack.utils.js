@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const slash = require('slash');
 const glob = require('glob');
+const ignore = require('ignore');
 const yargs = require('yargs/yargs');
 const findCacheDir = require('find-cache-dir');
 
@@ -155,3 +156,15 @@ processArgs.env =
         : {};
 
 module.exports.processArgs = processArgs;
+
+function readJsonFile(filepath) {
+    return JSON.parse(fs.readFileSync(filepath));
+}
+
+module.exports.readJsonFile = readJsonFile;
+
+function readIgnoreFile(filepath) {
+    return ignore().add(fs.readFileSync(filepath).toString());
+}
+
+module.exports.readIgnoreFile = readIgnoreFile;
