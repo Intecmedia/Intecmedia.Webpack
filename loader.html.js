@@ -139,7 +139,6 @@ module.exports = function HtmlLoader() {
     loaderContext.addContextDependency(helpersDir);
 
     const options = deepMerge({}, DEFAULT_OPTIONS, loaderContext.getOptions(), {
-        /* eslint-disable-next-line global-require, import/no-dynamic-require -- webpack is node env */
         context: require(htmlDataModule),
     });
     validateOptions(OPTIONS_SCHEMA, options, 'loader-html');
