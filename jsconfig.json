@@ -7,6 +7,6 @@
         "paths": {
         }
     },
-    "include": ["./.*.js", "./*.js"],
-    "exclude": ["node_modules", "source", "build"]
+    "include": ["./.*.js", "./*.js", "./source/helpers/*.js", "./source/html.data.js"],
+    "exclude": ["node_modules", "source/js", "build"]
 }

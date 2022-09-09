@@ -1,6 +1,5 @@
 {
-    "compilerOptions": {
-        "module": "es6",
+    "compilerOptions": {        
         "moduleResolution": "classic",
         "target": "esnext",
         "baseUrl": ".",

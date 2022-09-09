@@ -11,6 +11,7 @@ module.exports = {
         {
             'env': {
                 'browser': true,
+                'es2022': true,
                 'jquery': APP.JQUERY,
             },
             'extends': ['plugin:compat/recommended', 'plugin:prettier/recommended'],
