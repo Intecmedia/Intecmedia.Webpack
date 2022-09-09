@@ -21,6 +21,7 @@ module.exports = {
                 debug: ENV.DEBUG || !ENV.PROD || ENV.ARGV.verbose,
                 targets: { browsers: ENV.BROWSERS },
                 ignoreBrowserslistConfig: true,
+                shippedProposals: true,
             },
         ],
         ['@babel/preset-typescript', {}],
