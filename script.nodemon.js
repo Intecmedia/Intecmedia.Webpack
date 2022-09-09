@@ -35,7 +35,8 @@ nodemon
     })
     .on('quit', () => {
         logger.warn('App has quit');
-        process.exit();
+        // eslint-disable-next-line no-process-exit -- its ok
+        process.exit(0);
     })
     .on('restart', (files) => {
         logger.info('App restarted due to: ', files);
@@ -45,10 +46,12 @@ process
     .on('exit', (code) => {
         // Handle normal exits
         nodemon.emit('quit');
+        // eslint-disable-next-line no-process-exit -- its ok
         process.exit(code);
     })
     .on('SIGINT', () => {
         // Handle CTRL+C
         nodemon.emit('quit');
+        // eslint-disable-next-line no-process-exit -- its ok
         process.exit(0);
     });

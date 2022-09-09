@@ -134,8 +134,8 @@ module.exports = deepMerge({}, sharedConfig, {
               {
                   'at-rule-disallowed-list': null,
                   'block-no-empty': null,
-                  'no-empty-source': null,
                   'comment-no-empty': null,
+                  'no-empty-source': null,
                   'order/order': null,
                   'order/properties-alphabetical-order': null,
                   'order/properties-order': null,

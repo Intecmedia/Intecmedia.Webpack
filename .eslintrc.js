@@ -7,17 +7,25 @@ const APP = require('./app.config');
 const ENV = require('./app.env');
 
 module.exports = {
-    'env': {
-        'amd': true,
-        'browser': true,
-        'jquery': APP.JQUERY,
-        'node': false,
-    },
-    'extends': [
-        'plugin:compat/recommended',
-        'plugin:eslint-comments/recommended',
-        'airbnb-base',
-        'plugin:prettier/recommended',
+    'env': {},
+    'extends': ['plugin:eslint-comments/recommended', 'airbnb-base'],
+    'overrides': [
+        {
+            'env': {
+                'browser': true,
+                'jquery': APP.JQUERY,
+            },
+            'extends': ['plugin:compat/recommended', 'plugin:prettier/recommended'],
+            'files': ['./source/js/**/*.js'],
+        },
+        {
+            'env': {
+                'commonjs': true,
+                'node': true,
+            },
+            'extends': ['plugin:node/recommended', 'plugin:prettier/recommended'],
+            'files': ['./*.js', './source/helpers/*.js', './source/html.data.js'],
+        },
     ],
     'parser': '@babel/eslint-parser',
     'parserOptions': {
