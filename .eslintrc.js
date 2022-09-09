@@ -15,7 +15,10 @@ module.exports = {
                 'es2022': true,
                 'jquery': APP.JQUERY,
             },
-            'extends': ['plugin:compat/recommended', 'plugin:prettier/recommended'],
+            'extends': [
+                'plugin:compat/recommended',
+                'plugin:prettier/recommended', // prettier always last
+            ],
             'files': ['./source/js/**/*.js'],
         },
         // node code
@@ -24,7 +27,10 @@ module.exports = {
                 'commonjs': true,
                 'node': true,
             },
-            'extends': ['plugin:node/recommended', 'plugin:prettier/recommended'],
+            'extends': [
+                'plugin:node/recommended',
+                'plugin:prettier/recommended', // prettier always last
+            ],
             'files': ['./*.js', './source/helpers/*.js', './source/html.data.js'],
             'rules': {
                 'global-require': 'off',

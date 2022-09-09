@@ -12,9 +12,9 @@ module.exports = deepMerge({}, sharedConfig, {
     'extends': [
         'stylelint-config-sass-guidelines',
         'stylelint-config-twbs-bootstrap',
-        'stylelint-prettier/recommended',
-        'stylelint-config-prettier-scss',
         ...sharedConfig.extends,
+        'stylelint-prettier/recommended', // prettier always last
+        'stylelint-config-prettier-scss', // prettier always last
     ],
     'plugins': [
         'stylelint-high-performance-animation',
