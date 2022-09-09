@@ -1,5 +1,6 @@
 /* eslint max-lines: "off", max-len: "off" -- webpack is node env */
 
+const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const weblog = require('webpack-log');
@@ -354,7 +355,7 @@ module.exports = {
         ...(APP.HTML_PRETTY
             ? [
                   new HtmlBeautifyPlugin({
-                      ...require('./.beautifyrc'),
+                      ...JSON.parse(fs.readFileSync('./.jsbeautifyrc')),
                   }),
               ]
             : []),

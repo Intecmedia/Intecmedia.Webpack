@@ -10,10 +10,10 @@ const ENV = require('./app.env');
 const UTILS = require('./webpack.utils');
 
 const logger = weblog({ name: 'html-beautify' });
-const beautifyfIgnore = ignore().add(fs.readFileSync('./.beautifyignore').toString());
+const beautifyfIgnore = ignore().add(fs.readFileSync('./.jsbeautifyignore').toString());
 const statMessages = { fixed: 0, skipped: 0, ignored: 0 };
 const patterns = [...UTILS.processArgs._];
-const config = require('./.beautifyrc');
+const config = JSON.parse(fs.readFileSync('./.jsbeautifyrc'));
 
 function stripWhitespaces(string) {
     let result = string;
