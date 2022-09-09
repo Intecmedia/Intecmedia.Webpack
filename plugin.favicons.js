@@ -12,7 +12,7 @@ class FaviconsWebpackPlugin extends FaviconsWebpackPluginOriginal {
         super.apply(compiler);
 
         compiler.hooks.compilation.tap('FaviconsWebpackPlugin', (compilation) =>
-            HtmlWebpackPlugin.getHooks(compilation).beforeEmit.tapPromise('FaviconsWebpackPlugin', (htmlPluginData) => {
+            HtmlWebpackPlugin.getHooks(compilation).beforeEmit.tap('FaviconsWebpackPlugin', (htmlPluginData) => {
                 htmlPluginData.html = htmlPluginData.html.replace(ICO_PATTERN, '');
             })
         );
