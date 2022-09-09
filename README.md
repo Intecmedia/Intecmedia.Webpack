@@ -47,7 +47,8 @@
 * **npm run watch-dev** – watch в development-режиме и debug=off, самый быстрый способ.
 * **npm run watch-debug** – watch в development-режиме и debug=on, медленный способ.
 * **npm run js-lint** – линтер js через [eslint](https://eslint.org/).
-* **npm run js-lint-config** – печатает конфиг [eslint](https://eslint.org/).
+* **npm run js-lint-config** – печатает конфиг(для browser) [eslint](https://eslint.org/).
+* **npm run js-lint-config-node** – печатает конфиг(для node) [eslint](https://eslint.org/).
 * **npm run css-lint** – линтер scss через [stylelint](https://stylelint.io/).
 * **npm run css-lint-config** – печатает конфиг [stylelint](https://stylelint.io/).
 * **npm run html-validate** – линтер html(prod) через [html-validate](https://html-validate.org/).
