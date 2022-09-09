@@ -5,8 +5,10 @@ const ENV = require('./app.env');
 
 module.exports = {
     'env': {},
+    // common extends
     'extends': ['plugin:eslint-comments/recommended', 'airbnb-base'],
     'overrides': [
+        // browser code
         {
             'env': {
                 'browser': true,
@@ -16,6 +18,7 @@ module.exports = {
             'extends': ['plugin:compat/recommended', 'plugin:prettier/recommended'],
             'files': ['./source/js/**/*.js'],
         },
+        // node code
         {
             'env': {
                 'commonjs': true,
@@ -29,6 +32,7 @@ module.exports = {
                 'max-classes-per-file': 'off',
             },
         },
+        // config files
         {
             'files': ['./.*rc.js', './.*rc.*.js'],
             'rules': {
@@ -44,6 +48,7 @@ module.exports = {
     },
     'plugins': ['@babel', 'import'],
     'root': true,
+    // common rules
     'rules': {
         // code quality rules (fastest)
         'class-methods-use-this': 'off',
