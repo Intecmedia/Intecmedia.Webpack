@@ -15,11 +15,6 @@ const statMessages = { fixed: 0, skipped: 0, ignored: 0 };
 const patterns = [...UTILS.processArgs._];
 const config = require('./.beautifyrc');
 
-const options = {
-    ...config,
-    templating: 'django',
-};
-
 function stripWhitespaces(string) {
     let result = string;
 
@@ -36,7 +31,7 @@ function stripWhitespaces(string) {
 }
 
 function beautifyHtml(html) {
-    let result = beautify.html(html, options);
+    let result = beautify.html(html, config);
 
     result = stripWhitespaces(result);
     result = result.replace(/{{\s*/g, '{{ ').replace(/\s*}}/g, ' }}');

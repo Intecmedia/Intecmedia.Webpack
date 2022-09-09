@@ -1,7 +1,9 @@
 module.exports = {
+    'templating': ['django'],
     'indent_char': ' ',
     'indent_size': 4,
     'html': {
+        'templating': ['django'],
         'max_preserve_newlines': 1,
         'wrap_line_length': 120,
         'wrap_attributes': 'preserve-aligned',
