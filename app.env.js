@@ -6,6 +6,7 @@ const frontMatter = require('front-matter');
 
 const APP = require('./app.config');
 const UTILS = require('./webpack.utils');
+const PACKAGE = require('./package.json');
 
 const realcwd = fs.realpathSync(process.cwd());
 if (process.cwd() !== realcwd) {
@@ -22,8 +23,6 @@ const NODE_ENV = PROD ? 'production' : 'development';
 
 const VERBOSE = NODE_ENV === 'development' || DEBUG;
 const SOURCE_MAP = DEBUG || !PROD || DEV_SERVER;
-
-const { name: PACKAGE_NAME, browserslist } = require('./package.json');
 
 const SOURCE_PATH = path.resolve(__dirname, 'source');
 const OUTPUT_PATH = path.resolve(__dirname, APP.OUTPUT_PATH ? APP.OUTPUT_PATH : 'build');
@@ -83,7 +82,7 @@ const SITEMAP = glob
     });
 
 const BANNER_STRING = [
-    `[${PACKAGE_NAME}]: ENV.NODE_ENV=${NODE_ENV} | ENV.DEBUG=${DEBUG}`,
+    `[${PACKAGE.name}]: ENV.NODE_ENV=${NODE_ENV} | ENV.DEBUG=${DEBUG}`,
     fs.readFileSync(path.join(SOURCE_PATH, 'humans.txt')),
 ].join('\n\n');
 
@@ -98,9 +97,9 @@ module.exports = {
     SOURCE_MAP,
     SOURCE_PATH,
     OUTPUT_PATH,
-    PACKAGE_NAME,
-    BROWSERSLIST: browserslist,
-    BROWSERS: DEBUG ? browserslist.production : browserslist[NODE_ENV],
+    PACKAGE_NAME: PACKAGE.name,
+    BROWSERSLIST: PACKAGE.browserslist,
+    BROWSERS: DEBUG ? PACKAGE.browserslist.production : PACKAGE.browserslist[NODE_ENV],
     SITEMAP,
     VERBOSE,
     BANNER_STRING,
