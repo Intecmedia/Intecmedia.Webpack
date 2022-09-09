@@ -1,6 +1,3 @@
-/* eslint-env node -- webpack is node env */
-/* eslint "compat/compat": "off", "require-await": "off" -- webpack is node env */
-
 const deepMerge = require('lodash.merge');
 const ImageSize = require('image-size');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -15,12 +12,9 @@ class FaviconsWebpackPlugin extends FaviconsWebpackPluginOriginal {
         super.apply(compiler);
 
         compiler.hooks.compilation.tap('FaviconsWebpackPlugin', (compilation) =>
-            HtmlWebpackPlugin.getHooks(compilation).beforeEmit.tapPromise(
-                'FaviconsWebpackPlugin',
-                async (htmlPluginData) => {
-                    htmlPluginData.html = htmlPluginData.html.replace(ICO_PATTERN, '');
-                }
-            )
+            HtmlWebpackPlugin.getHooks(compilation).beforeEmit.tapPromise('FaviconsWebpackPlugin', (htmlPluginData) => {
+                htmlPluginData.html = htmlPluginData.html.replace(ICO_PATTERN, '');
+            })
         );
     }
 }

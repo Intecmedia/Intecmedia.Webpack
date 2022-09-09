@@ -1,5 +1,4 @@
-/* eslint-env node -- webpack is node env */
-/* eslint global-require: "off", max-lines: "off", import/no-dynamic-require: "off", max-len: "off", "compat/compat": "off" -- webpack is node env */
+/* eslint max-lines: "off", max-len: "off" -- webpack is node env */
 
 const path = require('path');
 const webpack = require('webpack');

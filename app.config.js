@@ -1,6 +1,3 @@
-/* eslint-env node -- webpack is node env */
-/* eslint global-require: "off", max-len: "off" -- webpack is node env */
-
 module.exports = {
     TITLE: '$APP.TITLE$',
     SHORT_NAME: '$APP.SHORT_NAME$',

@@ -1,5 +1,3 @@
-/* eslint-env node -- webpack is node env */
-/* eslint "compat/compat": "off" -- webpack is node env */
 const fs = require('fs');
 const semver = require('semver');
 const childProcess = require('child_process');

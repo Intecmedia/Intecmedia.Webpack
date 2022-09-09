@@ -1,6 +1,3 @@
-/* eslint-env node -- webpack is node env */
-/* eslint "compat/compat": "off" -- webpack is node env */
-
 const path = require('path');
 
 module.exports = {

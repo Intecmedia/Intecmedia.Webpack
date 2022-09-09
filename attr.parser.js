@@ -1,7 +1,3 @@
-/* eslint-env node -- webpack is node env */
-/* eslint "compat/compat": "off" -- webpack is node env */
-/* eslint "no-invalid-this": "off" -- its ok for 3d-party */
-
 const Parser = require('fastparse');
 
 function processMatch(match, orig, attr, value, index) {

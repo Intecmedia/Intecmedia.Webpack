@@ -1,6 +1,3 @@
-/* eslint-env node -- webpack is node env */
-/* eslint "compat/compat": "off" -- webpack is node env */
-
 const nunjucksRuntime = require('nunjucks/src/runtime');
 
 const NEWLINE_PATTERN = /\r\n|\n/g;

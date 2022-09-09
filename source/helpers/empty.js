@@ -1,6 +1,3 @@
-/* eslint-env node -- webpack is node env */
-/* eslint "compat/compat": "off" -- webpack is node env */
-
 module.exports = function helper(value, empty = true) {
     if (Array.isArray(value)) {
         return value.length > 0 ? value : empty;

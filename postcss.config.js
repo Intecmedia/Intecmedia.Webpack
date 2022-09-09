@@ -1,6 +1,3 @@
-/* eslint-env node -- webpack is node env */
-/* eslint global-require: "off", "compat/compat": "off" -- webpack is node env */
-
 const APP = require('./app.config');
 const ENV = require('./app.env');
 

@@ -1,6 +1,3 @@
-/* eslint-env node -- webpack is node env */
-/* eslint max-len: "off", "compat/compat": "off" -- webpack is node env */
-
 const fs = require('fs');
 const weblog = require('webpack-log');
 

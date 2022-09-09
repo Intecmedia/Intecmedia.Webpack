@@ -1,6 +1,3 @@
-/* eslint-env node -- webpack is node env */
-/* eslint "compat/compat": "off", "require-await": "off" -- webpack is node env */
-
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const deepMerge = require('lodash.merge');
 const beautify = require('js-beautify');
@@ -13,7 +10,7 @@ class HtmlBeautifyPlugin {
 
     apply(compiler) {
         compiler.hooks.compilation.tap(this.pluginName, (compilation) =>
-            HtmlWebpackPlugin.getHooks(compilation).beforeEmit.tapPromise(this.pluginName, async (htmlPluginData) => {
+            HtmlWebpackPlugin.getHooks(compilation).beforeEmit.tapPromise(this.pluginName, (htmlPluginData) => {
                 if (htmlPluginData.outputName && htmlPluginData.outputName.endsWith('.html')) {
                     htmlPluginData.html = beautify.html(htmlPluginData.html, this.options);
                 }

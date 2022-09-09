@@ -1,6 +1,3 @@
-/* eslint-env node -- webpack is node env */
-/* eslint global-require: "off", "compat/compat": "off" -- webpack is node env */
-
 const uniqueId = require('lodash.uniqueid');
 
 const SvgoCreateConfig = (config) => ({

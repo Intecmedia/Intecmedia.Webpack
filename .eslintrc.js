@@ -1,5 +1,3 @@
-/* eslint-env node -- webpack is node env */
-/* eslint "compat/compat": "off" -- webpack is node env */
 /* eslint "quote-props": ["error", "always"] -- more readability keys */
 /* eslint "sort-keys": "error" -- more readability keys */
 
@@ -25,6 +23,11 @@ module.exports = {
             },
             'extends': ['plugin:node/recommended', 'plugin:prettier/recommended'],
             'files': ['./*.js', './source/helpers/*.js', './source/html.data.js'],
+            'rules': {
+                'global-require': 'off',
+                'import/no-dynamic-require': 'off',
+                'max-classes-per-file': 'off',
+            },
         },
     ],
     'parser': '@babel/eslint-parser',

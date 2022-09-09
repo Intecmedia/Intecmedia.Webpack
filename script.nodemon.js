@@ -1,6 +1,3 @@
-/* eslint-env node -- webpack is node env */
-/* eslint "compat/compat": "off" -- webpack is node env */
-
 const nodemon = require('nodemon');
 const nodemonCli = require('nodemon/lib/cli');
 const deepMerge = require('lodash.merge');

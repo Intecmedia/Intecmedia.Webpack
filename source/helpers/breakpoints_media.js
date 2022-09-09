@@ -1,6 +1,3 @@
-/* eslint-env node -- webpack is node env */
-/* eslint "compat/compat": "off" -- webpack is node env */
-
 const DEFAULT_XS = 576;
 const DEFAULT_SM = 768;
 const DEFAULT_MD = 992;
