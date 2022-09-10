@@ -1,6 +1,5 @@
 /* global NODE_ENV VERBOSE BANNER_STRING __webpack_hash__ */
 
-// import '~/components/aquilon-validator';
 import '~/components/bootstrap';
 import '~/components/viewport-height';
 import '~/components/scrollbar-width';

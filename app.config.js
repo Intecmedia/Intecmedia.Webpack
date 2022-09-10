@@ -25,6 +25,7 @@ module.exports = {
     STYLELINT: true,
     ESLINT: true,
     IMAGEMIN: true,
+    GRID: false,
     get ENV() {
         return require('./app.env');
     },
