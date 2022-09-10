@@ -177,7 +177,7 @@
         "html-webpack-plugin": "^5.5.0",
         "husky": "^8.0.1",
         "ignore": "^5.2.0",
-        "image-minimizer-webpack-plugin": "^3.3.1",
+        "image-minimizer-webpack-plugin": "^3.4.0",
         "image-size": "^1.0.2",
         "imagemin": "^8.0.1",
         "imagemin-svgo": "^10.0.1",
