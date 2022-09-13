@@ -18,7 +18,7 @@ class TableResponsiveRequired extends Rule {
                 return;
             }
 
-            if (!table.parent.classList.contains('table-responsive')) {
+            if (!(table.parent && table.parent.classList.contains('table-responsive'))) {
                 this.report(table, '<table> required `<div class="table-responsive">` parent.');
             }
         });
