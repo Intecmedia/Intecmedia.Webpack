@@ -78,7 +78,8 @@ class IntersectionBlocks extends AbstractComponent {
             entry.target.setAttribute('data-intersection-is-downward', isDownward + 0);
 
             const isVisible = intersectionRatio ? entry.intersectionRatio >= intersectionRatio : entry.isIntersecting;
-            if (entry.target.getAttribute('data-intersection-is-visible') === (isVisible ? '1' : '0')) {
+            const isEqual = entry.target.getAttribute('data-intersection-is-visible') === (isVisible ? '1' : '0');
+            if (isEqual) {
                 return;
             }
             entry.target.setAttribute('data-intersection-is-visible', isVisible + 0);
