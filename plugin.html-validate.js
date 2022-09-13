@@ -5,6 +5,7 @@ const { rules: videoRules } = require('./plugin.html-validate.video');
 const { rules: commonRules } = require('./plugin.html-validate.common');
 const { rules: bemRules } = require('./plugin.html-validate.bem');
 const { rules: tableRules } = require('./plugin.html-validate.table');
+const { rules: wysiwygRules } = require('./plugin.html-validate.wysiwyg');
 
 module.exports = {
     name: 'pitcher',
@@ -16,5 +17,6 @@ module.exports = {
         ...videoRules,
         ...bemRules,
         ...tableRules,
+        ...wysiwygRules,
     },
 };
