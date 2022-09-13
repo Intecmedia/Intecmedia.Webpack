@@ -153,7 +153,7 @@
         "css-tree": "^2.2.1",
         "cssnano": "^5.1.13",
         "date-fns": "^2.29.2",
-        "eslint": "^8.23.0",
+        "eslint": "^8.23.1",
         "eslint-config-airbnb-base": "^15.0.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-import-resolver-webpack": "^0.13.2",
