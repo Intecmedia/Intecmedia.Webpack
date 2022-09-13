@@ -85,6 +85,12 @@ module.exports = {
                 'webp': (ENV.PROD || ENV.DEBUG) && APP.WEBP,
             },
         ],
+        'pitcher/table-responsive-required': [
+            'error',
+            {
+                'ignore': null,
+            },
+        ],
         'pitcher/video-playsinline-required': [
             'error',
             {
