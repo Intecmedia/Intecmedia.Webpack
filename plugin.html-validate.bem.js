@@ -15,9 +15,9 @@ class NoMissingElement extends Rule {
         this.on('dom:ready', this.domReady.bind(this));
     }
 
-    domReady(event) {
-        const nodes = event.document.querySelectorAll('body [class]');
-        const ignores = this.options.ignore ? event.document.querySelectorAll(this.options.ignore) : [];
+    domReady({ document }) {
+        const nodes = document.querySelectorAll('body [class]');
+        const ignores = this.options.ignore ? document.querySelectorAll(this.options.ignore) : [];
         nodes.forEach((node) => {
             if (nodeIgnore(node, ignores)) {
                 return;
@@ -50,13 +50,14 @@ class NoMissingModifier extends Rule {
         this.on('dom:ready', this.domReady.bind(this));
     }
 
-    domReady(event) {
-        const nodes = event.document.querySelectorAll('body [class]');
-        const ignores = this.options.ignore ? event.document.querySelectorAll(this.options.ignore) : [];
+    domReady({ document }) {
+        const nodes = document.querySelectorAll('body [class]');
+        const ignores = this.options.ignore ? document.querySelectorAll(this.options.ignore) : [];
         nodes.forEach((node) => {
             if (nodeIgnore(node, ignores)) {
                 return;
             }
+
             const classList = node.getAttributeValue('class').trim().split(CLASS_SEPARATOR);
             classList.forEach((className) => {
                 if (!MODIFIER_PATTERN.test(className)) return;

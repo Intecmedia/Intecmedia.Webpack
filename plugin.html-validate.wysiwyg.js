@@ -10,15 +10,16 @@ class WysiwygClassAllowed extends Rule {
         this.on('dom:ready', this.domReady.bind(this));
     }
 
-    domReady(event) {
-        const items = event.document.querySelectorAll('.wysiwyg [class]');
-        const ignores = this.options.ignore ? event.document.querySelectorAll(this.options.ignore) : [];
+    domReady({ document }) {
+        const items = document.querySelectorAll('.wysiwyg [class]');
+        const ignores = this.options.ignore ? document.querySelectorAll(this.options.ignore) : [];
         const allowed = this.options.allowed ? this.options.allowed.map((i) => i.toLowerCase()) : [];
 
         items.forEach((node) => {
             if (nodeIgnore(node, ignores)) {
                 return;
             }
+
             const className = node.classList.find((i) => !allowed.includes(i.toLowerCase()));
             if (className) {
                 this.report(node, `Class \`${className}\` not allowed inside \`.wysiwyg\`.`);

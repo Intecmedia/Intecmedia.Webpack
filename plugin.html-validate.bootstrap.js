@@ -41,16 +41,15 @@ class AbsRule extends Rule {
 }
 
 class ContainerNoNested extends AbsRule {
-    domReady(event) {
-        const containers = event.document.querySelectorAll('.container, .container-fluid');
-        const ignores = this.options.ignore ? event.document.querySelectorAll(this.options.ignore) : [];
+    domReady({ document }) {
+        const containers = document.querySelectorAll('.container, .container-fluid');
+        const ignores = this.options.ignore ? document.querySelectorAll(this.options.ignore) : [];
         containers.forEach((container) => {
-            const { parent } = container;
-            if (nodeIgnore(container, ignores) || !parent) {
+            if (nodeIgnore(container, ignores) || !container.parent) {
                 return;
             }
-            const { classList } = parent;
-            if (classList.contains('container') || classList.contains('container-fluid')) {
+
+            if (container.parent.classList.contains('container') || container.parent.classList.contains('container-fluid')) {
                 this.report(container, 'Containers (`.container` and `.container-fluid`) are not nestable.');
             }
         });
@@ -58,14 +57,15 @@ class ContainerNoNested extends AbsRule {
 }
 
 class ColNoRow extends AbsRule {
-    domReady(event) {
+    domReady({ document }) {
         const selector = colSelector(this.options.cols, this.options.breakpoints);
-        const cols = event.document.querySelectorAll(selector);
-        const ignores = this.options.ignore ? event.document.querySelectorAll(this.options.ignore) : [];
+        const cols = document.querySelectorAll(selector);
+        const ignores = this.options.ignore ? document.querySelectorAll(this.options.ignore) : [];
         cols.forEach((col) => {
             if (nodeIgnore(col, ignores)) {
                 return;
             }
+
             if (col.classList.contains('row')) {
                 this.report(col, 'Found both `.row` and `.col-*-*` used on the same element.');
             }
@@ -77,14 +77,15 @@ class ColNoRow extends AbsRule {
 }
 
 class RowNoChilds extends AbsRule {
-    domReady(event) {
+    domReady({ document }) {
         const cols = makeColsClassList(this.options.cols, this.options.breakpoints);
-        const elements = event.document.querySelectorAll('.row > *');
-        const ignores = this.options.ignore ? event.document.querySelectorAll(this.options.ignore) : [];
+        const elements = document.querySelectorAll('.row > *');
+        const ignores = this.options.ignore ? document.querySelectorAll(this.options.ignore) : [];
         elements.forEach((el) => {
             if (nodeIgnore(el, ignores)) {
                 return;
             }
+
             if (!cols.some((className) => el.classList.contains(className))) {
                 this.report(el, 'Only columns (`.col-*-*`) may be children of `.row`s.');
             }
@@ -101,13 +102,14 @@ class FormSelectNoFormControl extends Rule {
         this.on('dom:ready', this.domReady.bind(this));
     }
 
-    domReady(event) {
-        const selects = event.document.querySelectorAll('select');
-        const ignores = this.options.ignore ? event.document.querySelectorAll(this.options.ignore) : [];
+    domReady({ document }) {
+        const selects = document.querySelectorAll('select');
+        const ignores = this.options.ignore ? document.querySelectorAll(this.options.ignore) : [];
         selects.forEach((select) => {
             if (nodeIgnore(select, ignores)) {
                 return;
             }
+
             if (select.classList.contains('form-control')) {
                 this.report(select, 'For <select> not allowed `form-control` class, use `form-select` instead.');
             }
@@ -124,13 +126,14 @@ class FormControlInputOnly extends Rule {
         this.on('dom:ready', this.domReady.bind(this));
     }
 
-    domReady(event) {
-        const controls = event.document.querySelectorAll('.form-control');
-        const ignores = this.options.ignore ? event.document.querySelectorAll(this.options.ignore) : [];
+    domReady({ document }) {
+        const controls = document.querySelectorAll('.form-control');
+        const ignores = this.options.ignore ? document.querySelectorAll(this.options.ignore) : [];
         controls.forEach((control) => {
             if (nodeIgnore(control, ignores)) {
                 return;
             }
+
             if (control.nodeName.toLowerCase() !== 'input') {
                 this.report(control, 'Class `form-control` allowed only for input`s.');
             }

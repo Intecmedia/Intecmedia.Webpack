@@ -10,13 +10,14 @@ class IframeLoadingRequired extends Rule {
         this.on('dom:ready', this.domReady.bind(this));
     }
 
-    domReady(event) {
-        const iframes = event.document.querySelectorAll('iframe');
-        const ignores = this.options.ignore ? event.document.querySelectorAll(this.options.ignore) : [];
+    domReady({ document }) {
+        const iframes = document.querySelectorAll('iframe');
+        const ignores = this.options.ignore ? document.querySelectorAll(this.options.ignore) : [];
         iframes.forEach((iframe) => {
             if (nodeIgnore(iframe, ignores)) {
                 return;
             }
+
             const loading = iframe.getAttributeValue('loading');
             if (!loading) {
                 this.report(iframe, '<iframe> required `loading` attribute.');

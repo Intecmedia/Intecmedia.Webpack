@@ -10,9 +10,9 @@ class TableResponsiveRequired extends Rule {
         this.on('dom:ready', this.domReady.bind(this));
     }
 
-    domReady(event) {
-        const tables = event.document.querySelectorAll('table');
-        const ignores = this.options.ignore ? event.document.querySelectorAll(this.options.ignore) : [];
+    domReady({ document }) {
+        const tables = document.querySelectorAll('table');
+        const ignores = this.options.ignore ? document.querySelectorAll(this.options.ignore) : [];
         tables.forEach((table) => {
             if (nodeIgnore(table, ignores)) {
                 return;

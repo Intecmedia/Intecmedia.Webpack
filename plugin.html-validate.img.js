@@ -15,9 +15,9 @@ class ImgPictureRequired extends Rule {
         this.on('dom:ready', this.domReady.bind(this));
     }
 
-    domReady(event) {
-        const imgs = event.document.querySelectorAll('img');
-        const ignores = this.options.ignore ? event.document.querySelectorAll(this.options.ignore) : [];
+    domReady({ document }) {
+        const imgs = document.querySelectorAll('img');
+        const ignores = this.options.ignore ? document.querySelectorAll(this.options.ignore) : [];
         imgs.forEach((img) => {
             if (nodeIgnore(img, ignores)) {
                 return;
@@ -69,13 +69,14 @@ class ImgLoadingRequired extends Rule {
         this.on('dom:ready', this.domReady.bind(this));
     }
 
-    domReady(event) {
-        const imgs = event.document.querySelectorAll('img');
-        const ignores = this.options.ignore ? event.document.querySelectorAll(this.options.ignore) : [];
+    domReady({ document }) {
+        const imgs = document.querySelectorAll('img');
+        const ignores = this.options.ignore ? document.querySelectorAll(this.options.ignore) : [];
         imgs.forEach((img) => {
             if (nodeIgnore(img, ignores)) {
                 return;
             }
+
             const loading = img.getAttributeValue('loading');
             if (!loading) {
                 this.report(img, '<img> required `loading` attribute.');

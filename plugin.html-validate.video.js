@@ -10,13 +10,14 @@ class VideoPlaysinlineRequired extends Rule {
         this.on('dom:ready', this.domReady.bind(this));
     }
 
-    domReady(event) {
-        const videos = event.document.querySelectorAll('video');
-        const ignores = this.options.ignore ? event.document.querySelectorAll(this.options.ignore) : [];
+    domReady({ document }) {
+        const videos = document.querySelectorAll('video');
+        const ignores = this.options.ignore ? document.querySelectorAll(this.options.ignore) : [];
         videos.forEach((video) => {
             if (nodeIgnore(video, ignores)) {
                 return;
             }
+
             const autoplay = video.hasAttribute('autoplay');
             const playsinline = video.hasAttribute('playsinline');
             if (autoplay && !playsinline) {

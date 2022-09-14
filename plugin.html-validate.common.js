@@ -12,9 +12,9 @@ class CheckNodeEnv extends Rule {
         this.on('dom:ready', this.domReady.bind(this));
     }
 
-    domReady(event) {
+    domReady({ document }) {
         const currentEnv = this.options.NODE_ENV;
-        const documentElement = event.document.querySelector('html');
+        const documentElement = document.querySelector('html');
         const documentEnv = documentElement.getAttributeValue('data-node-env');
         if (documentEnv !== currentEnv) {
             const reportCommand =
