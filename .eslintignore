@@ -1,4 +1,4 @@
 build/*
 node_modules/*
-source/js/external/*.min.js
+source/js/external/*
 !/.*.js
