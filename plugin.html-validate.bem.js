@@ -4,8 +4,6 @@ const { nodeIgnore } = require('./plugin.html-validate.utils');
 const MODIFIER_PATTERN = /(--([a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*))$/;
 const ELEMENT_PATTERN = /(__([a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*))$/;
 
-const CLASS_SEPARATOR = /[\s]+/;
-
 class NoMissingElement extends Rule {
     constructor(options) {
         super({ ignore: '', ...options });
@@ -22,7 +20,7 @@ class NoMissingElement extends Rule {
             if (nodeIgnore(node, ignores)) {
                 return;
             }
-            const classList = node.getAttributeValue('class').trim().split(CLASS_SEPARATOR);
+            const classList = [...node.classList];
             classList.forEach((className) => {
                 if (!ELEMENT_PATTERN.test(className)) return;
                 const [, elementMatch] = className.match(ELEMENT_PATTERN);
@@ -58,7 +56,7 @@ class NoMissingModifier extends Rule {
                 return;
             }
 
-            const classList = node.getAttributeValue('class').trim().split(CLASS_SEPARATOR);
+            const classList = [...node.classList];
             classList.forEach((className) => {
                 if (!MODIFIER_PATTERN.test(className)) return;
                 const [, modifierMatch] = className.match(MODIFIER_PATTERN);
