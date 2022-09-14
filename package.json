@@ -94,7 +94,7 @@
             "npm run filename-lint",
             "npm run image-lint"
         ],
-        "*.svg": "npm run svgo"
+        "*.svg": ["npm run svgo"]
     },
     "author": "Dmitry Pyatkov",
     "license": "MIT",
