@@ -15,48 +15,56 @@ if (process.platform === 'win32') {
 }
 
 if (PACKAGE.name === 'Intecmedia.Webpack') {
-    lintErrors.push('Please rename `name` in `package.json`');
+    lintErrors.push('`Intecmedia.Webpack` not allowed in production. Please rename `name` in `package.json`.');
 }
 
-if (APP.TITLE === '$APP.TITLE$' || APP.TITLE.trim() === '') {
-    lintErrors.push('Please rename `TITLE` in `app.config.js`');
+const NAME_PATTERN = /^(@[a-z0-9-~][a-z0-9-._~]*\/)?[a-z0-9-~][a-z0-9-._~]*$/i;
+
+if (!NAME_PATTERN.test(PACKAGE.name)) {
+    lintErrors.push(
+        `Expected to match pattern "${NAME_PATTERN.toString()}". Please rename \`name\` in \`package.json\`.`
+    );
+}
+
+if (APP.TITLE === '$APP.TITLE$') {
+    lintErrors.push('`$APP.TITLE$` not allowed in production. Please rename `TITLE` in `app.config.js`.');
 }
 if (APP.TITLE.trim() === '') {
-    lintErrors.push('Please fill `TITLE` in `app.config.js`');
+    lintErrors.push('Empty `TITLE` not allowed in production. Please fill `TITLE` in `app.config.js`.');
 }
 
-if (APP.SHORT_NAME === '$APP.SHORT_NAME$' || APP.SHORT_NAME.trim() === '') {
-    lintErrors.push('Please rename `SHORT_NAME` in `app.config.js`');
+if (APP.SHORT_NAME === '$APP.SHORT_NAME$') {
+    lintErrors.push('`$APP.SHORT_NAME$` not allowed in production. Please rename `SHORT_NAME` in `app.config.js`.');
 }
 if (APP.SHORT_NAME.trim() === '') {
-    lintErrors.push('Please fill `SHORT_NAME` in `app.config.js`');
+    lintErrors.push('Empty `SHORT_NAME` not allowed in production. Please fill `SHORT_NAME` in `app.config.js`.');
 }
 
 if (APP.DESCRIPTION === '$APP.DESCRIPTION$') {
-    lintErrors.push('Please rename `DESCRIPTION in `app.config.js`');
+    lintErrors.push('`$APP.DESCRIPTION$` not allowed in production. Please rename `DESCRIPTION in `app.config.js`.');
 }
 if (APP.DESCRIPTION.trim() === '') {
-    lintErrors.push('Please fill `DESCRIPTION` in `app.config.js`');
+    lintErrors.push('Empty `DESCRIPTION` not allowed in production. Please fill `DESCRIPTION` in `app.config.js`.');
 }
 
-if (APP.TITLE === APP.SHORT_NAME || APP.TITLE === APP.DESCRIPTION) {
-    lintErrors.push('`TITLE` is equal `SHORT_NAME` or `DESCRIPTION`');
+if (APP.TITLE.length && (APP.TITLE === APP.SHORT_NAME || APP.TITLE === APP.DESCRIPTION)) {
+    lintErrors.push('`TITLE` is equal `SHORT_NAME` or `DESCRIPTION`. Please rename something.');
 }
-if (APP.SHORT_NAME === APP.TITLE || APP.SHORT_NAME === APP.DESCRIPTION) {
-    lintErrors.push('`SHORT_NAME` is equal `TITLE` or `DESCRIPTION`');
+if (APP.SHORT_NAME.length && (APP.SHORT_NAME === APP.TITLE || APP.SHORT_NAME === APP.DESCRIPTION)) {
+    lintErrors.push('`SHORT_NAME` is equal `TITLE` or `DESCRIPTION`. Please rename something.');
 }
-if (APP.DESCRIPTION === APP.TITLE || APP.DESCRIPTION === APP.SHORT_NAME) {
-    lintErrors.push('`DESCRIPTION` is equal `TITLE` or `SHORT_NAME`');
+if (APP.DESCRIPTION.length && (APP.DESCRIPTION === APP.TITLE || APP.DESCRIPTION === APP.SHORT_NAME)) {
+    lintErrors.push('`DESCRIPTION` is equal `TITLE` or `SHORT_NAME`. Please rename something.');
 }
 
 const npmVersion = JSON.parse(childProcess.execSync('npm version --json').toString() || '{}');
 
 if (!semver.satisfies(npmVersion.npm, PACKAGE.engines.npm)) {
-    lintErrors.push(`Required \`npm@${PACKAGE.engines.npm}\` version (current is \`npm@${npmVersion.npm}\`)`);
+    lintErrors.push(`Required \`npm@${PACKAGE.engines.npm}\` version (current is \`npm@${npmVersion.npm}\`).`);
 }
 
 if (!semver.satisfies(process.version, PACKAGE.engines.node)) {
-    lintErrors.push(`Required \`node@${PACKAGE.engines.node}\` version (current is \`node@${process.version}\`)`);
+    lintErrors.push(`Required \`node@${PACKAGE.engines.node}\` version (current is \`node@${process.version}\`).`);
 }
 
 let fonttoolsVersion = null;
@@ -72,11 +80,11 @@ try {
 
 if (!fonttoolsVersion) {
     lintErrors.push(
-        `Required python fonttools@${PACKAGE.engines['@pip/fonttools']} version (please run \`pip install fonttools\`)`
+        `Required python fonttools@${PACKAGE.engines['@pip/fonttools']} version. Please run \`pip install fonttools\`.`
     );
 } else if (!semver.satisfies(fonttoolsVersion, PACKAGE.engines['@pip/fonttools'])) {
     lintErrors.push(
-        `Required python fonttools@${PACKAGE.engines['@pip/fonttools']} version (current is \`${fonttoolsVersion}\`)`
+        `Required python fonttools@${PACKAGE.engines['@pip/fonttools']} version (current is \`${fonttoolsVersion}\`).`
     );
 }
 
@@ -89,9 +97,9 @@ try {
 
 if (!bashVersion) {
     if (process.platform === 'win32') {
-        lintErrors.push('Required bash (please install: `Git Bash` or `MinGW` or `Cygwin`)');
+        lintErrors.push('Required bash. Please install: `Git Bash` or `MinGW` or `Cygwin`.');
     } else {
-        lintErrors.push('Required bash');
+        lintErrors.push('Required bash.');
     }
 }
 

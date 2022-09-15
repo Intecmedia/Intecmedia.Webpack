@@ -1,7 +1,7 @@
 module.exports = {
-    TITLE: '$APP.TITLE$',
-    SHORT_NAME: '$APP.SHORT_NAME$',
-    DESCRIPTION: '$APP.DESCRIPTION$',
+    TITLE: '',
+    SHORT_NAME: '',
+    DESCRIPTION: '',
     PUBLIC_PATH: '/', // for relative use './'
     OUTPUT_PATH: './build',
     FAVICONS: true,
@@ -25,7 +25,6 @@ module.exports = {
     STYLELINT: true,
     ESLINT: true,
     IMAGEMIN: true,
-    GRID: false,
     get ENV() {
         return require('./app.env');
     },
