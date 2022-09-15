@@ -49,7 +49,10 @@ class ContainerNoNested extends AbsRule {
                 return;
             }
 
-            if (container.parent.classList.contains('container') || container.parent.classList.contains('container-fluid')) {
+            if (
+                container.parent.classList.contains('container') ||
+                container.parent.classList.contains('container-fluid')
+            ) {
                 this.report(container, 'Containers (`.container` and `.container-fluid`) are not nestable.');
             }
         });
