@@ -69,7 +69,7 @@
         "prettier-css": "cross-env NODE_ENV=production prettier --config ./.prettierrc.js --cache --write source/**/*.scss",
         "prettier-check-css": "cross-env NODE_ENV=production stylelint-config-prettier-scss source/css/app.scss",
         "prettier-check-js": "cross-env NODE_ENV=production eslint-config-prettier source/js/app.js webpack.config.js",
-        "lint-staged": "npx lint-staged --relative --allow-empty",
+        "lint-staged": "npx lint-staged --relative --allow-empty --diff=\".\"",
         "husky-install": "npx husky install",
         "pre-commit-hook": "npm run lint-staged",
         "post-merge-hook": "npm run update-package",
