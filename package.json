@@ -145,7 +145,7 @@
         "autoprefixer": "^10.4.11",
         "babel-loader": "^8.2.5",
         "bootstrap": "^5.2.1",
-        "browserslist": "^4.21.3",
+        "browserslist": "^4.21.4",
         "case-sensitive-paths-webpack-plugin": "^2.4.0",
         "compression-webpack-plugin": "^10.0.0",
         "copy-webpack-plugin": "^11.0.0",
