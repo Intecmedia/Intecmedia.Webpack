@@ -1,33 +1,40 @@
 {
-    "rules": [{
-        "pattern": "source/css/*.scss",
-        "test": "^([a-z0-9]+)(-[a-z0-9]+)*.scss$",
-        "convention": "kebab-case",
-        "ignore": []
-    }, {
-        "pattern": "source/css/**/*.scss",
-        "test": "^_([a-z0-9]+)(-[a-z0-9]+)*.scss$",
-        "convention": "kebab-case leading-underscore",
-        "ignore": ["source/css/*.scss", "**/*/_.scss"]
-    }, {
-        "pattern": "source/js/**/*.js",
-        "test": "^([a-z0-9]+)(-[a-z0-9]+)*.js$",
-        "convention": "kebab-case",
-        "ignore": ["source/js/external/*.*"]
-    }, {
-        "pattern": "*.js",
-        "test": "^.?([a-z0-9]+)([.-][a-z0-9]+)*.js$",
-        "convention": "kebab-case",
-        "ignore": []
-    }, {
-        "pattern": "source/**/*.html",
-        "test": "^_?([a-z0-9]+)(-[a-z0-9]+)*.html$",
-        "convention": "kebab-case",
-        "ignore": []
-    }, {
-        "pattern": "source/**/*.{jpg,jpeg,png,svg,gif}",
-        "test": "^([a-z0-9]+)(-[a-z0-9]+)*.(jpg|jpeg|png|svg|gif)$",
-        "convention": "kebab-case",
-        "ignore": []
-    }]
+    "rules": [
+        {
+            "pattern": "source/css/*.scss",
+            "test": "^([a-z0-9]+)(-[a-z0-9]+)*.scss$",
+            "convention": "kebab-case",
+            "ignore": []
+        },
+        {
+            "pattern": "source/css/**/*.scss",
+            "test": "^_([a-z0-9]+)(-[a-z0-9]+)*.scss$",
+            "convention": "kebab-case leading-underscore",
+            "ignore": ["source/css/*.scss", "**/*/_.scss"]
+        },
+        {
+            "pattern": "source/js/**/*.js",
+            "test": "^([a-z0-9]+)(-[a-z0-9]+)*.js$",
+            "convention": "kebab-case",
+            "ignore": ["source/js/external/*.*"]
+        },
+        {
+            "pattern": "*.js",
+            "test": "^.?([a-z0-9]+)([.-][a-z0-9]+)*.js$",
+            "convention": "kebab-case",
+            "ignore": []
+        },
+        {
+            "pattern": "source/**/*.html",
+            "test": "^_?([a-z0-9]+)(-[a-z0-9]+)*.html$",
+            "convention": "kebab-case",
+            "ignore": []
+        },
+        {
+            "pattern": "source/**/*.{jpg,jpeg,png,svg,gif}",
+            "test": "^([a-z0-9]+)(-[a-z0-9]+)*.(jpg|jpeg|png|svg|gif)$",
+            "convention": "kebab-case",
+            "ignore": []
+        }
+    ]
 }

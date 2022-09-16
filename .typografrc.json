@@ -1,9 +1,6 @@
 {
     "locale": ["ru", "en-US"],
-    "disableRule": [
-        "ru/other/phone-number",
-        "common/symbols/cf"
-    ],
+    "disableRule": ["ru/other/phone-number", "common/symbols/cf"],
     "enableRule": [],
     "onlyJsonKeys": [],
     "ignoreJsonKeys": []
