@@ -1,6 +1,5 @@
 build/*
 node_modules/*
-*.min.css
-*.min.js
-*.html
-*.njk
+source/js/external/*
+source/css/external/*
+**/*.{html,njk}
