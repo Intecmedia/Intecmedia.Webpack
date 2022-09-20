@@ -17,5 +17,7 @@ Attribute "width" is deprecated on <td> element
 Attribute "width" is deprecated on <th> element
 The “width” attribute on the “td” element is obsolete. Use CSS instead.
 The “width” attribute on the “th” element is obsolete. Use CSS instead.
+The “nowrap” attribute on the “td” element is obsolete. Use CSS instead.
+The “nowrap” attribute on the “td” element is obsolete. Use CSS instead.
 Attribute "nowrap" is deprecated on <td> element
 Attribute "nowrap" is deprecated on <th> element
