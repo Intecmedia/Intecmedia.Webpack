@@ -149,7 +149,7 @@
         "case-sensitive-paths-webpack-plugin": "^2.4.0",
         "compression-webpack-plugin": "^10.0.0",
         "copy-webpack-plugin": "^11.0.0",
-        "core-js": "^3.25.3",
+        "core-js": "^3.25.4",
         "cross-env": "^7.0.3",
         "css-loader": "^6.7.1",
         "css-tree": "^2.2.1",
@@ -200,7 +200,7 @@
         "nodemon": "^2.0.20",
         "nunjucks": "^3.2.3",
         "p-limit": "^3.1.0",
-        "postcss": "^8.4.16",
+        "postcss": "^8.4.17",
         "postcss-browser-reporter": "^0.6.0",
         "postcss-devtools": "^1.1.1",
         "postcss-fail-on-warn": "^0.2.1",
@@ -232,7 +232,7 @@
         "stylelint-max-lines": "^0.1.0",
         "stylelint-max-root-rules": "^0.1.0",
         "stylelint-no-nested-media": "^0.1.0",
-        "stylelint-no-unsupported-browser-features": "^5.0.4",
+        "stylelint-no-unsupported-browser-features": "^6.0.1",
         "stylelint-order": "^5.0.0",
         "stylelint-prettier": "^2.0.0",
         "stylelint-scss": "^4.3.0",
@@ -253,6 +253,6 @@
         "webpack-log": "^3.0.2",
         "webpack-sources": "^3.2.3",
         "whatwg-fetch": "^3.6.2",
-        "yargs": "^17.5.1"
+        "yargs": "^17.6.0"
     }
 }
