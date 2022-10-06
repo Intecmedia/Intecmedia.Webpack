@@ -3,7 +3,7 @@
     {% set dimensions = image_size(url) %}
     <img
         src="{{ require(url) }}"
-        loading="{% if attr.loading %}{{ attr.loading }}{% else %}lazy{% endif %}"
+        loading="{% if attrs.loading %}{{ attrs.loading }}{% else %}lazy{% endif %}"
         {% if dimensions.width and dimensions.height %}
         width="{{ dimensions.width }}"
         height="{{ dimensions.height }}"
