@@ -15,7 +15,7 @@ const imageminLogger = weblog({ name: 'imagemin' });
 module.exports = {
     implementation: ImageMinimizerPlugin.sharpMinify,
     encodeOptions: {
-        jpg: { quality: 90, effort: 1 },
+        jpeg: { quality: 90, effort: 1, chromaSubsampling: '4:4:4' },
         png: { quality: 90, effort: 1 },
         gif: { quality: 90, effort: 1 },
     },
@@ -28,20 +28,21 @@ module.exports = {
         ],
     ],
 };
+module.exports.encodeOptions.jpg = module.exports.encodeOptions.jpeg;
 
 module.exports.webp = {
     quality: 90, // 0 - 100, or 100 for lossless
-    options: { effort: 1 }, // https://sharp.pixelplumbing.com/api-output#webp
+    options: { effort: 1, chromaSubsampling: '4:4:4' }, // https://sharp.pixelplumbing.com/api-output#webp
 };
 
 module.exports.avif = {
     quality: 90, // 0 - 100, or 100 for lossless
-    options: { effort: 1 }, // https://sharp.pixelplumbing.com/api-output#avif
+    options: { effort: 1, chromaSubsampling: '4:4:4' }, // https://sharp.pixelplumbing.com/api-output#avif
 };
 
 module.exports.jpeg = {
     quality: 90, // 0 - 100
-    options: { effort: 1 }, // https://sharp.pixelplumbing.com/api-output#jpeg
+    options: { effort: 1, chromaSubsampling: '4:4:4' }, // https://sharp.pixelplumbing.com/api-output#jpeg
 };
 module.exports.jpg = module.exports.jpeg;
 
