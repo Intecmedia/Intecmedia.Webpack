@@ -15,9 +15,22 @@ const imageminLogger = weblog({ name: 'imagemin' });
 module.exports = {
     implementation: ImageMinimizerPlugin.sharpMinify,
     encodeOptions: {
-        jpeg: { quality: 90, effort: 1, chromaSubsampling: '4:4:4' },
-        png: { quality: 90, effort: 1 },
-        gif: { quality: 90, effort: 1 },
+        jpeg: {
+            // https://sharp.pixelplumbing.com/api-output#jpeg
+            quality: 90,
+            effort: 1,
+            chromaSubsampling: '4:4:4',
+        },
+        png: {
+            // https://sharp.pixelplumbing.com/api-output#png
+            quality: 90,
+            effort: 1,
+        },
+        gif: {
+            // https://sharp.pixelplumbing.com/api-output#gif
+            quality: 90,
+            effort: 1,
+        },
     },
     plugins: [
         [
@@ -32,23 +45,38 @@ module.exports.encodeOptions.jpg = module.exports.encodeOptions.jpeg;
 
 module.exports.webp = {
     quality: 90, // 0 - 100, or 100 for lossless
-    options: { effort: 1, chromaSubsampling: '4:4:4' }, // https://sharp.pixelplumbing.com/api-output#webp
+    options: {
+        // https://sharp.pixelplumbing.com/api-output#webp
+        effort: 1,
+        chromaSubsampling: '4:4:4',
+    },
 };
 
 module.exports.avif = {
     quality: 90, // 0 - 100, or 100 for lossless
-    options: { effort: 1, chromaSubsampling: '4:4:4' }, // https://sharp.pixelplumbing.com/api-output#avif
+    options: {
+        // https://sharp.pixelplumbing.com/api-output#avif
+        effort: 1,
+        chromaSubsampling: '4:4:4',
+    },
 };
 
 module.exports.jpeg = {
     quality: 90, // 0 - 100
-    options: { effort: 1, chromaSubsampling: '4:4:4' }, // https://sharp.pixelplumbing.com/api-output#jpeg
+    options: {
+        // https://sharp.pixelplumbing.com/api-output#jpeg
+        effort: 1,
+        chromaSubsampling: '4:4:4',
+    },
 };
 module.exports.jpg = module.exports.jpeg;
 
 module.exports.png = {
     quality: 100, // 0 - 100, or 100 for lossless
-    options: { effort: 1 }, // https://sharp.pixelplumbing.com/api-output#png
+    options: {
+        // https://sharp.pixelplumbing.com/api-output#png
+        effort: 1,
+    },
 };
 
 module.exports.testIgnore = (filepath) => {
