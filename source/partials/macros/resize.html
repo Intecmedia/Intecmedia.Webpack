@@ -36,7 +36,9 @@
 
         <img
             src="{{ require(url) }}"
-            loading="{% if attrs.img and attrs.img.loading %}{{ attrs.img.loading }}{% else %}lazy{% endif %}"
+            {% if not (attrs.img and attrs.img.loading) %}
+            loading="lazy"
+            {% endif %}
             {% if dimensions.width and dimensions.height %}
             width="{{ dimensions.width }}"
             height="{{ dimensions.height }}"
@@ -79,7 +81,9 @@
 
         <img
             src="{{ require(url) }}"
-            loading="{% if attrs.img and attrs.img.loading %}{{ attrs.img.loading }}{% else %}lazy{% endif %}"
+            {% if not (attrs.img and attrs.img.loading) %}
+            loading="lazy"
+            {% endif %}
             {% if dimensions.width and dimensions.height %}
             width="{{ dimensions.width }}"
             height="{{ dimensions.height }}"
@@ -102,7 +106,9 @@
         {% set dimensions = image_size(url) %}
         <img
             src="{{ require(url) }}"
-            loading="{% if attrs.img and attrs.img.loading %}{{ attrs.img.loading }}{% else %}lazy{% endif %}"
+            {% if not (attrs.img and attrs.img.loading) %}
+            loading="lazy"
+            {% endif %}
             {% if dimensions.width and dimensions.height %}
             width="{{ dimensions.width }}"
             height="{{ dimensions.height }}"
