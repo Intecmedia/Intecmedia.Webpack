@@ -341,16 +341,6 @@ $fluid-max-height: 1024px !default;
     @return fluid-clamp-base($min-size, $max-size, $min-height, $max-height, true);
 }
 
-@mixin fluid-clamp-font-size(
-    $min-size,
-    $max-size,
-    $min-width: $fluid-min-width,
-    $max-width: $fluid-max-width,
-    $prop: font-size
-) {
-    @include fluid-clamp-prop($prop, $min-size, $max-size, $min-width, $max-width);
-}
-
 @mixin fluid-clamp-prop(
     $prop: font-size,
     $min-size,
@@ -368,14 +358,14 @@ $fluid-max-height: 1024px !default;
     }
 }
 
-@mixin fluid-clamp-font-size-vertical(
+@mixin fluid-clamp-font-size(
     $min-size,
     $max-size,
-    $min-height: $fluid-min-height,
-    $max-height: $fluid-max-height,
+    $min-width: $fluid-min-width,
+    $max-width: $fluid-max-width,
     $prop: font-size
 ) {
-    @include fluid-clamp-prop-vertical($prop, $min-size, $max-size, $min-height, $max-height);
+    @include fluid-clamp-prop($prop, $min-size, $max-size, $min-width, $max-width);
 }
 
 @mixin fluid-clamp-prop-vertical(
@@ -393,4 +383,14 @@ $fluid-max-height: 1024px !default;
         /* stylelint-disable-next-line plugin/no-unsupported-browser-features, csstree/validator -- not standart feature */
         #{$prop}: $font-size-clamp;
     }
+}
+
+@mixin fluid-clamp-font-size-vertical(
+    $min-size,
+    $max-size,
+    $min-height: $fluid-min-height,
+    $max-height: $fluid-max-height,
+    $prop: font-size
+) {
+    @include fluid-clamp-prop-vertical($prop, $min-size, $max-size, $min-height, $max-height);
 }
