@@ -121,7 +121,8 @@ $fluid-max-height: 1024px !default;
     $min-width: $fluid-min-width,
     $max-width: $fluid-max-width,
     $min-width-calc: $min-width,
-    $max-width-calc: $max-width
+    $max-width-calc: $max-width,
+    $prop: font-size
 ) {
     @if meta.type-of($min-width) == "string" {
         $min-width: map-get($grid-breakpoints, $min-width);
@@ -136,15 +137,7 @@ $fluid-max-height: 1024px !default;
         $max-width-calc: map-get($grid-breakpoints, $max-width-calc);
     }
 
-    @include fluid-property(
-        font-size,
-        $min-value,
-        $max-value,
-        $min-width,
-        $max-width,
-        $min-width-calc,
-        $max-width-calc
-    );
+    @include fluid-property($prop, $min-value, $max-value, $min-width, $max-width, $min-width-calc, $max-width-calc);
 }
 
 @mixin fluid-font-size-rem(
@@ -153,7 +146,8 @@ $fluid-max-height: 1024px !default;
     $min-width: $fluid-min-width,
     $max-width: $fluid-max-width,
     $min-width-calc: $min-width,
-    $max-width-calc: $max-width
+    $max-width-calc: $max-width,
+    $prop: font-size
 ) {
     @if meta.type-of($min-width) == "string" {
         $min-width: map-get($grid-breakpoints, $min-width);
@@ -169,7 +163,7 @@ $fluid-max-height: 1024px !default;
     }
 
     @include fluid-property(
-        font-size,
+        $prop,
         rem($min-value),
         rem($max-value),
         $min-width,
@@ -185,7 +179,8 @@ $fluid-max-height: 1024px !default;
     $min-height: $fluid-min-height,
     $max-height: $fluid-max-height,
     $min-height-calc: $min-height,
-    $max-height-calc: $max-height
+    $max-height-calc: $max-height,
+    $prop: font-size
 ) {
     @if meta.type-of($min-height) == "string" {
         $min-height: map-get($vertical-breakpoints, $min-height);
@@ -201,7 +196,7 @@ $fluid-max-height: 1024px !default;
     }
 
     @include fluid-property-vertical(
-        font-size,
+        $prop,
         $min-value,
         $max-value,
         $min-height,
@@ -217,7 +212,8 @@ $fluid-max-height: 1024px !default;
     $min-height: $fluid-min-height,
     $max-height: $fluid-max-height,
     $min-height-calc: $min-height,
-    $max-height-calc: $max-height
+    $max-height-calc: $max-height,
+    $prop: font-size
 ) {
     @if meta.type-of($min-height) == "string" {
         $min-height: map-get($vertical-breakpoints, $min-height);
@@ -233,7 +229,7 @@ $fluid-max-height: 1024px !default;
     }
 
     @include fluid-property-vertical(
-        font-size,
+        $prop,
         rem($min-value),
         rem($max-value),
         $min-height,
@@ -345,14 +341,20 @@ $fluid-max-height: 1024px !default;
     @return fluid-clamp-base($min-size, $max-size, $min-height, $max-height, true);
 }
 
-@mixin fluid-clamp-font-size($min-size, $max-size, $min-width: $fluid-min-width, $max-width: $fluid-max-width) {
+@mixin fluid-clamp-font-size(
+    $min-size,
+    $max-size,
+    $min-width: $fluid-min-width,
+    $max-width: $fluid-max-width,
+    $prop: font-size
+) {
     $font-size-clamp: fluid-clamp($min-size, $max-size, $min-width, $max-width);
 
-    font-size: $min-size;
+    #{$prop}: $min-size;
 
-    @supports (font-size: $font-size-clamp) {
+    @supports (#{$prop}: $font-size-clamp) {
         /* stylelint-disable-next-line plugin/no-unsupported-browser-features, csstree/validator -- not standart feature */
-        font-size: $font-size-clamp;
+        #{$prop}: $font-size-clamp;
     }
 }
 
@@ -360,14 +362,15 @@ $fluid-max-height: 1024px !default;
     $min-size,
     $max-size,
     $min-height: $fluid-min-height,
-    $max-height: $fluid-max-height
+    $max-height: $fluid-max-height,
+    $prop: font-size
 ) {
     $font-size-clamp: fluid-clamp-vertical($min-size, $max-size, $min-height, $max-height);
 
-    font-size: $min-size;
+    #{$prop}: $min-size;
 
-    @supports (font-size: $font-size-clamp) {
+    @supports (#{$prop}: $font-size-clamp) {
         /* stylelint-disable-next-line plugin/no-unsupported-browser-features, csstree/validator -- not standart feature */
-        font-size: $font-size-clamp;
+        #{$prop}: $font-size-clamp;
     }
 }
