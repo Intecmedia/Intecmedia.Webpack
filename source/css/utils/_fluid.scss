@@ -348,6 +348,16 @@ $fluid-max-height: 1024px !default;
     $max-width: $fluid-max-width,
     $prop: font-size
 ) {
+    @include fluid-clamp-prop($prop, $min-size, $max-size, $min-width, $max-width);
+}
+
+@mixin fluid-clamp-prop(
+    $prop: font-size,
+    $min-size,
+    $max-size,
+    $min-width: $fluid-min-width,
+    $max-width: $fluid-max-width
+) {
     $font-size-clamp: fluid-clamp($min-size, $max-size, $min-width, $max-width);
 
     #{$prop}: $min-size;
@@ -364,6 +374,16 @@ $fluid-max-height: 1024px !default;
     $min-height: $fluid-min-height,
     $max-height: $fluid-max-height,
     $prop: font-size
+) {
+    @include fluid-clamp-prop-vertical($prop, $min-size, $max-size, $min-height, $max-height);
+}
+
+@mixin fluid-clamp-prop-vertical(
+    $prop: font-size,
+    $min-size,
+    $max-size,
+    $min-height: $fluid-min-height,
+    $max-height: $fluid-max-height
 ) {
     $font-size-clamp: fluid-clamp-vertical($min-size, $max-size, $min-height, $max-height);
 
