@@ -27,6 +27,13 @@ module.exports = deepMerge({}, sharedConfig, {
     'reportDescriptionlessDisables': true,
     'rules': {
         // code quality rules (fastest)
+        'at-rule-empty-line-before': [
+            'always',
+            {
+                'except': ['blockless-after-same-name-blockless', 'first-nested', 'inside-block'],
+                'ignore': ['after-comment', 'blockless-after-same-name-blockless', 'inside-block', 'first-nested'],
+            },
+        ],
         'max-nesting-depth': [
             5,
             {
