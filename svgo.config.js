@@ -20,6 +20,7 @@ const SvgoCreateConfig = (config) => ({
                           }
                         : false,
                     // or disable plugins
+                    convertColors: { shortname: false },
                     convertShapeToPath: false,
                     convertStyleToAttrs: false,
                     convertTransform: false,
