@@ -74,6 +74,13 @@ module.exports = deepMerge({}, sharedConfig, {
             ],
             'preset': 'bem',
         },
+        'rule-empty-line-before': [
+            'always',
+            {
+                'except': ['after-single-line-comment', 'first-nested'],
+                'ignore': ['after-comment', 'first-nested'],
+            },
+        ],
         'scss/dollar-variable-default': [
             true,
             {
