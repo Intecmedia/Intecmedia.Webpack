@@ -19,8 +19,8 @@ const SvgoCreateConfig = (config) => ({
                               preservePrefixes: [], // ignore prefix ids
                           }
                         : false,
-                    // or disable plugins
                     convertColors: { shortname: false },
+                    // or disable plugins
                     convertShapeToPath: false,
                     convertStyleToAttrs: false,
                     convertTransform: false,
