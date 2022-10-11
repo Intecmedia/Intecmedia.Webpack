@@ -81,6 +81,15 @@
             "npm run prettier",
             "npm run js-lint-cmd"
         ],
+        ".eslintrc.js": [
+            "npm run prettier-check-js"
+        ],
+        ".stylelintrc.js": [
+            "npm run prettier-check-css"
+        ],
+        ".stylelintrc.*.js": [
+            "npm run prettier-check-css"
+        ],
         "*.scss": [
             "npm run filename-lint",
             "npm run prettier",
