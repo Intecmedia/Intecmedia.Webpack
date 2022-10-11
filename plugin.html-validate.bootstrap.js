@@ -137,8 +137,8 @@ class FormControlInputOnly extends Rule {
                 return;
             }
 
-            if (control.nodeName.toLowerCase() !== 'input') {
-                this.report(control, 'Class `form-control` allowed only for input`s.');
+            if (!(control.nodeName.toLowerCase() === 'input' || control.nodeName.toLowerCase() === 'textarea')) {
+                this.report(control, 'Class `form-control` allowed only for input`s or textarea`s.');
             }
         });
     }
