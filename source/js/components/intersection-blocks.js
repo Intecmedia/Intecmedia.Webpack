@@ -6,6 +6,7 @@ const CLASS_NAME_INIT = 'is-intersection';
 const CLASS_NAME_VISIBLE = 'is-intersecting';
 const CLASS_NAME_UPWARD = 'is-intersection-upward';
 const CLASS_NAME_DOWNWARD = 'is-intersection-downward';
+const CLASS_NAME_END = 'is-intersection-end';
 
 const EVENT_NAME_INTERSECTION = 'intersection';
 
@@ -22,6 +23,7 @@ class IntersectionBlocks extends AbstractComponent {
         this.onIntersection = this.onIntersection.bind(this);
         this.onUpdate = this.onUpdate.bind(this);
         this.onDestroy = this.onDestroy.bind(this);
+        this.onTransitionEnd = this.onTransitionEnd.bind(this);
     }
 
     init() {
@@ -36,6 +38,7 @@ class IntersectionBlocks extends AbstractComponent {
     run() {
         this.items.forEach((target) => {
             target.classList.add(CLASS_NAME_INIT);
+            target.addEventListener('transitionend', this.onTransitionEnd);
             this.observer.observe(target);
         });
         this.on('update', this.onUpdate);
@@ -104,6 +107,10 @@ class IntersectionBlocks extends AbstractComponent {
                 observer.unobserve(entry.target);
             }
         });
+    }
+
+    onTransitionEnd(event) {
+        event.currentTarget.classList.add(CLASS_NAME_END);
     }
 
     destroy() {
