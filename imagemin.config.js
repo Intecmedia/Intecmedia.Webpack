@@ -23,7 +23,7 @@ module.exports = {
         },
         png: {
             // https://sharp.pixelplumbing.com/api-output#png
-            quality: 90,
+            quality: 100,
             effort: 1,
         },
         gif: {
@@ -44,7 +44,7 @@ module.exports = {
 module.exports.encodeOptions.jpg = module.exports.encodeOptions.jpeg;
 
 module.exports.webp = {
-    quality: 90, // 0 - 100, or 100 for lossless
+    quality: 95, // 0 - 100, or 100 for lossless
     options: {
         // https://sharp.pixelplumbing.com/api-output#webp
         effort: 1,
@@ -53,7 +53,7 @@ module.exports.webp = {
 };
 
 module.exports.avif = {
-    quality: 90, // 0 - 100, or 100 for lossless
+    quality: 95, // 0 - 100, or 100 for lossless
     options: {
         // https://sharp.pixelplumbing.com/api-output#avif
         effort: 1,
