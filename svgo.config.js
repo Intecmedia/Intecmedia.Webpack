@@ -1,5 +1,3 @@
-const uniqueId = require('lodash.uniqueid');
-
 const SvgoCreateConfig = (config) => ({
     js2svg: { pretty: !!config.pretty, eol: '\n', indent: 4 },
     plugins: [
@@ -10,11 +8,7 @@ const SvgoCreateConfig = (config) => ({
                     // customize options for plugins included in preset
                     cleanupIDs: config.prefix
                         ? {
-                              prefix: {
-                                  toString() {
-                                      return uniqueId(config.prefix);
-                                  },
-                              },
+                              prefix: config.prefix,
                               preserve: [], // ignore ids
                               preservePrefixes: [], // ignore prefix ids
                           }
