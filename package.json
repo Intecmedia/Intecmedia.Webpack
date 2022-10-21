@@ -76,7 +76,7 @@
         "prepare": "npm run update-package-hash && npm run husky-install"
     },
     "lint-staged": {
-        "*!(.min).js!build": [
+        "*!(.min).js,!build": [
             "npm run filename-lint",
             "npm run prettier",
             "npm run js-lint-cmd"
@@ -95,15 +95,15 @@
             "npm run prettier",
             "npm run css-lint-cmd"
         ],
-        "*.html!build": [
+        "*.html,!build": [
             "npm run filename-lint",
             "npm run html-beautify"
         ],
-        "*.{jpg,jpeg,png,svg,gif}!build": [
+        "*.{jpg,jpeg,png,svg,gif},!build": [
             "npm run filename-lint",
             "npm run image-lint"
         ],
-        "*.svg!build": [
+        "*.svg,!build": [
             "npm run svgo"
         ]
     },
