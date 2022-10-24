@@ -1,8 +1,6 @@
 import AbstractComponent from '~/components/abstract';
 
 export default class BootstrapValidation extends AbstractComponent {
-    static singleton = true;
-
     constructor(options = {}) {
         super(options);
         this.onSubmit = this.onSubmit.bind(this);
