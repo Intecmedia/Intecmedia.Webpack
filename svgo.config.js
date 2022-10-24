@@ -6,7 +6,7 @@ const SvgoCreateConfig = (config) => ({
             params: {
                 overrides: {
                     // customize options for plugins included in preset
-                    cleanupIDs: config.prefix
+                    cleanupIds: config.prefix
                         ? {
                               prefix: config.prefix,
                               preserve: [], // ignore ids
@@ -16,9 +16,7 @@ const SvgoCreateConfig = (config) => ({
                     convertColors: { shortname: false },
                     // or disable plugins
                     convertShapeToPath: false,
-                    convertStyleToAttrs: false,
                     convertTransform: false,
-                    removeDimensions: false,
                     removeViewBox: false,
                     removeUselessDefs: false,
                 },
