@@ -21,7 +21,7 @@ const SvgoCreateConfig = (config) => ({
             params: {
                 delim: '-',
                 prefix: config.prefix ? config.prefix : false,
-                prefixIds: config.prefix ? true : false,
+                prefixIds: !!config.prefix,
                 prefixClassNames: false,
             },
         },
