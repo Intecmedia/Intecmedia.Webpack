@@ -14,6 +14,8 @@ const SELECTOR_BLOCKS_NEW = `.${CLASS_NAME_BLOCK}:not(.${CLASS_NAME_INIT})`;
 const SELECTOR_BLOCKS_OLD = `.${CLASS_NAME_BLOCK}`;
 
 class IntersectionBlocks extends AbstractComponent {
+    static singleton = true;
+
     constructor(options = {}) {
         super(options);
 
