@@ -6,21 +6,21 @@ const SvgoCreateConfig = (config) => ({
             params: {
                 overrides: {
                     // customize options for plugins included in preset
-                    cleanupIds: config.prefix
-                        ? {
-                              prefix: config.prefix,
-                              preserve: [], // ignore ids
-                              preservePrefixes: [], // ignore prefix ids
-                          }
-                        : false,
                     convertColors: { shortname: false },
                     // or disable plugins
                     convertShapeToPath: false,
                     convertTransform: false,
                     removeViewBox: false,
                     removeUselessDefs: false,
+                    sortAttrs: false,
                 },
             },
+        },
+        {
+            name: 'prefixIds',
+            delim: '',
+            prefixIds: config.prefix ? config.prefix : false,
+            prefixClassNames: false,
         },
         // configure builtin plugin not included in preset
         { name: 'noDataURL', ...require('./svgo.no-data-url') },
