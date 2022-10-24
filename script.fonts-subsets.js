@@ -12,10 +12,6 @@ const FONTS_SRC = `${ENV.SOURCE_PATH}/fonts/src-ttf`;
 const FONTS_DST = `${ENV.SOURCE_PATH}/fonts`;
 const patterns = [...UTILS.processArgs._];
 
-if (process.platform === 'win32') {
-    childProcess.execSync('chcp 65001');
-}
-
 UTILS.globArray(patterns.length > 0 ? patterns : [`${FONTS_SRC}/**/*.ttf`], {
     ignore: [],
     nodir: true,
