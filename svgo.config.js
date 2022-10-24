@@ -18,9 +18,12 @@ const SvgoCreateConfig = (config) => ({
         },
         {
             name: 'prefixIds',
-            delim: '',
-            prefixIds: config.prefix ? config.prefix : false,
-            prefixClassNames: false,
+            params: {
+                delim: '-',
+                prefix: config.prefix ? config.prefix : false,
+                prefixIds: config.prefix ? true : false,
+                prefixClassNames: false,
+            },
         },
         // configure builtin plugin not included in preset
         { name: 'noDataURL', ...require('./svgo.no-data-url') },

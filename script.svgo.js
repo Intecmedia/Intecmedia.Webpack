@@ -31,7 +31,7 @@ UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.SOURCE_PATH}/**/*.svg`]
         }
 
         const name = path.basename(resourcePath, path.extname(resourcePath));
-        const options = SvgoCreateConfig({ prefix: `svgo-${name.toLowerCase()}-`, pretty: true });
+        const options = SvgoCreateConfig({ prefix: `svgo-${name.toLowerCase()}`, pretty: true });
         options.path = relativePath;
 
         const result = SVGO.optimize(svg, options);
