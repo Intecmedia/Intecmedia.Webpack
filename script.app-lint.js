@@ -75,6 +75,7 @@ try {
         .match(/Version: (.+)/);
     childProcess.execSync('pyftsubset --help');
 } catch (fonttoolsError) {
+    logger.error(fonttoolsError);
     fonttoolsVersion = null;
 }
 
@@ -92,6 +93,7 @@ let bashVersion = null;
 try {
     bashVersion = childProcess.execSync('bash --version').toString();
 } catch (fonttoolsError) {
+    logger.error(fonttoolsError);
     bashVersion = null;
 }
 
