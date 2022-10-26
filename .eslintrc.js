@@ -101,7 +101,17 @@ module.exports = {
         'require-await': ['error'],
         ...(ENV.PROD
             ? // code style rules (slowest)
-              {}
+              {
+                  'no-unused-vars': [
+                      'error',
+                      {
+                          'args': 'after-used',
+                          'caughtErrors': 'all',
+                          'ignoreRestSiblings': true,
+                          'vars': 'all',
+                      },
+                  ],
+              }
             : // dev-only rules (better dev experience)
               {
                   'compat/compat': 'off',
