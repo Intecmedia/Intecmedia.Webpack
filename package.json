@@ -245,7 +245,7 @@
         "stylelint-prettier": "^2.0.0",
         "stylelint-scss": "^4.3.0",
         "stylelint-selector-bem-pattern": "^2.1.1",
-        "stylelint-semantic-groups": "^1.1.4",
+        "stylelint-semantic-groups": "^1.2.0",
         "stylelint-webpack-plugin": "^3.3.0",
         "svg-spritemap-webpack-plugin": "^4.5.0",
         "svgo": "^3.0.0",
