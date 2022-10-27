@@ -2,7 +2,7 @@
 {% macro lazy (url, alt, attrs = {}) %}
     {% set dimensions = image_size(url) %}
     {% if dimensions.width and dimensions.height %}
-    {% set attrs = object_assign (attrs, {
+    {% set attrs = object_assign(attrs, {
         style: '--image-width:' + dimensions.width + ';' + '--image-height:' + dimensions.height + ';' + (attrs.style | default(''))
     }) %}
     {% endif %}
@@ -24,7 +24,7 @@
 {% macro picture (url, alt, attrs={}) %}
     {% set dimensions = image_size(url) %}
     {% if dimensions.width and dimensions.height %}
-    {% set attrs = object_assign (attrs, {
+    {% set attrs = object_assign(attrs, {
         style: '--image-width:' + dimensions.width + ';' + '--image-height:' + dimensions.height + ';' + (attrs.style | default(''))
     }) %}
     {% endif %}

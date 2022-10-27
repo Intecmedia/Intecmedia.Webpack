@@ -13,7 +13,7 @@
     {% if url.toLowerCase().endsWith('.svg') %}{{ throw('Useless <picture> for SVG: ' + url|dump + '.') }}{% endif %}
     {% set dimensions = image_size(url) %}
     {% if dimensions.width and dimensions.height %}
-    {% set attrs = object_assign (attrs, {
+    {% set attrs = object_assign(attrs, {
         style: '--image-width:' + dimensions.width + ';' + '--image-height:' + dimensions.height + ';' + (attrs.style | default(''))
     }) %}
     {% endif %}
@@ -61,7 +61,7 @@
     {% if url.toLowerCase().endsWith('.svg') %}{{ throw('Useless <picture> for SVG: ' + url|dump + '.') }}{% endif %}
     {% set dimensions = image_size(url) %}
     {% if dimensions.width and dimensions.height %}
-    {% set attrs = object_assign (attrs, {
+    {% set attrs = object_assign(attrs, {
         style: '--image-width:' + dimensions.width + ';' + '--image-height:' + dimensions.height + ';' + (attrs.style | default(''))
     }) %}
     {% endif %}
@@ -107,7 +107,7 @@
     {% if url.toLowerCase().endsWith('.svg') %}{{ throw('Useless <picture> for SVG: ' + url|dump + '.') }}{% endif %}
     {% set dimensions = image_size(url) %}
     {% if dimensions.width and dimensions.height %}
-    {% set attrs = object_assign (attrs, {
+    {% set attrs = object_assign(attrs, {
         style: '--image-width:' + dimensions.width + ';' + '--image-height:' + dimensions.height + ';' + (attrs.style | default(''))
     }) %}
     {% endif %}
