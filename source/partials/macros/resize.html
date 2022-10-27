@@ -11,6 +11,12 @@
 
 {% macro sources (url, alt, attrs={}, sources=DEFAULT_SOURCES, options=DEFAULT_OPTIONS) %}
     {% if url.toLowerCase().endsWith('.svg') %}{{ throw('Useless <picture> for SVG: ' + url|dump + '.') }}{% endif %}
+    {% set dimensions = image_size(url) %}
+    {% if dimensions.width and dimensions.height %}
+    {% set attrs = object_assign (attrs, {
+        style: '--image-width:' + dimensions.width + ';' + '--image-height:' + dimensions.height + ';' + (attrs.style | default(''))
+    }) %}
+    {% endif %}
     <picture{% for k, v in attrs %}{% if k != 'img' %} {{ k }}="{{ v }}"{% endif %}{% endfor %}>
         <!-- sources = {{ sources | dump | safe }} -->
 
@@ -22,8 +28,6 @@
         <source{% if source[0] %} media="{{ source[0] }}"{% endif %} srcset="{{ require(url + '?resize=' + source[1] + '&format=webp&suffix=' + source[2]) }}" type="image/webp">
         {% endfor %}{% endif %}
         {% endif %}
-
-        {% set dimensions = image_size(url) %}
 
         {% for source in sources %}
         <source{% if source[0] %} media="{{ source[0] }}"{% endif %} srcset="{{ require(url + '?resize=' + source[1] + '&suffix=' + source[2]) }}" type="image/{{ dimensions.type }}">
@@ -55,6 +59,12 @@
 
 {% macro breakpoints (url, alt, attrs={}, breakpoints=DEFAULT_BREAKPOINTS, sizes=DEFAULT_SIZES, options=DEFAULT_OPTIONS) %}
     {% if url.toLowerCase().endsWith('.svg') %}{{ throw('Useless <picture> for SVG: ' + url|dump + '.') }}{% endif %}
+    {% set dimensions = image_size(url) %}
+    {% if dimensions.width and dimensions.height %}
+    {% set attrs = object_assign (attrs, {
+        style: '--image-width:' + dimensions.width + ';' + '--image-height:' + dimensions.height + ';' + (attrs.style | default(''))
+    }) %}
+    {% endif %}
     <picture{% for k, v in attrs %}{% if k != 'img' %} {{ k }}="{{ v }}"{% endif %}{% endfor %}>
         <!-- breakpoints = {{ breakpoints | dump | safe }} -->
         <!-- sizes = {{ sizes | dump | safe }} -->
@@ -67,8 +77,6 @@
         <source{% if media %} media="{{ media }}"{% endif %} srcset="{{ require(url + '?resize=' + sizes[breakpoint] + '&format=webp&suffix=' + breakpoint) }}" type="image/webp">
         {% endfor %}{% endif %}
         {% endif %}
-
-        {% set dimensions = image_size(url) %}
 
         {% for breakpoint, media in breakpoints_media(breakpoints, sizes) %}
         <source{% if media %} media="{{ media }}"{% endif %} srcset="{{ require(url + '?resize=' + sizes[breakpoint] + '&suffix=' + breakpoint) }}" type="image/{{ dimensions.type }}">
@@ -97,13 +105,17 @@
 
 {% macro picture (url, alt, attrs={}, options=DEFAULT_OPTIONS) %}
     {% if url.toLowerCase().endsWith('.svg') %}{{ throw('Useless <picture> for SVG: ' + url|dump + '.') }}{% endif %}
+    {% set dimensions = image_size(url) %}
+    {% if dimensions.width and dimensions.height %}
+    {% set attrs = object_assign (attrs, {
+        style: '--image-width:' + dimensions.width + ';' + '--image-height:' + dimensions.height + ';' + (attrs.style | default(''))
+    }) %}
+    {% endif %}
     <picture{% for k, v in attrs %}{% if k != 'img' %} {{ k }}="{{ v }}"{% endif %}{% endfor %}>
         {% if APP.ENV.PROD or APP.ENV.DEBUG %}
         {% if APP.AVIF and not options.noavif %}<source srcset="{{ require(url + '?resize=&format=avif') }}" type="image/avif">{% endif %}
         {% if APP.WEBP and not options.nowebp %}<source srcset="{{ require(url + '?resize=&format=webp') }}" type="image/webp">{% endif %}
         {% endif %}
-
-        {% set dimensions = image_size(url) %}
         <img
             src="{{ require(url) }}"
             {% if not (attrs.img and attrs.img.loading) %}

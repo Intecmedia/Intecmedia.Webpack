@@ -58,7 +58,15 @@ module.exports = deepMerge({}, sharedConfig, {
             },
         ],
         'plugin/selector-bem-pattern': {
-            'ignoreCustomProperties': ['--aspect-', '--icon-', '--intersection-', '--#\\{\\$prefix\\}'],
+            'ignoreCustomProperties': [
+                '--aspect-',
+                '--bs-',
+                '--icon-',
+                '--image-width',
+                '--image-height',
+                '--intersection-',
+                '--#\\{\\$prefix\\}',
+            ],
             'ignoreSelectors': [
                 '\\.(js|is|no|has|not)\\-(.+)',
                 '^\\.(js|no\\-js)(\\s+)',

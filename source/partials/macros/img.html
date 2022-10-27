@@ -1,6 +1,11 @@
 <!-- beautify ignore:start -->
 {% macro lazy (url, alt, attrs = {}) %}
     {% set dimensions = image_size(url) %}
+    {% if dimensions.width and dimensions.height %}
+    {% set attrs = object_assign (attrs, {
+        style: '--image-width:' + dimensions.width + ';' + '--image-height:' + dimensions.height + ';' + (attrs.style | default(''))
+    }) %}
+    {% endif %}
     <img
         src="{{ require(url) }}"
         {% if not attrs.loading %}
@@ -17,8 +22,13 @@
 {% endmacro %}
 
 {% macro picture (url, alt, attrs={}) %}
+    {% set dimensions = image_size(url) %}
+    {% if dimensions.width and dimensions.height %}
+    {% set attrs = object_assign (attrs, {
+        style: '--image-width:' + dimensions.width + ';' + '--image-height:' + dimensions.height + ';' + (attrs.style | default(''))
+    }) %}
+    {% endif %}
     <picture{% for k, v in attrs %}{% if k != 'img' %} {{ k }}="{{ v }}"{% endif %}{% endfor %}>
-        {% set dimensions = image_size(url) %}
         <img
             src="{{ require(url) }}"
             {% if not (attrs.img and attrs.img.loading) %}
