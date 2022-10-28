@@ -2,7 +2,6 @@ const fs = require('fs');
 const path = require('path');
 const slash = require('slash');
 const weblog = require('webpack-log');
-const ignore = require('ignore');
 
 const SVGO = require('svgo');
 const { SvgoCreateConfig } = require('./svgo.config');
@@ -11,7 +10,7 @@ const logger = weblog({ name: 'svgo' });
 const ENV = require('./app.env');
 const UTILS = require('./webpack.utils');
 
-const ImageminIgnore = ignore().add(fs.readFileSync('./.imageminignore').toString());
+const imageminIgnore = UTILS.readIgnoreFile('./.imageminignore');
 const statMessages = { fixed: 0, skipped: 0, ignored: 0 };
 const patterns = [...UTILS.processArgs._];
 
@@ -23,7 +22,7 @@ UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.SOURCE_PATH}/**/*.svg`]
         const svg = fs.readFileSync(resourcePath, 'utf8').toString();
         const relativePath = slash(path.relative(ENV.SOURCE_PATH, path.normalize(resourcePath)));
 
-        const ignores = ImageminIgnore.ignores(relativePath);
+        const ignores = imageminIgnore.ignores(relativePath);
         if (ignores) {
             statMessages.ignored += 1;
             logger.info(`ignored ${relativePath}`);

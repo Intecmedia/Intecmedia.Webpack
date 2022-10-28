@@ -1,14 +1,13 @@
-const fs = require('fs');
-const ignore = require('ignore');
 const path = require('path');
 const slash = require('slash');
 const weblog = require('webpack-log');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 const ENV = require('./app.env');
+const UTILS = require('./webpack.utils');
 const { SvgoNoPrefixConfig } = require('./svgo.config');
 
-const imageminIgnore = ignore().add(fs.readFileSync('./.imageminignore').toString());
+const imageminIgnore = UTILS.readIgnoreFile('./.imageminignore');
 const imageminLogger = weblog({ name: 'imagemin' });
 
 // https://sharp.pixelplumbing.com/api-output#gif
