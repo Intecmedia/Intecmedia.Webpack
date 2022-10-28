@@ -152,7 +152,7 @@
         "@sentry/browser": "^7.17.1",
         "@sentry/tracing": "^7.17.1",
         "autoprefixer": "^10.4.13",
-        "babel-loader": "^8.2.5",
+        "babel-loader": "^9.0.0",
         "bootstrap": "^5.2.2",
         "browserslist": "^4.21.4",
         "case-sensitive-paths-webpack-plugin": "^2.4.0",
