@@ -1,4 +1,4 @@
-const fs = require('fs');
+cost fs = require('fs');
 const semver = require('semver');
 const childProcess = require('child_process');
 const weblog = require('webpack-log');
@@ -92,8 +92,8 @@ if (!fonttoolsVersion) {
 let bashVersion = null;
 try {
     bashVersion = childProcess.execSync('bash --version').toString();
-} catch (fonttoolsError) {
-    logger.error(fonttoolsError);
+} catch (bashError) {
+    logger.error(bashError);
     bashVersion = null;
 }
 
