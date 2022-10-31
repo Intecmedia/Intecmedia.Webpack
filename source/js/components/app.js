@@ -1,3 +1,5 @@
+import AbstractComponent from '~/components/abstract';
+
 const SEPARATOR_PATTERN = /\s*,\s*/;
 
 export default class AbstractApp {
@@ -79,6 +81,9 @@ export default class AbstractApp {
                 element.classList.add('js-component');
                 element.setAttribute('data-component-id', id);
                 const component = new ClassName(options);
+                if (!(component instanceof AbstractComponent)) {
+                    throw new TypeError(`Class ${name} should be instance of AbstractComponent.`);
+                }
                 if (!(name in this.components)) {
                     this.components[name] = {};
                 }
