@@ -1,4 +1,5 @@
 module.exports = function helper(arr, ...args) {
-    Array.prototype.push.call(arr, ...args);
-    return arr;
+    const result = [...arr];
+    Array.prototype.push.call(result, ...args);
+    return result;
 };
