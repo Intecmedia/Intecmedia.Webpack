@@ -1,3 +1,3 @@
-module.exports = function helper(url) {
-    return Object.values(url);
+module.exports = function helper(obj) {
+    return Object.values(obj);
 };
