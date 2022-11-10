@@ -1,4 +1,4 @@
 module.exports = function helper(arr, ...args) {
-    arr.push.call(null, args);
+    Array.prototype.push.call(arr, ...args);
     return arr;
 };

@@ -1,4 +1,4 @@
 module.exports = function helper(arr, ...args) {
-    arr.unshift.call(null, args);
+    Array.prototype.unshift.call(arr, ...args);
     return arr;
 };
