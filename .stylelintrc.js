@@ -68,8 +68,8 @@ module.exports = deepMerge({}, sharedConfig, {
                 '--#\\{\\$prefix\\}',
             ],
             'ignoreSelectors': [
-                '^(html|body)',
-                '\\.(js|is|no|has|not)\\-(.+)',
+                '^(html|body)\\.?',
+                '.+\\.(js|is|no|has|not)\\-(.+)',
                 '^(svg|picture|img|iframe|video|option|optgroup|canvas)\\.?',
                 '#\\{\\$[a-zA-Z][a-zA-Z-\\d]*\\}',
                 '\\.(active|fade|show)',
