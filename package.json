@@ -51,7 +51,7 @@
         "server-debug": "node ./script.nodemon.js --exec \"npx cross-env NODE_ENV=development DEBUG=1 NODE_OPTIONS=\\\"--inspect --max-old-space-size=4096\\\" webpack serve --mode=development\"",
         "preserver-debug-https": "npm run clean",
         "server-debug-https": "node ./script.nodemon.js --exec \"npx cross-env NODE_ENV=development DEBUG=1 NODE_OPTIONS=\\\"--inspect --max-old-space-size=4096\\\" webpack serve --https --mode=development\"",
-        "pre-build": "npm run app-lint && npm run js-lint && npm run css-lint && npm run utf-fix && npm run svgo && npm run image-lint && npm run fonts-subsets",
+        "pre-build": "npm run app-lint && npm run filename-lint && npm run js-lint && npm run css-lint && npm run utf-fix && npm run svgo && npm run image-lint && npm run fonts-subsets && npm run html-beautify",
         "post-build": "npm run html-validate && npm run html-validator",
         "prebuild": "npm run pre-build",
         "postbuild": "npm run post-build",
