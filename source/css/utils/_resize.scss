@@ -44,7 +44,7 @@ $resize-breakpoints: $grid-breakpoints !default;
 
             /* postcss.resize.avif: ignore */
 
-            background-image: url("#{$url}?resize=#{$size}x&format=jpg&suffix=#{$prefix}");
+            background-image: url("#{$url}?resize=#{$size}x&suffix=#{$prefix}");
         }
     }
 
