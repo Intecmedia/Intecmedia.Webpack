@@ -15,7 +15,7 @@
         {
             "pattern": "source/css/**/*.scss",
             "test": "^_(?!js\\-)",
-            "convention": "not allowed .js-component",
+            "convention": "not allowed .js-* component",
             "ignore": ["source/css/*.scss", "**/*/_.scss"]
         },
         {
