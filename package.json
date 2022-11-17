@@ -194,7 +194,7 @@
         "lodash.merge": "^4.6.2",
         "lodash.range": "^3.2.0",
         "lodash.template": "^4.5.0",
-        "mini-css-extract-plugin": "^2.6.1",
+        "mini-css-extract-plugin": "^2.7.0",
         "minimatch": "^5.1.0",
         "nodemon": "^2.0.20",
         "nunjucks": "^3.2.3",
