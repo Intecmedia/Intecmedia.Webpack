@@ -564,6 +564,15 @@ module.exports = {
                             esModule: false,
                             importLoaders: 2,
                             sourceMap: true,
+                            import: {
+                                filter: (url) => {
+                                    if (url.endsWith('.css')) {
+                                        throw new Error(`Unexpected file extension in @import ${JSON.stringify(url)};. Please import without file extension.`);
+                                        return false;
+                                    }
+                                    return true;
+                                },
+                            },
                         },
                     },
                     {
