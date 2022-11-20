@@ -567,8 +567,10 @@ module.exports = {
                             import: {
                                 filter: (url) => {
                                     if (url.endsWith('.css')) {
-                                        throw new Error(`Unexpected file extension in @import ${JSON.stringify(url)};. Please import without file extension.`);
-                                        return false;
+                                        throw new Error([
+                                            `Unexpected file extension in @import ${JSON.stringify(url)};.`,
+                                            `Please import without file extension.`,
+                                        ].join(' '));
                                     }
                                     return true;
                                 },
