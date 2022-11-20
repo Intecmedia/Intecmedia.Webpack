@@ -565,12 +565,15 @@ module.exports = {
                             importLoaders: 2,
                             sourceMap: true,
                             import: {
-                                filter: (url) => {
+                                filter(url) {
                                     if (url.endsWith('.css')) {
-                                        throw new Error([
-                                            `Unexpected file extension in @import ${JSON.stringify(url)};.`,
-                                            `Please import without file extension.`,
-                                        ].join(' '));
+                                        this.loaderContext.emitError(
+                                            [
+                                                `Unexpected file extension in @import ${JSON.stringify(url)};.`,
+                                                `Please import without file extension.`,
+                                            ].join(' ')
+                                        );
+                                        return false;
                                     }
                                     return true;
                                 },
