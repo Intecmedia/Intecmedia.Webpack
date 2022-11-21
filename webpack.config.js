@@ -604,8 +604,10 @@ module.exports = {
                             sourceMap: true,
                             implementation: require('sass'),
                             sassOptions: {
+                                charset: false,
                                 indentWidth: 4,
                                 outputStyle: 'expanded',
+                                verbose: ENV.DEBUG || ENV.ARGV.verbose,
                             },
                             webpackImporter: true,
                         },
