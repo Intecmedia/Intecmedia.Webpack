@@ -104,6 +104,9 @@ const DEFAULT_APPICON = {
             yandex: false,
             windows: false,
         },
+        files: {
+            android: { manifestFileName: 'manifest.json' },
+        },
     },
 };
 
