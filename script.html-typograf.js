@@ -22,7 +22,7 @@ instance.addSafeTag('<%', '%>');
 instance.addSafeTag('<!-- typograf ignore:start -->', '<!-- typograf ignore:end -->');
 
 UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.SOURCE_PATH}/**/*.html`], {
-    ignore: [`${ENV.OUTPUT_PATH}/**/*.*.html`, `${ENV.SOURCE_PATH}/partials/macros/**/*.html`],
+    ignore: [`${ENV.OUTPUT_PATH}/**/*.html`, `${ENV.SOURCE_PATH}/partials/macros/**/*.html`],
     nodir: true,
 }).then((files) => {
     logger.info(`${files.length} files\n`);

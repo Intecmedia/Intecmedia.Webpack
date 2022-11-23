@@ -3,6 +3,7 @@ const slash = require('slash');
 const minimatch = require('minimatch');
 const weblog = require('webpack-log');
 
+const ENV = require('./app.env');
 const UTILS = require('./webpack.utils');
 const config = require('./.filenamelintrc.json');
 
@@ -16,7 +17,7 @@ config.rules
     .filter((rule) => (patterns.length > 0 ? patterns.some((i) => minimatch(i, rule.pattern)) : true))
     .forEach((rule) => {
         const files = UTILS.globSync(rule.pattern, {
-            ignore: rule.ignore,
+            ignore: [...rule.ignore, `${ENV.OUTPUT_PATH}/**/*`],
             nodir: true,
         });
         const ruleTest = new RegExp(rule.test);

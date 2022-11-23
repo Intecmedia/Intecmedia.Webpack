@@ -63,7 +63,7 @@ const LINT_RULES = [
 const patterns = [...UTILS.processArgs._];
 
 UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.SOURCE_PATH}/**/*.{jpg,jpeg,png,svg,gif}`], {
-    ignore: [`${ENV.OUTPUT_PATH}/**/*.*.html`],
+    ignore: [`${ENV.OUTPUT_PATH}/**/*.html`],
     nodir: true,
 }).then(async (files) => {
     logger.info(`${files.length} files\n`);
