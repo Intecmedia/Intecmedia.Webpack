@@ -31,7 +31,7 @@ UTILS.globArray(
         `${ENV.SOURCE_PATH}/**/*.{html,svg,js,json,css,scss,njk}`,
     ],
     {
-        ignore: [],
+        ignore: [`${ENV.OUTPUT_PATH}/**/*`],
         dot: true,
         nodir: true,
     }

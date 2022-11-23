@@ -15,7 +15,7 @@ const statMessages = { fixed: 0, skipped: 0, ignored: 0 };
 const patterns = [...UTILS.processArgs._];
 
 UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.SOURCE_PATH}/**/*.svg`], {
-    ignore: [],
+    ignore: [`${ENV.OUTPUT_PATH}/**/*.svg`],
     nodir: true,
 }).then((files) => {
     files.forEach((resourcePath) => {
