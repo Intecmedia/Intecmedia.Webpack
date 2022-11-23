@@ -28,7 +28,7 @@ const htmlvalidate = new HtmlValidate({ ...config });
 const patterns = [...UTILS.processArgs._];
 
 UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.OUTPUT_PATH}/**/*.html`], {
-    ignore: [],
+    ignore: [`${ENV.SOURCE_PATH}/**/*.html`],
     nodir: true,
 }).then((files) => {
     logger.info(`${files.length} files\n`);
