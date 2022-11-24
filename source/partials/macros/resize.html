@@ -47,7 +47,7 @@
             intrinsicsize="{{ dimensions.width }}x{{ dimensions.height }}"
             {% endif %}
             {% if attrs.img %}{% for k, v in attrs.img %} {{ k }}="{{ v }}"{% endfor %}{% endif %}
-            alt="{{ alt }}"
+            {% if alt %}alt="{{ alt }}"{% endif %}
         >
     </picture>
 {% endmacro %}
@@ -76,7 +76,7 @@
             intrinsicsize="{{ dimensions.width }}x{{ dimensions.height }}"
             {% endif %}
             {% if attrs.img %}{% for k, v in attrs.img %} {{ k }}="{{ v }}"{% endfor %}{% endif %}
-            alt="{{ alt }}"
+            {% if alt %}alt="{{ alt }}"{% endif %}
         >
     </picture>
 {% endmacro %}
