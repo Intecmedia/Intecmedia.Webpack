@@ -71,7 +71,7 @@
         "prettier-check-js": "cross-env NODE_ENV=production eslint-config-prettier source/js/app.js webpack.config.js",
         "lint-staged": "npx lint-staged --relative --allow-empty --no-stash --concurrent false",
         "husky-install": "npx husky install",
-        "pre-commit-hook": "npm run lint-staged",
+        "pre-commit-hook": "npm run lint-staged -- --quiet",
         "post-merge-hook": "npm run update-package",
         "prepare": "npm run update-package-hash && npm run husky-install"
     },
