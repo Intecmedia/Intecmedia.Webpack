@@ -35,6 +35,7 @@ module.exports = {
             'rules': {
                 'global-require': 'off',
                 'import/no-dynamic-require': 'off',
+                'import/order': 'off',
                 'max-classes-per-file': 'off',
             },
         },
@@ -73,7 +74,6 @@ module.exports = {
             },
         ],
         'import/no-cycle': 'off',
-        'import/order': 'off',
         'max-lines': [
             'error',
             {
@@ -102,6 +102,14 @@ module.exports = {
         ...(ENV.PROD
             ? // code style rules (slowest)
               {
+                  'import/order': [
+                      'error',
+                      {
+                          'alphabetize': { 'order': 'asc' },
+                          'groups': [['builtin', 'external', 'internal']],
+                          'warnOnUnassignedImports': false,
+                      },
+                  ],
                   'no-unused-vars': [
                       'error',
                       {
@@ -119,6 +127,7 @@ module.exports = {
                   'import/no-import-module-exports': 'off',
                   'import/no-named-as-default': 'off',
                   'import/no-unresolved': 'off',
+                  'import/order': 'off',
                   'no-alert': 'off',
                   'no-debugger': 'off',
                   'no-misleading-character-class': 'off',
