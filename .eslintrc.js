@@ -106,7 +106,7 @@ module.exports = {
                       'error',
                       {
                           'alphabetize': { 'order': 'asc' },
-                          'groups': [['builtin', 'external', 'internal']],
+                          'groups': ['builtin', 'external', 'parent', 'sibling', 'index'],
                           'warnOnUnassignedImports': false,
                       },
                   ],
