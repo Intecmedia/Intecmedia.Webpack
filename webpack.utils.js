@@ -163,8 +163,10 @@ function readJsonFile(filepath) {
 
 module.exports.readJsonFile = readJsonFile;
 
-function readIgnoreFile(filepath) {
-    return ignore().add(fs.readFileSync(filepath).toString());
+function readIgnoreFile(filepath, options = {}) {
+    return ignore({
+        ...options,
+    }).add(fs.readFileSync(filepath).toString());
 }
 
 module.exports.readIgnoreFile = readIgnoreFile;
