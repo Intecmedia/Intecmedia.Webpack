@@ -1,4 +1,4 @@
-/* stylelint-disable scss/selector-nest-combinators, selector-max-type, plugin/selector-bem-pattern -- wysiwyg is semantic tags */
+/* stylelint-disable scss/selector-nest-combinators, selector-max-type, plugin/selector-bem-pattern, selector-nested-pattern -- wysiwyg is semantic tags */
 .wysiwyg {
     a {
         color: $link-color;
@@ -424,4 +424,4 @@
         }
     }
 }
-/* stylelint-enable scss/selector-nest-combinators, selector-max-type, plugin/selector-bem-pattern */
+/* stylelint-enable scss/selector-nest-combinators, selector-max-type, plugin/selector-bem-pattern, selector-nested-pattern */
