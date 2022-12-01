@@ -1,4 +1,4 @@
-# build dir
+# Build dir
 build/fonts
 build/img
 build/js
@@ -8,6 +8,9 @@ build/css
 build/upload
 build/**/*.html
 build/humans.txt
+
+# Webpack dev-server hot-update
+build/js/*.hot-update.*
 
 # VisualStudioCode
 .vscode
@@ -32,8 +35,8 @@ Thumbs.db
 # Mac DS_Store Files
 .DS_Store
 
-# yii2 thumbs
+# Uii2 thumbs
 build/**/*/thumbs/*
 
-# package hash
+# Package hash
 package-lock.hash
