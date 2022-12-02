@@ -165,6 +165,7 @@ module.exports.readJsonFile = readJsonFile;
 
 function readIgnoreFile(filepath, options = {}) {
     return ignore({
+        allowRelativePaths: true,
         ...options,
     }).add(fs.readFileSync(filepath).toString());
 }
