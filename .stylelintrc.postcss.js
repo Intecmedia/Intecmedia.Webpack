@@ -16,9 +16,9 @@ module.exports = deepMerge({}, sharedConfig, {
     'rules': {
         'csstree/validator': {
             'ignore': [],
-            'properties': {
-                // 'content-visibility': 'visible | hidden | auto | initial | unset',
-            },
+            // 'properties': {
+            // 'content-visibility': 'visible | hidden | auto | initial | unset',
+            // },
         },
         // 'pitcher/no-nested-media': true,
     },
