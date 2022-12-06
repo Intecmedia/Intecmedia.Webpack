@@ -35,6 +35,7 @@ function beautifyHtml(html) {
     result = stripWhitespaces(result);
     result = result.replace(/{{\s*/g, '{{ ').replace(/\s*}}/g, ' }}');
     result = result.replace(/{%\s*/g, '{% ').replace(/\s*%}/g, ' %}');
+    result = result.replace(/{#\s*/g, '{# ').replace(/\s*#}/g, ' #}');
 
     return result;
 }
