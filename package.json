@@ -204,7 +204,7 @@
         "postcss-devtools": "^1.1.1",
         "postcss-fail-on-warn": "^0.2.1",
         "postcss-flexbugs-fixes": "^5.0.2",
-        "postcss-focus": "^5.0.1",
+        "postcss-focus": "^6.0.0",
         "postcss-focus-visible": "^7.1.0",
         "postcss-focus-within": "^6.1.1",
         "postcss-font-display": "^0.3.0",
