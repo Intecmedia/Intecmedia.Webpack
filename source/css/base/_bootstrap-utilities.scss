@@ -1,5 +1,7 @@
 /* stylelint-disable scss/dollar-variable-default -- we not control third party code */
 
+// Bootstrap utilities
+
 $utilities: map-merge(
     $utilities,
     (
