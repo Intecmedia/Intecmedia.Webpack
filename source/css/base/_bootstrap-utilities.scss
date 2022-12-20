@@ -5,11 +5,8 @@
 $utilities: map-merge(
     $utilities,
     (
-        "rounded": null,
-        "rounded-top": null,
-        "rounded-end": null,
-        "rounded-bottom": null,
-        "rounded-start": null,
+        // https://getbootstrap.com/docs/5.2/utilities/api/#add-remove-modify
+        "remove-example": null
     )
 );
 /* stylelint-enable scss/dollar-variable-default */
