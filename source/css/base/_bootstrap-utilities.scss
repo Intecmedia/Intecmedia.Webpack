@@ -1,71 +1,13 @@
-/* stylelint-disable indentation -- we not control third party code */
+/* stylelint-disable scss/dollar-variable-default -- we not control third party code */
 
-// Utilities
-
-$utilities: () !default;
-// stylelint-disable-next-line scss/dollar-variable-default -- we not control third party code
 $utilities: map-merge(
+    $utilities,
     (
-        "text-align": (
-            responsive: false,
-            property: text-align,
-            class: text,
-            values: (
-                start: left,
-                end: right,
-                center: center,
-            ),
-        ),
-        "text-decoration": (
-            property: text-decoration,
-            values: none underline line-through,
-        ),
-        "text-transform": (
-            property: text-transform,
-            class: text,
-            values: lowercase uppercase capitalize,
-        ),
-        "white-space": (
-            property: white-space,
-            class: text,
-            values: (
-                wrap: normal,
-                nowrap: nowrap,
-            ),
-        ),
-        "word-wrap": (
-            property: word-wrap word-break,
-            class: text,
-            values: (
-                break: break-word,
-            ),
-            rtl: false,
-        ),
-        "margin-top": (
-            responsive: false,
-            property: margin-top,
-            class: mt,
-            values:
-                map-merge(
-                    $spacers,
-                    (
-                        auto: auto,
-                    )
-                ),
-        ),
-        "margin-bottom": (
-            responsive: false,
-            property: margin-bottom,
-            class: mb,
-            values:
-                map-merge(
-                    $spacers,
-                    (
-                        auto: auto,
-                    )
-                ),
-        ),
-    ),
-    $utilities
+        "rounded": null,
+        "rounded-top": null,
+        "rounded-end": null,
+        "rounded-bottom": null,
+        "rounded-start": null,
+    )
 );
-/* stylelint-enable indentation */
+/* stylelint-enable scss/dollar-variable-default */

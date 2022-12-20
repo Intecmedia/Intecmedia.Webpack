@@ -1,4 +1,5 @@
 /*!
+
  * Bootstrap v5.1.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
  * Copyright 2011-2021 Twitter, Inc.
@@ -12,13 +13,14 @@
 @import "node_modules/bootstrap/scss/variables";
 @import "node_modules/bootstrap/scss/maps";
 @import "node_modules/bootstrap/scss/mixins";
-@import "bootstrap-mixins"; // override "node_modules/bootstrap/scss/mixins"
-@import "bootstrap-utilities"; // overide "node_modules/bootstrap/scss/utilities"
+@import "bootstrap-mixin";
+@import "node_modules/bootstrap/scss/utilities";
+@import "bootstrap-utilities";
 
 // Layout & components
 @import "node_modules/bootstrap/scss/root";
 @import "node_modules/bootstrap/scss/reboot";
-@import "bootstrap-type"; // override "node_modules/bootstrap/scss/type"
+@import "bootstrap-type";
 @import "node_modules/bootstrap/scss/images";
 @import "node_modules/bootstrap/scss/containers";
 @import "node_modules/bootstrap/scss/grid";
