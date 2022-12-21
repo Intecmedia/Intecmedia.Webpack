@@ -1,3 +1,5 @@
+/* global VERBOSE */
+
 import AbstractComponent from '~/components/abstract';
 
 const SEPARATOR_PATTERN = /\s*,\s*/;
@@ -53,6 +55,9 @@ export default class AbstractApp {
         const detail = { target: scope };
         const event = new CustomEvent('init.App', { detail });
         window.dispatchEvent(event);
+        if (VERBOSE) {
+            console.log('[app] init.App', event);
+        }
 
         return newComponents;
     }
@@ -121,6 +126,9 @@ export default class AbstractApp {
         const detail = { target: scope };
         const event = new CustomEvent(`update.App`, { detail });
         window.dispatchEvent(event);
+        if (VERBOSE) {
+            console.log('[app] update.App', event);
+        }
 
         return this.triggerScope(scope, 'update');
     }
@@ -129,6 +137,9 @@ export default class AbstractApp {
         const detail = { target: scope };
         const event = new CustomEvent(`destroy.App`, { detail });
         window.dispatchEvent(event);
+        if (VERBOSE) {
+            console.log('[app] destroy.App', event);
+        }
 
         scope.querySelectorAll('.js-component[data-component-id]').forEach((element) => {
             this.destroyElement(element);
