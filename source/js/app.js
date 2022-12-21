@@ -25,7 +25,7 @@ if (NODE_ENV === 'production') {
 const app = new App({ components });
 if (VERBOSE) {
     window.$app = app;
-    console.log('[app]', app);
+    console.log('[app] new', app);
 }
 
 const domReady = () => {
