@@ -7,11 +7,11 @@
 
     <meta charset="utf-8">
     <title>
-        {% if PAGE.meta_title %}
+        {%- if PAGE.meta_title -%}
         {{ PAGE.meta_title }}
-        {% else %}
+        {%- else -%}
         {% if PAGE.homepage %}{{ PAGE.title or APP.TITLE }}{% else %}{{ PAGE.title }} | {{ APP.SHORT_NAME }}{% endif %}
-        {% endif %}
+        {%- endif -%}
     </title>
     <meta name="description" content="{{ PAGE.description or APP.DESCRIPTION }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
