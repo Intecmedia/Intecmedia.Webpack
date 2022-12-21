@@ -39,9 +39,6 @@ export default class AbstractApp {
 
     init() {
         this.initScope(document.body);
-        const detail = { target: this };
-        const event = new CustomEvent('init.App', { detail });
-        window.dispatchEvent(event);
     }
 
     initScope(scope) {
@@ -52,7 +49,11 @@ export default class AbstractApp {
         newComponents.forEach((component) => {
             component.init();
         });
-        this.updateScope(scope);
+
+        const detail = { target: scope };
+        const event = new CustomEvent('init.App', { detail });
+        window.dispatchEvent(event);
+
         return newComponents;
     }
 
@@ -117,10 +118,18 @@ export default class AbstractApp {
     }
 
     updateScope(scope) {
+        const detail = { target: scope };
+        const event = new CustomEvent(`update.App`, { detail });
+        window.dispatchEvent(event);
+
         return this.triggerScope(scope, 'update');
     }
 
     destroyScope(scope) {
+        const detail = { target: scope };
+        const event = new CustomEvent(`destroy.App`, { detail });
+        window.dispatchEvent(event);
+
         scope.querySelectorAll('.js-component[data-component-id]').forEach((element) => {
             this.destroyElement(element);
         });
