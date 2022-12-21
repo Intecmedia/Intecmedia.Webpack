@@ -1,5 +1,8 @@
 /* stylelint-disable -- we not control third party code  */
 
+@import "node_modules/bootstrap/scss/mixins/banner";
+@include bsBanner("");
+
 // Configuration
 @import "node_modules/bootstrap/scss/functions";
 @import "node_modules/bootstrap/scss/variables";
