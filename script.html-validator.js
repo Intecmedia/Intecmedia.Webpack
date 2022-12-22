@@ -59,12 +59,13 @@ UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.OUTPUT_PATH}/**/*.html`
             increaseStat('skipped');
             skipped = true;
         } else if (result.messages && result.messages.length > 0) {
-            skipped = false;
+            skipped = true;
             result.messages.forEach((message) => {
                 if (message.message && ignoreTest(message.message)) {
                     increaseStat(`${message.type}s-ignored`);
                     return;
                 }
+                skipped = false;
                 if (message.type === 'error') {
                     process.exitCode = 1;
                 }
@@ -87,8 +88,8 @@ UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.OUTPUT_PATH}/**/*.html`
         }
 
         if (skipped) {
-            increaseStat('skipped');
             logger.info(`skipped ${relativePath}`);
+            increaseStat('skipped');
         }
         return result;
     });
