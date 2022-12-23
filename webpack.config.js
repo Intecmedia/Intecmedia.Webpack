@@ -609,7 +609,7 @@ module.exports = {
                                 outputStyle: 'expanded',
                                 verbose: ENV.DEBUG || ENV.ARGV.verbose,
                             },
-                            webpackImporter: true,
+                            webpackImporter: false,
                         },
                     },
                 ],
