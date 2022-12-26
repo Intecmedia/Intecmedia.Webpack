@@ -1,6 +1,6 @@
 const path = require('path');
 const slash = require('slash');
-const minimatch = require('minimatch');
+const micromatch = require('micromatch');
 const weblog = require('webpack-log');
 
 const ENV = require('./app.env');
@@ -14,7 +14,7 @@ const statMessages = { skipped: 0, errors: 0, ignored: 0 };
 const patterns = [...UTILS.processArgs._];
 
 config.rules
-    .filter((rule) => (patterns.length > 0 ? patterns.some((i) => minimatch(i, rule.pattern)) : true))
+    .filter((rule) => (patterns.length > 0 ? patterns.some((i) => micromatch.isMatch(i, rule.pattern)) : true))
     .forEach((rule) => {
         const files = UTILS.globSync(rule.pattern, {
             ignore: [...rule.ignore, `${ENV.OUTPUT_PATH}/**/*`],
@@ -32,7 +32,7 @@ config.rules
 
             const filename = path.basename(resourcePath);
 
-            if (patterns.length > 0 && !patterns.some((i) => minimatch(i, relativePath))) {
+            if (patterns.length > 0 && !patterns.some((i) => micromatch.isMatch(i, relativePath))) {
                 return;
             }
 
