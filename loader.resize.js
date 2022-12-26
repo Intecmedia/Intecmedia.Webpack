@@ -13,6 +13,7 @@ const createHash = require('webpack/lib/util/createHash');
 
 const logger = weblog({ name: 'loader-resize' });
 const imageminConfig = require('./imagemin.config');
+const { version: sharpVersion } = require('sharp/package.json');
 const ENV = require('./app.env');
 
 const imageminConfigModule = require.resolve('./imagemin.config');
@@ -93,7 +94,7 @@ module.exports = async function ResizeLoader(content) {
                 resizeFit && resizeFit !== DEFAULT_FIT ? `-${resizeFit}` : ''
             }`) + (query.suffix ? `-${query.suffix}` : '');
 
-    const resourceHash = createHash('xxhash64').update(content).digest('hex');
+    const resourceHash = createHash('xxhash64').update(sharpVersion + content).digest('hex');
     const formatConfig = imageminConfig[format] || {};
     const cacheFilename = `${encodeURIComponent(`${relativePath}?${JSON.stringify(query)}`)}.json`;
     const cacheFilepath = cacheDirectory ? path.join(cacheDirectory, cacheFilename) : undefined;
