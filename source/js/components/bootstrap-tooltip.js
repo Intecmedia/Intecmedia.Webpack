@@ -30,6 +30,11 @@ window.addEventListener('init.App', (event) => {
     initTooltips(container);
 });
 
+window.addEventListener('update.App', (event) => {
+    const container = event.detail.target;
+    initTooltips(container);
+});
+
 window.addEventListener('destroy.App', (event) => {
     const container = event.detail.target;
     destroyTooltips(container);

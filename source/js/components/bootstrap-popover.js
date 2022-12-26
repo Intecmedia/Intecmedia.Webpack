@@ -31,6 +31,11 @@ window.addEventListener('init.App', (event) => {
     initPopovers(container);
 });
 
+window.addEventListener('update.App', (event) => {
+    const container = event.detail.target;
+    initPopovers(container);
+});
+
 window.addEventListener('destroy.App', (event) => {
     const container = event.detail.target;
     destroyPopovers(container);
