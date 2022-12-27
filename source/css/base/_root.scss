@@ -6,6 +6,7 @@
     --NODE_ENV: "#{$NODE_ENV}";
     --DEBUG: "#{$DEBUG}";
     --PACKAGE_NAME: "#{$PACKAGE_NAME}";
+    --#{$prefix}letter-spacing: #{$letter-spacing};
 }
 
 /* stylelint-enable no-duplicate-selectors */
