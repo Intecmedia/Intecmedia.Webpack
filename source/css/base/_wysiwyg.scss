@@ -1,6 +1,8 @@
 /* stylelint-disable scss/selector-nest-combinators, selector-max-type, plugin/selector-bem-pattern, selector-nested-pattern -- wysiwyg is semantic tags */
 .wysiwyg {
     a {
+        // dont customize here, instead of edit sass variables in `_variables.scss`
+
         color: $link-color;
         text-decoration: $link-decoration;
 
@@ -13,12 +15,22 @@
     }
 
     p {
+        // dont customize here, `p` is raw tag
+
         margin-bottom: $paragraph-margin-bottom;
+    }
+
+    p.lead {
+        // dont customize here, instead of edit `.lead` in `_bootstrap-type.scss`
+
+        @extend .lead;
     }
 
     h1,
     .h1,
     .display-1 {
+        // dont customize here, instead of edit `.h1` in `_bootstrap-type.scss`
+
         @extend .h1;
 
         small {
@@ -29,6 +41,8 @@
     h2,
     .h2,
     .display-2 {
+        // dont customize here, instead of edit `.h2` in `_bootstrap-type.scss`
+
         @extend .h2;
 
         small {
@@ -39,6 +53,8 @@
     h3,
     .h3,
     .display-3 {
+        // dont customize here, instead of edit `.h3` in `_bootstrap-type.scss`
+
         @extend .h3;
 
         small {
@@ -49,6 +65,8 @@
     h4,
     .h4,
     .display-4 {
+        // dont customize here, instead of edit `.h4` in `_bootstrap-type.scss`
+
         @extend .h4;
 
         small {
@@ -59,6 +77,8 @@
     h5,
     .h5,
     .display-5 {
+        // dont customize here, instead of edit `.h5` in `_bootstrap-type.scss`
+
         @extend .h5;
 
         small {
@@ -69,6 +89,8 @@
     h6,
     .h6,
     .display-6 {
+        // dont customize here, instead of edit `.h6` in `_bootstrap-type.scss`
+
         @extend .h6;
 
         small {
@@ -78,6 +100,8 @@
 
     // image with caption
     figure {
+        // dont customize here, instead of edit sass variables in `_variables.scss`
+
         @extend .figure;
 
         margin-bottom: $img-spacer;
@@ -143,11 +167,15 @@
     }
 
     table caption {
+        // dont customize here, instead of edit sass variables in `_variables.scss`
+
         font-size: $table-caption-font-size;
     }
 
     // default tables
     table:not(.table) {
+        // dont customize here, instead of edit sass variables in `_variables.scss`
+
         @extend .table;
         @extend .caption-top;
 
@@ -173,6 +201,8 @@
 
     // disabled table
     table:not(.table)[border="0"] {
+        // dont customize here
+
         width: inherit;
 
         border: 0;
@@ -207,6 +237,8 @@
     // table cells: collapse childs
     td,
     th {
+        // dont customize here
+
         > *:first-child {
             margin-top: 0;
         }
@@ -218,6 +250,8 @@
 
     // ordered list
     ol:not(.list-unstyled) {
+        // dont customize here, instead of edit sass variables in `_variables.scss`
+
         margin-bottom: $paragraph-margin-bottom;
         padding-left: $lists-indent;
 
@@ -249,6 +283,8 @@
 
     // unordered list
     ul:not(.list-unstyled) {
+        // dont customize here, instead of edit sass variables in `_variables.scss`
+
         margin-bottom: $paragraph-margin-bottom;
         padding-left: $lists-indent;
 
@@ -279,6 +315,8 @@
     ul ul,
     ol ul,
     ul ol {
+        // dont customize here
+
         margin-bottom: 0;
 
         &:not(.list-unstyled) {
@@ -286,8 +324,10 @@
         }
     }
 
+    // default image
     img {
-        // default image
+        // dont customize here, instead of edit sass variables in `_variables.scss`
+
         @extend .img-fluid;
 
         // images fit width for SM-breakpoint
@@ -360,6 +400,8 @@
     }
 
     picture {
+        // dont customize here, instead of edit sass variables in `_variables.scss`
+
         margin-bottom: $img-spacer;
 
         @include media-breakpoint-down(sm) {
@@ -417,6 +459,8 @@
 
     // blockquotes
     blockquote {
+        // dont customize here, instead of edit `.blockquote` in `_bootstrap-type.scss`
+
         @extend .blockquote;
 
         footer {
