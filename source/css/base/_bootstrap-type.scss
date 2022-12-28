@@ -5,26 +5,44 @@
 //
 .h1 {
     @extend h1;
+
+    // change `$h1-font-size` in `_variables.scss`
+    // for responsive use `@include media` or `@include fluid-clamp-font-size`
 }
 
 .h2 {
     @extend h2;
+
+    // change `$h2-font-size` in `_variables.scss`
+    // for responsive use `@include media` or `@include fluid-clamp-font-size`
 }
 
 .h3 {
     @extend h3;
+
+    // change `$h3-font-size` in `_variables.scss`
+    // for responsive use `@include media` or `@include fluid-clamp-font-size`
 }
 
 .h4 {
     @extend h4;
+
+    // change `$h4-font-size` in `_variables.scss`
+    // for responsive use `@include media` or `@include fluid-clamp-font-size`
 }
 
 .h5 {
     @extend h5;
+
+    // change `$h5-font-size` in `_variables.scss`
+    // for responsive use `@include media` or `@include fluid-clamp-font-size`
 }
 
 .h6 {
     @extend h6;
+
+    // change `$h6-font-size` in `_variables.scss`
+    // for responsive use `@include media` or `@include fluid-clamp-font-size`
 }
 
 .subheading {
