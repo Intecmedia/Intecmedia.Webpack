@@ -2,13 +2,13 @@
 
 @import "node_modules/bootstrap/scss/functions";
 
+// scss-docs-start breakpoints
 $vertical-breakpoints: (
     ss: 375px,
     sm: 576px,
     md: 768px,
     lg: 992px,
 ) !default;
-
 $grid-breakpoints: (
     xs: 0,
     ss: 375px,
@@ -20,7 +20,6 @@ $grid-breakpoints: (
     hd: 1920px,
     qhd: 2560px,
 ) !default;
-
 $container-max-widths: (
     sm: 540px,
     md: 720px,
@@ -31,8 +30,9 @@ $container-max-widths: (
     qhd: 2440px,
 ) !default;
 
-$theme-colors: () !default;
+// scss-docs-end breakpoints
 
+// scss-docs-start spacers
 $spacer: 1rem !default;
 $spacers: (
     0: 0,
@@ -44,13 +44,9 @@ $spacers: (
 ) !default;
 $gutters: $spacers !default;
 
-$aspect-ratios: (
-    "1x1": 100%,
-    "4x3": calc(3 / 4 * 100%),
-    "16x9": calc(9 / 16 * 100%),
-    "21x9": calc(9 / 21 * 100%),
-) !default;
+// scss-docs-end spacers
 
+// scss-docs-start settings
 $enable-caret: true !default;
 $enable-rounded: true !default;
 $enable-shadows: false !default;
@@ -67,32 +63,41 @@ $enable-negative-margins: false !default;
 $enable-deprecation-messages: true !default;
 $enable-important-utilities: true !default;
 $enable-dark-mode: false !default;
-
 $variable-prefix: "" !default;
 
+// scss-docs-end settings
+
+// scss-docs-start colors
+$theme-colors: () !default;
 $body-bg: #fff !default;
 $body-color: #000 !default;
 
+// scss-docs-end colors
+
+// scss-docs-start borders
 $border-width: 1px !default;
 $border-color: #dee2e6 !default;
 $border-radius: 0.25rem !default;
 
+// scss-docs-end borders
+
+// scss-docs-start type
 $font-family-base: system-ui, -apple-system, "Segoe UI", roboto, "Helvetica Neue", arial, "Noto Sans", "Liberation Sans",
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
-
 $font-size-root: null !default;
 $font-size-base: 1rem !default; // Assumes the browser default, typically `16px`
-
 $line-height-base: 1.5 !default;
 $letter-spacing: normal !default;
 
+// scss-docs-end type
+
+// scss-docs-start headings
 $h1-font-size: $font-size-base * 2.5 !default;
 $h2-font-size: $font-size-base * 2 !default;
 $h3-font-size: $font-size-base * 1.75 !default;
 $h4-font-size: $font-size-base * 1.5 !default;
 $h5-font-size: $font-size-base * 1.25 !default;
 $h6-font-size: $font-size-base !default;
-
 $font-sizes: (
     1: $h1-font-size,
     2: $h2-font-size,
@@ -101,21 +106,39 @@ $font-sizes: (
     5: $h5-font-size,
     6: $h6-font-size,
 ) !default;
-
 $display-font-sizes: $font-sizes !default;
 
+// scss-docs-end headings
+
+// scss-docs-start links
 $link-color: #0d6efd !default;
 $link-decoration: underline !default;
 $link-shade-percentage: 20% !default;
 $link-hover-color: shift-color($link-color, $link-shade-percentage) !default;
 $link-hover-decoration: null !default;
 
+// scss-docs-end links
+
+// scss-docs-start para
 $paragraph-margin-bottom: 1rem !default;
+
+// scss-docs-end para
+
+// scss-docs-start aspect ratios
+$aspect-ratios: (
+    "1x1": 100%,
+    "4x3": calc(3 / 4 * 100%),
+    "16x9": calc(9 / 16 * 100%),
+    "21x9": calc(9 / 21 * 100%),
+) !default;
+
+// scss-docs-end aspect ratios
 
 @import "node_modules/bootstrap/scss/variables";
 
 // Common variables (Not bootstrap)
 
+// scss-docs-start wysiwyg
 $lists-indent: 2rem !default;
 $lists-margin-bottom: 0.25rem !default;
 $ol-marker-color: inherit !default;
@@ -126,15 +149,16 @@ $ul-marker-symbol: "●" !default;
 $lists-marker-space: str-repeat(" ", 2) !default;
 $img-spacer: 1rem !default;
 
+// scss-docs-end wysiwyg
+
+// scss-docs-start tables
 $table-border-bordered: false !default;
 $table-border-striped: false !default;
 $table-caption-font-size: 0.875rem !default;
 
-$duration-slow: 2.4s !default;
-$duration-default: 1.6s !default;
-$duration-normal: 0.8s !default;
-$duration-fast: 0.4s !default;
+// scss-docs-end tables
 
+// scss-docs-start subheadings
 $subheadings-display: inline-block !default;
 $subheadings-color: $headings-color !default;
 $subheadings-font-size: 80% !default;
@@ -143,7 +167,16 @@ $subheadings-font-style: null !default;
 $subheadings-font-weight: 500 !default;
 $subheadings-line-height: 1.2 !default;
 
+// scss-docs-end subheadings
+
+// scss-docs-start transitions
+$duration-slow: 2.4s !default;
+$duration-default: 1.6s !default;
+$duration-normal: 0.8s !default;
+$duration-fast: 0.4s !default;
 $intersection-transition-delay: calc(
     (var(--intersection-delay-offset, 0) * var(--intersection-delay-offset-step, 0.1s)) +
         (var(--intersection-delay-index, 0) * var(--intersection-delay-step, 0.1s))
 ) !default;
+
+// scss-docs-end transitions
