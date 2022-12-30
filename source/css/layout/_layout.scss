@@ -34,7 +34,7 @@ html {
 body {
     min-height: 100vh;
 
-    letter-spacing: $letter-spacing;
+    letter-spacing: var(--#{$prefix}letter-spacing, #{$letter-spacing});
     text-rendering: optimizespeed;
 
     @supports (-webkit-touch-callout: none) {

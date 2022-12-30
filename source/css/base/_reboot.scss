@@ -53,5 +53,9 @@ picture {
     }
 }
 
+* {
+    letter-spacing: var(--#{$prefix}letter-spacing, #{$letter-spacing});
+}
+
 /* stylelint-enable scss/selector-nest-combinators, selector-max-type, property-no-vendor-prefix, order/properties-order */
 /* stylelint-enable no-duplicate-selectors */
