@@ -17,11 +17,7 @@ html {
     }
 
     @include media-breakpoint-up(hd) {
-        $root-font-size-min: 16px;
-        $root-font-size-max: 20px;
-        $root-font-size-clamp: fluid-clamp($root-font-size-min, $root-font-size-max, "hd", "qhd");
-        /* stylelint-disable-next-line declaration-property-unit-allowed-list -- for root allowed only px */
-        font-size: (($root-font-size-max + $root-font-size-min) * 0.5);
+        $root-font-size-clamp: fluid-clamp(16px, 20px, "hd", "qhd");
 
         @supports (font-size: $root-font-size-clamp) {
             /* stylelint-disable-next-line plugin/no-unsupported-browser-features, csstree/validator -- not standart feature */
