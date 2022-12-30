@@ -3,6 +3,7 @@
 @import "node_modules/bootstrap/scss/functions";
 
 // scss-docs-start breakpoints
+
 $vertical-breakpoints: (
     ss: 375px,
     sm: 576px,
@@ -47,6 +48,7 @@ $gutters: $spacers !default;
 // scss-docs-end spacers
 
 // scss-docs-start settings
+
 $enable-caret: true !default;
 $enable-rounded: true !default;
 $enable-shadows: false !default;
@@ -75,6 +77,7 @@ $body-color: #000 !default;
 // scss-docs-end colors
 
 // scss-docs-start borders
+
 $border-width: 1px !default;
 $border-color: #dee2e6 !default;
 $border-radius: 0.25rem !default;
@@ -82,6 +85,7 @@ $border-radius: 0.25rem !default;
 // scss-docs-end borders
 
 // scss-docs-start type
+
 $font-family-base: system-ui, -apple-system, "Segoe UI", roboto, "Helvetica Neue", arial, "Noto Sans", "Liberation Sans",
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 $font-size-root: null !default;
@@ -92,6 +96,7 @@ $letter-spacing: normal !default;
 // scss-docs-end type
 
 // scss-docs-start headings
+
 $h1-font-size: $font-size-base * 2.5 !default;
 $h2-font-size: $font-size-base * 2 !default;
 $h3-font-size: $font-size-base * 1.75 !default;
@@ -111,6 +116,7 @@ $display-font-sizes: $font-sizes !default;
 // scss-docs-end headings
 
 // scss-docs-start links
+
 $link-color: #0d6efd !default;
 $link-decoration: underline !default;
 $link-shade-percentage: 20% !default;
@@ -139,6 +145,7 @@ $aspect-ratios: (
 // Common variables (Not bootstrap)
 
 // scss-docs-start wysiwyg
+
 $lists-indent: 2rem !default;
 $lists-margin-bottom: 0.25rem !default;
 $ol-marker-color: inherit !default;
@@ -152,6 +159,7 @@ $img-spacer: 1rem !default;
 // scss-docs-end wysiwyg
 
 // scss-docs-start tables
+
 $table-border-bordered: false !default;
 $table-border-striped: false !default;
 $table-caption-font-size: 0.875rem !default;
@@ -159,6 +167,7 @@ $table-caption-font-size: 0.875rem !default;
 // scss-docs-end tables
 
 // scss-docs-start subheadings
+
 $subheadings-display: inline-block !default;
 $subheadings-color: $headings-color !default;
 $subheadings-font-size: 80% !default;
@@ -170,6 +179,7 @@ $subheadings-line-height: 1.2 !default;
 // scss-docs-end subheadings
 
 // scss-docs-start transitions
+
 $duration-slow: 2.4s !default;
 $duration-default: 1.6s !default;
 $duration-normal: 0.8s !default;
