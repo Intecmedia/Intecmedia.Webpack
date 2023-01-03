@@ -35,7 +35,7 @@ Thumbs.db
 # Mac DS_Store Files
 .DS_Store
 
-# Uii2 thumbs
+# Yii2 thumbs
 build/**/*/thumbs/*
 
 # Package hash
