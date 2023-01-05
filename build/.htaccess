@@ -1,3 +1,0 @@
-# Disable parent deny
-Allow from all
-Options -Indexes -Includes -MultiViews +FollowSymLinks
