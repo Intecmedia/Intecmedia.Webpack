@@ -1,13 +1,5 @@
 # Build dir
-build/fonts
-build/img
-build/js
-build/*.js
-build/*.json
-build/css
-build/upload
-build/**/*.html
-build/humans.txt
+build
 
 # Webpack dev-server hot-update
 build/js/*.hot-update.*
