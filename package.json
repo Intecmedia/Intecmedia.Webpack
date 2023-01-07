@@ -123,7 +123,7 @@
     },
     "overrides": {
         "glob": "7.2.3",
-        "postcss": "8.4.20",
+        "postcss": "8.4.21",
         "sharp": "0.31.3"
     },
     "dependencies": {
@@ -200,7 +200,7 @@
         "nodemon": "^2.0.20",
         "nunjucks": "^3.2.3",
         "p-limit": "^3.1.0",
-        "postcss": "8.4.20",
+        "postcss": "8.4.21",
         "postcss-browser-reporter": "^0.6.0",
         "postcss-devtools": "^1.1.1",
         "postcss-fail-on-warn": "^0.2.1",
