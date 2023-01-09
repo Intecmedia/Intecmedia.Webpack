@@ -70,13 +70,10 @@ module.exports = async function ResizeLoader(content) {
     const resourceFormat = resourceInfo.ext.slice(1).toLowerCase();
     const relativePath = slash(path.relative(__dirname, loaderContext.resourcePath));
 
-    let [, resizeWidth, , resizeHeight, resizeFit] =
-        String(query.resize)
-            .trim()
-            .match(/^(\d*)(x(\d*))?(\w+)?$/) || [];
-    resizeWidth = parseInt(resizeWidth, 10);
-    resizeHeight = parseInt(resizeHeight, 10);
-    resizeFit = (resizeFit || DEFAULT_FIT).trim();
+    const resizeMatch = query.resize.trim().match(/^(\d*)(x(\d*))?(\w+)?$/) || [];
+    const resizeWidth = parseInt(resizeMatch[1], 10);
+    const resizeHeight = parseInt(resizeMatch[2], 10);
+    const resizeFit = (resizeMatch[4] || DEFAULT_FIT).trim();
 
     if (!query.resize && !query.name) {
         query.name = path.basename(loaderContext.resourcePath, path.extname(loaderContext.resourcePath));
