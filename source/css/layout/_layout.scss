@@ -5,7 +5,7 @@
 html {
     --viewport-height: calc(var(--vh, 1vh) * 100); // https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
     --section-height: 100vh;
-    background: $body-bg;
+    background: var(--#{$prefix}body-bg, #{$body-bg});
 
     @include vertical-breakpoint-down(sm) {
         --section-height: #{map-get($vertical-breakpoints, "sm")};
