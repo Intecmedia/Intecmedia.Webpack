@@ -22,6 +22,8 @@
         font-style: $style;
         src: $src;
         font-display: swap;
+
+        @content;
     }
 }
 /* stylelint-enable function-url-quotes -- stylelint not detect quote() */
