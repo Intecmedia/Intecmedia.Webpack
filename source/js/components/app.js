@@ -177,7 +177,7 @@ export default class AbstractApp {
     }
 
     destroy() {
-        this.destroyScope(document.body);
+        this.destroyScope(document);
     }
 
     on(name, type, listener, options = {}) {
