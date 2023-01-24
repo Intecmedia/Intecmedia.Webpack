@@ -40,7 +40,7 @@ export default class AbstractApp {
     }
 
     init() {
-        this.initScope(document.body);
+        this.initScope(document);
     }
 
     initScope(scope) {
