@@ -566,7 +566,14 @@ module.exports = {
                             sourceMap: true,
                             import: {
                                 filter(url) {
-                                    if (url.endsWith('.css')) {
+                                    if (
+                                        url.endsWith('.css') &&
+                                        !(
+                                            url.startsWith('http://') ||
+                                            url.startsWith('https://') ||
+                                            url.startsWith('//')
+                                        )
+                                    ) {
                                         this.loaderContext.emitError(
                                             [
                                                 `Unexpected file extension in @import ${JSON.stringify(url)};.`,
