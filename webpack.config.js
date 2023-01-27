@@ -111,7 +111,9 @@ module.exports = {
             `${ENV.SOURCE_PATH}/css/example.scss`,
         ],
         */
-        ...(ENV.PROD || ENV.DEBUG ? { 'webpack-resize': `${ENV.SOURCE_PATH}/js/webpack-resize.js` } : {}),
+        ...(APP.RESIZE && (ENV.PROD || ENV.DEBUG)
+            ? { 'webpack-resize': `${ENV.SOURCE_PATH}/js/webpack-resize.js` }
+            : {}),
     },
 
     output: {

@@ -21,6 +21,7 @@ module.exports = {
     WEBP: true,
     AVIF: false,
     BROTLI: true,
+    RESIZE: false,
     GZIP: true,
     STYLELINT: true,
     ESLINT: true,
