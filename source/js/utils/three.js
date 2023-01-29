@@ -25,9 +25,8 @@ export function rotateAround(obj, around, axis, theta, isWorld = false) {
 export function printGraph(node) {
     // eslint-disable-next-line compat/compat -- allowed for debug functions
     console.group(` <${node.type}> ${node.name}`);
+    console.log(node);
     node.children.forEach((child) => printGraph(child));
     // eslint-disable-next-line compat/compat -- allowed for debug functions
     console.groupEnd();
 }
-
-export default { traverseMaterials, rotateAround, printGraph };
