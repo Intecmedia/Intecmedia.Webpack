@@ -40,7 +40,13 @@ export default class AbstractApp {
     }
 
     init() {
-        this.initScope(document);
+        const newComponents = [];
+        document.documentElement.querySelectorAll('[data-component]:not(.js-component)').forEach((element) => {
+            newComponents.push(...this.createElement(element));
+        });
+        newComponents.forEach((component) => {
+            component.init();
+        });
     }
 
     initScope(scope) {
@@ -130,7 +136,7 @@ export default class AbstractApp {
             console.log('[app] update', event);
         }
 
-        return this.triggerScope(scope, 'update');
+        this.triggerScope(scope, 'update');
     }
 
     destroyScope(scope) {
