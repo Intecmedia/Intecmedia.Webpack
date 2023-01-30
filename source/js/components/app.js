@@ -41,7 +41,7 @@ export default class AbstractApp {
 
     init() {
         const newComponents = [];
-        document.documentElement.querySelectorAll('[data-component]:not(.js-component)').forEach((element) => {
+        document.querySelectorAll('[data-component]:not(.js-component)').forEach((element) => {
             newComponents.push(...this.createElement(element));
         });
         newComponents.forEach((component) => {
