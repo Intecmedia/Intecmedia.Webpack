@@ -65,7 +65,7 @@ export default class AbstractApp {
             console.log('[app] init', event);
         }
 
-        return newComponents;
+        this.triggerScope(scope, 'update');
     }
 
     createElement(element) {
