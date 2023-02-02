@@ -8,10 +8,10 @@
 
 {% macro sources (url, alt, attrs={}, sources=DEFAULT_SOURCES, options=DEFAULT_OPTIONS) %}
     {% if url.toLowerCase().endsWith('.svg') %}{{ throw('Useless <picture> for SVG: ' + url|dump + '.') }}{% endif %}
-    {% set dimensions = image_size(url) %}
-    {% if dimensions.width and dimensions.height %}
+    {% set size = image_size(url) %}
+    {% if size.width and size.height %}
     {% set attrs = object_assign(attrs, {
-        style: '--image-width:' + dimensions.width + ';' + '--image-height:' + dimensions.height + ';' + (attrs.style | default(''))
+        style: '--image-width:' + size.width + ';' + '--image-height:' + size.height + ';' + (attrs.style | default(''))
     }) %}
     {% endif %}
     <picture{% for k, v in attrs %}{% if k != 'img' %} {{ k }}="{{ v }}"{% endif %}{% endfor %}>
@@ -27,7 +27,7 @@
         {% endif %}
 
         {% for source in sources %}
-        <source{% if source[0] %} media="{{ source[0] }}"{% endif %} srcset="{{ require(url + '?resize=' + source[1] + '&suffix=' + source[2]) }}" type="image/{{ dimensions.type }}">
+        <source{% if source[0] %} media="{{ source[0] }}"{% endif %} srcset="{{ require(url + '?resize=' + source[1] + '&suffix=' + source[2]) }}" type="image/{{ size.type }}">
         {% endfor %}
 
         {% if APP.ENV.PROD or APP.ENV.DEBUG %}
@@ -40,10 +40,10 @@
             {% if not (attrs.img and attrs.img.loading) %}
             loading="lazy"
             {% endif %}
-            {% if dimensions.width and dimensions.height %}
-            width="{{ dimensions.width }}"
-            height="{{ dimensions.height }}"
-            intrinsicsize="{{ dimensions.width }}x{{ dimensions.height }}"
+            {% if size.width and size.height %}
+            width="{{ size.width }}"
+            height="{{ size.height }}"
+            intrinsicsize="{{ size.width }}x{{ size.height }}"
             {% endif %}
             {% if attrs.img %}{% for k, v in attrs.img %} {{ k }}="{{ v }}"{% endfor %}{% endif %}
             {% if alt %}alt="{{ alt }}"{% endif %}
@@ -53,10 +53,10 @@
 
 {% macro picture (url, alt, attrs={}, options=DEFAULT_OPTIONS) %}
     {% if url.toLowerCase().endsWith('.svg') %}{{ throw('Useless <picture> for SVG: ' + url|dump + '.') }}{% endif %}
-    {% set dimensions = image_size(url) %}
-    {% if dimensions.width and dimensions.height %}
+    {% set size = image_size(url) %}
+    {% if size.width and size.height %}
     {% set attrs = object_assign(attrs, {
-        style: '--image-width:' + dimensions.width + ';' + '--image-height:' + dimensions.height + ';' + (attrs.style | default(''))
+        style: '--image-width:' + size.width + ';' + '--image-height:' + size.height + ';' + (attrs.style | default(''))
     }) %}
     {% endif %}
     <picture{% for k, v in attrs %}{% if k != 'img' %} {{ k }}="{{ v }}"{% endif %}{% endfor %}>
@@ -69,10 +69,10 @@
             {% if not (attrs.img and attrs.img.loading) %}
             loading="lazy"
             {% endif %}
-            {% if dimensions.width and dimensions.height %}
-            width="{{ dimensions.width }}"
-            height="{{ dimensions.height }}"
-            intrinsicsize="{{ dimensions.width }}x{{ dimensions.height }}"
+            {% if size.width and size.height %}
+            width="{{ size.width }}"
+            height="{{ size.height }}"
+            intrinsicsize="{{ size.width }}x{{ size.height }}"
             {% endif %}
             {% if attrs.img %}{% for k, v in attrs.img %} {{ k }}="{{ v }}"{% endfor %}{% endif %}
             {% if alt %}alt="{{ alt }}"{% endif %}
