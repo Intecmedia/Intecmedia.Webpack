@@ -13,6 +13,8 @@ const lintIgnore = UTILS.readIgnoreFile('./.imagelintignore');
 async function metadataAsync(filename) {
     const result = {};
     const metadata = await sharp(filename).metadata();
+    const stats = await sharp(filename).stats();
+    result.isOpaque = stats.isOpaque;
     result.hasAlpha = metadata.hasAlpha;
     result.size = metadata.size;
     result.extension = path.extname(filename).replace('.', '');
@@ -64,7 +66,7 @@ const LINT_RULES = [
         name: 'jpeg',
         options: config.jpeg || {},
         async fn(metadata, filename) {
-            if (metadata.format === 'png' && !metadata.hasAlpha) {
+            if (metadata.format === 'png' && metadata.isOpaque && metadata.hasAlpha) {
                 const jpeg = await sharp(filename).jpeg(this.options).toBuffer();
                 if (jpeg.length < metadata.size) {
                     return `JPEG (${jpeg.length} bytes) better than PNG (${metadata.size} bytes). Please use JPEG.`;
