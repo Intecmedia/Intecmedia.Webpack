@@ -2,8 +2,8 @@
 
 module.exports = {
     'colorspace': ['srgb', 'gray', 'b-w'],
+    'jpeg': { 'quality': 95 },
     'maxheight': 1920,
     'maxwidth': 1920,
-    'jpeg': { 'quality': 95 },
     'png': { 'quality': 100 },
 };
