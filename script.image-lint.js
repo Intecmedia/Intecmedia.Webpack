@@ -13,6 +13,8 @@ const lintIgnore = UTILS.readIgnoreFile('./.imagelintignore');
 async function metadataAsync(filename) {
     const result = {};
     const metadata = await sharp(filename).metadata();
+    result.hasAlpha = metadata.hasAlpha;
+    result.size = metadata.size;
     result.extension = path.extname(filename).replace('.', '');
     result.width = parseInt(metadata.width, 10);
     result.height = parseInt(metadata.height, 10);
@@ -58,6 +60,32 @@ const LINT_RULES = [
             return false;
         },
     },
+    {
+        name: 'jpeg',
+        options: config.jpeg || {},
+        async fn(metadata, filename) {
+            if (metadata.format === 'png' && !metadata.hasAlpha) {
+                const jpeg = await sharp(filename).jpeg(this.options).toBuffer();
+                if (jpeg.length < metadata.size) {
+                    return `JPEG (${jpeg.length} bytes) better than PNG (${metadata.size} bytes). Please use JPEG.`;
+                }
+            }
+            return false;
+        },
+    },
+    {
+        name: 'png',
+        options: config.png || {},
+        async fn(metadata, filename) {
+            if (metadata.format === 'jpg') {
+                const png = await sharp(filename).png(this.options).toBuffer();
+                if (png.length < metadata.size) {
+                    return `PNG (${png.length} bytes) better than JPEG (${metadata.size} bytes). Please use PNG.`;
+                }
+            }
+            return false;
+        },
+    },
 ];
 
 const patterns = [...UTILS.processArgs._];
@@ -75,7 +103,7 @@ UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.SOURCE_PATH}/**/*.{jpg,
     };
 
     const promises = files.map(async (resourcePath) => {
-        const relativePath = slash(path.relative(__dirname, resourcePath));
+        const relativePath = slash(path.relative(ENV.SOURCE_PATH, resourcePath));
         const metadata = await metadataAsync(resourcePath);
 
         if (lintIgnore.ignores(relativePath)) {
@@ -84,10 +112,14 @@ UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.SOURCE_PATH}/**/*.{jpg,
             return metadata;
         }
 
-        const lintErrors = LINT_RULES.map((rule) => {
-            const lintError = rule.fn(metadata);
-            return lintError ? [lintError] : [];
-        }).flat();
+        const lintErrors = (
+            await Promise.all(
+                LINT_RULES.map(async (rule) => {
+                    const lintError = await rule.fn(metadata, resourcePath);
+                    return lintError ? [lintError] : [];
+                })
+            )
+        ).flat();
 
         if (lintErrors.length > 0) {
             logger.info(`${relativePath}: ${JSON.stringify(metadata)}`);
