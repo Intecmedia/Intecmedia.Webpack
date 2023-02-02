@@ -9,6 +9,7 @@
 {% macro sources (url, alt, attrs={}, sources=DEFAULT_SOURCES, options=DEFAULT_OPTIONS) %}
     {% if url.toLowerCase().endsWith('.svg') %}{{ throw('Useless <picture> for SVG: ' + url|dump + '.') }}{% endif %}
     {% set size = image_size(url) %}
+    {% set sources = image_sources(size, sources) %}
     {% if size.width and size.height %}
     {% set attrs = object_assign(attrs, {
         style: '--image-width:' + size.width + ';' + '--image-height:' + size.height + ';' + (attrs.style | default(''))
