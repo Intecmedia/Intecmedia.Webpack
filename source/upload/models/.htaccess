@@ -59,6 +59,63 @@ Options -Indexes -Includes -MultiViews +FollowSymLinks
     </FilesMatch>
 </IfModule>
 
+# glb brotli
+<IfModule mod_headers.c>
+    # Enable rewrite
+    RewriteEngine On
+
+    # Serve brotli compressed glb files if they exist and the client accepts gzip.
+    RewriteCond %{REQUEST_FILENAME} \.glb$ [NC]
+    RewriteCond %{HTTP:Accept-encoding} br
+    RewriteCond %{REQUEST_FILENAME}\.br -s
+    RewriteRule ^(.*)\.glb $1\.glb\.br [QSA]
+    # Brotli not accepted
+    RewriteCond %{REQUEST_FILENAME} \.glb\.br$ [NC]
+    RewriteCond %{HTTP:Accept-encoding} !br
+    RewriteCond %{REQUEST_FILENAME} -s
+    RewriteRule ^(.*)\.glb\.br $1\.glb [L,QSA]
+
+    # Serve gzip compressed glb files if they exist and the client accepts gzip.
+    RewriteCond %{REQUEST_FILENAME} \.glb$ [NC]
+    RewriteCond %{HTTP:Accept-encoding} gzip
+    RewriteCond %{REQUEST_FILENAME}\.gz -s
+    RewriteRule ^(.*)\.glb $1\.glb\.gz [QSA]
+    # Gzip not accepted
+    RewriteCond %{REQUEST_FILENAME} \.glb\.gz$ [NC]
+    RewriteCond %{HTTP:Accept-encoding} !gzip
+    RewriteCond %{REQUEST_FILENAME} -s
+    RewriteRule ^(.*)\.glb\.gz $1\.glb [L,QSA]
+
+    # Serve correct content types, and prevent mod_deflate double gzip.
+    RewriteRule \.glb\.gz$ - [T=application/octet-stream,E=no-gzip:1]
+    RewriteRule \.glb\.br$ - [T=application/octet-stream,E=no-gzip:1]
+
+    <Files *.glb.gz>
+        # fix content type
+        AddType "application/octet-stream" .gz
+        AddEncoding gzip .gz
+        RemoveLanguage .gz
+    </Files>
+    <Files *.glb.br>
+        # fix content type
+        AddType "application/octet-stream" .br
+        AddEncoding br .br
+        RemoveLanguage .br
+    </Files>
+    <FilesMatch "(\.glb\.gz)$">
+        # Serve correct encoding type.
+        Header set Content-Encoding gzip
+        # Force proxies to cache gzipped & non-gzipped js files separately.
+        Header append Vary Accept-Encoding
+    </FilesMatch>
+    <FilesMatch "(\.glb\.br)$">
+        # Serve correct encoding type.
+        Header set Content-Encoding br
+        # Force proxies to cache gzipped & non-gzipped js files separately.
+        Header append Vary Accept-Encoding
+    </FilesMatch>
+</IfModule>
+
 # hdr brotli
 <IfModule mod_headers.c>
     # Enable rewrite
