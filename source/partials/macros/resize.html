@@ -7,7 +7,6 @@
 {% set DEFAULT_OPTIONS = {} %}
 
 {% macro sources (url, alt, attrs={}, sources=DEFAULT_SOURCES, options=DEFAULT_OPTIONS) %}
-    {% if url.toLowerCase().endsWith('.svg') %}{{ throw('Useless <picture> for SVG: ' + url|dump + '.') }}{% endif %}
     {% set size = image_size(url) %}
     {% set sources = image_sources(size, sources) %}
     {% if size.width and size.height %}
@@ -16,8 +15,9 @@
     }) %}
     {% endif %}
     <picture{% for k, v in attrs %}{% if k != 'img' %} {{ k }}="{{ v }}"{% endif %}{% endfor %}>
-        <!-- sources = {{ sources | dump | safe }} -->
+        {% if size.type == 'png' or size.type == 'jpg' or size.type == 'jpeg' %}
 
+        <!-- sources = {{ sources | dump | safe }} -->
         {% if APP.ENV.PROD or APP.ENV.DEBUG %}
         {% if APP.AVIF and not options.noavif %}{% for source in sources %}
         <source{% if source[0] %} media="{{ source[0] }}"{% endif %} srcset="{{ require(url + '?resize=' + source[1] + '&format=avif&suffix=' + source[2]) }}" type="image/avif">
@@ -36,6 +36,7 @@
         {% if APP.WEBP and not options.nowebp %}<source srcset="{{ require(url + '?resize=&format=webp') }}" type="image/webp">{% endif %}
         {% endif %}
 
+        {% endif %}
         <img
             src="{{ require(url) }}"
             {% if not (attrs.img and attrs.img.loading) %}
@@ -53,7 +54,6 @@
 {% endmacro %}
 
 {% macro picture (url, alt, attrs={}, options=DEFAULT_OPTIONS) %}
-    {% if url.toLowerCase().endsWith('.svg') %}{{ throw('Useless <picture> for SVG: ' + url|dump + '.') }}{% endif %}
     {% set size = image_size(url) %}
     {% if size.width and size.height %}
     {% set attrs = object_assign(attrs, {
@@ -61,9 +61,13 @@
     }) %}
     {% endif %}
     <picture{% for k, v in attrs %}{% if k != 'img' %} {{ k }}="{{ v }}"{% endif %}{% endfor %}>
+        {% if size.type == 'png' or size.type == 'jpg' or size.type == 'jpeg' %}
+
         {% if APP.ENV.PROD or APP.ENV.DEBUG %}
         {% if APP.AVIF and not options.noavif %}<source srcset="{{ require(url + '?resize=&format=avif') }}" type="image/avif">{% endif %}
         {% if APP.WEBP and not options.nowebp %}<source srcset="{{ require(url + '?resize=&format=webp') }}" type="image/webp">{% endif %}
+        {% endif %}
+
         {% endif %}
         <img
             src="{{ require(url) }}"
