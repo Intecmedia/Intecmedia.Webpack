@@ -47,9 +47,22 @@ export default class AbstractApp {
         newComponents.forEach((component) => {
             component.init();
         });
+
+        const detail = { target: document.documentElement };
+        const event = new CustomEvent('init.App', { detail });
+        window.dispatchEvent(event);
+        if (VERBOSE) {
+            console.log('[app] init', event);
+        }
+        this.triggerScope(document.documentElement, 'init');
     }
 
     initScope(scope) {
+        console.error(`[app] initScope method is deprecated, use updateScope instead`, scope);
+        throw new Error('Method initScope method is deprecated, use updateScope instead.');
+    }
+
+    updateScope(scope) {
         const newComponents = [];
         scope.querySelectorAll('[data-component]:not(.js-component)').forEach((element) => {
             newComponents.push(...this.createElement(element));
@@ -59,10 +72,10 @@ export default class AbstractApp {
         });
 
         const detail = { target: scope };
-        const event = new CustomEvent('init.App', { detail });
+        const event = new CustomEvent('update.App', { detail });
         window.dispatchEvent(event);
         if (VERBOSE) {
-            console.log('[app] init', event);
+            console.log('[app] update', event);
         }
 
         this.triggerScope(scope, 'update');
@@ -126,17 +139,6 @@ export default class AbstractApp {
             }
             closest = closest.parentNode.closest('.js-component[data-component-id]');
         }
-    }
-
-    updateScope(scope) {
-        const detail = { target: scope };
-        const event = new CustomEvent(`update.App`, { detail });
-        window.dispatchEvent(event);
-        if (VERBOSE) {
-            console.log('[app] update', event);
-        }
-
-        this.triggerScope(scope, 'update');
     }
 
     destroyScope(scope) {
