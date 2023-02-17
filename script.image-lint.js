@@ -106,13 +106,14 @@ UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.SOURCE_PATH}/**/*.{jpg,
 
     const promises = files.map(async (resourcePath) => {
         const relativePath = slash(path.relative(ENV.SOURCE_PATH, resourcePath));
-        const metadata = await metadataAsync(resourcePath);
 
         if (lintIgnore.ignores(relativePath)) {
             increaseStat('ignored');
             logger.info(`${relativePath}: ignored`);
-            return metadata;
+            return Promise.resolve(relativePath);
         }
+
+        const metadata = await metadataAsync(resourcePath);
 
         const lintErrors = (
             await Promise.all(
