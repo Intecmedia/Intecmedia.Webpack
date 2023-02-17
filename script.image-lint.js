@@ -11,8 +11,14 @@ const logger = weblog({ name: 'image-lint' });
 const lintIgnore = UTILS.readIgnoreFile('./.imagelintignore');
 
 async function metadataAsync(filename) {
+    let metadata;
     const result = {};
-    const metadata = await sharp(filename).metadata();
+    try {
+        metadata = await sharp(filename).metadata();
+    } catch (error) {
+        logger.error(filename, error);
+        return null;
+    }
     const stats = await sharp(filename).stats();
     result.isOpaque = stats.isOpaque;
     result.hasAlpha = metadata.hasAlpha;
@@ -114,6 +120,13 @@ UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.SOURCE_PATH}/**/*.{jpg,
         }
 
         const metadata = await metadataAsync(resourcePath);
+
+        if (!metadata) {
+            logger.error(`${relativePath}: cannot read metadata`);
+            increaseStat('error');
+            process.exitCode = 1;
+            return Promise.resolve(relativePath);
+        }
 
         const lintErrors = (
             await Promise.all(
