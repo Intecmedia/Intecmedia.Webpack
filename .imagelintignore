@@ -1,3 +1,4 @@
 img/**/*@resize-*.*
 upload/**/*@resize-*.*
 img/og-image.*
+*/build/*
