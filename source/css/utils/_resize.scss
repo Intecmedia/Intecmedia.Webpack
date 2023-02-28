@@ -34,7 +34,7 @@ $resize-breakpoints: $grid-breakpoints !default;
     @each $breakpoint in map-keys($breakpoints) {
         $size: strip-unit(map-get($breakpoints, $breakpoint));
 
-        @include media-breakpoint-only($breakpoint) {
+        @include media-breakpoint-up($breakpoint) {
             /* postcss.resize.webp: ignore */
 
             /* postcss.resize.avif: ignore */
@@ -49,7 +49,7 @@ $resize-breakpoints: $grid-breakpoints !default;
                 @each $breakpoint in map-keys($breakpoints) {
                     $size: strip-unit(map-get($breakpoints, $breakpoint));
 
-                    @include media-breakpoint-only($breakpoint) {
+                    @include media-breakpoint-up($breakpoint) {
                         /* postcss.resize.webp: ignore */
                         background-image: url("#{$url}?resize=#{$size}x&format=webp&suffix=#{$breakpoint}");
                     }
@@ -62,7 +62,7 @@ $resize-breakpoints: $grid-breakpoints !default;
                 @each $breakpoint in map-keys($breakpoints) {
                     $size: strip-unit(map-get($breakpoints, $breakpoint));
 
-                    @include media-breakpoint-only($breakpoint) {
+                    @include media-breakpoint-up($breakpoint) {
                         /* postcss.resize.avif: ignore */
                         background-image: url("#{$url}?resize=#{$size}x&format=avif&suffix=#{$breakpoint}");
                     }
