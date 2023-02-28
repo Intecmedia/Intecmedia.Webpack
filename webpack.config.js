@@ -158,7 +158,7 @@ module.exports = {
                           ? [
                                 new ImageMinimizerPlugin({
                                     test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
-                                    exclude: [/@resize-/, /(\?|&)resize=/, /(fonts|font)/i],
+                                    exclude: [/@resize-/, /(\?|&)resize=/, /(fonts|font)/i, 'svg-sprite.svg'],
                                     minimizer: {
                                         implementation: imageminConfig.implementation,
                                         options: {
