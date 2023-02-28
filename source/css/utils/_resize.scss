@@ -2,10 +2,6 @@
 
 $resize-breakpoints: $grid-breakpoints !default;
 
-@function resize-prefix($name, $breakpoints: $resize-breakpoints) {
-    @return if(breakpoint-min($name, $breakpoints) == null, "", $name);
-}
-
 @mixin background-image($url) {
     background-image: url("#{$url}");
 
@@ -37,14 +33,13 @@ $resize-breakpoints: $grid-breakpoints !default;
 
     @each $breakpoint in map-keys($breakpoints) {
         $size: strip-unit(map-get($breakpoints, $breakpoint));
-        $prefix: resize-prefix($breakpoint, $breakpoints);
 
-        @include media-breakpoint-only($prefix) {
+        @include media-breakpoint-only($breakpoint) {
             /* postcss.resize.webp: ignore */
 
             /* postcss.resize.avif: ignore */
 
-            background-image: url("#{$url}?resize=#{$size}x&suffix=#{$prefix}");
+            background-image: url("#{$url}?resize=#{$size}x&suffix=#{$breakpoint}");
         }
     }
 
@@ -53,11 +48,10 @@ $resize-breakpoints: $grid-breakpoints !default;
             html.webp & {
                 @each $breakpoint in map-keys($breakpoints) {
                     $size: strip-unit(map-get($breakpoints, $breakpoint));
-                    $prefix: resize-prefix($breakpoint, $breakpoints);
 
-                    @include media-breakpoint-only($prefix) {
+                    @include media-breakpoint-only($breakpoint) {
                         /* postcss.resize.webp: ignore */
-                        background-image: url("#{$url}?resize=#{$size}x&format=webp&suffix=#{$prefix}");
+                        background-image: url("#{$url}?resize=#{$size}x&format=webp&suffix=#{$breakpoint}");
                     }
                 }
             }
@@ -67,11 +61,10 @@ $resize-breakpoints: $grid-breakpoints !default;
             html.avif & {
                 @each $breakpoint in map-keys($breakpoints) {
                     $size: strip-unit(map-get($breakpoints, $breakpoint));
-                    $prefix: resize-prefix($breakpoint, $breakpoints);
 
-                    @include media-breakpoint-only($prefix) {
+                    @include media-breakpoint-only($breakpoint) {
                         /* postcss.resize.avif: ignore */
-                        background-image: url("#{$url}?resize=#{$size}x&format=avif&suffix=#{$prefix}");
+                        background-image: url("#{$url}?resize=#{$size}x&format=avif&suffix=#{$breakpoint}");
                     }
                 }
             }
