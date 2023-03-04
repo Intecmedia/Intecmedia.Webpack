@@ -215,7 +215,7 @@
         "postcss-url": "^10.1.3",
         "prettier": "^2.8.4",
         "resize-observer-polyfill": "^1.5.1",
-        "rimraf": "^4.2.0",
+        "rimraf": "^4.3.0",
         "sass": "^1.58.3",
         "sass-loader": "^13.2.0",
         "schema-utils": "^4.0.0",
