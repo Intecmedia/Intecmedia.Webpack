@@ -22,13 +22,13 @@ $grid-breakpoints: (
     qhd: 2560px,
 ) !default;
 $container-max-widths: (
-    sm: 540px,
-    md: 720px,
-    lg: 960px,
-    xl: 1140px,
-    xxl: 1320px,
-    hd: 1800px,
-    qhd: 2440px,
+    sm: 576px - 36px,
+    md: 768px - 48px,
+    lg: 992px - 32px,
+    xl: 1200px - 60px,
+    xxl: 1400px - 80px,
+    hd: 1920px - 120px,
+    qhd: 2560px - 120px,
 ) !default;
 
 // scss-docs-end breakpoints
