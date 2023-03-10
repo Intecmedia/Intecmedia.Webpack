@@ -1,0 +1,39 @@
+@use "sass:math";
+
+$fs-negative-steps: 2 !default;
+$fs-positive-steps: 7 !default;
+
+$fs-min-width: 375px !default;
+$fs-min-size: 18px !default;
+$fs-min-scale: 1.15 !default;
+
+$fs-max-width: 1920px !default;
+$fs-max-size: 24px !default;
+$fs-max-scale: 1.414 !default;
+
+@mixin fs-steps(
+    $negative-steps: $fs-negative-steps,
+    $positive-steps: $fs-positive-steps,
+    $min-width: $fs-min-width,
+    $min-size: $fs-min-size,
+    $min-scale: $fs-min-scale,
+    $max-width: $fs-max-width,
+    $max-size: $fs-max-size,
+    $max-scale: $fs-max-scale
+) {
+    @for $i from $negative-steps through 1 {
+        $min: $min-size * math.pow($min-scale, -$i);
+        $max: $max-size * math.pow($max-scale, -$i);
+
+        /* Step: -#{$i}: #{$min} -> #{$max} */
+        @include fluid-clamp-font-size(rem($min), rem($max), $min-width, $max-width, --fs-step--#{$i});
+    }
+
+    @for $i from 0 through $positive-steps {
+        $min: $min-size * math.pow($min-scale, $i);
+        $max: $max-size * math.pow($max-scale, $i);
+
+        /* Step: #{$i}: #{$min} -> #{$max} */
+        @include fluid-clamp-font-size(rem($min), rem($max), $min-width, $max-width, --fs-step-#{$i});
+    }
+}
