@@ -7,6 +7,8 @@ $fluid-max-width: 1920px !default;
 $fluid-min-height: 375px !default;
 $fluid-max-height: 992px !default;
 
+$fluid-fixed-digits: 5 !default;
+
 @function fluid-invalidate-units($a, $b) {
     @if not unitless($a) and (unit($a) != unit($b) or not comparable($a, $b)) {
         @return true;
@@ -285,10 +287,10 @@ $fluid-max-height: 992px !default;
     $sub-clamp: ($max-clamp - $min-clamp);
 
     $vp-value: math.div(16 * 100 * $sub-size, $sub-clamp);
-    $vp-value: to-fixed($vp-value, 4);
+    $vp-value: to-fixed($vp-value, $fluid-fixed-digits);
 
     $value: $min-size - math.div($min-clamp * $sub-size, $sub-clamp);
-    $value: to-fixed($value, 4);
+    $value: to-fixed($value, $fluid-fixed-digits);
 
     $sign: "";
 
@@ -309,11 +311,19 @@ $fluid-max-height: 992px !default;
     }
 
     @if $min-unit == rem and $max-unit == rem {
+        $min-size: to-fixed($min-size, $fluid-fixed-digits);
+        $abs-value: to-fixed($abs-value, $fluid-fixed-digits);
+        $max-size: to-fixed($max-size, $fluid-fixed-digits);
+
         @return clamp(#{$min-size}rem, #{$vp-value}#{$vp-unit} #{$sign} #{$abs-value}rem, #{$max-size}rem);
     }
 
     @if $min-unit == px and $max-unit == px {
-        @return clamp(#{$min-size * 16}px, #{$vp-value}#{$vp-unit} #{$sign} #{$abs-value * 16}px, #{$max-size * 16}px);
+        $min-size: to-fixed($min-size * 16, $fluid-fixed-digits);
+        $abs-value: to-fixed($abs-value * 16, $fluid-fixed-digits);
+        $max-size: to-fixed($max-size * 16, $fluid-fixed-digits);
+
+        @return clamp(#{$min-size}px, #{$vp-value}#{$vp-unit} #{$sign} #{$abs-value}px, #{$max-size}px);
     }
 
     @error "Cant calc $min-size=#{$min-size} and $max-size=#{$max-size} with different units.";
