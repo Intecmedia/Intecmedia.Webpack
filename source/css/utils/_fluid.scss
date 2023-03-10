@@ -123,9 +123,10 @@ $fluid-fixed-digits: 4 !default;
     $min-width: $fluid-min-width,
     $max-width: $fluid-max-width,
     $min-width-calc: $min-width,
-    $max-width-calc: $max-width,
-    $prop: font-size
+    $max-width-calc: $max-width
 ) {
+    $prop: font-size;
+
     @if meta.type-of($min-width) == "string" {
         $min-width: map-get($grid-breakpoints, $min-width);
     }
@@ -148,9 +149,10 @@ $fluid-fixed-digits: 4 !default;
     $min-width: $fluid-min-width,
     $max-width: $fluid-max-width,
     $min-width-calc: $min-width,
-    $max-width-calc: $max-width,
-    $prop: font-size
+    $max-width-calc: $max-width
 ) {
+    $prop: font-size;
+
     @if meta.type-of($min-width) == "string" {
         $min-width: map-get($grid-breakpoints, $min-width);
     }
@@ -181,9 +183,10 @@ $fluid-fixed-digits: 4 !default;
     $min-height: $fluid-min-height,
     $max-height: $fluid-max-height,
     $min-height-calc: $min-height,
-    $max-height-calc: $max-height,
-    $prop: font-size
+    $max-height-calc: $max-height
 ) {
+    $prop: font-size;
+
     @if meta.type-of($min-height) == "string" {
         $min-height: map-get($vertical-breakpoints, $min-height);
     }
@@ -214,9 +217,10 @@ $fluid-fixed-digits: 4 !default;
     $min-height: $fluid-min-height,
     $max-height: $fluid-max-height,
     $min-height-calc: $min-height,
-    $max-height-calc: $max-height,
-    $prop: font-size
+    $max-height-calc: $max-height
 ) {
+    $prop: font-size;
+
     @if meta.type-of($min-height) == "string" {
         $min-height: map-get($vertical-breakpoints, $min-height);
     }
@@ -357,47 +361,35 @@ $fluid-fixed-digits: 4 !default;
     @return fluid-clamp-base($min-size, $max-size, $min-height, $max-height, true);
 }
 
-@mixin fluid-clamp-prop(
-    $prop: font-size,
-    $min-size,
-    $max-size,
-    $min-width: $fluid-min-width,
-    $max-width: $fluid-max-width
-) {
-    $font-size-clamp: fluid-clamp($min-size, $max-size, $min-width, $max-width);
+@mixin fluid-clamp-prop($prop, $min-size, $max-size, $min-width: $fluid-min-width, $max-width: $fluid-max-width) {
+    $clamp-size: fluid-clamp($min-size, $max-size, $min-width, $max-width);
 
     #{$prop}: to-fixed($min-size, $fluid-fixed-digits);
 
-    @supports (#{$prop}: $font-size-clamp) {
+    @supports (#{$prop}: $clamp-size) {
         /* stylelint-disable-next-line plugin/no-unsupported-browser-features, csstree/validator -- not standart feature */
-        #{$prop}: $font-size-clamp;
+        #{$prop}: $clamp-size;
     }
 }
 
-@mixin fluid-clamp-font-size(
-    $min-size,
-    $max-size,
-    $min-width: $fluid-min-width,
-    $max-width: $fluid-max-width,
-    $prop: font-size
-) {
-    @include fluid-clamp-prop($prop, $min-size, $max-size, $min-width, $max-width);
+@mixin fluid-clamp-font-size($min-size, $max-size, $min-width: $fluid-min-width, $max-width: $fluid-max-width) {
+    @include fluid-clamp-prop(font-size, $min-size, $max-size, $min-width, $max-width);
 }
 
 @mixin fluid-clamp-prop-vertical(
-    $prop: font-size,
+    $prop,
     $min-size,
     $max-size,
     $min-height: $fluid-min-height,
     $max-height: $fluid-max-height
 ) {
-    $font-size-clamp: fluid-clamp-vertical($min-size, $max-size, $min-height, $max-height);
+    $clamp-size: fluid-clamp-vertical($min-size, $max-size, $min-height, $max-height);
 
     #{$prop}: to-fixed($min-size, $fluid-fixed-digits);
 
-    @supports (#{$prop}: $font-size-clamp) {
+    @supports (#{$prop}: $clamp-size) {
         /* stylelint-disable-next-line plugin/no-unsupported-browser-features, csstree/validator -- not standart feature */
-        #{$prop}: $font-size-clamp;
+        #{$prop}: $clamp-size;
     }
 }
 
@@ -405,8 +397,9 @@ $fluid-fixed-digits: 4 !default;
     $min-size,
     $max-size,
     $min-height: $fluid-min-height,
-    $max-height: $fluid-max-height,
-    $prop: font-size
+    $max-height: $fluid-max-height
 ) {
+    $prop: font-size;
+
     @include fluid-clamp-prop-vertical($prop, $min-size, $max-size, $min-height, $max-height);
 }
