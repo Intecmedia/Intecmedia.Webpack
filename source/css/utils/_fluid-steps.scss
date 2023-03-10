@@ -5,11 +5,11 @@ $fluid-steps-positive-count: 7 !default;
 
 $fluid-steps-min-width: 375px !default;
 $fluid-steps-min-size: 18px !default;
-$fluid-steps-min-scale: 1.15 !default;
+$fluid-steps-min-scale: 1.2 !default;
 
 $fluid-steps-max-width: 1920px !default;
-$fluid-steps-max-size: 24px !default;
-$fluid-steps-max-scale: 1.414 !default;
+$fluid-steps-max-size: 20px !default;
+$fluid-steps-max-scale: 1.25 !default;
 
 @mixin fluid-steps(
     $negative-count: $fluid-steps-negative-count,
