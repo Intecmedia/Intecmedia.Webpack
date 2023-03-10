@@ -315,7 +315,10 @@ $fluid-fixed-digits: 4 !default;
         $abs-value: to-fixed($abs-value, $fluid-fixed-digits);
         $max-size: to-fixed($max-size, $fluid-fixed-digits);
 
-        @return clamp(#{$min-size}rem, #{$vp-value}#{$vp-unit} #{$sign} #{$abs-value}rem, #{$max-size}rem);
+        $clamp-min: math.min($min-size, $max-size);
+        $clamp-max: math.max($min-size, $max-size);
+
+        @return clamp(#{$clamp-min}rem, #{$vp-value}#{$vp-unit} #{$sign} #{$abs-value}rem, #{$clamp-max}rem);
     }
 
     @if $min-unit == px and $max-unit == px {
@@ -323,7 +326,10 @@ $fluid-fixed-digits: 4 !default;
         $abs-value: to-fixed($abs-value * 16, $fluid-fixed-digits);
         $max-size: to-fixed($max-size * 16, $fluid-fixed-digits);
 
-        @return clamp(#{$min-size}px, #{$vp-value}#{$vp-unit} #{$sign} #{$abs-value}px, #{$max-size}px);
+        $clamp-min: math.min($min-size, $max-size);
+        $clamp-max: math.max($min-size, $max-size);
+
+        @return clamp(#{$clamp-min}px, #{$vp-value}#{$vp-unit} #{$sign} #{$abs-value}px, #{$clamp-max}px);
     }
 
     @error "Cant calc $min-size=#{$min-size} and $max-size=#{$max-size} with different units.";
