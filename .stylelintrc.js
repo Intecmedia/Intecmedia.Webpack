@@ -65,6 +65,7 @@ module.exports = deepMerge({}, sharedConfig, {
                 '--image-',
                 '--video-',
                 '--intersection-',
+                '--fluid-',
                 '--#\\{\\$prefix\\}',
             ],
             'ignoreSelectors': [
