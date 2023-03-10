@@ -366,7 +366,7 @@ $fluid-fixed-digits: 4 !default;
 ) {
     $font-size-clamp: fluid-clamp($min-size, $max-size, $min-width, $max-width);
 
-    #{$prop}: $min-size;
+    #{$prop}: to-fixed($min-size, $fluid-fixed-digits);
 
     @supports (#{$prop}: $font-size-clamp) {
         /* stylelint-disable-next-line plugin/no-unsupported-browser-features, csstree/validator -- not standart feature */
@@ -393,7 +393,7 @@ $fluid-fixed-digits: 4 !default;
 ) {
     $font-size-clamp: fluid-clamp-vertical($min-size, $max-size, $min-height, $max-height);
 
-    #{$prop}: $min-size;
+    #{$prop}: to-fixed($min-size, $fluid-fixed-digits);
 
     @supports (#{$prop}: $font-size-clamp) {
         /* stylelint-disable-next-line plugin/no-unsupported-browser-features, csstree/validator -- not standart feature */
