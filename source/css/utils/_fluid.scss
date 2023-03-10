@@ -1,11 +1,11 @@
 @use "sass:math";
 @use "sass:meta";
 
-$fluid-min-width: 420px !default;
-$fluid-max-width: 1280px !default;
+$fluid-min-width: 375px !default;
+$fluid-max-width: 1920px !default;
 
-$fluid-min-height: 320px !default;
-$fluid-max-height: 1024px !default;
+$fluid-min-height: 375px !default;
+$fluid-max-height: 992px !default;
 
 @function fluid-invalidate-units($a, $b) {
     @if not unitless($a) and (unit($a) != unit($b) or not comparable($a, $b)) {
