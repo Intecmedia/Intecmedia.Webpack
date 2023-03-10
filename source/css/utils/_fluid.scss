@@ -7,7 +7,7 @@ $fluid-max-width: 1920px !default;
 $fluid-min-height: 375px !default;
 $fluid-max-height: 992px !default;
 
-$fluid-fixed-digits: 5 !default;
+$fluid-fixed-digits: 4 !default;
 
 @function fluid-invalidate-units($a, $b) {
     @if not unitless($a) and (unit($a) != unit($b) or not comparable($a, $b)) {
