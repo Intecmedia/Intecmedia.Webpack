@@ -26,7 +26,7 @@ $fluid-steps-max-scale: 1.25 !default;
         $max: $max-size * math.pow($max-scale, -$i);
 
         /* Step: -#{$i}: #{to-fixed($min, 2)} -> #{to-fixed($max, 2)} */
-        @include fluid-clamp-font-size(rem($min), rem($max), $min-width, $max-width, --fluid-step--#{$i});
+        @include fluid-clamp-prop(--fluid-step--#{$i}, rem($min), rem($max), $min-width, $max-width);
     }
 
     @for $i from 0 through $positive-count {
@@ -34,6 +34,6 @@ $fluid-steps-max-scale: 1.25 !default;
         $max: $max-size * math.pow($max-scale, $i);
 
         /* Step: #{$i}: #{to-fixed($min, 2)} -> #{to-fixed($max, 2)} */
-        @include fluid-clamp-font-size(rem($min), rem($max), $min-width, $max-width, --fluid-step-#{$i});
+        @include fluid-clamp-prop(--fluid-step-#{$i}, rem($min), rem($max), $min-width, $max-width);
     }
 }
