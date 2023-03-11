@@ -18,14 +18,10 @@
 // Components
 @import "base/bootstrap";
 @import "base/reboot";
+@import "base/layout";
 @import "base/fonts";
 @import "base/wysiwyg";
 @import "components/";
-
-// Layout
-@import "layout/header";
-@import "layout/layout";
-@import "layout/footer";
 
 // Vendor
 @import "external/";
