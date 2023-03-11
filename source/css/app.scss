@@ -1,26 +1,26 @@
 // Mixins
 @import "utils/mixins";
-@import "utils/fluid";
-@import "utils/fluid-steps";
 @import "utils/rem";
 
 // Base
-@import "base/functions";
 @import "base/ease";
 @import "base/variables";
-@import "base/root";
-@import "base/bootstrap";
-@import "base/reboot";
-@import "base/fonts";
-@import "base/wysiwyg";
+@import "base/functions";
 
 // Utils
 @import "utils/debug";
+@import "utils/fluid";
+@import "utils/fluid-steps";
 @import "utils/focus-visible";
 @import "utils/resize";
 @import "utils/vertical-breakpoints";
 
 // Components
+@import "base/root";
+@import "base/bootstrap";
+@import "base/reboot";
+@import "base/fonts";
+@import "base/wysiwyg";
 @import "components/";
 
 // Layout
