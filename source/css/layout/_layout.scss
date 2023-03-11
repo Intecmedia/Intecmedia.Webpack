@@ -37,6 +37,12 @@ body {
         /* stylelint-disable-next-line value-no-vendor-prefix, plugin/no-unsupported-browser-features, csstree/validator -- iOS problem with 100vh */
         min-height: -webkit-fill-available;
     }
+
+    @if $NODE_ENV != "production" or $DEBUG {
+        &::after {
+            @include debug-body("NODE_ENV=#{$NODE_ENV} DEBUG=#{$DEBUG}");
+        }
+    }
 }
 
 /* stylelint-enable plugin/selector-bem-pattern, selector-nested-pattern */

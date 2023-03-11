@@ -1,4 +1,4 @@
-@mixin debug-popover($content) {
+@mixin debug-body($content) {
     position: fixed;
     bottom: 0;
     right: 0;
@@ -28,12 +28,4 @@
     html:focus & {
         transform: translateY(0);
     }
-}
-
-@if $NODE_ENV != "production" or $DEBUG {
-    /* stylelint-disable no-duplicate-selectors, scss/selector-nest-combinators -- its debug only tools */
-    body::after {
-        @include debug-popover("NODE_ENV=#{$NODE_ENV} DEBUG=#{$DEBUG}");
-    }
-    /* stylelint-enable no-duplicate-selectors, scss/selector-nest-combinators */
 }
