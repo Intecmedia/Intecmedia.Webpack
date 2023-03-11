@@ -2,9 +2,14 @@
 /* stylelint-disable plugin/selector-bem-pattern, selector-nested-pattern -- is common styles, not component */
 
 /* postcss-bem-linter: ignore */
-html {
+:root {
+    --NODE_ENV: "#{$NODE_ENV}";
+    --DEBUG: "#{$DEBUG}";
+    --PACKAGE_NAME: "#{$PACKAGE_NAME}";
+    --#{$prefix}letter-spacing: #{$letter-spacing};
     --viewport-height: calc(var(--vh, 1vh) * 100); // https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
     --section-height: 100vh;
+
     background: var(--#{$prefix}body-bg, #{$body-bg});
 
     @include vertical-breakpoint-down(sm) {
