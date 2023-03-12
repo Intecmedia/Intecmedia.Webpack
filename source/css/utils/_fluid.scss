@@ -247,14 +247,14 @@ $fluid-fixed-digits: 4 !default;
 
 @function fluid-clamp-base($min-size, $max-size, $min-clamp, $max-clamp, $vertical: false) {
     @if meta.type-of($min-clamp) == "string" {
-        @if ($vertical) {
+        @if $vertical {
             $min-clamp: map-get($vertical-breakpoints, $min-clamp);
         } @else {
             $min-clamp: map-get($grid-breakpoints, $min-clamp);
         }
     }
     @if meta.type-of($max-clamp) == "string" {
-        @if ($vertical) {
+        @if $vertical {
             $max-clamp: map-get($vertical-breakpoints, $max-clamp);
         } @else {
             $max-clamp: map-get($grid-breakpoints, $max-clamp);
@@ -298,7 +298,7 @@ $fluid-fixed-digits: 4 !default;
 
     $sign: "";
 
-    @if ($value >= 0) {
+    @if $value >= 0 {
         $sign: "+";
     } @else {
         $sign: "-";
@@ -308,7 +308,7 @@ $fluid-fixed-digits: 4 !default;
 
     $vp-unit: "";
 
-    @if ($vertical) {
+    @if $vertical {
         $vp-unit: "vh";
     } @else {
         $vp-unit: "vw";
