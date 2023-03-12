@@ -226,7 +226,7 @@
         "stylelint-config-prettier": "^9.0.5",
         "stylelint-config-prettier-scss": "^0.0.1",
         "stylelint-config-sass-guidelines": "^9.0.1",
-        "stylelint-config-twbs-bootstrap": "^7.0.0",
+        "stylelint-config-twbs-bootstrap": "^8.0.0",
         "stylelint-csstree-validator": "^2.1.0",
         "stylelint-high-performance-animation": "^1.8.0",
         "stylelint-max-lines": "^0.1.0",
