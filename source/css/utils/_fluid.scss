@@ -1,5 +1,4 @@
 @use "sass:math";
-@use "sass:meta";
 
 $fluid-min-width: 375px !default;
 $fluid-max-width: 1920px !default;
@@ -26,16 +25,16 @@ $fluid-fixed-digits: 4 !default;
     $min-width-calc: $min-width,
     $max-width-calc: $max-width
 ) {
-    @if meta.type-of($min-width) == "string" {
+    @if type-of($min-width) == "string" {
         $min-width: map-get($grid-breakpoints, $min-width);
     }
-    @if meta.type-of($max-width) == "string" {
+    @if type-of($max-width) == "string" {
         $max-width: map-get($grid-breakpoints, $max-width);
     }
-    @if meta.type-of($min-width-calc) == "string" {
+    @if type-of($min-width-calc) == "string" {
         $min-width-calc: map-get($grid-breakpoints, $min-width-calc);
     }
-    @if meta.type-of($max-width-calc) == "string" {
+    @if type-of($max-width-calc) == "string" {
         $max-width-calc: map-get($grid-breakpoints, $max-width-calc);
     }
 
@@ -76,16 +75,16 @@ $fluid-fixed-digits: 4 !default;
     $min-height-calc: $min-height,
     $max-height-calc: $max-height
 ) {
-    @if meta.type-of($min-height) == "string" {
+    @if type-of($min-height) == "string" {
         $min-height: map-get($vertical-breakpoints, $min-height);
     }
-    @if meta.type-of($max-height) == "string" {
+    @if type-of($max-height) == "string" {
         $max-height: map-get($vertical-breakpoints, $max-height);
     }
-    @if meta.type-of($min-height-calc) == "string" {
+    @if type-of($min-height-calc) == "string" {
         $min-height-calc: map-get($vertical-breakpoints, $min-height-calc);
     }
-    @if meta.type-of($max-height-calc) == "string" {
+    @if type-of($max-height-calc) == "string" {
         $max-height-calc: map-get($vertical-breakpoints, $max-height-calc);
     }
 
@@ -127,16 +126,16 @@ $fluid-fixed-digits: 4 !default;
 ) {
     $prop: font-size;
 
-    @if meta.type-of($min-width) == "string" {
+    @if type-of($min-width) == "string" {
         $min-width: map-get($grid-breakpoints, $min-width);
     }
-    @if meta.type-of($max-width) == "string" {
+    @if type-of($max-width) == "string" {
         $max-width: map-get($grid-breakpoints, $max-width);
     }
-    @if meta.type-of($min-width-calc) == "string" {
+    @if type-of($min-width-calc) == "string" {
         $min-width-calc: map-get($grid-breakpoints, $min-width-calc);
     }
-    @if meta.type-of($max-width-calc) == "string" {
+    @if type-of($max-width-calc) == "string" {
         $max-width-calc: map-get($grid-breakpoints, $max-width-calc);
     }
 
@@ -153,16 +152,16 @@ $fluid-fixed-digits: 4 !default;
 ) {
     $prop: font-size;
 
-    @if meta.type-of($min-width) == "string" {
+    @if type-of($min-width) == "string" {
         $min-width: map-get($grid-breakpoints, $min-width);
     }
-    @if meta.type-of($max-width) == "string" {
+    @if type-of($max-width) == "string" {
         $max-width: map-get($grid-breakpoints, $max-width);
     }
-    @if meta.type-of($min-width-calc) == "string" {
+    @if type-of($min-width-calc) == "string" {
         $min-width-calc: map-get($grid-breakpoints, $min-width-calc);
     }
-    @if meta.type-of($max-width-calc) == "string" {
+    @if type-of($max-width-calc) == "string" {
         $max-width-calc: map-get($grid-breakpoints, $max-width-calc);
     }
 
@@ -187,16 +186,16 @@ $fluid-fixed-digits: 4 !default;
 ) {
     $prop: font-size;
 
-    @if meta.type-of($min-height) == "string" {
+    @if type-of($min-height) == "string" {
         $min-height: map-get($vertical-breakpoints, $min-height);
     }
-    @if meta.type-of($max-height) == "string" {
+    @if type-of($max-height) == "string" {
         $max-height: map-get($vertical-breakpoints, $max-height);
     }
-    @if meta.type-of($min-height-calc) == "string" {
+    @if type-of($min-height-calc) == "string" {
         $min-height-calc: map-get($vertical-breakpoints, $min-height-calc);
     }
-    @if meta.type-of($max-height-calc) == "string" {
+    @if type-of($max-height-calc) == "string" {
         $max-height-calc: map-get($vertical-breakpoints, $max-height-calc);
     }
 
@@ -221,16 +220,16 @@ $fluid-fixed-digits: 4 !default;
 ) {
     $prop: font-size;
 
-    @if meta.type-of($min-height) == "string" {
+    @if type-of($min-height) == "string" {
         $min-height: map-get($vertical-breakpoints, $min-height);
     }
-    @if meta.type-of($max-height) == "string" {
+    @if type-of($max-height) == "string" {
         $max-height: map-get($vertical-breakpoints, $max-height);
     }
-    @if meta.type-of($min-height-calc) == "string" {
+    @if type-of($min-height-calc) == "string" {
         $min-height-calc: map-get($vertical-breakpoints, $min-height-calc);
     }
-    @if meta.type-of($max-height-calc) == "string" {
+    @if type-of($max-height-calc) == "string" {
         $max-height-calc: map-get($vertical-breakpoints, $max-height-calc);
     }
 
@@ -246,14 +245,14 @@ $fluid-fixed-digits: 4 !default;
 }
 
 @function fluid-clamp-base($min-size, $max-size, $min-clamp, $max-clamp, $vertical: false) {
-    @if meta.type-of($min-clamp) == "string" {
+    @if type-of($min-clamp) == "string" {
         @if $vertical {
             $min-clamp: map-get($vertical-breakpoints, $min-clamp);
         } @else {
             $min-clamp: map-get($grid-breakpoints, $min-clamp);
         }
     }
-    @if meta.type-of($max-clamp) == "string" {
+    @if type-of($max-clamp) == "string" {
         @if $vertical {
             $max-clamp: map-get($vertical-breakpoints, $max-clamp);
         } @else {
@@ -340,10 +339,10 @@ $fluid-fixed-digits: 4 !default;
 }
 
 @function fluid-clamp($min-size, $max-size, $min-width: $fluid-min-width, $max-width: $fluid-max-width) {
-    @if meta.type-of($min-width) == "string" {
+    @if type-of($min-width) == "string" {
         $min-width: map-get($grid-breakpoints, $min-width);
     }
-    @if meta.type-of($max-width) == "string" {
+    @if type-of($max-width) == "string" {
         $max-width: map-get($grid-breakpoints, $max-width);
     }
 
@@ -351,10 +350,10 @@ $fluid-fixed-digits: 4 !default;
 }
 
 @function fluid-clamp-vertical($min-size, $max-size, $min-height: $fluid-min-height, $max-height: $fluid-max-height) {
-    @if meta.type-of($min-height) == "string" {
+    @if type-of($min-height) == "string" {
         $min-height: map-get($vertical-breakpoints, $min-height);
     }
-    @if meta.type-of($max-height) == "string" {
+    @if type-of($max-height) == "string" {
         $max-height: map-get($vertical-breakpoints, $max-height);
     }
 
