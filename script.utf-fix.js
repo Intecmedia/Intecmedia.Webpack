@@ -26,6 +26,8 @@ function stripWhitespaces(string) {
 
 UTILS.globArray(
     [
+        path.join(__dirname, '.htaccess'),
+        path.join(__dirname, '.fonts-subsets'),
         path.join(__dirname, '.*ignore'),
         path.join(__dirname, '*.{js,json}'),
         `${ENV.SOURCE_PATH}/**/*.{html,svg,js,json,css,scss,njk}`,
