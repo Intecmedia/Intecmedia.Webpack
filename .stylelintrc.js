@@ -25,6 +25,8 @@ module.exports = deepMerge({}, sharedConfig, {
         ...sharedConfig.plugins,
     ],
     'reportDescriptionlessDisables': true,
+    'reportInvalidScopeDisables': false,
+    'reportNeedlessDisables': false,
     'rules': {
         // code quality rules (fastest)
         'max-nesting-depth': [
