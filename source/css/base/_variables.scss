@@ -152,7 +152,7 @@ $ol-marker-color: inherit !default;
 $ol-marker-symbol: "." !default;
 $ol-marker-list-style-type: decimal !default; // decimal-leading-zero
 $ul-marker-color: inherit !default;
-$ul-marker-symbol: "●" !default;
+$ul-marker-symbol: "●" !default; // string or url('img/ul-marker.svg')
 $lists-marker-space: str-repeat(" ", 2) !default;
 $img-spacer: 1rem !default;
 
