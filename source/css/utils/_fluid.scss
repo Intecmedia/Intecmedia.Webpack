@@ -366,7 +366,7 @@ $fluid-fixed-digits: 4 !default;
     #{$prop}: to-fixed($min-size, $fluid-fixed-digits);
 
     @supports (#{$prop}: $clamp-size) {
-        /* stylelint-disable-next-line plugin/no-unsupported-browser-features, csstree/validator -- not standart feature */
+        /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- not standart feature */
         #{$prop}: $clamp-size;
     }
 }
@@ -387,7 +387,7 @@ $fluid-fixed-digits: 4 !default;
     #{$prop}: to-fixed($min-size, $fluid-fixed-digits);
 
     @supports (#{$prop}: $clamp-size) {
-        /* stylelint-disable-next-line plugin/no-unsupported-browser-features, csstree/validator -- not standart feature */
+        /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- not standart feature */
         #{$prop}: $clamp-size;
     }
 }

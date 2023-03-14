@@ -25,7 +25,7 @@
         $root-font-size-clamp: fluid-clamp(16px, 20px, "hd", "qhd");
 
         @supports (font-size: $root-font-size-clamp) {
-            /* stylelint-disable-next-line plugin/no-unsupported-browser-features, csstree/validator -- not standart feature */
+            /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- not standart feature */
             font-size: $root-font-size-clamp;
         }
     }
@@ -39,7 +39,7 @@ body {
     text-rendering: optimizespeed;
 
     @supports (-webkit-touch-callout: none) {
-        /* stylelint-disable-next-line value-no-vendor-prefix, plugin/no-unsupported-browser-features, csstree/validator -- iOS problem with 100vh */
+        /* stylelint-disable-next-line value-no-vendor-prefix, plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- iOS problem with 100vh */
         min-height: -webkit-fill-available;
     }
 

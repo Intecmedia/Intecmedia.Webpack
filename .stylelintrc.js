@@ -11,10 +11,8 @@ module.exports = deepMerge({}, sharedConfig, {
     'defaultSeverity': ENV.PROD || ENV.DEBUG ? 'error' : 'warning',
     'extends': [
         'stylelint-config-sass-guidelines',
-        'stylelint-config-twbs-bootstrap',
         ...sharedConfig.extends,
         'stylelint-prettier/recommended', // prettier always last
-        'stylelint-config-prettier-scss', // prettier always last
     ],
     'plugins': [
         'stylelint-high-performance-animation',
@@ -22,6 +20,7 @@ module.exports = deepMerge({}, sharedConfig, {
         'stylelint-max-root-rules',
         'stylelint-scss',
         'stylelint-selector-bem-pattern',
+        'stylelint-order',
         ...sharedConfig.plugins,
     ],
     'reportDescriptionlessDisables': true,
@@ -91,6 +90,7 @@ module.exports = deepMerge({}, sharedConfig, {
                 'ignore': ['after-comment', 'first-nested'],
             },
         ],
+        'scss/at-extend-no-missing-placeholder': null,
         'scss/dollar-variable-default': [
             true,
             {
@@ -98,6 +98,7 @@ module.exports = deepMerge({}, sharedConfig, {
             },
         ],
         'scss/dollar-variable-pattern': ['^[a-zA-Z][a-zA-Z-\\d]*$'],
+        'scss/no-global-function-names': null,
         'scss/selector-nest-combinators': 'always',
         'selector-class-pattern': ['^[a-zA-Z0-9\\-_]+$'],
         'selector-max-class': 5,
