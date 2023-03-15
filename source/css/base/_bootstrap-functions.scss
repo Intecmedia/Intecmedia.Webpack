@@ -1,11 +1,17 @@
 // Bootstrap functions
 
+@function negativify-value($value) {
+    $result: calc(-1 * #{$value});
+
+    @return $result;
+}
+
 @function negativify-map($map) {
     $result: ();
 
     @each $key, $value in $map {
         @if $key != 0 {
-            $result: map-merge($result, ("n" + $key: (-$value)));
+            $result: map-merge($result, ("n" + $key: (negativify-value($value))));
         }
     }
     @return $result;
