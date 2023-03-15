@@ -190,3 +190,51 @@ $intersection-transition-delay: calc(
 ) !default;
 
 // scss-docs-end transitions
+
+// scss-docs-start fluid steps
+
+$fluid-steps-negative-count: 2 !default;
+$fluid-steps-positive-count: 7 !default;
+
+$fluid-steps-min-width: 375px !default;
+$fluid-steps-min-size: 16px !default;
+$fluid-steps-min-scale: 1.2 !default;
+
+$fluid-steps-max-width: 1920px !default;
+$fluid-steps-max-size: 20px !default;
+$fluid-steps-max-scale: 1.25 !default;
+
+// scss-docs-end fluid steps
+
+// scss-docs-start fluid steps
+
+$fluid-spacers: (
+    "3xs": 0.25,
+    "2xs": 0.5,
+    "xs": 0.75,
+    "s": 1,
+    "m": 1.5,
+    "l": 2,
+    "xl": 3,
+    "2xl": 4,
+    "3xl": 6,
+) !default;
+
+$fluid-spacers-pairs: (
+    "3xs": "2xs",
+    "2xs": "xs",
+    "xs": "s",
+    "s": "m",
+    "m": "l",
+    "l": "xl",
+    "xl": "2xl",
+    "2xl": "3xl",
+) !default;
+
+$fluid-spacers-min-width: 375px !default;
+$fluid-spacers-min-size: 16px !default;
+
+$fluid-spacers-max-width: 1920px !default;
+$fluid-spacers-max-size: 20px !default;
+
+// scss-docs-end fluid steps
