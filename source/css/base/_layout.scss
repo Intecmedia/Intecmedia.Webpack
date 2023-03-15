@@ -10,6 +10,25 @@
     --viewport-height: calc(var(--vh, 1vh) * 100); // https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
     --section-height: 100vh;
 
+    @include fluid-steps(
+        $negative-count: $fluid-steps-negative-count,
+        $positive-count: $fluid-steps-positive-count,
+        $min-width: $fluid-steps-min-width,
+        $min-size: $fluid-steps-min-size,
+        $min-scale: $fluid-steps-min-scale,
+        $max-width: $fluid-steps-max-width,
+        $max-size: $fluid-steps-max-size,
+        $max-scale: $fluid-steps-max-scale
+    );
+    @include fluid-spacers(
+        $spacers: $fluid-spacers,
+        $spacers-pairs: $fluid-spacers-pairs,
+        $min-width: $fluid-spacers-min-width,
+        $min-size: $fluid-spacers-min-size,
+        $max-width: $fluid-spacers-max-width,
+        $max-size: $fluid-spacers-max-size
+    );
+
     background: var(--#{$prefix}body-bg, #{$body-bg});
 
     @include vertical-breakpoint-down(sm) {
@@ -20,7 +39,6 @@
         /* stylelint-disable-next-line declaration-property-unit-allowed-list -- for root allowed only px */
         font-size: 14px;
     }
-
     @include media-breakpoint-up(hd) {
         $root-font-size-clamp: fluid-clamp(16px, 20px, "hd", "qhd");
 
