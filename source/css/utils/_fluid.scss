@@ -321,7 +321,7 @@ $fluid-fixed-digits: 4 !default;
         $clamp-min: math.min($min-size, $max-size);
         $clamp-max: math.max($min-size, $max-size);
 
-        @return clamp(#{$clamp-min}rem, #{$vp-value}#{$vp-unit} #{$sign} #{$abs-value}rem, #{$clamp-max}rem);
+        @return clamp(#{$clamp-min}rem, calc(#{$vp-value}#{$vp-unit} #{$sign} #{$abs-value}rem), #{$clamp-max}rem);
     }
 
     @if $min-unit == px and $max-unit == px {
@@ -332,7 +332,7 @@ $fluid-fixed-digits: 4 !default;
         $clamp-min: math.min($min-size, $max-size);
         $clamp-max: math.max($min-size, $max-size);
 
-        @return clamp(#{$clamp-min}px, #{$vp-value}#{$vp-unit} #{$sign} #{$abs-value}px, #{$clamp-max}px);
+        @return clamp(#{$clamp-min}px, calc(#{$vp-value}#{$vp-unit} #{$sign} #{$abs-value}px), #{$clamp-max}px);
     }
 
     @error "Cant calc $min-size=#{$min-size} and $max-size=#{$max-size} with different units.";
