@@ -1,5 +1,7 @@
 /* stylelint-disable scss/selector-nest-combinators, selector-max-type, plugin/selector-bem-pattern, selector-nested-pattern -- wysiwyg is semantic tags */
 .wysiwyg {
+    font-size: $paragraph-font-size;
+
     a {
         // dont customize here, instead of edit sass variables in `_variables.scss`
 
@@ -148,10 +150,6 @@
 
         img {
             @extend .figure-img;
-
-            @include media-breakpoint-down(sm) {
-                margin-bottom: ($img-spacer * 0.5);
-            }
         }
 
         // image text caption
@@ -181,6 +179,7 @@
         }
 
         width: 100%;
+        margin-bottom: $paragraph-margin-bottom;
 
         > caption ~ tr:not(:first-child),
         > caption ~ thead:not(:first-child) {
@@ -442,12 +441,6 @@
 
             margin-right: auto;
             margin-left: auto;
-        }
-
-        img {
-            @include media-breakpoint-down(sm) {
-                margin-bottom: ($img-spacer * 0.5);
-            }
         }
     }
 

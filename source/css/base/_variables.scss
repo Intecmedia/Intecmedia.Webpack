@@ -10,6 +10,7 @@ $vertical-breakpoints: (
     md: 768px,
     lg: 992px,
 ) !default;
+
 $grid-breakpoints: (
     xs: 0,
     ss: 375px,
@@ -37,11 +38,11 @@ $container-max-widths: (
 $spacer: 1rem !default;
 $spacers: (
     0: 0,
-    1: var(--fluid-spacer-3xs, #{$spacer * 0.25}),
-    2: var(--fluid-spacer-2xs, #{$spacer * 0.5}),
-    3: var(--fluid-spacer-s, #{$spacer}),
-    4: var(--fluid-spacer-m, #{$spacer * 1.5}),
-    5: var(--fluid-spacer-xl, #{$spacer * 3}),
+    1: var(--fluid-spacer-3xs) /* 0.25 */,
+    2: var(--fluid-spacer-2xs) /* 0.5 */,
+    3: var(--fluid-spacer-s) /* 1.0 */,
+    4: var(--fluid-spacer-m) /* 1.5 */,
+    5: var(--fluid-spacer-x) /* 3.0 */,
 ) !default;
 $gutters: $spacers !default;
 
@@ -98,11 +99,11 @@ $letter-spacing: normal !default;
 
 // scss-docs-start headings
 
-$h1-font-size: $font-size-base * 2.5 !default;
-$h2-font-size: $font-size-base * 2 !default;
-$h3-font-size: $font-size-base * 1.75 !default;
-$h4-font-size: $font-size-base * 1.5 !default;
-$h5-font-size: $font-size-base * 1.25 !default;
+$h1-font-size: var(--fluid-step-5) !default;
+$h2-font-size: var(--fluid-step-4) !default;
+$h3-font-size: var(--fluid-step-3) !default;
+$h4-font-size: var(--fluid-step-2) !default;
+$h5-font-size: var(--fluid-step-1) !default;
 $h6-font-size: $font-size-base !default;
 $font-sizes: (
     1: $h1-font-size,
@@ -113,6 +114,7 @@ $font-sizes: (
     6: $h6-font-size,
 ) !default;
 $display-font-sizes: $font-sizes !default;
+$headings-margin-bottom: var(--fluid-spacer-2xs) !default;
 
 // scss-docs-end headings
 
@@ -127,11 +129,28 @@ $link-hover-decoration: null !default;
 // scss-docs-end links
 
 // scss-docs-start para
-$paragraph-margin-bottom: 1rem !default;
+
+$paragraph-font-size: var(--fluid-step-0) !default;
+$paragraph-margin-bottom: var(--fluid-spacer-s) !default;
 
 // scss-docs-end para
 
+// scss-docs-start blockquote
+
+$blockquote-margin-y: var(--fluid-step-s) !default;
+$blockquote-font-size: var(--fluid-step-2) !default;
+
+// scss-docs-end blockquote
+
+// scss-docs-start hr
+
+$hr-margin-y: var(--fluid-step-s) !default;
+$hr-color: inherit !default;
+
+// scss-docs-end hr
+
 // scss-docs-start aspect ratios
+
 $aspect-ratios: (
     "1x1": 100%,
     "4x3": calc(3 / 4 * 100%),
@@ -148,14 +167,14 @@ $aspect-ratios: (
 // scss-docs-start wysiwyg
 
 $lists-indent: 2rem !default;
-$lists-margin-bottom: 0.25rem !default;
+$lists-margin-bottom: var(--fluid-spacer-3xs) !default;
 $ol-marker-color: inherit !default;
 $ol-marker-symbol: "." !default;
 $ol-marker-list-style-type: decimal !default; // decimal-leading-zero
 $ul-marker-color: inherit !default;
-$ul-marker-symbol: "●" !default; // string or url('img/ul-marker.svg')
+$ul-marker-symbol: "●" !default;
 $lists-marker-space: str-repeat(" ", 2) !default;
-$img-spacer: 1rem !default;
+$img-spacer: var(--fluid-spacer-s) !default;
 
 // scss-docs-end wysiwyg
 
