@@ -182,7 +182,7 @@ $img-spacer: var(--fluid-spacer-s) !default;
 
 $table-border-bordered: false !default;
 $table-border-striped: false !default;
-$table-caption-font-size: 0.875rem !default;
+$table-caption-font-size: var(--fluid-step-n1) !default;
 
 // scss-docs-end tables
 
