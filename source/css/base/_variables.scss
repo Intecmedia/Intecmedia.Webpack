@@ -81,7 +81,9 @@ $body-color: #000 !default;
 
 $border-width: 1px !default;
 $border-color: #dee2e6 !default;
-$border-radius: 0.25rem !default;
+$border-radius: var(--fluid-spacer-3xs) !default;
+$border-radius-sm: var(--fluid-spacer-3xs) !default;
+$border-radius-lg: var(--fluid-spacer-2xs) !default;
 
 // scss-docs-end borders
 
