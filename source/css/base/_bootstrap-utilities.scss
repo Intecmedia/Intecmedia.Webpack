@@ -2,12 +2,12 @@
 
 // Bootstrap utilities
 
+// Add, remove, modify https://getbootstrap.com/docs/5.3/utilities/api/#add-remove-modify
+
 $utilities: map-merge(
     $utilities,
     (
-        //
-        // Add, remove, modify https://getbootstrap.com/docs/5.2/utilities/api/#add-remove-modify
-        //
+        "unknown": null,
     )
 );
 /* stylelint-enable scss/dollar-variable-default */
