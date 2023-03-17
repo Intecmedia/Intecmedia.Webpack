@@ -92,7 +92,10 @@ $border-radius-lg: var(--fluid-spacer-2xs) !default;
 $font-family-base: system-ui, -apple-system, "Segoe UI", roboto, "Helvetica Neue", arial, "Noto Sans", "Liberation Sans",
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 $font-size-root: null !default;
-$font-size-base: 1rem !default; // Assumes the browser default, typically `16px`
+$font-size-rem: 1rem !default; // Assumes the browser default, typically `16px`
+$font-size-base: var(--fluid-step-0) !default;
+$font-size-sm: var(--fluid-step-n1) !default;
+$font-size-lg: var(--fluid-step-1) !default;
 $font-size-qhd: 1.25rem !default;
 $line-height-base: 1.5 !default;
 $letter-spacing: normal !default;
@@ -144,8 +147,13 @@ $blockquote-font-size: var(--fluid-step-2) !default;
 
 // scss-docs-end blockquote
 
-// scss-docs-start hr
+// scss-docs-start lead
 
+$lead-font-size: var(--fluid-step-2) !default;
+
+// scss-docs-end lead
+
+// scss-docs-start hr
 $hr-margin-y: var(--fluid-spacer-s) !default;
 $hr-color: inherit !default;
 
@@ -161,6 +169,25 @@ $aspect-ratios: (
 ) !default;
 
 // scss-docs-end aspect ratios
+
+// scss-docs-start form-check-variables
+
+$form-check-min-height: 1rem * $line-height-base !default;
+
+// scss-docs-end form-check-variables
+
+// scss-docs-start navbar-variables
+
+$nav-link-padding-y: 0.5rem !default;
+$nav-link-height: 1rem * $line-height-base + $nav-link-padding-y * 2 !default;
+$navbar-brand-height: 1.25rem * $line-height-base !default;
+
+// scss-docs-end navbar-variables
+
+// scss-docs-start progress-variables
+$progress-font-size: 1rem * 0.75 !default;
+
+// scss-docs-end progress-variables
 
 @import "node_modules/bootstrap/scss/variables";
 
