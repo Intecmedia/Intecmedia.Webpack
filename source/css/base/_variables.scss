@@ -166,7 +166,7 @@ $aspect-ratios: (
 
 // scss-docs-start wysiwyg
 
-$lists-indent: 2rem !default;
+$lists-indent: var(--fluid-spacer-l) !default;
 $lists-margin-bottom: var(--fluid-spacer-3xs) !default;
 $ol-marker-color: inherit !default;
 $ol-marker-symbol: "." !default;
