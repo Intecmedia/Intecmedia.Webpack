@@ -89,3 +89,32 @@
         @return $number;
     }
 }
+
+@function type-of-calc($value) {
+    @if type-of($value) != "string" {
+        @return false;
+    }
+    @return str-index($value, "calc(") == 1 and str-index($value, ")") == str-length($value);
+}
+
+@function type-of-var($value) {
+    @if type-of($value) != "string" {
+        @return false;
+    }
+    @return str-index($value, "var(") == 1 and str-index($value, ")") == str-length($value);
+}
+
+@function negativify-value($value) {
+    @if type-of-calc($value) {
+        $result: str-slice($value, str-length("calc("), -1);
+        $result: calc(-1 * #{$result});
+
+        @return $result;
+    }
+    @if type-of-var($value) {
+        $result: calc(-1 * #{$value});
+
+        @return $result;
+    }
+    @return -$value;
+}

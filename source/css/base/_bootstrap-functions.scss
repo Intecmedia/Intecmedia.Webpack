@@ -1,11 +1,5 @@
 // Bootstrap functions
 
-@function negativify-value($value) {
-    $result: calc(-1 * #{$value});
-
-    @return $result;
-}
-
 @function negativify-map($map) {
     $result: ();
 
