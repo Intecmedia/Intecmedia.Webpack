@@ -309,10 +309,14 @@ $fluid-fixed-digits: 4 !default;
 
     $vp-unit: "";
 
-    @if $vertical {
-        $vp-unit: "vh";
+    @if type-of($vertical) == "string" {
+        $vp-unit: $vertical;
     } @else {
-        $vp-unit: "vw";
+        @if $vertical {
+            $vp-unit: "vh";
+        } @else {
+            $vp-unit: "vw";
+        }
     }
 
     @if $min-unit == rem and $max-unit == rem {
