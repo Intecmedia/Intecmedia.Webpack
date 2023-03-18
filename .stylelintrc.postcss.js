@@ -13,7 +13,16 @@ module.exports = deepMerge({}, sharedConfig, {
         ...sharedConfig.plugins,
     ],
     'rules': {
-        'declaration-property-value-no-unknown': true,
-        // 'pitcher/no-nested-media': true,
+        ...(ENV.PROD
+            ? // code style rules (slowest)
+              {
+                  'declaration-property-value-no-unknown': true,
+                  // 'pitcher/no-nested-media': true,
+              }
+            : // dev-only rules (better dev experience)
+              {
+                  'declaration-property-value-no-unknown': null,
+                  // 'pitcher/no-nested-media': null,
+              }),
     },
 });
