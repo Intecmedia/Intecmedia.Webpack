@@ -1,5 +1,7 @@
 @use "sass:math";
 
+$clamp-supports: "width: clamp(0px, 0px, 0px)" !default;
+
 $fluid-min-width: 375px !default;
 $fluid-max-width: 1920px !default;
 
@@ -367,7 +369,7 @@ $fluid-fixed-digits: 4 !default;
 
     #{$prop}: to-fixed($min-size, $fluid-fixed-digits); /* #{$comment} */
 
-    @supports (#{$prop}: $clamp-size) {
+    @supports (#{$clamp-supports}) {
         /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- not standart feature */
         #{$prop}: $clamp-size; /* #{$comment} */
     }
@@ -390,7 +392,7 @@ $fluid-fixed-digits: 4 !default;
 
     #{$prop}: to-fixed($min-size, $fluid-fixed-digits); /* #{$comment} */
 
-    @supports (#{$prop}: $clamp-size) {
+    @supports (#{$clamp-supports}) {
         /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- not standart feature */
         #{$prop}: $clamp-size; /* #{$comment} */
     }
