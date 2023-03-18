@@ -16,6 +16,9 @@ module.exports = {
                   ...(APP.WEBP ? [require('./postcss.resize')('webp')] : []),
                   ...(!ENV.DEBUG
                       ? [
+                            require('postcss-sort-media-queries')({
+                                sort: APP.SORT_MEQIA_QUERIES || 'mobile-first',
+                            }),
                             require('cssnano')({
                                 preset: [
                                     'default',

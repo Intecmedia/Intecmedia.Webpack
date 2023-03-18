@@ -25,7 +25,8 @@ module.exports = {
     GZIP: true,
     STYLELINT: true,
     ESLINT: true,
-    IMAGEMIN: true,
+    IMAGEMIN: true,   
+    SORT_MEQIA_QUERIES: 'mobile-first',
     get ENV() {
         return require('./app.env');
     },
