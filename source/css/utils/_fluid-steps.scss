@@ -35,3 +35,35 @@ $fluid-steps-max-scale: 1.25 !default;
         @include fluid-clamp-prop(--fluid-step-#{$i}, rem($min), rem($max), $min-width, $max-width);
     }
 }
+
+@function fluid-steps-min(
+    $index,
+    $negative-count: $fluid-steps-negative-count,
+    $positive-count: $fluid-steps-positive-count,
+    $min-width: $fluid-steps-min-width,
+    $min-size: $fluid-steps-min-size,
+    $min-scale: $fluid-steps-min-scale,
+    $max-width: $fluid-steps-max-width,
+    $max-size: $fluid-steps-max-size,
+    $max-scale: $fluid-steps-max-scale
+) {
+    $min: $min-size * math.pow($min-scale, $index);
+
+    @return $min;
+}
+
+@function fluid-steps-max(
+    $index,
+    $negative-count: $fluid-steps-negative-count,
+    $positive-count: $fluid-steps-positive-count,
+    $min-width: $fluid-steps-min-width,
+    $min-size: $fluid-steps-min-size,
+    $min-scale: $fluid-steps-min-scale,
+    $max-width: $fluid-steps-max-width,
+    $max-size: $fluid-steps-max-size,
+    $max-scale: $fluid-steps-max-scale
+) {
+    $max: $max-size * math.pow($max-scale, $index);
+
+    @return $max;
+}

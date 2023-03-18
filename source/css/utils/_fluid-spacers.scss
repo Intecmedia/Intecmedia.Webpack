@@ -54,7 +54,6 @@ $fluid-spacers-max-size: 20px !default;
 
         $scale1: map-get($spacers, $key1);
         $scale2: map-get($spacers, $key2);
-
         $min-scale: math.min($scale1, $scale2);
         $max-scale: math.max($scale1, $scale2);
 
@@ -64,4 +63,46 @@ $fluid-spacers-max-size: 20px !default;
         /* Spacer: #{$key}: #{to-fixed($min, 2)} -> #{to-fixed($max, 2)} (x#{$min-scale} -> x#{$max-scale}) */
         @include fluid-clamp-prop(--fluid-spacer-#{$key}, rem($min), rem($max), $min-width, $max-width);
     }
+}
+
+@function fluid-spacers-min(
+    $name,
+    $spacers: $fluid-spacers,
+    $spacers-pairs: $fluid-spacers-pairs,
+    $min-width: $fluid-spacers-min-width,
+    $min-size: $fluid-spacers-min-size,
+    $max-width: $fluid-spacers-max-width,
+    $max-size: $fluid-spacers-max-size
+) {
+    @if map-has-key($spacers, $name) {
+        $scale: map-get($spacers, $name);
+        $min: $min-size * $scale;
+
+        @return $min;
+    }
+
+    // @todo: pairs;
+
+    @error "Cant find #{$name} key in spacers.";
+}
+
+@function fluid-spacers-max(
+    $name,
+    $spacers: $fluid-spacers,
+    $spacers-pairs: $fluid-spacers-pairs,
+    $min-width: $fluid-spacers-min-width,
+    $min-size: $fluid-spacers-min-size,
+    $max-width: $fluid-spacers-max-width,
+    $max-size: $fluid-spacers-max-size
+) {
+    @if map-has-key($spacers, $name) {
+        $scale: map-get($spacers, $name);
+        $max: $max-size * $scale;
+
+        @return $max;
+    }
+
+    // @todo: pairs;
+
+    @error "Cant find #{$name} key in spacers.";
 }
