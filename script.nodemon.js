@@ -10,6 +10,7 @@ const logger = weblog({ name: 'nodemon' });
 const nodemonConfig = {
     delay: '2500',
     ext: 'js,html',
+    watch: ['*.*', '.*'],
     ignore: [
         '**/.hg/**',
         '**/.git/**',
