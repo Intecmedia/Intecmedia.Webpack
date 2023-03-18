@@ -81,7 +81,19 @@ $fluid-spacers-max-size: 20px !default;
         @return $min;
     }
 
-    // @todo: pairs;
+    $sep-index: str-index($name, "-");
+
+    @if $sep-index {
+        $key1: str-slice($name, 1, $sep-index - 1);
+        $key2: str-slice($name, $sep-index + 1);
+
+        $scale1: map-get($spacers, $key1);
+        $scale2: map-get($spacers, $key2);
+        $min-scale: math.min($scale1, $scale2);
+        $min: $min-size * $min-scale;
+
+        @return $min;
+    }
 
     @error "Cant find #{$name} key in spacers.";
 }
@@ -102,7 +114,19 @@ $fluid-spacers-max-size: 20px !default;
         @return $max;
     }
 
-    // @todo: pairs;
+    $sep-index: str-index($name, "-");
+
+    @if $sep-index {
+        $key1: str-slice($name, 1, $sep-index - 1);
+        $key2: str-slice($name, $sep-index + 1);
+
+        $scale1: map-get($spacers, $key1);
+        $scale2: map-get($spacers, $key2);
+        $max-scale: math.max($scale1, $scale2);
+        $max: $max-size * $max-scale;
+
+        @return $max;
+    }
 
     @error "Cant find #{$name} key in spacers.";
 }
