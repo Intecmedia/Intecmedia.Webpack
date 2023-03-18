@@ -363,11 +363,13 @@ $fluid-fixed-digits: 4 !default;
 @mixin fluid-clamp-prop($prop, $min-size, $max-size, $min-width: $fluid-min-width, $max-width: $fluid-max-width) {
     $clamp-size: fluid-clamp($min-size, $max-size, $min-width, $max-width);
 
-    #{$prop}: to-fixed($min-size, $fluid-fixed-digits);
+    $comment: "$min-size=#{$min-size}, $max-size=#{$max-size}, $min-width=#{$min-width}, $max-width=#{$max-width}";
+
+    #{$prop}: to-fixed($min-size, $fluid-fixed-digits); /* (#{$comment}) */
 
     @supports (#{$prop}: $clamp-size) {
         /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- not standart feature */
-        #{$prop}: $clamp-size;
+        #{$prop}: $clamp-size; /* (#{$comment}) */
     }
 }
 
@@ -384,11 +386,13 @@ $fluid-fixed-digits: 4 !default;
 ) {
     $clamp-size: fluid-clamp-vertical($min-size, $max-size, $min-height, $max-height);
 
-    #{$prop}: to-fixed($min-size, $fluid-fixed-digits);
+    $comment: "$min-size=#{$min-size}, $max-size=#{$max-size}, $min-height=#{$min-height}, $max-height=#{$max-height}";
+
+    #{$prop}: to-fixed($min-size, $fluid-fixed-digits); /* (#{$comment}) */
 
     @supports (#{$prop}: $clamp-size) {
         /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- not standart feature */
-        #{$prop}: $clamp-size;
+        #{$prop}: $clamp-size; /* (#{$comment}) */
     }
 }
 
