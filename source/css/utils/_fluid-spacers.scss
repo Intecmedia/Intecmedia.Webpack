@@ -55,10 +55,13 @@ $fluid-spacers-max-size: 20px !default;
         $scale1: map-get($spacers, $key1);
         $scale2: map-get($spacers, $key2);
 
-        $min: $min-size * math.min($scale1, $scale2);
-        $max: $max-size * math.max($scale1, $scale2);
+        $min-scale: math.min($scale1, $scale2);
+        $max-scale: math.max($scale1, $scale2);
+
+        $min: $min-size * $min-scale;
+        $max: $max-size * $max-scale;
         $key: "#{$key1}-#{$key2}";
-        /* Spacer: #{$key}: #{to-fixed($min, 2)} -> #{to-fixed($max, 2)} (x#{math.min($scale1, $scale2)} -> x#{math.max($scale1, $scale2)}) */
+        /* Spacer: #{$key}: #{to-fixed($min, 2)} -> #{to-fixed($max, 2)} (x#{$min-scale} -> x#{$max-scale}) */
         @include fluid-clamp-prop(--fluid-spacer-#{$key}, rem($min), rem($max), $min-width, $max-width);
     }
 }
