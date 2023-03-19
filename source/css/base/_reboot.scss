@@ -32,6 +32,18 @@ select {
     -webkit-appearance: none;
 }
 
+svg {
+    // Keep images from scaling beyond the width of their parents.
+    display: inline-block;
+
+    // Part 1: Set a maximum relative to the parent.
+    max-width: 100%;
+
+    // Part 2: Override the height to auto, otherwise images will be stretched,
+    // when setting a width and height attribute on the img element.
+    height: auto;
+}
+
 picture {
     // Keep images from scaling beyond the width of their parents.
     display: inline-block;
