@@ -40,8 +40,10 @@ $fluid-fixed-digits: 4 !default;
         $max-width-calc: map-get($grid-breakpoints, $max-width-calc);
     }
 
-    @each $property in $properties {
-        #{$property}: $min-value;
+    $comment: "fluid-property($properties: #{$properties}, $min-value: #{$min-value}, $max-value: #{$max-value}, $min-width: #{$min-width}, $max-width: #{$max-width}, $min-width-calc: #{$min-width-calc}, $max-width-calc: #{$max-width-calc})";
+
+    @each $prop in $properties {
+        #{$prop}: to-fixed($min-value, $fluid-fixed-digits); /* #{$comment} */
     }
 
     @if fluid-invalidate-units($min-value, $min-width-calc) {
@@ -55,15 +57,22 @@ $fluid-fixed-digits: 4 !default;
     $value-calc: strip-unit($max-value - $min-value);
     $width-calc: strip-unit($max-width-calc - $min-width-calc);
 
+    $min-value: to-fixed($min-value, $fluid-fixed-digits);
+    $value-calc: to-fixed($value-calc, $fluid-fixed-digits);
+    $min-width-calc: to-fixed($min-width-calc, $fluid-fixed-digits);
+    $width-calc: to-fixed($width-calc, $fluid-fixed-digits);
+
     @media (min-width: $min-width) {
-        @each $property in $properties {
-            #{$property}: calc(#{$min-value} + #{$value-calc} * (100vw - #{$min-width-calc}) / #{$width-calc});
+        @each $prop in $properties {
+            $calc-size: calc(#{$min-value} + #{$value-calc} * (100vw - #{$min-width-calc}) / #{$width-calc});
+
+            #{$prop}: $calc-size; /* #{$comment} */
         }
     }
 
     @media (min-width: $max-width) {
-        @each $property in $properties {
-            #{$property}: $max-value;
+        @each $prop in $properties {
+            #{$prop}: $max-value; /* #{$comment} */
         }
     }
 }
@@ -90,8 +99,10 @@ $fluid-fixed-digits: 4 !default;
         $max-height-calc: map-get($vertical-breakpoints, $max-height-calc);
     }
 
-    @each $property in $properties {
-        #{$property}: $min-value;
+    $comment: "fluid-property-vertical($properties: #{$properties}, $min-value: #{$min-value}, $max-value: #{$max-value}, $min-height: #{$min-height}, $max-height: #{$max-height}, $min-height-calc: #{$min-height-calc}, $max-height-calc: #{$max-height-calc})";
+
+    @each $prop in $properties {
+        #{$prop}: to-fixed($min-value, $fluid-fixed-digits); /* #{$comment} */
     }
 
     @if fluid-invalidate-units($min-value, $min-height-calc) {
@@ -105,15 +116,22 @@ $fluid-fixed-digits: 4 !default;
     $value-calc: strip-unit($max-value - $min-value);
     $height-calc: strip-unit($max-height-calc - $min-height-calc);
 
+    $min-value: to-fixed($min-value, $fluid-fixed-digits);
+    $value-calc: to-fixed($value-calc, $fluid-fixed-digits);
+    $min-height-calc: to-fixed($min-height-calc, $fluid-fixed-digits);
+    $height-calc: to-fixed($height-calc, $fluid-fixed-digits);
+
     @media (min-height: $min-height) {
-        @each $property in $properties {
-            #{$property}: calc(#{$min-value} + #{$value-calc} * (100vh - #{$min-height-calc}) / #{$height-calc});
+        @each $prop in $properties {
+            $calc-size: calc(#{$min-value} + #{$value-calc} * (100vh - #{$min-height-calc}) / #{$height-calc});
+
+            #{$prop}: #{$calc-size}; /* #{$comment} */
         }
     }
 
     @media (min-height: $max-height) {
-        @each $property in $properties {
-            #{$property}: $max-value;
+        @each $prop in $properties {
+            #{$prop}: $max-value; /* #{$comment} */
         }
     }
 }
@@ -367,13 +385,31 @@ $fluid-fixed-digits: 4 !default;
 }
 
 @mixin fluid-clamp-prop($prop, $min-size, $max-size, $min-width: $fluid-min-width, $max-width: $fluid-max-width) {
+    @if type-of($min-width) == "string" {
+        $min-width: map-get($grid-breakpoints, $min-width);
+    }
+    @if type-of($max-width) == "string" {
+        $max-width: map-get($grid-breakpoints, $max-width);
+    }
+
     $clamp-size: fluid-clamp($min-size, $max-size, $min-width, $max-width);
 
     $comment: "fluid-clamp-prop($min-size: #{$min-size}, $max-size: #{$max-size}, $min-width: #{$min-width}, $max-width: #{$max-width})";
+    $supports: $clamp-supports;
 
     #{$prop}: to-fixed($min-size, $fluid-fixed-digits); /* #{$comment} */
 
-    @supports (#{$clamp-supports}) {
+    @supports not (#{$supports}) {
+        @include fluid-property(
+            $prop,
+            strip-unit(rem($min-size)) * 16px,
+            strip-unit(rem($max-size)) * 16px,
+            $min-width,
+            $max-width
+        );
+    }
+
+    @supports (#{$supports}) {
         /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- not standart feature */
         #{$prop}: $clamp-size; /* #{$comment} */
     }
@@ -390,13 +426,31 @@ $fluid-fixed-digits: 4 !default;
     $min-height: $fluid-min-height,
     $max-height: $fluid-max-height
 ) {
+    @if type-of($min-height) == "string" {
+        $min-height: map-get($vertical-breakpoints, $min-height);
+    }
+    @if type-of($max-height) == "string" {
+        $max-height: map-get($vertical-breakpoints, $max-height);
+    }
+
     $clamp-size: fluid-clamp-vertical($min-size, $max-size, $min-height, $max-height);
 
     $comment: "fluid-clamp-prop-vertical($min-size: #{$min-size}, $max-size: #{$max-size}, $min-height: #{$min-height}, $max-height: #{$max-height})";
+    $supports: $clamp-supports;
 
     #{$prop}: to-fixed($min-size, $fluid-fixed-digits); /* #{$comment} */
 
-    @supports (#{$clamp-supports}) {
+    @supports not (#{$supports}) {
+        @include fluid-property-vertical(
+            $prop,
+            strip-unit(rem($min-size)) * 16px,
+            strip-unit(rem($max-size)) * 16px,
+            $min-height,
+            $max-height
+        );
+    }
+
+    @supports (#{$supports}) {
         /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- not standart feature */
         #{$prop}: $clamp-size; /* #{$comment} */
     }

@@ -60,16 +60,16 @@ $rem-px-only: false !default;
 
 @mixin rem($properties, $values...) {
     @if type-of($properties) == "map" {
-        @each $property in map-keys($properties) {
-            @include rem($property, map-get($properties, $property));
+        @each $prop in map-keys($properties) {
+            @include rem($prop, map-get($properties, $prop));
         }
     } @else {
-        @each $property in $properties {
+        @each $prop in $properties {
             @if $rem-fallback or $rem-px-only {
-                #{$property}: rem-convert(px, $values...);
+                #{$prop}: rem-convert(px, $values...);
             }
             @if not $rem-px-only {
-                #{$property}: rem-convert(rem, $values...);
+                #{$prop}: rem-convert(rem, $values...);
             }
         }
     }
