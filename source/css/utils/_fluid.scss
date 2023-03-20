@@ -72,7 +72,7 @@ $fluid-fixed-digits: 4 !default;
 
     @media (min-width: $max-width) {
         @each $prop in $properties {
-            #{$prop}: $max-value; /* #{$comment} */
+            #{$prop}: to-fixed($max-value, $fluid-fixed-digits); /* #{$comment} */
         }
     }
 }
@@ -131,7 +131,7 @@ $fluid-fixed-digits: 4 !default;
 
     @media (min-height: $max-height) {
         @each $prop in $properties {
-            #{$prop}: $max-value; /* #{$comment} */
+            #{$prop}: to-fixed($max-value, $fluid-fixed-digits); /* #{$comment} */
         }
     }
 }
@@ -402,10 +402,12 @@ $fluid-fixed-digits: 4 !default;
     @supports not (#{$supports}) {
         @include fluid-property(
             $prop,
-            strip-unit(rem($min-size)) * 16px,
-            strip-unit(rem($max-size)) * 16px,
+            rem($min-size),
+            rem($max-size),
             $min-width,
-            $max-width
+            $max-width,
+            rem($min-width),
+            rem($max-width)
         );
     }
 
@@ -443,10 +445,12 @@ $fluid-fixed-digits: 4 !default;
     @supports not (#{$supports}) {
         @include fluid-property-vertical(
             $prop,
-            strip-unit(rem($min-size)) * 16px,
-            strip-unit(rem($max-size)) * 16px,
+            rem($min-size),
+            rem($max-size),
             $min-height,
-            $max-height
+            $max-height,
+            rem($min-height),
+            rem($max-height)
         );
     }
 
