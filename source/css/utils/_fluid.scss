@@ -63,6 +63,8 @@ $fluid-fixed-digits: 4 !default;
     $width-calc: to-fixed($width-calc, $fluid-fixed-digits);
 
     @media (min-width: $min-width) {
+        /* fallback css-calc */
+
         @each $prop in $properties {
             $calc-size: calc(#{$min-value} + #{$value-calc} * (100vw - #{$min-width-calc}) / #{$width-calc});
 
@@ -122,6 +124,8 @@ $fluid-fixed-digits: 4 !default;
     $height-calc: to-fixed($height-calc, $fluid-fixed-digits);
 
     @media (min-height: $min-height) {
+        /* fallback css-calc */
+
         @each $prop in $properties {
             $calc-size: calc(#{$min-value} + #{$value-calc} * (100vh - #{$min-height-calc}) / #{$height-calc});
 
@@ -400,6 +404,8 @@ $fluid-fixed-digits: 4 !default;
     #{$prop}: to-fixed($min-size, $fluid-fixed-digits); /* #{$comment} */
 
     @supports not (#{$supports}) {
+        /* fallback css-calc */
+
         @include fluid-property(
             $prop,
             rem($min-size),
@@ -412,7 +418,9 @@ $fluid-fixed-digits: 4 !default;
     }
 
     @supports (#{$supports}) {
-        /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- not standart feature */
+        /* modern css-clamp */
+
+        /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- checked on @supports */
         #{$prop}: $clamp-size; /* #{$comment} */
     }
 }
@@ -443,6 +451,8 @@ $fluid-fixed-digits: 4 !default;
     #{$prop}: to-fixed($min-size, $fluid-fixed-digits); /* #{$comment} */
 
     @supports not (#{$supports}) {
+        /* fallback css-calc */
+
         @include fluid-property-vertical(
             $prop,
             rem($min-size),
@@ -455,7 +465,9 @@ $fluid-fixed-digits: 4 !default;
     }
 
     @supports (#{$supports}) {
-        /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- not standart feature */
+        /* modern css-clamp */
+
+        /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- checked on @supports */
         #{$prop}: $clamp-size; /* #{$comment} */
     }
 }
