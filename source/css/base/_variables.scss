@@ -71,6 +71,7 @@ $variable-prefix: "" !default;
 // scss-docs-end settings
 
 // scss-docs-start colors
+
 $theme-colors: () !default;
 $body-bg: #fff !default;
 $body-color: #000 !default;
@@ -99,6 +100,7 @@ $font-size-lg: var(--fluid-step-1) !default;
 $font-size-qhd: 1.25rem !default;
 $line-height-base: 1.5 !default;
 $letter-spacing: normal !default;
+$rfs-breakpoint: 1280px !default;
 
 // scss-docs-end type
 
