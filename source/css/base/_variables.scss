@@ -190,9 +190,16 @@ $navbar-brand-height: 1.25rem * $line-height-base !default;
 // scss-docs-end navbar-variables
 
 // scss-docs-start progress-variables
+
 $progress-font-size: 1rem * 0.75 !default;
 
 // scss-docs-end progress-variables
+
+// scss-docs-start card-variables
+
+$card-group-margin: var(--fluid-spacer-xs) !default;
+
+// scss-docs-end card-variables
 
 @import "node_modules/bootstrap/scss/variables";
 
