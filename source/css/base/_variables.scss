@@ -46,6 +46,9 @@ $spacers: (
 ) !default;
 $gutters: $spacers !default;
 
+$grid-gutter-width: var(--fluid-spacer-m) !default;
+$container-padding-x: $grid-gutter-width !default;
+
 // scss-docs-end spacers
 
 // scss-docs-start settings
