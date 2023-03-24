@@ -102,6 +102,13 @@ module.exports = {
         ...(ENV.PROD
             ? // code style rules (slowest)
               {
+                  'id-length': [
+                      'error',
+                      {
+                          'exceptions': ['$', 'i', 'j', 'k', 'v', 'n', 'm', 'x', 'y', 'z', 'a', 'b'],
+                          'properties': 'never',
+                      },
+                  ],
                   'import/order': [
                       'error',
                       {

@@ -1,9 +1,9 @@
 /* globals APP */
 const requireCache = {};
 
-function requireAll(r) {
+function requireAll(context) {
     /* eslint-disable-next-line no-return-assign -- https://webpack.js.org/guides/dependency-management/#requirecontext */
-    r.keys().forEach((key) => (requireCache[key] = r(key)));
+    context.keys().forEach((key) => (requireCache[key] = context(key)));
 }
 
 if (APP.RESIZE) {
