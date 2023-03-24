@@ -215,7 +215,7 @@
         "prettier": "^2.8.6",
         "resize-observer-polyfill": "^1.5.1",
         "rimraf": "^4.4.1",
-        "sass": "^1.59.3",
+        "sass": "^1.60.0",
         "sass-loader": "^13.2.1",
         "schema-utils": "^4.0.0",
         "semver": "^7.3.8",
