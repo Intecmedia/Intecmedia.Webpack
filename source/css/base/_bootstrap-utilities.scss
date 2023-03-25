@@ -5,7 +5,7 @@
 // Add, remove, modify https://getbootstrap.com/docs/5.3/utilities/api/#add-remove-modify
 
 $utilities-merge: (
-    "unknown": null,
+    "focus-ring": null,
 );
 
 $utilities: map-merge($utilities, $utilities-merge);
