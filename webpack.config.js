@@ -245,10 +245,7 @@ module.exports = {
                                 test: /\.(js|css|svg|json|lottie|gltf|glb|hdr)(\?.*)?$/i,
                                 exclude: ['assets-manifest.json'],
                                 filename: '[path][base].gz[query]',
-                                algorithm(input, compressionOptions, callback) {
-                                    const zopfli = require('@gfx/zopfli');
-                                    return zopfli.gzip(input, compressionOptions, callback);
-                                },
+                                algorithm: 'gzip',
                             }),
                         ]
                       : []),
