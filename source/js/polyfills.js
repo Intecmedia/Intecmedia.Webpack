@@ -18,4 +18,7 @@ if (NODE_ENV === 'production' || DEBUG) {
 
     // eslint-disable-next-line global-require -- conditinal polyfill
     require('~/polyfills/focus-within');
+
+    // eslint-disable-next-line global-require -- conditinal polyfill
+    require('~/polyfills/event-submitter');
 }
