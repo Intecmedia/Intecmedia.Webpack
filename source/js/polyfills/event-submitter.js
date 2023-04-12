@@ -20,11 +20,10 @@ document.addEventListener(
             enumerable: true,
             get() {
                 const form = this.target;
-                return (
-                    [document.activeElement, lastButton].find((control) => {
-                        return control && control.matches(buttonsSelector) && form === control.form;
-                    }) || null
-                );
+                const elements = [document.activeElement, lastButton];
+                return elements.find((control) => {
+                    return control && control.matches(buttonsSelector) && form === control.form;
+                });
             },
         });
     },
