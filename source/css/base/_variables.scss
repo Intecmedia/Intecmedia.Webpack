@@ -46,7 +46,7 @@ $spacers: (
 ) !default;
 $gutters: $spacers !default;
 
-$grid-gutter-width: var(--fluid-spacer-m) !default;
+$grid-gutter-width: var(--fluid-gutter) !default;
 $container-padding-x: $grid-gutter-width !default;
 
 // scss-docs-end spacers
@@ -300,3 +300,13 @@ $fluid-spacers-max-width: 1920px !default;
 $fluid-spacers-max-size: 20px !default;
 
 // scss-docs-end fluid steps
+
+// scss-docs-start fluid gutter
+
+$fluid-gutter-min-width: 375px !default;
+$fluid-gutter-min-size: 9px !default;
+
+$fluid-gutter-max-width: 1920px !default;
+$fluid-gutter-max-size: 48px !default;
+
+// scss-docs-end fluid gutter

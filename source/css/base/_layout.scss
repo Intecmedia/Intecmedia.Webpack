@@ -28,6 +28,13 @@
         $max-width: $fluid-spacers-max-width,
         $max-size: $fluid-spacers-max-size
     );
+    @include fluid-clamp-prop(
+        $prop: --fluid-gutter,
+        $min-size: $fluid-gutter-min-size,
+        $max-size: $fluid-gutter-max-size,
+        $min-width: $fluid-gutter-min-width,
+        $max-width: $fluid-gutter-max-width
+    );
 
     background: var(--#{$prefix}body-bg, #{$body-bg});
 
