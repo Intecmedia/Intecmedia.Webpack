@@ -202,6 +202,15 @@ $card-group-margin: var(--fluid-spacer-xs) !default;
 
 // scss-docs-end card-variables
 
+// scss-docs-start tables
+
+$table-cell-padding-y: var(--fluid-spacer-2xs) !default;
+$table-cell-padding-x: var(--fluid-spacer-2xs) !default;
+$table-cell-padding-y-sm: var(--fluid-spacer-3xs) !default;
+$table-cell-padding-x-sm: var(--fluid-spacer-3xs) !default;
+
+// scss-docs-end tables
+
 @import "node_modules/bootstrap/scss/variables";
 
 // Common variables (Not bootstrap)
