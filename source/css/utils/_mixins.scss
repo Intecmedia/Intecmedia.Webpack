@@ -32,7 +32,7 @@
     @return $ret;
 }
 
-@function to-fixed($float, $digits: 4) {
+@function to-fixed($float, $digits: 6) {
     $sass-precision: 5;
     $pow: pow(10, $digits);
 
