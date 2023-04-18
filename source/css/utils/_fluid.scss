@@ -485,3 +485,31 @@ $fluid-fixed-digits: 6 !default;
 
     @include fluid-clamp-prop-vertical($prop, $min-size, $max-size, $min-height, $max-height);
 }
+
+@function fluid-calc($min-size, $max-size, $min-width: $fluid-min-width, $max-width: $fluid-max-width) {
+    @if type-of($min-width) == "string" {
+        $min-width: map-get($grid-breakpoints, $min-width);
+    }
+    @if type-of($max-width) == "string" {
+        $max-width: map-get($grid-breakpoints, $max-width);
+    }
+
+    @return calc(
+        #{$min-size} + ((#{$max-size} - #{$min-size}) * (100vw - #{$min-width}) /
+                    (#{strip-unit($max-width)} - #{strip-unit($min-width)}))
+    );
+}
+
+@function fluid-calc-vertical($min-size, $max-size, $min-height: $fluid-min-height, $max-height: $fluid-max-height) {
+    @if type-of($min-height) == "string" {
+        $min-height: map-get($vertical-breakpoints, $min-height);
+    }
+    @if type-of($max-height) == "string" {
+        $max-height: map-get($vertical-breakpoints, $max-height);
+    }
+
+    @return calc(
+        #{$min-size} + ((#{$max-size} - #{$min-size}) * (100vh - #{$min-height}) /
+                    (#{strip-unit($max-height)} - #{strip-unit($min-height)}))
+    );
+}
