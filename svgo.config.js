@@ -28,6 +28,8 @@ const SvgoCreateConfig = (config) => ({
         // configure builtin plugin not included in preset
         { name: 'noDataURL', ...require('./svgo.no-data-url') },
     ],
+    floatPrecision: 6,
+    transformPrecision: 6,
 });
 
 module.exports.SvgoCreateConfig = SvgoCreateConfig;
