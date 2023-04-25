@@ -1,5 +1,5 @@
 // Random float from <low, high> interval
-export default function randFloat(low, high) {
+export function randFloat(low, high) {
     return low + Math.random() * (high - low);
 }
 
@@ -12,3 +12,5 @@ export function randInt(low, high) {
 export function randFloatSpread(range) {
     return range * (0.5 - Math.random());
 }
+
+export default randFloat;

@@ -18,6 +18,8 @@ export function visibleRatioHorizontal(element, scrollLeft = null, scrollWidth =
     return Math.min(1, Math.max(0, ratio));
 }
 
-export default function visibleRatio(element, scrollTop = null, scrollHeight = null) {
+export function visibleRatio(element, scrollTop = null, scrollHeight = null) {
     return visibleRatioVertical(element, scrollTop, scrollHeight);
 }
+
+export default visibleRatio;
