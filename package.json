@@ -123,7 +123,7 @@
     "overrides": {
         "glob": "7.2.3",
         "postcss": "8.4.23",
-        "sharp": "0.32.0"
+        "sharp": "0.32.1"
     },
     "dependencies": {
         "@babel/cli": "^7.21.0",
@@ -218,7 +218,7 @@
         "sass-loader": "^13.2.2",
         "schema-utils": "^4.0.1",
         "semver": "^7.5.0",
-        "sharp": "0.32.0",
+        "sharp": "0.32.1",
         "slash": "^3.0.0",
         "stylelint": "^15.6.0",
         "stylelint-config-sass-guidelines": "^10.0.0",
