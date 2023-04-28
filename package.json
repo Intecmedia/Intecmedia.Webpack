@@ -123,7 +123,7 @@
     "overrides": {
         "glob": "7.2.3",
         "postcss": "8.4.23",
-        "sharp": "0.32.0"
+        "sharp": "0.32.1"
     },
     "dependencies": {
         "@babel/cli": "^7.21.0",
@@ -139,8 +139,8 @@
         "@babel/preset-env": "^7.21.4",
         "@babel/preset-typescript": "^7.21.4",
         "@popperjs/core": "^2.11.7",
-        "@sentry/browser": "^7.49.0",
-        "@sentry/tracing": "^7.49.0",
+        "@sentry/browser": "^7.50.0",
+        "@sentry/tracing": "^7.50.0",
         "autoprefixer": "^10.4.14",
         "babel-loader": "^9.1.2",
         "bootstrap": "^5.3.0-alpha3",
@@ -187,7 +187,7 @@
         "jquery": "^3.6.4",
         "js-beautify": "^1.14.7",
         "line-column": "^1.0.2",
-        "lint-staged": "^13.2.1",
+        "lint-staged": "^13.2.2",
         "loader-utils": "^3.2.1",
         "lodash.merge": "^4.6.2",
         "lodash.range": "^3.2.0",
@@ -214,11 +214,11 @@
         "prettier": "^2.8.8",
         "resize-observer-polyfill": "^1.5.1",
         "rimraf": "^5.0.0",
-        "sass": "^1.62.0",
+        "sass": "^1.62.1",
         "sass-loader": "^13.2.2",
         "schema-utils": "^4.0.1",
         "semver": "^7.5.0",
-        "sharp": "0.32.0",
+        "sharp": "0.32.1",
         "slash": "^3.0.0",
         "stylelint": "^15.6.0",
         "stylelint-config-sass-guidelines": "^10.0.0",
@@ -239,7 +239,7 @@
         "typescript": "^5.0.4",
         "typograf": "^7.0.0",
         "url-loader": "^4.1.1",
-        "webpack": "^5.80.0",
+        "webpack": "^5.81.0",
         "webpack-assets-manifest": "^5.1.0",
         "webpack-bundle-analyzer": "^4.8.0",
         "webpack-cli": "^5.0.2",
@@ -247,6 +247,6 @@
         "webpack-log": "^3.0.2",
         "webpack-sources": "^3.2.3",
         "whatwg-fetch": "^3.6.2",
-        "yargs": "^17.7.1"
+        "yargs": "^17.7.2"
     }
 }
