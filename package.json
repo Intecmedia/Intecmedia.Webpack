@@ -229,7 +229,7 @@
         "stylelint-no-unsupported-browser-features": "^6.1.0",
         "stylelint-order": "^6.0.3",
         "stylelint-prettier": "^3.0.0",
-        "stylelint-scss": "^4.7.0",
+        "stylelint-scss": "^5.0.0",
         "stylelint-selector-bem-pattern": "^2.1.1",
         "stylelint-semantic-groups": "^1.2.0",
         "stylelint-webpack-plugin": "^4.1.1",
