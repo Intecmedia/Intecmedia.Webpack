@@ -6,7 +6,7 @@ const ignore = require('ignore');
 const yargs = require('yargs/yargs');
 const findCacheDir = require('find-cache-dir');
 
-const FILENAME_PATTERN = /^[a-zA-Z0-9-/._@]+$/;
+const FILENAME_PATTERN = /^[a-zA-Z0-9-/.,_@]+$/;
 
 function lintFilename(filename) {
     if (!FILENAME_PATTERN.test(filename)) {
