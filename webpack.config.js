@@ -1,6 +1,7 @@
 /* eslint max-lines: "off", max-len: "off" -- webpack is node env */
 
 const path = require('path');
+const slash = require('slash');
 const webpack = require('webpack');
 const weblog = require('webpack-log');
 
@@ -36,6 +37,8 @@ const FaviconsPlugin = APP.FAVICONS ? require('./plugin.favicons') : () => {};
 const HtmlBeautifyPlugin = APP.HTML_PRETTY ? require('./plugin.html-beautify') : () => {};
 const RemoveAssetsPlugin = require('./plugin.remove-assets');
 const BabelOptions = require('./babel.options');
+
+const cleanIgnore = UTILS.readIgnoreFile('./.cleanignore');
 
 module.exports = {
     mode: ENV.PROD ? 'production' : 'development',
@@ -117,7 +120,12 @@ module.exports = {
     },
 
     output: {
-        clean: { keep: /(\.gitkeep|thumbs)/ },
+        clean: {
+            keep: (filepath) => {
+                const relativePath = slash(path.relative(ENV.OUTPUT_PATH, filepath));
+                return cleanIgnore.ignores(relativePath);
+            },
+        },
         filename: 'js/[name].min.js',
         chunkFilename: 'js/[name].min.js?[chunkhash]',
         hotUpdateChunkFilename: 'js/[name].hot-update.js?[fullhash]',
@@ -216,7 +224,7 @@ module.exports = {
             experimentalUseImportModule: true,
         }),
         new CopyWebpackPlugin({
-            patterns: ['**/.htaccess', 'img/**/*.*', 'upload/**/*.*', '*.txt', '*.php'].map((from) => ({
+            patterns: ['**/.htaccess', 'img/**/*.*', 'upload/**/*.*', '*.txt'].map((from) => ({
                 from,
                 to: ENV.OUTPUT_PATH,
                 context: ENV.SOURCE_PATH,
