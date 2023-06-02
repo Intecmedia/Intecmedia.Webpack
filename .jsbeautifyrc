@@ -8,6 +8,7 @@
         "wrap_line_length": 120,
         "wrap_attributes": "preserve-aligned",
         "wrap_attributes_indent_size": 4,
+        "wrap_attributes_min_attrs": 2,
         "inline": [
             "abbr", "b", "bdi", "bdo", "br", "cite",
             "del", "dfn", "em", "i",
