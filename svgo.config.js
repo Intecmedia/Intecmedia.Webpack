@@ -14,6 +14,7 @@ const SvgoCreateConfig = (config) => ({
                     removeUselessDefs: false,
                     sortAttrs: false,
                     mergePaths: false,
+                    mergeStyles: false,
                 },
             },
         },
