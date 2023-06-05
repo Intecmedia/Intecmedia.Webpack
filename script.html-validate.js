@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const slash = require('slash');
 const weblog = require('webpack-log');
-const { HtmlValidate } = require('html-validate');
+const htmlValidate = require('html-validate');
 
 const ENV = require('./app.env');
 const UTILS = require('./webpack.utils');
@@ -22,15 +22,17 @@ const ignoreTest = (message) => {
 };
 
 const lineEllipsis = 80;
-const config = require('./.htmlvalidaterc');
+const options = require('./.htmlvalidaterc');
+const resolvers = [htmlValidate.nodejsResolver({ rootDir: __dirname })];
+const loader = new htmlValidate.StaticConfigLoader(resolvers, { ...options });
+const htmlvalidate = new htmlValidate.HtmlValidate(loader);
 
-const htmlvalidate = new HtmlValidate({ ...config });
 const patterns = [...UTILS.processArgs._];
 
 UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.OUTPUT_PATH}/**/*.html`], {
     ignore: [`${ENV.SOURCE_PATH}/**/*.html`],
     nodir: true,
-}).then((files) => {
+}).then(async (files) => {
     logger.info(`${files.length} files\n`);
 
     const statMessages = { skipped: 0 };
@@ -39,7 +41,7 @@ UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.OUTPUT_PATH}/**/*.html`
         else statMessages[type] = 1;
     };
 
-    files.forEach((resourcePath) => {
+    const promises = files.map(async (resourcePath) => {
         const relativePath = slash(path.relative(__dirname, resourcePath));
 
         if (path.basename(resourcePath).startsWith('_')) {
@@ -49,7 +51,7 @@ UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.OUTPUT_PATH}/**/*.html`
         }
 
         const html = fs.readFileSync(resourcePath).toString('utf-8');
-        const report = htmlvalidate.validateFile(resourcePath);
+        const report = await htmlvalidate.validateFile(resourcePath);
 
         if (report.results.length === 0) {
             logger.info(`skipped ${relativePath}`);
@@ -78,6 +80,7 @@ UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.OUTPUT_PATH}/**/*.html`
             });
         });
     });
+    await Promise.all(promises);
 
     console.log('');
     logger.info('stats:', statMessages);
