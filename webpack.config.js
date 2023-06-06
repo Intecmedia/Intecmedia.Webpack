@@ -208,7 +208,7 @@ module.exports = {
             ? {
                   assetFilter: (asset) => {
                       const [filename] = asset.split('?', 2);
-                      const assetFilter = /\.(css|js)(\?.*)?$/;
+                      const assetFilter = /\.(js)(\?.*)?$/;
                       const webpackFilter = /webpack-\w+\.min\.js/i;
                       return assetFilter.test(filename) && !webpackFilter.test(filename);
                   },
