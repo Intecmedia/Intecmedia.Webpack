@@ -20,6 +20,7 @@ module.exports = {
                                 ? [
                                       require('postcss-sort-media-queries')({
                                           sort: APP.SORT_MEQIA_QUERIES,
+                                          onlyTopLevel: true,
                                       }),
                                   ]
                                 : []),
