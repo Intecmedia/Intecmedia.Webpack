@@ -60,7 +60,7 @@ function resourceName(prefix, hash = false) {
             return slash(resourceUrl + suffix);
         }
         if (resourceUrl.startsWith('node_modules/')) {
-            return slash(path.join(basename, resourceUrl + suffix));
+            return slash(path.join(basename, resourceUrl.replace(/^node_modules\//, '~') + suffix));
         }
         return slash(path.join(basename, `[name].[ext]${suffix}`));
     };
