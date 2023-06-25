@@ -11,8 +11,7 @@ class ViewportHeight {
 
     updateHeight() {
         const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-        const vh = viewportHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
+        document.documentElement.style.setProperty('--vh', `${parseFloat((viewportHeight * 0.01).toFixed(6))}px`);
     }
 
     onResize() {
