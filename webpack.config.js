@@ -569,7 +569,7 @@ module.exports = {
                         loader: 'css-loader',
                         options: {
                             esModule: false,
-                            importLoaders: 2,
+                            importLoaders: 3,
                             sourceMap: true,
                             import: {
                                 filter(url) {
@@ -592,6 +592,12 @@ module.exports = {
                                     return true;
                                 },
                             },
+                        },
+                    },
+                    {
+                        loader: 'resolve-url-loader',
+                        options: {
+                            sourceMap: true,
                         },
                     },
                     {
