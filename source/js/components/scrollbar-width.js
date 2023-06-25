@@ -27,7 +27,7 @@ class ScrollbarWidth {
     updateWidth() {
         this.width = this.helper.getWidth();
         if (this.widthLast !== this.width) {
-            document.documentElement.style.setProperty('--scrollbar-width', `${this.width}px`);
+            document.documentElement.style.setProperty('--scrollbar-width', `${parseFloat(this.width.toFixed(6))}px`);
             this.widthLast = this.width;
         }
     }
