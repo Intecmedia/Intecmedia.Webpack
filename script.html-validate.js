@@ -23,6 +23,7 @@ const ignoreTest = (message) => {
 
 const lineEllipsis = 80;
 const options = require('./.htmlvalidaterc');
+
 const resolvers = [htmlValidate.nodejsResolver({ rootDir: __dirname })];
 const loader = new htmlValidate.StaticConfigLoader(resolvers, { ...options });
 const htmlvalidate = new htmlValidate.HtmlValidate(loader);
