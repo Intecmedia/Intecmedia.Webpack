@@ -231,7 +231,7 @@
         "stylelint-order": "^6.0.3",
         "stylelint-prettier": "^3.0.0",
         "stylelint-scss": "^5.0.1",
-        "stylelint-selector-bem-pattern": "^2.1.1",
+        "stylelint-selector-bem-pattern": "^3.0.0",
         "stylelint-semantic-groups": "^1.2.0",
         "stylelint-webpack-plugin": "^4.1.1",
         "svg-spritemap-webpack-plugin": "^4.5.0",
