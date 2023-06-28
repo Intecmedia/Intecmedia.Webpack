@@ -51,7 +51,14 @@ module.exports = {
             },
         ],
         'property-disallowed-list': [
-            ['gap', 'row-gap', 'column-gap'], // https://caniuse.com/?search=gap
+            [
+                // https://caniuse.com/?search=gap
+                'gap',
+                'row-gap',
+                'column-gap',
+                // https://caniuse.com/?search=aspect-ratio
+                'aspect-ratio',
+            ],
         ],
         ...(ENV.PROD
             ? // code style rules (slowest)
