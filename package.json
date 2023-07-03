@@ -204,7 +204,7 @@
         "postcss-flexbugs-fixes": "^5.0.2",
         "postcss-focus": "^6.0.0",
         "postcss-focus-visible": "^8.0.2",
-        "postcss-focus-within": "^7.0.2",
+        "postcss-focus-within": "^8.0.0",
         "postcss-font-display": "^0.3.0",
         "postcss-loader": "^7.3.3",
         "postcss-reporter": "^7.0.5",
