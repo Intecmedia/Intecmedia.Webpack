@@ -513,3 +513,31 @@ $fluid-fixed-digits: 6 !default;
                     (#{strip-unit($max-height)} - #{strip-unit($min-height)}))
     );
 }
+
+@function fluid-vw-font-size($max-size, $max-width: $fluid-max-width) {
+    @if type-of($max-width) == "string" {
+        $max-width: map-get($grid-breakpoints, $max-width);
+    }
+    @if fluid-invalidate-units($max-size, $max-width) {
+        @error "Cant calc $max-size=#{$max-size} and $max-width=#{$max-width} with different units.";
+    }
+
+    $max-size-calc: strip-unit(rem($max-size));
+    $max-width-calc: strip-unit(rem($max-width));
+
+    @return math.div($max-size-calc, $max-width-calc * 0.01) * 1vw;
+}
+
+@function fluid-vh-font-size($max-size, $max-height: $fluid-max-height) {
+    @if type-of($max-height) == "string" {
+        $max-height: map-get($vertical-breakpoints, $max-height);
+    }
+    @if fluid-invalidate-units($max-size, $max-height) {
+        @error "Cant calc $max-size=#{$max-size} and $max-height=#{$max-height} with different units.";
+    }
+
+    $max-size-calc: strip-unit(rem($max-size));
+    $max-height-calc: strip-unit(rem($max-height));
+
+    @return math.div($max-size-calc, $max-height-calc * 0.01) * 1vh;
+}
