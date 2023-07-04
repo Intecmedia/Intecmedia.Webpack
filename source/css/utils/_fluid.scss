@@ -525,7 +525,7 @@ $fluid-fixed-digits: 6 !default;
     $max-size-calc: strip-unit(rem($max-size));
     $max-width-calc: strip-unit(rem($max-width));
 
-    @return math.div($max-size-calc, $max-width-calc * 0.01) * 1vw;
+    @return math.div($max-size-calc, $max-width-calc) * 100vw;
 }
 
 @function fluid-vh-font-size($max-size, $max-height: $fluid-max-height) {
@@ -539,5 +539,5 @@ $fluid-fixed-digits: 6 !default;
     $max-size-calc: strip-unit(rem($max-size));
     $max-height-calc: strip-unit(rem($max-height));
 
-    @return math.div($max-size-calc, $max-height-calc * 0.01) * 1vh;
+    @return math.div($max-size-calc, $max-height-calc) * 100vh;
 }
