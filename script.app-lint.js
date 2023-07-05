@@ -129,6 +129,10 @@ if (pnpmLock) {
     );
 }
 
+if (!APP.PUBLIC_PATH.endsWith('/')) {
+    lintErrors.push('`PUBLIC_PATH` required trailing slash.');
+}
+
 lintWarns.forEach((i) => logger.warn(i));
 lintErrors.forEach((i) => logger.error(i));
 
