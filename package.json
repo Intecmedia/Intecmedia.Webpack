@@ -221,7 +221,7 @@
         "semver": "^7.5.3",
         "sharp": "0.32.1",
         "slash": "^3.0.0",
-        "stylelint": "^15.10.0",
+        "stylelint": "^15.10.1",
         "stylelint-config-sass-guidelines": "^10.0.0",
         "stylelint-high-performance-animation": "^1.8.0",
         "stylelint-max-lines": "^0.1.0",
