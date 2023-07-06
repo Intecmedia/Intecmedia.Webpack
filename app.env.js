@@ -16,7 +16,7 @@ if (process.cwd() !== realcwd) {
 const ARGV = { ...UTILS.processArgs.env };
 const DEBUG = 'DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0;
 const DEV_SERVER = 'WEBPACK_DEV_SERVER' in process.env && process.env.WEBPACK_DEV_SERVER === 'true';
-const STANDALONE = ['webpack', 'webpack-dev-server'].includes(path.basename(require.main.filename, '.js'));
+const STANDALONE = require.main && ['webpack', 'webpack-dev-server'].includes(path.basename(require.main.filename, '.js'));
 const WATCH = process.argv.includes('--watch') || process.argv.includes('-w');
 const PROD = process.env.NODE_ENV !== 'development';
 const NODE_ENV = PROD ? 'production' : 'development';
