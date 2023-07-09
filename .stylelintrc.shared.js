@@ -4,7 +4,7 @@ const ENV = require('./app.env');
 
 module.exports = {
     'extends': [],
-    'plugins': ['stylelint-no-unsupported-browser-features'],
+    'plugins': [],
     'rules': {
         // code quality rules (fastest)
         'declaration-block-no-duplicate-custom-properties': null,
@@ -31,23 +31,6 @@ module.exports = {
             true,
             {
                 'disallowInList': false,
-            },
-        ],
-        'plugin/no-unsupported-browser-features': [
-            true,
-            {
-                'browsers': ENV.BROWSERS,
-                'ignore': [
-                    'css-featurequeries',
-                    'css-filters',
-                    'css-gradients',
-                    'css-resize',
-                    'css-touch-action',
-                    'css3-cursors-newer',
-                    'pointer-events',
-                    'will-change',
-                ],
-                'ignorePartialSupport': true,
             },
         ],
         'property-disallowed-list': [

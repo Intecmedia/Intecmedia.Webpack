@@ -10,6 +10,7 @@ module.exports = deepMerge({}, sharedConfig, {
     'extends': [...sharedConfig.extends],
     'plugins': [
         // 'stylelint-no-nested-media',
+        'stylelint-no-unsupported-browser-features',
         ...sharedConfig.plugins,
     ],
     'rules': {
@@ -18,10 +19,30 @@ module.exports = deepMerge({}, sharedConfig, {
               {
                   'declaration-property-value-no-unknown': true,
                   // 'pitcher/no-nested-media': true,
+                  'plugin/no-unsupported-browser-features': [
+                      true,
+                      {
+                          'browsers': ENV.BROWSERS,
+                          'ignore': [
+                              'css-file-selector-button',
+                              'css-marker-pseudo',
+                              'css-featurequeries',
+                              'css-filters',
+                              'css-gradients',
+                              'css-resize',
+                              'css-touch-action',
+                              'css3-cursors-newer',
+                              'pointer-events',
+                              'will-change',
+                          ],
+                          'ignorePartialSupport': true,
+                      },
+                  ],
               }
             : // dev-only rules (better dev experience)
               {
                   'declaration-property-value-no-unknown': null,
+                  'plugin/no-unsupported-browser-features': null,
                   // 'pitcher/no-nested-media': null,
               }),
     },
