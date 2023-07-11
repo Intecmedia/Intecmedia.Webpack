@@ -118,7 +118,7 @@
         "npm": ">=9"
     },
     "overrides": {
-        "glob": "7.2.3",
+        "glob": "10.3.3",
         "postcss": "8.4.25",
         "sharp": "0.32.1"
     },
@@ -169,7 +169,7 @@
         "focus-visible": "^5.2.0",
         "focus-within": "^3.0.2",
         "front-matter": "^4.0.2",
-        "glob": "7.2.3",
+        "glob": "10.3.3",
         "html-validate": "^8.0.5",
         "html-validator": "^6.0.1",
         "html-webpack-plugin": "^5.5.3",
