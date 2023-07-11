@@ -94,8 +94,20 @@ $border-radius-lg: var(--fluid-spacer-2xs) !default;
 
 // scss-docs-start type
 
-$font-family-base: system-ui, -apple-system, "Segoe UI", roboto, "Helvetica Neue", arial, "Noto Sans", "Liberation Sans",
-    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-family-base:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    roboto,
+    "Helvetica Neue",
+    arial,
+    "Noto Sans",
+    "Liberation Sans",
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji" !default;
 $font-size-root: null !default;
 $font-size-rem: 1rem !default; // Assumes the browser default, typically `16px`
 $font-size-base: var(--fluid-step-0) !default;

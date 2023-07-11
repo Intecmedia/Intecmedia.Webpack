@@ -15,7 +15,8 @@
 
             will-change: transform, opacity;
 
-            transition: opacity var(--intersection-duration-fade, $duration-default),
+            transition:
+                opacity var(--intersection-duration-fade, $duration-default),
                 transform var(--intersection-duration-translate, $duration-default);
             transition-delay: $intersection-transition-delay;
             transition-timing-function: $ease-default;
