@@ -114,8 +114,8 @@
     },
     "engines": {
         "@pip/fonttools": "*.*.*",
-        "node": ">=16",
-        "npm": ">=8.3"
+        "node": ">=18",
+        "npm": ">=9"
     },
     "overrides": {
         "glob": "7.2.3",
@@ -199,7 +199,7 @@
         "postcss-devtools": "^1.1.1",
         "postcss-fail-on-warn": "^0.2.1",
         "postcss-flexbugs-fixes": "^5.0.2",
-        "postcss-focus": "^6.0.0",
+        "postcss-focus": "^7.0.0",
         "postcss-focus-visible": "^9.0.0",
         "postcss-focus-within": "^8.0.0",
         "postcss-font-display": "^0.3.0",
