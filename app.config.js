@@ -27,6 +27,7 @@ module.exports = {
     ESLINT: true,
     IMAGEMIN: true,
     SORT_MEQIA_QUERIES: 'mobile-first',
+    RESOLVE_URL: true,
     get ENV() {
         return require('./app.env');
     },

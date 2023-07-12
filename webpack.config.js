@@ -569,7 +569,7 @@ module.exports = {
                         loader: 'css-loader',
                         options: {
                             esModule: false,
-                            importLoaders: 3,
+                            importLoaders: APP.RESOLVE_URL ? 3 : 2,
                             sourceMap: true,
                             import: {
                                 filter(url) {
@@ -594,12 +594,16 @@ module.exports = {
                             },
                         },
                     },
-                    {
-                        loader: 'resolve-url-loader',
-                        options: {
-                            sourceMap: true,
-                        },
-                    },
+                    ...(APP.RESOLVE_URL
+                        ? [
+                              {
+                                  loader: 'resolve-url-loader',
+                                  options: {
+                                      sourceMap: true,
+                                  },
+                              },
+                          ]
+                        : []),
                     {
                         loader: 'postcss-loader',
                         options: {
