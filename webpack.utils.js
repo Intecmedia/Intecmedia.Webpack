@@ -101,9 +101,9 @@ function globArray(patterns, options) {
         patterns.map(
             (pattern) =>
                 new Promise((resolve, reject) => {
-                    glob(slash(pattern), globOptions(options), (error, files) =>
-                        error === null ? resolve(files) : reject(error)
-                    );
+                    glob.glob(slash(pattern), globOptions(options))
+                        .then((files) => resolve(files))
+                        .catch((error) => reject(error));
                 })
         )
     ).then((files) => files.flat());
@@ -119,7 +119,9 @@ module.exports.globArraySync = globArraySync;
 
 function globPatched(pattern, options) {
     return new Promise((resolve, reject) => {
-        glob(slash(pattern), globOptions(options), (error, files) => (error === null ? resolve(files) : reject(error)));
+        glob.glob(slash(pattern), globOptions(options))
+            .then((files) => resolve(files))
+            .catch((error) => reject(error));
     });
 }
 
