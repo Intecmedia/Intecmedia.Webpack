@@ -181,7 +181,7 @@
         "imports-loader": "^4.0.1",
         "intersection-observer": "^0.12.2",
         "jquery": "^3.7.0",
-        "js-beautify": "^1.14.8",
+        "js-beautify": "^1.14.9",
         "line-column": "^1.0.2",
         "lint-staged": "^13.2.3",
         "loader-utils": "^3.2.1",
