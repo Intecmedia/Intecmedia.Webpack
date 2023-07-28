@@ -35,6 +35,7 @@ module.exports = deepMerge({}, sharedConfig, {
                               'css3-cursors-newer',
                               'pointer-events',
                               'will-change',
+                              'flexbox-gap',
                           ],
                           'ignorePartialSupport': true,
                       },
