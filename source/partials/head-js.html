@@ -25,7 +25,7 @@
         var viewportHeight = window.innerHeight;
         $html.style.setProperty('--vh', parseFloat((viewportHeight * 0.01).toFixed()) + 'px');
         // js cookie
-        document.cookie = '_js=1; path=/';
+        document.cookie = '_js=1; path=/; SameSite=Lax';
     })(document.documentElement));
 </script>
 <!-- /head-js -->
