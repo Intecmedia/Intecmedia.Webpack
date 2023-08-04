@@ -22,7 +22,7 @@
             'EQiBACwDoA='
         ].join('');
         // viewport sizes
-        var viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+        var viewportHeight = window.innerHeight;
         $html.style.setProperty('--vh', parseFloat((viewportHeight * 0.01).toFixed()) + 'px');
         // js cookie
         document.cookie = '_js=1; path=/';
