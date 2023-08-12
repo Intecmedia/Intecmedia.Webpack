@@ -330,7 +330,7 @@ $fluid-fixed-digits: 6 !default;
         $sign: "-";
     }
 
-    $abs-value: abs($value);
+    $abs-value: math.abs($value);
 
     $vp-unit: "";
 
