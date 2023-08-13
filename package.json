@@ -183,7 +183,7 @@
         "jquery": "^3.7.0",
         "js-beautify": "^1.14.9",
         "line-column": "^1.0.2",
-        "lint-staged": "^13.2.3",
+        "lint-staged": "^14.0.0",
         "loader-utils": "^3.2.1",
         "lodash.merge": "^4.6.2",
         "lodash.range": "^3.2.0",
