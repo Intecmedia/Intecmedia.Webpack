@@ -71,7 +71,7 @@ module.exports = {
     },
 
     experiments: {
-        topLevelAwait: false,
+        topLevelAwait: true,
         backCompat: false,
     },
 
