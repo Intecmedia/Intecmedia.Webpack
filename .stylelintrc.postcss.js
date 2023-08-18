@@ -27,6 +27,7 @@ module.exports = deepMerge({}, sharedConfig, {
                               'css-scrollbar',
                               'css-file-selector-button',
                               'css-marker-pseudo',
+                              'css-media-interaction',
                               'css-featurequeries',
                               'css-filters',
                               'css-gradients',
