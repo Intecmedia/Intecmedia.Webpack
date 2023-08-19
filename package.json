@@ -164,7 +164,7 @@
         "favicons": "^7.1.4",
         "favicons-webpack-plugin": "^6.0.1",
         "file-loader": "^6.2.0",
-        "find-cache-dir": "^3.3.2",
+        "find-cache-dir": "^5.0.0",
         "focus-visible": "^5.2.0",
         "focus-within": "^3.0.2",
         "front-matter": "^4.0.2",
