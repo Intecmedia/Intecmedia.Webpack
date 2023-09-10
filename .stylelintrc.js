@@ -146,12 +146,8 @@ module.exports = deepMerge({}, sharedConfig, {
                           'ignoreAtRules': ['property'],
                       },
                   ],
-                  'scss/dollar-variable-empty-line-after': [
-                      'always',
-                      {
-                          'except': ['last-nested', 'before-comment', 'before-dollar-variable'],
-                      },
-                  ],
+                  'scss/dollar-variable-colon-space-after': null,
+                  'scss/dollar-variable-empty-line-after': null,
                   'scss/double-slash-comment-empty-line-before': [
                       'always',
                       {
