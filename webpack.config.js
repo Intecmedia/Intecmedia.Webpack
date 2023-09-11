@@ -632,6 +632,7 @@ module.exports = {
                                 indentWidth: 4,
                                 outputStyle: 'expanded',
                                 verbose: ENV.DEBUG || ENV.ARGV.verbose,
+                                quietDeps: true,
                             },
                             webpackImporter: false,
                         },
