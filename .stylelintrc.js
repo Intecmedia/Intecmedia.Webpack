@@ -97,6 +97,8 @@ module.exports = deepMerge({}, sharedConfig, {
                 'ignore': 'local',
             },
         ],
+        'scss/dollar-variable-colon-space-after': null,
+        'scss/dollar-variable-empty-line-after': null,
         'scss/dollar-variable-pattern': ['^[a-zA-Z][a-zA-Z-\\d]*$'],
         'scss/no-global-function-names': null,
         'scss/selector-nest-combinators': 'always',
@@ -146,8 +148,6 @@ module.exports = deepMerge({}, sharedConfig, {
                           'ignoreAtRules': ['property'],
                       },
                   ],
-                  'scss/dollar-variable-colon-space-after': null,
-                  'scss/dollar-variable-empty-line-after': null,
                   'scss/double-slash-comment-empty-line-before': [
                       'always',
                       {
