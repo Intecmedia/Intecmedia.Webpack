@@ -91,13 +91,13 @@ module.exports = deepMerge({}, sharedConfig, {
             },
         ],
         'scss/at-extend-no-missing-placeholder': null,
+        'scss/dollar-variable-colon-space-after': null,
         'scss/dollar-variable-default': [
             true,
             {
                 'ignore': 'local',
             },
         ],
-        'scss/dollar-variable-colon-space-after': null,
         'scss/dollar-variable-empty-line-after': null,
         'scss/dollar-variable-pattern': ['^[a-zA-Z][a-zA-Z-\\d]*$'],
         'scss/no-global-function-names': null,
