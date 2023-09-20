@@ -25,6 +25,7 @@ module.exports = deepMerge({}, sharedConfig, {
                           'browsers': ENV.BROWSERS,
                           'ignore': [
                               'css-scrollbar',
+                              'css-snappoints',
                               'css-file-selector-button',
                               'css-marker-pseudo',
                               'css-media-interaction',
