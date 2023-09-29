@@ -248,8 +248,6 @@
         margin-bottom: $paragraph-margin-bottom;
         padding-left: $lists-indent;
 
-        counter-reset: ol calc(var(--start, 1) - 1);
-
         ol,
         ul {
             // nested without margin-bottom
@@ -260,6 +258,10 @@
             margin-bottom: $lists-margin-bottom;
 
             counter-increment: ol;
+
+            &:first-child {
+                counter-reset: ol calc(var(--start, 1) - 1);
+            }
 
             &:last-of-type {
                 margin-bottom: 0;
