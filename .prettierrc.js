@@ -1,6 +1,7 @@
 /* eslint "sort-keys": "error" -- more readability keys */
 
 module.exports = {
+    'endOfLine': 'lf',
     'overrides': [
         {
             'files': '*.scss',
