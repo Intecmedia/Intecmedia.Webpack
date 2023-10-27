@@ -319,6 +319,11 @@
         }
     }
 
+    // iframe embed
+    iframe {
+        max-width: 100%;
+    }
+
     // default image
     img {
         // dont customize here, instead of edit sass variables in `_variables.scss`
