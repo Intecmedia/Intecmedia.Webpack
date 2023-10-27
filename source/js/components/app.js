@@ -18,21 +18,21 @@ export default class AbstractApp {
         if (name in this.components) {
             if (arguments.length === 1) {
                 const values = Object.values(this.components[name]);
-                return values[0] || false;
+                return values[0] || null;
             }
             if (id instanceof Element) {
                 const dataComponentId = id.getAttribute('data-component-id');
                 if (dataComponentId && dataComponentId in this.components[name]) {
                     return this.components[name][dataComponentId];
                 }
-                return false;
+                return null;
             }
             if (id in this.components[name]) {
                 return this.components[name][id];
             }
-            return false;
+            return null;
         }
-        return false;
+        return null;
     }
 
     all(name) {
