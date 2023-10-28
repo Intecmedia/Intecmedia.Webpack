@@ -4,9 +4,17 @@
 
 // Add, remove, modify https://getbootstrap.com/docs/5.3/utilities/api/#add-remove-modify
 
-$utilities-merge: (
-    "focus-ring": null,
-);
+$utilities-merge: ();
+
+@if length($theme-colors) == 0 {
+    $utilities-merge: map-merge(
+        $utilities-merge,
+        (
+            "focus-ring": null,
+        )
+    );
+}
 
 $utilities: map-merge($utilities, $utilities-merge);
+
 /* stylelint-enable scss/dollar-variable-default */
