@@ -155,6 +155,7 @@ module.exports = deepMerge({}, sharedConfig, {
                           'ignore': ['between-comments', 'stylelint-commands'],
                       },
                   ],
+                  'scss/load-no-partial-leading-underscore': true,
               }
             : // dev-only rules (better dev experience)
               {
