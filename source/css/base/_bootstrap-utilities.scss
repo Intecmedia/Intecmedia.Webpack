@@ -6,15 +6,6 @@
 
 $utilities-merge: ();
 
-@if length($theme-colors) == 0 {
-    $utilities-merge: map-merge(
-        $utilities-merge,
-        (
-            "focus-ring": null,
-        )
-    );
-}
-
 $utilities: map-merge($utilities, $utilities-merge);
 
 /* stylelint-enable scss/dollar-variable-default */

@@ -76,7 +76,6 @@ $variable-prefix: "" !default;
 
 // scss-docs-start colors
 
-$theme-colors: () !default;
 $body-bg: #fff !default;
 $body-color: #000 !default;
 
@@ -215,6 +214,8 @@ $card-group-margin: var(--fluid-spacer-xs) !default;
 // scss-docs-end card-variables
 
 // scss-docs-start tables
+
+$table-variants: () !default;
 
 $table-cell-padding-y: var(--fluid-spacer-2xs) !default;
 $table-cell-padding-x: var(--fluid-spacer-2xs) !default;
