@@ -82,7 +82,6 @@ module.exports = {
     devServer: {
         allowedHosts: ['.localhost', 'localhost'],
         hot: 'only',
-        liveReload: true,
         port: 8888,
         static: {
             directory: ENV.OUTPUT_PATH,
