@@ -4,10 +4,11 @@ const { nodeIgnore } = require('./plugin.html-validate.utils');
 class WysiwygClassAllowed extends Rule {
     constructor(options) {
         super({ ignore: null, allowed: [], ...options });
+        this.domReady = this.domReady.bind(this);
     }
 
     setup() {
-        this.on('dom:ready', this.domReady.bind(this));
+        this.on('dom:ready', this.domReady);
     }
 
     domReady({ document }) {

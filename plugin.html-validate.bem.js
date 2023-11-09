@@ -7,10 +7,11 @@ const ELEMENT_PATTERN = /(__([a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*))$/;
 class NoMissingElement extends Rule {
     constructor(options) {
         super({ ignore: '', ...options });
+        this.domReady = this.domReady.bind(this);
     }
 
     setup() {
-        this.on('dom:ready', this.domReady.bind(this));
+        this.on('dom:ready', this.domReady);
     }
 
     domReady({ document }) {
@@ -42,10 +43,11 @@ class NoMissingElement extends Rule {
 class NoMissingModifier extends Rule {
     constructor(options) {
         super({ ignore: '', ...options });
+        this.domReady = this.domReady.bind(this);
     }
 
     setup() {
-        this.on('dom:ready', this.domReady.bind(this));
+        this.on('dom:ready', this.domReady);
     }
 
     domReady({ document }) {

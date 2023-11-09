@@ -9,10 +9,11 @@ class ImgPictureRequired extends Rule {
             ignore: '.wysiwyg img, img.ignore-html-validate',
             ...options,
         });
+        this.domReady = this.domReady.bind(this);
     }
 
     setup() {
-        this.on('dom:ready', this.domReady.bind(this));
+        this.on('dom:ready', this.domReady);
     }
 
     domReady({ document }) {
@@ -63,10 +64,11 @@ class ImgPictureRequired extends Rule {
 class ImgLoadingRequired extends Rule {
     constructor(options) {
         super({ intrinsicsize: true, ignore: '.wysiwyg img', ...options });
+        this.domReady = this.domReady.bind(this);
     }
 
     setup() {
-        this.on('dom:ready', this.domReady.bind(this));
+        this.on('dom:ready', this.domReady);
     }
 
     domReady({ document }) {

@@ -6,10 +6,11 @@ class CheckNodeEnv extends Rule {
             NODE_ENV: 'development',
             ...options,
         });
+        this.domReady = this.domReady.bind(this);
     }
 
     setup() {
-        this.on('dom:ready', this.domReady.bind(this));
+        this.on('dom:ready', this.domReady);
     }
 
     domReady({ document }) {

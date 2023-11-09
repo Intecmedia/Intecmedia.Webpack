@@ -33,10 +33,11 @@ class AbsRule extends Rule {
             breakpoints: COLS_BREAKPOINTS,
             ...options,
         });
+        this.domReady = this.domReady.bind(this);
     }
 
     setup() {
-        this.on('dom:ready', this.domReady.bind(this));
+        this.on('dom:ready', this.domReady);
     }
 }
 
@@ -99,10 +100,11 @@ class RowNoChilds extends AbsRule {
 class FormSelectNoFormControl extends Rule {
     constructor(options) {
         super({ ignore: '', ...options });
+        this.domReady = this.domReady.bind(this);
     }
 
     setup() {
-        this.on('dom:ready', this.domReady.bind(this));
+        this.on('dom:ready', this.domReady);
     }
 
     domReady({ document }) {
@@ -123,10 +125,11 @@ class FormSelectNoFormControl extends Rule {
 class FormControlInputOnly extends Rule {
     constructor(options) {
         super({ ignore: '', ...options });
+        this.domReady = this.domReady.bind(this);
     }
 
     setup() {
-        this.on('dom:ready', this.domReady.bind(this));
+        this.on('dom:ready', this.domReady);
     }
 
     domReady({ document }) {

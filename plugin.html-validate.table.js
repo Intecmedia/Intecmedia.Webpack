@@ -4,10 +4,11 @@ const { nodeIgnore } = require('./plugin.html-validate.utils');
 class TableResponsiveRequired extends Rule {
     constructor(options) {
         super({ ignore: null, ...options });
+        this.domReady = this.domReady.bind(this);
     }
 
     setup() {
-        this.on('dom:ready', this.domReady.bind(this));
+        this.on('dom:ready', this.domReady);
     }
 
     domReady({ document }) {
