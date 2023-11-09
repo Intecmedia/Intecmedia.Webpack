@@ -195,7 +195,7 @@
         "nunjucks": "^3.2.4",
         "p-limit": "^3.1.0",
         "postcss": "8.4.31",
-        "postcss-browser-reporter": "^0.6.0",
+        "postcss-browser-reporter": "^0.7.0",
         "postcss-devtools": "^1.1.1",
         "postcss-fail-on-warn": "^0.2.1",
         "postcss-flexbugs-fixes": "^5.0.2",
