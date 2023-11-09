@@ -213,7 +213,7 @@ module.exports = {
                   },
                   hints: 'warning',
                   maxAssetSize: Number.MAX_SAFE_INTEGER,
-                  maxEntrypointSize: 1024 * 1024,
+                  maxEntrypointSize: 1024 * 1024 * 1.5,
               }
             : false,
 
