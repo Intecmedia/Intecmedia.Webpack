@@ -16,6 +16,9 @@
         display: block;
 
         padding-top: var(--aspect-ratio, 100%);
+
+        user-select: none;
+        pointer-events: none;
     }
 
     > img {
