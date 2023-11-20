@@ -120,7 +120,7 @@
     "overrides": {
         "postcss": "8.4.31",
         "sharp": "0.31.0",
-        "svgo": "3.0.3"
+        "svgo": "3.0.4"
     },
     "dependencies": {
         "@babel/cli": "^7.23.0",
@@ -145,7 +145,7 @@
         "case-sensitive-paths-webpack-plugin": "^2.4.0",
         "compression-webpack-plugin": "^10.0.0",
         "copy-webpack-plugin": "^11.0.0",
-        "core-js": "^3.33.2",
+        "core-js": "^3.33.3",
         "cross-env": "^7.0.3",
         "css-loader": "^6.8.1",
         "cssnano": "^6.0.1",
@@ -232,7 +232,7 @@
         "stylelint-semantic-groups": "^1.2.0",
         "stylelint-webpack-plugin": "^4.1.1",
         "svg-spritemap-webpack-plugin": "^4.5.0",
-        "svgo": "3.0.3",
+        "svgo": "3.0.4",
         "terser-webpack-plugin": "^5.3.9",
         "typescript": "^5.2.2",
         "typograf": "^7.3.0",
