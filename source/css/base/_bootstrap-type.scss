@@ -124,7 +124,7 @@
 
 .blockquote-footer {
     @include font-size($blockquote-footer-font-size);
-    margin-top: -$blockquote-margin-y;
+    margin-top: calc(-1 * $blockquote-margin-y);
     margin-bottom: $blockquote-margin-y;
 
     color: $blockquote-footer-color;
