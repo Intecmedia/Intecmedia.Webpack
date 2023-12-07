@@ -73,6 +73,14 @@ iframe {
     max-width: 100%;
 }
 
+video {
+    // Keep images from scaling beyond the width of their parents.
+    display: inline-block;
+
+    // Part 1: Set a maximum relative to the parent.
+    max-width: 100%;
+}
+
 * {
     letter-spacing: var(--#{$prefix}letter-spacing, #{$letter-spacing});
 }
