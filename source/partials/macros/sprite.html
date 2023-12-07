@@ -1,7 +1,7 @@
 <!-- beautify ignore:start -->
 {% macro svg (name, attrs = {}) %}
     <svg{% for k, v in attrs %} {{ k }}="{{ v }}"{% endfor %}>
-        <use xlink:href="{{ APP.PUBLIC_PATH }}img/svg-sprite.svg#icon-{{ name }}" />
+        <use href="{{ APP.PUBLIC_PATH }}img/svg-sprite.svg#icon-{{ name }}" />
     </svg>
 {% endmacro %}
 <!-- beautify ignore:end -->
