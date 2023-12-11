@@ -226,7 +226,7 @@
         "stylelint-no-nested-media": "^0.1.0",
         "stylelint-no-unsupported-browser-features": "^7.0.0",
         "stylelint-order": "^6.0.4",
-        "stylelint-prettier": "^4.1.0",
+        "stylelint-prettier": "^5.0.0",
         "stylelint-scss": "^5.3.2",
         "stylelint-selector-bem-pattern": "^3.0.1",
         "stylelint-semantic-groups": "^1.2.1",
