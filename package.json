@@ -219,7 +219,7 @@
         "sharp": "0.33.1",
         "slash": "^3.0.0",
         "stylelint": "^15.11.0",
-        "stylelint-config-sass-guidelines": "^10.0.0",
+        "stylelint-config-sass-guidelines": "^11.0.0",
         "stylelint-high-performance-animation": "^1.10.0",
         "stylelint-max-lines": "^0.1.0",
         "stylelint-max-root-rules": "^0.1.0",
