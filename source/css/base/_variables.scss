@@ -143,10 +143,10 @@ $headings-margin-bottom: var(--fluid-spacer-2xs) !default;
 // scss-docs-start links
 
 $link-color: #0d6efd !default;
-$link-decoration: underline !default;
+$link-decoration: var(--#{$variable-prefix}link-decoration, underline) !default;
 $link-shade-percentage: 20% !default;
 $link-hover-color: shift-color($link-color, $link-shade-percentage) !default;
-$link-hover-decoration: null !default;
+$link-hover-decoration: var(--#{$variable-prefix}link-hover-decoration, none) !default;
 
 // scss-docs-end links
 
