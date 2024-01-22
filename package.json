@@ -145,7 +145,7 @@
         "case-sensitive-paths-webpack-plugin": "^2.4.0",
         "compression-webpack-plugin": "^11.0.0",
         "copy-webpack-plugin": "^12.0.2",
-        "core-js": "^3.35.0",
+        "core-js": "^3.35.1",
         "cross-env": "^7.0.3",
         "css-loader": "^6.9.1",
         "cssnano": "^6.0.3",
