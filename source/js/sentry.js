@@ -19,7 +19,7 @@ if ((NODE_ENV === 'production' || DEBUG) && APP.SENTRY.dsn) {
 
     const sentryImport = async () => {
         const Sentry = await import(/* webpackChunkName: "vendor.sentry" */ '@sentry/browser');
-        const { Integrations } = await import(/* webpackChunkName: "vendor.sentry" */ '@sentry/tracing');
+        // const { Integrations } = await import(/* webpackChunkName: "vendor.sentry" */ '@sentry/tracing');
         Sentry.init({
             debug: DEBUG || false,
             dsn: APP.SENTRY.dsn,
@@ -35,7 +35,7 @@ if ((NODE_ENV === 'production' || DEBUG) && APP.SENTRY.dsn) {
             ignoreErrors: APP.SENTRY.ignoreErrors || [],
             blacklistUrls: APP.SENTRY.blacklistUrls || [],
             whitelistUrls: APP.SENTRY.whitelistUrls || [],
-            integrations: [new Integrations.BrowserTracing()],
+            // integrations: [new Integrations.BrowserTracing()],
             tracesSampleRate: 1.0,
         });
     };
