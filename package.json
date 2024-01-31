@@ -125,7 +125,7 @@
     "dependencies": {
         "@babel/cli": "^7.23.9",
         "@babel/core": "^7.23.9",
-        "@babel/eslint-parser": "^7.23.9",
+        "@babel/eslint-parser": "^7.23.10",
         "@babel/eslint-plugin": "^7.23.5",
         "@babel/plugin-proposal-decorators": "^7.23.9",
         "@babel/plugin-proposal-pipeline-operator": "^7.23.3",
@@ -184,7 +184,7 @@
         "jquery": "^3.7.1",
         "js-beautify": "^1.14.11",
         "line-column": "^1.0.2",
-        "lint-staged": "^15.2.0",
+        "lint-staged": "^15.2.1",
         "loader-utils": "^3.2.1",
         "lodash.merge": "^4.6.2",
         "lodash.range": "^3.2.0",
