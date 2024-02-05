@@ -1,4 +1,4 @@
-import debounce from '~/utils/debounce';
+import { debounce } from '~/utils/tickers';
 
 const RESIZE_DEBOUNCE = 200;
 
