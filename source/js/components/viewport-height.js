@@ -1,8 +1,16 @@
-// https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
+import debounce from '~/utils/debounce';
 
+const RESIZE_DEBOUNCE = 200;
+
+// https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
 class ViewportHeight {
     constructor() {
         this.onResize = this.onResize.bind(this);
+
+        this.endEvent = new CustomEvent('resize.end');
+        this.endTrigger = debounce(() => {
+            window.dispatchEvent(this.endEvent);
+        }, RESIZE_DEBOUNCE);
     }
 
     init() {
@@ -16,6 +24,7 @@ class ViewportHeight {
 
     onResize() {
         this.updateHeight();
+        this.endTrigger();
     }
 }
 
