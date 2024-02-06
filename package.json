@@ -118,7 +118,7 @@
         "npm": ">=9"
     },
     "overrides": {
-        "postcss": "8.4.33",
+        "postcss": "8.4.34",
         "sharp": "0.33.2",
         "svgo": "3.2.0"
     },
@@ -184,7 +184,7 @@
         "jquery": "^3.7.1",
         "js-beautify": "^1.14.11",
         "line-column": "^1.0.2",
-        "lint-staged": "^15.2.1",
+        "lint-staged": "^15.2.2",
         "loader-utils": "^3.2.1",
         "lodash.debounce": "^4.0.8",
         "lodash.merge": "^4.6.2",
@@ -196,7 +196,7 @@
         "nodemon": "^3.0.3",
         "nunjucks": "^3.2.4",
         "p-limit": "^3.1.0",
-        "postcss": "8.4.33",
+        "postcss": "8.4.34",
         "postcss-browser-reporter": "^0.7.0",
         "postcss-devtools": "^1.1.1",
         "postcss-fail-on-warn": "^0.2.1",
@@ -217,7 +217,7 @@
         "sass": "^1.70.0",
         "sass-loader": "^14.1.0",
         "schema-utils": "^4.2.0",
-        "semver": "^7.5.4",
+        "semver": "^7.6.0",
         "sharp": "0.33.2",
         "slash": "^3.0.0",
         "stylelint": "^16.2.1",
