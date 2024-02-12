@@ -243,7 +243,7 @@
         "webpack-assets-manifest": "^5.1.0",
         "webpack-bundle-analyzer": "^4.10.1",
         "webpack-cli": "^5.1.4",
-        "webpack-dev-server": "^4.15.1",
+        "webpack-dev-server": "^5.0.0",
         "webpack-log": "^3.0.2",
         "webpack-sources": "^3.2.3",
         "whatwg-fetch": "^3.6.20",
