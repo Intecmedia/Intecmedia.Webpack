@@ -21,43 +21,37 @@ instance.addSafeTag('<%', '%>');
 instance.addSafeTag('<!--', '-->');
 instance.addSafeTag('<!-- typograf ignore:start -->', '<!-- typograf ignore:end -->');
 
-UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.SOURCE_PATH}/**/*.html`], {
+const files = UTILS.globArraySync(patterns.length > 0 ? patterns : [`${ENV.SOURCE_PATH}/**/*.html`], {
     ignore: [`${ENV.OUTPUT_PATH}/**/*.html`, `${ENV.SOURCE_PATH}/partials/macros/**/*.html`],
     nodir: true,
-})
-    .then((files) => {
-        logger.info(`${files.length} files\n`);
+});
 
-        files.forEach((resourcePath) => {
-            const relativePath = UTILS.slash(path.relative(__dirname, resourcePath));
-            if (typografIgnore.ignores(relativePath)) {
-                statMessages.ignored += 1;
-                logger.info(`ignored ${relativePath}`);
-                return;
-            }
+logger.info(`${files.length} files\n`);
 
-            const html = fs.readFileSync(resourcePath).toString('utf-8');
-            const templateData = frontMatter(html);
+files.forEach((resourcePath) => {
+    const relativePath = UTILS.slash(path.relative(__dirname, resourcePath));
+    if (typografIgnore.ignores(relativePath)) {
+        statMessages.ignored += 1;
+        logger.info(`ignored ${relativePath}`);
+        return;
+    }
 
-            const output =
-                (templateData.frontmatter ? ['---', templateData.frontmatter, '---', ''].join('\n') : '') +
-                instance.execute(templateData.body);
+    const html = fs.readFileSync(resourcePath).toString('utf-8');
+    const templateData = frontMatter(html);
 
-            if (html !== output) {
-                fs.writeFileSync(resourcePath, output);
-                statMessages.fixed += 1;
-                logger.info(`fixed ${relativePath}`);
-            } else {
-                statMessages.skipped += 1;
-                logger.info(`skipped ${relativePath}`);
-            }
-        });
+    const output =
+        (templateData.frontmatter ? ['---', templateData.frontmatter, '---', ''].join('\n') : '') +
+        instance.execute(templateData.body);
 
-        console.log('');
-        logger.info('stats:', statMessages);
+    if (html !== output) {
+        fs.writeFileSync(resourcePath, output);
+        statMessages.fixed += 1;
+        logger.info(`fixed ${relativePath}`);
+    } else {
+        statMessages.skipped += 1;
+        logger.info(`skipped ${relativePath}`);
+    }
+});
 
-        return files;
-    })
-    .catch((error) => {
-        logger.error(error);
-    });
+console.log('');
+logger.info('stats:', statMessages);

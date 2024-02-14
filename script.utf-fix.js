@@ -23,7 +23,7 @@ function stripWhitespaces(string) {
     return result;
 }
 
-UTILS.globArray(
+const files = UTILS.globArraySync(
     [
         path.join(__dirname, '**/*.htaccess'),
         path.join(__dirname, '.fonts-subsets'),
@@ -36,31 +36,27 @@ UTILS.globArray(
         dot: true,
         nodir: true,
     }
-)
-    .then((files) => {
-        files.forEach((resourcePath) => {
-            const resourceStat = fs.lstatSync(resourcePath);
-            if (!resourceStat.isFile()) return;
+);
 
-            const relativePath = UTILS.slash(path.relative(__dirname, resourcePath));
-            const source = fs.readFileSync(resourcePath, 'utf8').toString();
-            const fixedSource = stripWhitespaces(source.normalize('NFC'));
+logger.info(`${files.length} files\n`);
 
-            if (fixedSource === source) {
-                statMessages.skipped += 1;
-                logger.info(`skiped ${relativePath}`);
-            } else {
-                statMessages.fixed += 1;
-                fs.writeFileSync(resourcePath, fixedSource);
-                logger.info(`fixed ${relativePath}`);
-            }
-        });
+files.forEach((resourcePath) => {
+    const resourceStat = fs.lstatSync(resourcePath);
+    if (!resourceStat.isFile()) return;
 
-        console.log('');
-        logger.info('stats:', statMessages);
+    const relativePath = UTILS.slash(path.relative(__dirname, resourcePath));
+    const source = fs.readFileSync(resourcePath, 'utf8').toString();
+    const fixedSource = stripWhitespaces(source.normalize('NFC'));
 
-        return files;
-    })
-    .catch((error) => {
-        logger.error(error);
-    });
+    if (fixedSource === source) {
+        statMessages.skipped += 1;
+        logger.info(`skiped ${relativePath}`);
+    } else {
+        statMessages.fixed += 1;
+        fs.writeFileSync(resourcePath, fixedSource);
+        logger.info(`fixed ${relativePath}`);
+    }
+});
+
+console.log('');
+logger.info('stats:', statMessages);

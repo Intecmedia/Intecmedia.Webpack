@@ -11,47 +11,36 @@ const FONTS_SRC = `${ENV.SOURCE_PATH}/fonts/src-ttf`;
 const FONTS_DST = `${ENV.SOURCE_PATH}/fonts`;
 const patterns = [...UTILS.processArgs._];
 
-UTILS.globArray(patterns.length > 0 ? patterns : [`${FONTS_SRC}/**/*.ttf`], {
+const files = UTILS.globArraySync(patterns.length > 0 ? patterns : [`${FONTS_SRC}/**/*.ttf`], {
     ignore: [`${ENV.OUTPUT_PATH}/**/*.ttf`],
     nodir: true,
-})
-    .then((files) => {
-        logger.info(`${files.length} files`);
+});
 
-        const subsetsCommandSuffix = ' --unicodes-file=.fonts-subsets --drop-tables+=FFTM';
+logger.info(`${files.length} files`);
 
-        files.forEach((resourcePath) => {
-            const source = UTILS.slash(path.relative(__dirname, resourcePath));
-            const target = UTILS.slash(
-                path.relative(__dirname, path.join(FONTS_DST, path.relative(FONTS_SRC, resourcePath)))
-            );
+const subsetsCommandSuffix = ' --unicodes-file=.fonts-subsets --drop-tables+=FFTM';
 
-            const basename = path.basename(target, '.ttf');
-            const dirname = UTILS.slash(path.dirname(target));
+files.forEach((resourcePath) => {
+    const source = UTILS.slash(path.relative(__dirname, resourcePath));
+    const target = UTILS.slash(path.relative(__dirname, path.join(FONTS_DST, path.relative(FONTS_SRC, resourcePath))));
 
-            logger.info(`${source} --> ${dirname}/${basename}.ttf`);
-            childProcess.execSync(
-                `pyftsubset ${source} --output-file=${dirname}/${basename}.ttf ${subsetsCommandSuffix}`,
-                {
-                    stdio: 'inherit',
-                }
-            );
+    const basename = path.basename(target, '.ttf');
+    const dirname = UTILS.slash(path.dirname(target));
 
-            logger.info(`${source} --> ${dirname}/${basename}.woff`);
-            childProcess.execSync(
-                `pyftsubset ${source} --output-file=${dirname}/${basename}.woff --flavor=woff ${subsetsCommandSuffix}`,
-                { stdio: 'inherit' }
-            );
-
-            logger.info(`${source} --> ${dirname}/${basename}.woff2`);
-            childProcess.execSync(
-                `pyftsubset ${source} --output-file=${dirname}/${basename}.woff2 --flavor=woff2 ${subsetsCommandSuffix}`,
-                { stdio: 'inherit' }
-            );
-        });
-
-        return files;
-    })
-    .catch((error) => {
-        logger.error(error);
+    logger.info(`${source} --> ${dirname}/${basename}.ttf`);
+    childProcess.execSync(`pyftsubset ${source} --output-file=${dirname}/${basename}.ttf ${subsetsCommandSuffix}`, {
+        stdio: 'inherit',
     });
+
+    logger.info(`${source} --> ${dirname}/${basename}.woff`);
+    childProcess.execSync(
+        `pyftsubset ${source} --output-file=${dirname}/${basename}.woff --flavor=woff ${subsetsCommandSuffix}`,
+        { stdio: 'inherit' }
+    );
+
+    logger.info(`${source} --> ${dirname}/${basename}.woff2`);
+    childProcess.execSync(
+        `pyftsubset ${source} --output-file=${dirname}/${basename}.woff2 --flavor=woff2 ${subsetsCommandSuffix}`,
+        { stdio: 'inherit' }
+    );
+});

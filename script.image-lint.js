@@ -97,68 +97,65 @@ const LINT_RULES = [
 
 const patterns = [...UTILS.processArgs._];
 
-UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.SOURCE_PATH}/**/*.{jpg,jpeg,png,svg,gif}`], {
+const files = UTILS.globArraySync(patterns.length > 0 ? patterns : [`${ENV.SOURCE_PATH}/**/*.{jpg,jpeg,png,svg,gif}`], {
     ignore: [`${ENV.OUTPUT_PATH}/**/*.{jpg,jpeg,png,svg,gif}`],
     nodir: true,
-})
-    .then(async (files) => {
-        logger.info(`${files.length} files\n`);
+});
 
-        const statMessages = { ignored: 0, skipped: 0 };
-        const increaseStat = (type) => {
-            if (type in statMessages) statMessages[type] += 1;
-            else statMessages[type] = 1;
-        };
+logger.info(`${files.length} files\n`);
 
-        const promises = files.map(async (resourcePath) => {
-            const relativePath = UTILS.slash(path.relative(ENV.SOURCE_PATH, resourcePath));
+const statMessages = { ignored: 0, skipped: 0 };
+const increaseStat = (type) => {
+    if (type in statMessages) statMessages[type] += 1;
+    else statMessages[type] = 1;
+};
 
-            if (lintIgnore.ignores(relativePath)) {
-                increaseStat('ignored');
-                logger.info(`${relativePath}: ignored`);
-                return Promise.resolve(relativePath);
-            }
+const promises = files.map(async (resourcePath) => {
+    const relativePath = UTILS.slash(path.relative(ENV.SOURCE_PATH, resourcePath));
 
-            const metadata = await metadataAsync(resourcePath);
+    if (lintIgnore.ignores(relativePath)) {
+        increaseStat('ignored');
+        logger.info(`${relativePath}: ignored`);
+        return Promise.resolve(relativePath);
+    }
 
-            if (!metadata) {
-                logger.error(`${relativePath}: cannot read metadata`);
-                increaseStat('error');
-                process.exitCode = 1;
-                return Promise.resolve(relativePath);
-            }
+    const metadata = await metadataAsync(resourcePath);
 
-            const lintErrors = (
-                await Promise.all(
-                    LINT_RULES.map(async (rule) => {
-                        const lintError = await rule.fn(metadata, resourcePath);
-                        return lintError ? [lintError] : [];
-                    })
-                )
-            ).flat();
+    if (!metadata) {
+        logger.error(`${relativePath}: cannot read metadata`);
+        increaseStat('error');
+        process.exitCode = 1;
+        return Promise.resolve(relativePath);
+    }
 
-            if (lintErrors.length > 0) {
-                logger.info(`${relativePath}: ${JSON.stringify(metadata)}`);
-                lintErrors.forEach((lintError) => {
-                    logger.error(`${relativePath}: ${lintError}`);
-                });
-                console.log('');
-                increaseStat('error');
-                process.exitCode = 1;
-            } else {
-                increaseStat('skipped');
-                logger.info(`skipped ${relativePath}`);
-            }
+    const lintErrors = (
+        await Promise.all(
+            LINT_RULES.map(async (rule) => {
+                const lintError = await rule.fn(metadata, resourcePath);
+                return lintError ? [lintError] : [];
+            })
+        )
+    ).flat();
 
-            return metadata;
+    if (lintErrors.length > 0) {
+        logger.info(`${relativePath}: ${JSON.stringify(metadata)}`);
+        lintErrors.forEach((lintError) => {
+            logger.error(`${relativePath}: ${lintError}`);
         });
-        await Promise.all(promises);
-
         console.log('');
-        logger.info('stats:', statMessages);
+        increaseStat('error');
+        process.exitCode = 1;
+    } else {
+        increaseStat('skipped');
+        logger.info(`skipped ${relativePath}`);
+    }
 
-        return files;
+    return metadata;
+});
+
+Promise.all(promises)
+    .then(() => {
+        console.log('');
+        return logger.info('stats:', statMessages);
     })
-    .catch((error) => {
-        logger.error(error);
-    });
+    .catch((error) => logger.error(error));
