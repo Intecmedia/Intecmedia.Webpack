@@ -8,13 +8,11 @@ const fileLoader = require('file-loader');
 const deepMerge = require('lodash.merge');
 const weblog = require('webpack-log');
 const slash = require('slash');
-const pLimit = require('p-limit');
 const createHash = require('webpack/lib/util/createHash');
 
 const logger = weblog({ name: 'loader-resize' });
 const imageminConfig = require('./imagemin.config');
 const { version: sharpVersion } = require('sharp/package.json');
-const ENV = require('./app.env');
 
 const imageminConfigModule = require.resolve('./imagemin.config');
 
@@ -24,8 +22,6 @@ const DEFAULT_OPTIONS = {
 };
 const DEFAULT_FIT = 'inside';
 const ALLOWED_PATTERN = /\.(jpeg|jpg|png|gif)(\?.*)?$/i;
-
-const resizeLimit = ENV.PROD && !ENV.DEBUG ? pLimit(os.cpus().length - 1) : (callback) => callback();
 
 module.exports = async function ResizeLoader(content) {
     const loaderContext = this;
@@ -197,6 +193,14 @@ module.exports = async function ResizeLoader(content) {
     }
 
     resourceImage.toFormat(format.toLowerCase(), formatOptions);
+
+    let resizeLimit = (callback) => callback();
+    if (loaderContext.resizeLimit) {
+        resizeLimit = loaderContext.resizeLimit;
+    } else {
+        const { default: pLimit } = await import('p-limit');
+        loaderContext.resizeLimit = pLimit(os.cpus().length - 1);
+    }
 
     await resizeLimit(async () => {
         const resizePromise = await new Promise((resizeResolve, resizeReject) => {
