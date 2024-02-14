@@ -224,6 +224,8 @@ module.exports = async function ResizeLoader(content) {
                     resizeResolve(buffer);
                     loaderContext.resourcePath = path.join(resourceInfo.dir, `${name}.${format}`);
                     loaderCallback(null, nextLoader.call(loaderContext, buffer));
+
+                    return buffer;
                 })
                 .catch((bufferError) => {
                     loaderContext.emitError(bufferError);
