@@ -3,7 +3,6 @@ const path = require('path');
 const glob = require('glob');
 const ignore = require('ignore');
 const yargs = require('yargs/yargs');
-const findCacheDir = require('find-cache-dir');
 
 const FILENAME_PATTERN = /^[a-zA-Z0-9-/.,_@]+$/;
 
@@ -78,18 +77,8 @@ module.exports.resourceName = resourceName;
 function cacheDir(name, skipEnv = false) {
     const ENV = require('./app.env');
     const prefixedName = skipEnv ? name : `${name}-${ENV.NODE_ENV}`;
-    const orgEnvDir = process.env.CACHE_DIR || null;
-    const envDir = slash(path.join(__dirname, 'cache', prefixedName));
-    if (fs.existsSync(envDir)) {
-        process.env.CACHE_DIR = envDir;
-    }
-    const result = slash(findCacheDir({ name: prefixedName, create: true }))
-        .replace(`${prefixedName}/${prefixedName}`, prefixedName)
-        .replace('find-cache-dir', '');
-    if (orgEnvDir) {
-        process.env.CACHE_DIR = orgEnvDir;
-    }
-    return result;
+
+    return slash(path.join(__dirname, 'node_modules', '.cache', prefixedName, '/'));
 }
 
 module.exports.cacheDir = cacheDir;
