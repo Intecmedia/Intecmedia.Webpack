@@ -17,6 +17,7 @@ module.exports = {
             },
             'extends': [
                 'plugin:compat/recommended',
+                'plugin:promise/recommended',
                 'plugin:prettier/recommended', // prettier always last
             ],
             'files': ['./source/js/**/*.js'],
@@ -29,6 +30,7 @@ module.exports = {
             },
             'extends': [
                 'plugin:n/recommended',
+                'plugin:promise/recommended',
                 'plugin:prettier/recommended', // prettier always last
             ],
             'files': ['./*.js', './source/helpers/*.js', './source/html.data.js'],
@@ -100,6 +102,13 @@ module.exports = {
         'no-plusplus': 'off',
         'no-underscore-dangle': 'off',
         'prettier/prettier': ['error'],
+        'promise/param-names': [
+            'error',
+            {
+                'rejectPattern': '[rR]eject$',
+                'resolvePattern': '[rR]esolve$',
+            },
+        ],
         'require-await': ['error'],
         ...(ENV.PROD
             ? // code style rules (slowest)
