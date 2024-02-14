@@ -42,34 +42,40 @@ function beautifyHtml(html) {
 UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.SOURCE_PATH}/**/*.html`], {
     ignore: [`${ENV.OUTPUT_PATH}/**/*.html`, `${ENV.SOURCE_PATH}/partials/macros/**/*.html`],
     nodir: true,
-}).then((files) => {
-    logger.info(`${files.length} files\n`);
+})
+    .then((files) => {
+        logger.info(`${files.length} files\n`);
 
-    files.forEach((resourcePath) => {
-        const relativePath = UTILS.slash(path.relative(__dirname, resourcePath));
-        if (beautifyfIgnore.ignores(relativePath)) {
-            statMessages.ignored += 1;
-            logger.info(`ignored ${relativePath}`);
-            return;
-        }
+        files.forEach((resourcePath) => {
+            const relativePath = UTILS.slash(path.relative(__dirname, resourcePath));
+            if (beautifyfIgnore.ignores(relativePath)) {
+                statMessages.ignored += 1;
+                logger.info(`ignored ${relativePath}`);
+                return;
+            }
 
-        const html = fs.readFileSync(resourcePath).toString('utf-8');
-        const templateData = frontMatter(html);
+            const html = fs.readFileSync(resourcePath).toString('utf-8');
+            const templateData = frontMatter(html);
 
-        const output =
-            (templateData.frontmatter ? ['---', templateData.frontmatter, '---', ''].join('\n') : '') +
-            beautifyHtml(templateData.body.normalize('NFC'));
+            const output =
+                (templateData.frontmatter ? ['---', templateData.frontmatter, '---', ''].join('\n') : '') +
+                beautifyHtml(templateData.body.normalize('NFC'));
 
-        if (html !== output) {
-            fs.writeFileSync(resourcePath, output);
-            statMessages.fixed += 1;
-            logger.info(`fixed ${relativePath}`);
-        } else {
-            statMessages.skipped += 1;
-            logger.info(`skipped ${relativePath}`);
-        }
+            if (html !== output) {
+                fs.writeFileSync(resourcePath, output);
+                statMessages.fixed += 1;
+                logger.info(`fixed ${relativePath}`);
+            } else {
+                statMessages.skipped += 1;
+                logger.info(`skipped ${relativePath}`);
+            }
+        });
+
+        console.log('');
+        logger.info('stats:', statMessages);
+
+        return files;
+    })
+    .catch((error) => {
+        logger.error(error);
     });
-
-    console.log('');
-    logger.info('stats:', statMessages);
-});

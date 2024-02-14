@@ -12,18 +12,23 @@ const cleanIgnore = UTILS.readIgnoreFile('./.cleanignore');
 UTILS.glob(`${ENV.OUTPUT_PATH}/**/*`, {
     nodir: true,
     dot: true,
-}).then((files) => {
-    files.forEach((filepath) => {
-        const relativePath = UTILS.slash(path.relative(ENV.OUTPUT_PATH, filepath));
+})
+    .then((files) => {
+        files.forEach((filepath) => {
+            const relativePath = UTILS.slash(path.relative(ENV.OUTPUT_PATH, filepath));
 
-        if (cleanIgnore.ignores(relativePath)) {
-            return;
-        }
-
-        fs.unlink(filepath, (unlinkError) => {
-            if (unlinkError) {
-                logger.error(unlinkError);
+            if (cleanIgnore.ignores(relativePath)) {
+                return;
             }
+
+            fs.unlink(filepath, (unlinkError) => {
+                if (unlinkError) {
+                    logger.error(unlinkError);
+                }
+            });
         });
+        return files;
+    })
+    .catch((error) => {
+        logger.error(error);
     });
-});

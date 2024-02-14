@@ -32,56 +32,64 @@ const patterns = [...UTILS.processArgs._];
 UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.OUTPUT_PATH}/**/*.html`], {
     ignore: [`${ENV.SOURCE_PATH}/**/*.html`],
     nodir: true,
-}).then(async (files) => {
-    logger.info(`${files.length} files\n`);
+})
+    .then(async (files) => {
+        logger.info(`${files.length} files\n`);
 
-    const statMessages = { skipped: 0 };
-    const increaseStat = (type) => {
-        if (type in statMessages) statMessages[type] += 1;
-        else statMessages[type] = 1;
-    };
+        const statMessages = { skipped: 0 };
+        const increaseStat = (type) => {
+            if (type in statMessages) statMessages[type] += 1;
+            else statMessages[type] = 1;
+        };
 
-    const promises = files.map(async (resourcePath) => {
-        const relativePath = UTILS.slash(path.relative(__dirname, resourcePath));
+        const promises = files.map(async (resourcePath) => {
+            const relativePath = UTILS.slash(path.relative(__dirname, resourcePath));
 
-        if (path.basename(resourcePath).startsWith('_')) {
-            logger.info(`skipped ${relativePath}`);
-            increaseStat('skipped');
-            return;
-        }
+            if (path.basename(resourcePath).startsWith('_')) {
+                logger.info(`skipped ${relativePath}`);
+                increaseStat('skipped');
+                return;
+            }
 
-        const html = fs.readFileSync(resourcePath).toString('utf-8');
-        const report = await htmlvalidate.validateFile(resourcePath);
+            const html = fs.readFileSync(resourcePath).toString('utf-8');
+            const report = await htmlvalidate.validateFile(resourcePath);
 
-        if (report.results.length === 0) {
-            logger.info(`skipped ${relativePath}`);
-            increaseStat('skipped');
-            return;
-        }
+            if (report.results.length === 0) {
+                logger.info(`skipped ${relativePath}`);
+                increaseStat('skipped');
+                return;
+            }
 
-        report.results.forEach((result) => {
-            result.messages.forEach((message) => {
-                const messageType = message.severity === 2 ? 'error' : 'warning';
-                if (message.message && ignoreTest(message.message)) {
-                    increaseStat(`${messageType}s-ignored`);
-                    return;
-                }
-                if (messageType === 'error') {
-                    process.exitCode = 1;
-                }
-                increaseStat(`${messageType}s`);
+            report.results.forEach((result) => {
+                result.messages.forEach((message) => {
+                    const messageType = message.severity === 2 ? 'error' : 'warning';
+                    if (message.message && ignoreTest(message.message)) {
+                        increaseStat(`${messageType}s-ignored`);
+                        return;
+                    }
+                    if (messageType === 'error') {
+                        process.exitCode = 1;
+                    }
+                    increaseStat(`${messageType}s`);
 
-                logger.error(`${relativePath}: line ${message.line || 0} col [${message.column || 0}]`);
-                logger.warn(`${messageType}[${message.ruleId}]: ${message.message}`);
+                    logger.error(`${relativePath}: line ${message.line || 0} col [${message.column || 0}]`);
+                    logger.warn(`${messageType}[${message.ruleId}]: ${message.message}`);
 
-                const ellipsis = html.substring(message.offset - lineEllipsis, message.offset + lineEllipsis).trim();
-                console.log(`...${ellipsis}...`);
-                console.log('');
+                    const ellipsis = html
+                        .substring(message.offset - lineEllipsis, message.offset + lineEllipsis)
+                        .trim();
+                    console.log(`...${ellipsis}...`);
+                    console.log('');
+                });
             });
         });
-    });
-    await Promise.all(promises);
+        await Promise.all(promises);
 
-    console.log('');
-    logger.info('stats:', statMessages);
-});
+        console.log('');
+        logger.info('stats:', statMessages);
+
+        return files;
+    })
+    .catch((error) => {
+        logger.error(error);
+    });

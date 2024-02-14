@@ -36,25 +36,31 @@ UTILS.globArray(
         dot: true,
         nodir: true,
     }
-).then((files) => {
-    files.forEach((resourcePath) => {
-        const resourceStat = fs.lstatSync(resourcePath);
-        if (!resourceStat.isFile()) return;
+)
+    .then((files) => {
+        files.forEach((resourcePath) => {
+            const resourceStat = fs.lstatSync(resourcePath);
+            if (!resourceStat.isFile()) return;
 
-        const relativePath = UTILS.slash(path.relative(__dirname, resourcePath));
-        const source = fs.readFileSync(resourcePath, 'utf8').toString();
-        const fixedSource = stripWhitespaces(source.normalize('NFC'));
+            const relativePath = UTILS.slash(path.relative(__dirname, resourcePath));
+            const source = fs.readFileSync(resourcePath, 'utf8').toString();
+            const fixedSource = stripWhitespaces(source.normalize('NFC'));
 
-        if (fixedSource === source) {
-            statMessages.skipped += 1;
-            logger.info(`skiped ${relativePath}`);
-        } else {
-            statMessages.fixed += 1;
-            fs.writeFileSync(resourcePath, fixedSource);
-            logger.info(`fixed ${relativePath}`);
-        }
+            if (fixedSource === source) {
+                statMessages.skipped += 1;
+                logger.info(`skiped ${relativePath}`);
+            } else {
+                statMessages.fixed += 1;
+                fs.writeFileSync(resourcePath, fixedSource);
+                logger.info(`fixed ${relativePath}`);
+            }
+        });
+
+        console.log('');
+        logger.info('stats:', statMessages);
+
+        return files;
+    })
+    .catch((error) => {
+        logger.error(error);
     });
-
-    console.log('');
-    logger.info('stats:', statMessages);
-});
