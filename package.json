@@ -219,7 +219,7 @@
         "schema-utils": "^4.2.0",
         "semver": "^7.6.0",
         "sharp": "0.33.2",
-        "slash": "^3.0.0",
+        "slash": "^5.0.0",
         "stylelint": "^16.2.1",
         "stylelint-config-sass-guidelines": "^11.0.0",
         "stylelint-high-performance-animation": "^1.10.0",
