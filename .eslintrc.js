@@ -28,7 +28,7 @@ module.exports = {
                 'node': true,
             },
             'extends': [
-                'plugin:node/recommended',
+                'plugin:n/recommended',
                 'plugin:prettier/recommended', // prettier always last
             ],
             'files': ['./*.js', './source/helpers/*.js', './source/html.data.js'],
@@ -38,6 +38,7 @@ module.exports = {
                 'import/no-dynamic-require': 'off',
                 'import/order': 'off',
                 'max-classes-per-file': 'off',
+                'n/no-process-exit': 'off',
             },
         },
         // config files
