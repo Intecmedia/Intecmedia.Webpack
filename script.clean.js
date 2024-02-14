@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const slash = require('slash');
 const weblog = require('webpack-log');
 
 const logger = weblog({ name: 'clean' });
@@ -15,7 +14,7 @@ UTILS.glob(`${ENV.OUTPUT_PATH}/**/*`, {
     dot: true,
 }).then((files) => {
     files.forEach((filepath) => {
-        const relativePath = slash(path.relative(ENV.OUTPUT_PATH, filepath));
+        const relativePath = UTILS.slash(path.relative(ENV.OUTPUT_PATH, filepath));
 
         if (cleanIgnore.ignores(relativePath)) {
             return;

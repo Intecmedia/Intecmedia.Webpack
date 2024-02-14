@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const slash = require('slash');
 const weblog = require('webpack-log');
 
 const logger = weblog({ name: 'utf-fix' });
@@ -42,7 +41,7 @@ UTILS.globArray(
         const resourceStat = fs.lstatSync(resourcePath);
         if (!resourceStat.isFile()) return;
 
-        const relativePath = slash(path.relative(__dirname, resourcePath));
+        const relativePath = UTILS.slash(path.relative(__dirname, resourcePath));
         const source = fs.readFileSync(resourcePath, 'utf8').toString();
         const fixedSource = stripWhitespaces(source.normalize('NFC'));
 

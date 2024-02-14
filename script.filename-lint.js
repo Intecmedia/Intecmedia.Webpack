@@ -1,5 +1,4 @@
 const path = require('path');
-const slash = require('slash');
 const micromatch = require('micromatch');
 const weblog = require('webpack-log');
 
@@ -23,7 +22,7 @@ config.rules
         const ruleTest = new RegExp(rule.test);
 
         files.forEach((resourcePath) => {
-            const relativePath = slash(path.relative(__dirname, resourcePath));
+            const relativePath = UTILS.slash(path.relative(__dirname, resourcePath));
             if (lintIgnore.ignores(relativePath)) {
                 statMessages.ignored += 1;
                 logger.info(`${relativePath}: ignored`);

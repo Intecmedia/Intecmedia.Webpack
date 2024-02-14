@@ -1,5 +1,4 @@
 const path = require('path');
-const slash = require('slash');
 const weblog = require('webpack-log');
 const childProcess = require('child_process');
 
@@ -21,11 +20,13 @@ UTILS.globArray(patterns.length > 0 ? patterns : [`${FONTS_SRC}/**/*.ttf`], {
     const subsetsCommandSuffix = ' --unicodes-file=.fonts-subsets --drop-tables+=FFTM';
 
     files.forEach((resourcePath) => {
-        const source = slash(path.relative(__dirname, resourcePath));
-        const target = slash(path.relative(__dirname, path.join(FONTS_DST, path.relative(FONTS_SRC, resourcePath))));
+        const source = UTILS.slash(path.relative(__dirname, resourcePath));
+        const target = UTILS.slash(
+            path.relative(__dirname, path.join(FONTS_DST, path.relative(FONTS_SRC, resourcePath)))
+        );
 
         const basename = path.basename(target, '.ttf');
-        const dirname = slash(path.dirname(target));
+        const dirname = UTILS.slash(path.dirname(target));
 
         logger.info(`${source} --> ${dirname}/${basename}.ttf`);
         childProcess.execSync(`pyftsubset ${source} --output-file=${dirname}/${basename}.ttf ${subsetsCommandSuffix}`, {

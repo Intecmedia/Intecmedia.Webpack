@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
-const slash = require('slash');
 const frontMatter = require('front-matter');
 
 const APP = require('./app.config');
@@ -37,17 +36,17 @@ if (!['production', 'development'].includes(NODE_ENV)) {
 
 const IGNORE_PATTERN = /\/_/;
 const SITEMAP = glob
-    .sync(`${slash(SOURCE_PATH)}/**/*.{html,njk}`, {
-        ignore: [`${slash(SOURCE_PATH)}/partials/**/*.html`, `${slash(SOURCE_PATH)}/upload/**/*.html`],
+    .sync(`${UTILS.slash(SOURCE_PATH)}/**/*.{html,njk}`, {
+        ignore: [`${UTILS.slash(SOURCE_PATH)}/partials/**/*.html`, `${UTILS.slash(SOURCE_PATH)}/upload/**/*.html`],
     })
     .map((item) => {
         const basename = path.basename(item, path.extname(item));
-        const template = slash(path.relative(__dirname, item));
+        const template = UTILS.slash(path.relative(__dirname, item));
         const ignored = basename.startsWith('_') || IGNORE_PATTERN.test(template);
         const extension = (path.extname(basename) || path.extname(item)).substring(1);
         const noindex = ignored || extension !== 'html';
 
-        const filename = slash(
+        const filename = UTILS.slash(
             basename === 'index'
                 ? path.join(path.relative(SOURCE_PATH, item))
                 : path.join(
@@ -57,7 +56,7 @@ const SITEMAP = glob
                           : [basename, 'index.html'])
                   )
         );
-        const url = slash(
+        const url = UTILS.slash(
             filename.endsWith('index.html') ? filename.substring(0, filename.length - 'index.html'.length) : filename
         );
 
@@ -66,8 +65,8 @@ const SITEMAP = glob
         const templateData = frontMatter.test(templateSource) ? frontMatter(templateSource) : {};
         const PAGE = {
             ...templateData.attributes,
-            URL: slash(path.normalize(path.join(APP.PUBLIC_PATH, url))),
-            PATH: slash(path.normalize(item)),
+            URL: UTILS.slash(path.normalize(path.join(APP.PUBLIC_PATH, url))),
+            PATH: UTILS.slash(path.normalize(item)),
             BASENAME: basename,
             STAT: stat,
         };

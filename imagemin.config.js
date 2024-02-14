@@ -1,5 +1,4 @@
 const path = require('path');
-const slash = require('slash');
 const weblog = require('webpack-log');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
@@ -79,7 +78,7 @@ module.exports.png = {
 };
 
 module.exports.testIgnore = (filepath) => {
-    const relpath = slash(path.relative(__dirname, path.normalize(filepath)));
+    const relpath = UTILS.slash(path.relative(__dirname, path.normalize(filepath)));
     const ignores = imageminIgnore.ignores(relpath);
     if (ENV.DEBUG || ENV.ARGV.verbose) {
         imageminLogger.info(`${JSON.stringify(relpath)} ${ignores ? 'ignores' : 'minified'}`);

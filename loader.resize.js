@@ -7,7 +7,6 @@ const urlLoader = require('url-loader');
 const fileLoader = require('file-loader');
 const deepMerge = require('lodash.merge');
 const weblog = require('webpack-log');
-const slash = require('slash');
 const createHash = require('webpack/lib/util/createHash');
 
 const logger = weblog({ name: 'loader-resize' });
@@ -15,6 +14,7 @@ const imageminConfig = require('./imagemin.config');
 const { version: sharpVersion } = require('sharp/package.json');
 
 const imageminConfigModule = require.resolve('./imagemin.config');
+const UTILS = require('./webpack.utils');
 
 const DEFAULT_OPTIONS = {
     cacheDirectory: false,
@@ -64,7 +64,7 @@ module.exports = async function ResizeLoader(content) {
 
     const resourceInfo = path.parse(loaderContext.resourcePath);
     const resourceFormat = resourceInfo.ext.slice(1).toLowerCase();
-    const relativePath = slash(path.relative(__dirname, loaderContext.resourcePath));
+    const relativePath = UTILS.slash(path.relative(__dirname, loaderContext.resourcePath));
 
     const resizeMatch = query.resize.trim().match(/^(\d*)(x(\d*))?(\w+)?$/) || [];
     const resizeWidth = parseInt(resizeMatch[1], 10);

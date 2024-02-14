@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const slash = require('slash');
 const { parseSvg } = require('svgo/lib/parser');
+const UTILS = require('./webpack.utils');
 
 /*
 SVG sprite not support external content.
@@ -32,7 +32,7 @@ const walkAttributes = (root, callback) => {
 };
 
 module.exports = function noSpriteURL(filepath) {
-    const relpath = slash(path.relative(__dirname, path.normalize(filepath)));
+    const relpath = UTILS.slash(path.relative(__dirname, path.normalize(filepath)));
     const content = fs.readFileSync(filepath).toString();
     const root = parseSvg(content);
 

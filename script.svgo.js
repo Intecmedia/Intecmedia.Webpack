@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const slash = require('slash');
 const weblog = require('webpack-log');
 
 const SVGO = require('svgo');
@@ -20,7 +19,7 @@ UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.SOURCE_PATH}/**/*.svg`]
 }).then((files) => {
     files.forEach((resourcePath) => {
         const svg = fs.readFileSync(resourcePath, 'utf8').toString();
-        const relativePath = slash(path.relative(ENV.SOURCE_PATH, path.normalize(resourcePath)));
+        const relativePath = UTILS.slash(path.relative(ENV.SOURCE_PATH, path.normalize(resourcePath)));
 
         const ignores = imageminIgnore.ignores(relativePath);
         if (ignores) {

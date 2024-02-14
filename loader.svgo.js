@@ -1,9 +1,10 @@
 const path = require('path');
-const slash = require('slash');
 const weblog = require('webpack-log');
 
 const SVGO = require('svgo');
 const { SvgoCreateConfig } = require('./svgo.config');
+
+const UTILS = require('./webpack.utils');
 
 const logger = weblog({ name: 'loader-svgo' });
 
@@ -15,7 +16,7 @@ module.exports = function SvgLoader(content) {
     const name = path.basename(loaderContext.resourcePath, '.svg');
     const options = SvgoCreateConfig({ prefix: `svgo-${name.toLowerCase()}` });
 
-    const relativePath = slash(path.relative(__dirname, loaderContext.resourcePath));
+    const relativePath = UTILS.slash(path.relative(__dirname, loaderContext.resourcePath));
     options.path = relativePath;
 
     if (options.verbose) {

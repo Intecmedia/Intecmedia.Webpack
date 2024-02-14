@@ -1,5 +1,4 @@
 const path = require('path');
-const slash = require('slash');
 const sharp = require('sharp');
 const weblog = require('webpack-log');
 
@@ -111,7 +110,7 @@ UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.SOURCE_PATH}/**/*.{jpg,
     };
 
     const promises = files.map(async (resourcePath) => {
-        const relativePath = slash(path.relative(ENV.SOURCE_PATH, resourcePath));
+        const relativePath = UTILS.slash(path.relative(ENV.SOURCE_PATH, resourcePath));
 
         if (lintIgnore.ignores(relativePath)) {
             increaseStat('ignored');

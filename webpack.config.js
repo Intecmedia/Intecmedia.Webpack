@@ -1,7 +1,6 @@
 /* eslint max-lines: "off", max-len: "off" -- webpack is node env */
 
 const path = require('path');
-const slash = require('slash');
 const webpack = require('webpack');
 const weblog = require('webpack-log');
 
@@ -121,7 +120,7 @@ module.exports = {
     output: {
         clean: {
             keep: (filepath) => {
-                const relativePath = slash(path.relative(ENV.OUTPUT_PATH, filepath));
+                const relativePath = UTILS.slash(path.relative(ENV.OUTPUT_PATH, filepath));
                 return cleanIgnore.ignores(relativePath);
             },
         },

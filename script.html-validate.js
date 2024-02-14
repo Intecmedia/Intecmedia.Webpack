@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const slash = require('slash');
 const weblog = require('webpack-log');
 const htmlValidate = require('html-validate');
 
@@ -43,7 +42,7 @@ UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.OUTPUT_PATH}/**/*.html`
     };
 
     const promises = files.map(async (resourcePath) => {
-        const relativePath = slash(path.relative(__dirname, resourcePath));
+        const relativePath = UTILS.slash(path.relative(__dirname, resourcePath));
 
         if (path.basename(resourcePath).startsWith('_')) {
             logger.info(`skipped ${relativePath}`);

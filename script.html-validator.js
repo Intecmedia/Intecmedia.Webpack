@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const slash = require('slash');
 const validator = require('html-validator');
 const weblog = require('webpack-log');
 
@@ -48,7 +47,7 @@ UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.OUTPUT_PATH}/**/*.html`
     };
 
     const promises = files.map(async (resourcePath) => {
-        const relativePath = slash(path.relative(__dirname, resourcePath));
+        const relativePath = UTILS.slash(path.relative(__dirname, resourcePath));
         const html = fs.readFileSync(resourcePath, 'utf8').toString();
         const result = await validatorAsync({ format: 'json', data: html });
 

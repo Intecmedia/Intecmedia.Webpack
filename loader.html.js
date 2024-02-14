@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const slash = require('slash');
 
 const loaderUtils = require('loader-utils');
 const { validate: validateOptions } = require('schema-utils');
@@ -12,6 +11,7 @@ const deepMerge = require('lodash.merge');
 const lodashTemplate = require('lodash.template');
 
 const attributeParser = require('./attr.parser');
+const UTILS = require('./webpack.utils');
 
 const helpers = require('./source/helpers');
 const IncludeWithExtension = require('./plugin.nunjucks-include-with');
@@ -77,7 +77,7 @@ const ABSOLUTE_REPLACE = '../$1';
 const MACROS_PATTERN = /\{%\s+macro\s+([\w_]+).+%\}/gi;
 
 function resolveAbsolute(originUrl) {
-    const url = slash(originUrl);
+    const url = UTILS.slash(originUrl);
     if (!ABSOLUTE_PATTERN.test(url)) return url;
     return url.replace(ABSOLUTE_PATTERN, ABSOLUTE_REPLACE);
 }
@@ -145,7 +145,7 @@ module.exports = function HtmlLoader() {
 
     const nunjucksLoader = new nunjucks.FileSystemLoader(options.searchPath, { noCache: true });
     const nunjucksEnv = new nunjucks.Environment(nunjucksLoader, options.environment);
-    const relativePath = slash(path.relative(__dirname, loaderContext.resourcePath));
+    const relativePath = UTILS.slash(path.relative(__dirname, loaderContext.resourcePath));
 
     nunjucksEnv.addExtension(
         'includeWith',
@@ -167,14 +167,14 @@ module.exports = function HtmlLoader() {
             const url = options.requireReplace[match];
 
             if (options.verbose) {
-                const relativeUrl = slash(path.relative(__dirname, url));
+                const relativeUrl = UTILS.slash(path.relative(__dirname, url));
                 logger.info(`require(${JSON.stringify(relativeUrl)}) from ${JSON.stringify(relativePath)}`);
             }
 
             const resourceDirectory = path.dirname(loaderContext.resourcePath);
             const urlPrefix = path.relative(resourceDirectory, options.searchPath);
 
-            const request = loaderUtils.urlToRequest(slash(path.join(urlPrefix, url)), resourceDirectory);
+            const request = loaderUtils.urlToRequest(UTILS.slash(path.join(urlPrefix, url)), resourceDirectory);
             return `' + require(${JSON.stringify(request)}) + '`;
         });
 
@@ -191,8 +191,8 @@ module.exports = function HtmlLoader() {
 
     nunjucksEnv.addGlobal('APP', options.context);
     const PAGE = {
-        URL: slash(path.normalize(path.join(publicPath, resourceUrl))),
-        PATH: slash(path.normalize(resourcePath)),
+        URL: UTILS.slash(path.normalize(path.join(publicPath, resourceUrl))),
+        PATH: UTILS.slash(path.normalize(resourcePath)),
         STAT: resourceStat,
     };
     nunjucksEnv.addGlobal('PAGE', PAGE);
@@ -222,7 +222,7 @@ module.exports = function HtmlLoader() {
         const templateFilepath = path.isAbsolute(templateFilename)
             ? templateFilename
             : path.join(options.searchPath, templateFilename);
-        const templateRelative = slash(path.relative(__dirname, templateFilename));
+        const templateRelative = UTILS.slash(path.relative(__dirname, templateFilename));
         loaderContext.addDependency(templateFilepath);
 
         const templateSource = nunjucksGetSource.call(this, templateFilename);
@@ -230,7 +230,7 @@ module.exports = function HtmlLoader() {
             return templateSource;
         }
         if (SVG_PATTERN.test(templateFilename)) {
-            return { ...templateSource, src: `{{ require(${JSON.stringify(slash(templateFilename))}) }}` };
+            return { ...templateSource, src: `{{ require(${JSON.stringify(UTILS.slash(templateFilename))}) }}` };
         }
 
         [...templateSource.src.matchAll(MACROS_PATTERN)].forEach(([macrosDef, macrosName]) => {

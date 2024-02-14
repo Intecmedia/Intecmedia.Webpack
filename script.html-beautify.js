@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const slash = require('slash');
 const weblog = require('webpack-log');
 const frontMatter = require('front-matter');
 const beautify = require('js-beautify');
@@ -47,7 +46,7 @@ UTILS.globArray(patterns.length > 0 ? patterns : [`${ENV.SOURCE_PATH}/**/*.html`
     logger.info(`${files.length} files\n`);
 
     files.forEach((resourcePath) => {
-        const relativePath = slash(path.relative(__dirname, resourcePath));
+        const relativePath = UTILS.slash(path.relative(__dirname, resourcePath));
         if (beautifyfIgnore.ignores(relativePath)) {
             statMessages.ignored += 1;
             logger.info(`ignored ${relativePath}`);
