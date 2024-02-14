@@ -77,6 +77,9 @@ module.exports.resourceName = resourceName;
 function cacheDir(name, skipEnv = false) {
     const ENV = require('./app.env');
     const prefixedName = skipEnv ? name : `${name}-${ENV.NODE_ENV}`;
+    if (process.env.CACHE_DIR && !['true', 'false', '1', '0'].includes(process.env.CACHE_DIR)) {
+        return slash(path.join(process.env.CACHE_DIR, prefixedName, '/'));
+    }
 
     return slash(path.join(__dirname, 'node_modules', '.cache', prefixedName, '/'));
 }
