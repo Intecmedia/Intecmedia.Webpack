@@ -34,6 +34,7 @@ module.exports = {
             'files': ['./*.js', './source/helpers/*.js', './source/html.data.js'],
             'rules': {
                 'global-require': 'off',
+                'import/dynamic-import-chunkname': 'off',
                 'import/no-dynamic-require': 'off',
                 'import/order': 'off',
                 'max-classes-per-file': 'off',
