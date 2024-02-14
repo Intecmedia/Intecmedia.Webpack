@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const slash = require('slash');
 const glob = require('glob');
 const ignore = require('ignore');
 const yargs = require('yargs/yargs');
@@ -43,6 +42,14 @@ function toScssVars(obj) {
 }
 
 module.exports.toScssVars = toScssVars;
+
+function slash(filepath) {
+    const isExtendedLengthPath = filepath.startsWith('\\\\?\\');
+
+    return isExtendedLengthPath ? filepath : filepath.replace(/\\/g, '/');
+}
+
+module.exports.slash = slash;
 
 function resourceName(prefix, hash = false) {
     const ENV = require('./app.env');
