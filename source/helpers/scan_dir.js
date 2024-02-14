@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const slash = require('slash');
+const UTILS = require('../../webpack.utils');
 
 const glob = require('glob');
 const frontMatter = require('front-matter');
@@ -9,7 +9,7 @@ module.exports = function helper(dirname, orderKey = null, orderAsc = true) {
     const fullpath = path.join(process.cwd(), 'source', dirname);
     this.loaderContext.addContextDependency(fullpath);
     return glob
-        .sync(slash(path.join(fullpath, '*.html')), {
+        .sync(UTILS.slash(path.join(fullpath, '*.html')), {
             ignore: ['_*.html', 'index.html'],
         })
         .map((filename) => {
@@ -23,8 +23,8 @@ module.exports = function helper(dirname, orderKey = null, orderAsc = true) {
                 path.dirname(resourcePath) + (baseName === 'index' ? '' : path.posix.sep + baseName) + path.posix.sep;
 
             const stat = fs.statSync(filename);
-            const URL = slash(path.normalize(path.join(this.APP.PUBLIC_PATH, resourceUrl)));
-            const PATH = slash(path.normalize(resourcePath));
+            const URL = UTILS.slash(path.normalize(path.join(this.APP.PUBLIC_PATH, resourceUrl)));
+            const PATH = UTILS.slash(path.normalize(resourcePath));
 
             return {
                 ...templateData.attributes,

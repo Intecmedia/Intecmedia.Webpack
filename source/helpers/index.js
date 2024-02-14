@@ -1,11 +1,11 @@
 const path = require('path');
 const glob = require('glob');
-const slash = require('slash');
+const UTILS = require('../../webpack.utils');
 
 module.exports = new Map(
     glob
-        .sync(slash(path.join(__dirname, '*.js')), {
-            ignore: slash(__filename),
+        .sync(UTILS.slash(path.join(__dirname, '*.js')), {
+            ignore: UTILS.slash(__filename),
         })
         .map((filename) => [path.basename(filename, '.js'), require(filename)])
 );
