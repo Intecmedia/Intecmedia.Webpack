@@ -6,7 +6,7 @@ const ENV = require('./app.env');
 module.exports = {
     'env': {},
     // common extends
-    'extends': ['plugin:eslint-comments/recommended', 'airbnb-base'],
+    'extends': ['plugin:@eslint-community/eslint-comments/recommended', 'airbnb-base'],
     'overrides': [
         // browser code
         {
@@ -62,13 +62,13 @@ module.exports = {
     // common rules
     'rules': {
         // code quality rules (fastest)
-        'class-methods-use-this': 'off',
-        'eslint-comments/require-description': [
+        '@eslint-community/eslint-comments/require-description': [
             'error',
             {
                 'ignore': ['global', 'globals'],
             },
         ],
+        'class-methods-use-this': 'off',
         'func-names': ['error'],
         'import/dynamic-import-chunkname': [
             2,
