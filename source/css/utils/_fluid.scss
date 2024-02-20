@@ -343,9 +343,9 @@ $fluid-100-height: 100vh !default; // or 100vmin
         $vp-unit: $vertical;
     } @else {
         @if $vertical {
-            $vp-unit: "vh";
+            $vp-unit: unit($fluid-100-height);
         } @else {
-            $vp-unit: "vw";
+            $vp-unit: unit($fluid-100-width);
         }
     }
 
