@@ -16,7 +16,7 @@ module.exports = {
         ],
         'declaration-property-unit-allowed-list': [
             {
-                'font-size': ['rem', 'vw', 'vh'], // only rem, vw, vh unit
+                'font-size': ['rem', 'vw', 'vh', 'vmin', 'vmax'], // only rem, vw, vh unit
                 'letter-spacing': ['em'], // only em unit
                 'line-height': [], // only unit less
             },
