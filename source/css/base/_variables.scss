@@ -332,3 +332,16 @@ $fluid-gutter-max-width: 1920px !default;
 $fluid-gutter-max-size: 48px !default;
 
 // scss-docs-end fluid gutter
+
+// scss-docs-start scrollbar
+
+$scrollbar-size: 10px !default;
+$scrollbar-bg: #fff !default;
+
+$scrollbar-thumb-bg: #000 !default;
+$scrollbar-thumb-opacity: 0.5 !default;
+$scrollbar-thumb-border: 1px solid rgba(0, 0, 0, 0) !default;
+
+$scrollbar-track-bg: rgba(0, 0, 0, 0) !default;
+
+// scss-docs-end scrollbar

@@ -1,0 +1,52 @@
+/* stylelint-disable no-duplicate-selectors -- already in components, but we need it */
+/* stylelint-disable plugin/selector-bem-pattern -- scrollbar is not component */
+/* stylelint-disable selector-max-type -- scrollbar is not component */
+/* stylelint-disable scss/selector-nest-combinators -- scrollbar is not component */
+
+* {
+    --scrollbar-size: #{$scrollbar-size};
+    --scrollbar-bg: #{$scrollbar-bg};
+    --scrollbar-thumb-bg: #{$scrollbar-thumb-bg};
+    --scrollbar-thumb-opacity: #{$scrollbar-thumb-opacity};
+    --scrollbar-thumb-border: #{$scrollbar-thumb-border};
+    --scrollbar-track-bg: #{$scrollbar-track-bg};
+
+    @supports (scrollbar-width: thin) {
+        /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- checked on @supports */
+        scrollbar-width: thin;
+        /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- checked on @supports */
+        scrollbar-color: var(--scrollbar-thumb-bg) var(--scrollbar-bg);
+    }
+    @supports selector(*::-webkit-scrollbar) {
+        /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- checked on @supports */
+        scrollbar-width: revert;
+        /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- checked on @supports */
+        scrollbar-color: revert;
+    }
+
+    /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- its ok for custom scrollbar */
+    &::-webkit-scrollbar {
+        width: var(--scrollbar-size);
+        height: var(--scrollbar-size);
+    }
+
+    /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- its ok for custom scrollbar */
+    &::-webkit-scrollbar-track {
+        background: var(--scrollbar-track-bg);
+    }
+
+    /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- its ok for custom scrollbar */
+    &::-webkit-scrollbar-thumb {
+        border: var(--scrollbar-thumb-border);
+        border-radius: var(--scrollbar-size);
+
+        background-color: var(--scrollbar-thumb-bg);
+
+        opacity: var(--scrollbar-thumb-opacity);
+    }
+}
+
+/* stylelint-enable scss/selector-nest-combinators */
+/* stylelint-enable selector-max-type */
+/* stylelint-enable plugin/selector-bem-pattern */
+/* stylelint-enable no-duplicate-selectors */
