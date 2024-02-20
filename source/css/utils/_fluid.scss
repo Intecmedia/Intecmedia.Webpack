@@ -10,8 +10,8 @@ $fluid-max-height: 992px !default;
 
 $fluid-fixed-digits: 6 !default;
 
-$fluid-100-width: 100vw !default; // or 100vmax
-$fluid-100-height: 100vh !default; // or 100vmin
+$fluid-screen-width: 100vw !default; // or 100vmax
+$fluid-screen-height: 100vh !default; // or 100vmin
 
 @function fluid-invalidate-units($a, $b) {
     @if $a == 0 or $b == 0 {
@@ -72,7 +72,9 @@ $fluid-100-height: 100vh !default; // or 100vmin
         /* fallback css-calc */
 
         @each $prop in $properties {
-            $calc-size: calc(#{$min-value} + #{$value-calc} * ($fluid-100-width - #{$min-width-calc}) / #{$width-calc});
+            $calc-size: calc(
+                #{$min-value} + #{$value-calc} * ($fluid-screen-width - #{$min-width-calc}) / #{$width-calc}
+            );
 
             #{$prop}: $calc-size; /* #{$comment} */
         }
@@ -134,7 +136,7 @@ $fluid-100-height: 100vh !default; // or 100vmin
 
         @each $prop in $properties {
             $calc-size: calc(
-                #{$min-value} + #{$value-calc} * ($fluid-100-height - #{$min-height-calc}) / #{$height-calc}
+                #{$min-value} + #{$value-calc} * ($fluid-screen-height - #{$min-height-calc}) / #{$height-calc}
             );
 
             #{$prop}: #{$calc-size}; /* #{$comment} */
@@ -343,9 +345,9 @@ $fluid-100-height: 100vh !default; // or 100vmin
         $vp-unit: $vertical;
     } @else {
         @if $vertical {
-            $vp-unit: unit($fluid-100-height);
+            $vp-unit: unit($fluid-screen-height);
         } @else {
-            $vp-unit: unit($fluid-100-width);
+            $vp-unit: unit($fluid-screen-width);
         }
     }
 
@@ -500,7 +502,7 @@ $fluid-100-height: 100vh !default; // or 100vmin
     }
 
     @return calc(
-        #{$min-size} + ((#{$max-size} - #{$min-size}) * ($fluid-100-width - #{$min-width}) /
+        #{$min-size} + ((#{$max-size} - #{$min-size}) * ($fluid-screen-width - #{$min-width}) /
                     (#{strip-unit($max-width)} - #{strip-unit($min-width)}))
     );
 }
@@ -514,7 +516,7 @@ $fluid-100-height: 100vh !default; // or 100vmin
     }
 
     @return calc(
-        #{$min-size} + ((#{$max-size} - #{$min-size}) * ($fluid-100-height - #{$min-height}) /
+        #{$min-size} + ((#{$max-size} - #{$min-size}) * ($fluid-screen-height - #{$min-height}) /
                     (#{strip-unit($max-height)} - #{strip-unit($min-height)}))
     );
 }
@@ -530,7 +532,7 @@ $fluid-100-height: 100vh !default; // or 100vmin
     $max-size-calc: strip-unit(rem($max-size));
     $max-width-calc: strip-unit(rem($max-width));
 
-    @return math.div($max-size-calc, $max-width-calc) * $fluid-100-width;
+    @return math.div($max-size-calc, $max-width-calc) * $fluid-screen-width;
 }
 
 @function fluid-vh-font-size($max-size, $max-height: $fluid-max-height) {
@@ -544,5 +546,5 @@ $fluid-100-height: 100vh !default; // or 100vmin
     $max-size-calc: strip-unit(rem($max-size));
     $max-height-calc: strip-unit(rem($max-height));
 
-    @return math.div($max-size-calc, $max-height-calc) * $fluid-100-height;
+    @return math.div($max-size-calc, $max-height-calc) * $fluid-screen-height;
 }
