@@ -335,12 +335,11 @@ $fluid-gutter-max-size: 48px !default;
 
 // scss-docs-start scrollbar
 
-$scrollbar-size: 10px !default;
-$scrollbar-bg: #fff !default;
+$scrollbar-size: var(--fluid-spacer-2xs) !default;
+$scrollbar-bg: var(--light, #fff) !default;
 
-$scrollbar-thumb-bg: #000 !default;
-$scrollbar-thumb-opacity: 0.5 !default;
-$scrollbar-thumb-border: 1px solid rgba(0, 0, 0, 0) !default;
+$scrollbar-thumb-bg: var(--dark, #000) !default;
+$scrollbar-thumb-border: 1px solid var(--black) !default;
 
 $scrollbar-track-bg: rgba(0, 0, 0, 0) !default;
 

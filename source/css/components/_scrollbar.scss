@@ -7,7 +7,6 @@
     --scrollbar-size: #{$scrollbar-size};
     --scrollbar-bg: #{$scrollbar-bg};
     --scrollbar-thumb-bg: #{$scrollbar-thumb-bg};
-    --scrollbar-thumb-opacity: #{$scrollbar-thumb-opacity};
     --scrollbar-thumb-border: #{$scrollbar-thumb-border};
     --scrollbar-track-bg: #{$scrollbar-track-bg};
 
@@ -40,9 +39,7 @@
         border: var(--scrollbar-thumb-border);
         border-radius: var(--scrollbar-size);
 
-        background-color: var(--scrollbar-thumb-bg);
-
-        opacity: var(--scrollbar-thumb-opacity);
+        background: var(--scrollbar-thumb-bg);
     }
 }
 
