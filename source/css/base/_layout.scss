@@ -66,6 +66,8 @@ body {
     min-height: 100vh;
 
     letter-spacing: var(--#{$prefix}letter-spacing, #{$letter-spacing});
+
+    overflow: auto scroll;
     text-rendering: optimizespeed;
 
     @supports (-webkit-touch-callout: none) {
