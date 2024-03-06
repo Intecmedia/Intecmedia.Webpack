@@ -75,7 +75,7 @@ export default class AbstractApp {
         const event = new CustomEvent('update.App', { detail });
         window.dispatchEvent(event);
         if (VERBOSE) {
-            console.log('[app] update', event);
+            console.log('[app] update', event, scope);
         }
 
         this.triggerScope(scope, 'update');
@@ -146,7 +146,7 @@ export default class AbstractApp {
         const event = new CustomEvent(`destroy.App`, { detail });
         window.dispatchEvent(event);
         if (VERBOSE) {
-            console.log('[app] destroy', event);
+            console.log('[app] destroy', event, scope);
         }
 
         scope.querySelectorAll('.js-component[data-component-id]').forEach((element) => {
