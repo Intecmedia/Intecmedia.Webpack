@@ -140,7 +140,7 @@ module.exports = deepMerge({}, sharedConfig, {
                   'order/properties-alphabetical-order': null,
                   'order/properties-order': propertyOrdering,
                   'scss/at-import-partial-extension': 'never',
-                  'scss/at-import-partial-extension-blacklist': ['scss', 'css'],
+                  'scss/at-import-partial-extension-disallowed-list': ['scss', 'css'],
                   'scss/at-rule-no-unknown': [
                       true,
                       {
