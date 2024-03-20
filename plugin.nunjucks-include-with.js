@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('node:path');
 const nunjucksRuntime = require('nunjucks/src/runtime');
 
 const RELATIVE_PATTERN = /^\.{1,2}\//;

@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const childProcess = require('child_process');
+const fs = require('node:fs');
+const path = require('node:path');
+const childProcess = require('node:child_process');
 const createHash = require('webpack/lib/util/createHash');
 const weblog = require('webpack-log');
 

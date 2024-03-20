@@ -1,4 +1,4 @@
-const { URLSearchParams } = require('url');
+const { URLSearchParams } = require('node:url');
 const postcss = require('postcss');
 const postcssUrl = require('postcss-url');
 

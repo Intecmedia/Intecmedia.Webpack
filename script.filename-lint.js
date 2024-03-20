@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('node:path');
 const micromatch = require('micromatch');
 const weblog = require('webpack-log');
 

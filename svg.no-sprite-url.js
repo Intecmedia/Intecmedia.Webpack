@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 const { parseSvg } = require('svgo/lib/parser');
 const UTILS = require('./webpack.utils');
 

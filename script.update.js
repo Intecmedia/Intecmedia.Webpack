@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 const semver = require('semver');
 const childProcess = require('child_process');
 const createHash = require('webpack/lib/util/createHash');

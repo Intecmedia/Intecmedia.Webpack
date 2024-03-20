@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('node:fs');
 const semver = require('semver');
 const childProcess = require('child_process');
 const weblog = require('webpack-log');

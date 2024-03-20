@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('node:path');
 const ImageSize = require('image-size');
 
 const cacheMap = {};

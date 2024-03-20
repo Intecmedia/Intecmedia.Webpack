@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('node:path');
 const ENV = require('./app.env');
 
 module.exports = {
