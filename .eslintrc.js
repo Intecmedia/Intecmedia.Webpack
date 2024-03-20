@@ -41,6 +41,7 @@ module.exports = {
                 'import/order': 'off',
                 'max-classes-per-file': 'off',
                 'n/no-process-exit': 'off',
+                'n/prefer-node-protocol': 'warn',
             },
         },
         // config files
@@ -71,7 +72,7 @@ module.exports = {
         'class-methods-use-this': 'off',
         'func-names': ['error'],
         'import/dynamic-import-chunkname': [
-            2,
+            'error',
             {
                 'importFunctions': ['dynamicImport'],
                 'webpackChunknameFormat': '[a-zA-Z0-9\\-_\\.]+',
