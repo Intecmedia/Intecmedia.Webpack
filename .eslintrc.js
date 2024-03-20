@@ -2,6 +2,7 @@
 
 const APP = require('./app.config');
 const ENV = require('./app.env');
+const PACKAGE = require('./package.json');
 
 module.exports = {
     'env': {},
@@ -41,7 +42,12 @@ module.exports = {
                 'import/order': 'off',
                 'max-classes-per-file': 'off',
                 'n/no-process-exit': 'off',
-                'n/prefer-node-protocol': 'warn',
+                'n/prefer-node-protocol': [
+                    'warn',
+                    {
+                        'version': PACKAGE.engines.node,
+                    },
+                ],
             },
         },
         // config files
