@@ -23,6 +23,7 @@ module.exports = {
             // https://sharp.pixelplumbing.com/api-output#png
             quality: 100,
             effort: 1,
+            palette: false,
         },
         gif: {
             // https://sharp.pixelplumbing.com/api-output#gif
@@ -74,6 +75,7 @@ module.exports.png = {
     options: {
         // https://sharp.pixelplumbing.com/api-output#png
         effort: 1,
+        palette: false,
     },
 };
 
