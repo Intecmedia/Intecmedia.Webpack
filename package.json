@@ -60,7 +60,7 @@
         "utf-fix": "cross-env NODE_ENV=production node ./script.utf-fix.js",
         "svgo": "cross-env NODE_ENV=production node ./script.svgo.js",
         "filename-lint": "cross-env NODE_ENV=production node ./script.filename-lint.js",
-        "start": "npm run build",
+        "start": "npm run server",
         "prettier": "cross-env NODE_ENV=production prettier --config ./.prettierrc.js --cache --write",
         "prettier-js": "cross-env NODE_ENV=production prettier --config ./.prettierrc.js --cache --write *.js source/**/*.js",
         "prettier-css": "cross-env NODE_ENV=production prettier --config ./.prettierrc.js --cache --write source/**/*.scss",
@@ -119,7 +119,7 @@
     },
     "overrides": {
         "postcss": "8.4.38",
-        "sharp": "0.33.2",
+        "sharp": "0.33.3",
         "svgo": "3.2.0"
     },
     "dependencies": {
@@ -170,7 +170,7 @@
         "focus-within": "^3.0.2",
         "front-matter": "^4.0.2",
         "glob": "^10.3.10",
-        "html-validate": "^8.17.1",
+        "html-validate": "^8.18.0",
         "html-validator": "^6.0.1",
         "html-webpack-plugin": "^5.6.0",
         "husky": "^9.0.11",
@@ -218,8 +218,8 @@
         "sass-loader": "^14.1.1",
         "schema-utils": "^4.2.0",
         "semver": "^7.6.0",
-        "sharp": "0.33.2",
-        "stylelint": "^16.2.1",
+        "sharp": "0.33.3",
+        "stylelint": "^16.3.0",
         "stylelint-config-sass-guidelines": "^11.1.0",
         "stylelint-high-performance-animation": "^1.10.0",
         "stylelint-max-lines": "^0.1.0",
