@@ -21,7 +21,7 @@ module.exports = {
         },
         png: {
             // https://sharp.pixelplumbing.com/api-output#png
-            quality: 100,
+            quality: 90,
             effort: 1,
             palette: false,
         },
@@ -71,7 +71,7 @@ module.exports.jpeg = {
 module.exports.jpg = module.exports.jpeg;
 
 module.exports.png = {
-    quality: 100, // 0 - 100, or 100 for lossless
+    quality: 90, // 0 - 100, or 100 for lossless
     options: {
         // https://sharp.pixelplumbing.com/api-output#png
         effort: 1,
