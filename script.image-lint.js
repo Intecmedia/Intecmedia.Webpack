@@ -73,7 +73,7 @@ const LINT_RULES = [
     },
     {
         name: 'jpeg',
-        options: { ...imageminConfig.jpg.options, ...config.jpeg },
+        options: { ...imageminConfig.jpeg.options, ...config.jpeg },
         async fn(metadata, filename) {
             if (metadata.format === 'png' && metadata.isOpaque && metadata.hasAlpha) {
                 const jpeg = await sharp(filename).jpeg(this.options).toBuffer();
