@@ -6,6 +6,7 @@ const weblog = require('webpack-log');
 const ENV = require('./app.env');
 const UTILS = require('./webpack.utils');
 const config = require('./.imagelintrc');
+const imageminConfig = require('./imagemin.config');
 
 const logger = weblog({ name: 'image-lint' });
 const lintIgnore = UTILS.readIgnoreFile('./.imagelintignore');
@@ -72,7 +73,7 @@ const LINT_RULES = [
     },
     {
         name: 'jpeg',
-        options: config.jpeg || {},
+        options: { ...imageminConfig.jpg.options, ...config.jpeg },
         async fn(metadata, filename) {
             if (metadata.format === 'png' && metadata.isOpaque && metadata.hasAlpha) {
                 const jpeg = await sharp(filename).jpeg(this.options).toBuffer();
@@ -90,7 +91,7 @@ const LINT_RULES = [
     },
     {
         name: 'png',
-        options: config.png || {},
+        options: { ...imageminConfig.png.options, ...config.png },
         async fn(metadata, filename) {
             if (metadata.format === 'jpg') {
                 const png = await sharp(filename).png(this.options).toBuffer();
