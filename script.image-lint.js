@@ -77,7 +77,12 @@ const LINT_RULES = [
             if (metadata.format === 'png' && metadata.isOpaque && metadata.hasAlpha) {
                 const jpeg = await sharp(filename).jpeg(this.options).toBuffer();
                 if (jpeg.length < metadata.size) {
-                    return `JPEG (${jpeg.length} bytes) better than PNG (${metadata.size} bytes). Please use JPEG.`;
+                    const convertSource = UTILS.slash(path.relative(__dirname, filename));
+                    const convertTarget = convertSource.replace('.png', '.jpg');
+                    return [
+                        `JPEG (${jpeg.length} bytes) better than PNG (${metadata.size} bytes).`,
+                        `Please run: \`convert ${convertSource} ${convertTarget}\`.`,
+                    ].join('\n');
                 }
             }
             return false;
@@ -90,7 +95,12 @@ const LINT_RULES = [
             if (metadata.format === 'jpg') {
                 const png = await sharp(filename).png(this.options).toBuffer();
                 if (png.length < metadata.size) {
-                    return `PNG (${png.length} bytes) better than JPEG (${metadata.size} bytes). Please use PNG.`;
+                    const convertSource = UTILS.slash(path.relative(__dirname, filename));
+                    const convertTarget = convertSource.replace('.jpg', '.png');
+                    return [
+                        `PNG (${png.length} bytes) better than JPEG (${metadata.size} bytes).`,
+                        `Please run: \`convert ${convertSource} ${convertTarget}\`.`,
+                    ].join('\n');
                 }
             }
             return false;
