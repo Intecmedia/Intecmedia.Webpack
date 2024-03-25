@@ -1,3 +1,4 @@
+const fs = require('node:fs');
 const path = require('node:path');
 const sharp = require('sharp');
 const weblog = require('webpack-log');
@@ -18,10 +19,11 @@ async function metadataAsync(filename) {
         logger.error(filename, error);
         return null;
     }
-    const stats = await sharp(filename).stats();
-    result.isOpaque = stats.isOpaque;
+    const imageStat = await sharp(filename).stats();
+    const fileStat = await fs.stat(filename);
+    result.isOpaque = imageStat.isOpaque;
     result.hasAlpha = metadata.hasAlpha;
-    result.size = metadata.size;
+    result.size = fileStat.size;
     result.extension = path.extname(filename).replace('.', '');
     result.width = parseInt(metadata.width, 10);
     result.height = parseInt(metadata.height, 10);
