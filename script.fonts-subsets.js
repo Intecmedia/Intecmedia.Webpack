@@ -1,6 +1,6 @@
 const path = require('node:path');
 const weblog = require('webpack-log');
-const childProcess = require('child_process');
+const childProcess = require('node:child_process');
 
 const logger = weblog({ name: 'fonts-subsets' });
 

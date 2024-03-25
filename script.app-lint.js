@@ -1,6 +1,6 @@
 const fs = require('node:fs');
 const semver = require('semver');
-const childProcess = require('child_process');
+const childProcess = require('node:child_process');
 const weblog = require('webpack-log');
 
 const logger = weblog({ name: 'app-lint' });

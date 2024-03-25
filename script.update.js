@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const semver = require('semver');
-const childProcess = require('child_process');
+const childProcess = require('node:child_process');
 const createHash = require('webpack/lib/util/createHash');
 const weblog = require('webpack-log');
 
