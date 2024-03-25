@@ -2,3 +2,4 @@ img/**/*@resize-*.*
 upload/**/*@resize-*.*
 img/og-image.*
 */build/*
+upload/wysiwyg-test.jpg
