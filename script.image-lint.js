@@ -20,7 +20,8 @@ async function metadataAsync(filename) {
         return null;
     }
     const imageStat = await sharp(filename).stats();
-    const fileStat = await fs.stat(filename);
+    const fileStat = fs.statSync(filename);
+
     result.isOpaque = imageStat.isOpaque;
     result.hasAlpha = metadata.hasAlpha;
     result.size = fileStat.size;
