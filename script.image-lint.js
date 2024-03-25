@@ -81,7 +81,7 @@ const LINT_RULES = [
                     const convertTarget = convertSource.replace('.png', '.jpg');
                     return [
                         `JPEG (${jpeg.length} bytes) better than PNG (${metadata.size} bytes).`,
-                        `Please run: \`convert ${convertSource} ${convertTarget}\`.`,
+                        `Use JPG instead, please run: \`convert ${convertSource} ${convertTarget}\`.`,
                     ].join('\n');
                 }
             }
@@ -99,7 +99,7 @@ const LINT_RULES = [
                     const convertTarget = convertSource.replace('.jpg', '.png');
                     return [
                         `PNG (${png.length} bytes) better than JPEG (${metadata.size} bytes).`,
-                        `Please run: \`convert ${convertSource} ${convertTarget}\`.`,
+                        `Use PNG instead, please run: \`convert ${convertSource} ${convertTarget}\`.`,
                     ].join('\n');
                 }
             }
