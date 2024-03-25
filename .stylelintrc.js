@@ -12,7 +12,6 @@ module.exports = deepMerge({}, sharedConfig, {
     'extends': [
         'stylelint-config-sass-guidelines',
         ...sharedConfig.extends,
-        'stylelint-prettier/recommended', // prettier always last
     ],
     'plugins': [
         'stylelint-high-performance-animation',
@@ -21,6 +20,7 @@ module.exports = deepMerge({}, sharedConfig, {
         'stylelint-scss',
         'stylelint-selector-bem-pattern',
         'stylelint-order',
+        'stylelint-prettier', // prettier always last
         ...sharedConfig.plugins,
     ],
     'reportDescriptionlessDisables': true,
@@ -83,6 +83,7 @@ module.exports = deepMerge({}, sharedConfig, {
             ],
             'preset': 'bem',
         },
+        'prettier/prettier': true,
         'rule-empty-line-before': [
             'always',
             {
