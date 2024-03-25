@@ -9,10 +9,7 @@ const ENV = require('./app.env');
 module.exports = deepMerge({}, sharedConfig, {
     'customSyntax': 'postcss-scss',
     'defaultSeverity': ENV.PROD || ENV.DEBUG ? 'error' : 'warning',
-    'extends': [
-        'stylelint-config-sass-guidelines',
-        ...sharedConfig.extends,
-    ],
+    'extends': ['stylelint-config-sass-guidelines', ...sharedConfig.extends],
     'plugins': [
         'stylelint-high-performance-animation',
         'stylelint-max-lines',
