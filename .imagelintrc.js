@@ -5,5 +5,5 @@ module.exports = {
     'jpeg': { 'quality': 95 },
     'maxheight': 1920,
     'maxwidth': 1920,
-    'png': { 'quality': 100 },
+    'png': { 'palette': false, 'quality': 95 },
 };
