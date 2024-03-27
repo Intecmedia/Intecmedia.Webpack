@@ -9,6 +9,7 @@ module.exports = {
         ['@babel/plugin-transform-class-properties', {}],
         ['@babel/plugin-transform-logical-assignment-operators', {}],
         ['@babel/plugin-syntax-top-level-await', {}],
+        ['@babel/plugin-proposal-optional-chaining-assign', { version: '2023-07' }],
     ],
     presets: [
         [
