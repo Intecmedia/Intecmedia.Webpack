@@ -68,6 +68,7 @@ h6 {
 .lead {
     @include font-size($lead-font-size);
     font-weight: $lead-font-weight;
+    text-wrap: pretty;
 }
 
 // Type display classes
@@ -125,6 +126,8 @@ h6 {
 .blockquote {
     @include font-size($blockquote-font-size);
     margin-bottom: $blockquote-margin-y;
+
+    text-wrap: pretty;
 
     > :last-child {
         margin-bottom: 0;
