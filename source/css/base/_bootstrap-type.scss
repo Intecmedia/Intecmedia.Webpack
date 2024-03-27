@@ -1,8 +1,17 @@
-/* stylelint-disable selector-max-type, selector-list-comma-newline-after, selector-nested-pattern -- copy from bootstrap */
+/* stylelint-disable selector-max-type, selector-list-comma-newline-after, selector-nested-pattern, pitcher/max-root-rules -- copy from bootstrap */
 
 //
 // Headings
 //
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-wrap: balance;
+}
+
 .h1 {
     @extend h1;
 
@@ -134,4 +143,4 @@
     }
 }
 
-/* stylelint-enable selector-max-type, selector-list-comma-newline-after, selector-nested-pattern -- copy from bootstrap */
+/* stylelint-enable selector-max-type, selector-list-comma-newline-after, selector-nested-pattern, pitcher/max-root-rules -- copy from bootstrap */
