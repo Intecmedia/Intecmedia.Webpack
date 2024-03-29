@@ -32,6 +32,7 @@ const SvgoCreateConfig = (config) => ({
     ],
     floatPrecision: 6,
     transformPrecision: 6,
+    multipass: true,
 });
 
 module.exports.SvgoCreateConfig = SvgoCreateConfig;
