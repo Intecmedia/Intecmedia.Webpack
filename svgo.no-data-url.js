@@ -1,4 +1,4 @@
-const DATA_URL_PATTERN = /^data:image\/[^,;]+(;charset=[^;,]*)?(;base64)?,/;
+const DATA_URL_PATTERN = /^data:image\//i;
 
 exports.name = 'noDataURL';
 exports.description = 'Not allowed data URL(<image xlink:href="data:...">). Please use files instead.';
