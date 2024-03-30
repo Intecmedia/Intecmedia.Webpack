@@ -1,10 +1,8 @@
 const DATA_URL_PATTERN = /^data:image\/[^,;]+(;charset=[^;,]*)?(;base64)?,/;
 
 exports.name = 'noDataURL';
-exports.type = 'perItem';
-exports.active = true;
 exports.description = 'Not allowed data URL(<image xlink:href="data:...">). Please use files instead.';
-exports.params = {};
+exports.active = true;
 
 exports.fn = (root, options, extra) => ({
     element: {
