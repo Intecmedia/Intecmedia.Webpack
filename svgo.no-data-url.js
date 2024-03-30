@@ -9,9 +9,13 @@ exports.params = {};
 exports.fn = (root, options, extra) => ({
     element: {
         enter: (node) => {
-            if (!(node.type === 'element' && node.name === 'image')) return;
-            const href = node.attributes['xlink:href'] || node.attributes.href;
-            if (href !== undefined && DATA_URL_PATTERN.test(href)) {
+            if (node.name !== 'image') {
+                return;
+            }
+            if ('href' in node.attributes && DATA_URL_PATTERN.test(node.attributes.href)) {
+                throw new Error(`In ${JSON.stringify(extra.path)} -- ${exports.description}`);
+            }
+            if ('xlink:href' in node.attributes && DATA_URL_PATTERN.test(node.attributes['xlink:href'])) {
                 throw new Error(`In ${JSON.stringify(extra.path)} -- ${exports.description}`);
             }
         },
