@@ -10,10 +10,10 @@ exports.fn = (root, options, extra) => ({
             if (node.name !== 'image') {
                 return;
             }
-            if ('href' in node.attributes && DATA_URL_PATTERN.test(node.attributes.href)) {
-                throw new Error(`In ${JSON.stringify(extra.path)} -- ${exports.description}`);
-            }
-            if ('xlink:href' in node.attributes && DATA_URL_PATTERN.test(node.attributes['xlink:href'])) {
+            if (
+                ('href' in node.attributes && DATA_URL_PATTERN.test(node.attributes.href)) ||
+                ('xlink:href' in node.attributes && DATA_URL_PATTERN.test(node.attributes['xlink:href']))
+            ) {
                 throw new Error(`In ${JSON.stringify(extra.path)} -- ${exports.description}`);
             }
         },
