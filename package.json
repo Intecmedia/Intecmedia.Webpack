@@ -114,8 +114,8 @@
     },
     "engines": {
         "@pip/fonttools": "*.*.*",
-        "node": ">=18.20.0",
-        "npm": ">=9"
+        "node": ">=20.12.0",
+        "npm": ">=10"
     },
     "overrides": {
         "postcss": "8.4.38",
