@@ -4,7 +4,7 @@ module.exports = {
             chunks: 'all',
             enforce: true,
             test: /[\\/]node_modules[\\/]@sentry[\\/](.+)\.(js|mjs|cjs|ts)(\?.*)?$/,
-            name: 'vendor.sentry',
+            name: 'vendor-sentry',
             priority: 10,
         },
         /*
@@ -12,7 +12,7 @@ module.exports = {
             chunks: 'all',
             enforce: true,
             test: /[\\/]node_modules[\\/]three[\\/](.+)\.(js|mjs|cjs|ts)(\?.*)?$/,
-            name: 'vendor.three',
+            name: 'vendor-three',
             priority: 10,
         },
         */
