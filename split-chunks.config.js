@@ -5,7 +5,7 @@ module.exports = {
             enforce: true,
             test: /[\\/]node_modules[\\/](core-js|whatwg-fetch|focus-visible|focus-within|intersection-observer|resize-observer-polyfill)[\\/](.+)\.(js|mjs|cjs|ts)(\?.*)?$/,
             name: 'vendor.polyfills',
-            priority: -10,
+            priority: 0,
         },
         sentry: {
             chunks: 'all',
