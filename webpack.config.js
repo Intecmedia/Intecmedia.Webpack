@@ -188,14 +188,6 @@ module.exports = {
                               banner: (licenseFile) =>
                                   [`License information can be found in ${licenseFile}`, ENV.BANNER_STRING].join('\n'),
                           },
-                          terserOptions: {
-                              ecma: 2015,
-                              safari10: true,
-                              output: {
-                                  ecma: 2015,
-                                  comments: false,
-                              },
-                          },
                       }),
                   ]
                 : [],
