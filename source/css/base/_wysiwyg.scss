@@ -1,5 +1,7 @@
 /* stylelint-disable scss/selector-nest-combinators, selector-max-type, plugin/selector-bem-pattern, selector-nested-pattern -- wysiwyg is semantic tags */
 .wysiwyg {
+    @extend .clearfix;
+
     font-size: $paragraph-font-size;
 
     a {
