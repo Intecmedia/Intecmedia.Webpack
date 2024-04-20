@@ -150,6 +150,10 @@
             margin-left: auto;
         }
 
+        picture {
+            margin-bottom: 0;
+        }
+
         img {
             @extend .figure-img;
         }
