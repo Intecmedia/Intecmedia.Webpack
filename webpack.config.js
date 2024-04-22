@@ -328,6 +328,7 @@ module.exports = {
                     hash: ENV.PROD,
                     cache: !ENV.DEBUG,
                     title: APP.TITLE,
+                    excludeChunks: ['webpack-resize'],
                 })
         ),
         ...(APP.FAVICONS
