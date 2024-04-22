@@ -328,7 +328,6 @@ module.exports = {
                     hash: ENV.PROD,
                     cache: !ENV.DEBUG,
                     title: APP.TITLE,
-                    chunks: ['app'],
                     excludeChunks: ['webpack-resize'],
                 })
         ),
