@@ -176,9 +176,6 @@ module.exports = {
                                 }),
                             ]
                           : []),
-                      new RemoveAssetsPlugin({
-                          test: /webpack-\w+\.min\.js/i,
-                      }),
                       new TerserPlugin({
                           test: /\.(js)(\?.*)?$/i,
                           parallel: true,
@@ -227,6 +224,9 @@ module.exports = {
         ...(ENV.PROD && !ENV.DEBUG
             ? [
                   new CaseSensitivePathsPlugin(),
+                  new RemoveAssetsPlugin({
+                      test: /webpack-\w+\.min\.js/i,
+                  }),
                   ...(APP.BROTLI
                       ? [
                             new CompressionPlugin({
