@@ -6,6 +6,7 @@ const ENV = require('./app.env');
 const UTILS = require('./webpack.utils');
 const config = require('./.filenamelintrc.json');
 
+const VERBOSE = ENV.ARGV.verbose;
 const logger = weblog({ name: 'filename-lint' });
 const lintIgnore = UTILS.readIgnoreFile('./.filenamelintignore');
 const statMessages = { skipped: 0, errors: 0, ignored: 0 };
@@ -25,7 +26,9 @@ config.rules
             const relativePath = UTILS.slash(path.relative(__dirname, resourcePath));
             if (lintIgnore.ignores(relativePath)) {
                 statMessages.ignored += 1;
-                logger.info(`${relativePath}: ignored`);
+                if (VERBOSE) {
+                    logger.info(`${relativePath}: ignored`);
+                }
                 return;
             }
 
