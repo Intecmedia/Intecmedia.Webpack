@@ -96,7 +96,7 @@ const LINT_RULES = [
         async fn(metadata, filename) {
             if (metadata.format === 'jpg') {
                 const png = await sharp(filename).png(this.options).toBuffer();
-                const jpeg = await sharp(filename).png(imageminConfig.jpeg.options).toBuffer();
+                const jpeg = await sharp(filename).jpeg(imageminConfig.jpeg.options).toBuffer();
                 if (png.length < jpeg.length) {
                     const convertSource = UTILS.slash(path.relative(__dirname, filename));
                     const convertTarget = convertSource.replace('.jpg', '.png');
