@@ -10,6 +10,7 @@ const imageminConfig = require('./imagemin.config');
 
 const logger = weblog({ name: 'image-lint' });
 const lintIgnore = UTILS.readIgnoreFile('./.imagelintignore');
+const VERBOSE = ENV.ARGV.verbose;
 
 async function metadataAsync(filename) {
     let metadata;
@@ -131,7 +132,9 @@ const promises = files.map(async (resourcePath) => {
 
     if (lintIgnore.ignores(relativePath)) {
         increaseStat('ignored');
-        logger.info(`${relativePath}: ignored`);
+        if (VERBOSE) {
+            logger.info(`${relativePath}: ignored`);
+        }
         return Promise.resolve(relativePath);
     }
 
@@ -163,7 +166,9 @@ const promises = files.map(async (resourcePath) => {
         process.exitCode = 1;
     } else {
         increaseStat('skipped');
-        logger.info(`skipped ${relativePath}`);
+        if (VERBOSE) {
+            logger.info(`skipped ${relativePath}`);
+        }
     }
 
     return metadata;

@@ -9,6 +9,7 @@ const logger = weblog({ name: 'svgo' });
 const ENV = require('./app.env');
 const UTILS = require('./webpack.utils');
 
+const VERBOSE = ENV.ARGV.verbose;
 const imageminIgnore = UTILS.readIgnoreFile('./.imageminignore');
 const statMessages = { fixed: 0, skipped: 0, ignored: 0 };
 const patterns = [...UTILS.processArgs._];
@@ -27,7 +28,9 @@ files.forEach((resourcePath) => {
     const ignores = imageminIgnore.ignores(relativePath);
     if (ignores) {
         statMessages.ignored += 1;
-        logger.info(`ignored ${relativePath}`);
+        if (VERBOSE) {
+            logger.info(`ignored ${relativePath}`);
+        }
         return;
     }
 
@@ -44,7 +47,9 @@ files.forEach((resourcePath) => {
         logger.info(`fixed ${relativePath}`);
     } else {
         statMessages.skipped += 1;
-        logger.info(`skipped ${relativePath}`);
+        if (VERBOSE) {
+            logger.info(`skipped ${relativePath}`);
+        }
     }
 });
 
