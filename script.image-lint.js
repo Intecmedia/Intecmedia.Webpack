@@ -77,11 +77,12 @@ const LINT_RULES = [
         async fn(metadata, filename) {
             if (metadata.format === 'png' && metadata.isOpaque && metadata.hasAlpha) {
                 const jpeg = await sharp(filename).jpeg(this.options).toBuffer();
-                if (jpeg.length < metadata.size) {
+                const png = await sharp(filename).png(imageminConfig.png.options).toBuffer();
+                if (jpeg.length < png.length) {
                     const convertSource = UTILS.slash(path.relative(__dirname, filename));
                     const convertTarget = convertSource.replace('.png', '.jpg');
                     return [
-                        `JPEG (${jpeg.length} bytes) better than PNG (${metadata.size} bytes).`,
+                        `JPEG (${jpeg.length} bytes) better than PNG (${png.length} bytes).`,
                         `Use JPG instead, please run: \`magick convert ${convertSource} ${convertTarget}\`.`,
                     ].join('\n');
                 }
@@ -95,11 +96,12 @@ const LINT_RULES = [
         async fn(metadata, filename) {
             if (metadata.format === 'jpg') {
                 const png = await sharp(filename).png(this.options).toBuffer();
-                if (png.length < metadata.size) {
+                const jpeg = await sharp(filename).png(imageminConfig.jpeg.options).toBuffer();
+                if (png.length < jpeg.length) {
                     const convertSource = UTILS.slash(path.relative(__dirname, filename));
                     const convertTarget = convertSource.replace('.jpg', '.png');
                     return [
-                        `PNG (${png.length} bytes) better than JPEG (${metadata.size} bytes).`,
+                        `PNG (${png.length} bytes) better than JPEG (${jpeg.length} bytes).`,
                         `Use PNG instead, please run: \`magick convert ${convertSource} ${convertTarget}\`.`,
                     ].join('\n');
                 }
