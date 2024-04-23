@@ -120,7 +120,7 @@ const files = UTILS.globArraySync(patterns.length > 0 ? patterns : [`${ENV.SOURC
 
 logger.info(`${files.length} files\n`);
 
-const statMessages = { ignored: 0, skipped: 0 };
+const statMessages = { ignored: 0, skipped: 0, error: 0 };
 const increaseStat = (type) => {
     if (type in statMessages) statMessages[type] += 1;
     else statMessages[type] = 1;
