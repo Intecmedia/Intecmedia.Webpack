@@ -82,6 +82,7 @@ module.exports = {
         allowedHosts: ['.localhost', 'localhost'],
         hot: 'only',
         port: ENV.ARGV.port || 8888,
+        host: ENV.ARGV.host || 'local-ip',
         static: {
             directory: ENV.OUTPUT_PATH,
             publicPath: path.posix.resolve(APP.PUBLIC_PATH, '/'),
