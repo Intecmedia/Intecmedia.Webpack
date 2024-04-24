@@ -157,7 +157,6 @@ const promises = files.map(async (resourcePath) => {
     ).flat();
 
     if (lintErrors.length > 0) {
-        logger.info(`${relativePath}: ${JSON.stringify(metadata)}`);
         lintErrors.forEach((lintError) => {
             logger.error(`${relativePath}: ${lintError}`);
         });
