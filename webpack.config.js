@@ -79,7 +79,7 @@ module.exports = {
     },
 
     devServer: {
-        allowedHosts: ['.localhost', 'localhost'],
+        allowedHosts: ['localhost', '.localhost', ...(ENV.ARGV.allowedHosts ? ENV.ARGV.allowedHosts.split(',') : [])],
         hot: 'only',
         port: ENV.ARGV.port || 8888,
         host: ENV.ARGV.host || 'local-ip',
