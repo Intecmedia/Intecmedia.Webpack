@@ -22,6 +22,16 @@ module.exports = {
                 'plugin:prettier/recommended', // prettier always last
             ],
             'files': ['./source/js/**/*.js'],
+            'rules': {
+                'promise/no-nesting': 'off',
+                'promise/param-names': [
+                    'error',
+                    {
+                        'rejectPattern': '[rR]eject$',
+                        'resolvePattern': '[rR]esolve$',
+                    },
+                ],
+            },
         },
         // node code
         {
@@ -46,6 +56,14 @@ module.exports = {
                     'warn',
                     {
                         'version': PACKAGE.engines.node,
+                    },
+                ],
+                'promise/no-nesting': 'off',
+                'promise/param-names': [
+                    'error',
+                    {
+                        'rejectPattern': '[rR]eject$',
+                        'resolvePattern': '[rR]esolve$',
                     },
                 ],
             },
@@ -109,13 +127,6 @@ module.exports = {
         'no-plusplus': 'off',
         'no-underscore-dangle': 'off',
         'prettier/prettier': ['error'],
-        'promise/param-names': [
-            'error',
-            {
-                'rejectPattern': '[rR]eject$',
-                'resolvePattern': '[rR]esolve$',
-            },
-        ],
         'require-await': ['error'],
         ...(ENV.PROD
             ? // code style rules (slowest)
