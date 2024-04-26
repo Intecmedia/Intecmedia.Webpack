@@ -5,6 +5,7 @@ const weblog = require('webpack-log');
 const logger = weblog({ name: 'utf-fix' });
 const ENV = require('./app.env');
 const UTILS = require('./webpack.utils');
+const VERBOSE = ENV.ARGV.verbose;
 
 const statMessages = { fixed: 0, skipped: 0 };
 
@@ -50,7 +51,9 @@ files.forEach((resourcePath) => {
 
     if (fixedSource === source) {
         statMessages.skipped += 1;
-        logger.info(`skiped ${relativePath}`);
+        if (VERBOSE) {
+            logger.info(`skiped ${relativePath}`);
+        }
     } else {
         statMessages.fixed += 1;
         fs.writeFileSync(resourcePath, fixedSource);
