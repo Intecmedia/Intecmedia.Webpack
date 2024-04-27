@@ -1,3 +1,5 @@
+// Debug tooltip, display current breakpoint.
+// Visible only in development enviroment.
 @mixin debug-body($content) {
     position: fixed;
     bottom: 0;
