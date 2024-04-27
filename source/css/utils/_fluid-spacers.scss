@@ -38,10 +38,12 @@ $fluid-spacers-max-size: 20px !default;
     $max-size: $fluid-spacers-max-size
 ) {
     @each $key, $scale in $spacers {
+        $prop: "--fluid-spacer-#{$key}";
         $min: $min-size * $scale;
         $max: $max-size * $scale;
+
         /* Spacer: #{$key}: #{to-fixed($min, 2)} -> #{to-fixed($max, 2)} (x#{$scale}) */
-        @include fluid-clamp-prop(--fluid-spacer-#{$key}, rem($min), rem($max), $min-width, $max-width);
+        @include fluid-clamp-prop($prop, rem($min), rem($max), $min-width, $max-width);
     }
 
     @each $key1, $key2 in $spacers-pairs {
@@ -57,11 +59,13 @@ $fluid-spacers-max-size: 20px !default;
         $min-scale: math.min($scale1, $scale2);
         $max-scale: math.max($scale1, $scale2);
 
+        $key: "#{$key1}-#{$key2}";
+        $prop: "--fluid-spacer-#{$key}";
         $min: $min-size * $min-scale;
         $max: $max-size * $max-scale;
-        $key: "#{$key1}-#{$key2}";
+
         /* Spacer: #{$key}: #{to-fixed($min, 2)} -> #{to-fixed($max, 2)} (x#{$min-scale} -> x#{$max-scale}) */
-        @include fluid-clamp-prop(--fluid-spacer-#{$key}, rem($min), rem($max), $min-width, $max-width);
+        @include fluid-clamp-prop($prop, rem($min), rem($max), $min-width, $max-width);
     }
 }
 
