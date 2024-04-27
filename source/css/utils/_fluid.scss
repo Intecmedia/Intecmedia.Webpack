@@ -425,11 +425,13 @@ $fluid-screen-height: 100vh !default; // or 100vmin
                 rem($max-width)
             );
         }
-    }
+        @supports (#{$clamp-supports}) {
+            /* modern css-clamp */
 
-    @supports (#{$clamp-supports}) {
-        /* modern css-clamp */
-
+            /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- checked on @supports */
+            #{$prop}: $clamp-size; /* #{$comment} */
+        }
+    } @else {
         /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- checked on @supports */
         #{$prop}: $clamp-size; /* #{$comment} */
     }
@@ -471,11 +473,13 @@ $fluid-screen-height: 100vh !default; // or 100vmin
                 rem($max-height)
             );
         }
-    }
+        @supports (#{$clamp-supports}) {
+            /* modern css-clamp */
 
-    @supports (#{$clamp-supports}) {
-        /* modern css-clamp */
-
+            /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- checked on @supports */
+            #{$prop}: $clamp-size; /* #{$comment} */
+        }
+    } @else {
         /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- checked on @supports */
         #{$prop}: $clamp-size; /* #{$comment} */
     }
