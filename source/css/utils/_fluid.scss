@@ -500,11 +500,10 @@ $fluid-screen-height: 100vh !default; // or 100vmin
     @if type-of($max-width) == "string" {
         $max-width: map-get($grid-breakpoints, $max-width);
     }
+    $size-calc: strip-unit($max-size - $min-size);
+    $width-calc: strip-unit($max-width) - strip-unit($min-width);
 
-    @return calc(
-        #{$min-size} + ((#{$max-size} - #{$min-size}) * ($fluid-screen-width - #{$min-width}) /
-                    (#{strip-unit($max-width)} - #{strip-unit($min-width)}))
-    );
+    @return calc(#{$min-size} + #{$size-calc} * ($fluid-screen-width - #{$min-width}) / #{$width-calc});
 }
 
 @function fluid-calc-vertical($min-size, $max-size, $min-height: $fluid-min-height, $max-height: $fluid-max-height) {
@@ -514,11 +513,10 @@ $fluid-screen-height: 100vh !default; // or 100vmin
     @if type-of($max-height) == "string" {
         $max-height: map-get($vertical-breakpoints, $max-height);
     }
+    $size-calc: strip-unit($max-size - $min-size);
+    $height-calc: strip-unit($max-height) - strip-unit($min-height);
 
-    @return calc(
-        #{$min-size} + ((#{$max-size} - #{$min-size}) * ($fluid-screen-height - #{$min-height}) /
-                    (#{strip-unit($max-height)} - #{strip-unit($min-height)}))
-    );
+    @return calc(#{$min-size} + #{$size-calc} * ($fluid-screen-height - #{$min-height}) / #{$height-calc});
 }
 
 @function fluid-vw-font-size($max-size, $max-width: $fluid-max-width) {
