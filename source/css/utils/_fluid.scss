@@ -1,5 +1,6 @@
 @use "sass:math";
 
+$clamp-fallback: true !default;
 $clamp-supports: "width: clamp(0px, 0px, 0px)" !default;
 
 $fluid-min-width: 375px !default;
@@ -410,18 +411,20 @@ $fluid-screen-height: 100vh !default; // or 100vmin
     $comment: "fluid-clamp-prop($min-size: #{$min-size}, $max-size: #{$max-size}, $min-width: #{$min-width}, $max-width: #{$max-width})";
     #{$prop}: to-fixed($min-size, $fluid-fixed-digits); /* #{$comment} */
 
-    @supports not (#{$clamp-supports}) {
-        /* fallback css-calc */
+    @if ($clamp-fallback) {
+        @supports not (#{$clamp-supports}) {
+            /* fallback css-calc */
 
-        @include fluid-property(
-            $prop,
-            rem($min-size),
-            rem($max-size),
-            $min-width,
-            $max-width,
-            rem($min-width),
-            rem($max-width)
-        );
+            @include fluid-property(
+                $prop,
+                rem($min-size),
+                rem($max-size),
+                $min-width,
+                $max-width,
+                rem($min-width),
+                rem($max-width)
+            );
+        }
     }
 
     @supports (#{$clamp-supports}) {
@@ -454,18 +457,20 @@ $fluid-screen-height: 100vh !default; // or 100vmin
     $comment: "fluid-clamp-prop-vertical($min-size: #{$min-size}, $max-size: #{$max-size}, $min-height: #{$min-height}, $max-height: #{$max-height})";
     #{$prop}: to-fixed($min-size, $fluid-fixed-digits); /* #{$comment} */
 
-    @supports not (#{$clamp-supports}) {
-        /* fallback css-calc */
+    @if ($clamp-fallback) {
+        @supports not (#{$clamp-supports}) {
+            /* fallback css-calc */
 
-        @include fluid-property-vertical(
-            $prop,
-            rem($min-size),
-            rem($max-size),
-            $min-height,
-            $max-height,
-            rem($min-height),
-            rem($max-height)
-        );
+            @include fluid-property-vertical(
+                $prop,
+                rem($min-size),
+                rem($max-size),
+                $min-height,
+                $max-height,
+                rem($min-height),
+                rem($max-height)
+            );
+        }
     }
 
     @supports (#{$clamp-supports}) {
