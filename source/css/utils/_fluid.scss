@@ -407,13 +407,10 @@ $fluid-screen-height: 100vh !default; // or 100vmin
     }
 
     $clamp-size: fluid-clamp($min-size, $max-size, $min-width, $max-width);
-
     $comment: "fluid-clamp-prop($min-size: #{$min-size}, $max-size: #{$max-size}, $min-width: #{$min-width}, $max-width: #{$max-width})";
-    $supports: $clamp-supports;
-
     #{$prop}: to-fixed($min-size, $fluid-fixed-digits); /* #{$comment} */
 
-    @supports not (#{$supports}) {
+    @supports not (#{$clamp-supports}) {
         /* fallback css-calc */
 
         @include fluid-property(
@@ -427,7 +424,7 @@ $fluid-screen-height: 100vh !default; // or 100vmin
         );
     }
 
-    @supports (#{$supports}) {
+    @supports (#{$clamp-supports}) {
         /* modern css-clamp */
 
         /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- checked on @supports */
@@ -454,13 +451,10 @@ $fluid-screen-height: 100vh !default; // or 100vmin
     }
 
     $clamp-size: fluid-clamp-vertical($min-size, $max-size, $min-height, $max-height);
-
     $comment: "fluid-clamp-prop-vertical($min-size: #{$min-size}, $max-size: #{$max-size}, $min-height: #{$min-height}, $max-height: #{$max-height})";
-    $supports: $clamp-supports;
-
     #{$prop}: to-fixed($min-size, $fluid-fixed-digits); /* #{$comment} */
 
-    @supports not (#{$supports}) {
+    @supports not (#{$clamp-supports}) {
         /* fallback css-calc */
 
         @include fluid-property-vertical(
@@ -474,7 +468,7 @@ $fluid-screen-height: 100vh !default; // or 100vmin
         );
     }
 
-    @supports (#{$supports}) {
+    @supports (#{$clamp-supports}) {
         /* modern css-clamp */
 
         /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- checked on @supports */
@@ -500,6 +494,7 @@ $fluid-screen-height: 100vh !default; // or 100vmin
     @if type-of($max-width) == "string" {
         $max-width: map-get($grid-breakpoints, $max-width);
     }
+
     $size-calc: strip-unit($max-size - $min-size);
     $width-calc: strip-unit($max-width) - strip-unit($min-width);
 
@@ -513,6 +508,7 @@ $fluid-screen-height: 100vh !default; // or 100vmin
     @if type-of($max-height) == "string" {
         $max-height: map-get($vertical-breakpoints, $max-height);
     }
+
     $size-calc: strip-unit($max-size - $min-size);
     $height-calc: strip-unit($max-height) - strip-unit($min-height);
 
