@@ -2,6 +2,7 @@
 
 $resize-breakpoints: $grid-breakpoints !default;
 
+// Background-image mixin with webp-resize and avif-resize.
 @mixin background-image($url) {
     background-image: url("#{$url}");
 
@@ -26,6 +27,7 @@ $resize-breakpoints: $grid-breakpoints !default;
     }
 }
 
+// Background-image mixin with breakpoints resize, webp-resize and avif-resize.
 @mixin breakpoints-background-image($url, $breakpoints: $resize-breakpoints) {
     /* postcss.resize.webp: ignore */
 
