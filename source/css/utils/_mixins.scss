@@ -1,5 +1,6 @@
 @use "sass:math";
 
+// Repeat a string.
 @function str-repeat($str, $n) {
     $result: "";
 
@@ -9,6 +10,7 @@
     @return $result;
 }
 
+// Strip unit.
 @function strip-unit($number) {
     @if type-of($number) == "number" and not unitless($number) {
         @return math.div($number, ($number * 0 + 1));
@@ -17,6 +19,7 @@
     @return $number;
 }
 
+// Exponential expression.
 @function pow($x, $n) {
     $ret: 1;
 
@@ -32,6 +35,7 @@
     @return $ret;
 }
 
+// Formats number using fixed-point notation.
 @function to-fixed($float, $digits: 6) {
     $sass-precision: 5;
     $pow: pow(10, $digits);
@@ -39,6 +43,7 @@
     @return math.div(round($float * $pow), $pow);
 }
 
+// Replace all occurrences of the search string with the replacement string.
 @function str-replace($string, $search, $replace: "") {
     $index: str-index($string, $search);
 
@@ -52,10 +57,7 @@
     @return $string;
 }
 
-@function grid-percentage($column, $count) {
-    @return percentage(math.div($column, $count));
-}
-
+// Rounds number.
 @function decimal-round($number, $digits: 0, $mode: round) {
     $n: 1;
 
@@ -90,6 +92,7 @@
     }
 }
 
+// Check css-value is `calc()`.
 @function type-of-calc($value) {
     @if type-of($value) != "string" {
         @return false;
@@ -97,6 +100,7 @@
     @return str-index($value, "calc(") == 1 and str-index($value, ")") == str-length($value);
 }
 
+// Check css-value is `var()`.
 @function type-of-var($value) {
     @if type-of($value) != "string" {
         @return false;
@@ -104,6 +108,7 @@
     @return str-index($value, "var(") == 1 and str-index($value, ")") == str-length($value);
 }
 
+// Negativify CSS-value.
 @function negativify-value($value) {
     @if type-of-calc($value) {
         $result: str-slice($value, str-length("calc("), -1);
@@ -117,4 +122,9 @@
         @return $result;
     }
     @return -$value;
+}
+
+// Grid percentage e.g: 1 of 12 get 8.3333%.
+@function grid-percentage($column, $count) {
+    @return percentage(math.div($column, $count));
 }
