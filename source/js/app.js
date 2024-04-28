@@ -1,3 +1,9 @@
+/**
+ * --------------------------------------------------------------------------
+ * App webpack-entry
+ * --------------------------------------------------------------------------
+ */
+
 /* global NODE_ENV VERBOSE BANNER_STRING __webpack_hash__ */
 
 import '~/components/bootstrap';

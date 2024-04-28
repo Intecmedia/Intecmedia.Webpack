@@ -11,6 +11,11 @@ import AbstractComponent from '~/components/abstract';
 const SEPARATOR_PATTERN = /\s*,\s*/;
 
 export default class AbstractApp {
+    /**
+     * Creates an instance of AbstractApp.
+     * @param {Object} options
+     * @memberof AbstractApp
+     */
     constructor(options) {
         if (new.target === AbstractApp) {
             throw new TypeError('Cannot construct AbstractApp instances directly');
@@ -20,6 +25,14 @@ export default class AbstractApp {
         this.lastId = 0;
     }
 
+    /**
+     * Get component by name or id
+     *
+     * @param {string} name
+     * @param {number} [id=null]
+     * @return {AbstractComponent}
+     * @memberof AbstractApp
+     */
     get(name, id = null) {
         if (name in this.components) {
             if (arguments.length === 1) {
@@ -41,10 +54,22 @@ export default class AbstractApp {
         return null;
     }
 
+    /**
+     * Get all components by name
+     *
+     * @param {string} name
+     * @return {Array.AbstractComponent}
+     * @memberof AbstractApp
+     */
     all(name) {
         return name in this.components ? Object.values(this.components[name]) : [];
     }
 
+    /**
+     * Init application
+     *
+     * @memberof AbstractApp
+     */
     init() {
         const newComponents = [];
         document.querySelectorAll('[data-component]:not(.js-component)').forEach((element) => {
@@ -63,11 +88,23 @@ export default class AbstractApp {
         this.triggerScope(document.documentElement, 'init');
     }
 
+    /**
+     * Init scope
+     *
+     * @param {HTMLElement} scope
+     * @memberof AbstractApp
+     */
     initScope(scope) {
         console.error(`[app] initScope method is deprecated, use updateScope instead`, scope);
         throw new Error('Method initScope method is deprecated, use updateScope instead.');
     }
 
+    /**
+     * Update scope
+     *
+     * @param {HTMLElement} scope
+     * @memberof AbstractApp
+     */
     updateScope(scope) {
         const newComponents = [];
         scope.querySelectorAll('[data-component]:not(.js-component)').forEach((element) => {
@@ -87,6 +124,13 @@ export default class AbstractApp {
         this.triggerScope(scope, 'update');
     }
 
+    /**
+     * Create element components
+     *
+     * @param {HTMLElement} element
+     * @return {Array.AbstractComponent}
+     * @memberof AbstractApp
+     */
     createElement(element) {
         const newComponents = [];
         const id = ++this.lastId;
@@ -125,6 +169,13 @@ export default class AbstractApp {
         return newComponents;
     }
 
+    /**
+     * Trigger scrope event
+     *
+     * @param {HTMLElement} scope
+     * @param {string} trigger
+     * @memberof AbstractApp
+     */
     triggerScope(scope, trigger) {
         let closest = scope.closest('.js-component[data-component-id]');
         while (closest) {
@@ -147,6 +198,12 @@ export default class AbstractApp {
         }
     }
 
+    /**
+     * Destroy scope components
+     *
+     * @param {HTMLElement} scope
+     * @memberof AbstractApp
+     */
     destroyScope(scope) {
         const detail = { target: scope };
         const event = new CustomEvent(`destroy.App`, { detail });
@@ -161,6 +218,12 @@ export default class AbstractApp {
         this.triggerScope(scope, 'destroy');
     }
 
+    /**
+     * Destroy element component
+     *
+     * @param {HTMLElement} element
+     * @memberof AbstractApp
+     */
     destroyElement(element) {
         const id = element.getAttribute('data-component-id');
         if (!id) {
@@ -183,6 +246,12 @@ export default class AbstractApp {
         }
     }
 
+    /**
+     * Clear scope components
+     *
+     * @param {HTMLElement} scope
+     * @memberof AbstractApp
+     */
     clearScope(scope) {
         scope.querySelectorAll('.js-component[data-component-id]').forEach((element) => {
             element.classList.remove('js-component');
@@ -190,10 +259,25 @@ export default class AbstractApp {
         });
     }
 
+    /**
+     * Destroy application
+     *
+     * @memberof AbstractApp
+     */
     destroy() {
         this.destroyScope(document);
     }
 
+    /**
+     * Add event listener by component
+     *
+     * @param {string} name - event name
+     * @param {string} type - component name
+     * @param {Function} listener - listener callback
+     * @param {Object} [options={}] - event options
+     * @return {Array.AbstractComponent}
+     * @memberof AbstractApp
+     */
     on(name, type, listener, options = {}) {
         const components = this.all(name);
         components.forEach((component) => {
@@ -202,6 +286,16 @@ export default class AbstractApp {
         return components;
     }
 
+    /**
+     * Remove event listener by component
+     *
+     * @param {string} name - event name
+     * @param {string} type - component name
+     * @param {Function} listener - listener callback
+     * @param {Object} [options={}] - event options
+     * @return {Array.AbstractComponent}
+     * @memberof AbstractApp
+     */
     off(name, type, listener, options = {}) {
         const components = this.all(name);
         components.forEach((component) => {
@@ -210,6 +304,15 @@ export default class AbstractApp {
         return components;
     }
 
+    /**
+     * Trigger event listener by component
+     *
+     * @param {string} name - event name
+     * @param {string} type - component name
+     * @param {Object} [options={}] - event options
+     * @return {Array.AbstractComponent}
+     * @memberof AbstractApp
+     */
     trigger(name, type, options = {}) {
         const components = this.all(name);
         components.forEach((component) => {
