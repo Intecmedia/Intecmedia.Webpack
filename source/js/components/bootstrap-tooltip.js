@@ -1,3 +1,10 @@
+/**
+ * --------------------------------------------------------------------------
+ * Bootstrap tooltips customize
+ * https://getbootstrap.com/docs/5.3/components/tooltips/
+ * --------------------------------------------------------------------------
+ */
+
 import BootstrapTooltip from 'bootstrap/js/dist/tooltip';
 
 const CUSTOM_TEMPLATE = [

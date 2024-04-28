@@ -1,3 +1,10 @@
+/**
+ * --------------------------------------------------------------------------
+ * Bootstrap popover customize
+ * https://getbootstrap.com/docs/5.3/components/popovers/
+ * --------------------------------------------------------------------------
+ */
+
 import BootstrapPopover from 'bootstrap/js/dist/popover';
 
 const CUSTOM_TEMPLATE = [

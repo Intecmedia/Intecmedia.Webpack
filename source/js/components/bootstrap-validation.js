@@ -1,3 +1,10 @@
+/**
+ * --------------------------------------------------------------------------
+ * Bootstrap forms validation customize
+ * https://getbootstrap.com/docs/5.3/forms/validation/
+ * --------------------------------------------------------------------------
+ */
+
 import AbstractComponent from '~/components/abstract';
 
 export default class BootstrapValidation extends AbstractComponent {

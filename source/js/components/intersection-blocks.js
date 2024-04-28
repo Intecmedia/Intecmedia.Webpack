@@ -1,3 +1,9 @@
+/**
+ * --------------------------------------------------------------------------
+ * Intersection component. Details in `intersection-test.html`.
+ * --------------------------------------------------------------------------
+ */
+
 /* global VERBOSE */
 import AbstractComponent from '~/components/abstract';
 

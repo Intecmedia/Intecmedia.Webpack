@@ -1,3 +1,9 @@
+/**
+ * --------------------------------------------------------------------------
+ * Scrollbar width detection
+ * --------------------------------------------------------------------------
+ */
+
 import ScrollBarHelper from 'bootstrap/js/dist/util/scrollbar';
 
 class ScrollbarWidth {
