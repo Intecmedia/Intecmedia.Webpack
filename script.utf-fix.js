@@ -5,6 +5,7 @@ const weblog = require('webpack-log');
 const logger = weblog({ name: 'utf-fix' });
 const ENV = require('./app.env');
 const UTILS = require('./webpack.utils');
+
 const VERBOSE = ENV.ARGV.verbose;
 
 const statMessages = { fixed: 0, skipped: 0 };
