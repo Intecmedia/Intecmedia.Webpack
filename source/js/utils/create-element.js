@@ -1,8 +1,8 @@
 /**
- * Create element from string
- * @param {strin} html - input html
+ * Create element from string.
+ * @param {string} html - input html string
  * @param {boolean} childs - returns child nodes
- * @returns {HtmlElement
+ * @returns {HTMLElement} - new html element
  */
 export default function createElement(html, childs = false) {
     const template = document.createElement('template');

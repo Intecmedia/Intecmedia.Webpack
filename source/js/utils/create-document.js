@@ -1,7 +1,7 @@
 /**
- * Create document from string
- * @param {string} html - input html
- * @returns {Document}
+ * Create document from string.
+ * @param {string} html - input html string
+ * @returns {Document} - new html document
  */
 export default function createDocument(html) {
     const context = document.implementation.createHTMLDocument('');

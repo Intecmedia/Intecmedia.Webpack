@@ -1,10 +1,11 @@
 import getTransformTranslate from '~/utils/transform-translate';
 
 /**
- *
- * @param element
- * @param scrollTop
- * @param scrollHeight
+ * Get visible ratio vertical.
+ * @param {HTMLElement} element - html element
+ * @param {number} scrollTop - top scroll position
+ * @param {number} scrollHeight - scroll height
+ * @returns {number} - between 0 and 1
  */
 export function visibleRatioVertical(element, scrollTop = null, scrollHeight = null) {
     const top = scrollTop || document.documentElement.scrollTop;
@@ -16,10 +17,11 @@ export function visibleRatioVertical(element, scrollTop = null, scrollHeight = n
 }
 
 /**
- *
- * @param element
- * @param scrollLeft
- * @param scrollWidth
+ * Get visible ratio horizontal.
+ * @param {HTMLElement} element - html element
+ * @param {number} scrollLeft - left scroll position
+ * @param {number} scrollWidth - scroll width
+ * @returns {number} - between 0 and 1
  */
 export function visibleRatioHorizontal(element, scrollLeft = null, scrollWidth = null) {
     const left = scrollLeft || document.documentElement.scrollLeft;
@@ -31,10 +33,11 @@ export function visibleRatioHorizontal(element, scrollLeft = null, scrollWidth =
 }
 
 /**
- *
- * @param element
- * @param scrollTop
- * @param scrollHeight
+ * Get visible ratio vertical.
+ * @param {HTMLElement} element - html element
+ * @param {number} scrollTop - top scroll position
+ * @param {number} scrollHeight - scroll height
+ * @returns {number} - between 0 and 1
  */
 export function visibleRatio(element, scrollTop = null, scrollHeight = null) {
     return visibleRatioVertical(element, scrollTop, scrollHeight);

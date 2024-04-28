@@ -1,7 +1,7 @@
 /**
  * Check object is function
- * @param {Function} obj -- input object
- * @returns {boolean}
+ * @param {Function} obj - input object
+ * @returns {boolean} - check result
  */
 export default function isFunction(obj) {
     // Support: Chrome <=57, Firefox <=52

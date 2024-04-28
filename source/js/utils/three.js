@@ -1,7 +1,7 @@
 /**
- *
- * @param object
- * @param callback
+ * Traverse materials.
+ * @param {object} object - input object
+ * @param {Function} callback - callback function
  */
 export function traverseMaterials(object, callback) {
     object.traverse((node) => {
@@ -12,12 +12,12 @@ export function traverseMaterials(object, callback) {
 }
 
 /**
- *
- * @param obj
- * @param around
- * @param axis
- * @param theta
- * @param isWorld
+ * Rotate object around axis.
+ * @param {object} obj - input object
+ * @param {object} around - around object
+ * @param {string} axis - axis name
+ * @param {number} theta - theta angle
+ * @param {boolean} isWorld - is world
  */
 export function rotateAround(obj, around, axis, theta, isWorld = false) {
     if (isWorld) {
@@ -36,8 +36,8 @@ export function rotateAround(obj, around, axis, theta, isWorld = false) {
 }
 
 /**
- *
- * @param node
+ * Print node via `console.group` api.
+ * @param {object} node - input node
  */
 export function printGraph(node) {
     // eslint-disable-next-line compat/compat -- allowed for debug functions

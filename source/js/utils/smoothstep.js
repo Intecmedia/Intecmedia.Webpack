@@ -1,9 +1,9 @@
-// Bare-bones smoothstep function (cubic Hermite interpolation), returning a value in the range 0.0 to 1.0.
 /**
- *
- * @param min
- * @param max
- * @param value
+ * Smoothstep function (cubic Hermite interpolation), returning a value in the range 0.0 to 1.0.
+ * @param {number} min - min value
+ * @param {number} max - max value
+ * @param {number} value - input value
+ * @returns {number} - smoothstep value
  */
 export function smoothstep(min, max, value) {
     const x = Math.max(0, Math.min(1, (value - min) / (max - min)));
@@ -11,10 +11,11 @@ export function smoothstep(min, max, value) {
 }
 
 /**
- *
- * @param min
- * @param max
- * @param value
+ * Smootherstep function (cubic Hermite interpolation), returning a value in the range 0.0 to 1.0.
+ * @param {number} min - min value
+ * @param {number} max - max value
+ * @param {number} value - input value
+ * @returns {number} - smootherstep value
  */
 export function smootherstep(min, max, value) {
     const x = Math.max(0, Math.min(1, (value - min) / (max - min)));

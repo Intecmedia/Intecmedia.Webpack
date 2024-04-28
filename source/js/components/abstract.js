@@ -4,12 +4,16 @@
  * --------------------------------------------------------------------------
  */
 
+/**
+ * @typedef { import("./app.js").AbstractApp } AbstractApp
+ */
+
 export default class AbstractComponent {
     static singleton = false;
 
     /**
      * Creates an instance of AbstractComponent.
-     * @param {object} options
+     * @param {object} options - component options
      * @memberof AbstractComponent
      */
     constructor(options) {
@@ -38,7 +42,7 @@ export default class AbstractComponent {
     /**
      * Get current element
      * @readonly
-     * @returns {HTMLElement}
+     * @returns {HTMLElement} - current element
      * @memberof AbstractComponent
      */
     get element() {
@@ -48,7 +52,7 @@ export default class AbstractComponent {
     /**
      * Get current application
      * @readonly
-     * @returns {AbstractApp}
+     * @returns {AbstractApp} - current application
      * @memberof AbstractComponent
      */
     get app() {
@@ -80,10 +84,10 @@ export default class AbstractComponent {
     }
 
     /**
-     * Dispatch element event
+     * Dispatch element event.
      * @param {string} type - event type
      * @param {object} [detail] - event detaal
-     * @returns {boolean}
+     * @returns {boolean} - event result
      * @memberof AbstractComponent
      */
     trigger(type, detail = {}) {
@@ -93,9 +97,9 @@ export default class AbstractComponent {
     }
 
     /**
-     * Call element querySelector
+     * Call element querySelector.
      * @param {string} selector - query selector
-     * @returns {HTMLElement}
+     * @returns {HTMLElement} - matched element
      * @memberof AbstractComponent
      */
     selector(selector) {
@@ -103,9 +107,9 @@ export default class AbstractComponent {
     }
 
     /**
-     * Call element querySelectorAll
+     * Call element querySelectorAll.
      * @param {string} selector - query selector
-     * @returns {Array.HTMLElement}
+     * @returns {Array.HTMLElement} - matched elements
      * @memberof AbstractComponent
      */
     selectorAll(selector) {

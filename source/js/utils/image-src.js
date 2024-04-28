@@ -5,8 +5,9 @@ const USE_AVIF = APP.AVIF && (NODE_ENV === 'production' || DEBUG);
 const USE_WEBP = APP.WEBP && (NODE_ENV === 'production' || DEBUG);
 
 /**
- *
- * @param url
+ * Provide image source with avif or webp.
+ * @param {string} url - input image source
+ * @returns {string} - new image source
  */
 export default function imageSrc(url) {
     let src = url;

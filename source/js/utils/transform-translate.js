@@ -1,6 +1,7 @@
 /**
- *
- * @param element
+ * Get transform translate.
+ * @param {HTMLElement} element - html element
+ * @returns {object} - x and y
  */
 export default function getTransformTranslate(element) {
     const translate = { x: 0, y: 0 };

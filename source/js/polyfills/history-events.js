@@ -12,9 +12,9 @@
 /* eslint "no-invalid-this": "off" -- its ok for 3d-party */
 
 /**
- * History events decorator
- * @param {string} type
- * @returns function
+ * History events decorator.
+ * @param {string} type - event type
+ * @returns {Function} - decorator callback
  */
 function historyEventDecorator(type) {
     const origHandler = window.history[type];
