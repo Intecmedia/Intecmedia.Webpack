@@ -1,6 +1,7 @@
 /**
  * --------------------------------------------------------------------------
  * Viewport visible height detection
+ * https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
  * --------------------------------------------------------------------------
  */
 
@@ -8,7 +9,6 @@ import { debounce } from '~/utils/tickers';
 
 const RESIZE_DEBOUNCE = 200;
 
-// https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
 class ViewportHeight {
     constructor() {
         this.onResize = this.onResize.bind(this);
