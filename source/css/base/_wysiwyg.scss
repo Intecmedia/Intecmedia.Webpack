@@ -1,3 +1,7 @@
+//
+// WYSIWYG (What You See Is What You Get) semantic tags.
+//
+
 /* stylelint-disable scss/selector-nest-combinators, selector-max-type, plugin/selector-bem-pattern, selector-nested-pattern -- wysiwyg is semantic tags */
 .wysiwyg {
     @extend .clearfix;
