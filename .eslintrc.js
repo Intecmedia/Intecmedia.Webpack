@@ -19,6 +19,7 @@ module.exports = {
             'extends': [
                 'plugin:compat/recommended',
                 'plugin:promise/recommended',
+                ...(ENV.PROD ? ['plugin:jsdoc/recommended'] : []),
                 'plugin:prettier/recommended', // prettier always last
             ],
             'files': ['./source/js/**/*.js'],
