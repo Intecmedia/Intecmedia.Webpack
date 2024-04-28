@@ -15,6 +15,7 @@ $fluid-steps-max-width: 1920px !default;
 $fluid-steps-max-size: 20px !default;
 $fluid-steps-max-scale: 1.25 !default;
 
+// Fluid steps css-var with css-clamp.
 @mixin fluid-steps(
     $negative-count: $fluid-steps-negative-count,
     $positive-count: $fluid-steps-positive-count,
@@ -44,6 +45,7 @@ $fluid-steps-max-scale: 1.25 !default;
     }
 }
 
+// Fluid steps min value.
 @function fluid-steps-min(
     $index,
     $negative-count: $fluid-steps-negative-count,
@@ -60,6 +62,7 @@ $fluid-steps-max-scale: 1.25 !default;
     @return $min;
 }
 
+// Fluid steps max value.
 @function fluid-steps-max(
     $index,
     $negative-count: $fluid-steps-negative-count,

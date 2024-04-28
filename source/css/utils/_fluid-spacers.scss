@@ -33,6 +33,7 @@ $fluid-spacers-min-size: 16px !default;
 $fluid-spacers-max-width: 1920px !default;
 $fluid-spacers-max-size: 20px !default;
 
+// Fluid spacers css-var with css-clamp.
 @mixin fluid-spacers(
     $spacers: $fluid-spacers,
     $spacers-pairs: $fluid-spacers-pairs,
@@ -73,6 +74,7 @@ $fluid-spacers-max-size: 20px !default;
     }
 }
 
+// Fluid spacers min value.
 @function fluid-spacers-min(
     $name,
     $spacers: $fluid-spacers,
@@ -117,6 +119,7 @@ $fluid-spacers-max-size: 20px !default;
     @error "Cant find #{$name} key in spacers.";
 }
 
+// Fluid spacers max value.
 @function fluid-spacers-max(
     $name,
     $spacers: $fluid-spacers,
