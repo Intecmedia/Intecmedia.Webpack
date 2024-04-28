@@ -6,6 +6,7 @@
 
 /* globals APP */
 const requireCache = {};
+const IMAGE_PATTERN = /\.(png|jpg|jpeg)$/;
 
 /**
  * Require all modules from context
@@ -18,12 +19,12 @@ function requireAll(context) {
 
 if (APP.RESIZE) {
     if (APP.WEBP) {
-        requireAll(require.context('../img/?resize=&format=webp', true, /\.(png|jpg|jpeg)$/));
-        requireAll(require.context('../upload/?resize=&format=webp', true, /\.(png|jpg|jpeg)$/));
+        requireAll(require.context('../img/?resize=&format=webp', true, IMAGE_PATTERN));
+        requireAll(require.context('../upload/?resize=&format=webp', true, IMAGE_PATTERN));
     }
 
     if (APP.AVIF) {
-        requireAll(require.context('../img/?resize=&format=avif', true, /\.(png|jpg|jpeg)$/));
-        requireAll(require.context('../upload/?resize=&format=avif', true, /\.(png|jpg|jpeg)$/));
+        requireAll(require.context('../img/?resize=&format=avif', true, IMAGE_PATTERN));
+        requireAll(require.context('../upload/?resize=&format=avif', true, IMAGE_PATTERN));
     }
 }
