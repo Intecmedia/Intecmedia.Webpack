@@ -5,7 +5,7 @@
  */
 
 /**
- * @typedef { import("./app.js").AbstractApp } AbstractApp
+ * @typedef { import("./app.js").default } AbstractApp
  */
 
 export default class AbstractComponent {
@@ -42,7 +42,7 @@ export default class AbstractComponent {
     /**
      * Get current element
      * @readonly
-     * @returns {HTMLElement} - current element
+     * @type {HTMLElement} - current element
      * @memberof AbstractComponent
      */
     get element() {
@@ -52,7 +52,7 @@ export default class AbstractComponent {
     /**
      * Get current application
      * @readonly
-     * @returns {AbstractApp} - current application
+     * @type {AbstractApp} - current application
      * @memberof AbstractComponent
      */
     get app() {
