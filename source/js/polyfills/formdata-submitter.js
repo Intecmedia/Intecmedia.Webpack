@@ -1,3 +1,10 @@
+/**
+ * --------------------------------------------------------------------------
+ * FormData.submitter polyfill
+ * https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData#submitter
+ * --------------------------------------------------------------------------
+ */
+
 /* eslint 'compat/compat': 'off' -- useless for polyfill */
 
 const orgFormData = window.FormData;

@@ -1,12 +1,20 @@
+/**
+ * --------------------------------------------------------------------------
+ * Event submiter polyfill
+ * https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent/submitter
+ * --------------------------------------------------------------------------
+ */
+
 /* eslint 'compat/compat': 'off' -- useless for polyfill */
 
-const buttonsSelector = 'button, input[type="button"], input[type="submit"], input[type="image"]';
+const BUTTONS_SELECTOR = 'button, input[type="button"], input[type="submit"], input[type="image"]';
+
 let lastButton;
 
 document.addEventListener(
     'click',
     (event) => {
-        lastButton = event.target?.closest(buttonsSelector);
+        lastButton = event.target?.closest(BUTTONS_SELECTOR);
     },
     true
 );
@@ -22,7 +30,7 @@ document.addEventListener(
                 const form = this.target;
                 const elements = [document.activeElement, lastButton];
                 return elements.find((control) => {
-                    return control && control.matches(buttonsSelector) && form === control.form;
+                    return control && control.matches(BUTTONS_SELECTOR) && form === control.form;
                 });
             },
         });

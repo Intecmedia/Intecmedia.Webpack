@@ -1,3 +1,10 @@
+/**
+ * --------------------------------------------------------------------------
+ * ResizeObserver polyfill
+ * https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver
+ * --------------------------------------------------------------------------
+ */
+
 /* eslint 'compat/compat': 'off' -- useless for polyfill */
 
 // for polyfill use only require

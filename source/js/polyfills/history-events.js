@@ -1,12 +1,16 @@
+/**
+ * --------------------------------------------------------------------------
+ * Note that just calling history.pushState() or history.replaceState() won't trigger a popstate event.
+ * https://developer.mozilla.org/ru/docs/Web/Events/popstate
+ * --------------------------------------------------------------------------
+ */
+
 /* global VERBOSE */
+
 /* eslint 'compat/compat': 'off' -- useless for polyfill */
 /* eslint 'prefer-rest-params': 'off' -- arguments are alllowed for decorators */
 /* eslint "no-invalid-this": "off" -- its ok for 3d-party */
 
-/*
-    Note that just calling history.pushState() or history.replaceState() won't trigger a popstate event.
-    https://developer.mozilla.org/ru/docs/Web/Events/popstate
-*/
 function historyEventDecorator(type) {
     const origHandler = window.history[type];
     return function newHandler() {

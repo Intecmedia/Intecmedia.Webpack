@@ -1,3 +1,9 @@
+/**
+ * --------------------------------------------------------------------------
+ * Sentry errors handling webpack-entry
+ * --------------------------------------------------------------------------
+ */
+
 /* global NODE_ENV APP DEBUG VERBOSE */
 if ((NODE_ENV === 'production' || DEBUG) && APP.SENTRY.dsn) {
     const IGNORE_HOSTS = /(\.|^)localhost$/i;
