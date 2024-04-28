@@ -1,3 +1,7 @@
+//
+// Debug mixins and functions.
+//
+
 // Debug tooltip, display current breakpoint.
 // Visible only in development enviroment.
 @mixin debug-body($content) {

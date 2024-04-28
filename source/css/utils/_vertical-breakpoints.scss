@@ -1,3 +1,7 @@
+//
+// Vertical-breakpoint mixins and functions.
+//
+
 // Media of at least the minimum breakpoint height. No query for the smallest breakpoint.
 // Makes the @content apply to the given breakpoint and wider.
 @mixin vertical-breakpoint-up($name, $breakpoints: $vertical-breakpoints) {

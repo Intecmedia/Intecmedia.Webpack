@@ -1,4 +1,8 @@
-/* stylelint-disable scss/selector-nest-combinators, csstools/use-nesting -- focus visible polyfill */
+//
+// Focus-visible polyfill.
+//
+
+/* stylelint-disable scss/selector-nest-combinators, csstools/use-nesting -- focus-visible polyfill */
 .js-focus-visible :focus:not(.focus-visible) {
     outline: none;
 }
