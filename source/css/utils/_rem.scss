@@ -8,6 +8,7 @@ $rem-baseline: 16px !default;
 $rem-fallback: false !default;
 $rem-px-only: false !default;
 
+// Exctract rem separator from css-value.
 @function rem-separator($list, $separator: false) {
     @if $separator == "comma" or $separator == "space" {
         @return append($list, null, $separator);
@@ -27,11 +28,13 @@ $rem-px-only: false !default;
     @return if($test-list == $list, space, comma);
 }
 
+// Get rem baseline.
 @mixin rem-baseline($zoom: 100%) {
     /* stylelint-disable-next-line declaration-property-unit-allowed-list -- its wrong case */
     font-size: math.div($zoom, 16px) * $rem-baseline;
 }
 
+// Convert css-values to rem or px.
 @function rem-convert($to, $values...) {
     $result: ();
     $separator: rem-separator($values);
@@ -54,6 +57,7 @@ $rem-px-only: false !default;
     @return if(length($result) == 1, nth($result, 1), $result);
 }
 
+// Convert single property.
 @function rem($values...) {
     @if $rem-px-only {
         @return rem-convert(px, $values...);
@@ -62,6 +66,7 @@ $rem-px-only: false !default;
     }
 }
 
+// Convert list of properties.
 @mixin rem($properties, $values...) {
     @if type-of($properties) == "map" {
         @each $prop in map-keys($properties) {
