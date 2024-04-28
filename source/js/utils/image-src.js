@@ -4,6 +4,10 @@ const EXT_PATTERN = /\.(png|jpg|jpeg)(\?.*)?$/;
 const USE_AVIF = APP.AVIF && (NODE_ENV === 'production' || DEBUG);
 const USE_WEBP = APP.WEBP && (NODE_ENV === 'production' || DEBUG);
 
+/**
+ *
+ * @param url
+ */
 export default function imageSrc(url) {
     let src = url;
 

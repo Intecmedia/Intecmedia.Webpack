@@ -1,3 +1,11 @@
+/**
+ *
+ * @param value
+ * @param minValue
+ * @param maxValue
+ * @param minRange
+ * @param maxRange
+ */
 export function fluidValue(value, minValue, maxValue, minRange, maxRange) {
     let result = minValue;
     if (value <= minRange) {
@@ -9,10 +17,24 @@ export function fluidValue(value, minValue, maxValue, minRange, maxRange) {
     return result;
 }
 
+/**
+ *
+ * @param minValue
+ * @param maxValue
+ * @param minRange
+ * @param maxRange
+ */
 export function fluidWidth(minValue, maxValue, minRange = 320, maxRange = 1200) {
     return fluidValue(window.innerWidth, minValue, maxValue, minRange, maxRange);
 }
 
+/**
+ *
+ * @param minValue
+ * @param maxValue
+ * @param minRange
+ * @param maxRange
+ */
 export function fluidHeight(minValue, maxValue, minRange = 320, maxRange = 480) {
     return fluidValue(window.innerHeight, minValue, maxValue, minRange, maxRange);
 }

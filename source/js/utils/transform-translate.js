@@ -1,3 +1,7 @@
+/**
+ *
+ * @param element
+ */
 export default function getTransformTranslate(element) {
     const translate = { x: 0, y: 0 };
     const style = window.getComputedStyle(element);

@@ -11,6 +11,11 @@
 /* eslint 'prefer-rest-params': 'off' -- arguments are alllowed for decorators */
 /* eslint "no-invalid-this": "off" -- its ok for 3d-party */
 
+/**
+ * History events decorator
+ * @param {string} type
+ * @returns function
+ */
 function historyEventDecorator(type) {
     const origHandler = window.history[type];
     return function newHandler() {

@@ -1,3 +1,8 @@
+/**
+ * Create document from string
+ * @param {string} html - input html
+ * @returns {Document}
+ */
 export default function createDocument(html) {
     const context = document.implementation.createHTMLDocument('');
     context.open();

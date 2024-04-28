@@ -1,3 +1,8 @@
+/**
+ *
+ * @param object
+ * @param callback
+ */
 export function traverseMaterials(object, callback) {
     object.traverse((node) => {
         if (!node.isMesh) return;
@@ -6,6 +11,14 @@ export function traverseMaterials(object, callback) {
     });
 }
 
+/**
+ *
+ * @param obj
+ * @param around
+ * @param axis
+ * @param theta
+ * @param isWorld
+ */
 export function rotateAround(obj, around, axis, theta, isWorld = false) {
     if (isWorld) {
         obj.parent.localToWorld(obj.position); // compensate for world coordinate
@@ -22,6 +35,10 @@ export function rotateAround(obj, around, axis, theta, isWorld = false) {
     obj.rotateOnAxis(axis, theta); // rotate the OBJECT
 }
 
+/**
+ *
+ * @param node
+ */
 export function printGraph(node) {
     // eslint-disable-next-line compat/compat -- allowed for debug functions
     console.group(` <${node.type}> ${node.name}`);

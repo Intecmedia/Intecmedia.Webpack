@@ -9,7 +9,7 @@ export default class AbstractComponent {
 
     /**
      * Creates an instance of AbstractComponent.
-     * @param {Object} options
+     * @param {object} options
      * @memberof AbstractComponent
      */
     constructor(options) {
@@ -21,7 +21,6 @@ export default class AbstractComponent {
 
     /**
      * Init component
-     *
      * @memberof AbstractComponent
      */
     init() {
@@ -30,7 +29,6 @@ export default class AbstractComponent {
 
     /**
      * Destroy component
-     *
      * @memberof AbstractComponent
      */
     destroy() {
@@ -39,9 +37,8 @@ export default class AbstractComponent {
 
     /**
      * Get current element
-     *
      * @readonly
-     * @return {HTMLElement}
+     * @returns {HTMLElement}
      * @memberof AbstractComponent
      */
     get element() {
@@ -50,9 +47,8 @@ export default class AbstractComponent {
 
     /**
      * Get current application
-     *
      * @readonly
-     * @return {AbstractApp}
+     * @returns {AbstractApp}
      * @memberof AbstractComponent
      */
     get app() {
@@ -61,10 +57,9 @@ export default class AbstractComponent {
 
     /**
      * Add element event listener
-     *
      * @param {string} type - event type
      * @param {Function} listener - listener callback
-     * @param {Object} [options={}] - listener options
+     * @param {object} [options] - listener options
      * @memberof AbstractComponent
      */
     on(type, listener, options = {}) {
@@ -74,10 +69,9 @@ export default class AbstractComponent {
 
     /**
      * Remove element event listener
-     *
      * @param {string} type - event type
      * @param {Function} listener - listener callback
-     * @param {Object} [options={}] - listener options
+     * @param {object} [options] - listener options
      * @memberof AbstractComponent
      */
     off(type, listener, options = {}) {
@@ -87,10 +81,9 @@ export default class AbstractComponent {
 
     /**
      * Dispatch element event
-     *
      * @param {string} type - event type
-     * @param {Object} [detail={}] - event detaal
-     * @return {boolean}
+     * @param {object} [detail] - event detaal
+     * @returns {boolean}
      * @memberof AbstractComponent
      */
     trigger(type, detail = {}) {
@@ -101,9 +94,8 @@ export default class AbstractComponent {
 
     /**
      * Call element querySelector
-     *
      * @param {string} selector - query selector
-     * @return {HTMLElement}
+     * @returns {HTMLElement}
      * @memberof AbstractComponent
      */
     selector(selector) {
@@ -112,9 +104,8 @@ export default class AbstractComponent {
 
     /**
      * Call element querySelectorAll
-     *
      * @param {string} selector - query selector
-     * @return {Array.HTMLElement}
+     * @returns {Array.HTMLElement}
      * @memberof AbstractComponent
      */
     selectorAll(selector) {

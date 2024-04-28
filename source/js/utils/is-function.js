@@ -1,3 +1,8 @@
+/**
+ * Check object is function
+ * @param {Function} obj -- input object
+ * @returns {boolean}
+ */
 export default function isFunction(obj) {
     // Support: Chrome <=57, Firefox <=52
     // In some browsers, typeof returns "function" for HTML <object> elements

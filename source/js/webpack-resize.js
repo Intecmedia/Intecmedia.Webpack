@@ -7,6 +7,10 @@
 /* globals APP */
 const requireCache = {};
 
+/**
+ * Require all modules from context
+ * @param {object} context -- input context
+ */
 function requireAll(context) {
     /* eslint-disable-next-line no-return-assign -- https://webpack.js.org/guides/dependency-management/#requirecontext */
     context.keys().forEach((key) => (requireCache[key] = context(key)));

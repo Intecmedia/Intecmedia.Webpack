@@ -13,7 +13,7 @@ const SEPARATOR_PATTERN = /\s*,\s*/;
 export default class AbstractApp {
     /**
      * Creates an instance of AbstractApp.
-     * @param {Object} options
+     * @param {object} options
      * @memberof AbstractApp
      */
     constructor(options) {
@@ -27,10 +27,9 @@ export default class AbstractApp {
 
     /**
      * Get component by name or id
-     *
      * @param {string} name
-     * @param {number} [id=null]
-     * @return {AbstractComponent}
+     * @param {number} [id]
+     * @returns {AbstractComponent}
      * @memberof AbstractApp
      */
     get(name, id = null) {
@@ -56,9 +55,8 @@ export default class AbstractApp {
 
     /**
      * Get all components by name
-     *
      * @param {string} name
-     * @return {Array.AbstractComponent}
+     * @returns {Array.AbstractComponent}
      * @memberof AbstractApp
      */
     all(name) {
@@ -67,7 +65,6 @@ export default class AbstractApp {
 
     /**
      * Init application
-     *
      * @memberof AbstractApp
      */
     init() {
@@ -90,7 +87,6 @@ export default class AbstractApp {
 
     /**
      * Init scope
-     *
      * @param {HTMLElement} scope
      * @memberof AbstractApp
      */
@@ -101,7 +97,6 @@ export default class AbstractApp {
 
     /**
      * Update scope
-     *
      * @param {HTMLElement} scope
      * @memberof AbstractApp
      */
@@ -126,9 +121,8 @@ export default class AbstractApp {
 
     /**
      * Create element components
-     *
      * @param {HTMLElement} element
-     * @return {Array.AbstractComponent}
+     * @returns {Array.AbstractComponent}
      * @memberof AbstractApp
      */
     createElement(element) {
@@ -171,7 +165,6 @@ export default class AbstractApp {
 
     /**
      * Trigger scrope event
-     *
      * @param {HTMLElement} scope
      * @param {string} trigger
      * @memberof AbstractApp
@@ -200,7 +193,6 @@ export default class AbstractApp {
 
     /**
      * Destroy scope components
-     *
      * @param {HTMLElement} scope
      * @memberof AbstractApp
      */
@@ -220,7 +212,6 @@ export default class AbstractApp {
 
     /**
      * Destroy element component
-     *
      * @param {HTMLElement} element
      * @memberof AbstractApp
      */
@@ -248,7 +239,6 @@ export default class AbstractApp {
 
     /**
      * Clear scope components
-     *
      * @param {HTMLElement} scope
      * @memberof AbstractApp
      */
@@ -261,7 +251,6 @@ export default class AbstractApp {
 
     /**
      * Destroy application
-     *
      * @memberof AbstractApp
      */
     destroy() {
@@ -270,12 +259,11 @@ export default class AbstractApp {
 
     /**
      * Add event listener by component
-     *
      * @param {string} name - event name
      * @param {string} type - component name
      * @param {Function} listener - listener callback
-     * @param {Object} [options={}] - event options
-     * @return {Array.AbstractComponent}
+     * @param {object} [options] - event options
+     * @returns {Array.AbstractComponent}
      * @memberof AbstractApp
      */
     on(name, type, listener, options = {}) {
@@ -288,12 +276,11 @@ export default class AbstractApp {
 
     /**
      * Remove event listener by component
-     *
      * @param {string} name - event name
      * @param {string} type - component name
      * @param {Function} listener - listener callback
-     * @param {Object} [options={}] - event options
-     * @return {Array.AbstractComponent}
+     * @param {object} [options] - event options
+     * @returns {Array.AbstractComponent}
      * @memberof AbstractApp
      */
     off(name, type, listener, options = {}) {
@@ -306,11 +293,10 @@ export default class AbstractApp {
 
     /**
      * Trigger event listener by component
-     *
      * @param {string} name - event name
      * @param {string} type - component name
-     * @param {Object} [options={}] - event options
-     * @return {Array.AbstractComponent}
+     * @param {object} [options] - event options
+     * @returns {Array.AbstractComponent}
      * @memberof AbstractApp
      */
     trigger(name, type, options = {}) {
