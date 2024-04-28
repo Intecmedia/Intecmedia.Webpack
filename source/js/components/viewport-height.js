@@ -23,6 +23,10 @@ class ViewportHeight {
         window.addEventListener('resize', this.onResize);
     }
 
+    destroy() {
+        window.removeEventListener('resize', this.onResize);
+    }
+
     updateHeight() {
         const height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
         const vh = parseFloat((height * 0.01).toFixed(6));

@@ -22,6 +22,12 @@ class ScrollbarWidth {
         this.updateWidth();
     }
 
+    destroy() {
+        window.removeEventListener('resize', this.onResize);
+        window.removeEventListener('pushstate', this.onUpdate);
+        window.removeEventListener('popstate', this.onUpdate);
+    }
+
     onResize() {
         this.updateWidth();
     }
