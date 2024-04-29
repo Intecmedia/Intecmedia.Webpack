@@ -141,7 +141,7 @@ module.exports.globOptions = globOptions;
  * Glob by array of patterns.
  * @param {Array.string} patterns - glob patterns
  * @param {GlobOptions} options - glob options
- * @returns {Array} - glob result
+ * @returns {Promise} - glob result
  */
 function globArray(patterns, options) {
     return Promise.all(
