@@ -8,6 +8,8 @@ const FILENAME_PATTERN = /^[a-zA-Z0-9-/.,_@]+$/;
 
 /**
  * @typedef { import("glob").GlobOptions } GlobOptions
+ * @typedef { import("ignore").Options } IgnoreOptions
+ * @typedef { import("ignore").Ignore } Ignore
  */
 
 /**
@@ -241,8 +243,8 @@ module.exports.readJsonFile = readJsonFile;
 /**
  * Read and parse ignore file.
  * @param {string} filepath - ignore file path
- * @param {object} options - ignore options
- * @returns {object} - ignore object
+ * @param {IgnoreOptions} options - ignore options
+ * @returns {Ignore} - ignore object
  */
 function readIgnoreFile(filepath, options = {}) {
     return ignore({
