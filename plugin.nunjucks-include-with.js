@@ -3,10 +3,14 @@ const nunjucksRuntime = require('nunjucks/src/runtime');
 
 const RELATIVE_PATTERN = /^\.{1,2}\//;
 
-function IncludeWithExtension({ nunjucksEnv, tagName = 'includeWith' }) {
+/**
+ * Include with tag parser
+ * @param {object} options - parser options
+ */
+function IncludeWithExtension(options) {
     this.cwd = '';
-    this.nunjucksEnv = nunjucksEnv;
-    this.tags = [tagName];
+    this.nunjucksEnv = options.nunjucksEnv;
+    this.tags = [options.tagName || 'includeWith'];
 
     this.parse = (parser, nodes) => {
         const token = parser.nextToken();
