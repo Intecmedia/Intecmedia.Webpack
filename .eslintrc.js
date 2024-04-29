@@ -7,7 +7,11 @@ const PACKAGE = require('./package.json');
 module.exports = {
     'env': {},
     // common extends
-    'extends': ['plugin:@eslint-community/eslint-comments/recommended', 'airbnb-base'],
+    'extends': [
+        ...(ENV.PROD ? ['plugin:jsdoc/recommended'] : []),
+        'plugin:@eslint-community/eslint-comments/recommended',
+        'airbnb-base',
+    ],
     'overrides': [
         // browser code
         {
@@ -19,7 +23,6 @@ module.exports = {
             'extends': [
                 'plugin:compat/recommended',
                 'plugin:promise/recommended',
-                ...(ENV.PROD ? ['plugin:jsdoc/recommended'] : []),
                 'plugin:prettier/recommended', // prettier always last
             ],
             'files': ['./source/js/**/*.js'],
