@@ -5,7 +5,7 @@
  */
 
 /**
- * @typedef { import("./app.js").default } AbstractApp
+ * @typedef { import('./app.js').default } AbstractApp
  */
 
 export default class AbstractComponent {

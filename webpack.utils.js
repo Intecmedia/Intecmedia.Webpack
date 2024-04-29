@@ -7,9 +7,9 @@ const yargs = require('yargs/yargs');
 const FILENAME_PATTERN = /^[a-zA-Z0-9-/.,_@]+$/;
 
 /**
- * @typedef { import("glob").GlobOptions } GlobOptions
- * @typedef { import("ignore").Options } IgnoreOptions
- * @typedef { import("ignore").Ignore } Ignore
+ * @typedef { import('glob').GlobOptions } GlobOptions
+ * @typedef { import('ignore').Options } IgnoreOptions
+ * @typedef { import('ignore').Ignore } Ignore
  */
 
 /**
