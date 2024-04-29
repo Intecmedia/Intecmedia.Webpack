@@ -13,7 +13,7 @@ const statMessages = { fixed: 0, skipped: 0, ignored: 0 };
 const patterns = [...UTILS.processArgs._];
 const config = UTILS.readJsonFile('./.jsbeautifyrc');
 
-function stripWhitespaces(string) {
+const stripWhitespaces = (string) => {
     let result = string;
 
     if (result.charCodeAt(0) === 0xfeff) {
@@ -26,9 +26,9 @@ function stripWhitespaces(string) {
         .replace(/[ \t]+\n/g, '\n');
 
     return result;
-}
+};
 
-function beautifyHtml(html) {
+const beautifyHtml = (html) => {
     let result = beautify.html(html, config);
 
     result = stripWhitespaces(result);
@@ -37,7 +37,7 @@ function beautifyHtml(html) {
     result = result.replace(/{#\s*/g, '{# ').replace(/\s*#}/g, ' #}');
 
     return result;
-}
+};
 
 const files = UTILS.globArraySync(patterns.length > 0 ? patterns : [`${ENV.SOURCE_PATH}/**/*.html`], {
     ignore: [`${ENV.OUTPUT_PATH}/**/*.html`, `${ENV.SOURCE_PATH}/partials/macros/**/*.html`],

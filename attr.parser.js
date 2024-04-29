@@ -1,5 +1,13 @@
 const Parser = require('fastparse');
 
+/**
+ * Process attr match
+ * @param {string} match - matched value
+ * @param {string} orig - origin value
+ * @param {string} attr - attribute name
+ * @param {string} value - attribute value
+ * @param {number} index - match index
+ */
 function processMatch(match, orig, attr, value, index) {
     if (!this.filterAttr(this.currentTag, attr)) return;
     this.results.push({

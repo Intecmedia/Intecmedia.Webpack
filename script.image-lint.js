@@ -12,7 +12,7 @@ const logger = weblog({ name: 'image-lint' });
 const lintIgnore = UTILS.readIgnoreFile('./.imagelintignore');
 const VERBOSE = ENV.ARGV.verbose;
 
-async function metadataAsync(filename) {
+const metadataAsync = async (filename) => {
     let metadata;
     const result = {};
     try {
@@ -34,7 +34,7 @@ async function metadataAsync(filename) {
     result.format = metadata.format === 'jpeg' ? 'jpg' : metadata.format;
     result.space = metadata.space;
     return result;
-}
+};
 
 const LINT_RULES = [
     {

@@ -76,13 +76,13 @@ const ABSOLUTE_PATTERN = /^\/([^/])/;
 const ABSOLUTE_REPLACE = '../$1';
 const MACROS_PATTERN = /\{%\s+macro\s+([\w_]+).+%\}/gi;
 
-function resolveAbsolute(originUrl) {
+const resolveAbsolute = (originUrl) => {
     const url = UTILS.slash(originUrl);
     if (!ABSOLUTE_PATTERN.test(url)) return url;
     return url.replace(ABSOLUTE_PATTERN, ABSOLUTE_REPLACE);
-}
+};
 
-function processHtml(html, options, loaderCallback) {
+const processHtml = (html, options, loaderCallback) => {
     const links = attributeParser(html, (tag, attribute) => {
         if (!(tag in options.requireTags)) return false;
         if (options.requireTags[tag].includes(attribute)) return true;
@@ -124,7 +124,7 @@ function processHtml(html, options, loaderCallback) {
     const exportString = `module.exports = function (params) { with (params) { return (${template})(); }; };`;
 
     loaderCallback(null, exportString);
-}
+};
 
 nunjucks.installJinjaCompat();
 

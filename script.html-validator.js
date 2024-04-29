@@ -27,10 +27,10 @@ const errorsLogger = {
     warning: logger.warn,
 };
 
-async function validatorAsync(options) {
+const validatorAsync = async (options) => {
     const result = await validator(options);
     return result;
-}
+};
 
 const patterns = [...UTILS.processArgs._];
 

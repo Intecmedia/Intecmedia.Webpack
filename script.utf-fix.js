@@ -10,7 +10,7 @@ const VERBOSE = ENV.ARGV.verbose;
 
 const statMessages = { fixed: 0, skipped: 0 };
 
-function stripWhitespaces(string) {
+const stripWhitespaces = (string) => {
     let result = string;
 
     if (result.charCodeAt(0) === 0xfeff) {
@@ -23,7 +23,7 @@ function stripWhitespaces(string) {
         .replace(/[ \t]+\n/g, '\n');
 
     return result;
-}
+};
 
 const files = UTILS.globArraySync(
     [
