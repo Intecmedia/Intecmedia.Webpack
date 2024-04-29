@@ -7,6 +7,10 @@ const yargs = require('yargs/yargs');
 const FILENAME_PATTERN = /^[a-zA-Z0-9-/.,_@]+$/;
 
 /**
+ * @typedef { import("glob").GlobOptions } GlobOptions
+ */
+
+/**
  * Line file name by pattern.
  * @param {string} filename - file name
  */
@@ -119,7 +123,7 @@ module.exports.cacheDir = cacheDir;
 
 /**
  * Patch glob options.
- * @param {object} options - glob options
+ * @param {GlobOptions} options - glob options
  * @returns {object} - glob options
  */
 function globOptions(options) {
@@ -134,7 +138,7 @@ module.exports.globOptions = globOptions;
 /**
  *
  * @param {Array} patterns - glob patterns
- * @param {object} options - glob options
+ * @param {GlobOptions} options - glob options
  * @returns {Array} - glob result
  */
 function globArray(patterns, options) {
@@ -155,7 +159,7 @@ module.exports.globArray = globArray;
 /**
  *
  * @param {Array.string} patterns - glob patterns
- * @param {object} options - glob options
+ * @param {GlobOptions} options - glob options
  * @returns {Array} - glob result
  */
 function globArraySync(patterns, options) {
@@ -167,7 +171,7 @@ module.exports.globArraySync = globArraySync;
 /**
  *
  * @param {string} pattern - glob pattern
- * @param {object} options - glob options
+ * @param {GlobOptions} options - glob options
  * @returns {Promise} - glob result
  */
 function globPatched(pattern, options) {
@@ -183,7 +187,7 @@ module.exports.glob = globPatched;
 /**
  *
  * @param {string} pattern - glob pattern
- * @param {object} options - glob options
+ * @param {GlobOptions} options - glob options
  * @returns {object} - glob result
  */
 function globSyncPatched(pattern, options) {
