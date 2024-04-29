@@ -138,8 +138,8 @@ function globOptions(options) {
 module.exports.globOptions = globOptions;
 
 /**
- *
- * @param {Array} patterns - glob patterns
+ * Glob by array of patterns.
+ * @param {Array.string} patterns - glob patterns
  * @param {GlobOptions} options - glob options
  * @returns {Array} - glob result
  */
@@ -171,7 +171,7 @@ function globArraySync(patterns, options) {
 module.exports.globArraySync = globArraySync;
 
 /**
- *
+ * Glob with patched options.
  * @param {string} pattern - glob pattern
  * @param {GlobOptions} options - glob options
  * @returns {Promise} - glob result
@@ -187,10 +187,10 @@ function globPatched(pattern, options) {
 module.exports.glob = globPatched;
 
 /**
- *
+ * Glob sync with patched options.
  * @param {string} pattern - glob pattern
  * @param {GlobOptions} options - glob options
- * @returns {object} - glob result
+ * @returns {Array} - glob result
  */
 function globSyncPatched(pattern, options) {
     return glob.sync(slash(pattern), globOptions(options));
@@ -199,9 +199,9 @@ function globSyncPatched(pattern, options) {
 module.exports.globSync = globSyncPatched;
 
 /**
- *
- * @param {object} info - module metta info
- * @returns {string} - module query string
+ * Create webpack module template.
+ * @param {object} info - module meta info
+ * @returns {string} - webpack module template
  */
 function moduleFilenameTemplate(info) {
     const relativePath = slash(path.relative(__dirname, info.absoluteResourcePath));
