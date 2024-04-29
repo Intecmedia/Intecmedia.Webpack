@@ -6,6 +6,10 @@ const yargs = require('yargs/yargs');
 
 const FILENAME_PATTERN = /^[a-zA-Z0-9-/.,_@]+$/;
 
+/**
+ * Line file name by pattern.
+ * @param {string} filename - file name
+ */
 function lintFilename(filename) {
     if (!FILENAME_PATTERN.test(filename)) {
         throw new Error(
@@ -18,6 +22,11 @@ function lintFilename(filename) {
 
 module.exports.lintFilename = lintFilename;
 
+/**
+ * Cast object to SCSS variable.
+ * @param {object} obj - input object
+ * @returns {string} - casted object
+ */
 function castScssVar(obj) {
     if (Array.isArray(obj)) {
         return ['(', obj.map((v) => castScssVar(v)).join(', '), ')'].join('');
@@ -34,6 +43,11 @@ function castScssVar(obj) {
     return JSON.stringify(obj);
 }
 
+/**
+ * Stringify object to SCSS variable.
+ * @param {object} obj - input object
+ * @returns {string} - stringify object
+ */
 function toScssVars(obj) {
     return Object.entries(obj)
         .map((item) => ((name, value) => `$${name}: ${castScssVar(value)};`)(...item))
@@ -42,6 +56,11 @@ function toScssVars(obj) {
 
 module.exports.toScssVars = toScssVars;
 
+/**
+ * Fix path slashes.
+ * @param {string} filepath - file path
+ * @returns {string} - slashed file path
+ */
 function slash(filepath) {
     const isExtendedLengthPath = filepath.startsWith('\\\\?\\');
 
@@ -50,6 +69,12 @@ function slash(filepath) {
 
 module.exports.slash = slash;
 
+/**
+ * Get resource name callback.
+ * @param {string} prefix - resource path prefix
+ * @param {boolean} hash - use content hash
+ * @returns {Function} - resource name callback
+ */
 function resourceName(prefix, hash = false) {
     const ENV = require('./app.env');
     const basename = path.basename(prefix);
@@ -74,6 +99,12 @@ function resourceName(prefix, hash = false) {
 
 module.exports.resourceName = resourceName;
 
+/**
+ * Get cache directory path.
+ * @param {string} name - cache name
+ * @param {boolean} skipEnv - skip NODE_ENV
+ * @returns {string} - cache directory path
+ */
 function cacheDir(name, skipEnv = false) {
     const ENV = require('./app.env');
     const prefixedName = skipEnv ? name : `${name}-${ENV.NODE_ENV}`;
@@ -86,6 +117,11 @@ function cacheDir(name, skipEnv = false) {
 
 module.exports.cacheDir = cacheDir;
 
+/**
+ * Patch glob options.
+ * @param {object} options - glob options
+ * @returns {object} - glob options
+ */
 function globOptions(options) {
     if (options && 'ignore' in options) {
         options.ignore = options.ignore.map(slash);
@@ -95,6 +131,12 @@ function globOptions(options) {
 
 module.exports.globOptions = globOptions;
 
+/**
+ *
+ * @param {Array} patterns - glob patterns
+ * @param {object} options - glob options
+ * @returns {Array} - glob result
+ */
 function globArray(patterns, options) {
     return Promise.all(
         patterns.map(
@@ -110,12 +152,24 @@ function globArray(patterns, options) {
 
 module.exports.globArray = globArray;
 
+/**
+ *
+ * @param {Array.string} patterns - glob patterns
+ * @param {object} options - glob options
+ * @returns {Array} - glob result
+ */
 function globArraySync(patterns, options) {
     return patterns.map((pattern) => glob.sync(slash(pattern), globOptions(options))).flat();
 }
 
 module.exports.globArraySync = globArraySync;
 
+/**
+ *
+ * @param {string} pattern - glob pattern
+ * @param {object} options - glob options
+ * @returns {Promise} - glob result
+ */
 function globPatched(pattern, options) {
     return new Promise((resolve, reject) => {
         glob.glob(slash(pattern), globOptions(options))
@@ -126,12 +180,23 @@ function globPatched(pattern, options) {
 
 module.exports.glob = globPatched;
 
+/**
+ *
+ * @param {string} pattern - glob pattern
+ * @param {object} options - glob options
+ * @returns {object} - glob result
+ */
 function globSyncPatched(pattern, options) {
     return glob.sync(slash(pattern), globOptions(options));
 }
 
 module.exports.globSync = globSyncPatched;
 
+/**
+ *
+ * @param {object} info - module metta info
+ * @returns {string} - module query string
+ */
 function moduleFilenameTemplate(info) {
     const relativePath = slash(path.relative(__dirname, info.absoluteResourcePath));
     return `webpack://${info.namespace}/${relativePath}?${info.query}`;
@@ -158,12 +223,23 @@ processArgs.env =
 
 module.exports.processArgs = processArgs;
 
+/**
+ * Read and parse json file.
+ * @param {string} filepath - json file path
+ * @returns {object} - json object
+ */
 function readJsonFile(filepath) {
     return JSON.parse(fs.readFileSync(filepath));
 }
 
 module.exports.readJsonFile = readJsonFile;
 
+/**
+ * Read and parse ignore file.
+ * @param {string} filepath - ignore file path
+ * @param {object} options - ignore options
+ * @returns {object} - ignore object
+ */
 function readIgnoreFile(filepath, options = {}) {
     return ignore({
         allowRelativePaths: true,
