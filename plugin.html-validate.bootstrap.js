@@ -1,6 +1,10 @@
 const { Rule } = require('html-validate');
 const { nodeIgnore } = require('./plugin.html-validate.utils');
 
+/**
+ * @typedef { import('html-validate').DOMReadyEvent } DOMReadyEvent
+ */
+
 const COLS_COUNT = 12;
 const COLS_BREAKPOINTS = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
 
@@ -25,7 +29,13 @@ const colSelector = (cols = COLS_COUNT, breakpoints = COLS_BREAKPOINTS) => {
     return classList.map((className) => `.${className}`).join(', ');
 };
 
+/**
+ *
+ */
 class AbsRule extends Rule {
+    /**
+     * @param {object} options - plugin options
+     */
     constructor(options) {
         super({
             ignore: '',
@@ -36,12 +46,21 @@ class AbsRule extends Rule {
         this.domReady = this.domReady.bind(this);
     }
 
+    /**
+     *
+     */
     setup() {
         this.on('dom:ready', this.domReady);
     }
 }
 
+/**
+ *
+ */
 class ContainerNoNested extends AbsRule {
+    /**
+     * @param {DOMReadyEvent.document} document - document object
+     */
     domReady({ document }) {
         const containers = document.querySelectorAll('.container, .container-fluid');
         const ignores = this.options.ignore ? document.querySelectorAll(this.options.ignore) : [];
@@ -60,7 +79,13 @@ class ContainerNoNested extends AbsRule {
     }
 }
 
+/**
+ *
+ */
 class ColNoRow extends AbsRule {
+    /**
+     * @param {DOMReadyEvent.document} document - document object
+     */
     domReady({ document }) {
         const selector = colSelector(this.options.cols, this.options.breakpoints);
         const cols = document.querySelectorAll(selector);
@@ -80,7 +105,13 @@ class ColNoRow extends AbsRule {
     }
 }
 
+/**
+ *
+ */
 class RowNoChilds extends AbsRule {
+    /**
+     * @param {DOMReadyEvent.document} document - document object
+     */
     domReady({ document }) {
         const cols = makeColsClassList(this.options.cols, this.options.breakpoints);
         const elements = document.querySelectorAll('.row > *');
@@ -97,16 +128,28 @@ class RowNoChilds extends AbsRule {
     }
 }
 
+/**
+ *
+ */
 class FormSelectNoFormControl extends Rule {
+    /**
+     * @param {object} options - plugin options
+     */
     constructor(options) {
         super({ ignore: '', ...options });
         this.domReady = this.domReady.bind(this);
     }
 
+    /**
+     *
+     */
     setup() {
         this.on('dom:ready', this.domReady);
     }
 
+    /**
+     * @param {DOMReadyEvent.document} document - document object
+     */
     domReady({ document }) {
         const selects = document.querySelectorAll('select');
         const ignores = this.options.ignore ? document.querySelectorAll(this.options.ignore) : [];
@@ -122,16 +165,28 @@ class FormSelectNoFormControl extends Rule {
     }
 }
 
+/**
+ *
+ */
 class FormControlInputOnly extends Rule {
+    /**
+     * @param {object} options - plugin options
+     */
     constructor(options) {
         super({ ignore: '', ...options });
         this.domReady = this.domReady.bind(this);
     }
 
+    /**
+     *
+     */
     setup() {
         this.on('dom:ready', this.domReady);
     }
 
+    /**
+     * @param {DOMReadyEvent.document} document - document object
+     */
     domReady({ document }) {
         const controls = document.querySelectorAll('.form-control');
         const ignores = this.options.ignore ? document.querySelectorAll(this.options.ignore) : [];

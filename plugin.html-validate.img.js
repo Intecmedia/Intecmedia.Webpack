@@ -1,7 +1,17 @@
 const { Rule } = require('html-validate');
 const { nodeIgnore } = require('./plugin.html-validate.utils');
 
+/**
+ * @typedef { import('html-validate').DOMReadyEvent } DOMReadyEvent
+ */
+
+/**
+ *
+ */
 class ImgPictureRequired extends Rule {
+    /**
+     * @param {object} options - plugin options
+     */
     constructor(options) {
         super({
             webp: true,
@@ -12,10 +22,16 @@ class ImgPictureRequired extends Rule {
         this.domReady = this.domReady.bind(this);
     }
 
+    /**
+     *
+     */
     setup() {
         this.on('dom:ready', this.domReady);
     }
 
+    /**
+     * @param {DOMReadyEvent.document} document - document object
+     */
     domReady({ document }) {
         const imgs = document.querySelectorAll('img');
         const ignores = this.options.ignore ? document.querySelectorAll(this.options.ignore) : [];
@@ -61,16 +77,28 @@ class ImgPictureRequired extends Rule {
     }
 }
 
+/**
+ *
+ */
 class ImgLoadingRequired extends Rule {
+    /**
+     * @param {object} options - plugin options
+     */
     constructor(options) {
         super({ intrinsicsize: true, ignore: '.wysiwyg img', ...options });
         this.domReady = this.domReady.bind(this);
     }
 
+    /**
+     *
+     */
     setup() {
         this.on('dom:ready', this.domReady);
     }
 
+    /**
+     * @param {DOMReadyEvent.document} document - document object
+     */
     domReady({ document }) {
         const imgs = document.querySelectorAll('img');
         const ignores = this.options.ignore ? document.querySelectorAll(this.options.ignore) : [];

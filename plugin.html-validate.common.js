@@ -1,6 +1,16 @@
 const { Rule } = require('html-validate');
 
+/**
+ * @typedef { import('html-validate').DOMReadyEvent } DOMReadyEvent
+ */
+
+/**
+ *
+ */
 class CheckNodeEnv extends Rule {
+    /**
+     * @param {object} options - plugin options
+     */
     constructor(options) {
         super({
             NODE_ENV: 'development',
@@ -9,10 +19,16 @@ class CheckNodeEnv extends Rule {
         this.domReady = this.domReady.bind(this);
     }
 
+    /**
+     *
+     */
     setup() {
         this.on('dom:ready', this.domReady);
     }
 
+    /**
+     * @param {DOMReadyEvent.document} document - document object
+     */
     domReady({ document }) {
         const currentEnv = this.options.NODE_ENV;
         const documentElement = document.querySelector('html');

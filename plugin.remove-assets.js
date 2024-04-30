@@ -1,8 +1,21 @@
+/**
+ * @typedef { import('webpack').Compiler } Compiler
+ */
+
+/**
+ * Remove assets from complidation.
+ */
 class RemoveAssetsPlugin {
+    /**
+     * @param {object} options - plugin options
+     */
     constructor(options) {
         this.options = { ...options };
     }
 
+    /**
+     * @param {Compiler} compiler - webpack complier object
+     */
     apply(compiler) {
         compiler.hooks.compilation.tap('RemoveAssetsPlugin', (compilation) => {
             compilation.hooks.processAssets.tap(

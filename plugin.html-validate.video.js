@@ -1,16 +1,32 @@
 const { Rule } = require('html-validate');
 const { nodeIgnore } = require('./plugin.html-validate.utils');
 
+/**
+ * @typedef { import('html-validate').DOMReadyEvent } DOMReadyEvent
+ */
+
+/**
+ *
+ */
 class VideoPlaysinlineRequired extends Rule {
+    /**
+     * @param {object} options - plugin options
+     */
     constructor(options) {
         super({ ignore: '.wysiwyg video', ...options });
         this.domReady = this.domReady.bind(this);
     }
 
+    /**
+     *
+     */
     setup() {
         this.on('dom:ready', this.domReady);
     }
 
+    /**
+     * @param {DOMReadyEvent.document} document - document object
+     */
     domReady({ document }) {
         const videos = document.querySelectorAll('video');
         const ignores = this.options.ignore ? document.querySelectorAll(this.options.ignore) : [];

@@ -1,19 +1,35 @@
 const { Rule } = require('html-validate');
 const { nodeIgnore } = require('./plugin.html-validate.utils');
 
+/**
+ * @typedef { import('html-validate').DOMReadyEvent } DOMReadyEvent
+ */
+
 const MODIFIER_PATTERN = /(--([a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*))$/;
 const ELEMENT_PATTERN = /(__([a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*))$/;
 
+/**
+ *
+ */
 class NoMissingElement extends Rule {
+    /**
+     * @param {object} options - plugin options
+     */
     constructor(options) {
         super({ ignore: '', ...options });
         this.domReady = this.domReady.bind(this);
     }
 
+    /**
+     *
+     */
     setup() {
         this.on('dom:ready', this.domReady);
     }
 
+    /**
+     * @param {DOMReadyEvent.document} document - document object
+     */
     domReady({ document }) {
         const nodes = document.querySelectorAll('body [class]');
         const ignores = this.options.ignore ? document.querySelectorAll(this.options.ignore) : [];
@@ -40,16 +56,28 @@ class NoMissingElement extends Rule {
     }
 }
 
+/**
+ *
+ */
 class NoMissingModifier extends Rule {
+    /**
+     * @param {object} options - plugin options
+     */
     constructor(options) {
         super({ ignore: '', ...options });
         this.domReady = this.domReady.bind(this);
     }
 
+    /**
+     *
+     */
     setup() {
         this.on('dom:ready', this.domReady);
     }
 
+    /**
+     * @param {DOMReadyEvent.document} document - document object
+     */
     domReady({ document }) {
         const nodes = document.querySelectorAll('body [class]');
         const ignores = this.options.ignore ? document.querySelectorAll(this.options.ignore) : [];

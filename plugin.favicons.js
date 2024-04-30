@@ -7,7 +7,17 @@ const APP = require('./app.config');
 
 const ICO_PATTERN = /<link rel="shortcut icon" href="[^"]+favicon.ico">/;
 
+/**
+ * @typedef { import('webpack').Compiler } Compiler
+ */
+
+/**
+ * `favicons-webpack-plugin` integration with `html-webpack-plugin`
+ */
 class FaviconsWebpackPlugin extends FaviconsWebpackPluginOriginal {
+    /**
+     * @param {Compiler} compiler - webpack compiler object
+     */
     apply(compiler) {
         super.apply(compiler);
 
