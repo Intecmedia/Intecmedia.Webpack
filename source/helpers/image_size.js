@@ -3,7 +3,13 @@ const ImageSize = require('image-size');
 
 const cacheMap = {};
 
-module.exports = function helper(filename, nocache = false) {
+/**
+ * Get the size of an image.
+ * @param {string} filename - image file name
+ * @param {boolean} nocache - disable cache flag
+ * @returns {object} - image size object
+ */
+function helperImageSize(filename, nocache = false) {
     const fullpath = path.join(process.cwd(), 'source', filename);
     this.loaderContext.addDependency(fullpath);
     if (!(fullpath in cacheMap) || nocache) {
@@ -15,4 +21,6 @@ module.exports = function helper(filename, nocache = false) {
     }
 
     return cacheMap[fullpath];
-};
+}
+
+module.exports = helperImageSize;

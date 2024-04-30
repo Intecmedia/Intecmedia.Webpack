@@ -1,5 +1,12 @@
 const dataFns = require('date-fns');
 
-module.exports = function helper(date, format) {
+/**
+ * Format date.
+ * @param {string} date - date object
+ * @param {string} format - date format
+ * @returns {string} - date formated
+ */
+function helperDateFormat(date, format) {
     return dataFns.format(date ? new Date(date) : new Date(), format);
-};
+}
+module.exports = helperDateFormat;

@@ -1,4 +1,10 @@
-module.exports = function helper(size, sources) {
+/**
+ * Filter image sources via image size
+ * @param {object} size - image size
+ * @param {Array} sources - image sources
+ * @returns {Array} - filtered image sources
+ */
+function helperImageSources(size, sources) {
     if (!(size.width && size.height)) {
         return [];
     }
@@ -16,4 +22,6 @@ module.exports = function helper(size, sources) {
 
         return true;
     });
-};
+}
+
+module.exports = helperImageSources;

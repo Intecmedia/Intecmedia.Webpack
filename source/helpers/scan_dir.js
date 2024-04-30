@@ -5,7 +5,14 @@ const UTILS = require('../../webpack.utils');
 const glob = require('glob');
 const frontMatter = require('front-matter');
 
-module.exports = function helper(dirname, orderKey = null, orderAsc = true) {
+/**
+ * Scan templates directory, read front-matter data and ordering.
+ * @param {string} dirname - directory path
+ * @param {string} orderKey - order key
+ * @param {string} orderAsc - order direction
+ * @returns {Array.object} - array of front-matter data
+ */
+function helperScanDir(dirname, orderKey = null, orderAsc = true) {
     const fullpath = path.join(process.cwd(), 'source', dirname);
     this.loaderContext.addContextDependency(fullpath);
     return glob
@@ -41,4 +48,5 @@ module.exports = function helper(dirname, orderKey = null, orderAsc = true) {
             const comparison = a[orderKey].localeCompare(b[orderKey]);
             return orderAsc ? comparison : comparison * -1;
         });
-};
+}
+module.exports = helperScanDir;
