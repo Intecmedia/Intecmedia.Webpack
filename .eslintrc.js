@@ -150,6 +150,23 @@ module.exports = {
                           'warnOnUnassignedImports': false,
                       },
                   ],
+                  'jsdoc/require-description': [
+                      'warn',
+                      {
+                          'checkConstructors': false,
+                          'contexts': ['ClassDeclaration', 'FunctionDeclaration', 'MethodDefinition'],
+                      },
+                  ],
+                  'jsdoc/require-jsdoc': [
+                      'warn',
+                      {
+                          'require': {
+                              'ClassDeclaration': true,
+                              'FunctionDeclaration': true,
+                              'MethodDefinition': true,
+                          },
+                      },
+                  ],
                   'no-unused-vars': [
                       'error',
                       {
