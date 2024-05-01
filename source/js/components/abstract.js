@@ -8,6 +8,9 @@
  * @typedef { import('./app.js').default } AbstractApp
  */
 
+/**
+ * Abstract component.
+ */
 export default class AbstractComponent {
     static singleton = false;
 

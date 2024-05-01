@@ -19,9 +19,15 @@ const EVENT_NAME_INTERSECTION = 'intersection';
 const SELECTOR_BLOCKS_NEW = `.${CLASS_NAME_BLOCK}:not(.${CLASS_NAME_INIT})`;
 const SELECTOR_BLOCKS_OLD = `.${CLASS_NAME_BLOCK}`;
 
+/**
+ * Intersection component. Details in `intersection-test.html`.
+ */
 class IntersectionBlocks extends AbstractComponent {
     static singleton = true;
 
+    /**
+     * @param {object} options - component options
+     */
     constructor(options = {}) {
         super(options);
 
@@ -34,6 +40,9 @@ class IntersectionBlocks extends AbstractComponent {
         this.onTransitionEnd = this.onTransitionEnd.bind(this);
     }
 
+    /**
+     * Init observer.
+     */
     init() {
         this.observer = new IntersectionObserver(this.onIntersection, {
             rootMargin: '0px 0px 0px 0px',
@@ -43,6 +52,9 @@ class IntersectionBlocks extends AbstractComponent {
         setTimeout(() => this.run(), 0);
     }
 
+    /**
+     * Init events.
+     */
     run() {
         this.items.forEach((target) => {
             target.classList.add(CLASS_NAME_INIT);
@@ -53,6 +65,10 @@ class IntersectionBlocks extends AbstractComponent {
         this.on('destroy', this.onDestroy);
     }
 
+    /**
+     * Update-event handler.
+     * @param {CustomEvent.detail} detail - event detail data
+     */
     onUpdate({ detail }) {
         const items = [...detail.target.querySelectorAll(SELECTOR_BLOCKS_NEW)];
         if (items.length > 0) {
@@ -64,6 +80,10 @@ class IntersectionBlocks extends AbstractComponent {
         }
     }
 
+    /**
+     * Destroy-event handler.
+     * @param {CustomEvent.detail} detail - event detail data
+     */
     onDestroy({ detail }) {
         if (this.items.length > 0) {
             const items = [...detail.target.querySelectorAll(SELECTOR_BLOCKS_OLD)];
@@ -77,6 +97,11 @@ class IntersectionBlocks extends AbstractComponent {
         }
     }
 
+    /**
+     * Intersection handler.
+     * @param {Array.IntersectionObserverEntry} entries - intersection entries
+     * @param {IntersectionObserver} observer - intersection observer
+     */
     onIntersection(entries, observer) {
         entries.forEach((entry) => {
             const intersectionRatio =
@@ -117,10 +142,17 @@ class IntersectionBlocks extends AbstractComponent {
         });
     }
 
+    /**
+     * TransitionEnd-event handler.
+     * @param {TransitionEvent} event - transition event
+     */
     onTransitionEnd(event) {
         event.currentTarget.classList.add(CLASS_NAME_END);
     }
 
+    /**
+     * Remove events.
+     */
     destroy() {
         this.off('update', this.onUpdate);
         this.off('destroy', this.onDestroy);

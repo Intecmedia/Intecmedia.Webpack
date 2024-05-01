@@ -13,7 +13,13 @@ import '~/components/scrollbar-width';
 import components from '~/components/';
 import AbstractApp from '~/components/app';
 
+/**
+ * @inheritdoc
+ */
 class App extends AbstractApp {
+    /**
+     * @inheritdoc
+     */
     init() {
         document.documentElement.classList.add('ready-js');
         document.documentElement.classList.add('is-page-transition-ready');

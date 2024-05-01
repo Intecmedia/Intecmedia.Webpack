@@ -10,6 +10,9 @@ import AbstractComponent from '~/components/abstract';
 
 const SEPARATOR_PATTERN = /\s*,\s*/;
 
+/**
+ * Abstract application.
+ */
 export default class AbstractApp {
     /**
      * Creates an instance of AbstractApp.

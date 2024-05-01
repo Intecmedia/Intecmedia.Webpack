@@ -9,7 +9,14 @@
 
 const orgFormData = window.FormData;
 
+/**
+ * FormData submitter polyfill.
+ */
 class FormDataSubmitter extends orgFormData {
+    /**
+     * @param {HTMLFormElement} form - html form element
+     * @param {HTMLInputElement} submitter - html submitter element
+     */
     constructor(form, submitter = null) {
         super(form);
         if (submitter) {
