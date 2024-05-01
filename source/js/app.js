@@ -14,11 +14,11 @@ import components from '~/components/';
 import AbstractApp from '~/components/app';
 
 /**
- * @inheritdoc
+ * Main application.
  */
 class App extends AbstractApp {
     /**
-     * @inheritdoc
+     * Init application.
      */
     init() {
         document.documentElement.classList.add('ready-js');
