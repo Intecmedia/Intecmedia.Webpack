@@ -9,7 +9,7 @@ const MODIFIER_PATTERN = /(--([a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*))$/;
 const ELEMENT_PATTERN = /(__([a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*))$/;
 
 /**
- *
+ * Lint missing BEM-element.
  */
 class NoMissingElement extends Rule {
     /**
@@ -21,13 +21,14 @@ class NoMissingElement extends Rule {
     }
 
     /**
-     *
+     * Setup plugin events.
      */
     setup() {
         this.on('dom:ready', this.domReady);
     }
 
     /**
+     * Lint html document.
      * @param {DOMReadyEvent.document} document - document object
      */
     domReady({ document }) {
@@ -57,7 +58,7 @@ class NoMissingElement extends Rule {
 }
 
 /**
- *
+ *Lint missing BEM-modifier.
  */
 class NoMissingModifier extends Rule {
     /**
@@ -69,13 +70,14 @@ class NoMissingModifier extends Rule {
     }
 
     /**
-     *
+     * Setup plugin events.
      */
     setup() {
         this.on('dom:ready', this.domReady);
     }
 
     /**
+     * Lint html document.
      * @param {DOMReadyEvent.document} document - document object
      */
     domReady({ document }) {

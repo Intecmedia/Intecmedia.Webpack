@@ -14,6 +14,7 @@ class RemoveAssetsPlugin {
     }
 
     /**
+     * Apply plugin to compliler.
      * @param {Compiler} compiler - webpack complier object
      */
     apply(compiler) {

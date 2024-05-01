@@ -138,7 +138,7 @@ function globOptions(options) {
 module.exports.globOptions = globOptions;
 
 /**
- * Glob by array of patterns.
+ * Glob async by array of patterns.
  * @param {Array.string} patterns - glob patterns
  * @param {GlobOptions} options - glob options
  * @returns {Promise} - glob result
@@ -159,7 +159,7 @@ function globArray(patterns, options) {
 module.exports.globArray = globArray;
 
 /**
- *
+ * Glob sync by array of patterns.
  * @param {Array.string} patterns - glob patterns
  * @param {GlobOptions} options - glob options
  * @returns {Array} - glob result

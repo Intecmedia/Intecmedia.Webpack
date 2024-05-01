@@ -16,6 +16,7 @@ const ICO_PATTERN = /<link rel="shortcut icon" href="[^"]+favicon.ico">/;
  */
 class FaviconsWebpackPlugin extends FaviconsWebpackPluginOriginal {
     /**
+     * Apply plugin to compliler.
      * @param {Compiler} compiler - webpack compiler object
      */
     apply(compiler) {

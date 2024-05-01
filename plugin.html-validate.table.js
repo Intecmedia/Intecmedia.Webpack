@@ -18,13 +18,14 @@ class TableResponsiveRequired extends Rule {
     }
 
     /**
-     *
+     * Setup plugin events.
      */
     setup() {
         this.on('dom:ready', this.domReady);
     }
 
     /**
+     * Lint html document.
      * @param {DOMReadyEvent.document} document - document object
      */
     domReady({ document }) {

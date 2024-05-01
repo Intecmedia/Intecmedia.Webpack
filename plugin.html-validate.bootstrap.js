@@ -47,7 +47,7 @@ class AbsRule extends Rule {
     }
 
     /**
-     *
+     * Setup plugin events.
      */
     setup() {
         this.on('dom:ready', this.domReady);
@@ -59,6 +59,7 @@ class AbsRule extends Rule {
  */
 class ContainerNoNested extends AbsRule {
     /**
+     * Lint html document.
      * @param {DOMReadyEvent.document} document - document object
      */
     domReady({ document }) {
@@ -84,6 +85,7 @@ class ContainerNoNested extends AbsRule {
  */
 class ColNoRow extends AbsRule {
     /**
+     * Lint html document.
      * @param {DOMReadyEvent.document} document - document object
      */
     domReady({ document }) {
@@ -110,6 +112,7 @@ class ColNoRow extends AbsRule {
  */
 class RowNoChilds extends AbsRule {
     /**
+     * Lint html document.
      * @param {DOMReadyEvent.document} document - document object
      */
     domReady({ document }) {
@@ -133,6 +136,7 @@ class RowNoChilds extends AbsRule {
  */
 class FormSelectNoFormControl extends Rule {
     /**
+     * Lint html document.
      * @param {object} options - plugin options
      */
     constructor(options) {
@@ -141,13 +145,14 @@ class FormSelectNoFormControl extends Rule {
     }
 
     /**
-     *
+     * Setup plugin events.
      */
     setup() {
         this.on('dom:ready', this.domReady);
     }
 
     /**
+     * Lint html document.
      * @param {DOMReadyEvent.document} document - document object
      */
     domReady({ document }) {
@@ -178,13 +183,14 @@ class FormControlInputOnly extends Rule {
     }
 
     /**
-     *
+     * Setup plugin events.
      */
     setup() {
         this.on('dom:ready', this.domReady);
     }
 
     /**
+     * Lint html document.
      * @param {DOMReadyEvent.document} document - document object
      */
     domReady({ document }) {

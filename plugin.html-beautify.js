@@ -19,6 +19,7 @@ class HtmlBeautifyPlugin {
     }
 
     /**
+     * Apply plugin to compliler.
      * @param {Compiler} compiler - webpack compiler object
      */
     apply(compiler) {
