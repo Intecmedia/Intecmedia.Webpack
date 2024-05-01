@@ -5,7 +5,7 @@ const { Rule } = require('html-validate');
  */
 
 /**
- *
+ * Lint `html[data-node-env]` attribute.
  */
 class CheckNodeEnv extends Rule {
     /**

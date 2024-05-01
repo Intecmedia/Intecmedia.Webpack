@@ -6,7 +6,7 @@ const { nodeIgnore } = require('./plugin.html-validate.utils');
  */
 
 /**
- *
+ * Lint `table` should be wrapped with `.table-responsive`.
  */
 class TableResponsiveRequired extends Rule {
     /**

@@ -6,7 +6,7 @@ const { nodeIgnore } = require('./plugin.html-validate.utils');
  */
 
 /**
- *
+ * Lint `video[playsinline]` required attribute.
  */
 class VideoPlaysinlineRequired extends Rule {
     /**

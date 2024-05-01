@@ -6,7 +6,7 @@ const { nodeIgnore } = require('./plugin.html-validate.utils');
  */
 
 /**
- *
+ * Lint `iframe[loading]` required attribute.
  */
 class IframeLoadingRequired extends Rule {
     /**

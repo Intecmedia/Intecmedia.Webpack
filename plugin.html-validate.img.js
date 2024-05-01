@@ -6,7 +6,7 @@ const { nodeIgnore } = require('./plugin.html-validate.utils');
  */
 
 /**
- *
+ * Lint `img` should be wrapped with `picture`.
  */
 class ImgPictureRequired extends Rule {
     /**
@@ -79,7 +79,7 @@ class ImgPictureRequired extends Rule {
 }
 
 /**
- *
+ * Lint `img[loading]` required attribute.
  */
 class ImgLoadingRequired extends Rule {
     /**

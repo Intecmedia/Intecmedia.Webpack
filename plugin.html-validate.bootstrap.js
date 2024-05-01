@@ -30,7 +30,7 @@ const colSelector = (cols = COLS_COUNT, breakpoints = COLS_BREAKPOINTS) => {
 };
 
 /**
- *
+ * Abstract bootstrap rule
  */
 class AbsRule extends Rule {
     /**
@@ -55,7 +55,7 @@ class AbsRule extends Rule {
 }
 
 /**
- *
+ *  Lint `.container` disallow nesting.
  */
 class ContainerNoNested extends AbsRule {
     /**
@@ -81,7 +81,7 @@ class ContainerNoNested extends AbsRule {
 }
 
 /**
- *
+ * Lint `.col` without row.
  */
 class ColNoRow extends AbsRule {
     /**
@@ -108,7 +108,7 @@ class ColNoRow extends AbsRule {
 }
 
 /**
- *
+ * Lint empty `.row`.
  */
 class RowNoChilds extends AbsRule {
     /**
@@ -132,7 +132,7 @@ class RowNoChilds extends AbsRule {
 }
 
 /**
- *
+ * Lint `select` required `.form-select` class.
  */
 class FormSelectNoFormControl extends Rule {
     /**
@@ -171,7 +171,7 @@ class FormSelectNoFormControl extends Rule {
 }
 
 /**
- *
+ * Lint `.form-control` allow only for `input` or `textarea`.
  */
 class FormControlInputOnly extends Rule {
     /**
