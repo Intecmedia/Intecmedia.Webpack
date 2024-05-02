@@ -10,7 +10,9 @@
     --NODE_ENV: "#{$NODE_ENV}";
     --DEBUG: "#{$DEBUG}";
     --PACKAGE_NAME: "#{$PACKAGE_NAME}";
+
     --viewport-height: calc(var(--vh, 1vh) * 100); // https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
+    --viewport-height-diff: calc(100vh - var(--viewport-height, 100vh));
     --section-height: 100vh;
 
     @each $name, $width in $grid-breakpoints {
