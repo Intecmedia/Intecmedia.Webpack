@@ -27,7 +27,7 @@ $fluid-steps-max-scale: 1.25 !default;
     $max-scale: $fluid-steps-max-scale
 ) {
     @for $i from $negative-count through 1 {
-        $prop: "--fluid-step-#{$i}";
+        $prop: "--fluid-step-n#{$i}";
         $min: $min-size * math.pow($min-scale, -$i);
         $max: $max-size * math.pow($max-scale, -$i);
 
