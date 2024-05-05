@@ -180,7 +180,7 @@
         "image-minimizer-webpack-plugin": "^4.0.0",
         "image-size": "^1.1.1",
         "imagemin": "^8.0.1",
-        "imagemin-svgo": "^10.0.1",
+        "imagemin-svgo": "^11.0.0",
         "imports-loader": "^5.0.0",
         "intersection-observer": "^0.12.2",
         "jquery": "^3.7.1",
