@@ -1,6 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { parseSvg } = require('svgo/lib/parser');
+const { parse: parseSvg } = require('svg-parser');
 const UTILS = require('./webpack.utils');
 
 /*
@@ -20,14 +20,14 @@ const walkNodes = (root, callback) => {
     });
 };
 
-const walkAttributes = (root, callback) => {
-    if (root.attributes) {
-        Object.entries(root.attributes).forEach(([name, value]) => {
+const walkProperties = (root, callback) => {
+    if (root.properties) {
+        Object.entries(root.properties).forEach(([name, value]) => {
             callback(root, name, value);
         });
     }
     walkNodes(root, (node) => {
-        walkAttributes(node, callback);
+        walkProperties(node, callback);
     });
 };
 
@@ -36,11 +36,11 @@ module.exports = function noSpriteURL(filepath) {
     const content = fs.readFileSync(filepath).toString();
     const root = parseSvg(content);
 
-    walkAttributes(root, (node, name, value) => {
+    walkProperties(root, (node, name, value) => {
         if (URL_PATTERN.test(value)) {
             throw new Error(
                 [
-                    `[svg-sprite] external content <${node.name} ${name}="${value}"> not allowed in: ${relpath}.`,
+                    `[svg-sprite] external content <${node.tagName} ${name}="${value}"> not allowed in: ${relpath}.`,
                     'Chrome issue: https://code.google.com/p/chromium/issues/detail?id=109212',
                     'Safari issue: https://bugs.webkit.org/show_bug.cgi?id=105904',
                 ].join('\n')
