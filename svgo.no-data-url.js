@@ -14,6 +14,7 @@ exports.fn = (root, options, extra) => ({
                 ('href' in node.attributes && DATA_URL_PATTERN.test(node.attributes.href)) ||
                 ('xlink:href' in node.attributes && DATA_URL_PATTERN.test(node.attributes['xlink:href']))
             ) {
+                console.error(`[svgo.no-data-url] error in ${JSON.stringify(extra.path)}`, node);
                 throw new Error(`In ${JSON.stringify(extra.path)} -- ${exports.description}`);
             }
         },

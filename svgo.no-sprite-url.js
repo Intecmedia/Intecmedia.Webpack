@@ -19,6 +19,7 @@ exports.fn = (root, options, extra) => ({
             }
             Object.values(node.attributes).forEach((attr) => {
                 if (URL_PATTERN.test(attr)) {
+                    console.error(`[svgo.no-sprite-url] error in ${JSON.stringify(extra.path)}`, node);
                     throw new Error(`In ${JSON.stringify(extra.path)} -- ${exports.description}`);
                 }
             });
