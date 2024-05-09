@@ -29,7 +29,6 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const CompressionPlugin = ENV.PROD && !ENV.DEBUG ? require('compression-webpack-plugin') : () => {};
 const TerserPlugin = ENV.PROD && !ENV.DEBUG ? require('terser-webpack-plugin') : () => {};
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
-const SVGNoSpriteUrl = require('./svg.no-sprite-url');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 
 const FaviconsPlugin = APP.FAVICONS ? require('./plugin.favicons') : () => {};
@@ -364,13 +363,8 @@ module.exports = {
                 svgo: false,
             },
             sprite: {
-                prefix: (filename) => {
-                    SVGNoSpriteUrl(filename);
-                    return 'icon-';
-                },
-                generate: {
-                    title: false,
-                },
+                prefix: 'icon-',
+                generate: { title: false },
             },
         }),
         ...(ENV.PROD || ENV.DEBUG
