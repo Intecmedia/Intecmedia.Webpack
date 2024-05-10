@@ -9,7 +9,6 @@ exports.description = [
     'Chromium issue: https://code.google.com/p/chromium/issues/detail?id=109212',
     'Safari issue: https://bugs.webkit.org/show_bug.cgi?id=105904',
 ].join('\n');
-exports.active = true;
 
 exports.fn = (root, options, extra) => ({
     element: {
