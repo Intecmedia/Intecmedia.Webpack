@@ -8,6 +8,7 @@ const SvgoCreateConfig = (config) => ({
                     // customize options for plugins included in preset
                     convertColors: { shortname: false },
                     // or disable plugins
+                    cleanupIds: false,
                     convertShapeToPath: false,
                     convertTransform: false,
                     removeViewBox: false,
