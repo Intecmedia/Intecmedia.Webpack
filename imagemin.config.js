@@ -4,7 +4,6 @@ const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 const ENV = require('./app.env');
 const UTILS = require('./webpack.utils');
-const { SvgoNoPrefixConfig } = require('./svgo.config');
 
 const imageminIgnore = UTILS.readIgnoreFile('./.imageminignore');
 const imageminLogger = weblog({ name: 'imagemin' });
@@ -31,14 +30,6 @@ module.exports = {
             effort: 1,
         },
     },
-    plugins: [
-        [
-            'svgo',
-            {
-                ...SvgoNoPrefixConfig,
-            },
-        ],
-    ],
 };
 module.exports.encodeOptions.jpg = module.exports.encodeOptions.jpeg;
 

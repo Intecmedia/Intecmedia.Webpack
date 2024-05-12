@@ -163,14 +163,11 @@ module.exports = {
                       ...(APP.IMAGEMIN
                           ? [
                                 new ImageMinimizerPlugin({
-                                    test: /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i,
-                                    exclude: [/@resize-/, /(\?|&)resize=/, /(fonts|font)/i, 'svg-sprite.svg'],
+                                    test: /\.(jpeg|jpg|png|gif)(\?.*)?$/i,
+                                    exclude: [/@resize-/, /(\?|&)resize=/],
                                     minimizer: {
                                         implementation: imageminConfig.implementation,
-                                        options: {
-                                            plugins: imageminConfig.plugins,
-                                            encodeOptions: imageminConfig.encodeOptions,
-                                        },
+                                        options: { encodeOptions: imageminConfig.encodeOptions },
                                         filter: (input, name) => !imageminConfig.testIgnore(name),
                                     },
                                 }),
