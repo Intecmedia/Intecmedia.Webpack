@@ -13,7 +13,7 @@ exports.description = [
 exports.fn = (root, options, extra) => ({
     element: {
         enter: (node) => {
-            if (extra.path && UTILS.slash(extra.path).indexOf(SPRITE_DIR) !== 0) {
+            if (!extra.path || UTILS.slash(extra.path).indexOf(SPRITE_DIR) !== 0) {
                 return;
             }
             Object.values(node.attributes).forEach((attr) => {
