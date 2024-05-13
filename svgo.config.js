@@ -7,6 +7,7 @@ const SvgoCreateConfig = (config) => ({
                 overrides: {
                     // customize options for plugins included in preset
                     convertColors: { shortname: false },
+                    removeRasterImages: true,
                     // or disable plugins
                     cleanupIds: false,
                     convertShapeToPath: false,
