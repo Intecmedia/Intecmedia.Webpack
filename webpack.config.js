@@ -241,6 +241,7 @@ module.exports = {
                                 exclude: ['assets-manifest.json'],
                                 filename: '[path][base].br[query]',
                                 algorithm: 'brotliCompress',
+                                minRatio: Number.MAX_SAFE_INTEGER,
                             }),
                         ]
                       : []),
@@ -251,6 +252,7 @@ module.exports = {
                                 exclude: ['assets-manifest.json'],
                                 filename: '[path][base].gz[query]',
                                 algorithm: 'gzip',
+                                minRatio: Number.MAX_SAFE_INTEGER,
                             }),
                         ]
                       : []),
