@@ -6,6 +6,7 @@
         "type": "git",
         "url": "https://github.com/Intecmedia/Intecmedia.Webpack.git"
     },
+    "type": "commonjs",
     "scripts": {
         "clean": "cross-env NODE_ENV=production node script.clean.js",
         "clear-cache": "npx rimraf ./node_modules/.cache",
