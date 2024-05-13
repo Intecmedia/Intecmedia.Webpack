@@ -11,22 +11,27 @@ exports.description = [
     'Safari issue: https://bugs.webkit.org/show_bug.cgi?id=105904',
 ].join('\n');
 
-exports.fn = (root, options, info) => ({
-    element: {
-        enter: (node) => {
-            if (!info.path) {
-                return;
-            }
-            const filepath = info.path ? UTILS.slash(info.path) : false;
-            if (!(filepath.indexOf(SPRITE_DIR) === 0 || filepath.indexOf(SPRITE_FILE) === 0)) {
-                return;
-            }
-            Object.values(node.attributes).forEach((attr) => {
-                if (URL_PATTERN.test(attr)) {
-                    console.error(`[svgo.no-sprite-url] error in ${JSON.stringify(info.path)}`, node);
-                    throw new Error(`In ${JSON.stringify(info.path)} -- ${exports.description}`);
-                }
-            });
+const isSpriteFile = (info) => {
+    if (!info.path) return false;
+    const filepath = info.path ? UTILS.slash(info.path) : false;
+    if (filepath.indexOf(SPRITE_DIR) === 0 || filepath.indexOf(SPRITE_FILE) === 0) {
+        return true;
+    }
+    return false;
+};
+
+exports.fn = (root, options, info) => {
+    if (!isSpriteFile(info)) return {};
+    return {
+        element: {
+            enter: (node) => {
+                Object.values(node.attributes).forEach((attr) => {
+                    if (URL_PATTERN.test(attr)) {
+                        console.error(`[svgo.no-sprite-url] error in ${JSON.stringify(info.path)}`, node);
+                        throw new Error(`In ${JSON.stringify(info.path)} -- ${exports.description}`);
+                    }
+                });
+            },
         },
-    },
-});
+    };
+};
