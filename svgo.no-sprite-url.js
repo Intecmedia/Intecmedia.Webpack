@@ -14,7 +14,7 @@ exports.description = [
 const isSpriteFile = (info) => {
     if (!info.path) return false;
     const filepath = UTILS.slash(info.path);
-    if (filepath.indexOf(SPRITE_DIR) === 0 || filepath.indexOf(SPRITE_FILE) === 0) {
+    if (filepath.startsWith(SPRITE_DIR) || filepath.startsWith(SPRITE_FILE)) {
         return true;
     }
     return false;
