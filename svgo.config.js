@@ -7,7 +7,6 @@ const SvgoCreateConfig = (config) => ({
                 overrides: {
                     // customize options for plugins included in preset
                     convertColors: { shortname: false },
-                    removeRasterImages: true,
                     // or disable plugins
                     cleanupIds: false,
                     convertShapeToPath: false,
@@ -29,6 +28,7 @@ const SvgoCreateConfig = (config) => ({
                 prefixClassNames: false,
             },
         },
+        { name: 'removeRasterImages' },
         // configure builtin plugin not included in preset
         { name: 'noDataURL', ...require('./svgo.no-data-url') },
         { name: 'noSpriteURL', ...require('./svgo.no-sprite-url') },
