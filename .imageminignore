@@ -1,5 +1,4 @@
 img/og-image.*
 img/favicons/*
-img/svg-sprite.svg
 img/**/*@resize-*.*
 upload/**/*@resize-*.*

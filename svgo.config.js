@@ -38,5 +38,3 @@ const SvgoCreateConfig = (config) => ({
 });
 
 module.exports.SvgoCreateConfig = SvgoCreateConfig;
-
-module.exports.SvgoNoPrefixConfig = SvgoCreateConfig({ prefix: false });

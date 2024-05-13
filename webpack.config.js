@@ -6,6 +6,7 @@ const weblog = require('webpack-log');
 
 const logger = weblog({ name: 'webpack-config' });
 const imageminConfig = require('./imagemin.config');
+const { SvgoCreateConfig } = require('./svgo.config');
 
 const ENV = require('./app.env');
 const APP = require('./app.config');
@@ -168,6 +169,15 @@ module.exports = {
                                     minimizer: {
                                         implementation: imageminConfig.implementation,
                                         options: { encodeOptions: imageminConfig.encodeOptions },
+                                        filter: (input, name) => !imageminConfig.testIgnore(name),
+                                    },
+                                }),
+                                new ImageMinimizerPlugin({
+                                    test: /\.(svg)(\?.*)?$/i,
+                                    exclude: [/@resize-/, /(\?|&)resize=/],
+                                    minimizer: {
+                                        implementation: ImageMinimizerPlugin.svgoMinify,
+                                        options: { encodeOptions: SvgoCreateConfig({ prefix: false, pretty: false }) },
                                         filter: (input, name) => !imageminConfig.testIgnore(name),
                                     },
                                 }),

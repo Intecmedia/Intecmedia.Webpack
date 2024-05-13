@@ -14,7 +14,7 @@ module.exports = function SvgLoader(content) {
     const loaderCallback = loaderContext.async();
 
     const name = path.basename(loaderContext.resourcePath, '.svg');
-    const options = SvgoCreateConfig({ prefix: `svgo-${name.toLowerCase()}` });
+    const options = SvgoCreateConfig({ prefix: `svgo-${name.toLowerCase()}`, pretty: true });
 
     const relativePath = UTILS.slash(path.relative(__dirname, loaderContext.resourcePath));
     options.path = relativePath;
