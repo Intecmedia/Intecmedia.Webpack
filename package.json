@@ -120,7 +120,7 @@
     },
     "overrides": {
         "postcss": "8.4.38",
-        "sharp": "0.33.3"
+        "sharp": "0.33.4"
     },
     "dependencies": {
         "@babel/cli": "^7.24.5",
@@ -220,7 +220,7 @@
         "sass-loader": "^14.2.1",
         "schema-utils": "^4.2.0",
         "semver": "^7.6.2",
-        "sharp": "0.33.3",
+        "sharp": "0.33.4",
         "stylelint": "^16.5.0",
         "stylelint-config-sass-guidelines": "^11.1.0",
         "stylelint-high-performance-animation": "^1.10.0",
