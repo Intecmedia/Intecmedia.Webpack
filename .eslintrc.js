@@ -8,8 +8,7 @@ module.exports = {
     'env': {},
     // common extends
     'extends': [
-        ...(ENV.PROD ? ['plugin:jsdoc/recommended'] : []),
-        'plugin:@eslint-community/eslint-comments/recommended',
+        ...(ENV.PROD ? ['plugin:jsdoc/recommended', 'plugin:@eslint-community/eslint-comments/recommended'] : []),
         'airbnb-base',
     ],
     'overrides': [
@@ -91,12 +90,6 @@ module.exports = {
     // common rules
     'rules': {
         // code quality rules (fastest)
-        '@eslint-community/eslint-comments/require-description': [
-            'error',
-            {
-                'ignore': ['global', 'globals'],
-            },
-        ],
         'class-methods-use-this': 'off',
         'func-names': ['error'],
         'import/dynamic-import-chunkname': [
@@ -134,7 +127,14 @@ module.exports = {
         'require-await': ['error'],
         ...(ENV.PROD
             ? // code style rules (slowest)
+
               {
+                  '@eslint-community/eslint-comments/require-description': [
+                      'error',
+                      {
+                          'ignore': ['global', 'globals'],
+                      },
+                  ],
                   'id-length': [
                       'error',
                       {
