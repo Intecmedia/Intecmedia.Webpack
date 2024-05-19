@@ -172,7 +172,7 @@
         "focus-within": "^3.0.2",
         "front-matter": "^4.0.2",
         "glob": "^10.3.15",
-        "html-validate": "^8.18.2",
+        "html-validate": "^8.19.0",
         "html-validator": "^6.0.1",
         "html-webpack-plugin": "^5.6.0",
         "husky": "^9.0.11",
