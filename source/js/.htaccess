@@ -55,3 +55,60 @@
         Header append Vary Accept-Encoding
     </FilesMatch>
 </IfModule>
+
+# wasm brotli
+<IfModule mod_headers.c>
+    # Enable rewrite
+    RewriteEngine On
+
+    # Serve brotli compressed wasm files if they exist and the client accepts gzip.
+    RewriteCond %{REQUEST_FILENAME} \.wasm$ [NC]
+    RewriteCond %{HTTP:Accept-encoding} br
+    RewriteCond %{REQUEST_FILENAME}\.br -s
+    RewriteRule ^(.*)\.wasm $1\.wasm\.br [QSA]
+    # Brotli not accepted
+    RewriteCond %{REQUEST_FILENAME} \.wasm\.br$ [NC]
+    RewriteCond %{HTTP:Accept-encoding} !br
+    RewriteCond %{REQUEST_FILENAME} -s
+    RewriteRule ^(.*)\.wasm\.br $1\.wasm [L,QSA]
+
+    # Serve gzip compressed wasm files if they exist and the client accepts gzip.
+    RewriteCond %{REQUEST_FILENAME} \.wasm$ [NC]
+    RewriteCond %{HTTP:Accept-encoding} gzip
+    RewriteCond %{REQUEST_FILENAME}\.gz -s
+    RewriteRule ^(.*)\.wasm $1\.wasm\.gz [QSA]
+    # Gzip not accepted
+    RewriteCond %{REQUEST_FILENAME} \.wasm\.gz$ [NC]
+    RewriteCond %{HTTP:Accept-encoding} !gzip
+    RewriteCond %{REQUEST_FILENAME} -s
+    RewriteRule ^(.*)\.wasm\.gz $1\.wasm [L,QSA]
+
+    # Serve correct content types, and prevent mod_deflate double gzip.
+    RewriteRule \.wasm\.gz$ - [T=application/wasm,E=no-gzip:1]
+    RewriteRule \.wasm\.br$ - [T=application/wasm,E=no-gzip:1]
+
+    <Files *.wasm.gz>
+        # fix content type
+        AddType "application/wasm" .gz
+        AddEncoding gzip .gz
+        RemoveLanguage .gz
+    </Files>
+    <Files *.wasm.br>
+        # fix content type
+        AddType "application/wasm" .br
+        AddEncoding br .br
+        RemoveLanguage .br
+    </Files>
+    <FilesMatch "(\.wasm\.gz)$">
+        # Serve correct encoding type.
+        Header set Content-Encoding gzip
+        # Force proxies to cache gzipped & non-gzipped js files separately.
+        Header append Vary Accept-Encoding
+    </FilesMatch>
+    <FilesMatch "(\.wasm\.br)$">
+        # Serve correct encoding type.
+        Header set Content-Encoding br
+        # Force proxies to cache gzipped & non-gzipped js files separately.
+        Header append Vary Accept-Encoding
+    </FilesMatch>
+</IfModule>
