@@ -237,7 +237,7 @@ module.exports = {
                   ...(APP.BROTLI
                       ? [
                             new CompressionPlugin({
-                                test: /\.(js|css|svg|json|lottie|gltf|glb|hdr)(\?.*)?$/i,
+                                test: /\.(js|css|svg|json|lottie|gltf|glb|hdr|wasm)(\?.*)?$/i,
                                 exclude: ['assets-manifest.json'],
                                 filename: '[path][base].br[query]',
                                 algorithm: 'brotliCompress',
@@ -248,7 +248,7 @@ module.exports = {
                   ...(APP.GZIP
                       ? [
                             new CompressionPlugin({
-                                test: /\.(js|css|svg|json|lottie|gltf|glb|hdr)(\?.*)?$/i,
+                                test: /\.(js|css|svg|json|lottie|gltf|glb|hdr|wasm)(\?.*)?$/i,
                                 exclude: ['assets-manifest.json'],
                                 filename: '[path][base].gz[query]',
                                 algorithm: 'gzip',
