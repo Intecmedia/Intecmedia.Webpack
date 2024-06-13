@@ -80,7 +80,7 @@ module.exports = {
 
     devServer: {
         allowedHosts: ['localhost', '.localhost', ...(ENV.ARGV.allowedHosts ? ENV.ARGV.allowedHosts.split(',') : [])],
-        hot: 'only',
+        hot: true,
         port: ENV.ARGV.port || 8888,
         host: ENV.ARGV.host || '0.0.0.0',
         static: {
@@ -96,6 +96,7 @@ module.exports = {
             stats: ENV.DEBUG ? 'detailed' : 'normal',
             publicPath: path.posix.resolve(APP.PUBLIC_PATH, '/'),
             writeToDisk: true,
+            serverSideRender: true,
         },
         ...require('./devserver.config'),
     },
