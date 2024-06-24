@@ -3,7 +3,6 @@
 const path = require('node:path');
 const webpack = require('webpack');
 const weblog = require('webpack-log');
-const zopfli = require('@gfx/zopfli');
 
 const logger = weblog({ name: 'webpack-config' });
 const imageminConfig = require('./imagemin.config');
@@ -253,9 +252,7 @@ module.exports = {
                                 test: /\.(js|css|svg|json|lottie|gltf|glb|hdr|wasm)(\?.*)?$/i,
                                 exclude: ['assets-manifest.json'],
                                 filename: '[path][base].gz[query]',
-                                algorithm(input, compressionOptions, callback) {
-                                    return zopfli.gzip(input, compressionOptions, callback);
-                                },
+                                algorithm: 'gzip',
                                 minRatio: Number.MAX_SAFE_INTEGER,
                             }),
                         ]
