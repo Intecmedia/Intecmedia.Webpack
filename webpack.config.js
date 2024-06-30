@@ -153,7 +153,13 @@ module.exports = {
                     chunks: 'initial',
                     enforce: true,
                     test: /[\\/](node_modules)[\\/](.+)\.(js|mjs|cjs|ts)(\?.*)?$/,
-                    name: 'vendor',
+                    name(module) {
+                        const packageName = module.context.match(
+                            /[\\/]node_modules[\\/](?:(@[\w-]*?[\\/].*?|.*?)([\\/]|$))/
+                        )[1];
+                        return `vendor.${packageName.replace('@', '').replace(/[\\/]/, '-')}`;
+                    },
+                    minSize: 20000,
                     priority: 0,
                 },
             },
