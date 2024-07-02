@@ -36,22 +36,22 @@ export default class AbstractApp {
      * @memberof AbstractApp
      */
     get(name, id = null) {
-        if (name in this.components) {
-            if (arguments.length === 1) {
-                const values = Object.values(this.components[name]);
-                return values[0] || null;
-            }
-            if (id instanceof Element) {
-                const dataComponentId = id.getAttribute('data-component-id');
-                if (dataComponentId && dataComponentId in this.components[name]) {
-                    return this.components[name][dataComponentId];
-                }
-                return null;
-            }
-            if (id in this.components[name]) {
-                return this.components[name][id];
+        if (!(name in this.components)) {
+            return null;
+        }
+        if (arguments.length === 1) {
+            const values = Object.values(this.components[name]);
+            return values[0] || null;
+        }
+        if (id instanceof Element) {
+            const dataComponentId = id.getAttribute('data-component-id');
+            if (dataComponentId && dataComponentId in this.components[name]) {
+                return this.components[name][dataComponentId];
             }
             return null;
+        }
+        if (id in this.components[name]) {
+            return this.components[name][id];
         }
         return null;
     }
@@ -86,16 +86,6 @@ export default class AbstractApp {
             console.log('[app] init', event);
         }
         this.triggerScope(document.documentElement, 'init');
-    }
-
-    /**
-     * Init scope
-     * @param {HTMLElement} scope - scope element
-     * @memberof AbstractApp
-     */
-    initScope(scope) {
-        console.error(`[app] initScope method is deprecated, use updateScope instead`, scope);
-        throw new Error('Method initScope method is deprecated, use updateScope instead.');
     }
 
     /**
