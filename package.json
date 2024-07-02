@@ -119,7 +119,7 @@
         "npm": ">=10"
     },
     "overrides": {
-        "postcss": "8.4.38",
+        "postcss": "8.4.39",
         "sharp": "0.33.4"
     },
     "dependencies": {
@@ -161,7 +161,7 @@
         "eslint-plugin-jsdoc": "^48.5.0",
         "eslint-plugin-n": "^17.9.0",
         "eslint-plugin-prettier": "^5.1.3",
-        "eslint-plugin-promise": "^6.2.0",
+        "eslint-plugin-promise": "^6.4.0",
         "eslint-webpack-plugin": "^4.2.0",
         "expose-loader": "^5.0.0",
         "fastparse": "^1.1.2",
@@ -196,7 +196,7 @@
         "nodemon": "^3.1.4",
         "nunjucks": "^3.2.4",
         "p-limit": "^5.0.0",
-        "postcss": "8.4.38",
+        "postcss": "8.4.39",
         "postcss-browser-reporter": "^0.7.0",
         "postcss-devtools": "^1.1.1",
         "postcss-fail-on-warn": "^0.2.1",
@@ -235,7 +235,7 @@
         "svg-spritemap-webpack-plugin": "^4.5.1",
         "svgo": "^3.3.2",
         "terser-webpack-plugin": "^5.3.10",
-        "typescript": "^5.5.2",
+        "typescript": "^5.5.3",
         "typograf": "^7.4.1",
         "url-loader": "^4.1.1",
         "webpack": "^5.92.1",
