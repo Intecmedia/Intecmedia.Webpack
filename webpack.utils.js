@@ -262,7 +262,8 @@ module.exports.readIgnoreFile = readIgnoreFile;
  * @returns {string} - package name
  */
 function packageName(filepath) {
-    const [org, pkg] = slash(path.relative(MODULES_DIR, path.resolve(filepath))).split('/');
+    const relpath = slash(path.relative(MODULES_DIR, path.resolve(filepath)));
+    const [org, pkg] = relpath.split('/');
 
     return org.startsWith('@') ? `${org}/${pkg}` : org;
 }
