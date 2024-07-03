@@ -155,10 +155,8 @@ module.exports = {
                     test: /[\\/](node_modules)[\\/](.+)\.(js|mjs|cjs|ts)(\?.*)?$/,
                     name: APP.SPLIT_CHUNKS
                         ? (module) => {
-                              const packageName = module.context.match(
-                                  /[\\/]node_modules[\\/](?:(@[\w-]*?[\\/].*?|.*?)([\\/]|$))/
-                              )[1];
-                              return `vendor.${packageName.replace('@', '').replace(/[\\/]/, '-')}`;
+                              const packageName = UTILS.packageName(module.context);
+                              return `vendor.${packageName.replace('@', '').replace('/', '-')}`;
                           }
                         : 'vendor',
                     minSize: 20000,

@@ -5,6 +5,7 @@ const ignore = require('ignore');
 const yargs = require('yargs/yargs');
 
 const FILENAME_PATTERN = /^[a-zA-Z0-9-/.,_@]+$/;
+const MODULES_DIR = path.join(__dirname, 'node_modules');
 
 /**
  * @typedef { import('glob').GlobOptions } GlobOptions
@@ -118,7 +119,7 @@ function cacheDir(name, skipEnv = false) {
         return slash(path.join(process.env.CACHE_DIR, prefixedName, '/'));
     }
 
-    return slash(path.join(__dirname, 'node_modules', '.cache', prefixedName, '/'));
+    return slash(path.join(MODULES_DIR, '.cache', prefixedName, '/'));
 }
 
 module.exports.cacheDir = cacheDir;
@@ -254,3 +255,16 @@ function readIgnoreFile(filepath, options = {}) {
 }
 
 module.exports.readIgnoreFile = readIgnoreFile;
+
+/**
+ * Get package name from file.
+ * @param {string} filepath - input file path
+ * @returns {string} - package name
+ */
+function packageName(filepath) {
+    const [org, pkg] = slash(path.relative(MODULES_DIR, path.resolve(filepath))).split('/');
+
+    return org.startsWith('@') ? `${org}/${pkg}` : org;
+}
+
+module.exports.packageName = packageName;
