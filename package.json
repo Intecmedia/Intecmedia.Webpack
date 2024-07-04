@@ -195,7 +195,7 @@
         "mini-css-extract-plugin": "^2.9.0",
         "nodemon": "^3.1.4",
         "nunjucks": "^3.2.4",
-        "p-limit": "^5.0.0",
+        "p-limit": "^6.0.0",
         "postcss": "8.4.39",
         "postcss-browser-reporter": "^0.7.0",
         "postcss-devtools": "^1.1.1",
