@@ -9,7 +9,7 @@ const ENV = require('./app.env');
 module.exports = deepMerge({}, sharedConfig, {
     'customSyntax': 'postcss-scss',
     'defaultSeverity': ENV.PROD || ENV.DEBUG ? 'error' : 'warning',
-    'extends': ['stylelint-config-sass-guidelines', ...sharedConfig.extends],
+    'extends': ['stylelint-config-recommended-scss', ...sharedConfig.extends],
     'plugins': [
         'stylelint-high-performance-animation',
         'stylelint-max-lines',
@@ -31,6 +31,7 @@ module.exports = deepMerge({}, sharedConfig, {
                 'ignore': ['blockless-at-rules', 'pseudo-classes'],
             },
         ],
+        'no-descending-specificity': null,
         'pitcher/max-lines': 1024,
         'pitcher/max-root-rules': 16,
         'plugin/no-low-performance-animation-properties': [
@@ -89,6 +90,7 @@ module.exports = deepMerge({}, sharedConfig, {
             },
         ],
         'scss/at-extend-no-missing-placeholder': null,
+        'scss/comment-no-empty': null,
         'scss/dollar-variable-colon-space-after': null,
         'scss/dollar-variable-default': [
             true,
@@ -99,6 +101,7 @@ module.exports = deepMerge({}, sharedConfig, {
         'scss/dollar-variable-empty-line-after': null,
         'scss/dollar-variable-pattern': ['^[a-zA-Z][a-zA-Z-\\d]*$'],
         'scss/no-global-function-names': null,
+        'scss/operator-no-newline-after': null,
         'scss/selector-nest-combinators': 'always',
         'selector-class-pattern': ['^[a-zA-Z0-9\\-_]+$'],
         'selector-max-class': 5,
