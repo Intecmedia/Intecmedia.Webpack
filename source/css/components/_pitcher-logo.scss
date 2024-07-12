@@ -14,10 +14,6 @@ $pitcher-logo-hover-color: $link-hover-color !default;
     &:focus,
     &:active {
         color: #{$pitcher-logo-hover-color};
-
-        .pitcher-logo__icon {
-            fill: #{$pitcher-logo-hover-color};
-        }
     }
 }
 
@@ -32,4 +28,10 @@ $pitcher-logo-hover-color: $link-hover-color !default;
     height: 29px;
 
     fill: #{$pitcher-logo-color};
+
+    .pitcher-logo:hover &,
+    .pitcher-logo:focus &,
+    .pitcher-logo:active & {
+        fill: #{$pitcher-logo-hover-color};
+    }
 }
