@@ -180,8 +180,7 @@ html.avif .test {
 ### Favicons и App Icons
 
 -   Мы используем [favicons-webpack-plugin](https://github.com/jantimon/favicons-webpack-plugin).
--   Файл `.favicons-source-64x64.png` исходник favicons.
--   Файл `.favicons-source-1024x1024.png` исходник app icons.
+-   Файл `.favicons-source.svg` исходник favicons.
 -   `THEME_COLOR` редактируется в `app.config.js`.
 -   `BACKGROUND_COLOR` редактируется в `app.config.js`.
 -   Метатеги добавлются автоматически в <head>.
