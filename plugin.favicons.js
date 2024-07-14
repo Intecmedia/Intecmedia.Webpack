@@ -25,6 +25,9 @@ const DEFAULT_OPTIONS = {
             windows: false,
             yandex: false,
         },
+        files: {
+            android: { manifestFileName: 'manifest.json' },
+        },
     },
 };
 
