@@ -628,6 +628,7 @@ module.exports = {
                                 outputStyle: 'expanded',
                                 verbose: ENV.DEBUG || ENV.ARGV.verbose,
                                 quietDeps: true,
+                                silenceDeprecations: ['mixed-decls'],
                             },
                             webpackImporter: false,
                         },
