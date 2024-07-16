@@ -32,6 +32,7 @@ module.exports = deepMerge({}, sharedConfig, {
             },
         ],
         'no-descending-specificity': null,
+        'no-invalid-double-slash-comments': null,
         'pitcher/max-lines': 1024,
         'pitcher/max-root-rules': 16,
         'plugin/no-low-performance-animation-properties': [
