@@ -45,8 +45,6 @@
         $max-width: $fluid-gutter-max-width
     );
 
-    background: var(--#{$prefix}body-bg, #{$body-bg});
-
     @include vertical-breakpoint-down(sm) {
         --section-height: #{map-get($vertical-breakpoints, "sm")};
     }
@@ -63,6 +61,11 @@
             font-size: $root-font-size-clamp;
         }
     }
+}
+
+/* postcss-bem-linter: ignore */
+html {
+    background: var(--#{$prefix}body-bg, #{$body-bg});
 }
 
 /* postcss-bem-linter: ignore */
