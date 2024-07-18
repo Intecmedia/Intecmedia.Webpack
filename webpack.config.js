@@ -634,7 +634,7 @@ module.exports = {
                                 quietDeps: true,
                                 silenceDeprecations: ['mixed-decls'],
                                 logger: {
-                                 warn: () => {},
+                                    warn: () => {},
                                 },
                             },
                             webpackImporter: false,
