@@ -90,9 +90,9 @@ module.exports = {
         client: {
             logging: 'info',
             overlay: {
-               errors: true,
-               warnings: false,
-               runtimeErrors: true,
+                errors: true,
+                warnings: false,
+                runtimeErrors: true,
             },
             progress: true,
         },
@@ -633,6 +633,7 @@ module.exports = {
                                 verbose: ENV.DEBUG || ENV.ARGV.verbose,
                                 quietDeps: true,
                                 silenceDeprecations: ['mixed-decls'],
+                                logger: { warn: () => {} },
                             },
                             webpackImporter: false,
                         },
