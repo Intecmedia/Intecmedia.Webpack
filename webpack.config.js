@@ -89,7 +89,7 @@ module.exports = {
         },
         client: {
             logging: 'info',
-            overlay: : {
+            overlay: {
                errors: true,
                warnings: false,
                runtimeErrors: true,
