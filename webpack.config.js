@@ -633,7 +633,9 @@ module.exports = {
                                 verbose: ENV.DEBUG || ENV.ARGV.verbose,
                                 quietDeps: true,
                                 silenceDeprecations: ['mixed-decls'],
-                                logger: { warn: () => {} },
+                                logger: {
+                                 warn: () => {},
+                                },
                             },
                             webpackImporter: false,
                         },
