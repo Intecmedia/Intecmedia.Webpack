@@ -114,7 +114,7 @@ module.exports = deepMerge({}, sharedConfig, {
                 'ignoreTypes': ['/^(html|body|svg|picture|img|iframe|video|option|optgroup|canvas)\\.?/'],
             },
         ],
-        'selector-nested-pattern': ['^(&--|&__|&::|&:|&\\.|&\\[|>|~|\\+|\\w+|\\.)'],
+        'selector-nested-pattern': ['^(&--|&__|&::|&:|&\\.|&\\[|>|&\\s*|~|\\+|\\w+|\\.)'],
         'selector-no-qualifying-type': [
             true,
             {
