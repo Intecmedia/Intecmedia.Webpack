@@ -425,9 +425,7 @@ $fluid-screen-height: 100vh !default; // or 100vmin
     $clamp-size: fluid-clamp($min-size, $max-size, $min-width, $max-width);
     $comment: "fluid-clamp-prop($min-size: #{$min-size}, $max-size: #{$max-size}, $min-width: #{$min-width}, $max-width: #{$max-width})";
 
-    & {
-        #{$prop}: to-fixed($min-size, $fluid-fixed-digits); /* #{$comment} */
-    }
+    #{$prop}: to-fixed($min-size, $fluid-fixed-digits); /* #{$comment} */
 
     @if ($clamp-fallback) {
         @supports not (#{$clamp-supports}) {
@@ -450,10 +448,8 @@ $fluid-screen-height: 100vh !default; // or 100vmin
             #{$prop}: $clamp-size; /* #{$comment} */
         }
     } @else {
-        & {
-            /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- checked on @supports */
-            #{$prop}: $clamp-size; /* #{$comment} */
-        }
+        /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- checked on @supports */
+        #{$prop}: $clamp-size; /* #{$comment} */
     }
 }
 
@@ -480,9 +476,7 @@ $fluid-screen-height: 100vh !default; // or 100vmin
     $clamp-size: fluid-clamp-vertical($min-size, $max-size, $min-height, $max-height);
     $comment: "fluid-clamp-prop-vertical($min-size: #{$min-size}, $max-size: #{$max-size}, $min-height: #{$min-height}, $max-height: #{$max-height})";
 
-    & {
-        #{$prop}: to-fixed($min-size, $fluid-fixed-digits); /* #{$comment} */
-    }
+    #{$prop}: to-fixed($min-size, $fluid-fixed-digits); /* #{$comment} */
 
     @if ($clamp-fallback) {
         @supports not (#{$clamp-supports}) {
@@ -505,10 +499,8 @@ $fluid-screen-height: 100vh !default; // or 100vmin
             #{$prop}: $clamp-size; /* #{$comment} */
         }
     } @else {
-        & {
-            /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- checked on @supports */
-            #{$prop}: $clamp-size; /* #{$comment} */
-        }
+        /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- checked on @supports */
+        #{$prop}: $clamp-size; /* #{$comment} */
     }
 }
 
