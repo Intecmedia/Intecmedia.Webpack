@@ -543,9 +543,7 @@ module.exports = {
             // font loaders
             {
                 test: /\.(eot|woff|woff2|ttf|svg)(\?.*)?$/i,
-                include: [
-                    /(fonts|font)/i,
-                ],
+                include: [/(fonts|font)/i],
                 exclude: [
                     /(img|images)/i,
                     path.join(ENV.SOURCE_PATH, 'img/svg-sprite'),
