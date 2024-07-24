@@ -628,7 +628,7 @@ module.exports = {
                                 ),
                             }),
                             sourceMap: true,
-                            implementation: require('sass'),
+                            implementation: require('sass-embedded'),
                             sassOptions: {
                                 charset: false,
                                 indentWidth: 4,
