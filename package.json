@@ -101,10 +101,10 @@
         "production": [
             "iOS >= 12",
             "Safari >= 12",
-            "Chrome >= 60",
-            "ChromeAndroid >= 60",
-            "Opera >= 60",
-            "Firefox >= 60",
+            "Chrome >= 80",
+            "ChromeAndroid >= 80",
+            "Opera >= 80",
+            "Firefox >= 80",
             "Firefox ESR"
         ],
         "development": [
