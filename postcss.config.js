@@ -3,7 +3,6 @@ const ENV = require('./app.env');
 
 module.exports = {
     plugins: [
-        require('postcss-devtools')({ precise: true }),
         require('./postcss.stylelint')(),
         ...(ENV.PROD || ENV.DEBUG
             ? [
