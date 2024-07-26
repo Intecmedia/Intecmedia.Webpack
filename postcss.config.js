@@ -9,7 +9,6 @@ module.exports = {
             ? [
                   require('postcss-focus')({ oldFocus: true }),
                   require('postcss-focus-visible')(),
-                  require('postcss-focus-within')(),
                   require('postcss-font-display')([{ display: 'swap' }, { test: 'FontAwesome', display: 'block' }]),
                   require('postcss-flexbugs-fixes')(),
                   ...(APP.AVIF ? [require('./postcss.resize')('avif')] : []),
