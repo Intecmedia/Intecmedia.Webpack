@@ -243,7 +243,6 @@
         "webpack-dev-server": "^5.0.4",
         "webpack-log": "^3.0.2",
         "webpack-sources": "^3.2.3",
-        "whatwg-fetch": "^3.6.20",
         "yargs": "^17.7.2"
     }
 }

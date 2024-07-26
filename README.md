@@ -104,7 +104,6 @@
 
 ## Полифилы
 
--   [fetch](https://github.com/github/fetch#readme)
 -   [focus-visible](https://github.com/WICG/focus-visible)
 -   [intersection-observer](https://github.com/w3c/IntersectionObserver#readme)
 -   [resize-observer-polyfill](https://github.com/que-etc/resize-observer-polyfill)

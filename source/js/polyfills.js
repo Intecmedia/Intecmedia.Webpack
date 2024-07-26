@@ -14,9 +14,6 @@ require('~/polyfills/focus-visible');
 
 if (NODE_ENV === 'production' || DEBUG) {
     // eslint-disable-next-line global-require -- conditinal polyfill
-    require('~/polyfills/fetch');
-
-    // eslint-disable-next-line global-require -- conditinal polyfill
     require('~/polyfills/intersection-observer');
 
     // eslint-disable-next-line global-require -- conditinal polyfill
