@@ -4,7 +4,7 @@
 
 /* stylelint-disable function-url-quotes -- stylelint not detect quote() */
 
-@mixin font-face($name, $path, $weight: null, $style: null, $exts: woff2 woff) {
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: woff2 woff, $display: swap) {
     $src: null;
     $extmods: (
         eot: "?",
@@ -26,7 +26,7 @@
         font-family: quote($name);
         font-style: $style;
         src: $src;
-        font-display: swap;
+        font-display: $display;
 
         @content;
     }
