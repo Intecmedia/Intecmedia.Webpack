@@ -199,7 +199,6 @@
         "postcss-browser-reporter": "^0.7.0",
         "postcss-devtools": "^1.1.1",
         "postcss-fail-on-warn": "^0.2.1",
-        "postcss-flexbugs-fixes": "^5.0.2",
         "postcss-focus": "^7.0.0",
         "postcss-focus-visible": "^9.0.1",
         "postcss-font-display": "^0.3.0",
