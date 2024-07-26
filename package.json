@@ -179,7 +179,6 @@
         "image-minimizer-webpack-plugin": "^4.0.2",
         "image-size": "^1.1.1",
         "imports-loader": "^5.0.0",
-        "intersection-observer": "^0.12.2",
         "jquery": "^3.7.1",
         "js-beautify": "^1.15.1",
         "line-column": "^1.0.2",
