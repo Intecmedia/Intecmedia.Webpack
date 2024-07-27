@@ -634,7 +634,7 @@ module.exports = {
                                 verbose: ENV.DEBUG || ENV.ARGV.verbose,
                                 quietDeps: true,
                                 silenceDeprecations: ['mixed-decls'],
-                                loadPaths : [__dirname],
+                                loadPaths: [__dirname],
                                 ...(ENV.DEBUG
                                     ? {}
                                     : {
