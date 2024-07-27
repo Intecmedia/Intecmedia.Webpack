@@ -614,7 +614,7 @@ module.exports = {
                     {
                         loader: 'sass-loader',
                         options: {
-                            api: 'legacy',
+                            api: 'modern-compiler',
                             additionalData: UTILS.toScssVars({
                                 DEBUG: ENV.DEBUG,
                                 NODE_ENV: ENV.NODE_ENV,
@@ -630,11 +630,11 @@ module.exports = {
                             implementation: require('sass-embedded'),
                             sassOptions: {
                                 charset: false,
-                                indentWidth: 4,
                                 outputStyle: 'expanded',
                                 verbose: ENV.DEBUG || ENV.ARGV.verbose,
                                 quietDeps: true,
                                 silenceDeprecations: ['mixed-decls'],
+                                loadPaths : [__dirname],
                                 ...(ENV.DEBUG
                                     ? {}
                                     : {
