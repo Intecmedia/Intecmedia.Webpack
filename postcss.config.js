@@ -8,10 +8,7 @@ module.exports = {
             ? [
                   require('postcss-focus')({ oldFocus: true }),
                   require('postcss-focus-visible')(),
-                  require('postcss-font-display')([
-                      { display: 'swap' },
-                      { test: 'FontAwesome', display: 'block' },
-                  ]),
+                  require('postcss-font-display')([{ display: 'swap' }, { test: 'FontAwesome', display: 'block' }]),
                   ...(APP.AVIF ? [require('./postcss.resize')('avif')] : []),
                   ...(APP.WEBP ? [require('./postcss.resize')('webp')] : []),
                   ...(!ENV.DEBUG
@@ -45,8 +42,6 @@ module.exports = {
         }),
         require('postcss-browser-reporter')(),
         require('./postcss.reporter')(), // this always last
-        ...(!(ENV.DEV_SERVER || ENV.WATCH) && !ENV.DEBUG ? [
-            require('postcss-fail-on-warn')(),
-        ] : []), // this always last
+        ...(!(ENV.DEV_SERVER || ENV.WATCH) && !ENV.DEBUG ? [require('postcss-fail-on-warn')()] : []), // this always last
     ],
 };
