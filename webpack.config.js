@@ -615,8 +615,7 @@ module.exports = {
                         loader: 'sass-loader',
                         options: {
                             api: 'legacy',
-                            additionalData: () =>
-                                UTILS.toScssVars({
+                            additionalData: UTILS.toScssVars({
                                     DEBUG: ENV.DEBUG,
                                     NODE_ENV: ENV.NODE_ENV,
                                     PACKAGE_NAME: ENV.PACKAGE_NAME,
