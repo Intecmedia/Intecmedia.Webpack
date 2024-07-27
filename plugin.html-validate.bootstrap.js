@@ -6,7 +6,7 @@ const { nodeIgnore } = require('./plugin.html-validate.utils');
  */
 
 const COLS_COUNT = 12;
-const COLS_BREAKPOINTS = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
+const COLS_BREAKPOINTS = ['xs', 'ss', 'sm', 'md', 'lg', 'xl', 'xxl', 'hd', 'qhd'];
 
 const makeColsClassList = (cols = COLS_COUNT, breakpoints = COLS_BREAKPOINTS) => {
     const colsNumbers = Array.from({ length: cols }, (value, index) => index + 1);
