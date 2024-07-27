@@ -206,6 +206,6 @@ module.exports = {
                 'config': './resolve.config.js',
             },
         },
-        'polyfills': ['fetch', 'IntersectionObserver', 'Promise', 'ResizeObserver', 'Symbol'],
+        'polyfills': ['ResizeObserver'],
     },
 };
