@@ -616,16 +616,16 @@ module.exports = {
                         options: {
                             api: 'legacy',
                             additionalData: UTILS.toScssVars({
-                                    DEBUG: ENV.DEBUG,
-                                    NODE_ENV: ENV.NODE_ENV,
-                                    PACKAGE_NAME: ENV.PACKAGE_NAME,
-                                    ...Object.assign(
-                                        {},
-                                        ...Object.entries({ ...APP, ENV: {} }).map(([k, v]) => ({
-                                            [`APP-${k}`]: v,
-                                        }))
-                                    ),
-                                }),
+                                DEBUG: ENV.DEBUG,
+                                NODE_ENV: ENV.NODE_ENV,
+                                PACKAGE_NAME: ENV.PACKAGE_NAME,
+                                ...Object.assign(
+                                    {},
+                                    ...Object.entries({ ...APP, ENV: {} }).map(([k, v]) => ({
+                                        [`APP-${k}`]: v,
+                                    }))
+                                ),
+                            }),
                             sourceMap: true,
                             implementation: require('sass-embedded'),
                             sassOptions: {
@@ -635,9 +635,13 @@ module.exports = {
                                 verbose: ENV.DEBUG || ENV.ARGV.verbose,
                                 quietDeps: true,
                                 silenceDeprecations: ['mixed-decls'],
-                                logger: {
-                                    warn: () => {},
-                                },
+                                ...(ENV.DEBUG
+                                    ? {}
+                                    : {
+                                          logger: {
+                                              warn: () => {}, // force silence deprecations
+                                          },
+                                      }),
                             },
                             webpackImporter: false,
                         },
