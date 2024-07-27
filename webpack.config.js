@@ -630,7 +630,7 @@ module.exports = {
                             implementation: require('sass-embedded'),
                             sassOptions: {
                                 charset: false,
-                                outputStyle: 'expanded',
+                                style: 'expanded',
                                 verbose: ENV.DEBUG || ENV.ARGV.verbose,
                                 quietDeps: true,
                                 silenceDeprecations: ['mixed-decls'],
