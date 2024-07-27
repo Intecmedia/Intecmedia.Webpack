@@ -24,9 +24,6 @@ module.exports = {
                 'ignore': ['inside-function'],
             },
         ],
-        'declaration-property-value-disallowed-list': {
-            'display': ['grid', 'inline-grid'], // https://caniuse.com/?search=grid
-        },
         'no-duplicate-selectors': [
             true,
             {
