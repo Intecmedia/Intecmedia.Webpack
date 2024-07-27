@@ -165,6 +165,7 @@ class RowNoChilds extends AbsRule {
      */
     domReady({ document }) {
         const cols = makeColsClassList(this.options.cols, this.options.breakpoints);
+        const gridCols = makeGridColsClassList(this.options.cols, this.options.breakpoints);
         const elements = document.querySelectorAll('.row > *');
         const ignores = this.options.ignore ? document.querySelectorAll(this.options.ignore) : [];
         elements.forEach((el) => {
@@ -173,6 +174,9 @@ class RowNoChilds extends AbsRule {
             }
 
             if (!cols.some((className) => el.classList.contains(className))) {
+                this.report(el, 'Only columns (`.col-*-*`) may be children of `.row`s.');
+            }
+            if (gridCols.some((className) => el.classList.contains(className))) {
                 this.report(el, 'Only columns (`.col-*-*`) may be children of `.row`s.');
             }
         });
@@ -188,7 +192,8 @@ class GridNoChilds extends AbsRule {
      * @param {DOMReadyEvent.document} document - document object
      */
     domReady({ document }) {
-        const cols = makeGridColsClassList(this.options.cols, this.options.breakpoints);
+        const cols = makeColsClassList(this.options.cols, this.options.breakpoints);
+        const gridCols = makeGridColsClassList(this.options.cols, this.options.breakpoints);
         const elements = document.querySelectorAll('.grid > *');
         const ignores = this.options.ignore ? document.querySelectorAll(this.options.ignore) : [];
         elements.forEach((el) => {
@@ -196,8 +201,11 @@ class GridNoChilds extends AbsRule {
                 return;
             }
 
-            if (!cols.some((className) => el.classList.contains(className))) {
-                this.report(el, 'Only columns (`.col-*-*`) may be children of `.grid`s.');
+            if (!gridCols.some((className) => el.classList.contains(className))) {
+                this.report(el, 'Only columns (`.g-col-*-*`) may be children of `.grid`s.');
+            }
+            if (cols.some((className) => el.classList.contains(className))) {
+                this.report(el, 'Only columns (`.g-col-*-*`) may be children of `.grid`s.');
             }
         });
     }
