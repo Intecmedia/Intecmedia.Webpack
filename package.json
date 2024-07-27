@@ -99,8 +99,8 @@
     "license": "MIT",
     "browserslist": {
         "production": [
-            "iOS >= 12",
-            "Safari >= 12",
+            "iOS >= 12.2",
+            "Safari >= 12.2",
             "Chrome >= 80",
             "ChromeAndroid >= 80",
             "Opera >= 80",
