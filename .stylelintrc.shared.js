@@ -46,7 +46,6 @@ module.exports = {
         ...(ENV.PROD
             ? // code style rules (slowest)
               {
-                  'color-hex-alpha': 'never',
                   'property-no-unknown': [
                       true,
                       {
