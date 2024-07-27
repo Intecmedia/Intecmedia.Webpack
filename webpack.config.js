@@ -614,17 +614,19 @@ module.exports = {
                     {
                         loader: 'sass-loader',
                         options: {
-                            additionalData: UTILS.toScssVars({
-                                DEBUG: ENV.DEBUG,
-                                NODE_ENV: ENV.NODE_ENV,
-                                PACKAGE_NAME: ENV.PACKAGE_NAME,
-                                ...Object.assign(
-                                    {},
-                                    ...Object.entries({ ...APP, ENV: {} }).map(([k, v]) => ({
-                                        [`APP-${k}`]: v,
-                                    }))
-                                ),
-                            }),
+                            api: 'legacy',
+                            additionalData: () =>
+                                UTILS.toScssVars({
+                                    DEBUG: ENV.DEBUG,
+                                    NODE_ENV: ENV.NODE_ENV,
+                                    PACKAGE_NAME: ENV.PACKAGE_NAME,
+                                    ...Object.assign(
+                                        {},
+                                        ...Object.entries({ ...APP, ENV: {} }).map(([k, v]) => ({
+                                            [`APP-${k}`]: v,
+                                        }))
+                                    ),
+                                }),
                             sourceMap: true,
                             implementation: require('sass-embedded'),
                             sassOptions: {
