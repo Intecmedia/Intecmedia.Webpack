@@ -118,6 +118,9 @@ class ColNoRow extends AbsRule {
             if (!col.parent || !col.parent.classList.contains('row')) {
                 this.report(col, 'Not found `.row` for `.col`.');
             }
+            if (col.parent && col.parent.classList.contains('grid')) {
+                this.report(col, 'Mixed `.row` and `.grid` not allowed.');
+            }
         });
     }
 }
@@ -144,6 +147,9 @@ class GridColNoGrid extends AbsRule {
             }
             if (!col.parent || !col.parent.classList.contains('grid')) {
                 this.report(col, 'Not found `.grid` for `.g-col`.');
+            }
+            if (col.parent && col.parent.classList.contains('row')) {
+                this.report(col, 'Mixed `.grid` and `.row` not allowed.');
             }
         });
     }
