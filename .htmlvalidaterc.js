@@ -31,6 +31,18 @@ module.exports = {
                 'ignore': '',
             },
         ],
+        'bootstrap/grid-col-no-grid': [
+            'error',
+            {
+                'ignore': '',
+            },
+        ],
+        'bootstrap/grid-no-childs': [
+            'error',
+            {
+                'ignore': '',
+            },
+        ],
         'bootstrap/row-no-childs': [
             'error',
             {

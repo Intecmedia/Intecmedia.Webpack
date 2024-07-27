@@ -29,6 +29,21 @@ const colSelector = (cols = COLS_COUNT, breakpoints = COLS_BREAKPOINTS) => {
     return classList.map((className) => `.${className}`).join(', ');
 };
 
+const makeGridColsClassList = (cols = COLS_COUNT, breakpoints = COLS_BREAKPOINTS) => {
+    const colsNumbers = Array.from({ length: cols }, (value, index) => index + 1);
+    return [
+        ...colsNumbers.map((col) => `g-col-${col}`),
+        ...breakpoints
+            .map((breakpoint) => [...colsNumbers.map((col) => `g-col-${breakpoint}-${col}`), `g-col-${breakpoint}`])
+            .flat(),
+    ];
+};
+
+const gridColSelector = (cols = COLS_COUNT, breakpoints = COLS_BREAKPOINTS) => {
+    const classList = makeGridColsClassList(cols, breakpoints);
+    return classList.map((className) => `.${className}`).join(', ');
+};
+
 /**
  * Abstract bootstrap rule
  */
@@ -81,7 +96,7 @@ class ContainerNoNested extends AbsRule {
 }
 
 /**
- * Lint `.col` without row.
+ * Lint `.col` without `.row`.
  */
 class ColNoRow extends AbsRule {
     /**
@@ -108,6 +123,33 @@ class ColNoRow extends AbsRule {
 }
 
 /**
+ * Lint `.g-col` without `.grid`.
+ */
+class GridColNoGrid extends AbsRule {
+    /**
+     * Lint html document.
+     * @param {DOMReadyEvent.document} document - document object
+     */
+    domReady({ document }) {
+        const selector = gridColSelector(this.options.cols, this.options.breakpoints);
+        const cols = document.querySelectorAll(selector);
+        const ignores = this.options.ignore ? document.querySelectorAll(this.options.ignore) : [];
+        cols.forEach((col) => {
+            if (nodeIgnore(col, ignores)) {
+                return;
+            }
+
+            if (col.classList.contains('grid')) {
+                this.report(col, 'Found both `.grid` and `.g-col-*-*` used on the same element.');
+            }
+            if (!col.parent || !col.parent.classList.contains('grid')) {
+                this.report(col, 'Not found `.grid` for `.g-col`.');
+            }
+        });
+    }
+}
+
+/**
  * Lint empty `.row`.
  */
 class RowNoChilds extends AbsRule {
@@ -126,6 +168,30 @@ class RowNoChilds extends AbsRule {
 
             if (!cols.some((className) => el.classList.contains(className))) {
                 this.report(el, 'Only columns (`.col-*-*`) may be children of `.row`s.');
+            }
+        });
+    }
+}
+
+/**
+ * Lint empty `.grid`.
+ */
+class GridNoChilds extends AbsRule {
+    /**
+     * Lint html document.
+     * @param {DOMReadyEvent.document} document - document object
+     */
+    domReady({ document }) {
+        const cols = makeGridColsClassList(this.options.cols, this.options.breakpoints);
+        const elements = document.querySelectorAll('.grid > *');
+        const ignores = this.options.ignore ? document.querySelectorAll(this.options.ignore) : [];
+        elements.forEach((el) => {
+            if (nodeIgnore(el, ignores)) {
+                return;
+            }
+
+            if (!cols.some((className) => el.classList.contains(className))) {
+                this.report(el, 'Only columns (`.col-*-*`) may be children of `.grid`s.');
             }
         });
     }
@@ -211,6 +277,7 @@ class FormControlInputOnly extends Rule {
 module.exports = {
     ColNoRow,
     RowNoChilds,
+    GridNoChilds,
     ContainerNoNested,
     FormSelectNoFormControl,
     FormControlInputOnly,
@@ -219,6 +286,8 @@ module.exports = {
 module.exports.rules = {
     'bootstrap/col-no-row': ColNoRow,
     'bootstrap/row-no-childs': RowNoChilds,
+    'bootstrap/grid-col-no-grid': GridColNoGrid,
+    'bootstrap/grid-no-childs': GridNoChilds,
     'bootstrap/container-no-nested': ContainerNoNested,
     'bootstrap/form-control-input-only': FormControlInputOnly,
     'bootstrap/form-select-no-form-control': FormSelectNoFormControl,
