@@ -10,6 +10,7 @@ module.exports = {
     'extends': [
         ...(ENV.PROD ? ['plugin:jsdoc/recommended', 'plugin:@eslint-community/eslint-comments/recommended'] : []),
         'eslint:recommended',
+        'plugin:import/recommended',
     ],
     'overrides': [
         // browser code
@@ -50,11 +51,9 @@ module.exports = {
             ],
             'files': ['./*.js', './source/helpers/*.js', './source/html.data.js'],
             'rules': {
-                'global-require': 'off',
                 'import/dynamic-import-chunkname': 'off',
                 'import/no-dynamic-require': 'off',
                 'import/order': 'off',
-                'max-classes-per-file': 'off',
                 'n/no-process-exit': 'off',
                 'n/prefer-node-protocol': [
                     'warn',
