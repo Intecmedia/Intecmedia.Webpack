@@ -9,13 +9,14 @@ module.exports = {
     // common extends
     'extends': [
         ...(ENV.PROD ? ['plugin:jsdoc/recommended', 'plugin:@eslint-community/eslint-comments/recommended'] : []),
-        'airbnb-base',
+        'eslint:recommended',
     ],
     'overrides': [
         // browser code
         {
             'env': {
                 'browser': true,
+                'commonjs': true,
                 'es2022': true,
                 'jquery': APP.JQUERY,
             },

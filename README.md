@@ -13,7 +13,6 @@
 -   Bootstrap 5.
 -   Babel и [babel-preset-env](https://babeljs.io/docs/en/babel-preset-env).
 -   TypeScript через [babel-preset-typescript](https://babeljs.io/docs/en/babel-preset-typescript)
--   Линтер с автофиксом [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) ([перевод](https://github.com/leonidlebedev/javascript-airbnb)).
 -   Шаблонизатор [Nunjucks](https://mozilla.github.io/nunjucks/) для сборки HTML.
 -   SCSS, autoprefixer, PostCSS: [autoprefixer](https://github.com/postcss/autoprefixer),
     [cssnano](http://cssnano.co/).
