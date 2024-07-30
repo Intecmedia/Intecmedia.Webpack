@@ -12,8 +12,6 @@ module.exports = deepMerge({}, sharedConfig, {
     'extends': ['stylelint-config-recommended-scss', ...sharedConfig.extends],
     'plugins': [
         'stylelint-high-performance-animation',
-        'stylelint-max-lines',
-        'stylelint-max-root-rules',
         'stylelint-scss',
         'stylelint-selector-bem-pattern',
         'stylelint-order',
@@ -33,8 +31,6 @@ module.exports = deepMerge({}, sharedConfig, {
         ],
         'no-descending-specificity': null,
         'no-invalid-double-slash-comments': null,
-        'pitcher/max-lines': 1024,
-        'pitcher/max-root-rules': 16,
         'plugin/no-low-performance-animation-properties': [
             true,
             {

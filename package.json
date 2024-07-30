@@ -217,8 +217,6 @@
         "stylelint-config-recommended-scss": "^14.1.0",
         "stylelint-config-standard-scss": "^13.1.0",
         "stylelint-high-performance-animation": "^1.10.0",
-        "stylelint-max-lines": "^0.1.0",
-        "stylelint-max-root-rules": "^0.1.0",
         "stylelint-no-nested-media": "^0.1.0",
         "stylelint-no-unsupported-browser-features": "^8.0.1",
         "stylelint-order": "^6.0.4",
