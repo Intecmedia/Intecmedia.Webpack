@@ -51,8 +51,6 @@ module.exports = {
             ],
             'files': ['./*.js', './source/helpers/*.js', './source/html.data.js'],
             'rules': {
-                'import/dynamic-import-chunkname': 'off',
-                'import/no-dynamic-require': 'off',
                 'import/order': 'off',
                 'n/no-process-exit': 'off',
                 'n/prefer-node-protocol': [
@@ -92,14 +90,6 @@ module.exports = {
         // code quality rules (fastest)
         'class-methods-use-this': 'off',
         'func-names': ['error'],
-        'import/dynamic-import-chunkname': [
-            'error',
-            {
-                'importFunctions': ['dynamicImport'],
-                'webpackChunknameFormat': '[a-zA-Z0-9\\-_\\.]+',
-            },
-        ],
-        'import/no-cycle': 'off',
         'max-lines': [
             'error',
             {
@@ -180,16 +170,8 @@ module.exports = {
             : // dev-only rules (better dev experience)
               {
                   'compat/compat': 'off',
-                  'import/dynamic-import-chunkname': 'off',
-                  'import/extensions': 'off',
-                  'import/no-absolute-path': 'off',
-                  'import/no-duplicates': 'off',
-                  'import/no-extraneous-dependencies': 'off',
-                  'import/no-import-module-exports': 'off',
-                  'import/no-named-as-default': 'off',
                   'import/no-unresolved': 'off',
                   'import/order': 'off',
-                  'import/prefer-default-export': 'off',
                   'no-alert': 'off',
                   'no-debugger': 'off',
                   'no-misleading-character-class': 'off',
