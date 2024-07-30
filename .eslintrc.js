@@ -88,8 +88,8 @@ module.exports = {
     // common rules
     'rules': {
         // code quality rules (fastest)
-        'class-methods-use-this': 'off',
         'func-names': ['error'],
+        'import/no-named-as-default': 'off',
         'max-lines': [
             'error',
             {
@@ -98,7 +98,6 @@ module.exports = {
                 'skipComments': true,
             },
         ],
-        'no-console': 'off',
         'no-invalid-this': [
             'error',
             {
@@ -111,8 +110,6 @@ module.exports = {
                 'props': false,
             },
         ],
-        'no-plusplus': 'off',
-        'no-underscore-dangle': 'off',
         'prettier/prettier': ['error'],
         'require-await': ['error'],
         ...(ENV.PROD
@@ -172,7 +169,6 @@ module.exports = {
                   'compat/compat': 'off',
                   'import/no-unresolved': 'off',
                   'import/order': 'off',
-                  'no-alert': 'off',
                   'no-debugger': 'off',
                   'no-misleading-character-class': 'off',
                   'no-redeclare': 'off',
