@@ -58,6 +58,7 @@ module.exports = {
                   'declaration-block-no-duplicate-custom-properties': null,
                   'declaration-block-no-duplicate-properties': null,
                   'no-duplicate-selectors': null,
+                  'property-no-unknown': null,
                   'rule-selector-property-disallowed-list': null,
               }),
     },
