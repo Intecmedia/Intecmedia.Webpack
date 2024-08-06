@@ -149,7 +149,6 @@ module.exports = {
                   moduleIds: 'named',
               }
             : {}),
-        emitOnErrors: !(ENV.PROD && !ENV.DEBUG),
         splitChunks: {
             cacheGroups: {
                 ...require('./split-chunks.config').cacheGroups,
