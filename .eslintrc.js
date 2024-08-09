@@ -4,8 +4,8 @@ const fs = require('node:fs');
 
 const ignore = require('ignore');
 const globals = require('globals');
-const pluginCompat = require('eslint-plugin-compat').configs['flat/recommended'];
-const pluginNode = require('eslint-plugin-n').configs['flat/recommended-script'];
+const compatPlugin = require('eslint-plugin-compat').configs['flat/recommended'];
+const nodePlugin = require('eslint-plugin-n').configs['flat/recommended-script'];
 const eslintParser = require('@babel/eslint-parser');
 
 const APP = require('./app.config');
@@ -16,23 +16,25 @@ const ignores = ignore({ 'allowRelativePaths': false })
     .add(fs.readFileSync('./.eslintignore').toString())
     ._rules.map((i) => i.pattern);
 
-const commonPlugins = [
+const commonConfigs = [
     require('@eslint/js/src/configs/eslint-recommended'),
     ...(ENV.PROD ? [require('eslint-plugin-jsdoc').configs['flat/recommended']] : []),
     ...(ENV.PROD ? [require('@eslint-community/eslint-plugin-eslint-comments/configs').recommended] : []),
     require('eslint-plugin-promise').configs['flat/recommended'],
     require('eslint-plugin-prettier/recommended'), // prettier always last
 ];
+const commonPlugins = Object.assign({}, ...commonConfigs.map((i) => i.plugins));
+const commonRules = Object.assign({}, ...commonConfigs.map((i) => i.rules));
 
 module.exports = [
     // common rules
     {
         'ignores': [...ignores],
         'plugins': {
-            ...Object.assign({}, ...commonPlugins.map((i) => i.plugins)),
+            ...commonPlugins,
         },
         'rules': {
-            ...Object.assign({}, ...commonPlugins.map((i) => i.rules)),
+            ...commonRules,
             // code quality rules (fastest)
             'func-names': ['error'],
             'max-lines': [
@@ -55,7 +57,15 @@ module.exports = [
                     'props': false,
                 },
             ],
-            'quote-props': ['error', 'as-needed', { 'keywords': false, 'numbers': false, 'unnecessary': true }],
+            'quote-props': [
+                'error',
+                'as-needed',
+                {
+                    'keywords': false,
+                    'numbers': false,
+                    'unnecessary': true,
+                },
+            ],
             'require-await': ['error'],
             ...(ENV.PROD
                 ? // code style rules (slowest)
@@ -133,10 +143,10 @@ module.exports = [
             'sourceType': 'module',
         },
         'plugins': {
-            ...pluginCompat.plugins,
+            ...compatPlugin.plugins,
         },
         'rules': {
-            ...pluginCompat.rules,
+            ...compatPlugin.rules,
             'global-require': 'error',
             'promise/no-nesting': 'off',
             'promise/param-names': [
@@ -168,10 +178,10 @@ module.exports = [
             'sourceType': 'commonjs',
         },
         'plugins': {
-            ...pluginNode.plugins,
+            ...nodePlugin.plugins,
         },
         'rules': {
-            ...pluginNode.rules,
+            ...nodePlugin.rules,
             'n/no-extraneous-require': 'off',
             'n/no-process-exit': 'off',
             'n/prefer-node-protocol': [
