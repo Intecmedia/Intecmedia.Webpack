@@ -12,7 +12,7 @@ const APP = require('./app.config');
 const ENV = require('./app.env');
 const PACKAGE = require('./package.json');
 
-const ignores = ignore({ allowRelativePaths: false })
+const ignores = ignore({ 'allowRelativePaths': false })
     .add(fs.readFileSync('./.eslintignore').toString())
     ._rules.map((i) => i.pattern);
 
@@ -55,6 +55,7 @@ module.exports = [
                     'props': false,
                 },
             ],
+            'quote-props': ['error', 'as-needed', { 'keywords': false, 'numbers': false, 'unnecessary': true }],
             'require-await': ['error'],
             ...(ENV.PROD
                 ? // code style rules (slowest)
