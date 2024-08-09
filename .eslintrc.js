@@ -2,6 +2,7 @@
 
 const fs = require('node:fs');
 const globals = require('globals');
+const pluginCompat = require('eslint-plugin-compat');
 
 const APP = require('./app.config');
 const ENV = require('./app.env');
@@ -9,7 +10,7 @@ const PACKAGE = require('./package.json');
 
 const ignores = fs.readFileSync('./.eslintignore').toString().trim().split(/\r?\n/);
 
-const common = [
+const commonPlugins = [
     require('@eslint/js/src/configs/eslint-recommended'),
     ...(ENV.PROD ? [require('eslint-plugin-jsdoc').configs['flat/recommended']] : []),
     ...(ENV.PROD ? [require('@eslint-community/eslint-plugin-eslint-comments/configs').recommended] : []),
@@ -22,10 +23,10 @@ module.exports = [
     {
         'ignores': [...ignores],
         'plugins': {
-            ...Object.assign({}, ...common.map((i) => i.plugins)),
+            ...Object.assign({}, ...commonPlugins.map((i) => i.plugins)),
         },
         'rules': {
-            ...Object.assign({}, ...common.map((i) => i.rules)),
+            ...Object.assign({}, ...commonPlugins.map((i) => i.rules)),
             // code quality rules (fastest)
             'func-names': ['error'],
             'max-lines': [
@@ -107,14 +108,6 @@ module.exports = [
     },
     // browser code
     {
-        ...require('eslint-plugin-compat').configs['flat/recommended'],
-        'files': ['source/js/**/*.js'],
-        'settings': {
-            'browsers': ENV.BROWSERS,
-            'polyfills': ['ResizeObserver'],
-        },
-    },
-    {
         'files': ['source/js/**/*.js'],
         'languageOptions': {
             'ecmaVersion': 2022,
@@ -131,7 +124,11 @@ module.exports = [
             },
             'sourceType': 'module',
         },
+        'plugins': {
+            ...pluginCompat.configs['flat/recommended'].plugins,
+        },
         'rules': {
+            ...pluginCompat.configs['flat/recommended'].rules,
             'global-require': 'error',
             'promise/no-nesting': 'off',
             'promise/param-names': [
@@ -141,6 +138,10 @@ module.exports = [
                     'resolvePattern': '[rR]esolve$',
                 },
             ],
+        },
+        'settings': {
+            'browsers': ENV.BROWSERS,
+            'polyfills': ['ResizeObserver'],
         },
     },
     // node code
