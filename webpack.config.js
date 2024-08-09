@@ -317,7 +317,7 @@ module.exports = {
                       cacheLocation: UTILS.cacheDir('eslint', ENV.PROD),
                       files: '**/*.js',
                       overrideConfigFile: './.eslintrc.js',
-                      ignorePath: './.eslintignore',
+                      configType: 'flat',
                       lintDirtyModulesOnly: ENV.DEV_SERVER || ENV.WATCH,
                       quiet: ENV.PROD || ENV.DEBUG,
                       fix: APP.LINT_FIX,

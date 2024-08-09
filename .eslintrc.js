@@ -1,189 +1,185 @@
 /* eslint "sort-keys": "error" -- more readability keys */
 
+const fs = require('node:fs');
+
 const APP = require('./app.config');
 const ENV = require('./app.env');
 const PACKAGE = require('./package.json');
 
-module.exports = {
-    'env': {},
-    // common extends
-    'extends': [
-        ...(ENV.PROD ? ['plugin:jsdoc/recommended', 'plugin:@eslint-community/eslint-comments/recommended'] : []),
-        'eslint:recommended',
-        'plugin:import/recommended',
-    ],
-    'overrides': [
-        // browser code
-        {
-            'env': {
-                'browser': true,
-                'commonjs': true,
-                'es2022': true,
-                'jquery': APP.JQUERY,
-            },
-            'extends': [
-                'plugin:compat/recommended',
-                'plugin:promise/recommended',
-                'plugin:prettier/recommended', // prettier always last
-            ],
-            'files': ['./source/js/**/*.js'],
-            'rules': {
-                'promise/no-nesting': 'off',
-                'promise/param-names': [
-                    'error',
-                    {
-                        'rejectPattern': '[rR]eject$',
-                        'resolvePattern': '[rR]esolve$',
-                    },
-                ],
-            },
-        },
-        // node code
-        {
-            'env': {
-                'commonjs': true,
-                'node': true,
-            },
-            'extends': [
-                'plugin:n/recommended',
-                'plugin:promise/recommended',
-                'plugin:prettier/recommended', // prettier always last
-            ],
-            'files': ['./*.js', './source/helpers/*.js', './source/html.data.js'],
-            'rules': {
-                'import/order': 'off',
-                'n/no-process-exit': 'off',
-                'n/prefer-node-protocol': [
-                    'warn',
-                    {
-                        'version': PACKAGE.engines.node,
-                    },
-                ],
-                'promise/no-nesting': 'off',
-                'promise/param-names': [
-                    'error',
-                    {
-                        'rejectPattern': '[rR]eject$',
-                        'resolvePattern': '[rR]esolve$',
-                    },
-                ],
-            },
-        },
-        // config files
-        {
-            'files': ['./.*rc.js', './.*rc.*.js'],
-            'rules': {
-                'quote-props': ['error', 'always'],
-            },
-        },
-    ],
-    'parser': '@babel/eslint-parser',
-    'parserOptions': {
-        'babelOptions': {
-            'configFile': './babel.config.js',
-        },
-    },
-    'plugins': ['@babel', 'import'],
-    'root': true,
-    // common rules
-    'rules': {
-        // code quality rules (fastest)
-        'func-names': ['error'],
-        'import/no-named-as-default': 'off',
-        'max-lines': [
-            'error',
-            {
-                'max': 300,
-                'skipBlankLines': true,
-                'skipComments': true,
-            },
-        ],
-        'no-invalid-this': [
-            'error',
-            {
-                'capIsConstructor': true,
-            },
-        ],
-        'no-param-reassign': [
-            'error',
-            {
-                'props': false,
-            },
-        ],
-        'prettier/prettier': ['error'],
-        'require-await': ['error'],
-        ...(ENV.PROD
-            ? // code style rules (slowest)
+const ignores = fs.readFileSync('./.eslintignore').toString().trim().split(/\r?\n/);
 
-              {
-                  '@eslint-community/eslint-comments/require-description': [
-                      'error',
-                      {
-                          'ignore': ['global', 'globals'],
-                      },
-                  ],
-                  'id-length': [
-                      'error',
-                      {
-                          'exceptions': ['$', 'i', 'j', 'k', 'v', 'n', 'm', 'x', 'y', 'z', 'a', 'b'],
-                          'properties': 'never',
-                      },
-                  ],
-                  'import/order': [
-                      'error',
-                      {
-                          'alphabetize': { 'order': 'asc' },
-                          'groups': ['builtin', 'external', 'parent', 'sibling', 'index'],
-                          'warnOnUnassignedImports': false,
-                      },
-                  ],
-                  'jsdoc/require-description': [
-                      'warn',
-                      {
-                          'checkConstructors': false,
-                          'contexts': ['ClassDeclaration', 'FunctionDeclaration', 'MethodDefinition'],
-                      },
-                  ],
-                  'jsdoc/require-jsdoc': [
-                      'warn',
-                      {
-                          'require': {
-                              'ClassDeclaration': true,
-                              'FunctionDeclaration': true,
-                              'MethodDefinition': true,
-                          },
-                      },
-                  ],
-                  'no-unused-vars': [
-                      'error',
-                      {
-                          'args': 'after-used',
-                          'caughtErrors': 'all',
-                          'ignoreRestSiblings': true,
-                          'vars': 'all',
-                      },
-                  ],
-              }
-            : // dev-only rules (better dev experience)
-              {
-                  'compat/compat': 'off',
-                  'import/no-unresolved': 'off',
-                  'import/order': 'off',
-                  'no-debugger': 'off',
-                  'no-misleading-character-class': 'off',
-                  'no-redeclare': 'off',
-                  'no-unreachable': 'off',
-                  'no-unused-expressions': 'off',
-                  'no-unused-vars': 'off',
-              }),
+module.exports = [
+    require('@eslint/js/src/configs/eslint-recommended'),
+    ...(ENV.PROD ? [require('eslint-plugin-jsdoc').configs['flat/recommended']] : []),
+    ...(ENV.PROD ? [require('@eslint-community/eslint-plugin-eslint-comments/configs').recommended] : []),
+    require('eslint-plugin-promise').configs['flat/recommended'],
+    require('eslint-plugin-prettier/recommended'), // prettier always last
+    {
+        'ignores': [...ignores],
     },
-    'settings': {
-        'import/resolver': {
-            'node': {},
-            'webpack': {
-                'config': './resolve.config.js',
-            },
+    // browser code
+    {
+        ...require('eslint-plugin-compat').configs['flat/recommended'],
+        'files': ['source/js/**/*.js'],
+        'settings': {
+            'browsers': ENV.BROWSERS,
+            'polyfills': ['ResizeObserver'],
         },
-        'polyfills': ['ResizeObserver'],
     },
-};
+    {
+        'files': ['source/js/**/*.js'],
+        'languageOptions': {
+            'ecmaVersion': 2022,
+            'globals': {
+                ...require('globals').browser,
+                ...(APP.JQUERY ? require('globals').jquery : {}),
+                'require': false,
+            },
+            'parser': require('@babel/eslint-parser'),
+            'parserOptions': {
+                'babelOptions': {
+                    'configFile': './babel.config.js',
+                },
+            },
+            'sourceType': 'module',
+        },
+        'rules': {
+            'global-require': 'error',
+            'promise/no-nesting': 'off',
+            'promise/param-names': [
+                'error',
+                {
+                    'rejectPattern': '[rR]eject$',
+                    'resolvePattern': '[rR]esolve$',
+                },
+            ],
+        },
+    },
+    // node code
+    {
+        ...require('eslint-plugin-n').configs['flat/recommended-script'],
+        'files': ['*.js', 'source/helpers/*.js', 'source/html.data.js'],
+    },
+    {
+        'files': ['*.js', 'source/helpers/*.js', 'source/html.data.js'],
+        'languageOptions': {
+            'ecmaVersion': 2022,
+            'globals': {
+                ...require('globals').node,
+            },
+            'parserOptions': {
+                'ecmaFeatures': {
+                    'globalReturn': true,
+                },
+            },
+            'sourceType': 'commonjs',
+        },
+        'rules': {
+            'n/no-extraneous-require': 'off',
+            'n/no-process-exit': 'off',
+            'n/prefer-node-protocol': [
+                'warn',
+                {
+                    'version': PACKAGE.engines.node,
+                },
+            ],
+            'promise/no-nesting': 'off',
+            'promise/param-names': [
+                'error',
+                {
+                    'rejectPattern': '[rR]eject$',
+                    'resolvePattern': '[rR]esolve$',
+                },
+            ],
+        },
+    },
+    // config files
+    {
+        'files': ['.*rc.js', '.*rc.*.js'],
+        'rules': {
+            'quote-props': ['error', 'always'],
+        },
+    },
+    // common rules
+    {
+        'rules': {
+            // code quality rules (fastest)
+            'func-names': ['error'],
+            'max-lines': [
+                'error',
+                {
+                    'max': 300,
+                    'skipBlankLines': true,
+                    'skipComments': true,
+                },
+            ],
+            'no-invalid-this': [
+                'error',
+                {
+                    'capIsConstructor': true,
+                },
+            ],
+            'no-param-reassign': [
+                'error',
+                {
+                    'props': false,
+                },
+            ],
+            'require-await': ['error'],
+            ...(ENV.PROD
+                ? // code style rules (slowest)
+
+                  {
+                      '@eslint-community/eslint-comments/require-description': [
+                          'error',
+                          {
+                              'ignore': ['global', 'globals'],
+                          },
+                      ],
+                      'id-length': [
+                          'error',
+                          {
+                              'exceptions': ['$', 'i', 'j', 'k', 'v', 'n', 'm', 'x', 'y', 'z', 'a', 'b'],
+                              'properties': 'never',
+                          },
+                      ],
+                      'jsdoc/require-description': [
+                          'warn',
+                          {
+                              'checkConstructors': false,
+                              'contexts': ['ClassDeclaration', 'FunctionDeclaration', 'MethodDefinition'],
+                          },
+                      ],
+                      'jsdoc/require-jsdoc': [
+                          'warn',
+                          {
+                              'require': {
+                                  'ClassDeclaration': true,
+                                  'FunctionDeclaration': true,
+                                  'MethodDefinition': true,
+                              },
+                          },
+                      ],
+                      'no-unused-vars': [
+                          'error',
+                          {
+                              'args': 'after-used',
+                              'caughtErrors': 'all',
+                              'ignoreRestSiblings': true,
+                              'vars': 'all',
+                          },
+                      ],
+                  }
+                : // dev-only rules (better dev experience)
+                  {
+                      'compat/compat': 'off',
+                      'no-debugger': 'off',
+                      'no-misleading-character-class': 'off',
+                      'no-redeclare': 'off',
+                      'no-unreachable': 'off',
+                      'no-unused-expressions': 'off',
+                      'no-unused-vars': 'off',
+                  }),
+        },
+    },
+];
