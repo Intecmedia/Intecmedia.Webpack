@@ -1,8 +1,11 @@
 /* eslint "sort-keys": "error" -- more readability keys */
 
 const fs = require('node:fs');
+
 const globals = require('globals');
-const pluginCompat = require('eslint-plugin-compat');
+const pluginCompat = require('eslint-plugin-compat').configs['flat/recommended'];
+const pluginNode = require('eslint-plugin-n').configs['flat/recommended-script'];
+const eslintParser = require('@babel/eslint-parser');
 
 const APP = require('./app.config');
 const ENV = require('./app.env');
@@ -116,7 +119,7 @@ module.exports = [
                 ...(APP.JQUERY ? globals.jquery : {}),
                 'require': false,
             },
-            'parser': require('@babel/eslint-parser'),
+            'parser': eslintParser,
             'parserOptions': {
                 'babelOptions': {
                     'configFile': './babel.config.js',
@@ -125,10 +128,10 @@ module.exports = [
             'sourceType': 'module',
         },
         'plugins': {
-            ...pluginCompat.configs['flat/recommended'].plugins,
+            ...pluginCompat.plugins,
         },
         'rules': {
-            ...pluginCompat.configs['flat/recommended'].rules,
+            ...pluginCompat.rules,
             'global-require': 'error',
             'promise/no-nesting': 'off',
             'promise/param-names': [
@@ -146,10 +149,6 @@ module.exports = [
     },
     // node code
     {
-        ...require('eslint-plugin-n').configs['flat/recommended-script'],
-        'files': ['*.js', 'source/helpers/*.js', 'source/html.data.js'],
-    },
-    {
         'files': ['*.js', 'source/helpers/*.js', 'source/html.data.js'],
         'languageOptions': {
             'ecmaVersion': 2022,
@@ -163,7 +162,11 @@ module.exports = [
             },
             'sourceType': 'commonjs',
         },
+        'plugins': {
+            ...pluginNode.plugins,
+        },
         'rules': {
+            ...pluginNode.rules,
             'n/no-extraneous-require': 'off',
             'n/no-process-exit': 'off',
             'n/prefer-node-protocol': [
