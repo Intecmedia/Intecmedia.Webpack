@@ -110,6 +110,7 @@ module.exports = [
                       'no-unreachable': 'off',
                       'no-unused-expressions': 'off',
                       'no-unused-vars': 'off',
+                      'quote-props': 'off',
                   }),
         },
     },
