@@ -175,6 +175,8 @@ module.exports = [
         },
         'rules': {
             ...nodePlugin.rules,
+            'max-len': 'off',
+            'max-lines': 'off',
             'n/no-extraneous-require': 'off',
             'n/no-process-exit': 'off',
             'n/prefer-node-protocol': [

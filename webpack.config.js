@@ -1,5 +1,3 @@
-/* eslint max-lines: "off", max-len: "off" -- webpack is node env */
-
 const path = require('node:path');
 const webpack = require('webpack');
 const weblog = require('webpack-log');
