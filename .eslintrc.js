@@ -57,6 +57,14 @@ module.exports = [
                     'props': false,
                 },
             ],
+            'promise/no-nesting': 'off',
+            'promise/param-names': [
+                'error',
+                {
+                    'rejectPattern': '[rR]eject$',
+                    'resolvePattern': '[rR]esolve$',
+                },
+            ],
             'quote-props': [
                 'error',
                 'as-needed',
@@ -141,14 +149,6 @@ module.exports = [
         'rules': {
             ...compatPlugin.rules,
             'global-require': 'error',
-            'promise/no-nesting': 'off',
-            'promise/param-names': [
-                'error',
-                {
-                    'rejectPattern': '[rR]eject$',
-                    'resolvePattern': '[rR]esolve$',
-                },
-            ],
         },
         'settings': {
             'browsers': ENV.BROWSERS,
@@ -183,14 +183,6 @@ module.exports = [
                 'warn',
                 {
                     'version': PACKAGE.engines.node,
-                },
-            ],
-            'promise/no-nesting': 'off',
-            'promise/param-names': [
-                'error',
-                {
-                    'rejectPattern': '[rR]eject$',
-                    'resolvePattern': '[rR]esolve$',
                 },
             ],
         },
