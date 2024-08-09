@@ -69,14 +69,7 @@ module.exports = [
             'require-await': ['error'],
             ...(ENV.PROD
                 ? // code style rules (slowest)
-
                   {
-                      '@eslint-community/eslint-comments/require-description': [
-                          'error',
-                          {
-                              'ignore': ['global', 'globals'],
-                          },
-                      ],
                       'id-length': [
                           'error',
                           {
