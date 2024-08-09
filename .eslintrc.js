@@ -2,6 +2,7 @@
 
 const fs = require('node:fs');
 
+const ignore = require('ignore');
 const globals = require('globals');
 const pluginCompat = require('eslint-plugin-compat').configs['flat/recommended'];
 const pluginNode = require('eslint-plugin-n').configs['flat/recommended-script'];
@@ -11,7 +12,9 @@ const APP = require('./app.config');
 const ENV = require('./app.env');
 const PACKAGE = require('./package.json');
 
-const ignores = fs.readFileSync('./.eslintignore').toString().trim().split(/\r?\n/);
+const ignores = ignore({ allowRelativePaths: false })
+    .add(fs.readFileSync('./.eslintignore').toString())
+    ._rules.map((i) => i.pattern);
 
 const commonPlugins = [
     require('@eslint/js/src/configs/eslint-recommended'),
