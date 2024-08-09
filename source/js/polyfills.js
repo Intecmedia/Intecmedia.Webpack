@@ -8,8 +8,6 @@
 
 // for polyfill use only require
 require('~/polyfills/history-events');
-
-// eslint-disable-next-line global-require -- conditinal polyfill
 require('~/polyfills/focus-visible');
 
 if (NODE_ENV === 'production' || DEBUG) {
