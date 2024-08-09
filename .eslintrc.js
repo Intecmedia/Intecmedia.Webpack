@@ -1,6 +1,7 @@
 /* eslint "sort-keys": "error" -- more readability keys */
 
 const fs = require('node:fs');
+const globals = require('globals');
 
 const APP = require('./app.config');
 const ENV = require('./app.env');
@@ -31,8 +32,8 @@ module.exports = [
         'languageOptions': {
             'ecmaVersion': 2022,
             'globals': {
-                ...require('globals').browser,
-                ...(APP.JQUERY ? require('globals').jquery : {}),
+                ...globals.browser,
+                ...(APP.JQUERY ? globals.jquery : {}),
                 'require': false,
             },
             'parser': require('@babel/eslint-parser'),
@@ -65,7 +66,7 @@ module.exports = [
         'languageOptions': {
             'ecmaVersion': 2022,
             'globals': {
-                ...require('globals').node,
+                ...globals.node,
             },
             'parserOptions': {
                 'ecmaFeatures': {
