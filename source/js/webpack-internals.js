@@ -6,16 +6,16 @@
 
 /* global NODE_ENV APP DEBUG */
 
-/* eslint-disable-next-line camelcase, no-undef -- set webpack public path on the fly https://webpack.js.org/guides/public-path/#set-value-on-the-fly */
+/* eslint-disable-next-line no-undef -- set webpack public path on the fly https://webpack.js.org/guides/public-path/#set-value-on-the-fly */
 __webpack_public_path__ = document.documentElement.getAttribute('data-public-path') || APP.PUBLIC_PATH;
 
 const useCompression = DEBUG || NODE_ENV === 'production';
 const BROTLI_PATTERN = /\.min\.js\.br/;
 const GZIP_PATTERN = /\.min\.js\.gz/;
 
-/* eslint-disable-next-line camelcase, no-undef -- set chunk filename https://webpack.js.org/api/module-variables/#__webpack_get_script_filename__-webpack-specific */
+/* eslint-disable-next-line no-undef -- set chunk filename https://webpack.js.org/api/module-variables/#__webpack_get_script_filename__-webpack-specific */
 const org_get_script_filename = __webpack_get_script_filename__;
-/* eslint-disable-next-line camelcase, no-undef -- set chunk filename https://webpack.js.org/api/module-variables/#__webpack_get_script_filename__-webpack-specific */
+/* eslint-disable-next-line no-undef -- set chunk filename https://webpack.js.org/api/module-variables/#__webpack_get_script_filename__-webpack-specific */
 __webpack_get_script_filename__ = (chunkId) => {
     const filename = org_get_script_filename(chunkId);
     const [filebase, filequery] = filename.split('?', 2);
