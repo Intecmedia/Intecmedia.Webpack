@@ -13,7 +13,6 @@ const IMAGE_PATTERN = /\.(png|jpg|jpeg)$/;
  * @param {object} context -- input context
  */
 function requireAll(context) {
-    /* eslint-disable-next-line no-return-assign -- https://webpack.js.org/guides/dependency-management/#requirecontext */
     context.keys().forEach((key) => (requireCache[key] = context(key)));
 }
 
