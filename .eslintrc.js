@@ -14,7 +14,7 @@ const PACKAGE = require('./package.json');
 
 const ignores = ignore({ 'allowRelativePaths': false })
     .add(fs.readFileSync('./.eslintignore').toString())
-    ._rules.map((i) => i.pattern);
+    ._rules.map((i) => i.origin);
 
 const commonConfigs = [
     require('@eslint/js/src/configs/eslint-recommended'),
@@ -27,9 +27,12 @@ const commonPlugins = Object.assign({}, ...commonConfigs.map((i) => i.plugins));
 const commonRules = Object.assign({}, ...commonConfigs.map((i) => i.rules));
 
 module.exports = [
-    // common rules
+    // ignores rules
     {
         'ignores': [...ignores],
+    },
+    // common rules
+    {
         'plugins': {
             ...commonPlugins,
         },
