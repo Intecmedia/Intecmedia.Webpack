@@ -15,7 +15,7 @@ const ignores = fs
     .readFileSync('./.eslintignore', 'utf-8')
     .split(/\r?\n/g)
     .map((i) => i.trim())
-    .filter((i) => i != '');
+    .filter((i) => i !== '');
 
 const commonConfigs = [
     require('@eslint/js/src/configs/eslint-recommended'),
@@ -40,6 +40,13 @@ module.exports = [
         'rules': {
             ...commonRules,
             // code quality rules (fastest)
+            'eqeqeq': [
+                'error',
+                'always',
+                {
+                    'null': 'ignore',
+                },
+            ],
             'func-names': ['error'],
             'max-lines': [
                 'error',
