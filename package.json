@@ -136,7 +136,7 @@
         "@babel/plugin-transform-optional-chaining": "^7.24.8",
         "@babel/preset-env": "^7.25.3",
         "@babel/preset-typescript": "^7.24.7",
-        "@eslint-community/eslint-plugin-eslint-comments": "^4.3.0",
+        "@eslint-community/eslint-plugin-eslint-comments": "^4.4.0",
         "@popperjs/core": "^2.11.8",
         "@sentry/browser": "^8.26.0",
         "@sentry/tracing": "^7.114.0",
