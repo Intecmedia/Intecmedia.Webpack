@@ -68,6 +68,7 @@ module.exports = [
                     'props': false,
                 },
             ],
+            'prefer-template': ['error'],
             'promise/no-nesting': 'off',
             'promise/param-names': [
                 'error',
