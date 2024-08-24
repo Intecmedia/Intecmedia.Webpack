@@ -19,7 +19,7 @@ const ignores = fs
 
 const commonConfigs = [
     require('@eslint/js/src/configs/eslint-recommended'),
-    ...(ENV.PROD ? [require('eslint-plugin-jsdoc').configs['flat/recommended']] : []),
+    require('eslint-plugin-jsdoc').configs['flat/recommended'],
     ...(ENV.PROD ? [require('@eslint-community/eslint-plugin-eslint-comments/configs').recommended] : []),
     require('eslint-plugin-promise').configs['flat/recommended'],
     require('eslint-plugin-prettier/recommended'), // prettier always last
@@ -127,6 +127,10 @@ module.exports = [
                 : // dev-only rules (better dev experience)
                   {
                       'compat/compat': 'off',
+                      'jsdoc/require-description': 'off',
+                      'jsdoc/require-param-description': 'off',
+                      'jsdoc/require-param-type': 'off',
+                      'jsdoc/require-returns': 'off',
                       'no-debugger': 'off',
                       'no-misleading-character-class': 'off',
                       'no-redeclare': 'off',
