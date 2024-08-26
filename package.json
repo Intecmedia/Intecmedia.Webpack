@@ -110,9 +110,9 @@
             "Firefox ESR"
         ],
         "development": [
-            "last 1 Safari major versions",
-            "last 1 Chrome versions",
-            "last 1 Firefox versions"
+            "last 2 Safari major versions",
+            "last 2 Chrome versions",
+            "last 2 Firefox versions"
         ]
     },
     "engines": {
