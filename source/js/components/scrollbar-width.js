@@ -3,17 +3,21 @@
  * Scrollbar width detection
  * --------------------------------------------------------------------------
  */
-
+import AbstractComponent from '~/components/abstract';
 import ScrollBarHelper from 'bootstrap/js/dist/util/scrollbar';
 
 /**
  * Calc scrollbar width.
  */
-class ScrollbarWidth {
+class ScrollbarWidth extends AbstractComponent {
+    static singleton = true;
+
     /**
-     *
+     * @param {object} options - options
      */
-    constructor() {
+    constructor(options = {}) {
+        super(options);
+
         this.onResize = this.onResize.bind(this);
         this.onUpdate = this.onUpdate.bind(this);
     }
@@ -66,7 +70,12 @@ class ScrollbarWidth {
     }
 }
 
-const instance = new ScrollbarWidth();
-instance.init();
+const dataComponent = document.documentElement.hasAttribute('data-component')
+    ? document.documentElement.getAttribute('data-component').split(/\s*,\s*/)
+    : [];
+if (!dataComponent.includes('ScrollbarWidth')) {
+    dataComponent.push('ScrollbarWidth');
+}
+document.documentElement.setAttribute('data-component', dataComponent.join(','));
 
-export default instance;
+export default ScrollbarWidth;

@@ -4,7 +4,7 @@
  * https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
  * --------------------------------------------------------------------------
  */
-
+import AbstractComponent from '~/components/abstract';
 import { debounce } from '~/utils/tickers';
 
 const RESIZE_DEBOUNCE = 200;
@@ -12,11 +12,15 @@ const RESIZE_DEBOUNCE = 200;
 /**
  * Calc visual viewport height.
  */
-class ViewportHeight {
+class ViewportHeight extends AbstractComponent {
+    static singleton = true;
+
     /**
-     *
+     * @param {object} options - options
      */
-    constructor() {
+    constructor(options = {}) {
+        super(options);
+
         this.onResize = this.onResize.bind(this);
 
         this.endEvent = new CustomEvent('resize.end');
@@ -57,7 +61,12 @@ class ViewportHeight {
     }
 }
 
-const instance = new ViewportHeight();
-instance.init();
+const dataComponent = document.documentElement.hasAttribute('data-component')
+    ? document.documentElement.getAttribute('data-component').split(/\s*,\s*/)
+    : [];
+if (!dataComponent.includes('ViewportHeight')) {
+    dataComponent.push('ViewportHeight');
+}
+document.documentElement.setAttribute('data-component', dataComponent.join(','));
 
-export default instance;
+export default ViewportHeight;

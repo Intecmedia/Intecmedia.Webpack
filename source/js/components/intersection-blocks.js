@@ -162,4 +162,12 @@ class IntersectionBlocks extends AbstractComponent {
     }
 }
 
+const dataComponent = document.body.hasAttribute('data-component')
+    ? document.body.getAttribute('data-component').split(/\s*,\s*/)
+    : [];
+if (!dataComponent.includes('IntersectionBlocks')) {
+    dataComponent.push('IntersectionBlocks');
+}
+document.body.setAttribute('data-component', dataComponent.join(','));
+
 export default IntersectionBlocks;
