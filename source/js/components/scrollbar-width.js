@@ -70,12 +70,11 @@ class ScrollbarWidth extends AbstractComponent {
     }
 }
 
-const dataComponent = document.documentElement.hasAttribute('data-component')
-    ? document.documentElement.getAttribute('data-component').split(/\s*,\s*/)
-    : [];
-if (!dataComponent.includes('ScrollbarWidth')) {
-    dataComponent.push('ScrollbarWidth');
+const node = document.documentElement;
+const components = node.hasAttribute('data-component') ? node.getAttribute('data-component').split(/\s*,\s*/) : [];
+if (!components.includes('ScrollbarWidth')) {
+    components.push('ScrollbarWidth');
 }
-document.documentElement.setAttribute('data-component', dataComponent.join(','));
+node.setAttribute('data-component', components.join(','));
 
 export default ScrollbarWidth;

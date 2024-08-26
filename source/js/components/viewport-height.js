@@ -61,12 +61,11 @@ class ViewportHeight extends AbstractComponent {
     }
 }
 
-const dataComponent = document.documentElement.hasAttribute('data-component')
-    ? document.documentElement.getAttribute('data-component').split(/\s*,\s*/)
-    : [];
-if (!dataComponent.includes('ViewportHeight')) {
-    dataComponent.push('ViewportHeight');
+const node = document.documentElement;
+const components = node.hasAttribute('data-component') ? node.getAttribute('data-component').split(/\s*,\s*/) : [];
+if (!components.includes('ViewportHeight')) {
+    components.push('ViewportHeight');
 }
-document.documentElement.setAttribute('data-component', dataComponent.join(','));
+node.setAttribute('data-component', components.join(','));
 
 export default ViewportHeight;
