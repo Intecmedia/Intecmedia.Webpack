@@ -163,7 +163,7 @@ export default class AbstractApp {
      * @memberof AbstractApp
      */
     triggerScope(scope, trigger) {
-        let closest = scope.closest('.js-component[data-component-id]');
+        let closest = scope.closest?.('.js-component[data-component-id]');
         while (closest) {
             const id = closest.getAttribute('data-component-id');
             if (id) {
@@ -180,7 +180,7 @@ export default class AbstractApp {
                     }
                 }
             }
-            closest = closest.parentNode.closest('.js-component[data-component-id]');
+            closest = closest.parentNode.closest?.('.js-component[data-component-id]');
         }
     }
 
