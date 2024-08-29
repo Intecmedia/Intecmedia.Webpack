@@ -2,7 +2,7 @@
  * Split an array into chunks.
  * @param {Array} arr - input ararray
  * @param {number} size - size of chhnk
- * @returns {Array.Array} - array of arrays
+ * @returns {Array[]} - array of arrays
  */
 export default function arrayChunk(arr, size) {
     const result = [];

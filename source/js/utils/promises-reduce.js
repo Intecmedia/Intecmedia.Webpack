@@ -1,6 +1,6 @@
 /**
  * Reduce promices with callback function.
- * @param {Array.Promise} promises - promises array
+ * @param {Promise[]} promises - promises array
  * @param {Function} reducer - reduce callback
  * @returns {object} - promise result
  */

@@ -59,7 +59,7 @@ export default class AbstractApp {
     /**
      * Get all components by name
      * @param {string} name - component name
-     * @returns {Array.AbstractComponent} - matched components
+     * @returns {AbstractComponent[]} - matched components
      * @memberof AbstractApp
      */
     all(name) {
@@ -115,7 +115,7 @@ export default class AbstractApp {
     /**
      * Create element components
      * @param {HTMLElement} element - html element
-     * @returns {Array.AbstractComponent} - new component
+     * @returns {AbstractComponent[]} - new component
      * @memberof AbstractApp
      */
     createElement(element) {
@@ -256,7 +256,7 @@ export default class AbstractApp {
      * @param {string} type - component name
      * @param {Function} listener - listener callback
      * @param {object} [options] - event options
-     * @returns {Array.AbstractComponent} - matched components
+     * @returns {AbstractComponent[]} - matched components
      * @memberof AbstractApp
      */
     on(name, type, listener, options = {}) {
@@ -273,7 +273,7 @@ export default class AbstractApp {
      * @param {string} type - component name
      * @param {Function} listener - listener callback
      * @param {object} [options] - event options
-     * @returns {Array.AbstractComponent} - matched components
+     * @returns {AbstractComponent[]} - matched components
      * @memberof AbstractApp
      */
     off(name, type, listener, options = {}) {
@@ -289,7 +289,7 @@ export default class AbstractApp {
      * @param {string} name - event name
      * @param {string} type - component name
      * @param {object} [options] - event options
-     * @returns {Array.AbstractComponent} - matched components
+     * @returns {AbstractComponent[]} - matched components
      * @memberof AbstractApp
      */
     trigger(name, type, options = {}) {

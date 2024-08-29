@@ -112,7 +112,7 @@ export default class AbstractComponent {
     /**
      * Call element querySelectorAll.
      * @param {string} selector - query selector
-     * @returns {Array.HTMLElement} - matched elements
+     * @returns {HTMLElement[]} - matched elements
      * @memberof AbstractComponent
      */
     selectorAll(selector) {

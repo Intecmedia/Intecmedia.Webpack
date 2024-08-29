@@ -99,7 +99,7 @@ class IntersectionBlocks extends AbstractComponent {
 
     /**
      * Intersection handler.
-     * @param {Array.IntersectionObserverEntry} entries - intersection entries
+     * @param {IntersectionObserverEntry[]} entries - intersection entries
      * @param {IntersectionObserver} observer - intersection observer
      */
     onIntersection(entries, observer) {
