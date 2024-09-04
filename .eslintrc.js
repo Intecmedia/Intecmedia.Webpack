@@ -126,6 +126,7 @@ module.exports = [
                   }
                 : // dev-only rules (better dev experience)
                   {
+                      'compat/compat': 'off',
                       'jsdoc/require-description': 'off',
                       'jsdoc/require-param-description': 'off',
                       'jsdoc/require-param-type': 'off',
@@ -158,6 +159,9 @@ module.exports = [
             },
             'sourceType': 'module',
         },
+        'linterOptions': {
+            'reportUnusedDisableDirectives': 0,
+        },
         'plugins': {
             ...compatPlugin.plugins,
         },
@@ -184,6 +188,9 @@ module.exports = [
                 },
             },
             'sourceType': 'commonjs',
+        },
+        'linterOptions': {
+            'reportUnusedDisableDirectives': 0,
         },
         'plugins': {
             ...nodePlugin.plugins,
