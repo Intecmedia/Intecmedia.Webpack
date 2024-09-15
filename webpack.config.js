@@ -270,16 +270,6 @@ module.exports = {
             banner: ENV.BANNER_STRING,
             include: /\.(css|js)(\?.*)?$/i,
         }),
-        new webpack.ProvidePlugin({
-            ...(APP.JQUERY
-                ? {
-                      $: 'jquery',
-                      jQuery: 'jquery',
-                      'window.$': 'jquery',
-                      'window.jQuery': 'jquery',
-                  }
-                : {}),
-        }),
         new webpack.DefinePlugin({
             DEBUG: JSON.stringify(ENV.DEBUG),
             NODE_ENV: JSON.stringify(ENV.NODE_ENV),
@@ -435,36 +425,6 @@ module.exports = {
                 },
             },
             // javascript loaders
-            ...(APP.JQUERY
-                ? [
-                      {
-                          test: require.resolve('jquery'),
-                          loader: 'expose-loader',
-                          options: {
-                              exposes: ['$', 'jQuery'],
-                          },
-                      },
-                  ]
-                : []),
-            ...(APP.JQUERY
-                ? [
-                      {
-                          test: /\.(js|mjs|cjs)(\?.*)?$/i,
-                          include: [
-                              // enable jquery global
-                              ...BabelOptions.includeJquery,
-                          ],
-                          exclude: [
-                              // disable jquery global
-                              ...BabelOptions.excludeJquery,
-                          ],
-                          loader: 'imports-loader',
-                          options: {
-                              imports: ['default jquery $', 'default jquery jQuery'],
-                          },
-                      },
-                  ]
-                : []),
             {
                 type: 'javascript/auto',
                 test: /\.(js|mjs|cjs|ts)(\?.*)?$/i,

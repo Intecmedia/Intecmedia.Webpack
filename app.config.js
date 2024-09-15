@@ -16,7 +16,6 @@ module.exports = {
         blacklistUrls: [],
         whitelistUrls: [],
     },
-    JQUERY: false,
     LINT_FIX: true,
     WEBP: true,
     AVIF: false,

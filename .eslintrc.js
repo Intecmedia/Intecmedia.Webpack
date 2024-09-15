@@ -148,7 +148,6 @@ module.exports = [
             'ecmaVersion': 2022,
             'globals': {
                 ...globals.browser,
-                ...(APP.JQUERY ? globals.jquery : {}),
                 'require': false,
             },
             'parser': eslintParser,
