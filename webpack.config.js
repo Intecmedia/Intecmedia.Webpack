@@ -319,7 +319,7 @@ module.exports = {
                     template,
                     chunks: ['app', 'vendor'],
                     inject: ignored || extension !== 'html' ? false : 'body',
-                    scriptLoading: 'blocking',
+                    scriptLoading: 'defer',
                     minify:
                         (ENV.PROD || ENV.DEBUG) && extension === 'html'
                             ? {
