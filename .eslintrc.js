@@ -19,7 +19,7 @@ const ignores = fs
 
 const commonConfigs = [
     require('@eslint/js/src/configs/eslint-recommended'),
-    require('eslint-plugin-jsdoc').configs['flat/recommended'],
+    ...(APP.JSDOC && ENV.PROD ? [require('eslint-plugin-jsdoc').configs['flat/recommended']] : []),
     ...(ENV.PROD ? [require('@eslint-community/eslint-plugin-eslint-comments/configs').recommended] : []),
     require('eslint-plugin-promise').configs['flat/recommended'],
     require('eslint-plugin-prettier/recommended'), // prettier always last
@@ -97,23 +97,27 @@ module.exports = [
                               'properties': 'never',
                           },
                       ],
-                      'jsdoc/require-description': [
-                          'warn',
-                          {
-                              'checkConstructors': false,
-                              'contexts': ['ClassDeclaration', 'FunctionDeclaration', 'MethodDefinition'],
-                          },
-                      ],
-                      'jsdoc/require-jsdoc': [
-                          'warn',
-                          {
-                              'require': {
-                                  'ClassDeclaration': true,
-                                  'FunctionDeclaration': true,
-                                  'MethodDefinition': true,
-                              },
-                          },
-                      ],
+                      ...(APP.JSDOC
+                          ? {
+                                'jsdoc/require-description': [
+                                    'warn',
+                                    {
+                                        'checkConstructors': false,
+                                        'contexts': ['ClassDeclaration', 'FunctionDeclaration', 'MethodDefinition'],
+                                    },
+                                ],
+                                'jsdoc/require-jsdoc': [
+                                    'warn',
+                                    {
+                                        'require': {
+                                            'ClassDeclaration': true,
+                                            'FunctionDeclaration': true,
+                                            'MethodDefinition': true,
+                                        },
+                                    },
+                                ],
+                            }
+                          : {}),
                       'no-unused-vars': [
                           'error',
                           {
@@ -127,10 +131,14 @@ module.exports = [
                 : // dev-only rules (better dev experience)
                   {
                       'compat/compat': 'off',
-                      'jsdoc/require-description': 'off',
-                      'jsdoc/require-param-description': 'off',
-                      'jsdoc/require-param-type': 'off',
-                      'jsdoc/require-returns': 'off',
+                      ...(APP.JSDOC
+                          ? {
+                                'jsdoc/require-description': 'off',
+                                'jsdoc/require-param-description': 'off',
+                                'jsdoc/require-param-type': 'off',
+                                'jsdoc/require-returns': 'off',
+                            }
+                          : {}),
                       'no-debugger': 'off',
                       'no-misleading-character-class': 'off',
                       'no-redeclare': 'off',
