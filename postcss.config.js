@@ -8,7 +8,11 @@ module.exports = {
             ? [
                   require('postcss-focus')({ oldFocus: true }),
                   require('postcss-focus-visible')(),
-                  require('postcss-font-display')([{ display: 'swap' }, { test: 'FontAwesome', display: 'block' }]),
+                  require('postcss-font-display')([
+                      { display: 'swap' },
+                      // { test: 'ExampleFontFamily1', display: 'block' },
+                      // { test: 'ExampleFontFamily2', display: 'auto' },
+                  ]),
                   ...(APP.AVIF ? [require('./postcss.resize')('avif')] : []),
                   ...(APP.WEBP ? [require('./postcss.resize')('webp')] : []),
                   ...(!ENV.DEBUG
