@@ -5,7 +5,7 @@
  * --------------------------------------------------------------------------
  */
 
-import BootstrapPopover from 'bootstrap/js/dist/popover';
+import BootstrapPopover from 'bootstrap/js/src/popover';
 
 const CUSTOM_TEMPLATE = [
     '<div class="popover popover-custom" role="tooltip">',

@@ -5,7 +5,7 @@
  * --------------------------------------------------------------------------
  */
 
-import BootstrapTooltip from 'bootstrap/js/dist/tooltip';
+import BootstrapTooltip from 'bootstrap/js/src/tooltip';
 
 const CUSTOM_TEMPLATE = [
     '<div class="tooltip tooltip-custom" role="tooltip">',

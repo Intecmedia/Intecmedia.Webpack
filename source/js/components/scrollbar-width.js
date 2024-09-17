@@ -4,7 +4,7 @@
  * --------------------------------------------------------------------------
  */
 import AbstractComponent from '~/components/abstract';
-import ScrollBarHelper from 'bootstrap/js/dist/util/scrollbar';
+import ScrollBarHelper from 'bootstrap/js/src/util/scrollbar';
 
 /**
  * Calc scrollbar width.
