@@ -5,12 +5,12 @@
 
 <IfModule mod_expires.c>
     ExpiresActive On
-    ExpiresByType image/gif "access plus 1 year"
-    ExpiresByType image/png "access plus 1 year"
-    ExpiresByType image/jpg "access plus 1 year"
-    ExpiresByType image/jpeg "access plus 1 year"
-    ExpiresByType image/webp "access plus 1 year"
-    ExpiresByType image/avif "access plus 1 year"
+    ExpiresByType image/gif A10368000
+    ExpiresByType image/png A10368000
+    ExpiresByType image/jpg A10368000
+    ExpiresByType image/jpeg A10368000
+    ExpiresByType image/webp A10368000
+    ExpiresByType image/avif A10368000
 </IfModule>
 
 <IfModule mod_headers.c>
