@@ -74,7 +74,7 @@ module.exports = async function ResizeLoader(content) {
     if (!query.resize && !query.name) {
         query.name = path.basename(loaderContext.resourcePath, path.extname(loaderContext.resourcePath));
     }
-    if (resourceFormat == 'svg' && !query.format) {
+    if (resourceFormat === 'svg' && !query.format) {
         query.format = 'png';
     }
 
@@ -195,7 +195,12 @@ module.exports = async function ResizeLoader(content) {
         resourceImage.resize(resizeWidth || resourceMeta.width, resizeHeight || resourceMeta.height, resizeOptions);
     }
 
-    resourceImage.toFormat(format.toLowerCase(), formatOptions);
+    try {
+        resourceImage.toFormat(format.toLowerCase(), formatOptions);
+    } catch (toFormatError) {
+        loaderContext.emitError(toFormatError);
+        loaderCallback(toFormatError);
+    }
 
     let resizeLimit = (callback) => callback();
     if (loaderContext.resizeLimit) {
