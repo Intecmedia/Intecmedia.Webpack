@@ -21,7 +21,7 @@ const DEFAULT_OPTIONS = {
     verbose: false,
 };
 const DEFAULT_FIT = 'inside';
-const ALLOWED_PATTERN = /\.(jpeg|jpg|png|gif)(\?.*)?$/i;
+const ALLOWED_PATTERN = /\.(jpeg|jpg|png|gif|svg)(\?.*)?$/i;
 
 module.exports = async function ResizeLoader(content) {
     const loaderContext = this;
@@ -73,6 +73,9 @@ module.exports = async function ResizeLoader(content) {
 
     if (!query.resize && !query.name) {
         query.name = path.basename(loaderContext.resourcePath, path.extname(loaderContext.resourcePath));
+    }
+    if (resourceFormat == 'svg' && !query.format) {
+        query.format = 'png';
     }
 
     const format = (query.format || resourceFormat).toLowerCase();
