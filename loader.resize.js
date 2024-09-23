@@ -196,7 +196,7 @@ module.exports = async function ResizeLoader(content) {
     }
 
     try {
-        resourceImage.toFormat(format.toLowerCase(), formatOptions);
+        resourceImage.toFormat(format, formatOptions);
     } catch (toFormatError) {
         loaderContext.emitError(toFormatError);
         loaderCallback(toFormatError);
