@@ -61,11 +61,11 @@
         --intersection-translate-y: var(--intersection-translate-y-up, 0);
 
         &.is-intersection-downward {
-            --intersection-translate-y-up: 100%;
+            --intersection-translate-y-up: var(--intersection-translate-y-base, 100%);
         }
 
         &.is-intersection-upward {
-            --intersection-translate-y-up: -100%;
+            --intersection-translate-y-up: calc(var(--intersection-translate-y-base, 100%) * -1);
         }
     }
 
@@ -74,11 +74,11 @@
         --intersection-translate-y: var(--intersection-translate-y-down, 0);
 
         &.is-intersection-downward {
-            --intersection-translate-y-down: -100%;
+            --intersection-translate-y-down: calc(var(--intersection-translate-y-base, 100%) * -1);
         }
 
         &.is-intersection-upward {
-            --intersection-translate-y-down: 100%;
+            --intersection-translate-y-down: var(--intersection-translate-y-base, 100%);
         }
     }
 
