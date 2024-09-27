@@ -8,6 +8,7 @@ const { rules: commonRules } = require('./plugin.html-validate.common');
 const { rules: bemRules } = require('./plugin.html-validate.bem');
 const { rules: tableRules } = require('./plugin.html-validate.table');
 const { rules: wysiwygRules } = require('./plugin.html-validate.wysiwyg');
+const { rules: linkRules } = require('./plugin.html-validate.link');
 
 module.exports = definePlugin({
     name: 'pitcher',
@@ -20,5 +21,6 @@ module.exports = definePlugin({
         ...bemRules,
         ...tableRules,
         ...wysiwygRules,
+        ...linkRules,
     },
 });
