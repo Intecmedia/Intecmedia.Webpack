@@ -38,8 +38,15 @@ class LinkNoEmpty extends Rule {
             }
 
             const href = item.getAttributeValue('href');
-            if (href === '#') {
-                this.report(item, 'Anchor not allow `href="#"` attribute.');
+            if (href === '') {
+                this.report(item, '<a> required `href` attribute.');
+            } else if (href === '#') {
+                this.report(item, '<a> required `href` attribute.');
+            } else if (href.startsWith('#')) {
+                const target = document.querySelector(href);
+                if (!target) {
+                    this.report(item, `<a> not found target node (\`href=${JSON.stringify(href)}\`).`);
+                }
             }
         });
     }
