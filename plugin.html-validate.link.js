@@ -36,8 +36,7 @@ class LinkNoEmpty extends Rule {
             if (nodeIgnore(item, ignores)) {
                 return;
             }
-
-            const href = item.getAttributeValue('href');
+            const href = String(item.getAttributeValue('href') || '');
             if (href === '') {
                 this.report(item, '<a> required `href` attribute.');
             } else if (href === '#') {
