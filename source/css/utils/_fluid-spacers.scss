@@ -2,6 +2,7 @@
 // Fluid spacers mixins and functions.
 //
 
+@use "sass:map";
 @use "sass:math";
 
 $fluid-spacers: (

@@ -20,12 +20,12 @@ $fluid-fixed-digits: 6 !default;
 $fluid-screen-width: 100vw !default; // or 100vmax
 $fluid-screen-height: 100vh !default; // or 100vmin
 
-// Invalidate fluid units: should be comparable or unitless.
+// Invalidate fluid units: should be compatible or unitless.
 @function fluid-invalidate-units($a, $b) {
     @if $a == 0 or $b == 0 {
         @return false;
     }
-    @if not math.is-unitless($a) and (math.unit($a) != math.unit($b) or not math.comparable($a, $b)) {
+    @if not math.is-unitless($a) and (math.unit($a) != math.unit($b) or not math.compatible($a, $b)) {
         @return true;
     }
 
