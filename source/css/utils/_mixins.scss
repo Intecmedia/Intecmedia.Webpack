@@ -3,6 +3,8 @@
 //
 
 @use "sass:math";
+@use "sass:meta";
+@use "sass:string";
 
 // Repeat a string.
 @function str-repeat($str, $n) {
@@ -16,7 +18,7 @@
 
 // Strip unit.
 @function strip-unit($number) {
-    @if type-of($number) == "number" and not unitless($number) {
+    @if meta.type-of($number) == "number" and not math.is-unitless($number) {
         @return math.div($number, ($number * 0 + 1));
     }
 
@@ -44,16 +46,16 @@
     $sass-precision: 5;
     $pow: pow(10, $digits);
 
-    @return math.div(round($float * $pow), $pow);
+    @return math.div(math.round($float * $pow), $pow);
 }
 
 // Replace all occurrences of the search string with the replacement string.
 @function str-replace($string, $search, $replace: "") {
-    $index: str-index($string, $search);
+    $index: string.index($string, $search);
 
     @if $index {
-        $result: str-slice($string, 1, $index - 1) + $replace;
-        $result: $result + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+        $result: string.slice($string, 1, $index - 1) + $replace;
+        $result: $result + str-replace(string.slice($string, $index + string.length($search)), $search, $replace);
 
         @return $result;
     }
@@ -66,16 +68,16 @@
     $n: 1;
 
     // $number must be a number
-    @if type-of($number) != number {
+    @if meta.type-of($number) != number {
         @warn '#{ $number } is not a number.';
         @return $number;
     }
 
     // $digits must be a unitless number
-    @if type-of($digits) != number {
+    @if meta.type-of($digits) != number {
         @warn '#{ $digits } is not a number.';
         @return $number;
-    } @else if not unitless($digits) {
+    } @else if not math.is-unitless($digits) {
         @warn '#{ $digits } has a unit.';
         @return $number;
     }
@@ -85,11 +87,11 @@
         }
     }
     @if $mode == round {
-        @return math.div(round($number * $n), $n);
+        @return math.div(math.round($number * $n), $n);
     } @else if $mode == ceil {
-        @return math.div(ceil($number * $n), $n);
+        @return math.div(math.ceil($number * $n), $n);
     } @else if $mode == floor {
-        @return math.div(floor($number * $n), $n);
+        @return math.div(math.floor($number * $n), $n);
     } @else {
         @warn '#{ $mode } is undefined keyword.';
         @return $number;
@@ -98,24 +100,24 @@
 
 // Check css-value is `calc()`.
 @function type-of-calc($value) {
-    @if type-of($value) != "string" {
+    @if meta.type-of($value) != "string" {
         @return false;
     }
-    @return str-index($value, "calc(") == 1 and str-index($value, ")") == str-length($value);
+    @return string.index($value, "calc(") == 1 and string.index($value, ")") == string.length($value);
 }
 
 // Check css-value is `var()`.
 @function type-of-var($value) {
-    @if type-of($value) != "string" {
+    @if meta.type-of($value) != "string" {
         @return false;
     }
-    @return str-index($value, "var(") == 1 and str-index($value, ")") == str-length($value);
+    @return string.index($value, "var(") == 1 and string.index($value, ")") == string.length($value);
 }
 
 // Negativify CSS-value.
 @function negativify-value($value) {
     @if type-of-calc($value) {
-        $result: str-slice($value, str-length("calc("), -1);
+        $result: string.slice($value, string.length("calc("), -1);
         $result: calc(-1 * #{$result});
 
         @return $result;
@@ -130,5 +132,5 @@
 
 // Grid percentage e.g: 1 of 12 get 8.3333%.
 @function grid-percentage($column, $count) {
-    @return percentage(math.div($column, $count));
+    @return math.percentage(math.div($column, $count));
 }
