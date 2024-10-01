@@ -97,7 +97,6 @@ module.exports = deepMerge({}, sharedConfig, {
         ],
         'scss/dollar-variable-empty-line-after': null,
         'scss/dollar-variable-pattern': ['^[a-zA-Z][a-zA-Z-\\d]*$'],
-        'scss/no-global-function-names': null,
         'scss/operator-no-newline-after': null,
         'selector-class-pattern': ['^[a-zA-Z0-9\\-_]+$'],
         'selector-max-class': 5,
