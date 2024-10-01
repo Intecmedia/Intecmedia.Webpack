@@ -52,15 +52,15 @@ $fluid-spacers-max-size: 20px !default;
     }
 
     @each $key1, $key2 in $spacers-pairs {
-        @if not map-has-key($spacers, $key1) {
+        @if not map.has-key($spacers, $key1) {
             @error "Cant find #{$key1} key in spacers.";
         }
-        @if not map-has-key($spacers, $key2) {
+        @if not map.has-key($spacers, $key2) {
             @error "Cant find #{$key2} key in spacers.";
         }
 
-        $scale1: map-get($spacers, $key1);
-        $scale2: map-get($spacers, $key2);
+        $scale1: map.get($spacers, $key1);
+        $scale2: map.get($spacers, $key2);
         $min-scale: math.min($scale1, $scale2);
         $max-scale: math.max($scale1, $scale2);
 
@@ -84,32 +84,32 @@ $fluid-spacers-max-size: 20px !default;
     $max-width: $fluid-spacers-max-width,
     $max-size: $fluid-spacers-max-size
 ) {
-    @if map-has-key($spacers, $name) {
-        $scale: map-get($spacers, $name);
+    @if map.has-key($spacers, $name) {
+        $scale: map.get($spacers, $name);
         $min: $min-size * $scale;
 
         @return $min;
     }
 
-    $sep-index: str-index($name, "-");
+    $sep-index: string.index($name, "-");
 
     @if $sep-index {
-        @if not map-has-key($spacers-pairs, $name) {
+        @if not map.has-key($spacers-pairs, $name) {
             @error "Cant find #{$name} key in spacers.";
         }
 
-        $key1: str-slice($name, 1, $sep-index - 1);
-        $key2: str-slice($name, $sep-index + 1);
+        $key1: string.slice($name, 1, $sep-index - 1);
+        $key2: string.slice($name, $sep-index + 1);
 
-        @if not map-has-key($spacers, $key1) {
+        @if not map.has-key($spacers, $key1) {
             @error "Cant find #{$key1} key in spacers.";
         }
-        @if not map-has-key($spacers, $key2) {
+        @if not map.has-key($spacers, $key2) {
             @error "Cant find #{$key2} key in spacers.";
         }
 
-        $scale1: map-get($spacers, $key1);
-        $scale2: map-get($spacers, $key2);
+        $scale1: map.get($spacers, $key1);
+        $scale2: map.get($spacers, $key2);
         $min-scale: math.min($scale1, $scale2);
         $min: $min-size * $min-scale;
 
@@ -129,32 +129,32 @@ $fluid-spacers-max-size: 20px !default;
     $max-width: $fluid-spacers-max-width,
     $max-size: $fluid-spacers-max-size
 ) {
-    @if map-has-key($spacers, $name) {
-        $scale: map-get($spacers, $name);
+    @if map.has-key($spacers, $name) {
+        $scale: map.get($spacers, $name);
         $max: $max-size * $scale;
 
         @return $max;
     }
 
-    $sep-index: str-index($name, "-");
+    $sep-index: string.index($name, "-");
 
     @if $sep-index {
-        @if not map-has-key($spacers-pairs, $name) {
+        @if not map.has-key($spacers-pairs, $name) {
             @error "Cant find #{$name} key in spacers.";
         }
 
-        $key1: str-slice($name, 1, $sep-index - 1);
-        $key2: str-slice($name, $sep-index + 1);
+        $key1: string.slice($name, 1, $sep-index - 1);
+        $key2: string.slice($name, $sep-index + 1);
 
-        @if not map-has-key($spacers, $key1) {
+        @if not map.has-key($spacers, $key1) {
             @error "Cant find #{$key1} key in spacers.";
         }
-        @if not map-has-key($spacers, $key2) {
+        @if not map.has-key($spacers, $key2) {
             @error "Cant find #{$key2} key in spacers.";
         }
 
-        $scale1: map-get($spacers, $key1);
-        $scale2: map-get($spacers, $key2);
+        $scale1: map.get($spacers, $key1);
+        $scale2: map.get($spacers, $key2);
         $max-scale: math.max($scale1, $scale2);
         $max: $max-size * $max-scale;
 

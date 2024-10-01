@@ -2,7 +2,9 @@
 // Fluid mixins and functions.
 //
 
+@use "sass:map";
 @use "sass:math";
+@use "sass:meta";
 
 $clamp-fallback: true !default;
 $clamp-supports: "width: clamp(0px, 0px, 0px)" !default;
@@ -23,7 +25,7 @@ $fluid-screen-height: 100vh !default; // or 100vmin
     @if $a == 0 or $b == 0 {
         @return false;
     }
-    @if not unitless($a) and (unit($a) != unit($b) or not comparable($a, $b)) {
+    @if not math.is-unitless($a) and (math.unit($a) != math.unit($b) or not math.comparable($a, $b)) {
         @return true;
     }
 
@@ -40,17 +42,17 @@ $fluid-screen-height: 100vh !default; // or 100vmin
     $min-width-calc: $min-width,
     $max-width-calc: $max-width
 ) {
-    @if type-of($min-width) == "string" {
-        $min-width: map-get($grid-breakpoints, $min-width);
+    @if meta.type-of($min-width) == "string" {
+        $min-width: map.get($grid-breakpoints, $min-width);
     }
-    @if type-of($max-width) == "string" {
-        $max-width: map-get($grid-breakpoints, $max-width);
+    @if meta.type-of($max-width) == "string" {
+        $max-width: map.get($grid-breakpoints, $max-width);
     }
-    @if type-of($min-width-calc) == "string" {
-        $min-width-calc: map-get($grid-breakpoints, $min-width-calc);
+    @if meta.type-of($min-width-calc) == "string" {
+        $min-width-calc: map.get($grid-breakpoints, $min-width-calc);
     }
-    @if type-of($max-width-calc) == "string" {
-        $max-width-calc: map-get($grid-breakpoints, $max-width-calc);
+    @if meta.type-of($max-width-calc) == "string" {
+        $max-width-calc: map.get($grid-breakpoints, $max-width-calc);
     }
 
     $comment: "fluid-property($properties: #{$properties}, $min-value: #{$min-value}, $max-value: #{$max-value}, $min-width: #{$min-width}, $max-width: #{$max-width}, $min-width-calc: #{$min-width-calc}, $max-width-calc: #{$max-width-calc})";
@@ -104,17 +106,17 @@ $fluid-screen-height: 100vh !default; // or 100vmin
     $min-height-calc: $min-height,
     $max-height-calc: $max-height
 ) {
-    @if type-of($min-height) == "string" {
-        $min-height: map-get($vertical-breakpoints, $min-height);
+    @if meta.type-of($min-height) == "string" {
+        $min-height: map.get($vertical-breakpoints, $min-height);
     }
-    @if type-of($max-height) == "string" {
-        $max-height: map-get($vertical-breakpoints, $max-height);
+    @if meta.type-of($max-height) == "string" {
+        $max-height: map.get($vertical-breakpoints, $max-height);
     }
-    @if type-of($min-height-calc) == "string" {
-        $min-height-calc: map-get($vertical-breakpoints, $min-height-calc);
+    @if meta.type-of($min-height-calc) == "string" {
+        $min-height-calc: map.get($vertical-breakpoints, $min-height-calc);
     }
-    @if type-of($max-height-calc) == "string" {
-        $max-height-calc: map-get($vertical-breakpoints, $max-height-calc);
+    @if meta.type-of($max-height-calc) == "string" {
+        $max-height-calc: map.get($vertical-breakpoints, $max-height-calc);
     }
 
     $comment: "fluid-property-vertical($properties: #{$properties}, $min-value: #{$min-value}, $max-value: #{$max-value}, $min-height: #{$min-height}, $max-height: #{$max-height}, $min-height-calc: #{$min-height-calc}, $max-height-calc: #{$max-height-calc})";
@@ -169,17 +171,17 @@ $fluid-screen-height: 100vh !default; // or 100vmin
 ) {
     $prop: font-size;
 
-    @if type-of($min-width) == "string" {
-        $min-width: map-get($grid-breakpoints, $min-width);
+    @if meta.type-of($min-width) == "string" {
+        $min-width: map.get($grid-breakpoints, $min-width);
     }
-    @if type-of($max-width) == "string" {
-        $max-width: map-get($grid-breakpoints, $max-width);
+    @if meta.type-of($max-width) == "string" {
+        $max-width: map.get($grid-breakpoints, $max-width);
     }
-    @if type-of($min-width-calc) == "string" {
-        $min-width-calc: map-get($grid-breakpoints, $min-width-calc);
+    @if meta.type-of($min-width-calc) == "string" {
+        $min-width-calc: map.get($grid-breakpoints, $min-width-calc);
     }
-    @if type-of($max-width-calc) == "string" {
-        $max-width-calc: map-get($grid-breakpoints, $max-width-calc);
+    @if meta.type-of($max-width-calc) == "string" {
+        $max-width-calc: map.get($grid-breakpoints, $max-width-calc);
     }
 
     @include fluid-property($prop, $min-value, $max-value, $min-width, $max-width, $min-width-calc, $max-width-calc);
@@ -196,17 +198,17 @@ $fluid-screen-height: 100vh !default; // or 100vmin
 ) {
     $prop: font-size;
 
-    @if type-of($min-width) == "string" {
-        $min-width: map-get($grid-breakpoints, $min-width);
+    @if meta.type-of($min-width) == "string" {
+        $min-width: map.get($grid-breakpoints, $min-width);
     }
-    @if type-of($max-width) == "string" {
-        $max-width: map-get($grid-breakpoints, $max-width);
+    @if meta.type-of($max-width) == "string" {
+        $max-width: map.get($grid-breakpoints, $max-width);
     }
-    @if type-of($min-width-calc) == "string" {
-        $min-width-calc: map-get($grid-breakpoints, $min-width-calc);
+    @if meta.type-of($min-width-calc) == "string" {
+        $min-width-calc: map.get($grid-breakpoints, $min-width-calc);
     }
-    @if type-of($max-width-calc) == "string" {
-        $max-width-calc: map-get($grid-breakpoints, $max-width-calc);
+    @if meta.type-of($max-width-calc) == "string" {
+        $max-width-calc: map.get($grid-breakpoints, $max-width-calc);
     }
 
     @include fluid-property(
@@ -231,17 +233,17 @@ $fluid-screen-height: 100vh !default; // or 100vmin
 ) {
     $prop: font-size;
 
-    @if type-of($min-height) == "string" {
-        $min-height: map-get($vertical-breakpoints, $min-height);
+    @if meta.type-of($min-height) == "string" {
+        $min-height: map.get($vertical-breakpoints, $min-height);
     }
-    @if type-of($max-height) == "string" {
-        $max-height: map-get($vertical-breakpoints, $max-height);
+    @if meta.type-of($max-height) == "string" {
+        $max-height: map.get($vertical-breakpoints, $max-height);
     }
-    @if type-of($min-height-calc) == "string" {
-        $min-height-calc: map-get($vertical-breakpoints, $min-height-calc);
+    @if meta.type-of($min-height-calc) == "string" {
+        $min-height-calc: map.get($vertical-breakpoints, $min-height-calc);
     }
-    @if type-of($max-height-calc) == "string" {
-        $max-height-calc: map-get($vertical-breakpoints, $max-height-calc);
+    @if meta.type-of($max-height-calc) == "string" {
+        $max-height-calc: map.get($vertical-breakpoints, $max-height-calc);
     }
 
     @include fluid-property-vertical(
@@ -266,17 +268,17 @@ $fluid-screen-height: 100vh !default; // or 100vmin
 ) {
     $prop: font-size;
 
-    @if type-of($min-height) == "string" {
-        $min-height: map-get($vertical-breakpoints, $min-height);
+    @if meta.type-of($min-height) == "string" {
+        $min-height: map.get($vertical-breakpoints, $min-height);
     }
-    @if type-of($max-height) == "string" {
-        $max-height: map-get($vertical-breakpoints, $max-height);
+    @if meta.type-of($max-height) == "string" {
+        $max-height: map.get($vertical-breakpoints, $max-height);
     }
-    @if type-of($min-height-calc) == "string" {
-        $min-height-calc: map-get($vertical-breakpoints, $min-height-calc);
+    @if meta.type-of($min-height-calc) == "string" {
+        $min-height-calc: map.get($vertical-breakpoints, $min-height-calc);
     }
-    @if type-of($max-height-calc) == "string" {
-        $max-height-calc: map-get($vertical-breakpoints, $max-height-calc);
+    @if meta.type-of($max-height-calc) == "string" {
+        $max-height-calc: map.get($vertical-breakpoints, $max-height-calc);
     }
 
     @include fluid-property-vertical(
@@ -292,22 +294,22 @@ $fluid-screen-height: 100vh !default; // or 100vmin
 
 // Fluid property with css-clamp.
 @function fluid-clamp-base($min-size, $max-size, $min-clamp, $max-clamp, $vertical: false) {
-    @if type-of($min-clamp) == "string" {
+    @if meta.type-of($min-clamp) == "string" {
         @if $vertical {
-            $min-clamp: map-get($vertical-breakpoints, $min-clamp);
+            $min-clamp: map.get($vertical-breakpoints, $min-clamp);
         } @else {
-            $min-clamp: map-get($grid-breakpoints, $min-clamp);
+            $min-clamp: map.get($grid-breakpoints, $min-clamp);
         }
     }
-    @if type-of($max-clamp) == "string" {
+    @if meta.type-of($max-clamp) == "string" {
         @if $vertical {
-            $max-clamp: map-get($vertical-breakpoints, $max-clamp);
+            $max-clamp: map.get($vertical-breakpoints, $max-clamp);
         } @else {
-            $max-clamp: map-get($grid-breakpoints, $max-clamp);
+            $max-clamp: map.get($grid-breakpoints, $max-clamp);
         }
     }
 
-    $min-unit: unit($min-size);
+    $min-unit: math.unit($min-size);
 
     @if $min-unit != px and $min-unit != rem {
         @error "$min-size #{$min-size} must be either px or rem (now is #{$min-unit}).";
@@ -315,7 +317,7 @@ $fluid-screen-height: 100vh !default; // or 100vmin
     $min-size: rem($min-size);
     $min-size: strip-unit($min-size);
 
-    $max-unit: unit($max-size);
+    $max-unit: math.unit($max-size);
 
     @if $max-unit != px and $max-unit != rem {
         @error "$max-size #{$max-size} must be either px or rem (now is #{$max-unit}).";
@@ -323,12 +325,12 @@ $fluid-screen-height: 100vh !default; // or 100vmin
     $max-size: rem($max-size);
     $max-size: strip-unit($max-size);
 
-    @if unit($max-clamp) != px {
+    @if math.unit($max-clamp) != px {
         @error "$max-clamp #{$max-clamp} must be px (now is #{unit($min-clamp)}).";
     }
     $min-clamp: strip-unit($min-clamp);
 
-    @if unit($max-clamp) != px {
+    @if math.unit($max-clamp) != px {
         @error "$max-clamp #{$max-clamp} must be px (now is #{unit($max-clamp)}).";
     }
     $max-clamp: strip-unit($max-clamp);
@@ -354,13 +356,13 @@ $fluid-screen-height: 100vh !default; // or 100vmin
 
     $vp-unit: "";
 
-    @if type-of($vertical) == "string" {
+    @if meta.type-of($vertical) == "string" {
         $vp-unit: $vertical;
     } @else {
         @if $vertical {
-            $vp-unit: unit($fluid-screen-height);
+            $vp-unit: math.unit($fluid-screen-height);
         } @else {
-            $vp-unit: unit($fluid-screen-width);
+            $vp-unit: math.unit($fluid-screen-width);
         }
     }
 
@@ -391,11 +393,11 @@ $fluid-screen-height: 100vh !default; // or 100vmin
 
 // Fluid horizontal property with css-clamp.
 @function fluid-clamp($min-size, $max-size, $min-width: $fluid-min-width, $max-width: $fluid-max-width) {
-    @if type-of($min-width) == "string" {
-        $min-width: map-get($grid-breakpoints, $min-width);
+    @if meta.type-of($min-width) == "string" {
+        $min-width: map.get($grid-breakpoints, $min-width);
     }
-    @if type-of($max-width) == "string" {
-        $max-width: map-get($grid-breakpoints, $max-width);
+    @if meta.type-of($max-width) == "string" {
+        $max-width: map.get($grid-breakpoints, $max-width);
     }
 
     @return fluid-clamp-base($min-size, $max-size, $min-width, $max-width, false);
@@ -403,11 +405,11 @@ $fluid-screen-height: 100vh !default; // or 100vmin
 
 // Fluid vertical property with css-clamp.
 @function fluid-clamp-vertical($min-size, $max-size, $min-height: $fluid-min-height, $max-height: $fluid-max-height) {
-    @if type-of($min-height) == "string" {
-        $min-height: map-get($vertical-breakpoints, $min-height);
+    @if meta.type-of($min-height) == "string" {
+        $min-height: map.get($vertical-breakpoints, $min-height);
     }
-    @if type-of($max-height) == "string" {
-        $max-height: map-get($vertical-breakpoints, $max-height);
+    @if meta.type-of($max-height) == "string" {
+        $max-height: map.get($vertical-breakpoints, $max-height);
     }
 
     @return fluid-clamp-base($min-size, $max-size, $min-height, $max-height, true);
@@ -415,11 +417,11 @@ $fluid-screen-height: 100vh !default; // or 100vmin
 
 // Fluid horizontal property with css-clamp.
 @mixin fluid-clamp-prop($prop, $min-size, $max-size, $min-width: $fluid-min-width, $max-width: $fluid-max-width) {
-    @if type-of($min-width) == "string" {
-        $min-width: map-get($grid-breakpoints, $min-width);
+    @if meta.type-of($min-width) == "string" {
+        $min-width: map.get($grid-breakpoints, $min-width);
     }
-    @if type-of($max-width) == "string" {
-        $max-width: map-get($grid-breakpoints, $max-width);
+    @if meta.type-of($max-width) == "string" {
+        $max-width: map.get($grid-breakpoints, $max-width);
     }
 
     $clamp-size: fluid-clamp($min-size, $max-size, $min-width, $max-width);
@@ -466,11 +468,11 @@ $fluid-screen-height: 100vh !default; // or 100vmin
     $min-height: $fluid-min-height,
     $max-height: $fluid-max-height
 ) {
-    @if type-of($min-height) == "string" {
-        $min-height: map-get($vertical-breakpoints, $min-height);
+    @if meta.type-of($min-height) == "string" {
+        $min-height: map.get($vertical-breakpoints, $min-height);
     }
-    @if type-of($max-height) == "string" {
-        $max-height: map-get($vertical-breakpoints, $max-height);
+    @if meta.type-of($max-height) == "string" {
+        $max-height: map.get($vertical-breakpoints, $max-height);
     }
 
     $clamp-size: fluid-clamp-vertical($min-size, $max-size, $min-height, $max-height);
@@ -518,11 +520,11 @@ $fluid-screen-height: 100vh !default; // or 100vmin
 
 // Fluid horizontal property with css-calc.
 @function fluid-calc($min-size, $max-size, $min-width: $fluid-min-width, $max-width: $fluid-max-width) {
-    @if type-of($min-width) == "string" {
-        $min-width: map-get($grid-breakpoints, $min-width);
+    @if meta.type-of($min-width) == "string" {
+        $min-width: map.get($grid-breakpoints, $min-width);
     }
-    @if type-of($max-width) == "string" {
-        $max-width: map-get($grid-breakpoints, $max-width);
+    @if meta.type-of($max-width) == "string" {
+        $max-width: map.get($grid-breakpoints, $max-width);
     }
 
     $size-calc: strip-unit($max-size - $min-size);
@@ -533,11 +535,11 @@ $fluid-screen-height: 100vh !default; // or 100vmin
 
 // Fluid vertical property with css-calc.
 @function fluid-calc-vertical($min-size, $max-size, $min-height: $fluid-min-height, $max-height: $fluid-max-height) {
-    @if type-of($min-height) == "string" {
-        $min-height: map-get($vertical-breakpoints, $min-height);
+    @if meta.type-of($min-height) == "string" {
+        $min-height: map.get($vertical-breakpoints, $min-height);
     }
-    @if type-of($max-height) == "string" {
-        $max-height: map-get($vertical-breakpoints, $max-height);
+    @if meta.type-of($max-height) == "string" {
+        $max-height: map.get($vertical-breakpoints, $max-height);
     }
 
     $size-calc: strip-unit($max-size - $min-size);
@@ -548,8 +550,8 @@ $fluid-screen-height: 100vh !default; // or 100vmin
 
 // Fluid horizontal font-size property with 100vw.
 @function fluid-vw-font-size($max-size, $max-width: $fluid-max-width) {
-    @if type-of($max-width) == "string" {
-        $max-width: map-get($grid-breakpoints, $max-width);
+    @if meta.type-of($max-width) == "string" {
+        $max-width: map.get($grid-breakpoints, $max-width);
     }
     @if fluid-invalidate-units($max-size, $max-width) {
         @error "Cant calc $max-size=#{$max-size} and $max-width=#{$max-width} with different units.";
@@ -563,8 +565,8 @@ $fluid-screen-height: 100vh !default; // or 100vmin
 
 // Fluid vertical font-size property with 100vh.
 @function fluid-vh-font-size($max-size, $max-height: $fluid-max-height) {
-    @if type-of($max-height) == "string" {
-        $max-height: map-get($vertical-breakpoints, $max-height);
+    @if meta.type-of($max-height) == "string" {
+        $max-height: map.get($vertical-breakpoints, $max-height);
     }
     @if fluid-invalidate-units($max-size, $max-height) {
         @error "Cant calc $max-size=#{$max-size} and $max-height=#{$max-height} with different units.";

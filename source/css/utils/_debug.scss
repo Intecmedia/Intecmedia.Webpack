@@ -1,6 +1,8 @@
 //
 // Debug mixins and functions.
 //
+@use "sass:map";
+@use "sass:string";
 
 // Debug tooltip, display current breakpoint.
 // Visible only in development enviroment.
@@ -24,9 +26,9 @@
 
     transition: transform 0.3s;
 
-    @each $breakpoint in map-keys($grid-breakpoints) {
+    @each $breakpoint in map.keys($grid-breakpoints) {
         @include media-breakpoint-up($breakpoint) {
-            content: "Breakpoint=" + to-upper-case("#{$breakpoint} ") + $content;
+            content: "Breakpoint=" + string.to-upper-case("#{$breakpoint} ") + $content;
         }
     }
 
