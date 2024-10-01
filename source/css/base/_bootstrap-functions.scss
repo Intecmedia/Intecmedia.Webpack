@@ -1,13 +1,14 @@
 //
 // Bootstrap functions.
 //
+@use "sass:map";
 
 @function negativify-map($map) {
     $result: ();
 
     @each $key, $value in $map {
         @if $key != 0 {
-            $result: map-merge($result, ("n" + $key: (negativify-value($value))));
+            $result: map.merge($result, ("n" + $key: (negativify-value($value))));
         }
     }
     @return $result;

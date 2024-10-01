@@ -1,7 +1,7 @@
 //
 // Html root and html body
 //
-
+@use "sass:map";
 /* stylelint-disable no-duplicate-selectors -- already in 'node_modules/bootstrap/scss/reboot.scss', but we need it */
 /* stylelint-disable plugin/selector-bem-pattern, selector-nested-pattern -- is common styles, not component */
 
@@ -46,7 +46,7 @@
     );
 
     @include vertical-breakpoint-down(sm) {
-        --section-height: #{map-get($vertical-breakpoints, "sm")};
+        --section-height: #{map.get($vertical-breakpoints, "sm")};
     }
 
     @include media-breakpoint-down(ss) {

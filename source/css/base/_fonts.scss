@@ -1,7 +1,9 @@
 //
 // Fonts mixins.
 //
-
+@use "sass:map";
+@use "sass:list";
+@use "sass:string";
 /* stylelint-disable function-url-quotes -- stylelint not detect quote() */
 
 @mixin font-face($name, $path, $weight: null, $style: null, $exts: woff2 woff, $display: swap) {
@@ -16,14 +18,14 @@
     );
 
     @each $ext in $exts {
-        $extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
-        $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
-        $src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+        $extmod: if(map.has-key($extmods, $ext), $ext + map.get($extmods, $ext), $ext);
+        $format: if(map.has-key($formats, $ext), map.get($formats, $ext), $ext);
+        $src: list.append($src, url(string.quote($path + "." + $extmod)) format(string.quote($format)), comma);
     }
 
     @font-face {
         font-weight: $weight;
-        font-family: quote($name);
+        font-family: string.quote($name);
         font-style: $style;
         src: $src;
         font-display: $display;
