@@ -3,6 +3,7 @@
 //
 
 @use "sass:math";
+@use "sass:meta";
 @use "sass:list";
 
 $rem-baseline: 16px !default;
@@ -30,11 +31,11 @@ $rem-px-only: false !default;
     $separator: rem-separator($values);
 
     @each $value in $values {
-        @if type-of($value) == "number" and unit($value) == "rem" and $to == "px" {
+        @if meta.type-of($value) == "number" and math.unit($value) == "rem" and $to == "px" {
             $result: list.append($result, math.div($value, 1rem) * $rem-baseline, $separator);
-        } @else if type-of($value) == "number" and unit($value) == "px" and $to == "rem" {
+        } @else if meta.type-of($value) == "number" and math.unit($value) == "px" and $to == "rem" {
             $result: list.append($result, math.div($value, $rem-baseline) * 1rem, $separator);
-        } @else if type-of($value) == "list" {
+        } @else if meta.type-of($value) == "list" {
             $value-separator: rem-separator($value);
             $value: rem-convert($to, $value...);
             $value: rem-separator($value, $value-separator);
@@ -58,7 +59,7 @@ $rem-px-only: false !default;
 
 // Convert list of properties.
 @mixin rem($properties, $values...) {
-    @if type-of($properties) == "map" {
+    @if meta.type-of($properties) == "map" {
         @each $prop in map.keys($properties) {
             @include rem($prop, map.get($properties, $prop));
         }
