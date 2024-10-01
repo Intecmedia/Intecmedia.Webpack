@@ -69,8 +69,8 @@ $rem-px-only: false !default;
 // Convert list of properties.
 @mixin rem($properties, $values...) {
     @if type-of($properties) == "map" {
-        @each $prop in map-keys($properties) {
-            @include rem($prop, map-get($properties, $prop));
+        @each $prop in map.keys($properties) {
+            @include rem($prop, map.get($properties, $prop));
         }
     } @else {
         @each $prop in $properties {

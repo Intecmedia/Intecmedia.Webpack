@@ -1,7 +1,7 @@
 //
 // Resize image mixins and functions.
 //
-
+@use "sass:map";
 /* stylelint-disable plugin/no-unsupported-browser-features -- wrong error */
 
 $resize-breakpoints: $grid-breakpoints !default;
@@ -37,8 +37,8 @@ $resize-breakpoints: $grid-breakpoints !default;
 
     /* postcss.resize.avif: ignore */
 
-    @each $breakpoint in map-keys($breakpoints) {
-        $size: strip-unit(map-get($breakpoints, $breakpoint));
+    @each $breakpoint in map.keys($breakpoints) {
+        $size: strip-unit(map.get($breakpoints, $breakpoint));
 
         @include media-breakpoint-up($breakpoint) {
             /* postcss.resize.webp: ignore */
@@ -52,8 +52,8 @@ $resize-breakpoints: $grid-breakpoints !default;
     @if $NODE_ENV == "production" or $DEBUG {
         @if $APP-WEBP {
             html.webp & {
-                @each $breakpoint in map-keys($breakpoints) {
-                    $size: strip-unit(map-get($breakpoints, $breakpoint));
+                @each $breakpoint in map.keys($breakpoints) {
+                    $size: strip-unit(map.get($breakpoints, $breakpoint));
 
                     @include media-breakpoint-up($breakpoint) {
                         /* postcss.resize.webp: ignore */
@@ -65,8 +65,8 @@ $resize-breakpoints: $grid-breakpoints !default;
 
         @if $APP-AVIF {
             html.avif & {
-                @each $breakpoint in map-keys($breakpoints) {
-                    $size: strip-unit(map-get($breakpoints, $breakpoint));
+                @each $breakpoint in map.keys($breakpoints) {
+                    $size: strip-unit(map.get($breakpoints, $breakpoint));
 
                     @include media-breakpoint-up($breakpoint) {
                         /* postcss.resize.avif: ignore */
