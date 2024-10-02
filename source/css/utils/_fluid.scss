@@ -213,12 +213,12 @@ $fluid-screen-height: 100vh !default; // or 100vmin
 
     @include fluid-property(
         $prop,
-        rem($min-value),
-        rem($max-value),
+        remify($min-value),
+        remify($max-value),
         $min-width,
         $max-width,
-        rem($min-width-calc),
-        rem($max-width-calc)
+        remify($min-width-calc),
+        remify($max-width-calc)
     );
 }
 
@@ -283,12 +283,12 @@ $fluid-screen-height: 100vh !default; // or 100vmin
 
     @include fluid-property-vertical(
         $prop,
-        rem($min-value),
-        rem($max-value),
+        remify($min-value),
+        remify($max-value),
         $min-height,
         $max-height,
-        rem($min-height-calc),
-        rem($max-height-calc)
+        remify($min-height-calc),
+        remify($max-height-calc)
     );
 }
 
@@ -314,7 +314,7 @@ $fluid-screen-height: 100vh !default; // or 100vmin
     @if $min-unit != px and $min-unit != rem {
         @error "$min-size #{$min-size} must be either px or rem (now is #{$min-unit}).";
     }
-    $min-size: rem($min-size);
+    $min-size: remify($min-size);
     $min-size: strip-unit($min-size);
 
     $max-unit: math.unit($max-size);
@@ -322,7 +322,7 @@ $fluid-screen-height: 100vh !default; // or 100vmin
     @if $max-unit != px and $max-unit != rem {
         @error "$max-size #{$max-size} must be either px or rem (now is #{$max-unit}).";
     }
-    $max-size: rem($max-size);
+    $max-size: remify($max-size);
     $max-size: strip-unit($max-size);
 
     @if math.unit($max-clamp) != px {
@@ -435,12 +435,12 @@ $fluid-screen-height: 100vh !default; // or 100vmin
 
             @include fluid-property(
                 $prop,
-                rem($min-size),
-                rem($max-size),
+                remify($min-size),
+                remify($max-size),
                 $min-width,
                 $max-width,
-                rem($min-width),
-                rem($max-width)
+                remify($min-width),
+                remify($max-width)
             );
         }
         @supports (#{$clamp-supports}) {
@@ -486,12 +486,12 @@ $fluid-screen-height: 100vh !default; // or 100vmin
 
             @include fluid-property-vertical(
                 $prop,
-                rem($min-size),
-                rem($max-size),
+                remify($min-size),
+                remify($max-size),
                 $min-height,
                 $max-height,
-                rem($min-height),
-                rem($max-height)
+                remify($min-height),
+                remify($max-height)
             );
         }
         @supports (#{$clamp-supports}) {
@@ -557,8 +557,8 @@ $fluid-screen-height: 100vh !default; // or 100vmin
         @error "Cant calc $max-size=#{$max-size} and $max-width=#{$max-width} with different units.";
     }
 
-    $max-size-calc: strip-unit(rem($max-size));
-    $max-width-calc: strip-unit(rem($max-width));
+    $max-size-calc: strip-unit(remify($max-size));
+    $max-width-calc: strip-unit(remify($max-width));
 
     @return math.div($max-size-calc, $max-width-calc) * $fluid-screen-width;
 }
@@ -572,8 +572,8 @@ $fluid-screen-height: 100vh !default; // or 100vmin
         @error "Cant calc $max-size=#{$max-size} and $max-height=#{$max-height} with different units.";
     }
 
-    $max-size-calc: strip-unit(rem($max-size));
-    $max-height-calc: strip-unit(rem($max-height));
+    $max-size-calc: strip-unit(remify($max-size));
+    $max-height-calc: strip-unit(remify($max-height));
 
     @return math.div($max-size-calc, $max-height-calc) * $fluid-screen-height;
 }

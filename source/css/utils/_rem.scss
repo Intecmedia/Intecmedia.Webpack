@@ -6,12 +6,12 @@
 @use "sass:meta";
 @use "sass:list";
 
-$rem-baseline: 16px !default;
-$rem-fallback: false !default;
-$rem-px-only: false !default;
+$remify-baseline: 16px !default;
+$remify-fallback: false !default;
+$remify-px-only: false !default;
 
 // Exctract rem separator from css-value.
-@function rem-separator($list, $separator: false) {
+@function remify-separator($list, $separator: false) {
     @if $separator == "comma" or $separator == "space" {
         @return list.append($list, null, $separator);
     }
@@ -20,25 +20,25 @@ $rem-px-only: false !default;
 }
 
 // Get rem baseline.
-@mixin rem-baseline($zoom: 100%) {
+@mixin remify-baseline($zoom: 100%) {
     /* stylelint-disable-next-line declaration-property-unit-allowed-list -- its wrong case */
-    font-size: math.div($zoom, 16px) * $rem-baseline;
+    font-size: math.div($zoom, 16px) * $remify-baseline;
 }
 
 // Convert css-values to rem or px.
-@function rem-convert($to, $values...) {
+@function remify-convert($to, $values...) {
     $result: ();
-    $separator: rem-separator($values);
+    $separator: remify-separator($values);
 
     @each $value in $values {
         @if meta.type-of($value) == "number" and math.unit($value) == "rem" and $to == "px" {
-            $result: list.append($result, math.div($value, 1rem) * $rem-baseline, $separator);
+            $result: list.append($result, math.div($value, 1rem) * $remify-baseline, $separator);
         } @else if meta.type-of($value) == "number" and math.unit($value) == "px" and $to == "rem" {
-            $result: list.append($result, math.div($value, $rem-baseline) * 1rem, $separator);
+            $result: list.append($result, math.div($value, $remify-baseline) * 1rem, $separator);
         } @else if meta.type-of($value) == "list" {
-            $value-separator: rem-separator($value);
-            $value: rem-convert($to, $value...);
-            $value: rem-separator($value, $value-separator);
+            $value-separator: remify-separator($value);
+            $value: remify-convert($to, $value...);
+            $value: remify-separator($value, $value-separator);
             $result: list.append($result, $value, $separator);
         } @else {
             $result: list.append($result, $value, $separator);
@@ -49,27 +49,27 @@ $rem-px-only: false !default;
 }
 
 // Convert single property.
-@function rem($values...) {
-    @if $rem-px-only {
-        @return rem-convert(px, $values...);
+@function remify($values...) {
+    @if $remify-px-only {
+        @return remify-convert(px, $values...);
     } @else {
-        @return rem-convert(rem, $values...);
+        @return remify-convert(rem, $values...);
     }
 }
 
 // Convert list of properties.
-@mixin rem($properties, $values...) {
+@mixin remify($properties, $values...) {
     @if meta.type-of($properties) == "map" {
         @each $prop in map.keys($properties) {
-            @include rem($prop, map.get($properties, $prop));
+            @include remify($prop, map.get($properties, $prop));
         }
     } @else {
         @each $prop in $properties {
-            @if $rem-fallback or $rem-px-only {
-                #{$prop}: rem-convert(px, $values...);
+            @if $remify-fallback or $remify-px-only {
+                #{$prop}: remify-convert(px, $values...);
             }
-            @if not $rem-px-only {
-                #{$prop}: rem-convert(rem, $values...);
+            @if not $remify-px-only {
+                #{$prop}: remify-convert(rem, $values...);
             }
         }
     }

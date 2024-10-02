@@ -39,8 +39,8 @@
     );
     @include fluid-clamp-prop(
         $prop: --fluid-gutter,
-        $min-size: rem($fluid-gutter-min-size),
-        $max-size: rem($fluid-gutter-max-size),
+        $min-size: remify($fluid-gutter-min-size),
+        $max-size: remify($fluid-gutter-max-size),
         $min-width: $fluid-gutter-min-width,
         $max-width: $fluid-gutter-max-width
     );
