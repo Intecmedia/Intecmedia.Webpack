@@ -98,12 +98,24 @@
     }
 }
 
+// Check string starts with.
+@function str-starts-with($str, $substring) {
+    $position: 1;
+    @return string.index($str, $substring) == $position;
+}
+
+// Check string ends with.
+@function str-ends-with($str, $substring) {
+    $position: string.length($str) - string.length($substring) + 1;
+    @return string.index($str, $substring) == $position;
+}
+
 // Check css-value is `calc()`.
 @function type-of-calc($value) {
     @if meta.type-of($value) != "string" {
         @return false;
     }
-    @return string.index($value, "calc(") == 1 and string.index($value, ")") == string.length($value);
+    @return str-starts-with($value, "calc(") and str-ends-with($value, ")");
 }
 
 // Check css-value is `var()`.
@@ -111,7 +123,7 @@
     @if meta.type-of($value) != "string" {
         @return false;
     }
-    @return string.index($value, "var(") == 1 and string.index($value, ")") == string.length($value);
+    @return str-starts-with($value, "var(") and str-ends-with($value, ")");
 }
 
 // Negativify CSS-value.
