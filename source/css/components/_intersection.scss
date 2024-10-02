@@ -92,32 +92,44 @@
     }
 
     &--fade-up {
+        /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder -- variant of two modificators */
         @extend .intersection--fade;
+        /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder -- variant of two modificators */
         @extend .intersection--up;
     }
 
     &--fade-down {
+        /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder -- variant of two modificators */
         @extend .intersection--fade;
+        /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder -- variant of two modificators */
         @extend .intersection--down;
     }
 
     &--scale-up {
+        /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder -- variant of two modificators */
         @extend .intersection--scale;
+        /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder -- variant of two modificators */
         @extend .intersection--up;
     }
 
     &--scale-down {
+        /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder -- variant of two modificators */
         @extend .intersection--scale;
+        /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder -- variant of two modificators */
         @extend .intersection--down;
     }
 
     &--scale-in-up {
+        /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder -- variant of two modificators */
         @extend .intersection--scale-in;
+        /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder -- variant of two modificators */
         @extend .intersection--up;
     }
 
     &--scale-in-down {
+        /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder -- variant of two modificators */
         @extend .intersection--scale-in;
+        /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder -- variant of two modificators */
         @extend .intersection--down;
     }
 }
