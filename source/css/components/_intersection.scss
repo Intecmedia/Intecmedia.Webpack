@@ -3,6 +3,9 @@
 //
 
 .intersection {
+    $intersection-translate-y-base: 100% !default;
+    $intersection-duration-default: $duration-default !default;
+
     html.js & {
         &--block,
         > .intersection__block {
@@ -20,8 +23,8 @@
             will-change: transform, opacity;
 
             transition:
-                opacity var(--intersection-duration-fade, $duration-default),
-                transform var(--intersection-duration-translate, $duration-default);
+                opacity var(--intersection-duration-fade, #{$intersection-duration-default}),
+                transform var(--intersection-duration-translate, #{$intersection-duration-default});
             transition-delay: $intersection-transition-delay;
             transition-timing-function: $ease-default;
         }
@@ -61,11 +64,13 @@
         --intersection-translate-y: var(--intersection-translate-y-up, 0);
 
         &.is-intersection-downward {
-            --intersection-translate-y-up: var(--intersection-translate-y-base, 100%);
+            --intersection-translate-y-up: var(--intersection-translate-y-base, #{$intersection-translate-y-base});
         }
 
         &.is-intersection-upward {
-            --intersection-translate-y-up: calc(var(--intersection-translate-y-base, 100%) * -1);
+            --intersection-translate-y-up: calc(
+                var(--intersection-translate-y-base, #{$intersection-translate-y-base}) * -1
+            );
         }
     }
 
@@ -74,11 +79,13 @@
         --intersection-translate-y: var(--intersection-translate-y-down, 0);
 
         &.is-intersection-downward {
-            --intersection-translate-y-down: calc(var(--intersection-translate-y-base, 100%) * -1);
+            --intersection-translate-y-down: calc(
+                var(--intersection-translate-y-base, #{$intersection-translate-y-base}) * -1
+            );
         }
 
         &.is-intersection-upward {
-            --intersection-translate-y-down: var(--intersection-translate-y-base, 100%);
+            --intersection-translate-y-down: var(--intersection-translate-y-base, #{$intersection-translate-y-base});
         }
     }
 
