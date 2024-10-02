@@ -87,13 +87,6 @@ module.exports = deepMerge({}, sharedConfig, {
             },
         ],
         'scss/comment-no-empty': null,
-        'scss/dollar-variable-default': [
-            true,
-            {
-                'ignore': 'local',
-            },
-        ],
-        'scss/dollar-variable-empty-line-after': null,
         'scss/dollar-variable-pattern': ['^[a-zA-Z][a-zA-Z-\\d]*$'],
         'scss/operator-no-newline-after': null,
         'selector-class-pattern': ['^[a-zA-Z0-9\\-_]+$'],
