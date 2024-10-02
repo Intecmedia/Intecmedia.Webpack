@@ -3,8 +3,11 @@ module.exports = {
         // '../include/template/**/*.{php,phtml,svg}',
     ],
     historyApiFallback: {
+        index: '/',
+        disableDotRule: true,
         rewrites: [
-            // { from: /^\/example\/(.+)/, to: '/example/index.html' },
+            { from: /./, to: "/404" },
+            // { from: /^\/from-example\/(.+)/, to: '/to-example' },
         ],
-    },
+     },
 };
