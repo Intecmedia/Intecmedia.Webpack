@@ -87,7 +87,6 @@ module.exports = deepMerge({}, sharedConfig, {
             },
         ],
         'scss/comment-no-empty': null,
-        'scss/dollar-variable-colon-space-after': null,
         'scss/dollar-variable-default': [
             true,
             {
