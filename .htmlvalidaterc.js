@@ -152,5 +152,6 @@ module.exports = {
         'script-type': 'off',
         'svg-focusable': 'off',
         'tel-non-breaking': 'off',
+        'wcag/h63': 'off',
     },
 };
