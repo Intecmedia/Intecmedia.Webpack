@@ -4,7 +4,21 @@
 
 .intersection {
     $intersection-translate-y-base: 100% !default;
-    $intersection-duration-default: $duration-default !default;
+
+    $intersection-scale-base: 1.15 !default;
+    $intersection-scale-in-base: 0.85 !default;
+
+    $intersection-duration-fade-default: $duration-default !default;
+    $intersection-duration-translate-default: $duration-default !default;
+
+    $intersection-duration-fade-slow: $duration-slow !default;
+    $intersection-duration-translate-slow: $duration-slow !default;
+
+    $intersection-duration-fade-normal: $duration-normal !default;
+    $intersection-duration-translate-normal: $duration-normal !default;
+
+    $intersection-duration-fade-fast: $duration-fast !default;
+    $intersection-duration-translate-fast: $duration-fast !default;
 
     html.js & {
         &--block,
@@ -23,8 +37,8 @@
             will-change: transform, opacity;
 
             transition:
-                opacity var(--intersection-duration-fade, #{$intersection-duration-default}),
-                transform var(--intersection-duration-translate, #{$intersection-duration-default});
+                opacity var(--intersection-duration-fade, #{$intersection-duration-fade-default}),
+                transform var(--intersection-duration-translate, #{$intersection-duration-translate-default});
             transition-delay: $intersection-transition-delay;
             transition-timing-function: $ease-default;
         }
@@ -41,18 +55,18 @@
     }
 
     &--duration-slow {
-        --intersection-duration-fade: #{$duration-slow};
-        --intersection-duration-translate: #{$duration-slow};
+        --intersection-duration-fade: #{$intersection-duration-fade-slow};
+        --intersection-duration-translate: #{$intersection-duration-translate-slow};
     }
 
     &--duration-normal {
-        --intersection-duration-fade: #{$duration-normal};
-        --intersection-duration-translate: #{$duration-normal};
+        --intersection-duration-fade: #{$intersection-duration-fade-normal};
+        --intersection-duration-translate: #{$intersection-duration-translate-normal};
     }
 
     &--duration-fast {
-        --intersection-duration-fade: #{$duration-fast};
-        --intersection-duration-translate: #{$duration-fast};
+        --intersection-duration-fade: #{$intersection-duration-fade-fast};
+        --intersection-duration-translate: #{$intersection-duration-translate-fast};
     }
 
     &--fade {
@@ -90,12 +104,11 @@
     }
 
     &--scale {
-        --intersection-scale: 1.15;
+        --intersection-scale: #{$intersection-scale-base};
     }
 
     &--scale-in {
-        --intersection-scale-in: 0.85;
-        --intersection-scale: var(--intersection-scale-in, 0);
+        --intersection-scale: #{$intersection-scale-in-base};
     }
 
     &--fade-up {
