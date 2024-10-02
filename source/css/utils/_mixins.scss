@@ -13,6 +13,7 @@
     @for $i from 1 through $n {
         $result: $result + $str;
     }
+
     @return $result;
 }
 
@@ -21,7 +22,6 @@
     @if meta.type-of($number) == "number" and not math.is-unitless($number) {
         @return math.div($number, ($number * 0 + 1));
     }
-
     @return $number;
 }
 
@@ -43,9 +43,7 @@
 
 // Formats number using fixed-point notation.
 @function to-fixed($float, $digits: 6) {
-    $sass-precision: 5;
     $pow: pow(10, $digits);
-
     @return math.div(math.round($float * $pow), $pow);
 }
 
@@ -100,14 +98,14 @@
 
 // Check string starts with.
 @function str-starts-with($str, $substring) {
-    $position: 1;
-    @return string.index($str, $substring) == $position;
+    $index: 1;
+    @return string.index($str, $substring) == $index;
 }
 
 // Check string ends with.
 @function str-ends-with($str, $substring) {
-    $position: string.length($str) - string.length($substring) + 1;
-    @return string.index($str, $substring) == $position;
+    $index: string.length($str) - string.length($substring) + 1;
+    @return string.index($str, $substring) == $index;
 }
 
 // Check css-value is `calc()`.
