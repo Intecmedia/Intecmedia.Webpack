@@ -2,9 +2,9 @@
 // WYSIWYG (What You See Is What You Get) semantic tags.
 //
 
-/* stylelint-disable scss/selector-nest-combinators, selector-max-type, plugin/selector-bem-pattern, selector-nested-pattern -- wysiwyg is semantic tags */
+/* stylelint-disable scss/selector-nest-combinators, selector-max-type, plugin/selector-bem-pattern, selector-nested-pattern, scss/at-extend-no-missing-placeholder -- wysiwyg is semantic tags */
 .wysiwyg {
-    @extend .clearfix;
+    @include clearfix();
 
     font-size: $paragraph-font-size;
 
@@ -467,4 +467,4 @@
         }
     }
 }
-/* stylelint-enable scss/selector-nest-combinators, selector-max-type, plugin/selector-bem-pattern, selector-nested-pattern */
+/* stylelint-enable scss/selector-nest-combinators, selector-max-type, plugin/selector-bem-pattern, selector-nested-pattern, scss/at-extend-no-missing-placeholder */

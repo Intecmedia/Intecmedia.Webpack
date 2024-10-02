@@ -86,7 +86,6 @@ module.exports = deepMerge({}, sharedConfig, {
                 'ignore': ['after-comment', 'first-nested'],
             },
         ],
-        'scss/at-extend-no-missing-placeholder': null,
         'scss/comment-no-empty': null,
         'scss/dollar-variable-colon-space-after': null,
         'scss/dollar-variable-default': [
