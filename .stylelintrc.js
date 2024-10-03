@@ -31,6 +31,7 @@ module.exports = deepMerge({}, sharedConfig, {
         ],
         'no-descending-specificity': null,
         'no-invalid-double-slash-comments': null,
+        'no-invalid-position-at-import-rule': null,
         'plugin/no-low-performance-animation-properties': [
             true,
             {
