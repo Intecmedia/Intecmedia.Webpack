@@ -5,7 +5,6 @@
 /* stylelint-disable no-duplicate-selectors -- already in components, but we need it */
 /* stylelint-disable plugin/selector-bem-pattern -- scrollbar is not component */
 /* stylelint-disable selector-max-type -- scrollbar is not component */
-/* stylelint-disable scss/selector-nest-combinators -- scrollbar is not component */
 
 * {
     --scrollbar-size: #{$scrollbar-size};
@@ -47,7 +46,6 @@
     }
 }
 
-/* stylelint-enable scss/selector-nest-combinators */
 /* stylelint-enable selector-max-type */
 /* stylelint-enable plugin/selector-bem-pattern */
 /* stylelint-enable no-duplicate-selectors */
