@@ -12,6 +12,12 @@ module.exports = deepMerge({}, sharedConfig, {
     'extends': ['stylelint-config-recommended-scss', ...sharedConfig.extends],
     'overrides': [
         {
+            'files': ['source/css/base/**/*.scss'],
+            'rules': {
+                'scss/at-extend-no-missing-placeholder': null,
+            },
+        },
+        {
             'files': ['source/css/components/**/*.scss'],
             'rules': {
                 'plugin/selector-bem-pattern': {

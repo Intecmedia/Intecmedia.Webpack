@@ -2,7 +2,6 @@
 // WYSIWYG (What You See Is What You Get) semantic tags.
 //
 
-/* stylelint-disable scss/at-extend-no-missing-placeholder -- wysiwyg is semantic tags */
 .wysiwyg {
     @include clearfix();
 
@@ -467,4 +466,3 @@
         }
     }
 }
-/* stylelint-enable scss/at-extend-no-missing-placeholder */
