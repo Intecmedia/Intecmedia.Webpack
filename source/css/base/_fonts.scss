@@ -4,7 +4,6 @@
 @use "sass:map";
 @use "sass:list";
 @use "sass:string";
-/* stylelint-disable function-url-quotes -- stylelint not detect quote() */
 
 @mixin font-face($name, $path, $weight: null, $style: null, $exts: woff2 woff, $display: swap) {
     $src: null;
@@ -34,11 +33,9 @@
     }
 }
 
-// @include font-face('Example', '../fonts/Example', null, null, woff2 woff);
-// @include font-face('Example', '../fonts/Example-Light', 300, null, woff2 woff);
-// @include font-face('Example', '../fonts/Example-Medium', 500, null, woff2 woff);
-// @include font-face('Example', '../fonts/Example-Bold', 700, null, woff2 woff);
-// @include font-face('Example', '../fonts/Example-Italic', null, italic, woff2 woff);
-// @include font-face('Example', '../fonts/Example-Bold-Italic', 700, italic, woff2 woff);
-
-/* stylelint-enable function-url-quotes -- stylelint not detect quote() */
+// @include font-face("Example", "../fonts/Example", null, null, woff2 woff);
+// @include font-face("Example", "../fonts/Example-Light", 300, null, woff2 woff);
+// @include font-face("Example", "../fonts/Example-Medium", 500, null, woff2 woff);
+// @include font-face("Example", "../fonts/Example-Bold", 700, null, woff2 woff);
+// @include font-face("Example", "../fonts/Example-Italic", null, italic, woff2 woff);
+// @include font-face("Example", "../fonts/Example-Bold-Italic", 700, italic, woff2 woff);
