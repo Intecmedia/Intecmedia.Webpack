@@ -19,12 +19,6 @@ $remify-px-only: false !default;
     @return list.separator($list);
 }
 
-// Get rem baseline.
-@mixin remify-baseline($zoom: 100%) {
-    /* stylelint-disable-next-line declaration-property-unit-allowed-list -- its wrong case */
-    font-size: math.div($zoom, 16px) * $remify-baseline;
-}
-
 // Convert css-values to rem or px.
 @function remify-convert($to, $values...) {
     $result: ();
