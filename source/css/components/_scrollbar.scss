@@ -25,18 +25,18 @@
         scrollbar-color: revert;
     }
 
-    /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- its ok for custom scrollbar */
+    /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- its ok for custom scrollbar */
     &::-webkit-scrollbar {
         width: var(--scrollbar-size);
         height: var(--scrollbar-size);
     }
 
-    /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- its ok for custom scrollbar */
+    /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- its ok for custom scrollbar */
     &::-webkit-scrollbar-track {
         background: var(--scrollbar-track-bg);
     }
 
-    /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- its ok for custom scrollbar */
+    /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- its ok for custom scrollbar */
     &::-webkit-scrollbar-thumb {
         border: var(--scrollbar-thumb-border);
         border-radius: var(--scrollbar-size);

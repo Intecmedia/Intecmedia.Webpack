@@ -55,7 +55,7 @@
         $root-font-size-clamp: fluid-clamp($font-size-rem, $font-size-qhd, "hd", "qhd");
 
         @supports (font-size: $root-font-size-clamp) {
-            /* stylelint-disable-next-line plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- not standart feature */
+            /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- not standart feature */
             font-size: $root-font-size-clamp;
         }
     }
@@ -74,11 +74,6 @@ body {
 
     overflow: auto scroll;
     text-rendering: optimizespeed;
-
-    @supports (-webkit-touch-callout: none) {
-        /* stylelint-disable-next-line value-no-vendor-prefix, plugin/no-unsupported-browser-features, declaration-property-value-no-unknown -- iOS problem with 100vh */
-        min-height: -webkit-fill-available;
-    }
 
     @if $NODE_ENV != "production" or $DEBUG {
         &::after {
