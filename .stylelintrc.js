@@ -39,6 +39,13 @@ module.exports = deepMerge({}, sharedConfig, {
                     ],
                     'preset': 'bem',
                 },
+                'selector-max-type': [
+                    0,
+                    {
+                        'ignore': ['child'],
+                        'ignoreTypes': ['/^(html|body|svg|picture|img|iframe|video|option|optgroup|canvas)\\.?/'],
+                    },
+                ],
                 'selector-nested-pattern': ['^(&--|&__|&::|&:|&\\.|&\\[|>|&\\s*|~|\\+|\\w+|\\.)'],
             },
         },
@@ -105,13 +112,6 @@ module.exports = deepMerge({}, sharedConfig, {
         'selector-class-pattern': ['^[a-zA-Z0-9\\-_]+$'],
         'selector-max-class': 5,
         'selector-max-compound-selectors': 5,
-        'selector-max-type': [
-            0,
-            {
-                'ignore': ['child'],
-                'ignoreTypes': ['/^(html|body|svg|picture|img|iframe|video|option|optgroup|canvas)\\.?/'],
-            },
-        ],
         'selector-no-qualifying-type': [
             true,
             {
