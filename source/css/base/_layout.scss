@@ -3,9 +3,7 @@
 //
 @use "sass:map";
 /* stylelint-disable no-duplicate-selectors -- already in 'node_modules/bootstrap/scss/reboot.scss', but we need it */
-/* stylelint-disable plugin/selector-bem-pattern -- is common styles, not component */
 
-/* postcss-bem-linter: ignore */
 :root {
     --NODE_ENV: "#{$NODE_ENV}";
     --DEBUG: "#{$DEBUG}";
@@ -63,12 +61,10 @@
     }
 }
 
-/* postcss-bem-linter: ignore */
 html {
     background: var(--#{$prefix}body-bg, #{$body-bg});
 }
 
-/* postcss-bem-linter: ignore */
 body {
     --#{$prefix}letter-spacing: #{$letter-spacing};
 
@@ -91,5 +87,4 @@ body {
     }
 }
 
-/* stylelint-enable plugin/selector-bem-pattern  */
 /* stylelint-enable no-duplicate-selectors */

@@ -13,7 +13,38 @@ module.exports = deepMerge({}, sharedConfig, {
     'overrides': [
         {
             'files': ['source/css/components/**/*.scss'],
-            'selector-nested-pattern': ['^(&--|&__|&::|&:|&\\.|&\\[|>|&\\s*|~|\\+|\\w+|\\.)'],
+            'rules': {
+                'plugin/selector-bem-pattern': {
+                    'ignoreCustomProperties': [
+                        '--aspect-',
+                        '--bs-',
+                        '--icon-',
+                        '--image-',
+                        '--video-',
+                        '--intersection-',
+                        '--fluid-',
+                        '--#\\{\\$prefix\\}',
+                    ],
+                    'ignoreSelectors': [
+                        '^(html|body)\\.?',
+                        '.+\\.(js|is|no|has|not)\\-(.+)',
+                        '^(svg|picture|img|iframe|video|option|optgroup|canvas)\\.?',
+                        '#\\{\\$[a-zA-Z][a-zA-Z-\\d]*\\}',
+                        '\\.(active|fade|hide|hiding|show|showing|disabled|collapse|collapsed|collapsing)',
+                    ],
+                    'implicitComponents': [
+                        'source/css/components/**/*.scss',
+                        'source/css/layout/**/*.scss',
+                        'source/css/pages/**/*.scss',
+                    ],
+                    'preset': 'bem',
+                },
+                'selector-nested-pattern': ['^(&--|&__|&::|&:|&\\.|&\\[|>|&\\s*|~|\\+|\\w+|\\.)'],
+            },
+        },
+        {
+            'files': ['source/css/components/**/_.scss'],
+            'rules': { 'plugin/selector-bem-pattern': null },
         },
     ],
     'plugins': [
@@ -60,31 +91,6 @@ module.exports = deepMerge({}, sharedConfig, {
                 'severity': 'warning',
             },
         ],
-        'plugin/selector-bem-pattern': {
-            'ignoreCustomProperties': [
-                '--aspect-',
-                '--bs-',
-                '--icon-',
-                '--image-',
-                '--video-',
-                '--intersection-',
-                '--fluid-',
-                '--#\\{\\$prefix\\}',
-            ],
-            'ignoreSelectors': [
-                '^(html|body)\\.?',
-                '.+\\.(js|is|no|has|not)\\-(.+)',
-                '^(svg|picture|img|iframe|video|option|optgroup|canvas)\\.?',
-                '#\\{\\$[a-zA-Z][a-zA-Z-\\d]*\\}',
-                '\\.(active|fade|hide|hiding|show|showing|disabled|collapse|collapsed|collapsing)',
-            ],
-            'implicitComponents': [
-                'source/css/components/**/*.scss',
-                'source/css/layout/**/*.scss',
-                'source/css/pages/**/*.scss',
-            ],
-            'preset': 'bem',
-        },
         'prettier/prettier': true,
         'rule-empty-line-before': [
             'always',
