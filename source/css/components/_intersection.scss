@@ -3,13 +3,13 @@
 //
 
 .intersection {
-    $intersection-translate-y-base: 100% !default;
+    $intersection-translate-y-base: 50% !default;
 
     $intersection-scale-base: 1.15 !default;
     $intersection-scale-in-base: 0.85 !default;
 
-    $intersection-duration-fade-default: $duration-default !default;
-    $intersection-duration-translate-default: $duration-default !default;
+    $intersection-duration-fade-default: $duration-normal !default;
+    $intersection-duration-translate-default: $duration-normal !default;
 
     $intersection-duration-fade-slow: $duration-slow !default;
     $intersection-duration-translate-slow: $duration-slow !default;
