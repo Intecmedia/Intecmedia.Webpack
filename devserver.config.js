@@ -6,8 +6,8 @@ module.exports = {
         index: '/',
         disableDotRule: true,
         rewrites: [
-            { from: /./, to: "/404" },
+            { from: /./, to: '/404' },
             // { from: /^\/from-example\/(.+)/, to: '/to-example' },
         ],
-     },
+    },
 };
