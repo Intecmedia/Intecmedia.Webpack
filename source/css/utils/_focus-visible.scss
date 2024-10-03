@@ -2,8 +2,6 @@
 // Focus-visible polyfill.
 //
 
-/* stylelint-disable csstools/use-nesting -- focus-visible polyfill */
 .js-focus-visible :focus:not(.focus-visible) {
     outline: none;
 }
-/* stylelint-enable csstools/use-nesting */

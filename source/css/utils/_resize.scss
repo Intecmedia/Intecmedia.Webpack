@@ -2,7 +2,6 @@
 // Resize image mixins and functions.
 //
 @use "sass:map";
-/* stylelint-disable plugin/no-unsupported-browser-features -- wrong error */
 
 $resize-breakpoints: $grid-breakpoints !default;
 
@@ -77,5 +76,3 @@ $resize-breakpoints: $grid-breakpoints !default;
         }
     }
 }
-
-/* stylelint-enable plugin/no-unsupported-browser-features */
