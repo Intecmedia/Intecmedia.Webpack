@@ -45,6 +45,7 @@ module.exports = deepMerge({}, sharedConfig, {
                     ],
                     'preset': 'bem',
                 },
+                'selector-max-compound-selectors': 5,
                 'selector-max-type': [
                     0,
                     {
@@ -73,12 +74,6 @@ module.exports = deepMerge({}, sharedConfig, {
     'reportNeedlessDisables': false,
     'rules': {
         // code quality rules (fastest)
-        'max-nesting-depth': [
-            5,
-            {
-                'ignore': ['blockless-at-rules', 'pseudo-classes'],
-            },
-        ],
         'no-descending-specificity': null,
         'no-invalid-double-slash-comments': null,
         'no-invalid-position-at-import-rule': null,
@@ -117,7 +112,6 @@ module.exports = deepMerge({}, sharedConfig, {
         'scss/operator-no-newline-after': null,
         'selector-class-pattern': ['^[a-zA-Z0-9\\-_]+$'],
         'selector-max-class': 5,
-        'selector-max-compound-selectors': 5,
         'selector-no-qualifying-type': [
             true,
             {

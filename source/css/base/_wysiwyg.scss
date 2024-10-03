@@ -211,7 +211,6 @@
 
         background: transparent;
 
-        /* stylelint-disable-next-line selector-max-compound-selectors -- its ok for tables */
         > :not(:first-child) {
             border-top: 0;
         }
@@ -219,11 +218,9 @@
         > thead,
         > tbody,
         > tfoot {
-            /* stylelint-disable-next-line selector-max-compound-selectors -- its ok for tables */
             > tr {
                 border: 0;
 
-                /* stylelint-disable-next-line selector-max-compound-selectors, max-nesting-depth -- its ok for tables */
                 > th,
                 > td {
                     border: 0;
@@ -346,13 +343,11 @@
 
         // image with rounded border
         &.img-rounded {
-            /* stylelint-disable-next-line declaration-no-important -- force set border radius */
             border-radius: $border-radius !important;
         }
 
         // image with circle border
         &.img-circle {
-            /* stylelint-disable-next-line declaration-no-important -- force set border radius */
             border-radius: $border-radius !important;
             border-radius: 50%;
         }
