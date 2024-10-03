@@ -10,6 +10,12 @@ module.exports = deepMerge({}, sharedConfig, {
     'customSyntax': 'postcss-scss',
     'defaultSeverity': ENV.PROD || ENV.DEBUG ? 'error' : 'warning',
     'extends': ['stylelint-config-recommended-scss', ...sharedConfig.extends],
+    'overrides': [
+        {
+            'files': ['source/css/components/**/*.scss'],
+            'selector-nested-pattern': ['^(&--|&__|&::|&:|&\\.|&\\[|>|&\\s*|~|\\+|\\w+|\\.)'],
+        },
+    ],
     'plugins': [
         'stylelint-high-performance-animation',
         'stylelint-scss',
@@ -100,7 +106,6 @@ module.exports = deepMerge({}, sharedConfig, {
                 'ignoreTypes': ['/^(html|body|svg|picture|img|iframe|video|option|optgroup|canvas)\\.?/'],
             },
         ],
-        'selector-nested-pattern': ['^(&--|&__|&::|&:|&\\.|&\\[|>|&\\s*|~|\\+|\\w+|\\.)'],
         'selector-no-qualifying-type': [
             true,
             {
