@@ -5,19 +5,25 @@
 
 // Configuration
 @import "node_modules/bootstrap/scss/functions";
+/* stylelint-enable -- allow nested disable */
 @import "bootstrap-functions";
+/* stylelint-disable -- allow nested disable */
 @import "node_modules/bootstrap/scss/maps";
 @import "node_modules/bootstrap/scss/mixins";
+/* stylelint-enable -- allow nested disable */
 @import "bootstrap-mixins";
+/* stylelint-disable -- allow nested disable */
 @import "node_modules/bootstrap/scss/utilities";
+/* stylelint-enable -- allow nested disable */
 @import "bootstrap-utilities";
+/* stylelint-disable -- allow nested disable */
 
 // Layout & components
 @import "node_modules/bootstrap/scss/root";
 @import "node_modules/bootstrap/scss/reboot";
-/* stylelint-enable -- we not control third party code */
+/* stylelint-enable -- allow nested disable */
 @import "bootstrap-type";
-/* stylelint-disable -- we not control third party code */
+/* stylelint-disable -- allow nested disable */
 @import "node_modules/bootstrap/scss/images";
 @import "node_modules/bootstrap/scss/containers";
 @import "node_modules/bootstrap/scss/grid";
