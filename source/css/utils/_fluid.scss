@@ -82,7 +82,7 @@ $fluid-screen-height: 100vh !default; // or 100vmin
 
         @each $prop in $properties {
             $calc-size: calc(
-                #{$min-value} + #{$value-calc} * ($fluid-screen-width - #{$min-width-calc}) / #{$width-calc}
+                #{$min-value} + #{$value-calc} * (#{$fluid-screen-width} - #{$min-width-calc}) / #{$width-calc}
             );
 
             #{$prop}: $calc-size; /* #{$comment} */
@@ -146,7 +146,7 @@ $fluid-screen-height: 100vh !default; // or 100vmin
 
         @each $prop in $properties {
             $calc-size: calc(
-                #{$min-value} + #{$value-calc} * ($fluid-screen-height - #{$min-height-calc}) / #{$height-calc}
+                #{$min-value} + #{$value-calc} * (#{$fluid-screen-height} - #{$min-height-calc}) / #{$height-calc}
             );
 
             #{$prop}: #{$calc-size}; /* #{$comment} */
@@ -530,7 +530,7 @@ $fluid-screen-height: 100vh !default; // or 100vmin
     $size-calc: strip-unit($max-size - $min-size);
     $width-calc: strip-unit($max-width) - strip-unit($min-width);
 
-    @return calc(#{$min-size} + #{$size-calc} * ($fluid-screen-width - #{$min-width}) / #{$width-calc});
+    @return calc(#{$min-size} + #{$size-calc} * (#{$fluid-screen-width} - #{$min-width}) / #{$width-calc});
 }
 
 // Fluid vertical property with css-calc.
@@ -545,7 +545,7 @@ $fluid-screen-height: 100vh !default; // or 100vmin
     $size-calc: strip-unit($max-size - $min-size);
     $height-calc: strip-unit($max-height) - strip-unit($min-height);
 
-    @return calc(#{$min-size} + #{$size-calc} * ($fluid-screen-height - #{$min-height}) / #{$height-calc});
+    @return calc(#{$min-size} + #{$size-calc} * (#{$fluid-screen-height} - #{$min-height}) / #{$height-calc});
 }
 
 // Fluid horizontal font-size property with 100vw.
