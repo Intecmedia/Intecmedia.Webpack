@@ -23,9 +23,9 @@ module.exports = {
             },
         },
     ],
-    'printWidth': 120,
+    'printWidth': 160,
     'quoteProps': 'preserve',
     'tabWidth': 4,
-    'trailingComma': 'es5',
+    'trailingComma': 'all',
     'useTabs': false,
 };
