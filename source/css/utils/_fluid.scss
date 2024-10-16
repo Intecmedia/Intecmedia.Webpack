@@ -81,9 +81,7 @@ $fluid-screen-height: 100vh !default; // or 100vmin
         /* fallback css-calc */
 
         @each $prop in $properties {
-            $calc-size: calc(
-                #{$min-value} + #{$value-calc} * (#{$fluid-screen-width} - #{$min-width-calc}) / #{$width-calc}
-            );
+            $calc-size: calc(#{$min-value} + #{$value-calc} * (#{$fluid-screen-width} - #{$min-width-calc}) / #{$width-calc});
 
             #{$prop}: $calc-size; /* #{$comment} */
         }
@@ -145,9 +143,7 @@ $fluid-screen-height: 100vh !default; // or 100vmin
         /* fallback css-calc */
 
         @each $prop in $properties {
-            $calc-size: calc(
-                #{$min-value} + #{$value-calc} * (#{$fluid-screen-height} - #{$min-height-calc}) / #{$height-calc}
-            );
+            $calc-size: calc(#{$min-value} + #{$value-calc} * (#{$fluid-screen-height} - #{$min-height-calc}) / #{$height-calc});
 
             #{$prop}: #{$calc-size}; /* #{$comment} */
         }
@@ -211,15 +207,7 @@ $fluid-screen-height: 100vh !default; // or 100vmin
         $max-width-calc: map.get($grid-breakpoints, $max-width-calc);
     }
 
-    @include fluid-property(
-        $prop,
-        remify($min-value),
-        remify($max-value),
-        $min-width,
-        $max-width,
-        remify($min-width-calc),
-        remify($max-width-calc)
-    );
+    @include fluid-property($prop, remify($min-value), remify($max-value), $min-width, $max-width, remify($min-width-calc), remify($max-width-calc));
 }
 
 // Fluid vertical font-size property with css-clamp, at-supports and calc-fallback.
@@ -246,15 +234,7 @@ $fluid-screen-height: 100vh !default; // or 100vmin
         $max-height-calc: map.get($vertical-breakpoints, $max-height-calc);
     }
 
-    @include fluid-property-vertical(
-        $prop,
-        $min-value,
-        $max-value,
-        $min-height,
-        $max-height,
-        $min-height-calc,
-        $max-height-calc
-    );
+    @include fluid-property-vertical($prop, $min-value, $max-value, $min-height, $max-height, $min-height-calc, $max-height-calc);
 }
 
 // Fluid vertical font-size property with rem, css-clamp, at-supports and calc-fallback.
@@ -433,15 +413,7 @@ $fluid-screen-height: 100vh !default; // or 100vmin
         @supports not (#{$clamp-supports}) {
             /* fallback css-calc */
 
-            @include fluid-property(
-                $prop,
-                remify($min-size),
-                remify($max-size),
-                $min-width,
-                $max-width,
-                remify($min-width),
-                remify($max-width)
-            );
+            @include fluid-property($prop, remify($min-size), remify($max-size), $min-width, $max-width, remify($min-width), remify($max-width));
         }
         @supports (#{$clamp-supports}) {
             /* modern css-clamp */
@@ -461,13 +433,7 @@ $fluid-screen-height: 100vh !default; // or 100vmin
 }
 
 // Fluid vertical property with css-clamp.
-@mixin fluid-clamp-prop-vertical(
-    $prop,
-    $min-size,
-    $max-size,
-    $min-height: $fluid-min-height,
-    $max-height: $fluid-max-height
-) {
+@mixin fluid-clamp-prop-vertical($prop, $min-size, $max-size, $min-height: $fluid-min-height, $max-height: $fluid-max-height) {
     @if meta.type-of($min-height) == "string" {
         $min-height: map.get($vertical-breakpoints, $min-height);
     }
@@ -484,15 +450,7 @@ $fluid-screen-height: 100vh !default; // or 100vmin
         @supports not (#{$clamp-supports}) {
             /* fallback css-calc */
 
-            @include fluid-property-vertical(
-                $prop,
-                remify($min-size),
-                remify($max-size),
-                $min-height,
-                $max-height,
-                remify($min-height),
-                remify($max-height)
-            );
+            @include fluid-property-vertical($prop, remify($min-size), remify($max-size), $min-height, $max-height, remify($min-height), remify($max-height));
         }
         @supports (#{$clamp-supports}) {
             /* modern css-clamp */
@@ -507,12 +465,7 @@ $fluid-screen-height: 100vh !default; // or 100vmin
 }
 
 // Fluid vertical font-size property with css-clamp.
-@mixin fluid-clamp-font-size-vertical(
-    $min-size,
-    $max-size,
-    $min-height: $fluid-min-height,
-    $max-height: $fluid-max-height
-) {
+@mixin fluid-clamp-font-size-vertical($min-size, $max-size, $min-height: $fluid-min-height, $max-height: $fluid-max-height) {
     $prop: font-size;
 
     @include fluid-clamp-prop-vertical($prop, $min-size, $max-size, $min-height, $max-height);

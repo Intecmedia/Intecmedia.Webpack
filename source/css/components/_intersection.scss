@@ -23,11 +23,7 @@
     html.js & {
         &--block,
         > .intersection__block {
-            $intersection-translate: translate3d(
-                var(--intersection-translate-x, 0),
-                var(--intersection-translate-y, 0),
-                var(--intersection-translate-z, 0)
-            );
+            $intersection-translate: translate3d(var(--intersection-translate-x, 0), var(--intersection-translate-y, 0), var(--intersection-translate-z, 0));
             $intersection-scale: scale(var(--intersection-scale, 1));
             $intersection-rotate: rotate(var(--intersection-rotate, 0));
 
@@ -82,9 +78,7 @@
         }
 
         &.is-intersection-upward {
-            --intersection-translate-y-up: calc(
-                var(--intersection-translate-y-base, #{$intersection-translate-y-base}) * -1
-            );
+            --intersection-translate-y-up: calc(var(--intersection-translate-y-base, #{$intersection-translate-y-base}) * -1);
         }
     }
 
@@ -93,9 +87,7 @@
         --intersection-translate-y: var(--intersection-translate-y-down, 0);
 
         &.is-intersection-downward {
-            --intersection-translate-y-down: calc(
-                var(--intersection-translate-y-base, #{$intersection-translate-y-base}) * -1
-            );
+            --intersection-translate-y-down: calc(var(--intersection-translate-y-base, #{$intersection-translate-y-base}) * -1);
         }
 
         &.is-intersection-upward {
