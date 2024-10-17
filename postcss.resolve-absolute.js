@@ -14,10 +14,9 @@ module.exports = ({ silent }) => {
             if (!ABSOLUTE_PATTERN.test(originUrl)) return originUrl;
 
             const resolvedUrl = originUrl.replace(ABSOLUTE_PATTERN, ABSOLUTE_REPLACE); // resolve absolute urls
-            const message = [
-                `Absolute url(${JSON.stringify(originUrl)}) resolved as url(${JSON.stringify(resolvedUrl)}).`,
-                'Please fix to relative.',
-            ].join(' ');
+            const message = [`Absolute url(${JSON.stringify(originUrl)}) resolved as url(${JSON.stringify(resolvedUrl)}).`, 'Please fix to relative.'].join(
+                ' ',
+            );
 
             warn(message);
             logger.error(message);

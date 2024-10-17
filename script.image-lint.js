@@ -65,9 +65,7 @@ const LINT_RULES = [
         allowed: config.colorspace,
         fn(metadata) {
             if (!this.allowed.includes(metadata.space)) {
-                return `The color space of this image is ${metadata.space}. It must be ${JSON.stringify(
-                    this.allowed
-                )}.`;
+                return `The color space of this image is ${metadata.space}. It must be ${JSON.stringify(this.allowed)}.`;
             }
             return false;
         },
@@ -152,7 +150,7 @@ const promises = files.map(async (resourcePath) => {
             LINT_RULES.map(async (rule) => {
                 const lintError = await rule.fn(metadata, resourcePath);
                 return lintError ? [lintError] : [];
-            })
+            }),
         )
     ).flat();
 

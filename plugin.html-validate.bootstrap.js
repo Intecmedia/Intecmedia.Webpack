@@ -14,13 +14,7 @@ const makeColsClassList = (cols = COLS_COUNT, breakpoints = COLS_BREAKPOINTS) =>
         ...colsNumbers.map((col) => `col-${col}`),
         'col',
         'col-auto',
-        ...breakpoints
-            .map((breakpoint) => [
-                ...colsNumbers.map((col) => `col-${breakpoint}-${col}`),
-                `col-${breakpoint}`,
-                `col-${breakpoint}-auto`,
-            ])
-            .flat(),
+        ...breakpoints.map((breakpoint) => [...colsNumbers.map((col) => `col-${breakpoint}-${col}`), `col-${breakpoint}`, `col-${breakpoint}-auto`]).flat(),
     ];
 };
 
@@ -33,9 +27,7 @@ const makeGridColsClassList = (cols = COLS_COUNT, breakpoints = COLS_BREAKPOINTS
     const colsNumbers = Array.from({ length: cols }, (value, index) => index + 1);
     return [
         ...colsNumbers.map((col) => `g-col-${col}`),
-        ...breakpoints
-            .map((breakpoint) => [...colsNumbers.map((col) => `g-col-${breakpoint}-${col}`), `g-col-${breakpoint}`])
-            .flat(),
+        ...breakpoints.map((breakpoint) => [...colsNumbers.map((col) => `g-col-${breakpoint}-${col}`), `g-col-${breakpoint}`]).flat(),
     ];
 };
 
@@ -85,10 +77,7 @@ class ContainerNoNested extends AbsRule {
                 return;
             }
 
-            if (
-                container.parent.classList.contains('container') ||
-                container.parent.classList.contains('container-fluid')
-            ) {
+            if (container.parent.classList.contains('container') || container.parent.classList.contains('container-fluid')) {
                 this.report(container, 'Containers (`.container` and `.container-fluid`) are not nestable.');
             }
         });

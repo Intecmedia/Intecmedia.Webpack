@@ -116,9 +116,7 @@ module.exports = {
             `${ENV.SOURCE_PATH}/css/example.scss`,
         ],
         */
-        ...(APP.RESIZE && (ENV.PROD || ENV.DEBUG)
-            ? { 'webpack-resize': `${ENV.SOURCE_PATH}/js/webpack-resize.js` }
-            : {}),
+        ...(APP.RESIZE && (ENV.PROD || ENV.DEBUG) ? { 'webpack-resize': `${ENV.SOURCE_PATH}/js/webpack-resize.js` } : {}),
     },
 
     output: {
@@ -197,8 +195,7 @@ module.exports = {
                           extractComments: {
                               condition: 'some',
                               filename: (fileData) => `${fileData.filename}.LICENSE`,
-                              banner: (licenseFile) =>
-                                  [`License information can be found in ${licenseFile}`, ENV.BANNER_STRING].join('\n'),
+                              banner: (licenseFile) => [`License information can be found in ${licenseFile}`, ENV.BANNER_STRING].join('\n'),
                           },
                       }),
                   ]
@@ -279,7 +276,7 @@ module.exports = {
                 {},
                 ...Object.entries(APP).map(([k, v]) => ({
                     [`APP.${k}`]: JSON.stringify(v),
-                }))
+                })),
             ),
             BANNER_STRING: JSON.stringify(ENV.BANNER_STRING),
         }),
@@ -336,7 +333,7 @@ module.exports = {
                     cache: !ENV.DEBUG,
                     title: APP.TITLE,
                     excludeChunks: ['webpack-resize'],
-                })
+                }),
         ),
         ...(APP.FAVICONS
             ? [
@@ -472,11 +469,7 @@ module.exports = {
                 test: /\.(svg)(\?.*)?$/i,
                 issuer: /\.(html)(\?.*)?$/i,
                 include: [path.join(ENV.SOURCE_PATH, 'partials')],
-                exclude: [
-                    /(fonts|font)/i,
-                    path.join(ENV.SOURCE_PATH, 'img/svg-sprite'),
-                    path.join(ENV.SOURCE_PATH, 'upload'),
-                ],
+                exclude: [/(fonts|font)/i, path.join(ENV.SOURCE_PATH, 'img/svg-sprite'), path.join(ENV.SOURCE_PATH, 'upload')],
                 loader: './loader.svgo.js',
                 options: { verbose: ENV.DEBUG || ENV.ARGV.verbose },
             },
@@ -530,19 +523,11 @@ module.exports = {
                             sourceMap: true,
                             import: {
                                 filter(url) {
-                                    if (
-                                        url.endsWith('.css') &&
-                                        !(
-                                            url.startsWith('http://') ||
-                                            url.startsWith('https://') ||
-                                            url.startsWith('//')
-                                        )
-                                    ) {
+                                    if (url.endsWith('.css') && !(url.startsWith('http://') || url.startsWith('https://') || url.startsWith('//'))) {
                                         this.loaderContext.emitError(
-                                            [
-                                                `Unexpected file extension in @import ${JSON.stringify(url)};.`,
-                                                `Please import without file extension.`,
-                                            ].join(' ')
+                                            [`Unexpected file extension in @import ${JSON.stringify(url)};.`, `Please import without file extension.`].join(
+                                                ' ',
+                                            ),
                                         );
                                         return false;
                                     }
@@ -580,7 +565,7 @@ module.exports = {
                                     {},
                                     ...Object.entries({ ...APP, ENV: {} }).map(([k, v]) => ({
                                         [`APP-${k}`]: v,
-                                    }))
+                                    })),
                                 ),
                             }),
                             sourceMap: true,

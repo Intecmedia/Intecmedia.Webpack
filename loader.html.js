@@ -118,7 +118,7 @@ const processHtml = (html, options, loaderCallback) => {
         lodashTemplate(content, {
             interpolate: /<%=([\s\S]+?)%>/g,
             variable: 'data',
-        }).source
+        }).source,
     );
 
     const exportString = `module.exports = function (params) { with (params) { return (${template})(); }; };`;
@@ -151,7 +151,7 @@ module.exports = function HtmlLoader() {
         'includeWith',
         new IncludeWithExtension({
             nunjucksEnv,
-        })
+        }),
     );
 
     options.requireIdent = (url) => {
@@ -185,8 +185,7 @@ module.exports = function HtmlLoader() {
     const resourcePath = path.posix.sep + path.relative(options.searchPath, loaderContext.resourcePath);
     const baseName = path.basename(loaderContext.resourcePath, '.html');
 
-    const resourceUrl =
-        path.dirname(resourcePath) + (baseName === 'index' ? '' : path.posix.sep + baseName) + path.posix.sep;
+    const resourceUrl = path.dirname(resourcePath) + (baseName === 'index' ? '' : path.posix.sep + baseName) + path.posix.sep;
     const resourceStat = fs.statSync(loaderContext.resourcePath);
 
     nunjucksEnv.addGlobal('APP', options.context);
@@ -219,9 +218,7 @@ module.exports = function HtmlLoader() {
 
     const nunjucksGetSource = nunjucksLoader.getSource;
     nunjucksLoader.getSource = function getSource(templateFilename) {
-        const templateFilepath = path.isAbsolute(templateFilename)
-            ? templateFilename
-            : path.join(options.searchPath, templateFilename);
+        const templateFilepath = path.isAbsolute(templateFilename) ? templateFilename : path.join(options.searchPath, templateFilename);
         const templateRelative = UTILS.slash(path.relative(__dirname, templateFilename));
         loaderContext.addDependency(templateFilepath);
 
@@ -234,13 +231,7 @@ module.exports = function HtmlLoader() {
         }
 
         [...templateSource.src.matchAll(MACROS_PATTERN)].forEach(([macrosDef, macrosName]) => {
-            if (
-                !(
-                    templateRelative in options.macrosWhitelist &&
-                    options.macrosWhitelist[templateRelative].includes(macrosName)
-                ) ||
-                !options.macrosWhitelist
-            ) {
+            if (!(templateRelative in options.macrosWhitelist && options.macrosWhitelist[templateRelative].includes(macrosName)) || !options.macrosWhitelist) {
                 const macrosError = [
                     `Macros: ${JSON.stringify(macrosDef)} not allowed in ${JSON.stringify(templateRelative)}.`,
                     'Please replace to {% includeWith "partials/example.html", { varname: \'value\' } %} instead.',
@@ -257,12 +248,7 @@ module.exports = function HtmlLoader() {
         nunjucksEnv.addGlobal('PAGE', deepMerge(nunjucksEnv.getGlobal('PAGE') || {}, templateData.attributes, PAGE));
         return {
             ...templateSource,
-            src: [
-                '{#---',
-                templateData.frontmatter.replace('#}', escape('#}')).replace('{#', escape('{#')),
-                '---#}',
-                templateData.body,
-            ].join('\n'),
+            src: ['{#---', templateData.frontmatter.replace('#}', escape('#}')).replace('{#', escape('{#')), '---#}', templateData.body].join('\n'),
         };
     };
 

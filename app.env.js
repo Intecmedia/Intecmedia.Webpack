@@ -15,8 +15,7 @@ if (process.cwd() !== realcwd) {
 const ARGV = { ...UTILS.processArgs.env };
 const DEBUG = 'DEBUG' in process.env && parseInt(process.env.DEBUG, 10) > 0;
 const DEV_SERVER = 'WEBPACK_DEV_SERVER' in process.env && process.env.WEBPACK_DEV_SERVER === 'true';
-const STANDALONE =
-    require.main && ['webpack', 'webpack-dev-server'].includes(path.basename(require.main.filename, '.js'));
+const STANDALONE = require.main && ['webpack', 'webpack-dev-server'].includes(path.basename(require.main.filename, '.js'));
 const WATCH = process.argv.includes('--watch') || process.argv.includes('-w');
 const PROD = process.env.NODE_ENV !== 'development';
 const NODE_ENV = PROD ? 'production' : 'development';
@@ -51,14 +50,10 @@ const SITEMAP = glob
                 ? path.join(path.relative(SOURCE_PATH, item))
                 : path.join(
                       path.relative(SOURCE_PATH, path.dirname(item)),
-                      ...(noindex
-                          ? [extension !== 'html' ? basename : `${basename}.${extension}`]
-                          : [basename, 'index.html'])
-                  )
+                      ...(noindex ? [extension !== 'html' ? basename : `${basename}.${extension}`] : [basename, 'index.html']),
+                  ),
         );
-        const url = UTILS.slash(
-            filename.endsWith('index.html') ? filename.substring(0, filename.length - 'index.html'.length) : filename
-        );
+        const url = UTILS.slash(filename.endsWith('index.html') ? filename.substring(0, filename.length - 'index.html'.length) : filename);
 
         const stat = fs.statSync(item);
         const templateSource = fs.readFileSync(item, 'utf8').toString();
@@ -81,10 +76,7 @@ const SITEMAP = glob
         };
     });
 
-const BANNER_STRING = [
-    `[${PACKAGE.name}]: ENV.NODE_ENV=${NODE_ENV} | ENV.DEBUG=${DEBUG}`,
-    fs.readFileSync(path.join(SOURCE_PATH, 'humans.txt')),
-].join('\n\n');
+const BANNER_STRING = [`[${PACKAGE.name}]: ENV.NODE_ENV=${NODE_ENV} | ENV.DEBUG=${DEBUG}`, fs.readFileSync(path.join(SOURCE_PATH, 'humans.txt'))].join('\n\n');
 
 module.exports = {
     ARGV,

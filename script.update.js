@@ -31,13 +31,11 @@ console.log('');
 logger.info('npm ls...');
 const { dependencies } = require('./package.json');
 
-const packages = Object.entries(
-    JSON.parse(childProcess.execSync(`npm ls --json ${silent}`).toString() || '{}').dependencies || {}
-).filter(
+const packages = Object.entries(JSON.parse(childProcess.execSync(`npm ls --json ${silent}`).toString() || '{}').dependencies || {}).filter(
     ([pkg, meta]) =>
         dependencies[pkg] &&
         !/^\w+:/.test(dependencies[pkg]) &&
-        (dependencies[pkg] === 'latest' || semver.minVersion(dependencies[pkg]).version !== meta.version)
+        (dependencies[pkg] === 'latest' || semver.minVersion(dependencies[pkg]).version !== meta.version),
 );
 
 const updated = [];

@@ -19,11 +19,7 @@ const MODULES_DIR = path.join(__dirname, 'node_modules');
  */
 function lintFilename(filename) {
     if (!FILENAME_PATTERN.test(filename)) {
-        throw new Error(
-            `Filename ${JSON.stringify(filename)} does not match the naming convention pattern: ${JSON.stringify(
-                FILENAME_PATTERN.toString()
-            )}`
-        );
+        throw new Error(`Filename ${JSON.stringify(filename)} does not match the naming convention pattern: ${JSON.stringify(FILENAME_PATTERN.toString())}`);
     }
 }
 
@@ -152,8 +148,8 @@ function globArray(patterns, options) {
                     glob.glob(slash(pattern), globOptions(options))
                         .then((files) => resolve(files))
                         .catch((error) => reject(error));
-                })
-        )
+                }),
+        ),
     ).then((files) => files.flat());
 }
 
@@ -215,10 +211,7 @@ const yargsOptions = {
     'parse-positional-numbers': false,
 };
 
-const processArgs = yargs(process.argv.slice(2))
-    .parserConfiguration(yargsOptions)
-    .option('env', { default: [], type: 'array' })
-    .parse();
+const processArgs = yargs(process.argv.slice(2)).parserConfiguration(yargsOptions).option('env', { default: [], type: 'array' }).parse();
 
 processArgs.env =
     processArgs.env.length > 0

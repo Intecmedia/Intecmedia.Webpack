@@ -33,14 +33,8 @@ files.forEach((resourcePath) => {
     });
 
     logger.info(`${source} --> ${dirname}/${basename}.woff`);
-    childProcess.execSync(
-        `pyftsubset ${source} --output-file=${dirname}/${basename}.woff --flavor=woff ${subsetsCommandSuffix}`,
-        { stdio: 'inherit' }
-    );
+    childProcess.execSync(`pyftsubset ${source} --output-file=${dirname}/${basename}.woff --flavor=woff ${subsetsCommandSuffix}`, { stdio: 'inherit' });
 
     logger.info(`${source} --> ${dirname}/${basename}.woff2`);
-    childProcess.execSync(
-        `pyftsubset ${source} --output-file=${dirname}/${basename}.woff2 --flavor=woff2 ${subsetsCommandSuffix}`,
-        { stdio: 'inherit' }
-    );
+    childProcess.execSync(`pyftsubset ${source} --output-file=${dirname}/${basename}.woff2 --flavor=woff2 ${subsetsCommandSuffix}`, { stdio: 'inherit' });
 });

@@ -37,7 +37,7 @@ const files = UTILS.globArraySync(
         ignore: [`${ENV.OUTPUT_PATH}/**/*`],
         dot: true,
         nodir: true,
-    }
+    },
 );
 
 logger.info(`${files.length} files\n`);

@@ -45,12 +45,7 @@ class NoMissingElement extends Rule {
                 const blockName = className.substring(0, className.length - elementMatch.length);
                 const closest = node.closest(`.${blockName}`);
                 if (!(closest && closest !== node)) {
-                    this.report(
-                        node,
-                        `Class-element references missing block ${JSON.stringify(
-                            blockName
-                        )} (element is ${JSON.stringify(className)}).`
-                    );
+                    this.report(node, `Class-element references missing block ${JSON.stringify(blockName)} (element is ${JSON.stringify(className)}).`);
                 }
             });
         });
@@ -94,12 +89,7 @@ class NoMissingModifier extends Rule {
                 const [, modifierMatch] = className.match(MODIFIER_PATTERN);
                 const blockName = className.substring(0, className.length - modifierMatch.length);
                 if (!classList.includes(blockName)) {
-                    this.report(
-                        node,
-                        `Class-modifier references missing block ${JSON.stringify(
-                            blockName
-                        )} (modifier is ${JSON.stringify(className)}).`
-                    );
+                    this.report(node, `Class-modifier references missing block ${JSON.stringify(blockName)} (modifier is ${JSON.stringify(className)}).`);
                 }
             });
         });

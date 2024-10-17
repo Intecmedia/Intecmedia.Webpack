@@ -32,9 +32,7 @@ module.exports = async function ResizeLoader(content) {
     loaderContext.addDependency(loaderContext.resourcePath);
     loaderContext.addDependency(imageminConfigModule);
 
-    const query = loaderContext.resourceQuery
-        ? Object.fromEntries(new URLSearchParams(loaderContext.resourceQuery.slice(1)).entries())
-        : {};
+    const query = loaderContext.resourceQuery ? Object.fromEntries(new URLSearchParams(loaderContext.resourceQuery.slice(1)).entries()) : {};
     const options = deepMerge({}, DEFAULT_OPTIONS, loaderContext.getOptions());
     const context = options.context || loaderContext.rootContext;
 
@@ -86,9 +84,8 @@ module.exports = async function ResizeLoader(content) {
                   content,
               })
             : null) ||
-            `${resourceInfo.name}@resize-${resizeWidth || ''}x${resizeHeight || ''}${
-                resizeFit && resizeFit !== DEFAULT_FIT ? `-${resizeFit}` : ''
-            }`) + (query.suffix ? `-${query.suffix}` : '');
+            `${resourceInfo.name}@resize-${resizeWidth || ''}x${resizeHeight || ''}${resizeFit && resizeFit !== DEFAULT_FIT ? `-${resizeFit}` : ''}`) +
+        (query.suffix ? `-${query.suffix}` : '');
 
     const resourceHash = createHash('xxhash64')
         .update(sharpVersion + content)
@@ -223,7 +220,7 @@ module.exports = async function ResizeLoader(content) {
                                 data: buffer.toString('base64'),
                                 hash: resourceHash,
                                 config: JSON.stringify(formatConfig),
-                            })
+                            }),
                         );
                     }
                     if (options.verbose) {

@@ -11,15 +11,9 @@ const nodemonConfig = {
     delay: '2500',
     ext: 'js,html',
     watch: ['*.*', '.*'],
-    ignore: [
-        '**/.hg/**',
-        '**/.git/**',
-        '**/.svn/**',
-        'build',
-        'source/js',
-        'source/partials',
-        'source/html.data.js',
-    ].concat(ENV.SITEMAP.map((i) => i.template)),
+    ignore: ['**/.hg/**', '**/.git/**', '**/.svn/**', 'build', 'source/js', 'source/partials', 'source/html.data.js'].concat(
+        ENV.SITEMAP.map((i) => i.template),
+    ),
     verbose: true,
 };
 

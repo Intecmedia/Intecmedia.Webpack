@@ -26,8 +26,7 @@ function helperScanDir(dirname, orderKey = null, orderAsc = true) {
             const resourcePath = path.posix.sep + path.relative(this.loaderOptions.searchPath, filename);
             const baseName = path.basename(filename, '.html');
 
-            const resourceUrl =
-                path.dirname(resourcePath) + (baseName === 'index' ? '' : path.posix.sep + baseName) + path.posix.sep;
+            const resourceUrl = path.dirname(resourcePath) + (baseName === 'index' ? '' : path.posix.sep + baseName) + path.posix.sep;
 
             const stat = fs.statSync(filename);
             const URL = UTILS.slash(path.normalize(path.join(this.APP.PUBLIC_PATH, resourceUrl)));

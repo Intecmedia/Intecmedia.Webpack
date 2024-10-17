@@ -31,7 +31,7 @@ class RemoveAssetsPlugin {
                         .forEach((name) => {
                             compilation.deleteAsset(name);
                         });
-                }
+                },
             );
         });
     }

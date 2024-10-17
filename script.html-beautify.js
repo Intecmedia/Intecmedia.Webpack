@@ -57,9 +57,7 @@ files.forEach((resourcePath) => {
     const html = fs.readFileSync(resourcePath).toString('utf-8');
     const templateData = frontMatter(html);
 
-    const output =
-        (templateData.frontmatter ? ['---', templateData.frontmatter, '---', ''].join('\n') : '') +
-        beautifyHtml(templateData.body.normalize('NFC'));
+    const output = (templateData.frontmatter ? ['---', templateData.frontmatter, '---', ''].join('\n') : '') + beautifyHtml(templateData.body.normalize('NFC'));
 
     if (html !== output) {
         fs.writeFileSync(resourcePath, output);

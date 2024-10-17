@@ -28,7 +28,7 @@ class HtmlBeautifyPlugin {
                 if (htmlPluginData.outputName && htmlPluginData.outputName.endsWith('.html')) {
                     htmlPluginData.html = beautify.html(htmlPluginData.html, this.options);
                 }
-            })
+            }),
         );
     }
 }

@@ -21,16 +21,7 @@ module.exports = deepMerge({}, sharedConfig, {
             'files': ['source/css/components/**/*.scss'],
             'rules': {
                 'plugin/selector-bem-pattern': {
-                    'ignoreCustomProperties': [
-                        '--aspect-',
-                        '--bs-',
-                        '--icon-',
-                        '--image-',
-                        '--video-',
-                        '--intersection-',
-                        '--fluid-',
-                        '--#\\{\\$prefix\\}',
-                    ],
+                    'ignoreCustomProperties': ['--aspect-', '--bs-', '--icon-', '--image-', '--video-', '--intersection-', '--fluid-', '--#\\{\\$prefix\\}'],
                     'ignoreSelectors': [
                         '^(html|body)\\.?',
                         '.+\\.(js|is|no|has|not)\\-(.+)',
@@ -38,11 +29,7 @@ module.exports = deepMerge({}, sharedConfig, {
                         '#\\{\\$[a-zA-Z][a-zA-Z-\\d]*\\}',
                         '\\.(active|fade|hide|hiding|show|showing|disabled|collapse|collapsed|collapsing)',
                     ],
-                    'implicitComponents': [
-                        'source/css/components/**/*.scss',
-                        'source/css/layout/**/*.scss',
-                        'source/css/pages/**/*.scss',
-                    ],
+                    'implicitComponents': ['source/css/components/**/*.scss', 'source/css/layout/**/*.scss', 'source/css/pages/**/*.scss'],
                     'preset': 'bem',
                 },
                 'selector-max-compound-selectors': 5,

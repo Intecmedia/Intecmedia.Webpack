@@ -38,9 +38,7 @@ module.exports.FavIcon = function FavIcon(options) {
         throw new Error(`FavIcon '${mergedOptions.logo}': the file is not a valid image (allowed only svg).`);
     }
     if (!(logoSize.width === 64 && logoSize.height === 64)) {
-        throw new Error(
-            `FavIcon '${mergedOptions.logo}': image size (${logoSize.width}x${logoSize.height}) is not than (64x64).`
-        );
+        throw new Error(`FavIcon '${mergedOptions.logo}': image size (${logoSize.width}x${logoSize.height}) is not than (64x64).`);
     }
 
     return new FaviconsWebpackPlugin(mergedOptions);

@@ -16,7 +16,7 @@ document.addEventListener(
     (event) => {
         lastButton = event.target?.closest(BUTTONS_SELECTOR);
     },
-    true
+    true,
 );
 
 document.addEventListener(
@@ -35,7 +35,7 @@ document.addEventListener(
             },
         });
     },
-    true
+    true,
 );
 
 document.addEventListener('submit', () => {
