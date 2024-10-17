@@ -52,7 +52,7 @@
         font-size: 14px;
     }
     @include media-breakpoint-up(hd) {
-        $root-font-size-clamp: fluid-clamp($font-size-rem, $font-size-qhd, "hd", "qhd");
+        $root-font-size-clamp: fluid-clamp($font-size-rem, $font-size-qhd-rem, "hd", "qhd");
 
         @supports (font-size: $root-font-size-clamp) {
             /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- not standart feature */
