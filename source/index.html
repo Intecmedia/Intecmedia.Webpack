@@ -18,6 +18,25 @@ og_image:
                 <p>
                     <a href="/wysiwyg">Content from WYSIWYG-editor</a>
                 </p>
+
+                <input class="form-control" value="form-control">
+                <input class="form-control form-control-sm" value="form-control-sm">
+                <input class="form-control form-control-lg" value="form-control-lg">
+
+                <button class="btn btn-dark d-block w-100">btn</button>
+                <button class="btn btn-dark d-block w-100 btn-sm">btn-sm</button>
+                <button class="btn btn-dark d-block w-100 btn-lg">btn-lg</button>
+
+                <select class="form-select">
+                    <option>form-select</option>
+                </select>
+                <select class="form-select form-select-sm">
+                    <option>form-select-sm</option>
+                </select>
+                <select class="form-select form-select-lg">
+                    <option>form-select-lg</option>
+                </select>
+
                 {{ $resize.picture('./upload/wysiwyg-test.jpg', 'Test') }}
             </div>
         </div>
