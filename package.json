@@ -230,7 +230,7 @@
         "webpack": "^5.97.1",
         "webpack-assets-manifest": "^5.2.1",
         "webpack-bundle-analyzer": "^4.10.2",
-        "webpack-cli": "^5.1.4",
+        "webpack-cli": "^6.0.0",
         "webpack-dev-server": "^5.2.0",
         "webpack-log": "^3.0.2",
         "webpack-sources": "^3.2.3",
