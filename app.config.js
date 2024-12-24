@@ -28,7 +28,7 @@ module.exports = {
     SORT_MEQIA_QUERIES: 'mobile-first',
     RESOLVE_URL: true,
     SPLIT_CHUNKS: true,
-    JSDOC: true,
+    JSDOC: false,
     get ENV() {
         return require('./app.env');
     },
