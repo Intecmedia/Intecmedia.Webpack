@@ -4,7 +4,7 @@ const APP = require('./app.config');
 const ENV = require('./app.env');
 
 module.exports = {
-    'extends': ['htmlvalidate:recommended', 'htmlvalidate:document'],
+    'extends': ['html-validate:recommended', 'html-validate:document'],
     'plugins': ['<rootDir>/plugin.html-validate.js'],
     'rules': {
         'bootstrap/col-no-row': [
