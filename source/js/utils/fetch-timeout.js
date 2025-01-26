@@ -1,4 +1,4 @@
-export default function fetchTimeout(input, init, delay = 7000) {
+export default function fetchTimeout(input, init = {}, delay = 5000) {
     return Promise.race([
         fetch(input, init),
         new Promise((resolve, reject) => {
