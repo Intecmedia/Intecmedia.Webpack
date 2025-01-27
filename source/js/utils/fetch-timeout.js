@@ -23,11 +23,12 @@ export default function fetchTimeout(input, init = {}, delay = 5000) {
             }),
         new Promise((resolve, reject) => {
             timeoutId = setTimeout(() => {
+                const reason = `Timeout error [${delay}ms]`;
                 if (controller) {
-                    controller.abort();
+                    controller.abort(reason);
                 }
                 timeoutId = null;
-                reject(new Error(`Timeout error [${delay}]`));
+                reject(new Error(reason));
             }, delay);
         }),
     ]);
