@@ -22,8 +22,14 @@
             'EQiBACwDoA='
         ].join('');
         // viewport sizes
-        var viewportHeight = window.innerHeight;
-        $html.style.setProperty('--vh', parseFloat((viewportHeight * 0.01).toFixed()) + 'px');
+        $html.style.setProperty('--vh', (window.innerHeight * 0.01).toFixed() + 'px');
+        var fixedBlock = document.createElement('div');
+        fixedBlock.style = 'width: 1px; height: 100vh; position: fixed; left: 0px; top: 0px; bottom: 0px; visibility: hidden;';
+        $html.appendChild(fixedBlock);
+        $html.style.setProperty('--lvh', (fixedBlock.clientHeight * 0.01).toFixed() + 'px');
+        fixedBlock.remove();
+        $html.style.setProperty('--svh', ($html.clientHeight * 0.01).toFixed() + 'px');
+        $html.style.setProperty('--dvh', (window.innerHeight * 0.01).toFixed() + 'px');
         // js cookie
         document.cookie = '_js=1; path=/; SameSite=Lax';
     })(document.documentElement));

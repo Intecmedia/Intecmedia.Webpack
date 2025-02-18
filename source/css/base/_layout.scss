@@ -9,8 +9,12 @@
     --DEBUG: "#{$DEBUG}";
     --PACKAGE_NAME: "#{$PACKAGE_NAME}";
 
-    --viewport-height: calc(var(--vh, 1vh) * 100); // https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
-    --viewport-height-diff: calc(100vh - var(--viewport-height, 100vh));
+    // https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
+    --viewport-height: calc(var(--vh, 1vh) * 100);
+    --viewport-dynamic-height: calc(var(--dvh, 1vh) * 100);
+    --viewport-small-height: calc(var(--svh, 1vh) * 100);
+    --viewport-large-height: calc(var(--lvh, 1vh) * 100);
+
     --section-height: 100vh;
 
     @each $name, $width in $grid-breakpoints {

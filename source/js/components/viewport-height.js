@@ -48,8 +48,21 @@ class ViewportHeight extends AbstractComponent {
      */
     updateHeight() {
         const height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-        const vh = parseFloat((height * 0.01).toFixed(6));
+        const vh = (height * 0.01).toFixed(6);
         document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+        const fixedBlock = document.createElement('div');
+        fixedBlock.style = 'width: 1px; height: 100vh; position: fixed; left: 0px; top: 0px; bottom: 0px; visibility: hidden;';
+        document.body.appendChild(fixedBlock);
+        const lvh = (fixedBlock.clientHeight * 0.01).toFixed(6);
+        $html.style.setProperty('--lvh', `${lvh}px`);
+        fixedBlock.remove();
+
+        const svh = (document.documentElement.clientHeight * 0.01).toFixed();
+        document.documentElement.style.setProperty('--svh', `${svh}px`);
+
+        const dvh = (window.innerHeight * 0.01).toFixed(6);
+        document.documentElement.style.setProperty('--dvh', `${dvh}px`);
     }
 
     /**
