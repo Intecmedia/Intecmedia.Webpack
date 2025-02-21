@@ -167,7 +167,7 @@
         "focus-visible": "^5.2.1",
         "front-matter": "^4.0.2",
         "glob": "^11.0.1",
-        "globals": "^15.15.0",
+        "globals": "^16.0.0",
         "html-validate": "^9.2.2",
         "html-validator": "^6.0.1",
         "html-webpack-plugin": "^5.6.3",
