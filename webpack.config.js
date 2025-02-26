@@ -342,6 +342,7 @@ module.exports = {
                       publicPath: APP.PUBLIC_PATH,
                       outputPath: 'img/favicons/',
                       prefix: 'img/favicons/',
+                      favicons: APP.FAVICONS_OPTIONS || {},
                       cache: !ENV.DEBUG,
                   }),
               ]

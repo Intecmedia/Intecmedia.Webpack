@@ -9,6 +9,7 @@ module.exports = {
     START_URL: '/?utm_source=app_manifest',
     THEME_COLOR: '#fff',
     BACKGROUND_COLOR: '#fff',
+    FAVICONS_OPTIONS: {},
     HTML_PRETTY: true,
     SENTRY: {
         dsn: '',
