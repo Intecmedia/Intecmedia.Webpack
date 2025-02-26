@@ -1,3 +1,4 @@
+const fs = require('node:fs');
 const path = require('node:path');
 const ImageSize = require('image-size');
 
@@ -13,7 +14,7 @@ function helperImageSize(filename, nocache = false) {
     const fullpath = path.join(process.cwd(), 'source', filename);
     this.loaderContext.addDependency(fullpath);
     if (!(fullpath in cacheMap) || nocache) {
-        cacheMap[fullpath] = ImageSize(fullpath);
+        cacheMap[fullpath] = ImageSize.imageSize(fs.readFileSync(fullpath));
         cacheMap[fullpath].intrinsicsize = `${cacheMap[fullpath].width}x${cacheMap[fullpath].height}`;
         if (cacheMap[fullpath].type === 'jpg') {
             cacheMap[fullpath].type = 'jpeg';

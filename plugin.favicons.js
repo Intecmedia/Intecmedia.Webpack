@@ -1,3 +1,4 @@
+const fs = require('node:fs');
 const deepMerge = require('lodash.merge');
 const ImageSize = require('image-size');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
@@ -33,7 +34,7 @@ const DEFAULT_OPTIONS = {
 
 module.exports.FavIcon = function FavIcon(options) {
     const mergedOptions = deepMerge({}, DEFAULT_OPTIONS, options);
-    const logoSize = ImageSize(mergedOptions.logo);
+    const logoSize = ImageSize.imageSize(fs.readFileSync(mergedOptions.logo));
     if (!(logoSize && logoSize.type === 'svg')) {
         throw new Error(`FavIcon '${mergedOptions.logo}': the file is not a valid image (allowed only svg).`);
     }
