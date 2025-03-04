@@ -65,6 +65,18 @@
     }
 }
 
+/* stylelint-disable-next-line plugin/no-unsupported-browser-features -- not standart feature */
+@supports (height: 100dvh) and (height: 100svh) and (height: 100lvh) {
+    :root {
+        /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- not standart feature */
+        --viewport-dynamic-height: 100dvh !important;
+        /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- not standart feature */
+        --viewport-small-height: 100svh !important;
+        /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- not standart feature */
+        --viewport-large-height: 100lvh !important;
+    }
+}
+
 html {
     background: var(--#{$prefix}body-bg, #{$body-bg});
 }
