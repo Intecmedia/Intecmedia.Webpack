@@ -151,7 +151,7 @@ module.exports = {
                 defaultVendors: {
                     chunks: 'initial',
                     enforce: true,
-                    test: /[\\/](node_modules)[\\/](.+)\.(js|mjs|cjs|ts)(\?.*)?$/,
+                    test: /[\\/](node_modules)[\\/](.+)\.(js|mjs|cjs|ts|jsx)(\?.*)?$/,
                     name: APP.SPLIT_CHUNKS
                         ? (module) => {
                               const packageName = UTILS.packageName(module.context);
@@ -377,7 +377,7 @@ module.exports = {
         ...(ENV.SOURCE_MAP
             ? [
                   new webpack.SourceMapDevToolPlugin({
-                      test: /\.(js|mjs|cjs|ts|css|scss)(\?.*)?$/i,
+                      test: /\.(js|mjs|cjs|ts|jsx|css|scss)(\?.*)?$/i,
                       moduleFilenameTemplate: UTILS.moduleFilenameTemplate,
                       fallbackModuleFilenameTemplate: UTILS.moduleFilenameTemplate,
                   }),
@@ -425,7 +425,7 @@ module.exports = {
             // javascript loaders
             {
                 type: 'javascript/auto',
-                test: /\.(js|mjs|cjs|ts)(\?.*)?$/i,
+                test: /\.(js|mjs|cjs|ts|jsx)(\?.*)?$/i,
                 exclude: {
                     and: [
                         // disable babel transform
