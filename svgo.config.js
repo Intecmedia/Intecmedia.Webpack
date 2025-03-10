@@ -33,8 +33,6 @@ const SvgoCreateConfig = (config) => ({
         { name: 'noDataURL', ...require('./svgo.no-data-url') },
         { name: 'noSpriteURL', ...require('./svgo.no-sprite-url') },
     ],
-    floatPrecision: 6,
-    transformPrecision: 6,
     multipass: true,
 });
 
