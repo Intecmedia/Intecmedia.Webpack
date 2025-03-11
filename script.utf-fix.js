@@ -27,6 +27,7 @@ const stripWhitespaces = (string) => {
 
 const files = UTILS.globArraySync(
     [
+        path.join(__dirname, '.husky/**/*'),
         path.join(__dirname, '**/*.htaccess'),
         path.join(__dirname, '.fonts-subsets'),
         path.join(__dirname, '.*ignore'),
