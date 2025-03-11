@@ -7,7 +7,7 @@ const APP = require('./app.config');
 
 const DEFAULT_OPTIONS = {
     mode: 'webapp',
-     devMode: 'webapp',
+    devMode: 'webapp',
     logo: './.favicons-source.svg',
     publicPath: '/',
     outputPath: 'img/favicons/',
