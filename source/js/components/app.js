@@ -176,7 +176,7 @@ export default class AbstractApp {
                     }
                 }
             }
-            closest = closest.parentNode.closest?.('.js-component[data-component-id]');
+            closest = closest.parentNode?.closest?.('.js-component[data-component-id]');
         }
     }
 
