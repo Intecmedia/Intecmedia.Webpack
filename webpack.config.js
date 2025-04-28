@@ -572,7 +572,7 @@ module.exports = {
                             sourceMap: true,
                             implementation: require('sass-embedded'),
                             sassOptions: {
-                                charset: false,
+                                charset: true,
                                 style: 'expanded',
                                 verbose: ENV.DEBUG || ENV.ARGV.verbose,
                                 quietDeps: true,
