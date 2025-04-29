@@ -18,7 +18,8 @@ const files = UTILS.globArraySync(patterns.length > 0 ? patterns : [`${FONTS_SRC
 
 logger.info(`${files.length} files`);
 
-const subsetsCommandSuffix = ' --unicodes-file=.fonts-subsets --drop-tables+=FFTM';
+const commandPrefix = 'pyftsubset';
+const commandSuffix = ' --unicodes-file=.fonts-subsets --drop-tables+=FFTM';
 
 files.forEach((resourcePath) => {
     const source = UTILS.slash(path.relative(__dirname, resourcePath));
@@ -28,13 +29,13 @@ files.forEach((resourcePath) => {
     const dirname = UTILS.slash(path.dirname(target));
 
     logger.info(`${source} --> ${dirname}/${basename}.ttf`);
-    childProcess.execSync(`pyftsubset ${source} --output-file=${dirname}/${basename}.ttf ${subsetsCommandSuffix}`, {
+    childProcess.execSync(`${commandPrefix} ${source} --output-file=${dirname}/${basename}.ttf ${commandSuffix}`, {
         stdio: 'inherit',
     });
 
     logger.info(`${source} --> ${dirname}/${basename}.woff`);
-    childProcess.execSync(`pyftsubset ${source} --output-file=${dirname}/${basename}.woff --flavor=woff ${subsetsCommandSuffix}`, { stdio: 'inherit' });
+    childProcess.execSync(`${commandPrefix} ${source} --output-file=${dirname}/${basename}.woff --flavor=woff ${commandSuffix}`, { stdio: 'inherit' });
 
     logger.info(`${source} --> ${dirname}/${basename}.woff2`);
-    childProcess.execSync(`pyftsubset ${source} --output-file=${dirname}/${basename}.woff2 --flavor=woff2 ${subsetsCommandSuffix}`, { stdio: 'inherit' });
+    childProcess.execSync(`${commandPrefix} ${source} --output-file=${dirname}/${basename}.woff2 --flavor=woff2 ${commandSuffix}`, { stdio: 'inherit' });
 });
