@@ -30,3 +30,14 @@ export function getFloat(element, name, initial) {
 export function getInt(element, name, initial) {
     return name in element.dataset ? parseInt(element.dataset[name], 10) || 0 : initial;
 }
+
+/**
+ * Get data-property as json
+ * @param {HTMLElement} element - html element
+ * @param {string} name - name of data-attribute
+ * @param {string} initial - default value
+ * @returns {string} - result value
+ */
+export function getJSON(element, name, initial) {
+    return name in element.dataset ? JSON.parse(element.dataset[name]) : initial;
+}
