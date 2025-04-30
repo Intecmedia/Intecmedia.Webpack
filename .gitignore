@@ -3,6 +3,7 @@ build
 
 # Webpack dev-server hot-update
 build/js/*.hot-update.*
+build/js/*.webpack-dev-server.*
 
 # VisualStudioCode
 .vscode
