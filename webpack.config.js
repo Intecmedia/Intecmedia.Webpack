@@ -84,6 +84,7 @@ module.exports = {
         static: {
             directory: ENV.OUTPUT_PATH,
             publicPath: path.posix.resolve(APP.PUBLIC_PATH, '/'),
+            watch: false,
         },
         client: {
             logging: 'info',
