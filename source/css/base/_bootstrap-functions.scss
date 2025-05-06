@@ -11,5 +11,6 @@
             $result: map.merge($result, ("n" + $key: (negativify-value($value))));
         }
     }
+
     @return $result;
 }

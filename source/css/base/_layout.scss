@@ -46,11 +46,9 @@
         $min-width: $fluid-gutter-min-width,
         $max-width: $fluid-gutter-max-width
     );
-
     @include vertical-breakpoint-down(sm) {
         --section-height: #{map.get($vertical-breakpoints, "sm")};
     }
-
     @include media-breakpoint-down(ss) {
         /* stylelint-disable-next-line declaration-property-unit-allowed-list -- for root allowed only px */
         font-size: 14px;

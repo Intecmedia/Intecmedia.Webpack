@@ -64,7 +64,6 @@ $fluid-screen-height: 100vh !default; // or 100vmin
     @if fluid-invalidate-units($min-value, $min-width-calc) {
         @error "Cant calc $min-value=#{$min-value} and $min-width-calc=#{$min-width-calc} with different units.";
     }
-
     @if fluid-invalidate-units($max-value, $max-width-calc) {
         @error "Cant calc $max-value=#{$max-value} and $max-width-calc=#{$max-width-calc} with different units.";
     }
@@ -86,7 +85,6 @@ $fluid-screen-height: 100vh !default; // or 100vmin
             #{$prop}: $calc-size; /* #{$comment} */
         }
     }
-
     @media (min-width: $max-width) {
         @each $prop in $properties {
             #{$prop}: to-fixed($max-value, $fluid-fixed-digits); /* #{$comment} */
@@ -126,7 +124,6 @@ $fluid-screen-height: 100vh !default; // or 100vmin
     @if fluid-invalidate-units($min-value, $min-height-calc) {
         @error "Cant calc $min-value=#{$min-value} and $min-height-calc=#{$min-height-calc} with different units.";
     }
-
     @if fluid-invalidate-units($max-value, $max-height-calc) {
         @error "Cant calc $max-value=#{$max-value} and $max-height-calc=#{$max-height-calc} with different units.";
     }
@@ -148,7 +145,6 @@ $fluid-screen-height: 100vh !default; // or 100vmin
             #{$prop}: #{$calc-size}; /* #{$comment} */
         }
     }
-
     @media (min-height: $max-height) {
         @each $prop in $properties {
             #{$prop}: to-fixed($max-value, $fluid-fixed-digits); /* #{$comment} */
@@ -356,7 +352,6 @@ $fluid-screen-height: 100vh !default; // or 100vmin
 
         @return clamp(#{$clamp-min}rem, calc(#{$vp-value}#{$vp-unit} #{$sign} #{$abs-value}rem), #{$clamp-max}rem);
     }
-
     @if $min-unit == px and $max-unit == px {
         $min-size: to-fixed($min-size * 16, $fluid-fixed-digits);
         $abs-value: to-fixed($abs-value * 16, $fluid-fixed-digits);

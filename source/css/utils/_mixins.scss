@@ -22,6 +22,7 @@
     @if meta.type-of($number) == "number" and not math.is-unitless($number) {
         @return math.div($number, ($number * 0 + 1));
     }
+
     @return $number;
 }
 
@@ -38,12 +39,14 @@
             $ret: math.div($ret, $x);
         }
     }
+
     @return $ret;
 }
 
 // Formats number using fixed-point notation.
 @function to-fixed($float, $digits: 6) {
     $pow: pow(10, $digits);
+
     @return math.div(math.round($float * $pow), $pow);
 }
 
@@ -68,17 +71,21 @@
     // $number must be a number
     @if meta.type-of($number) != number {
         @warn '#{ $number } is not a number.';
+
         @return $number;
     }
 
     // $digits must be a unitless number
     @if meta.type-of($digits) != number {
         @warn '#{ $digits } is not a number.';
+
         @return $number;
     } @else if not math.is-unitless($digits) {
         @warn '#{ $digits } has a unit.';
+
         @return $number;
     }
+
     @if $digits > 0 {
         @for $i from 1 through $digits {
             $n: $n * 10;
@@ -92,6 +99,7 @@
         @return math.div(math.floor($number * $n), $n);
     } @else {
         @warn '#{ $mode } is undefined keyword.';
+
         @return $number;
     }
 }
@@ -99,12 +107,14 @@
 // Check string starts with.
 @function str-starts-with($str, $substring) {
     $index: 1;
+
     @return string.index($str, $substring) == $index;
 }
 
 // Check string ends with.
 @function str-ends-with($str, $substring) {
     $index: string.length($str) - string.length($substring) + 1;
+
     @return string.index($str, $substring) == $index;
 }
 
@@ -113,6 +123,7 @@
     @if meta.type-of($value) != "string" {
         @return false;
     }
+
     @return str-starts-with($value, "calc(") and str-ends-with($value, ")");
 }
 
@@ -121,6 +132,7 @@
     @if meta.type-of($value) != "string" {
         @return false;
     }
+
     @return str-starts-with($value, "var(") and str-ends-with($value, ")");
 }
 
@@ -137,6 +149,7 @@
 
         @return $result;
     }
+
     @return -$value;
 }
 

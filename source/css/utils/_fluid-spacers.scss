@@ -51,7 +51,6 @@ $fluid-spacers-max-size: 20px !default;
         /* Spacer: #{$key}: #{to-fixed($min, 2)} -> #{to-fixed($max, 2)} (x#{$scale}) */
         @include fluid-clamp-prop($prop, remify($min), remify($max), $min-width, $max-width);
     }
-
     @each $key1, $key2 in $spacers-pairs {
         @if not map.has-key($spacers, $key1) {
             @error "Cant find #{$key1} key in spacers.";

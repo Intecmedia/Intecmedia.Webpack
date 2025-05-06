@@ -34,7 +34,6 @@ $fluid-steps-max-scale: 1.25 !default;
         /* Step: -#{$i}: #{to-fixed($min, 2)} -> #{to-fixed($max, 2)} */
         @include fluid-clamp-prop($prop, remify($min), remify($max), $min-width, $max-width);
     }
-
     @for $i from 0 through $positive-count {
         $prop: "--fluid-step-#{$i}";
         $min: $min-size * math.pow($min-scale, $i);
