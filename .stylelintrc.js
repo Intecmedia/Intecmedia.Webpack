@@ -109,7 +109,7 @@ module.exports = deepMerge({}, sharedConfig, {
             ? // code style rules (slowest)
               {
                   'at-rule-empty-line-before': [
-                     'always',
+                      'always',
                       {
                           'except': ['after-same-name', 'first-nested'],
                           'ignore': ['after-comment'],
