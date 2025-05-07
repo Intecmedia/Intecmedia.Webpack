@@ -137,7 +137,7 @@ module.exports = async function ResizeLoader(content) {
     const lossless = typeof query.lossless !== 'undefined' ? !!query.lossless : resourceFormat === 'png';
 
     if (format === 'webp') {
-        if ('lossless' in imageminConfig.webp.lossless && imageminConfig.webp.lossless !== null) {
+        if ('lossless' in imageminConfig.webp && imageminConfig.webp.lossless !== null) {
             formatOptions.lossless = imageminConfig.webp.lossless;
         } else if (lossless || quality === 100) {
             formatOptions.lossless = true;
@@ -151,7 +151,7 @@ module.exports = async function ResizeLoader(content) {
             Object.assign(formatOptions, query.options);
         }
     } else if (format === 'avif') {
-        if ('lossless' in imageminConfig.avif.lossless && imageminConfig.avif.lossless !== null) {
+        if ('lossless' in imageminConfig.avif && imageminConfig.avif.lossless !== null) {
             formatOptions.lossless = imageminConfig.avif.lossless;
         } else if (lossless) {
             formatOptions.lossless = true;
