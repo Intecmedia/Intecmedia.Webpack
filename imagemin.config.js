@@ -35,6 +35,7 @@ module.exports.encodeOptions.jpg = module.exports.encodeOptions.jpeg;
 
 module.exports.webp = {
     quality: 90, // 0 - 100, or 100 for lossless
+    lossless: false, // null -- auto
     options: {
         // https://sharp.pixelplumbing.com/api-output#webp
         effort: 1,
@@ -44,6 +45,7 @@ module.exports.webp = {
 
 module.exports.avif = {
     quality: 90, // 0 - 100, or 100 for lossless
+    lossless: false, // null -- auto
     options: {
         // https://sharp.pixelplumbing.com/api-output#avif
         effort: 1,
