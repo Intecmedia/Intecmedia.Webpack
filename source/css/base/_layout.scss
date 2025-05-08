@@ -53,12 +53,15 @@
         /* stylelint-disable-next-line declaration-property-unit-allowed-list -- for root allowed only px */
         font-size: 14px;
     }
-    @include media-breakpoint-up(hd) {
-        $root-font-size-clamp: fluid-clamp($font-size-rem, $font-size-qhd-rem, "hd", "qhd");
 
-        @supports (font-size: $root-font-size-clamp) {
-            /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- not standart feature */
-            font-size: $root-font-size-clamp;
+    @if map.get($vertical-breakpoints, "hd") and map.get($vertical-breakpoints, "qhd") {
+        @include media-breakpoint-up(hd) {
+            $root-font-size-clamp: fluid-clamp($font-size-rem, $font-size-qhd-rem, "hd", "qhd");
+
+            @supports (font-size: $root-font-size-clamp) {
+                /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- not standart feature */
+                font-size: $root-font-size-clamp;
+            }
         }
     }
 }
