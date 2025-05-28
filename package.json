@@ -123,7 +123,7 @@
     "overrides": {},
     "dependencies": {
         "@babel/cli": "^7.27.2",
-        "@babel/core": "^7.27.1",
+        "@babel/core": "^7.27.3",
         "@babel/eslint-parser": "^7.27.1",
         "@babel/eslint-plugin": "^7.27.1",
         "@babel/plugin-proposal-decorators": "^7.27.1",
@@ -178,7 +178,7 @@
         "image-size": "^2.0.2",
         "js-beautify": "^1.15.4",
         "line-column": "^1.0.2",
-        "lint-staged": "^16.0.0",
+        "lint-staged": "^16.1.0",
         "loader-utils": "^3.3.1",
         "lodash.debounce": "^4.0.8",
         "lodash.merge": "^4.6.2",
@@ -235,6 +235,6 @@
         "webpack-dev-server": "^5.2.1",
         "webpack-log": "^3.0.2",
         "webpack-sources": "^3.3.0",
-        "yargs": "^17.7.2"
+        "yargs": "^18.0.0"
     }
 }
