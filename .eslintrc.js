@@ -15,7 +15,7 @@ const ignores = fs
     .readFileSync('./.eslintignore', 'utf-8')
     .split(/\r?\n/g)
     .map((i) => i.trim())
-    .filter((i) => i !== '');
+    .filter((i) => i !== '' && !i.startsWith('#'));
 
 const commonConfigs = [
     require('@eslint/js/src/configs/eslint-recommended'),
