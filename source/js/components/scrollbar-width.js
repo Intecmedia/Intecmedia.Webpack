@@ -19,7 +19,6 @@ class ScrollbarWidth extends AbstractComponent {
         super(options);
 
         this.onResize = this.onResize.bind(this);
-        this.onUpdate = this.onUpdate.bind(this);
     }
 
     /**
@@ -29,8 +28,6 @@ class ScrollbarWidth extends AbstractComponent {
         this.helper = new ScrollBarHelper();
 
         window.addEventListener('resize', this.onResize);
-        window.addEventListener('pushstate', this.onUpdate);
-        window.addEventListener('popstate', this.onUpdate);
 
         this.updateWidth();
     }
@@ -40,21 +37,12 @@ class ScrollbarWidth extends AbstractComponent {
      */
     destroy() {
         window.removeEventListener('resize', this.onResize);
-        window.removeEventListener('pushstate', this.onUpdate);
-        window.removeEventListener('popstate', this.onUpdate);
     }
 
     /**
      * Resize-event handler.
      */
     onResize() {
-        this.updateWidth();
-    }
-
-    /**
-     * Update-event handler.
-     */
-    onUpdate() {
         this.updateWidth();
     }
 
