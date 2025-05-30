@@ -34,15 +34,10 @@
         document.cookie = '_js=1; path=/; SameSite=Lax';
         // scrollbar width
         var scrollbarOuter = document.createElement('div');
-        scrollbarOuter.style.zIndex = '-9999';
-        scrollbarOuter.style.position = 'absolute';
-        scrollbarOuter.style.visibility = 'hidden';
-        scrollbarOuter.style.width = '100px';
-        scrollbarOuter.style.marginLeft = '-100px';
-        scrollbarOuter.style.overflow = 'scroll';
+        scrollbarOuter.style = 'z-index: -9999; position: absolute; visibility: hidden; width: 100px; margin-left: -100px; overflow: scroll;';
         $html.appendChild(scrollbarOuter);
         var scrollbarInner = document.createElement('div');
-        scrollbarInner.style.width = '100%';
+        scrollbarInner.style = 'width: 100%;';
         scrollbarOuter.appendChild(scrollbarInner);
         $html.style.setProperty('--scrollbar-width', (100 - scrollbarInner.offsetWidth) + 'px');
         scrollbarOuter.remove();

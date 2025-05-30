@@ -26,15 +26,10 @@ class ScrollbarWidth extends AbstractComponent {
     init() {
         this.scrollbarOuter = document.createElement('div');
         this.scrollbarOuter.className = 'scrollbar-width';
-        this.scrollbarOuter.style.zIndex = '-9999';
-        this.scrollbarOuter.style.position = 'absolute';
-        this.scrollbarOuter.style.visibility = 'hidden';
-        this.scrollbarOuter.style.width = '100px';
-        this.scrollbarOuter.style.marginLeft = '-100px';
-        this.scrollbarOuter.style.overflow = 'scroll';
+        this.scrollbarOuter.style = 'z-index: -9999; position: absolute; visibility: hidden; width: 100px; margin-left: -100px; overflow: scroll;';
         document.documentElement.appendChild(this.scrollbarOuter);
         this.scrollbarInner = document.createElement('div');
-        this.scrollbarInner.style.width = '100%';
+        this.scrollbarInner.style = 'width: 100%;';
         this.scrollbarOuter.appendChild(this.scrollbarInner);
 
         window.addEventListener('resize', this.onResize);
