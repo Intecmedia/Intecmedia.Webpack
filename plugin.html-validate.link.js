@@ -1,6 +1,8 @@
 const { Rule } = require('html-validate');
 const { nodeIgnore } = require('./plugin.html-validate.utils');
 
+const ENV = require('./app.env');
+
 /**
  * @typedef { import('html-validate').DOMReadyEvent } DOMReadyEvent
  */
@@ -55,6 +57,8 @@ class LinkNoEmpty extends Rule {
  * Lint trailing `a[href]` attribute.
  */
 class LinkTrailingSlash extends Rule {
+    sitemapUrls = [];
+
     /**
      * @param {object} options - plugin options
      */
@@ -68,6 +72,7 @@ class LinkTrailingSlash extends Rule {
      */
     setup() {
         this.on('dom:ready', this.domReady);
+        this.sitemapUrls = ENV.SITEMAP.map((i) => i.PAGE.URL);
     }
 
     /**
@@ -85,8 +90,7 @@ class LinkTrailingSlash extends Rule {
             const href = String(item.getAttributeValue('href') || '');
             if (href.charAt(0) === '/' && href.charAt(1) !== '/') {
                 const url = new URL(href, 'https://localhost/');
-                const parts = url.pathname.split('/');
-                if (!url.pathname.endsWith('/') && !parts[parts.length - 1].startsWith('_')) {
+                if (!url.pathname.endsWith('/') && this.sitemapUrls.includes(`${url.pathname}/`)) {
                     this.report(item, `<a> trailing slash required (\`href=${JSON.stringify(href)}\`).`);
                 }
             }
