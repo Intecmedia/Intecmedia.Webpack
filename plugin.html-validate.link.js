@@ -88,7 +88,7 @@ class LinkTrailingSlash extends Rule {
                 return;
             }
             const href = String(item.getAttributeValue('href') || '');
-            if (href.charAt(0) === '/' && href.charAt(1) !== '/') {
+            if (href.startsWith('/') && !href.startsWith('//')) {
                 const url = new URL(href, 'https://localhost/');
                 if (!url.pathname.endsWith('/') && this.sitemapUrls.includes(`${url.pathname}/`)) {
                     this.report(item, `<a> trailing slash required (\`href=${JSON.stringify(href)}\`).`);
