@@ -156,8 +156,8 @@
         "eslint": "^9.28.0",
         "eslint-config-prettier": "^10.1.5",
         "eslint-plugin-compat": "^6.0.2",
-        "eslint-plugin-jsdoc": "^50.6.17",
-        "eslint-plugin-n": "^17.18.0",
+        "eslint-plugin-jsdoc": "^50.7.1",
+        "eslint-plugin-n": "^17.19.0",
         "eslint-plugin-prettier": "^5.4.1",
         "eslint-plugin-promise": "^7.2.1",
         "eslint-webpack-plugin": "^5.0.1",
@@ -234,7 +234,7 @@
         "webpack-cli": "^6.0.1",
         "webpack-dev-server": "^5.2.1",
         "webpack-log": "^3.0.2",
-        "webpack-sources": "^3.3.0",
+        "webpack-sources": "^3.3.2",
         "yargs": "^18.0.0"
     }
 }
