@@ -105,6 +105,12 @@ module.exports = {
                 'ignore': '.wysiwyg a, .counters-body a, a.ignore-html-validate',
             },
         ],
+        'pitcher/link-trailing-slash': [
+            'error',
+            {
+                'ignore': '.wysiwyg a, .counters-body a, a.ignore-html-validate',
+            },
+        ],
         'pitcher/table-responsive-required': [
             'error',
             {

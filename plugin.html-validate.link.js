@@ -51,8 +51,52 @@ class LinkNoEmpty extends Rule {
     }
 }
 
-module.exports = { LinkNoEmpty };
+/**
+ * Lint trailing `a[href]` attribute.
+ */
+class LinkTrailingSlash extends Rule {
+    /**
+     * @param {object} options - plugin options
+     */
+    constructor(options) {
+        super({ ignore: '.wysiwyg a', ...options });
+        this.domReady = this.domReady.bind(this);
+    }
+
+    /**
+     * Setup plugin events.
+     */
+    setup() {
+        this.on('dom:ready', this.domReady);
+    }
+
+    /**
+     * Lint `a[href]` nodes.
+     * @param {DOMReadyEvent.document} document - document object
+     */
+    domReady({ document }) {
+        const links = document.querySelectorAll('a');
+        const ignores = this.options.ignore ? document.querySelectorAll(this.options.ignore) : [];
+
+        links.forEach((item) => {
+            if (nodeIgnore(item, ignores)) {
+                return;
+            }
+            const href = String(item.getAttributeValue('href') || '');
+            if (href.charAt(0) === '/' && href.charAt(1) !== '/') {
+                const url = new URL(href, 'https://localhost/');
+                const parts = url.pathname.split('/');
+                if (!url.pathname.endsWith('/') && !parts[parts.length - 1].startsWith('_')) {
+                    this.report(item, `<a> trailing slash required (\`href=${JSON.stringify(href)}\`).`);
+                }
+            }
+        });
+    }
+}
+
+module.exports = { LinkNoEmpty, LinkTrailingSlash };
 
 module.exports.rules = {
     'pitcher/link-no-empty': LinkNoEmpty,
+    'pitcher/link-trailing-slash': LinkTrailingSlash,
 };
