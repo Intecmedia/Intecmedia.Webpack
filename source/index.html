@@ -20,27 +20,32 @@ og_image:
                 <p>
                     <a href="/wysiwyg">Content from WYSIWYG-editor</a>
                 </p>
-
-                <input class="form-control" value="form-control">
-                <input class="form-control form-control-sm" value="form-control-sm">
-                <input class="form-control form-control-lg" value="form-control-lg">
-
-                <button class="btn btn-dark d-block w-100">btn</button>
-                <button class="btn btn-dark d-block w-100 btn-sm">btn-sm</button>
-                <button class="btn btn-dark d-block w-100 btn-lg">btn-lg</button>
-
-                <select class="form-select">
-                    <option>form-select</option>
-                </select>
-                <select class="form-select form-select-sm">
-                    <option>form-select-sm</option>
-                </select>
-                <select class="form-select form-select-lg">
-                    <option>form-select-lg</option>
-                </select>
-
                 {{ $resize.picture('./upload/wysiwyg-test.jpg', 'Test') }}
             </div>
+
+            <label for="form-control" class="visually-hidden">form-control</label>
+            <input type="text" id="form-control" class="form-control" value="form-control">
+            <label for="form-control-sm" class="visually-hidden">form-control-sm</label>
+            <input type="text" id="form-control-sm" class="form-control form-control-sm" value="form-control-sm">
+            <label for="form-control-lg" class="visually-hidden">form-control-lg</label>
+            <input type="text" id="form-control-lg" class="form-control form-control-lg" value="form-control-lg">
+
+            <button type="button" class="btn btn-dark d-block w-100">btn</button>
+            <button type="button" class="btn btn-dark d-block w-100 btn-sm">btn-sm</button>
+            <button type="button" class="btn btn-dark d-block w-100 btn-lg">btn-lg</button>
+
+            <label for="form-select" class="visually-hidden">form-select</label>
+            <select class="form-select" id="form-select">
+                <option>form-select</option>
+            </select>
+            <label for="form-select-sm" class="visually-hidden">form-select-sm</label>
+            <select class="form-select form-select-sm" id="form-select-sm">
+                <option>form-select-sm</option>
+            </select>
+            <label for="form-select-lg" class="visually-hidden">form-select-lg</label>
+            <select class="form-select form-select-lg" id="form-select-lg">
+                <option>form-select-lg</option>
+            </select>
         </div>
     </div>
 </div>
