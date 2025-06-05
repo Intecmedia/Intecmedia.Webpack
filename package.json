@@ -124,7 +124,7 @@
     "dependencies": {
         "@babel/cli": "^7.27.2",
         "@babel/core": "^7.27.4",
-        "@babel/eslint-parser": "^7.27.1",
+        "@babel/eslint-parser": "^7.27.5",
         "@babel/eslint-plugin": "^7.27.1",
         "@babel/plugin-proposal-decorators": "^7.27.1",
         "@babel/plugin-proposal-optional-chaining-assign": "^7.27.1",
@@ -139,7 +139,7 @@
         "@babel/preset-typescript": "^7.27.1",
         "@eslint-community/eslint-plugin-eslint-comments": "^4.5.0",
         "@popperjs/core": "^2.11.8",
-        "@sentry/browser": "^9.24.0",
+        "@sentry/browser": "^9.26.0",
         "@sentry/tracing": "^7.120.3",
         "autoprefixer": "^10.4.21",
         "babel-loader": "^10.0.0",
@@ -232,7 +232,7 @@
         "webpack-assets-manifest": "^6.1.0",
         "webpack-bundle-analyzer": "^4.10.2",
         "webpack-cli": "^6.0.1",
-        "webpack-dev-server": "^5.2.1",
+        "webpack-dev-server": "^5.2.2",
         "webpack-log": "^3.0.2",
         "webpack-sources": "^3.3.2",
         "yargs": "^18.0.0"
