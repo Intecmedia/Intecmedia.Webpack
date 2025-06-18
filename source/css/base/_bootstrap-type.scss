@@ -74,6 +74,8 @@ h6 {
     @include font-size($lead-font-size);
     font-weight: $lead-font-weight;
     font-family: $lead-font-family;
+    font-style: $lead-font-style;
+    line-height: $lead-line-height;
     text-wrap: pretty;
 }
 
