@@ -135,6 +135,10 @@ h6 {
     @include font-size($blockquote-font-size);
     margin-bottom: $blockquote-margin-y;
 
+    font-weight: $blockquote-font-weight;
+    font-family: $blockquote-font-family;
+    font-style: $blockquote-font-style;
+    line-height: $blockquote-line-height;
     text-wrap: pretty;
 
     > :last-child {
