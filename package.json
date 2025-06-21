@@ -224,7 +224,7 @@
         "stylelint-semantic-groups": "^1.2.1",
         "stylelint-webpack-plugin": "^5.0.1",
         "svg-spritemap-webpack-plugin": "^4.7.0",
-        "svgo": "^3.3.2",
+        "svgo": "^4.0.0",
         "terser-webpack-plugin": "^5.3.14",
         "typescript": "^5.8.3",
         "typograf": "^7.4.4",
