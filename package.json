@@ -156,7 +156,7 @@
         "eslint": "^9.29.0",
         "eslint-config-prettier": "^10.1.5",
         "eslint-plugin-compat": "^6.0.2",
-        "eslint-plugin-jsdoc": "^51.0.3",
+        "eslint-plugin-jsdoc": "^51.0.6",
         "eslint-plugin-n": "^17.20.0",
         "eslint-plugin-prettier": "^5.5.0",
         "eslint-plugin-promise": "^7.2.1",
@@ -211,7 +211,7 @@
         "schema-utils": "^4.3.2",
         "semver": "^7.7.2",
         "sharp": "^0.34.2",
-        "stylelint": "^16.20.0",
+        "stylelint": "^16.21.0",
         "stylelint-config-recommended-scss": "^15.0.1",
         "stylelint-config-standard-scss": "^15.0.1",
         "stylelint-high-performance-animation": "^1.11.0",
@@ -235,7 +235,7 @@
         "webpack-cli": "^6.0.1",
         "webpack-dev-server": "^5.2.2",
         "webpack-log": "^3.0.2",
-        "webpack-sources": "^3.3.2",
+        "webpack-sources": "^3.3.3",
         "yargs": "^18.0.0"
     }
 }
