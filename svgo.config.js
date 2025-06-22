@@ -11,7 +11,6 @@ const SvgoCreateConfig = (config) => ({
                     cleanupIds: false,
                     convertShapeToPath: false,
                     convertTransform: false,
-                    removeViewBox: false,
                     removeUselessDefs: false,
                     removeHiddenElems: false,
                     mergePaths: false,
