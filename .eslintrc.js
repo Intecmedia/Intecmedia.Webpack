@@ -178,7 +178,7 @@ module.exports = [
         },
         'settings': {
             'browsers': ENV.BROWSERS,
-            'polyfills': ['ResizeObserver'],
+            'polyfills': [],
         },
     },
     // node code
