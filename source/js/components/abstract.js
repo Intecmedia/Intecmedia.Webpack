@@ -24,6 +24,12 @@ export default class AbstractComponent {
             throw new TypeError('Cannot construct AbstractComponent instances directly');
         }
         this.options = options;
+
+        Object.defineProperty(this, 'trigger', { value: this.trigger, configurable: false, writable: false });
+        Object.defineProperty(this, 'on', { value: this.on, configurable: false, writable: false });
+        Object.defineProperty(this, 'off', { value: this.off, configurable: false, writable: false });
+        Object.defineProperty(this, 'selector', { value: this.off, configurable: false, writable: false });
+        Object.defineProperty(this, 'selectorAll', { value: this.off, configurable: false, writable: false });
     }
 
     /**
