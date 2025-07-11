@@ -38,6 +38,12 @@ module.exports = {
                 'column-gap',
                 // https://caniuse.com/?search=aspect-ratio
                 'aspect-ratio',
+                // https://caniuse.com/?search=scale
+                'scale',
+                // https://caniuse.com/?search=translate
+                'translate',
+                // https://caniuse.com/?search=rotate
+                'rotate',
             ],
         ],
         'rule-selector-property-disallowed-list': {
