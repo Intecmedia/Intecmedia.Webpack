@@ -6,7 +6,7 @@
 @use "sass:math";
 @use "sass:meta";
 
-$clamp-fallback: true !default;
+$clamp-fallback: false !default;
 $clamp-supports: "width: clamp(0px, 0px, 0px)" !default;
 
 $fluid-min-width: 375px !default;
