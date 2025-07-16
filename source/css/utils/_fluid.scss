@@ -402,9 +402,9 @@ $fluid-screen-height: 100vh !default; // or 100vmin
     $clamp-size: fluid-clamp($min-size, $max-size, $min-width, $max-width);
     $comment: "fluid-clamp-prop($min-size: #{$min-size}, $max-size: #{$max-size}, $min-width: #{$min-width}, $max-width: #{$max-width})";
 
-    #{$prop}: to-fixed($min-size, $fluid-fixed-digits); /* #{$comment} */
-
     @if ($clamp-fallback) {
+        #{$prop}: to-fixed($min-size, $fluid-fixed-digits); /* #{$comment} */
+
         @supports not (#{$clamp-supports}) {
             /* fallback css-calc */
 
