@@ -22,7 +22,7 @@ module.exports = {
     AVIF: false,
     BROTLI: true,
     RESIZE: false,
-    GZIP: true,
+    GZIP: false,
     STYLELINT: true,
     ESLINT: true,
     IMAGEMIN: true,
