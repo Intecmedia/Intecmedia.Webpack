@@ -45,5 +45,21 @@
     }
 }
 
+.hidden-scrollbar {
+    --scrollbar-size: 0;
+
+    @supports (scrollbar-width: none) {
+        /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- its ok for custom scrollbar */
+        scrollbar-width: none;
+    }
+
+    /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- its ok for custom scrollbar */
+    &::-webkit-scrollbar,
+    &::-webkit-scrollbar-thumb,
+    &::-webkit-scrollbar-track {
+        display: none;
+    }
+}
+
 /* stylelint-enable plugin/selector-bem-pattern */
 /* stylelint-enable no-duplicate-selectors */
