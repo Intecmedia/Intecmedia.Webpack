@@ -6,7 +6,7 @@ module.exports = {
         require('./postcss.stylelint')(),
         ...(ENV.PROD || ENV.DEBUG
             ? [
-                  require('postcss-focus')({ oldFocus: false }),
+                  require('postcss-focus')(),
                   require('postcss-focus-visible')(),
                   require('postcss-font-display')([
                       { display: 'swap' },
