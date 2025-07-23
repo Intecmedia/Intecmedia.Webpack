@@ -131,6 +131,7 @@ module.exports = [
                 : // dev-only rules (better dev experience)
                   {
                       'compat/compat': 'off',
+                      'eqeqeq': 'off',
                       ...(APP.JSDOC
                           ? {
                                 'jsdoc/require-description': 'off',
