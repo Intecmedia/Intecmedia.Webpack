@@ -45,7 +45,7 @@
     }
 }
 
-.hidden-scrollbar {
+@mixin hidden-scrollbar() {
     --scrollbar-size: 0 !important;
 
     @supports (scrollbar-width: none) {
@@ -59,6 +59,10 @@
     &::-webkit-scrollbar-track {
         display: none !important;
     }
+}
+
+.hidden-scrollbar {
+    @include hidden-scrollbar();
 }
 
 /* stylelint-enable plugin/selector-bem-pattern */
