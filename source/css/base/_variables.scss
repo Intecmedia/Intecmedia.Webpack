@@ -301,6 +301,12 @@ $form-floating-padding-x: $input-btn-padding-x-rem !default;
 
 // scss-docs-end form-floating-variables
 
+// scss-docs-start figure-variables
+$figure-caption-font-size: $font-size-sm !default;
+$figure-caption-color: inherit !default;
+
+// scss-docs-end figure-variables
+
 @import "node_modules/bootstrap/scss/variables";
 
 // Common variables (Not bootstrap)
