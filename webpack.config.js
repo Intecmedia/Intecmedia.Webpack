@@ -306,6 +306,7 @@ module.exports = {
                       configType: 'flat',
                       lintDirtyModulesOnly: ENV.DEV_SERVER || ENV.WATCH,
                       quiet: ENV.PROD || ENV.DEBUG,
+                      failOnError: ENV.PROD || ENV.DEBUG,
                       fix: APP.LINT_FIX,
                   }),
               ]
