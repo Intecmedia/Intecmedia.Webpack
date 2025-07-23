@@ -50,14 +50,14 @@
 
     @supports (scrollbar-width: none) {
         /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- its ok for custom scrollbar */
-        scrollbar-width: none;
+        scrollbar-width: none !important;
     }
 
     /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- its ok for custom scrollbar */
     &::-webkit-scrollbar,
     &::-webkit-scrollbar-thumb,
     &::-webkit-scrollbar-track {
-        display: none;
+        display: none !important;
     }
 }
 
