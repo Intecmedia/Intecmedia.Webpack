@@ -21,7 +21,17 @@ module.exports = deepMerge({}, sharedConfig, {
             'files': ['source/css/components/**/*.scss'],
             'rules': {
                 'plugin/selector-bem-pattern': {
-                    'ignoreCustomProperties': ['--aspect-', '--bs-', '--icon-', '--image-', '--video-', '--intersection-', '--fluid-', '--#\\{\\$prefix\\}', '--scrollbar-'],
+                    'ignoreCustomProperties': [
+                        '--aspect-',
+                        '--bs-',
+                        '--icon-',
+                        '--image-',
+                        '--video-',
+                        '--intersection-',
+                        '--fluid-',
+                        '--#\\{\\$prefix\\}',
+                        '--scrollbar-',
+                    ],
                     'ignoreSelectors': [
                         '^(html|body)\\.?',
                         '.+\\.(js|is|no|has|not)\\-(.+)',
