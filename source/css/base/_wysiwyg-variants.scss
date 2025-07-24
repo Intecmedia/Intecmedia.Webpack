@@ -1,0 +1,19 @@
+//
+// WYSIWYG (What You See Is What You Get) semantic tags.
+//
+
+.wysiwyg {
+    &[data-bs-theme="dark"] {
+        --#{$prefix}body-color: #{$body-color-dark};
+        --#{$prefix}headings-color: #{$headings-color-dark};
+        --#{$prefix}emphasis-color: #{$body-color-dark};
+
+        --#{$prefix}table-bg: #{$body-bg-dark};
+
+        color: var(--#{$prefix}body-color);
+
+        table:not(.table) {
+            --#{$prefix}table-bg: #{$body-bg-dark};
+        }
+    }
+}
