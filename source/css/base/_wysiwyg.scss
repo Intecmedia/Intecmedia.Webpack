@@ -9,16 +9,6 @@
 
     a {
         // dont customize here, instead of edit sass variables in `_variables.scss`
-
-        color: $link-color;
-        text-decoration: $link-decoration;
-
-        &:hover,
-        &:focus,
-        &:active {
-            color: $link-hover-color;
-            text-decoration: $link-hover-decoration;
-        }
     }
 
     p {
