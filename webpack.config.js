@@ -78,7 +78,7 @@ module.exports = {
 
     devServer: {
         allowedHosts: ['localhost', '.localhost', ...(ENV.ARGV.allowedHosts ? ENV.ARGV.allowedHosts.split(',') : [])],
-        hot: true,
+        hot: false,
         port: ENV.ARGV.port || 8888,
         host: ENV.ARGV.host || '0.0.0.0',
         static: {
