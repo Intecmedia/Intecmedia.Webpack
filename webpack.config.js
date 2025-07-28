@@ -363,8 +363,9 @@ module.exports = {
                 svgo: false,
             },
             sprite: {
+                gutter: 5,
                 prefix: 'icon-',
-                generate: { title: false },
+                generate: { title: false, use: true },
             },
         }),
         ...(ENV.PROD || ENV.DEBUG
