@@ -27,7 +27,7 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const CompressionPlugin = ENV.PROD && !ENV.DEBUG ? require('compression-webpack-plugin') : () => {};
 const TerserPlugin = ENV.PROD && !ENV.DEBUG ? require('terser-webpack-plugin') : () => {};
-const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
+const SVGSpritemapPlugin = import('svg-spritemap-webpack-plugin');
 const { WebpackAssetsManifest } = require('webpack-assets-manifest');
 
 const FaviconsPlugin = APP.FAVICONS ? require('./plugin.favicons') : () => {};
@@ -37,7 +37,7 @@ const BabelOptions = require('./babel.options');
 
 const cleanIgnore = UTILS.readIgnoreFile('./.cleanignore');
 
-module.exports = {
+module.exports = async () => ({
     mode: ENV.PROD ? 'production' : 'development',
 
     stats: {
@@ -356,7 +356,7 @@ module.exports = {
                   }),
               ]
             : []),
-        new SVGSpritemapPlugin(['source/img/svg-sprite/*.svg'], {
+        new ((await SVGSpritemapPlugin).default)(['source/img/svg-sprite/*.svg'], {
             output: {
                 filename: 'img/svg-sprite.svg',
                 svg4everybody: false,
@@ -596,4 +596,4 @@ module.exports = {
             },
         ],
     },
-};
+});
