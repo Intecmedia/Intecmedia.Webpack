@@ -356,7 +356,7 @@ module.exports = async () => ({
                   }),
               ]
             : []),
-        new ((await SVGSpritemapPlugin).default)(['source/img/svg-sprite/*.svg'], {
+        new (await SVGSpritemapPlugin).default(['source/img/svg-sprite/*.svg'], {
             output: {
                 filename: 'img/svg-sprite.svg',
                 svg4everybody: false,
