@@ -139,7 +139,7 @@
         "@babel/preset-typescript": "^7.27.1",
         "@eslint-community/eslint-plugin-eslint-comments": "^4.5.0",
         "@popperjs/core": "^2.11.8",
-        "@sentry/browser": "^9.44.2",
+        "@sentry/browser": "^10.0.0",
         "@sentry/tracing": "^7.120.4",
         "autoprefixer": "^10.4.21",
         "babel-loader": "^10.0.0",
