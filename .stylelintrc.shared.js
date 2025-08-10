@@ -46,6 +46,7 @@ module.exports = {
                 'rotate',
             ],
         ],
+        'property-no-deprecated': null,
         'rule-selector-property-disallowed-list': {
             '/^(html|:root)$/': ['overflow', 'overflow-x', 'overflow-y'],
         },
