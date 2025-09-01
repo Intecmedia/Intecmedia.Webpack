@@ -36,7 +36,7 @@
                 opacity var(--intersection-duration-fade, #{$intersection-duration-fade-default}),
                 transform var(--intersection-duration-translate, #{$intersection-duration-translate-default});
             transition-delay: $intersection-transition-delay;
-            transition-timing-function: $ease-default;
+            transition-timing-function: var(--intersection-ease, #{$ease-default});
         }
     }
 
