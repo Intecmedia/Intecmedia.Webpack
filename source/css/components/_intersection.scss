@@ -24,7 +24,7 @@
         &--block,
         > .intersection__block {
             $intersection-translate: translate3d(var(--intersection-translate-x, 0), var(--intersection-translate-y, 0), var(--intersection-translate-z, 0));
-            $intersection-scale: scale(var(--intersection-scale, 1));
+            $intersection-scale: scale(var(--intersection-scale-x, var(--intersection-scale, 1)), var(--intersection-scale-y, var(--intersection-scale, 1)));
             $intersection-rotate: rotate(var(--intersection-rotate, 0));
 
             opacity: var(--intersection-fade, 1);
