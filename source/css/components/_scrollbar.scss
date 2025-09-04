@@ -10,6 +10,7 @@
     --scrollbar-bg: #{$scrollbar-bg};
     --scrollbar-thumb-bg: #{$scrollbar-thumb-bg};
     --scrollbar-thumb-border: #{$scrollbar-thumb-border};
+    --scrollbar-thumb-border-radius: #{$scrollbar-size};
     --scrollbar-track-bg: #{$scrollbar-track-bg};
 
     @supports (scrollbar-width: thin) {
@@ -39,7 +40,7 @@
     /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- its ok for custom scrollbar */
     &::-webkit-scrollbar-thumb {
         border: var(--scrollbar-thumb-border);
-        border-radius: var(--scrollbar-size);
+        border-radius: var(--scrollbar-thumb-border-radius);
 
         background: var(--scrollbar-thumb-bg);
     }
