@@ -4,9 +4,9 @@
 
 .form-textarea {
     height: auto;
+}
 
-    /* postcss-bem-linter: ignore */
-    .form-floating > & {
-        height: auto; /* force textarea row attribute */
-    }
+/* postcss-bem-linter: ignore */
+.form-floating > .form-textare {
+    height: auto; /* force textarea row attribute */
 }
