@@ -19,25 +19,22 @@
         /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- checked on @supports */
         scrollbar-color: var(--scrollbar-thumb-bg) var(--scrollbar-bg);
     }
-    @supports selector(*::-webkit-scrollbar) {
+    @supports selector(::-webkit-scrollbar) {
         /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- checked on @supports */
         scrollbar-width: revert;
         /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- checked on @supports */
         scrollbar-color: revert;
     }
 
-    /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- its ok for custom scrollbar */
     &::-webkit-scrollbar {
         width: var(--scrollbar-size);
         height: var(--scrollbar-size);
     }
 
-    /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- its ok for custom scrollbar */
     &::-webkit-scrollbar-track {
         background: var(--scrollbar-track-bg);
     }
 
-    /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- its ok for custom scrollbar */
     &::-webkit-scrollbar-thumb {
         border: var(--scrollbar-thumb-border);
         border-radius: var(--scrollbar-thumb-border-radius);
@@ -46,7 +43,7 @@
     }
 }
 
-* {
+#{$scrollbar-selectors} {
     @include scrollbar();
 }
 
@@ -58,7 +55,6 @@
         scrollbar-width: none !important;
     }
 
-    /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- its ok for custom scrollbar */
     &::-webkit-scrollbar,
     &::-webkit-scrollbar-thumb,
     &::-webkit-scrollbar-track {

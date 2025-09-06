@@ -421,6 +421,8 @@ $fluid-gutter-max-size: 48px !default;
 
 // scss-docs-start scrollbar
 
+$scrollbar-selectors: "*" !default;
+
 $scrollbar-size: var(--fluid-spacer-2xs) !default;
 $scrollbar-bg: var(--light, #fff) !default;
 
