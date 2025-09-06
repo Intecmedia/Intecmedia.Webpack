@@ -5,7 +5,7 @@
 /* stylelint-disable no-duplicate-selectors -- already in components, but we need it */
 /* stylelint-disable plugin/selector-bem-pattern -- scrollbar is not component */
 
-* {
+@mixin scrollbar() {
     --scrollbar-size: #{$scrollbar-size};
     --scrollbar-bg: #{$scrollbar-bg};
     --scrollbar-thumb-bg: #{$scrollbar-thumb-bg};
@@ -44,6 +44,10 @@
 
         background: var(--scrollbar-thumb-bg);
     }
+}
+
+* {
+    @include scrollbar();
 }
 
 @mixin hidden-scrollbar() {
