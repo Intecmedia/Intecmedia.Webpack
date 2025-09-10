@@ -1,7 +1,8 @@
 /**
  * Inserts HTML line breaks before all newlines in a string
  * @param {string} str - input string
- * @returns {boolean} - use XHTML compatible line breaks or not
+ * @param {boolean} use_xhtml - whether to use XHTML compatible line breaks or not
+ * @returns {boolean} - returns string with <br /> or <br> inserted before all newlines (\r\n, \n\r, \n and \r)
  */
 export default function nl2br(str, use_xhtml = false) {
     var breakTag = use_xhtml ? '<br ' + '/>' : '<br>';

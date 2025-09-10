@@ -1,3 +1,10 @@
+/**
+ * The fetch() with timeout.
+ * @param {string} input - a string or any other object with a stringifier
+ * @param {object} init - a RequestInit object containing any custom settings that you want to apply to the request.
+ * @param {number} delay - delays number of microseconds
+ * @returns {Promise} - a Promise that resolves to a Response object
+ */
 export default function fetchTimeout(input, init = {}, delay = 5000) {
     var controller, timeoutId;
     if (!('signal' in init) && window.AbortController) {
