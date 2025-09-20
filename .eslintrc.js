@@ -99,6 +99,8 @@ module.exports = [
                       ],
                       ...(APP.JSDOC
                           ? {
+                                'jsdoc/reject-any-type': 'off',
+                                'jsdoc/reject-function-type': 'off',
                                 'jsdoc/require-description': [
                                     'warn',
                                     {
@@ -134,6 +136,8 @@ module.exports = [
                       'eqeqeq': 'off',
                       ...(APP.JSDOC
                           ? {
+                                'jsdoc/reject-any-type': 'off',
+                                'jsdoc/reject-function-type': 'off',
                                 'jsdoc/require-description': 'off',
                                 'jsdoc/require-param-description': 'off',
                                 'jsdoc/require-param-type': 'off',
