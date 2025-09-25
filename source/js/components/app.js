@@ -134,7 +134,7 @@ export default class AbstractApp {
             if (!ClassName) {
                 console.error(`[app] Unknown component name: ${name}`, element);
             } else if (ClassName.singleton && name in this.components && Object.keys(this.components[name]).length !== 0) {
-                console.error(`[app] Cannot create already existing component: ${name}`, element);
+                console.error(`[app] Cannot create already existing singleton: ${name}`, element);
             } else {
                 element.classList.add('js-component');
                 element.setAttribute('data-component-id', id);
