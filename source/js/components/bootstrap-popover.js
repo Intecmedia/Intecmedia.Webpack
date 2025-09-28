@@ -6,6 +6,7 @@
  */
 
 import BootstrapPopover from 'bootstrap/js/src/popover';
+import { DefaultAllowlist } from 'bootstrap/js/src/util/sanitizer';
 
 const CUSTOM_TEMPLATE = [
     '<div class="popover popover-custom" role="tooltip">',
@@ -15,11 +16,19 @@ const CUSTOM_TEMPLATE = [
     '</div>',
 ].join('');
 
+const allowList = {
+    ...DefaultAllowlist,
+    picture: ['class'],
+    source: ['media', 'srcset', 'type'],
+};
+
 const initPopovers = (container) => {
     const items = [...container.querySelectorAll(':not(.is-popover-init)[data-bs-toggle="popover"]')];
     items.forEach((item) => {
         item.classList.add('is-popover-init');
-        const instance = BootstrapPopover.getOrCreateInstance(item);
+        const instance = BootstrapPopover.getOrCreateInstance(item, {
+            allowList: allowList,
+        });
         instance._config.template = CUSTOM_TEMPLATE;
     });
 };

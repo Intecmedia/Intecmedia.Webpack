@@ -6,6 +6,7 @@
  */
 
 import BootstrapTooltip from 'bootstrap/js/src/tooltip';
+import { DefaultAllowlist } from 'bootstrap/js/src/util/sanitizer';
 
 const CUSTOM_TEMPLATE = [
     '<div class="tooltip tooltip-custom" role="tooltip">',
@@ -14,11 +15,19 @@ const CUSTOM_TEMPLATE = [
     '</div>',
 ].join('');
 
+const allowList = {
+    ...DefaultAllowlist,
+    picture: ['class'],
+    source: ['media', 'srcset', 'type'],
+};
+
 const initTooltips = (container) => {
     const items = [...container.querySelectorAll(':not(.is-tooltip-init)[data-bs-toggle="tooltip"]')];
     items.forEach((item) => {
         item.classList.add('is-tooltip-init');
-        const instance = BootstrapTooltip.getOrCreateInstance(item);
+        const instance = BootstrapTooltip.getOrCreateInstance(item, {
+            allowList: allowList,
+        });
         instance._config.template = CUSTOM_TEMPLATE;
     });
 };
