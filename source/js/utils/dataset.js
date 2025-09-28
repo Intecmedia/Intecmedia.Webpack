@@ -35,9 +35,20 @@ export function getInt(element, name, initial) {
  * Get data-property as json
  * @param {HTMLElement} element - html element
  * @param {string} name - name of data-attribute
- * @param {string} initial - default value
+ * @param {any} initial - default value
  * @returns {string} - result value
  */
 export function getJSON(element, name, initial) {
     return name in element.dataset ? JSON.parse(element.dataset[name]) : initial;
+}
+
+/**
+ * Get data-property as boolean
+ * @param {HTMLElement} element - html element
+ * @param {string} name - name of data-attribute
+ * @param {boolean} initial - default value
+ * @returns {boolean} - result value
+ */
+export function getBoolean(element, name, initial) {
+    return name in element.dataset ? Boolean(JSON.parse(element.dataset[name])) : initial;
 }
