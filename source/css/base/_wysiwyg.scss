@@ -331,8 +331,7 @@
             margin-left: auto;
         }
 
-        // image with rounded border
-        &.img-rounded {
+        @if $img-rounded {
             border-radius: $border-radius !important;
         }
 
