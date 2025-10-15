@@ -38,7 +38,7 @@ module.exports = deepMerge({}, sharedConfig, {
                         '.+\\.(js|is|no|has|not)\\-(.+)',
                         '^(svg|picture|img|iframe|video|option|optgroup|canvas)\\.?',
                         '#\\{\\$[a-zA-Z][a-zA-Z-\\d]*\\}',
-                        '\\.(active|fade|hide|hiding|show|showing|disabled|collapse|collapsed|collapsing)',
+                        '\\.(active|fade|hide|hiding|show|showing|disabled|collapse|collapsed|collapsing|cke_editable)',
                     ],
                     'implicitComponents': ['source/css/components/**/*.scss', 'source/css/layout/**/*.scss', 'source/css/pages/**/*.scss'],
                     'preset': 'bem',
