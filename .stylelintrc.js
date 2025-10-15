@@ -29,6 +29,7 @@ module.exports = deepMerge({}, sharedConfig, {
                         '--video-',
                         '--intersection-',
                         '--fluid-',
+                        '--gutter-',
                         '--#\\{\\$prefix\\}',
                         '--scrollbar-',
                     ],
