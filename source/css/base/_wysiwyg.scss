@@ -450,4 +450,13 @@
             @extend .blockquote-footer;
         }
     }
+
+    // abbrs
+    abbr {
+        white-space: nowrap;
+        text-decoration: underline dotted;
+        text-decoration-skip-ink: none;
+        text-underline-position: under;
+        text-decoration-thickness: 1px;
+    }
 }
