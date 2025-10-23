@@ -1,30 +1,37 @@
 const scriptLoadMap = {};
 
+/**
+ * Load an script from a given URL
+ * @param {string} src -  url The URL of the script resource
+ * @returns {Promise<HTMLScriptElement>} The loaded script
+ */
 export default function loadScript(src) {
     return new Promise((resolve, reject) => {
-        const onLoad = () => {
-            scriptLoadMap[src] = true;
-            resolve();
-        };
-        const onError = () => {
-            reject();
-        };
-
         const existsScript = document.querySelector(`script[src='${src}']`);
         if (existsScript instanceof HTMLScriptElement) {
             if (src in scriptLoadMap) {
-                onLoad();
+                resolve(existsScript);
             } else {
-                existsScript.addEventListener('load', onLoad);
-                existsScript.addEventListener('error', onError);
+                existsScript.addEventListener('load', () => {
+                    scriptLoadMap[src] = true;
+                    resolve(existsScript);
+                });
+                existsScript.addEventListener('error', (errorEvent) => {
+                    reject(errorEvent);
+                });
             }
 
             return existsScript;
         }
 
         const scriptElement = document.createElement('script');
-        scriptElement.onload = onLoad;
-        scriptElement.onerror = onError;
+        scriptElement.addEventListener('load', () => {
+            scriptLoadMap[src] = true;
+            resolve(scriptElement);
+        });
+        scriptElement.addEventListener('error', (errorEvent) => {
+            reject(errorEvent);
+        });
         scriptElement.type = 'text/javascript';
         scriptElement.src = src;
         scriptElement.async = true;
