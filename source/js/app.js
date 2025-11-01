@@ -22,8 +22,6 @@ class App extends AbstractApp {
         document.documentElement.classList.add('ready-js');
         document.documentElement.classList.add('is-page-transition-ready');
         super.init();
-
-        /* !!! your code here !!! */
     }
 }
 
