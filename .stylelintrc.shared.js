@@ -27,10 +27,6 @@ module.exports = {
         'no-duplicate-selectors': null, // dart-sass@1.92.0 Emit declarations, childless at-rules, and comments in the order they appear in the source even when they're interleaved with nested rules.
         'property-disallowed-list': [
             [
-                // https://caniuse.com/?search=gap
-                'gap',
-                'row-gap',
-                'column-gap',
                 // https://caniuse.com/?search=aspect-ratio
                 'aspect-ratio',
                 // https://caniuse.com/?search=scale
