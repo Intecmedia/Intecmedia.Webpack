@@ -30,13 +30,27 @@ module.exports = {
                 // https://caniuse.com/?search=aspect-ratio
                 'aspect-ratio',
                 // https://caniuse.com/?search=scale
-                'scale', 'scaleX',  'scaleY',  'scaleZ', 'scale3d',
+                'scale',
+                'scaleX',
+                'scaleY',
+                'scaleZ',
+                'scale3d',
                 // https://caniuse.com/?search=translate
-                'translate', 'translateX',  'translateY',  'translateZ', 'translate3d',
+                'translate',
+                'translateX',
+                'translateY',
+                'translateZ',
+                'translate3d',
                 // https://caniuse.com/?search=rotate
-                'rotate', 'rotateX',  'rotateY',  'rotateZ', 'rotate3d',
+                'rotate',
+                'rotateX',
+                'rotateY',
+                'rotateZ',
+                'rotate3d',
                 // https://caniuse.com/?search=skew
-                'skew', 'skewX',  'skewY',
+                'skew',
+                'skewX',
+                'skewY',
             ],
         ],
         'property-no-deprecated': null,
