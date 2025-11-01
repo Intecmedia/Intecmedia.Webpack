@@ -349,6 +349,13 @@ $subheadings-line-height: 1.2 !default;
 
 // scss-docs-end subheadings
 
+// scss-docs-start abbr
+
+$abbr-text-decoration: underline dotted !default;
+$abbr-text-decoration-thickness: 1px !default;
+
+// scss-docs-end abbr
+
 // scss-docs-start transitions
 
 $duration-slow: 2.4s !default;
