@@ -194,6 +194,9 @@
             @if $table-th-bg != null {
                 --#{$prefix}table-bg: #{$table-th-bg};
             }
+            @if $table-th-text-align != null {
+                text-align: #{$table-th-text-align};
+            }
         }
     }
 
