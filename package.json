@@ -121,7 +121,7 @@
         "npm": ">=11"
     },
     "overrides": {
-        "sharp": "^0.34.4"
+        "sharp": "^0.34.5"
     },
     "dependencies": {
         "@babel/cli": "^7.28.3",
@@ -141,7 +141,7 @@
         "@babel/preset-typescript": "^7.28.5",
         "@eslint-community/eslint-plugin-eslint-comments": "^4.5.0",
         "@popperjs/core": "^2.11.8",
-        "@sentry/browser": "^10.22.0",
+        "@sentry/browser": "^10.23.0",
         "@sentry/tracing": "^7.120.4",
         "autoprefixer": "^10.4.21",
         "babel-loader": "^10.0.0",
@@ -212,7 +212,7 @@
         "sass-loader": "^16.0.6",
         "schema-utils": "^4.3.3",
         "semver": "^7.7.3",
-        "sharp": "^0.34.4",
+        "sharp": "^0.34.5",
         "stylelint": "^16.25.0",
         "stylelint-config-recommended-scss": "^16.0.2",
         "stylelint-config-standard-scss": "^16.0.0",
