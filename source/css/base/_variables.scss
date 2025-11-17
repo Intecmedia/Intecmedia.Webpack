@@ -333,8 +333,10 @@ $img-spacer: var(--fluid-spacer-s) !default;
 // scss-docs-start tables
 
 $table-border-bordered: false !default;
-$table-border-striped: false !default;
+$table-border-striped: true !default;
 $table-caption-font-size: var(--fluid-step-n1) !default;
+$table-th-bg: null !default;
+$table-th-text-align: null !default;
 
 // scss-docs-end tables
 
@@ -349,6 +351,13 @@ $subheadings-font-weight: 500 !default;
 $subheadings-line-height: 1.2 !default;
 
 // scss-docs-end subheadings
+
+// scss-docs-start abbr
+
+$abbr-text-decoration: underline dotted !default;
+$abbr-text-decoration-thickness: 1px !default;
+
+// scss-docs-end abbr
 
 // scss-docs-start transitions
 

@@ -5,16 +5,20 @@ const SvgoCreateConfig = (config) => ({
             name: 'preset-default',
             params: {
                 overrides: {
-                    // customize options for plugins included in preset
-                    convertColors: { shortname: false },
-                    // or disable plugins
-                    cleanupIds: false,
-                    convertShapeToPath: false,
-                    convertTransform: false,
-                    removeUselessDefs: false,
-                    removeHiddenElems: false,
-                    mergePaths: false,
-                    mergeStyles: false,
+                    ...(!config.sprite
+                        ? {
+                              // customize options for plugins included in preset
+                              convertColors: { shortname: false },
+                              // or disable plugins
+                              cleanupIds: false,
+                              convertShapeToPath: false,
+                              convertTransform: false,
+                              removeUselessDefs: false,
+                              removeHiddenElems: false,
+                              mergePaths: false,
+                              mergeStyles: false,
+                          }
+                        : {}),
                 },
             },
         },

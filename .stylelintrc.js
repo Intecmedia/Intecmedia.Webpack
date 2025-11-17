@@ -7,6 +7,7 @@ const { propertyOrdering } = require('stylelint-semantic-groups');
 const ENV = require('./app.env');
 
 module.exports = deepMerge({}, sharedConfig, {
+    'allowEmptyInput': true,
     'customSyntax': 'postcss-scss',
     'defaultSeverity': ENV.PROD || ENV.DEBUG ? 'error' : 'warning',
     'extends': ['stylelint-config-recommended-scss', ...sharedConfig.extends],
@@ -29,6 +30,7 @@ module.exports = deepMerge({}, sharedConfig, {
                         '--video-',
                         '--intersection-',
                         '--fluid-',
+                        '--gutter-',
                         '--#\\{\\$prefix\\}',
                         '--scrollbar-',
                     ],
@@ -37,7 +39,7 @@ module.exports = deepMerge({}, sharedConfig, {
                         '.+\\.(js|is|no|has|not)\\-(.+)',
                         '^(svg|picture|img|iframe|video|option|optgroup|canvas)\\.?',
                         '#\\{\\$[a-zA-Z][a-zA-Z-\\d]*\\}',
-                        '\\.(active|fade|hide|hiding|show|showing|disabled|collapse|collapsed|collapsing)',
+                        '\\.(active|fade|hide|hiding|show|showing|disabled|collapse|collapsed|collapsing|cke_editable)',
                     ],
                     'implicitComponents': ['source/css/components/**/*.scss', 'source/css/layout/**/*.scss', 'source/css/pages/**/*.scss'],
                     'preset': 'bem',
@@ -106,6 +108,7 @@ module.exports = deepMerge({}, sharedConfig, {
                 'ignore': ['after-comment', 'first-nested'],
             },
         ],
+        'scss/at-if-no-null': null,
         'scss/comment-no-empty': null,
         'scss/dollar-variable-pattern': ['^[a-zA-Z][a-zA-Z-\\d]*$'],
         'scss/operator-no-newline-after': null,
