@@ -26,7 +26,7 @@ module.exports = {
     STYLELINT: true,
     ESLINT: true,
     IMAGEMIN: true,
-    SORT_MEQIA_QUERIES: 'mobile-first',
+    SORT_MEDIA_QUERIES: 'mobile-first',
     RESOLVE_URL: true,
     SPLIT_CHUNKS: true,
     JSDOC: false,
