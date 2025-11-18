@@ -189,15 +189,6 @@
                 border-top-width: $table-border-width;
             }
         }
-
-        th {
-            @if $table-th-bg != null {
-                --#{$prefix}table-bg: #{$table-th-bg};
-            }
-            @if $table-th-text-align != null {
-                text-align: #{$table-th-text-align};
-            }
-        }
     }
 
     // disabled table
@@ -457,16 +448,5 @@
         footer {
             @extend .blockquote-footer;
         }
-    }
-
-    // abbrs
-    abbr {
-        // dont customize here, instead of edit sass variables in `_variables.scss`
-
-        white-space: nowrap;
-        text-decoration: $abbr-text-decoration;
-        text-decoration-skip-ink: none;
-        text-underline-position: under;
-        text-decoration-thickness: $abbr-text-decoration-thickness;
     }
 }

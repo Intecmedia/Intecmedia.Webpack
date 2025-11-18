@@ -1,7 +1,6 @@
 /**
- * Copy text to clipboard.
- * @param {string} text - input text string
- * @returns {Promise} copy result
+ *
+ * @param text
  */
 export default function copyToClipboard(text) {
     if (navigator.clipboard && window.isSecureContext) {
