@@ -31,7 +31,7 @@ export default class AbstractApp {
     /**
      * Get component by name or id
      * @param {string} name - component name
-     * @param {number} [id] - component id
+     * @param {number|HTMLElement} [id] - component id
      * @returns {AbstractComponent} - matched component
      * @memberof AbstractApp
      */
