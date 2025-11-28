@@ -1,4 +1,5 @@
 const fs = require('node:fs');
+const crypto = require('node:crypto');
 const path = require('node:path');
 
 const loaderUtils = require('loader-utils');
@@ -51,8 +52,8 @@ const SRC_SEPARATOR = /\s+/;
 const SRCSET_SEPARATOR = /\s*,\s*/;
 const SRCSET_ATTRS = ['srcset', 'data-srcset'];
 const IGNORE_PATTERN = /^{{.*}}$/;
-const REQUIRE_PATTERN = /{{ require\([\d.\\]+\) }}/g;
-const REQUIRE_IDENT = () => `{{ require(${Math.random()}${Math.random()}) }}`;
+const REQUIRE_PATTERN = /{{ require\([0-9a-f]+\) }}/g;
+const REQUIRE_IDENT = () => `{{ require(${crypto.randomBytes(20).toString('hex')}) }}`;
 const SVG_PATTERN = /\.(svg)(\?.*)?$/i;
 
 const OPTIONS_SCHEMA = {
