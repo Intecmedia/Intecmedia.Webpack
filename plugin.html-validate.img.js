@@ -80,7 +80,7 @@ class ImgLoadingRequired extends Rule {
      * @param {object} options - plugin options
      */
     constructor(options) {
-        super({ intrinsicsize: true, ignore: '.wysiwyg img', ...options });
+        super({ ignore: '.wysiwyg img', ...options });
         this.domReady = this.domReady.bind(this);
     }
 
@@ -106,12 +106,6 @@ class ImgLoadingRequired extends Rule {
             const loading = img.getAttributeValue('loading');
             if (!loading) {
                 this.report(img, '<img> required `loading` attribute.');
-            }
-            if (this.options.intrinsicsize) {
-                const intrinsicsize = img.getAttributeValue('intrinsicsize');
-                if (!intrinsicsize) {
-                    this.report(img, '<img> required `intrinsicsize` attribute.');
-                }
             }
         });
     }

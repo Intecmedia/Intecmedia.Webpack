@@ -88,7 +88,6 @@ module.exports = {
             'error',
             {
                 'ignore': '.wysiwyg img, .counters-body img, img.ignore-html-validate',
-                'intrinsicsize': true,
             },
         ],
         'pitcher/img-picture-required': [

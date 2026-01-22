@@ -1,6 +1,5 @@
 This document appears to be written in English but the “html” start tag has “lang="ru"”. Consider using “lang="en"” (or variant) instead.
 Section lacks heading. Consider using “h2”-“h6” elements to add identifying headings to all sections.
-Attribute “intrinsicsize” not allowed on element “img” at this point.
 Attribute “importance” not allowed on element “img” at this point.
 Attribute “loading” not allowed on element “img” at this point.
 The “align” attribute on the “img” element is obsolete. Use CSS instead.
