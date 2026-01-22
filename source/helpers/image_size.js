@@ -15,7 +15,6 @@ function helperImageSize(filename, nocache = false) {
     this.loaderContext.addDependency(fullpath);
     if (!(fullpath in cacheMap) || nocache) {
         cacheMap[fullpath] = ImageSize.imageSize(fs.readFileSync(fullpath));
-        cacheMap[fullpath].intrinsicsize = `${cacheMap[fullpath].width}x${cacheMap[fullpath].height}`;
         if (cacheMap[fullpath].type === 'jpg') {
             cacheMap[fullpath].type = 'jpeg';
         }
