@@ -177,7 +177,7 @@
         "html-webpack-plugin": "^5.6.6",
         "husky": "^9.1.7",
         "ignore": "^7.0.5",
-        "image-minimizer-webpack-plugin": "^4.1.4",
+        "image-minimizer-webpack-plugin": "^5.0.0",
         "image-size": "^2.0.2",
         "js-beautify": "^1.15.4",
         "js-cookie": "^3.0.5",
