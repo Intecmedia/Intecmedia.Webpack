@@ -216,7 +216,7 @@
         "stylelint": "^16.26.1",
         "stylelint-config-recommended-scss": "^16.0.2",
         "stylelint-config-standard-scss": "^16.0.0",
-        "stylelint-high-performance-animation": "^1.11.0",
+        "stylelint-high-performance-animation": "^2.0.0",
         "stylelint-no-nested-media": "^0.1.0",
         "stylelint-no-unsupported-browser-features": "^8.1.1",
         "stylelint-order": "^7.0.1",
