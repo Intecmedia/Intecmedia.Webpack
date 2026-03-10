@@ -129,6 +129,7 @@ module.exports = async () => ({
         },
         filename: 'js/[name].min.js',
         chunkFilename: 'js/[name].min.js?[chunkhash]',
+        chunkLoadingGlobal: 'webpackChunkLoading',
         hotUpdateChunkFilename: 'js/[name].hot-update.js?[fullhash]',
         hotUpdateMainFilename: 'js/[runtime].hot-update.json?[fullhash]',
         path: ENV.OUTPUT_PATH,
