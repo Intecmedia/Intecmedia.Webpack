@@ -4,6 +4,7 @@
  * --------------------------------------------------------------------------
  */
 import AbstractComponent from '~/components/abstract';
+import ScrollBarHelper from 'bootstrap/js/src/util/scrollbar';
 
 /**
  * Calc scrollbar width.
@@ -24,15 +25,12 @@ class ScrollbarWidth extends AbstractComponent {
      * Init events.
      */
     init() {
-        this.scrollbarOuter = document.createElement('div');
-        this.scrollbarOuter.className = 'scrollbar-width';
-        this.scrollbarOuter.style = 'z-index: -9999; position: absolute; visibility: hidden; width: 100px; margin-left: -100px; overflow: scroll;';
-        document.documentElement.appendChild(this.scrollbarOuter);
-        this.scrollbarInner = document.createElement('div');
-        this.scrollbarInner.style = 'width: 100%;';
-        this.scrollbarOuter.appendChild(this.scrollbarInner);
+        this.helper = new ScrollBarHelper();
 
         window.addEventListener('resize', this.onResize);
+
+        this.observer = new ResizeObserver(this.onResize);
+        this.observer.observe(document.documentElement);
 
         this.updateWidth();
     }
@@ -41,9 +39,10 @@ class ScrollbarWidth extends AbstractComponent {
      * Remove events.
      */
     destroy() {
-        window.removeEventListener('resize', this.onResize);
+        this.observer?.disconnect();
+        this.observer = null;
 
-        this.scrollbarOuter.remove();
+        window.removeEventListener('resize', this.onResize);
     }
 
     /**
@@ -57,11 +56,8 @@ class ScrollbarWidth extends AbstractComponent {
      * Update width.
      */
     updateWidth() {
-        this.width = 100 - this.scrollbarInner.offsetWidth;
-        if (this.widthLast !== this.width) {
-            document.documentElement.style.setProperty('--scrollbar-width', `${this.width}px`);
-            this.widthLast = this.width;
-        }
+        this.width = this.helper.getWidth();
+        document.documentElement.style.setProperty('--scrollbar-width', `${this.width}px`);
     }
 }
 
