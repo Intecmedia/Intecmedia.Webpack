@@ -56,8 +56,8 @@ class ScrollbarWidth extends AbstractComponent {
      * Update width.
      */
     updateWidth() {
-        this.width = this.helper.getWidth();
-        document.documentElement.style.setProperty('--scrollbar-width', `${this.width}px`);
+        var scrollbarWidth = this.helper.getWidth().toFixed(6);
+        document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
     }
 }
 
