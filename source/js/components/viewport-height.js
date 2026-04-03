@@ -33,13 +33,21 @@ class ViewportHeight extends AbstractComponent {
      * Init events.
      */
     init() {
+        this.observer = new ResizeObserver(this.onResize);
+        this.observer.observe(document.documentElement);
+
         window.addEventListener('resize', this.onResize);
+
+        this.updateHeight();
     }
 
     /**
      * Remove events.
      */
     destroy() {
+        this.observer?.disconnect();
+        this.observer = null;
+
         window.removeEventListener('resize', this.onResize);
     }
 
