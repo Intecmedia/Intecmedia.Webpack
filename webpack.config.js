@@ -517,7 +517,7 @@ module.exports = async () => ({
                         loader: MiniCssExtractPlugin.loader,
                         options: {
                             esModule: false,
-                            publicPath: ENV.PUBLIC_PATH === '/' || ENV.PUBLIC_PATH.startsWith('.') ? 'auto' : ENV.PUBLIC_PATH,
+                            publicPath: APP.PUBLIC_PATH === '/' || APP.PUBLIC_PATH.startsWith('.') ? 'auto' : APP.PUBLIC_PATH,
                         },
                     },
                     {
