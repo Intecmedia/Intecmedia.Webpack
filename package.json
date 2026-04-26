@@ -141,7 +141,7 @@
         "@babel/preset-typescript": "^7.28.5",
         "@eslint-community/eslint-plugin-eslint-comments": "^4.7.1",
         "@popperjs/core": "^2.11.8",
-        "@sentry/browser": "^10.49.0",
+        "@sentry/browser": "^10.50.0",
         "@sentry/tracing": "^7.120.4",
         "autoprefixer": "^10.5.0",
         "babel-loader": "^10.1.1",
@@ -153,7 +153,7 @@
         "core-js": "^3.49.0",
         "cross-env": "^10.1.0",
         "css-loader": "^7.1.4",
-        "cssnano": "^7.1.5",
+        "cssnano": "^7.1.7",
         "date-fns": "^4.1.0",
         "eslint": "^9.39.4",
         "eslint-config-prettier": "^10.1.8",
@@ -225,9 +225,9 @@
         "stylelint-selector-bem-pattern": "^4.0.1",
         "stylelint-semantic-groups": "^1.2.2",
         "stylelint-webpack-plugin": "^5.1.0",
-        "svg-spritemap-webpack-plugin": "^5.1.0",
+        "svg-spritemap-webpack-plugin": "5.1.0",
         "svgo": "^4.0.1",
-        "terser-webpack-plugin": "^5.4.0",
+        "terser-webpack-plugin": "^5.5.0",
         "typescript": "^5.9.3",
         "typograf": "^7.7.0",
         "url-loader": "^4.1.1",
@@ -237,7 +237,7 @@
         "webpack-cli": "^7.0.2",
         "webpack-dev-server": "^5.2.3",
         "webpack-log": "^3.0.2",
-        "webpack-sources": "^3.3.4",
+        "webpack-sources": "^3.4.0",
         "yargs": "^18.0.0"
     }
 }
