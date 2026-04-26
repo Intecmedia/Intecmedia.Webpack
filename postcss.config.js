@@ -29,6 +29,7 @@ module.exports = {
                                 preset: [
                                     'default',
                                     {
+                                        overrideBrowserslist: ENV.BROWSERS,
                                         minifyFontValues: { removeQuotes: false },
                                         discardComments: { removeAll: true },
                                     },
