@@ -32,7 +32,7 @@ module.exports = {
                                         overrideBrowserslist: ENV.BROWSERS,
                                         discardComments: { removeAll: true },
                                         minifyFontValues: { removeQuotes: false },
-                                        minifySelectors: false,
+                                        minifySelectors: { convertToIs: false },
                                     },
                                 ],
                             }),
