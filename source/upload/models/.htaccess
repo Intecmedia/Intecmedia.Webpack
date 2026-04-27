@@ -1,6 +1,6 @@
 # Disable parent deny
 Allow from all
-Options -Indexes -Includes -MultiViews +FollowSymLinks
+Options -Indexes -Includes -MultiViews
 
 # gltf brotli
 <IfModule mod_headers.c>
