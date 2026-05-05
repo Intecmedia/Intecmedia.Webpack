@@ -101,12 +101,12 @@
     "license": "MIT",
     "browserslist": {
         "production": [
-            "iOS >= 14",
-            "Safari >= 14",
-            "Chrome >= 90",
-            "ChromeAndroid >= 90",
-            "Opera >= 90",
-            "Firefox >= 90",
+            "iOS >= 15",
+            "Safari >= 15",
+            "Chrome >= 100",
+            "ChromeAndroid >= 100",
+            "Opera >= 100",
+            "Firefox >= 100",
             "Firefox ESR"
         ],
         "development": [
