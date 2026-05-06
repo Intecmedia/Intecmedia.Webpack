@@ -136,7 +136,7 @@
         "@babel/plugin-transform-logical-assignment-operators": "^7.28.6",
         "@babel/plugin-transform-nullish-coalescing-operator": "^7.28.6",
         "@babel/plugin-transform-optional-chaining": "^7.28.6",
-        "@babel/preset-env": "^7.29.3",
+        "@babel/preset-env": "^7.29.5",
         "@babel/preset-react": "^7.28.5",
         "@babel/preset-typescript": "^7.28.5",
         "@eslint-community/eslint-plugin-eslint-comments": "^4.7.1",

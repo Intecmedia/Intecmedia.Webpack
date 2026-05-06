@@ -23,6 +23,7 @@ module.exports = {
                 targets: { browsers: ENV.BROWSERS },
                 ignoreBrowserslistConfig: true,
                 shippedProposals: true,
+                bugfixes: true,
             },
         ],
         ['@babel/preset-typescript', {}],
