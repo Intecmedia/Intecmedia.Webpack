@@ -182,7 +182,7 @@
         "js-beautify": "^1.15.4",
         "js-cookie": "^3.0.5",
         "line-column": "^1.0.2",
-        "lint-staged": "^16.4.0",
+        "lint-staged": "^17.0.0",
         "loader-utils": "^3.3.1",
         "lodash.debounce": "^4.0.8",
         "lodash.merge": "^4.6.2",
