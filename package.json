@@ -117,7 +117,7 @@
     },
     "engines": {
         "@pip/fonttools": "*.*.*",
-        "node": ">=22",
+        "node": ">=24",
         "npm": ">=11"
     },
     "overrides": {
