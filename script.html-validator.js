@@ -52,7 +52,7 @@ const promises = files.map(async (resourcePath) => {
     const html = fs.readFileSync(resourcePath, 'utf8').toString();
     const result = await validatorAsync({ format: 'json', data: html });
 
-    let skipped = false;
+    let skipped;
 
     if (path.basename(resourcePath).startsWith('_')) {
         logger.info(`skipped ${relativePath}`);
