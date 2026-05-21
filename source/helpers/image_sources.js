@@ -12,7 +12,7 @@ function helperImageSources(size, sources) {
     return sources.filter((source) => {
         const resizeMatch = (source[1] || '').trim().match(/^(\d*)(x(\d*))?(\w+)?$/) || [];
         const resizeWidth = parseInt(resizeMatch[1], 10);
-        const resizeHeight = parseInt(resizeMatch[2], 10);
+        const resizeHeight = parseInt(resizeMatch[3], 10);
         if (resizeWidth > 0 && resizeWidth >= size.width) {
             return false;
         }
