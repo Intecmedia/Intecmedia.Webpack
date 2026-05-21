@@ -37,7 +37,6 @@ module.exports = deepMerge({}, sharedConfig, {
                               'css-gradients',
                               'css-resize',
                               'css-touch-action',
-                              'css-focus-visible',
                               'css-scroll-behavior',
                               'css3-cursors-grab',
                               'css3-cursors-newer',

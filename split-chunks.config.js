@@ -3,7 +3,7 @@ module.exports = {
         polyfills: {
             chunks: 'all',
             enforce: true,
-            test: /[\\/]node_modules[\\/](core-js|whatwg-fetch|focus-visible|focus-within|intersection-observer|resize-observer-polyfill)[\\/](.+)\.(js|mjs|cjs|ts)(\?.*)?$/,
+            test: /[\\/]node_modules[\\/](core-js)[\\/](.+)\.(js|mjs|cjs|ts)(\?.*)?$/,
             name: 'vendor.polyfills',
             priority: Number.MAX_SAFE_INTEGER,
         },

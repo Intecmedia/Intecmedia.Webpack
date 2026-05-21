@@ -7,7 +7,6 @@ module.exports = {
         ...(ENV.PROD || ENV.DEBUG
             ? [
                   require('postcss-focus')(),
-                  require('postcss-focus-visible')(),
                   require('postcss-font-display')([
                       { display: 'swap' },
                       // { test: 'ExampleFontFamily1', display: 'block' },

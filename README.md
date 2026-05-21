@@ -103,7 +103,6 @@
 
 ## Полифилы
 
--   [:focus-visible](https://github.com/WICG/focus-visible)
 -   [SubmitEvent.submitter](https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent/submitter)
 -   [FormData.submitter](https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData#submitter)
 
