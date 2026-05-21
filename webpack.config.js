@@ -140,7 +140,6 @@ module.exports = async () => ({
     },
 
     optimization: {
-        concatenateModules: false,
         ...(!ENV.PROD || ENV.DEBUG
             ? {
                   chunkIds: 'named',
