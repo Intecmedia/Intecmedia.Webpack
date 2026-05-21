@@ -70,6 +70,7 @@ module.exports = async () => ({
     experiments: {
         topLevelAwait: true,
         backCompat: false,
+        futureDefaults: false,
     },
 
     watchOptions: {
