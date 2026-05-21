@@ -13,14 +13,18 @@ const cacheMap = {};
 function helperImageSize(filename, nocache = false) {
     const fullpath = path.join(process.cwd(), 'source', filename);
     this.loaderContext.addDependency(fullpath);
-    if (!(fullpath in cacheMap) || nocache) {
-        cacheMap[fullpath] = ImageSize.imageSize(fs.readFileSync(fullpath));
-        if (cacheMap[fullpath].type === 'jpg') {
-            cacheMap[fullpath].type = 'jpeg';
+
+    const stat = fs.statSync(fullpath);
+    const cacheKey = `${fullpath}:${stat.mtimeMs}`;
+
+    if (!(cacheKey in cacheMap) || nocache) {
+        cacheMap[cacheKey] = ImageSize.imageSize(fs.readFileSync(fullpath));
+        if (cacheMap[cacheKey].type === 'jpg') {
+            cacheMap[cacheKey].type = 'jpeg';
         }
     }
 
-    return cacheMap[fullpath];
+    return cacheMap[cacheKey];
 }
 
 module.exports = helperImageSize;

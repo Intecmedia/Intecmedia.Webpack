@@ -13,9 +13,14 @@ const cacheMap = {};
 function helperMd5File(filename, nocache = false) {
     const fullpath = path.join(process.cwd(), 'source', filename);
     this.loaderContext.addDependency(fullpath);
-    if (!(fullpath in cacheMap) || nocache) {
-        cacheMap[fullpath] = crypto.createHash('md5').update(fs.readFileSync(fullpath)).digest('hex');
+
+    const stat = fs.statSync(fullpath);
+    const cacheKey = `${fullpath}:${stat.mtimeMs}`;
+
+    if (!(cacheKey in cacheMap) || nocache) {
+        cacheMap[cacheKey] = crypto.createHash('md5').update(fs.readFileSync(fullpath)).digest('hex');
     }
-    return cacheMap[fullpath];
+
+    return cacheMap[cacheKey];
 }
 module.exports = helperMd5File;
