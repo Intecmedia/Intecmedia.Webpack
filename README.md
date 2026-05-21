@@ -26,9 +26,9 @@
 
 ## Системные требования
 
--   `Node.js` >= 20 c включеным [`Chocolatey`](https://user-images.githubusercontent.com/3109072/68096791-82350c00-fe89-11e9-8cfa-b4619ce96162.jpg)
--   `NPM` >= 10 (обновляется командой `npm install -g npm`)
--   `python` >= 2.7 и `pip` (автоматически ставятся вместе с `Chocolatey`)
+-   `Node.js` >= 24 c включеным [`Chocolatey`](https://user-images.githubusercontent.com/3109072/68096791-82350c00-fe89-11e9-8cfa-b4619ce96162.jpg)
+-   `NPM` >= 11 (обновляется командой `npm install -g npm`)
+-   `python` и `pip` (автоматически ставятся вместе с `Chocolatey`)
 -   Если у вас `Windows` – установите любой `bash`: `Git Bash` или `MinGW` или `Cygwin`
 -   ВНИМАНИЕ! `Yarn` и `PnPM`  – запрещен, все скрипты расчитаны только на `NPM`.
 
