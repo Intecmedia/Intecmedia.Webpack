@@ -27,7 +27,7 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const CompressionPlugin = ENV.PROD && !ENV.DEBUG ? require('compression-webpack-plugin') : () => {};
 const TerserPlugin = ENV.PROD && !ENV.DEBUG ? require('terser-webpack-plugin') : () => {};
-const SVGSpritemapPlugin = import('svg-spritemap-webpack-plugin');
+const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 const { WebpackAssetsManifest } = require('webpack-assets-manifest');
 
 const FaviconsPlugin = APP.FAVICONS ? require('./plugin.favicons') : () => {};
