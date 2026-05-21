@@ -33,6 +33,12 @@ class ViewportHeight extends AbstractComponent {
      * Init events.
      */
     init() {
+        this.fixedBlock = document.createElement('div');
+        this.fixedBlock.id = 'viewport-height';
+        this.fixedBlock.style =
+            'z-index: -9999; width: 1px; height: 100vh; position: fixed; left: 0px; top: 0px; bottom: 0px; visibility: hidden; pointer-events: none;';
+        document.body.appendChild(this.fixedBlock);
+
         this.observer = new ResizeObserver(this.onResize);
         this.observer.observe(document.documentElement);
 
@@ -49,6 +55,9 @@ class ViewportHeight extends AbstractComponent {
         this.observer = null;
 
         window.removeEventListener('resize', this.onResize);
+
+        this.fixedBlock?.remove();
+        this.fixedBlock = null;
     }
 
     /**
@@ -59,12 +68,8 @@ class ViewportHeight extends AbstractComponent {
         const vh = (height * 0.01).toFixed(4);
         document.documentElement.style.setProperty('--vh', `${vh}px`);
 
-        const fixedBlock = document.createElement('div');
-        fixedBlock.style = 'width: 1px; height: 100vh; position: fixed; left: 0px; top: 0px; bottom: 0px; visibility: hidden;';
-        document.body.appendChild(fixedBlock);
-        const lvh = (fixedBlock.clientHeight * 0.01).toFixed(4);
+        const lvh = (this.fixedBlock.clientHeight * 0.01).toFixed(4);
         document.documentElement.style.setProperty('--lvh', `${lvh}px`);
-        fixedBlock.remove();
 
         const svh = (document.documentElement.clientHeight * 0.01).toFixed(4);
         document.documentElement.style.setProperty('--svh', `${svh}px`);
