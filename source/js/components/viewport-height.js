@@ -63,7 +63,7 @@ class ViewportHeight extends AbstractComponent {
         fixedBlock.style = 'width: 1px; height: 100vh; position: fixed; left: 0px; top: 0px; bottom: 0px; visibility: hidden;';
         document.body.appendChild(fixedBlock);
         const lvh = (fixedBlock.clientHeight * 0.01).toFixed(4);
-        $html.style.setProperty('--lvh', `${lvh}px`);
+        document.documentElement.style.setProperty('--lvh', `${lvh}px`);
         fixedBlock.remove();
 
         const svh = (document.documentElement.clientHeight * 0.01).toFixed(4);
