@@ -9,7 +9,7 @@ const path = require('node:path');
 function helperLottieSize(filename) {
     const fullpath = path.join(process.cwd(), 'source', filename);
     this.loaderContext.addDependency(fullpath);
-    const lottie = JSON.parse(fs.readFileSync(fullpath));
+    const lottie = JSON.parse(fs.readFileSync(fullpath, 'utf8'));
     return { width: lottie.w, height: lottie.h };
 }
 module.exports = helperLottieSize;

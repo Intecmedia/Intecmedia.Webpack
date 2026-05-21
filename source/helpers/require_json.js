@@ -9,6 +9,6 @@ const path = require('node:path');
 function helperRequireJson(filename) {
     const fullpath = path.join(process.cwd(), 'source', filename);
     this.loaderContext.addDependency(fullpath);
-    return JSON.parse(fs.readFileSync(fullpath));
+    return JSON.parse(fs.readFileSync(fullpath, 'utf8'));
 }
 module.exports = helperRequireJson;

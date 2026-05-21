@@ -9,6 +9,6 @@ const path = require('node:path');
 function helperRequireFile(filename) {
     const fullpath = path.join(process.cwd(), 'source', filename);
     this.loaderContext.addDependency(fullpath);
-    return fs.readFileSync(fullpath);
+    return fs.readFileSync(fullpath, 'utf8');
 }
 module.exports = helperRequireFile;
