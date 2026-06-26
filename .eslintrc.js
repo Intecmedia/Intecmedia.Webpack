@@ -4,7 +4,7 @@ const fs = require('node:fs');
 
 const globals = require('globals');
 const compatPlugin = require('eslint-plugin-compat').configs['flat/recommended'];
-const nodePlugin = require('eslint-plugin-n').default.configs['flat/recommended-script'];
+const nodePlugin = require('eslint-plugin-n').configs['flat/recommended-script'];
 // const eslintParser = require('@babel/eslint-parser');
 
 const APP = require('./app.config');
