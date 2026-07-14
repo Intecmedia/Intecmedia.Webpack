@@ -7,7 +7,7 @@
 
 import AbstractComponent from '~/components/abstract';
 
-const INPUT_SELECTOR = 'input, textarea, select';
+const INPUT_SELECTOR = 'input:not(.no-validate), textarea:not(.no-validate), select:not(.no-validate)';
 
 /**
  * Bootstrap forms validation.
@@ -74,9 +74,7 @@ export default class BootstrapValidation extends AbstractComponent {
         event.preventDefault();
 
         const input = event.target.closest(INPUT_SELECTOR);
-        if (!input) return;
-
-        this.validateInput(input);
+        if (input) this.validateInput(input);
     }
 
     /**
@@ -85,9 +83,7 @@ export default class BootstrapValidation extends AbstractComponent {
      */
     onInput(event) {
         const input = event.target.closest(INPUT_SELECTOR);
-        if (!input) return;
-
-        this.validateInput(input);
+        if (input) this.validateInput(input);
     }
 
     /**
@@ -95,10 +91,8 @@ export default class BootstrapValidation extends AbstractComponent {
      * @param {Event} event - input event
      */
     onChange(event) {
-        const input = event.target.closest(INPUT_SELECTOR);
-        if (!input) return;
-
-        this.validateInput(input);
+        const input = event.target?.closest(INPUT_SELECTOR);
+        if (input) this.validateInput(input);
     }
 
     /**
