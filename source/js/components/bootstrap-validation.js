@@ -123,14 +123,19 @@ export default class BootstrapValidation extends AbstractComponent {
             input.classList.remove('is-valid');
         }
 
-        const invalidMessage =
-            input.nextElementSibling &&
-            (input.nextElementSibling.classList.contains('invalid-feedback') || input.nextElementSibling.classList.contains('invalid-tooltip'))
-                ? input.nextElementSibling
-                : null;
+        const invalid = (() => {
+            let sibling = input.nextElementSibling;
+            while (sibling) {
+                if (sibling.classList.contains('invalid-feedback') || sibling.classList.contains('invalid-tooltip')) {
+                    return sibling;
+                }
+                sibling = sibling.nextElementSibling;
+            }
+            return null;
+        })();
 
-        if (invalidMessage) {
-            invalidMessage.textContent = input.validationMessage;
+        if (invalid) {
+            invalid.textContent = input.validationMessage;
         }
     }
 
