@@ -71,10 +71,11 @@ export default class BootstrapValidation extends AbstractComponent {
      * @param {Event} event - invalid event
      */
     onInvalid(event) {
-        event.preventDefault();
-
         const input = event.target.closest(INPUT_SELECTOR);
-        if (input) this.validateInput(input);
+        if (!input) return;
+
+        event.preventDefault();
+        this.validateInput(input);
     }
 
     /**
@@ -83,7 +84,9 @@ export default class BootstrapValidation extends AbstractComponent {
      */
     onInput(event) {
         const input = event.target.closest(INPUT_SELECTOR);
-        if (input) this.validateInput(input);
+        if (!input) return;
+
+        this.validateInput(input);
     }
 
     /**
@@ -91,8 +94,10 @@ export default class BootstrapValidation extends AbstractComponent {
      * @param {Event} event - input event
      */
     onChange(event) {
-        const input = event.target?.closest(INPUT_SELECTOR);
-        if (input) this.validateInput(input);
+        const input = event.target.closest(INPUT_SELECTOR);
+        if (!input) return;
+
+        this.validateInput(input);
     }
 
     /**
