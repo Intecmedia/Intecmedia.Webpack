@@ -11,8 +11,8 @@ const createHash = require('webpack/lib/util/createHash');
 
 const logger = weblog({ name: 'loader-resize' });
 const imageminConfig = require('./imagemin.config');
-const { version: sharpVersion } = require('sharp/package.json');
 
+const { version: sharpVersion } = require(path.join(__dirname, 'node_modules', 'sharp', 'package.json'));
 const imageminConfigModule = require.resolve('./imagemin.config');
 const UTILS = require('./webpack.utils');
 
