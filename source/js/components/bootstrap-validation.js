@@ -36,6 +36,8 @@ export default class BootstrapValidation extends AbstractComponent {
         this.element.addEventListener('input', this.onInput);
         this.element.addEventListener('change', this.onChange);
         this.element.addEventListener('invalid', this.onInvalid);
+
+        this.element.setAttribute('novalidate', '');
     }
 
     /**
