@@ -218,7 +218,7 @@
         "svg-spritemap-webpack-plugin": "^5.1.4",
         "svgo": "^4.0.2",
         "terser-webpack-plugin": "^5.6.1",
-        "typescript": "^6.0.3",
+        "typescript": "^7.0.0",
         "typograf": "^7.7.0",
         "url-loader": "^4.1.1",
         "webpack": "^5.108.4",
