@@ -186,7 +186,7 @@
         "nodemon": "^3.1.14",
         "nunjucks": "^3.2.4",
         "p-limit": "^7.3.1",
-        "postcss": "^8.5.25",
+        "postcss": "^8.5.26",
         "postcss-browser-reporter": "^0.7.0",
         "postcss-fail-on-warn": "^0.2.1",
         "postcss-focus": "^7.0.0",
@@ -232,7 +232,7 @@
         "yargs": "^18.1.0"
     },
     "allowScripts": {
-        "core-js@3.49.0": true,
-        "sharp@0.34.5": true
+        "core-js@3.50.0": true,
+        "sharp@0.35.3": true
     }
 }
