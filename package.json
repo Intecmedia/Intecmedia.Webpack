@@ -148,7 +148,7 @@
         "css-loader": "^7.1.4",
         "cssnano": "^8.0.8",
         "date-fns": "^4.4.0",
-        "eslint": "^10.9.0",
+        "eslint": "^10.9.1",
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-compat": "^7.0.2",
         "eslint-plugin-jsdoc": "^64.2.1",
