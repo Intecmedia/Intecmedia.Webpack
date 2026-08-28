@@ -32,6 +32,7 @@ module.exports = {
                                         discardComments: { removeAll: true },
                                         minifyFontValues: { removeQuotes: false },
                                         minifySelectors: { convertToIs: false },
+                                        svgo: false,
                                     },
                                 ],
                             }),
