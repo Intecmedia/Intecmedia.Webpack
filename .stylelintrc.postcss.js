@@ -34,6 +34,7 @@ module.exports = deepMerge({}, sharedConfig, {
                               'css-media-interaction',
                               'css-featurequeries',
                               'css-filters',
+                              'css-focus-visible',
                               'css-gradients',
                               'css-resize',
                               'css-touch-action',
