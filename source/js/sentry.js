@@ -39,8 +39,8 @@ if ((NODE_ENV === 'production' || DEBUG) && APP.SENTRY.dsn) {
                 return event;
             },
             ignoreErrors: APP.SENTRY.ignoreErrors || [],
-            blacklistUrls: APP.SENTRY.blacklistUrls || [],
-            whitelistUrls: APP.SENTRY.whitelistUrls || [],
+            denyUrls: APP.SENTRY.denyUrls || APP.SENTRY.blacklistUrls || [],
+            allowUrls: APP.SENTRY.allowUrls || APP.SENTRY.whitelistUrls || [],
             // integrations: [new Integrations.BrowserTracing()],
             tracesSampleRate: 1.0,
         });
