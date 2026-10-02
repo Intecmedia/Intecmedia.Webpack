@@ -121,7 +121,7 @@
         "npm": ">=11"
     },
     "overrides": {
-        "sharp": "0.35.4",
+        "sharp": "0.35.5",
         "typescript": "7.0.2"
     },
     "dependencies": {
@@ -203,7 +203,7 @@
         "sass-loader": "^17.0.1",
         "schema-utils": "^4.5.0",
         "semver": "^7.8.5",
-        "sharp": "0.35.4",
+        "sharp": "0.35.5",
         "stylelint": "^17.16.0",
         "stylelint-config-recommended-scss": "^17.0.1",
         "stylelint-config-standard-scss": "^17.0.0",
@@ -233,6 +233,6 @@
     },
     "allowScripts": {
         "core-js@3.50.0": true,
-        "sharp@0.35.4": true
+        "sharp@0.35.5": true
     }
 }
