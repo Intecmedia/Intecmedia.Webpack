@@ -27,28 +27,12 @@ module.exports = {
         'no-duplicate-selectors': null, // dart-sass@1.92.0 Emit declarations, childless at-rules, and comments in the order they appear in the source even when they're interleaved with nested rules.
         'property-disallowed-list': [
             [
-                // https://caniuse.com/?search=scale
+                // https://caniuse.com/mdn-css_properties_scale
                 'scale',
-                'scaleX',
-                'scaleY',
-                'scaleZ',
-                'scale3d',
-                // https://caniuse.com/?search=translate
+                // https://caniuse.com/mdn-css_properties_translate
                 'translate',
-                'translateX',
-                'translateY',
-                'translateZ',
-                'translate3d',
-                // https://caniuse.com/?search=rotate
+                // https://caniuse.com/mdn-css_properties_rotate
                 'rotate',
-                'rotateX',
-                'rotateY',
-                'rotateZ',
-                'rotate3d',
-                // https://caniuse.com/?search=skew
-                'skew',
-                'skewX',
-                'skewY',
             ],
         ],
         'property-no-deprecated': null,
