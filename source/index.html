@@ -23,6 +23,77 @@ og_image:
                 {{ $resize.picture('./upload/wysiwyg-test.jpg', 'Test') }}
             </div>
 
+            <hr>
+            <h2>Example custom form-validation</h2>
+
+            <form class="row g-3" data-component="BootstrapValidation">
+                <div class="col-md-4">
+                    <label for="validation-custom-first-name" class="form-label">First name</label>
+                    <input type="text" class="form-control" id="validation-custom-first-name" value="Mark" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="validation-custom-last-name" class="form-label">Last name</label>
+                    <input type="text" class="form-control" id="validation-custom-last-name" value="Otto" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="validation-custom-username" class="form-label">Username</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text" id="input-group-prepend">@</span>
+                        <input type="text" class="form-control" id="validation-custom-username" aria-describedby="input-group-prepend" required>
+                        <div class="invalid-feedback">
+                            Please choose a username.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="validation-custom-city" class="form-label">City</label>
+                    <input type="text" class="form-control" id="validation-custom-city" required>
+                    <div class="invalid-feedback">
+                        Please provide a valid city.
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="validation-custom-state" class="form-label">State</label>
+                    <select class="form-select" id="validation-custom-state" required>
+                        <option selected disabled value="">Choose…</option>
+                        <option>…</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please select a valid state.
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="validation-custom-zip" class="form-label">Zip</label>
+                    <input type="text" class="form-control" id="validation-custom-zip" required>
+                    <div class="invalid-feedback">
+                        Please provide a valid zip.
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="invalid-check" required>
+                        <label class="form-check-label" for="invalid-check">
+                            Agree to terms and conditions
+                        </label>
+                        <div class="invalid-feedback">
+                            You must agree before submitting.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-dark" type="submit">Submit form</button>
+                </div>
+            </form>
+
+            <hr>
+            <h2>Example form-controls</h2>
+
             <label for="form-control" class="visually-hidden">form-control</label>
             <input type="text" id="form-control" class="form-control" value="form-control">
             <label for="form-control-sm" class="visually-hidden">form-control-sm</label>
