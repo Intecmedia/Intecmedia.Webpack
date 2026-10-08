@@ -103,10 +103,10 @@
         "production": [
             "iOS >= 15.4",
             "Safari >= 15.4",
-            "Chrome >= 100",
-            "ChromeAndroid >= 100",
-            "Opera >= 100",
-            "Firefox >= 100",
+            "Chrome >= 105",
+            "ChromeAndroid >= 105",
+            "Opera >= 91",
+            "Firefox >= 121",
             "Firefox ESR"
         ],
         "development": [
