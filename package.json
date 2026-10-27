@@ -162,7 +162,7 @@
         "favicons-webpack-plugin": "^6.0.1",
         "file-loader": "^6.2.0",
         "front-matter": "^4.0.2",
-        "glob": "^13.0.6",
+        "glob": "^14.0.0",
         "globals": "^17.13.0",
         "gsap": "^3.15.0",
         "html-validate": "^11.17.0",
