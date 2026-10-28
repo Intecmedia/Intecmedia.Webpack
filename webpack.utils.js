@@ -229,7 +229,7 @@ module.exports.processArgs = processArgs;
  * @returns {object} - json object
  */
 function readJsonFile(filepath) {
-    return JSON.parse(fs.readFileSync(filepath));
+    return JSON.parse(fs.readFileSync(filepath, 'utf8'));
 }
 
 module.exports.readJsonFile = readJsonFile;
@@ -244,7 +244,7 @@ function readIgnoreFile(filepath, options = {}) {
     return ignore({
         allowRelativePaths: true,
         ...options,
-    }).add(fs.readFileSync(filepath).toString());
+    }).add(fs.readFileSync(filepath, 'utf8'));
 }
 
 module.exports.readIgnoreFile = readIgnoreFile;
