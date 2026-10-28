@@ -317,7 +317,6 @@ module.exports = async () => ({
                 new HtmlWebpackPlugin({
                     filename,
                     template,
-                    chunks: ['app', 'vendor'],
                     inject: ignored || extension !== 'html' ? false : 'body',
                     scriptLoading: 'defer',
                     minify:
