@@ -45,7 +45,8 @@
 -   **npm run prod** – сборка в production-режиме (с линтерами) и debug=off, самый медленный способ.
 -   **npm run prod-debug** – сборка в production-режиме (с линтерами) и debug=on, самый медленный способ.
 -   **npm run production** – сборка в production-режиме (без линтеров) и debug=off, самый медленный способ.
--   **npm run watch** – watch в production-режимеи debug=off, самый медленный способ.
+-   **npm run watch** – watch в development-режимеи debug=off, самый медленный способ.
+-   **npm run watch-prod** – watch в production-режимеи debug=off, самый медленный способ.
 -   **npm run watch-dev** – watch в development-режиме и debug=off, самый быстрый способ.
 -   **npm run watch-debug** – watch в development-режиме и debug=on, медленный способ.
 -   **npm run js-lint** – линтер js через [eslint](https://eslint.org/).
@@ -61,8 +62,8 @@
 -   **npm run app-lint** – линтер конфигурации приложения.
 -   **npm run image-lint** – линтер изображений
 -   **npm run lint** – запуск всех линтеров (app, eslint, stylelint, html-validate, validator.w3.org).
--   **npm run server** – сервер в production-режиме и debug=off, самый медленный способ.
--   **npm run server-https** – https-сервер в production-режиме и debug=off, самый медленный способ.
+-   **npm run server** – сервер в development-режиме и debug=off, самый медленный способ.
+-   **npm run server-https** – https-сервер в development-режиме и debug=off, самый медленный способ.
 -   **npm run server-dev** – сервер в development-режиме и debug=off, самый быстрый способ.
 -   **npm run server-debug** – сервер в development-режиме и debug=on, медленный способ.
 -   **npm run server-debug-https** – https-сервер в development-режиме и debug=on, медленный способ.
