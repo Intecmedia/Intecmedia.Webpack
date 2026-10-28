@@ -1,5 +1,5 @@
 /**
- * Create date object from string or current date if empty
+ * Create a date object from a string, or use the current date if the string is empty.
  * @param {string} date - date value
  * @returns {Date} - date object
  */

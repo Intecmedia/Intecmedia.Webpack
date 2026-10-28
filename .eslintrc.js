@@ -1,4 +1,4 @@
-/* eslint "sort-keys": "error" -- more readability keys */
+/* eslint "sort-keys": "error" -- for better readability */
 
 const fs = require('node:fs');
 

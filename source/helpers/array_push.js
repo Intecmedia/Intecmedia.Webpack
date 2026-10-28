@@ -1,5 +1,5 @@
 /**
- * Push one or more elements onto the end of array.
+ * Push one or more elements onto the end of an array.
  * @param {Array} arr - input array
  * @param {...any} args - args to push
  * @returns {Array} - new array

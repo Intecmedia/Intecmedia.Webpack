@@ -1,5 +1,5 @@
 /**
- * Return object if not empty or result empty variant.
+ * Return the value if it is not empty; otherwise, return the empty variant.
  * @param {object|Array} value - input object or array
  * @param {boolean} empty - empty variant
  * @returns {boolean} - checked result

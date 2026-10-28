@@ -9,13 +9,13 @@ if ((NODE_ENV === 'production' || DEBUG) && APP.SENTRY.dsn) {
     const IGNORE_HOSTS = /(\.|^)localhost$/i;
 
     const sentryCheckIgnore = (event) => {
-        // ignore dev host
+        // Ignore development hosts.
         if (document.location.hostname.match(IGNORE_HOSTS)) {
             return true;
         }
-        // Detect if we got a ReportingObserver event
+        // Detect whether this is a ReportingObserver event.
         if (event?.message?.indexOf('ReportingObserver') === 0) {
-            // And check whether sourceFile points to chrome-extension.
+            // Also check whether sourceFile points to a Chrome extension.
             if (event?.extra?.body?.sourceFile?.indexOf('chrome-extension') === 0) {
                 return true;
             }

@@ -3,7 +3,7 @@
  */
 
 /**
- * Remove assets from complidation.
+ * Remove assets from compilation.
  */
 class RemoveAssetsPlugin {
     /**
@@ -14,8 +14,8 @@ class RemoveAssetsPlugin {
     }
 
     /**
-     * Apply plugin to compliler.
-     * @param {Compiler} compiler - webpack complier object
+     * Apply the plugin to the compiler.
+     * @param {Compiler} compiler - webpack compiler object
      */
     apply(compiler) {
         compiler.hooks.compilation.tap('RemoveAssetsPlugin', (compilation) => {

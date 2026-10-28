@@ -2,8 +2,8 @@
 // External libraries
 //
 
-/* stylelint-disable -- we not control third party code */
+/* stylelint-disable -- we do not control third-party code */
 
-// @import "node_modules/external-package/path/to/foobar.min"; !!!dont use extension -- only base file name!!!
+// @import "node_modules/external-package/path/to/foobar.min"; Do not include the extension; use only the base file name.
 
 /* stylelint-enable */

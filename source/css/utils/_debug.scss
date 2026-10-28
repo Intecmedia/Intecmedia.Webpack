@@ -4,8 +4,8 @@
 @use "sass:map";
 @use "sass:string";
 
-// Debug tooltip, display current breakpoint.
-// Visible only in development enviroment.
+// Debug tooltip showing the current breakpoint.
+// Visible only in the development environment.
 @mixin debug-body($content) {
     position: fixed;
     bottom: 0;

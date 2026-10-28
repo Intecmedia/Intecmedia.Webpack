@@ -1,4 +1,4 @@
-/* eslint "sort-keys": "error" -- more readability keys */
+/* eslint "sort-keys": "error" -- for better readability */
 
 const ENV = require('./app.env');
 

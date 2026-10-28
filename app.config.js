@@ -2,7 +2,7 @@ module.exports = {
     TITLE: '',
     SHORT_NAME: '',
     DESCRIPTION: '',
-    PUBLIC_PATH: '/', // for relative use './'
+    PUBLIC_PATH: '/', // Use './' for relative paths.
     OUTPUT_PATH: './build',
     FAVICONS: true,
     LANGUAGE: 'ru',

@@ -6,13 +6,13 @@
 
 /* global NODE_ENV DEBUG */
 
-// for polyfill use only require
+// Use require only for polyfills.
 require('~/polyfills/history-events');
 
 if (NODE_ENV === 'production' || DEBUG) {
-    // eslint-disable-next-line global-require -- conditinal polyfill
+    // eslint-disable-next-line global-require -- conditional polyfill
     require('~/polyfills/event-submitter');
 
-    // eslint-disable-next-line global-require -- conditinal polyfill
+    // eslint-disable-next-line global-require -- conditional polyfill
     require('~/polyfills/formdata-submitter');
 }
