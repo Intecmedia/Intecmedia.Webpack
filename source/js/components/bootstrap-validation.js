@@ -19,6 +19,7 @@ export default class BootstrapValidation extends AbstractComponent {
     constructor(options = {}) {
         super(options);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onReset = this.onReset.bind(this);
         this.onInput = this.onInput.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onInvalid = this.onInvalid.bind(this);
