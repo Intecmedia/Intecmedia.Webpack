@@ -6,7 +6,7 @@
 
 /* global NODE_ENV APP DEBUG VERBOSE */
 if ((NODE_ENV === 'production' || DEBUG) && APP.SENTRY.dsn) {
-    const IGNORE_HOSTS = /(\.|^)localhost$/i;
+    const IGNORE_HOSTS = /(\.|^)(local|localhost)$/i;
 
     const sentryCheckIgnore = (event) => {
         // Ignore development hosts.
