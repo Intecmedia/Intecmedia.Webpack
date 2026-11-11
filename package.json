@@ -205,7 +205,7 @@
         "schema-utils": "^4.8.2",
         "semver": "^7.8.6",
         "sharp": "0.35.5",
-        "stylelint": "^17.16.0",
+        "stylelint": "^18.0.0",
         "stylelint-config-recommended-scss": "^17.0.1",
         "stylelint-config-standard-scss": "^17.0.0",
         "stylelint-high-performance-animation": "^2.0.0",
