@@ -23,12 +23,11 @@ const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const StyleLintPlugin = require('stylelint-webpack-plugin');
-const ESLintPlugin = require('eslint-webpack-plugin');
 const CompressionPlugin = ENV.PROD && !ENV.DEBUG ? require('compression-webpack-plugin') : () => {};
 const TerserPlugin = ENV.PROD && !ENV.DEBUG ? require('terser-webpack-plugin') : () => {};
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 const { WebpackAssetsManifest } = require('webpack-assets-manifest');
+const DiagnosticsPlugin = require('diagnostics-webpack-plugin');
 
 const FaviconsPlugin = APP.FAVICONS ? require('./plugin.favicons') : () => {};
 const HtmlBeautifyPlugin = APP.HTML_PRETTY ? require('./plugin.html-beautify') : () => {};
@@ -282,33 +281,29 @@ module.exports = async () => ({
             ),
             BANNER_STRING: JSON.stringify(ENV.BANNER_STRING),
         }),
-        ...(APP.STYLELINT
+        ...(APP.STYLELINT || APP.ESLINT
             ? [
-                  new StyleLintPlugin({
-                      cache: !ENV.DEBUG,
-                      cacheLocation: UTILS.cacheDir('stylelint', ENV.PROD),
-                      customSyntax: 'postcss-scss',
-                      files: '**/*.scss',
-                      configFile: './.stylelintrc.js',
-                      ignorePath: './.stylelintignore',
-                      lintDirtyModulesOnly: ENV.DEV_SERVER || ENV.WATCH,
-                      quiet: ENV.PROD || ENV.DEBUG,
-                      fix: APP.LINT_FIX,
-                  }),
-              ]
-            : []),
-        ...(APP.ESLINT
-            ? [
-                  new ESLintPlugin({
-                      cache: !ENV.DEBUG,
-                      cacheLocation: UTILS.cacheDir('eslint', ENV.PROD),
-                      files: '**/*.js',
-                      overrideConfigFile: './.eslintrc.js',
-                      configType: 'flat',
-                      lintDirtyModulesOnly: ENV.DEV_SERVER || ENV.WATCH,
-                      quiet: ENV.PROD || ENV.DEBUG,
-                      failOnError: ENV.PROD || ENV.DEBUG,
-                      fix: APP.LINT_FIX,
+                  new DiagnosticsPlugin({
+                      checks: [
+                          {
+                              use: 'eslint',
+                              files: '**/*.js',
+                              overrideConfigFile: './.eslintrc.js',
+                              cache: !ENV.DEBUG,
+                              cacheLocation: UTILS.cacheDir('eslint', ENV.PROD),
+                              reportAs: ENV.PROD || ENV.DEBUG ? 'error' : 'warning',
+                              fix: APP.LINT_FIX,
+                          },
+                          {
+                              use: 'stylelint',
+                              files: '**/*.scss',
+                              overrideConfigFile: './.stylelintrc.js',
+                              cache: !ENV.DEBUG,
+                              cacheLocation: UTILS.cacheDir('stylelint', ENV.PROD),
+                              reportAs: ENV.PROD || ENV.DEBUG ? 'error' : 'warning',
+                              fix: APP.LINT_FIX,
+                          },
+                      ],
                   }),
               ]
             : []),
