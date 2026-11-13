@@ -281,28 +281,36 @@ module.exports = async () => ({
             ),
             BANNER_STRING: JSON.stringify(ENV.BANNER_STRING),
         }),
-        ...(APP.STYLELINT || APP.ESLINT
+        ...(APP.ESLINT || APP.STYLELINT
             ? [
                   new DiagnosticsPlugin({
                       checks: [
-                          {
-                              use: 'eslint',
-                              files: '**/*.js',
-                              overrideConfigFile: './.eslintrc.js',
-                              cache: !ENV.DEBUG,
-                              cacheLocation: UTILS.cacheDir('eslint', ENV.PROD),
-                              reportAs: ENV.PROD || ENV.DEBUG ? 'error' : 'warning',
-                              fix: APP.LINT_FIX,
-                          },
-                          {
-                              use: 'stylelint',
-                              files: '**/*.scss',
-                              overrideConfigFile: './.stylelintrc.js',
-                              cache: !ENV.DEBUG,
-                              cacheLocation: UTILS.cacheDir('stylelint', ENV.PROD),
-                              reportAs: ENV.PROD || ENV.DEBUG ? 'error' : 'warning',
-                              fix: APP.LINT_FIX,
-                          },
+                          ...(APP.ESLINT
+                              ? [
+                                    {
+                                        use: 'eslint',
+                                        files: '**/*.js',
+                                        overrideConfigFile: './.eslintrc.js',
+                                        cache: !ENV.DEBUG,
+                                        cacheLocation: UTILS.cacheDir('eslint', ENV.PROD),
+                                        reportAs: ENV.PROD || ENV.DEBUG ? 'error' : 'warning',
+                                        fix: APP.LINT_FIX,
+                                    },
+                                ]
+                              : []),
+                          ...(APP.STYLELINT
+                              ? [
+                                    {
+                                        use: 'stylelint',
+                                        files: '**/*.scss',
+                                        overrideConfigFile: './.stylelintrc.js',
+                                        cache: !ENV.DEBUG,
+                                        cacheLocation: UTILS.cacheDir('stylelint', ENV.PROD),
+                                        reportAs: ENV.PROD || ENV.DEBUG ? 'error' : 'warning',
+                                        fix: APP.LINT_FIX,
+                                    },
+                                ]
+                              : []),
                       ],
                   }),
               ]
