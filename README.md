@@ -89,9 +89,9 @@
 
 ## Стилистика кода
 
--   JS основна на [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) ([перевод](https://github.com/leonidlebedev/javascript-airbnb)).
+-   JS основна на [eslint-recommended](https://eslint.org/docs/latest/rules/).
 -   CSS использум БЭМ, как метод именования селекторов (исключение – сторонние css-пакеты) ([список рекомендаций по БЭМ](https://nicothin.pro/idiomatic-pre-CSS/)).
--   SCSS основна на [stylelint-config-sass-guidelines](https://sass-guidelin.es/ru/).
+-   SCSS основна на [stylelint-config-recommended-scss](https://github.com/stylelint-scss/stylelint-config-recommended-scss).
 -   HTML проверяется через [html-validate](https://html-validate.org/) и [validator.w3.org](https://validator.w3.org/).
 -   Подробно писать про оформление кода нет смысла – сборка покрыта линтерами.
 
