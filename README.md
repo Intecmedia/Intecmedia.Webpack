@@ -95,13 +95,6 @@
 -   HTML проверяется через [html-validate](https://html-validate.org/) и [validator.w3.org](https://validator.w3.org/).
 -   Подробно писать про оформление кода нет смысла – сборка покрыта линтерами.
 
-### Структура важных блоков (Schema.org)
-
--   [Адреса и Организации](http://help.yandex.ru/webmaster/supported-schemas/address-organization.xml)
--   [Вопросы и Ответы](http://help.yandex.ru/webmaster/supported-schemas/questions.xml)
--   [Товары и Цены](http://help.yandex.ru/webmaster/supported-schemas/goods-prices.xml)
--   [Картинки](http://help.yandex.ru/webmaster/supported-schemas/image.xml)
-
 ## Полифилы
 
 -   [SubmitEvent.submitter](https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent/submitter)
