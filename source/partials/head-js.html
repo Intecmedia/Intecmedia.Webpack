@@ -1,18 +1,18 @@
 <!-- head-js -->
 <script>
-    (document.documentElement && document.documentElement.className && (function($html) {
+    (function() {
         // js test
-        $html.className = $html.className.replace('no-js', 'js');
+        document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
         // webp support test
         var webp = new Image();
         webp.onload = webp.onerror = function() {
-            $html.className += (webp.width == 1 && webp.height == 1 ? ' webp' : ' no-webp');
+            document.documentElement.className += (webp.width == 1 && webp.height == 1 ? ' webp' : ' no-webp');
         };
         webp.src = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuUAAA=';
         // avif support test
         var avif = new Image();
         avif.onload = avif.onerror = function() {
-            $html.className += (avif.width == 1 && avif.height == 1 ? ' avif' : ' no-avif');
+            document.documentElement.className += (avif.width == 1 && avif.height == 1 ? ' avif' : ' no-avif');
         };
         avif.src = [
             'data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAAEcbWV0YQAAAAAAAABIaGRscgAAAAAAAAAAcGljdAAAAAAAAAAA',
@@ -22,25 +22,25 @@
             'EQiBACwDoA='
         ].join('');
         // viewport sizes
-        $html.style.setProperty('--vh', (window.innerHeight * 0.01).toFixed(4) + 'px');
+        document.documentElement.style.setProperty('--vh', (window.innerHeight * 0.01).toFixed(4) + 'px');
         var fixedBlock = document.createElement('div');
         fixedBlock.style = 'width: 1px; height: 100vh; position: fixed; left: 0px; top: 0px; bottom: 0px; visibility: hidden;';
-        $html.appendChild(fixedBlock);
-        $html.style.setProperty('--lvh', (fixedBlock.clientHeight * 0.01).toFixed(4) + 'px');
+        document.documentElement.appendChild(fixedBlock);
+        document.documentElement.style.setProperty('--lvh', (fixedBlock.clientHeight * 0.01).toFixed(4) + 'px');
         fixedBlock.remove();
-        $html.style.setProperty('--svh', ($html.clientHeight * 0.01).toFixed(4) + 'px');
-        $html.style.setProperty('--dvh', (window.innerHeight * 0.01).toFixed(4) + 'px');
+        document.documentElement.style.setProperty('--svh', (document.documentElement.clientHeight * 0.01).toFixed(4) + 'px');
+        document.documentElement.style.setProperty('--dvh', (window.innerHeight * 0.01).toFixed(4) + 'px');
         // js cookie
         document.cookie = '_js=1; path=/; SameSite=Lax';
         // scrollbar width
         var scrollbarOuter = document.createElement('div');
         scrollbarOuter.style = 'z-index: -9999; position: absolute; visibility: hidden; width: 100px; margin-left: -100px; overflow: scroll;';
-        $html.appendChild(scrollbarOuter);
+        document.documentElement.appendChild(scrollbarOuter);
         var scrollbarInner = document.createElement('div');
         scrollbarInner.style = 'width: 100%;';
         scrollbarOuter.appendChild(scrollbarInner);
-        $html.style.setProperty('--scrollbar-width', (100 - scrollbarInner.offsetWidth).toFixed(4) + 'px');
+        document.documentElement.style.setProperty('--scrollbar-width', (100 - scrollbarInner.offsetWidth).toFixed(4) + 'px');
         scrollbarOuter.remove();
-    })(document.documentElement));
+    })();
 </script>
 <!-- /head-js -->
