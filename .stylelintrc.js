@@ -123,14 +123,6 @@ module.exports = deepMerge({}, sharedConfig, {
         ...(ENV.PROD
             ? // code style rules (slowest)
               {
-                  'at-rule-empty-line-before': [
-                      'always',
-                      {
-                          'except': ['after-same-name', 'first-nested'],
-                          'ignore': ['after-comment'],
-                          'ignoreAtRules': ['import'],
-                      },
-                  ],
                   'order/order': [
                       'dollar-variables',
                       'custom-properties',
