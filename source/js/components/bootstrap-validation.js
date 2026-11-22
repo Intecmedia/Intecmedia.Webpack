@@ -110,6 +110,7 @@ export default class BootstrapValidation extends AbstractComponent {
     resetInput(input) {
         input.classList.remove('is-invalid');
         input.classList.remove('is-valid');
+        input.removeAttribute('aria-invalid');
     }
 
     /**
@@ -120,9 +121,11 @@ export default class BootstrapValidation extends AbstractComponent {
         if (input.validity.valid) {
             input.classList.add('is-valid');
             input.classList.remove('is-invalid');
+            input.removeAttribute('aria-invalid');
         } else {
             input.classList.add('is-invalid');
             input.classList.remove('is-valid');
+            input.setAttribute('aria-invalid', 'true');
         }
 
         const invalid = (() => {
